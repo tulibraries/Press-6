@@ -30,4 +30,12 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  tupress:
+    default:
+      fields:
+        confirm: Are you sure?
+    admin:
+      actions:
+        sync: Sync
+        show_website: Show in Website
+        detach: Detach

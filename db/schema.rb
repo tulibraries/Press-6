@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_05_184347) do
+ActiveRecord::Schema.define(version: 2020_10_06_185408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,7 +47,71 @@ ActiveRecord::Schema.define(version: 2020_10_05_184347) do
   end
 
   create_table "books", force: :cascade do |t|
+    t.string "book_id"
     t.string "title"
+    t.string "subtitle"
+    t.text "author"
+    t.text "about_author"
+    t.text "intro"
+    t.text "blurb"
+    t.text "excerpt_text"
+    t.text "in_series"
+    t.text "binding"
+    t.text "description"
+    t.text "reviews"
+    t.text "subjects"
+    t.text "contents"
+    t.text "author_id"
+    t.text "author_prefix"
+    t.text "author_first"
+    t.text "author_last"
+    t.text "author_suffix"
+    t.text "author_byline"
+    t.text "author_bios"
+    t.string "is_guide"
+    t.string "cover_image"
+    t.string "format"
+    t.string "isbn"
+    t.string "ean"
+    t.string "pub_date"
+    t.string "pages_total"
+    t.string "trim"
+    t.string "illustrations"
+    t.string "award"
+    t.string "status"
+    t.integer "newsweight"
+    t.boolean "hot"
+    t.integer "hotweight"
+    t.boolean "course_adoption"
+    t.boolean "highlight"
+    t.string "catalog"
+    t.string "award_year"
+    t.string "sort_title"
+    t.string "supplement"
+    t.string "edition"
+    t.string "suggested_reading"
+    t.boolean "course_adoptions"
+    t.string "subject1"
+    t.string "subject2"
+    t.string "subject3"
+    t.string "award_year2"
+    t.string "award2"
+    t.string "award_year3"
+    t.string "award3"
+    t.string "award_year4"
+    t.string "award4"
+    t.decimal "price", precision: 5, scale: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "title"
+    t.string "title_id"
+    t.text "author"
+    t.text "review"
+    t.string "review_id"
+    t.integer "weight"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

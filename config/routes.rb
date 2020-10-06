@@ -1,6 +1,18 @@
 Rails.application.routes.draw do
   namespace :admin do
-      resources :books
+    resources :books
+
+    resource :books do
+      member do
+        get ":id/detach" => :detach
+      end
+    end
+
+    resource :books do
+      member do
+        post "detach" => :detach
+      end
+    end
 
       root to: "books#index"
     end

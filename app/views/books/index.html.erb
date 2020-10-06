@@ -6,23 +6,11 @@
 </div>
 </div>
 
-<div class="row">
-  <div class="col-12">
-    <h2 class="red">Title</h2>
-  </div>
-</div>
-
   <div class="row">
     <% @books.each do |book| %>
-      <div class="col-4" style="outline:solid red 1px">
-        <p><%= book.title %></p>
-        <p><%= link_to 'Show', book %></p>
-        <p><%= link_to 'Edit', edit_book_path(book) %></p>
-        <p><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      <div class="col-4">
+        <p><%= link_to book.title, book %></p>
       </div>
     <% end %>
   </div>
 
-<br>
-
-<%= link_to 'New Book', new_book_path %>
