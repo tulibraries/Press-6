@@ -1,2 +1,2 @@
-//= link_tree ../images
-//= link_directory ../stylesheets .css
+//= link_tree ../../webpack/images
+//= link_directory ../../webpack/stylesheets .css
