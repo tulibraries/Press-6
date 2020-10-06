@@ -1,26 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Books</h1>
+<div class="row">
+<div class="col-12">
+  <h1>Books</h1>
+</div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="row">
+  <div class="col-12">
+    <h2 class="red">Title</h2>
+  </div>
+</div>
 
-  <tbody>
+  <div class="row">
     <% @books.each do |book| %>
-      <tr>
-        <td><%= book.title %></td>
-        <td><%= link_to 'Show', book %></td>
-        <td><%= link_to 'Edit', edit_book_path(book) %></td>
-        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <div class="col-4" style="outline:solid red 1px">
+        <p><%= book.title %></p>
+        <p><%= link_to 'Show', book %></p>
+        <p><%= link_to 'Edit', edit_book_path(book) %></p>
+        <p><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
 
 <br>
 
