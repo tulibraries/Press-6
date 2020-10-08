@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_06_185408) do
+ActiveRecord::Schema.define(version: 2020_10_08_153227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,8 @@ ActiveRecord::Schema.define(version: 2020_10_06_185408) do
     t.decimal "price", precision: 5, scale: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "news"
+    t.text "guide_text"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -112,6 +114,17 @@ ActiveRecord::Schema.define(version: 2020_10_06_185408) do
     t.text "review"
     t.string "review_id"
     t.integer "weight"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "series", force: :cascade do |t|
+    t.string "series_code"
+    t.string "series_name"
+    t.string "editors"
+    t.text "description"
+    t.string "founder"
+    t.string "image_link"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

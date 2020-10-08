@@ -39,3 +39,4 @@ en:
         sync: Sync
         show_website: Show in Website
         detach: Detach
+        edit_resource: "Edit: %{name}"

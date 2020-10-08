@@ -35,6 +35,7 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.string :award
       t.string :status
       # t.text :news_text HAS_RICH_TEXT in model
+      # t.boolean :news
       t.integer :newsweight
       t.boolean :hot
       t.integer :hotweight

@@ -24,6 +24,9 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 gem 'administrate'
+gem 'nokogiri'
+gem 'pry'
+gem 'administrate-field-scoped_has_many'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

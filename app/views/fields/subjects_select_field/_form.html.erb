@@ -1,0 +1,19 @@
+<%
+  subject_list = eval field.resource.subjects
+  subjects = []
+
+  subject_list.each do |subject|
+    unless subject['subject']['subject_id'].nil?
+      subjects.push [subject['subject']['subject_title'],subject['subject']['subject_id']]
+    end
+  end
+%>
+
+<div class="field-unit__label">
+  <%= f.label field.attribute, for: "#{f.object_name}_#{field.attribute}" %>
+</div>
+<div class="field-unit__field">
+  <%= select_tag field.attribute, 
+        options_for_select(subjects), 
+        include_blank: "(none)" %>
+</div>

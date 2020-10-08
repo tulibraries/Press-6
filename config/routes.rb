@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :series
   namespace :admin do
     resources :books
 
