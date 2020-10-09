@@ -18,11 +18,12 @@ class BookDashboard < Administrate::BaseDashboard
     blurb: Field::Text,
     excerpt_image: FileField,
     excerpt_text: Field::Text,
-    in_series: Field::Text,
+    in_series: Field::Select.with_options(
+      class_name: "Series"
+    ),
     binding: Field::Text,
     description: Field::Text,
     reviews: Field::Text,
-    subjects: Field::Text,
     contents: Field::Text,
     author_id: Field::Text,
     author_prefix: Field::Text,
@@ -61,6 +62,8 @@ class BookDashboard < Administrate::BaseDashboard
     edition: Field::String,
     suggested_reading_image: FileField,
     course_adoptions: Field::Boolean,
+
+    subjects: Field::Text,
     subject1: SubjectsSelectField,
     subject2: SubjectsSelectField,
     subject3: SubjectsSelectField,

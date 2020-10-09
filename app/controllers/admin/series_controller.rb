@@ -1,5 +1,5 @@
 module Admin
-  class BooksController < Admin::ApplicationController
+  class SeriesController < Admin::ApplicationController
     include Admin::Detachable
 
     def default_sort

@@ -12,6 +12,18 @@ module Admin
       # TODO Add authentication logic here.
     end
 
+    def order
+      @order ||= Administrate::Order.new(
+        params.fetch(resource_name, {}).fetch(:order, default_sort[:order]),
+        params.fetch(resource_name, {}).fetch(:direction, default_sort[:direction]),
+      )
+    end
+
+    # override this in specific controllers as needed
+    def default_sort
+      { order: :title, direction: :desc }
+    end
+
     # Override this value to specify the number of elements to display at a time
     # on index pages. Defaults to 20.
     # def records_per_page

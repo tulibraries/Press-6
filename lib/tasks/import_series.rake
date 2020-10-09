@@ -9,10 +9,10 @@ namespace :db do
       task :import_series, [:filepath] => :environment do |t, args|
 
 
-      REVIEW_DATA = args.fetch(:filepath)
+      SERIES_DATA = args.fetch(:filepath)
 
-      if REVIEW_DATA 
-        doc = File.open(REVIEW_DATA, 'rb:UTF-16le') { |f| Nokogiri::XML(f) }
+      if SERIES_DATA 
+        doc = File.open(SERIES_DATA, 'rb:UTF-16le') { |f| Nokogiri::XML(f) }      
       else
         doc = Nokogiri::XML("")
       end
@@ -28,32 +28,30 @@ namespace :db do
       new_review = nil
 
       doc.xpath("//record").map do |node|
-
-      unless node.xpath("series/series_id").empty?
+      if node.xpath("series/series_id").text.present?
 
         node.xpath("series").map do |newseries|
 
-          series = Series.find_by(series_code: newseries.xpath("series_id").text)
+          series = Series.find_by(code: newseries.xpath("series_id").text)
 
           if series.nil?
-            series = Series.new(series_id: newseries.xpath("series_id").text)
+            series = Series.new(code: newseries.xpath("series_id").text)
             new_series = true
           end
 
           series.tap do |r|
-            r.series_code = node.xpath("series_id").text
-            r.series_name = node.xpath("series_title").text
-            r.description = node.xpath("series_description").text
-            r.editors = node.xpath("review_text").text
+            r.code = node.xpath("series/series_id").text
+            r.title = node.xpath("series/series_title").text
+            r.description = node.xpath("series/series_description").text
+            r.editors = node.xpath("series/series_editors").text
           end #tap
-
 
           if series.save
             unless new_series.nil?
-              created_ids << series.series_id
+              created_ids << series.code
             end
           else
-              error_ids << series.series_id
+              error_ids << series.code
           end
 
           new_series = nil

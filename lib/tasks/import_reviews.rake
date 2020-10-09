@@ -28,7 +28,6 @@ namespace :db do
       new_review = nil
 
 
-
       doc.xpath("//record").map do |node|
 
       unless node.xpath("reviews/review/review_text").empty?

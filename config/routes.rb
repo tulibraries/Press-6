@@ -1,15 +1,17 @@
 Rails.application.routes.draw do
-  resources :series
   namespace :admin do
     resources :books
+    resources :series
+    resources :subjects
+    resources :catalogs
 
-    resource :books do
+    resource :books, :series, :subjects do
       member do
         get ":id/detach" => :detach
       end
     end
 
-    resource :books do
+    resource :books, :series, :subjects do
       member do
         post "detach" => :detach
       end
@@ -17,6 +19,11 @@ Rails.application.routes.draw do
 
       root to: "books#index"
     end
+
   resources :books
+  resources :series
+  resources :subjects
+  resources :catalogs
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
