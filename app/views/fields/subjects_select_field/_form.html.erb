@@ -13,7 +13,8 @@
   <%= f.label field.attribute, for: "#{f.object_name}_#{field.attribute}" %>
 </div>
 <div class="field-unit__field">
-  <%= select_tag "#{f.object_name}[#{field.attribute}]", options_for_select(subjects, {selected: field.data.presence}), 
-      include_blank: "(none)"
-       %>
+  <%= select_tag "#{f.object_name}[#{field.attribute}]", 
+                  options_for_select(subjects, {selected: field.data.presence}), 
+                  include_blank: "(none)"
+                %>
 </div>

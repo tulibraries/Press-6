@@ -1,4 +1,6 @@
-require "administrate/base_dashboard"
+# frozen_string_literal: true
+
+require 'administrate/base_dashboard'
 
 class SubjectDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -13,7 +15,7 @@ class SubjectDashboard < Administrate::BaseDashboard
     title: Field::String,
     pdf: FileField,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -22,25 +24,25 @@ class SubjectDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-  code
-  title
+    code
+    title
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-  code
-  title
-  pdf
+    code
+    title
+    pdf
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-  code
-  title
-  pdf
+    code
+    title
+    pdf
   ].freeze
 
   # COLLECTION_FILTERS
@@ -58,7 +60,7 @@ class SubjectDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how subjects are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(subject)
-  #   "Subject ##{subject.id}"
-  # end
+  def display_resource(subject)
+    subject.title
+  end
 end

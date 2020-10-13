@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 class CreateBooks < ActiveRecord::Migration[6.0]
   def change
     create_table :books do |t|
       t.string :book_id
       t.string :title
-	  	t.string :subtitle
+      t.string :subtitle
       t.text :author
       t.text :about_author
-  		t.text :intro
-	  	t.text :blurb
-	  	t.text :excerpt_text
-	  	t.text :in_series
-	  	t.text :binding
-	  	t.text :description
-	  	t.text :reviews
-	  	t.text :subjects
+      t.text :intro
+      t.text :blurb
+      t.text :excerpt_text
+      t.text :in_series
+      t.text :binding
+      t.text :description
+      t.text :reviews
+      t.text :subjects
       t.text :contents
       t.text :author_id
       t.text :author_prefix
@@ -22,13 +24,13 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.text :author_suffix
       t.text :author_byline
       t.text :author_bios
-	  	t.string :is_guide
+      t.string :is_guide
       # t.text :is_guide_text HAS_RICH_TEXT in model
-	  	t.string :cover_image
-	  	t.string :format
-	  	t.string :isbn
-	  	t.string :ean
-	  	t.string :pub_date
+      t.string :cover_image
+      t.string :format
+      t.string :isbn
+      t.string :ean
+      t.string :pub_date
       t.string :pages_total
       t.string :trim
       t.string :illustrations
@@ -58,7 +60,7 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.string :award_year4
       t.string :award4
 
-	  	t.numeric :price, :precision => 5, :scale => 2
+      t.numeric :price, precision: 5, scale: 2
 
       t.timestamps
     end

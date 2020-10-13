@@ -1,21 +1,20 @@
+# frozen_string_literal: true
+
 require 'nokogiri'
 require 'yaml'
 require 'pry'
 
 namespace :db do
-    namespace :seed do
-
-      desc 'Import book catalogs to database'
-      task :import_catalogs, [:filepath] => :environment do |t, args|
-
-
+  namespace :seed do
+    desc 'Import book catalogs to database'
+    task :import_catalogs, [:filepath] => :environment do |t, args|
       CATALOGS_DATA = args.fetch(:filepath)
 
-      if CATALOGS_DATA 
-        doc = File.open(CATALOGS_DATA, 'rb:UTF-16le') { |f| Nokogiri::XML(f) }      
-      else
-        doc = Nokogiri::XML("")
-      end
+      doc = if CATALOGS_DATA
+              File.open(CATALOGS_DATA, 'rb:UTF-16le') { |f| Nokogiri::XML(f) }
+            else
+              Nokogiri::XML('')
+            end
 
       error_ids = []
       created_ids = []
@@ -27,11 +26,13 @@ namespace :db do
       db_review_ids = []
       new_review = nil
 
-      doc.xpath("//record").map do |node|
-      if node.xpath("catalog").text.present?
+      doc.xpath('//record').map do |node|
+        next unless node.xpath('catalog').text.present?
 
-        node.xpath("catalog").map do |newcatalog|
+        next unless %w[sp fa].include?(node.xpath('catalog').text[0, 2].downcase) &&
+                    Float(node.xpath('catalog').text[2, 4], exception: false)
 
+        node.xpath('catalog').map do |newcatalog|
           catalog = Catalog.find_by(code: newcatalog.text)
 
           if catalog.nil?
@@ -41,34 +42,30 @@ namespace :db do
 
           catalog.tap do |r|
             r.code = newcatalog.text
-            binding.pry if newcatalog.text[2,4].nil?
-            r.season = "Fall" if newcatalog.text[0,2].downcase == "fa"
-            r.season = "Spring" if newcatalog.text[0,2].downcase == "sp"
-            decade = newcatalog.text[2,4]
-            current_century = Time.now.strftime("%C")
+            binding.pry if newcatalog.text[2, 4].nil?
+            r.season = 'Fall' if newcatalog.text[0, 2].downcase == 'fa'
+            r.season = 'Spring' if newcatalog.text[0, 2].downcase == 'sp'
+            decade = newcatalog.text[2, 4]
+            current_century = Time.now.strftime('%C')
             r.year = "#{current_century}#{decade}"
             r.year = "19#{decade}" if decade.to_i >= 78 && decade.to_i <= 99
-            r.title = r.season.to_s + " " + r.year.to_s + " Catalog"
-          end #tap
+            r.title = r.season.to_s + ' ' + r.year.to_s + ' Catalog'
+          end # tap
 
           if catalog.save
-            unless new_catalog.nil?
-              created_ids << catalog.code
-            end
+            created_ids << catalog.code unless new_catalog.nil?
           else
-              error_ids << catalog.code
+            error_ids << catalog.code
           end
 
           new_catalog = nil
+        end
+        # map
+        # unless
+      end # map
 
-        end if ["sp","fa"].include?(node.xpath("catalog").text[0,2].downcase) &&
-                      Float(node.xpath("catalog").text[2,4], exception: false) #map
-      end #unless
-    end #map
-
-    puts "created: "+created_ids.length.to_s
-    puts "errors: "+error_ids.length.to_s
-
-    end #task
-  end #namespace: seed
-end #namespace: db
+      puts 'catalogs updated: ' + created_ids.length.to_s
+      puts 'catalogs errored: ' + error_ids.length.to_s
+    end # task
+  end # namespace: seed
+end # namespace: db

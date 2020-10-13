@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # All Administrate controllers inherit from this
 # `Administrate::ApplicationController`, making it the ideal place to put
 # authentication logic or other before_actions.
@@ -9,13 +11,13 @@ module Admin
     before_action :authenticate_admin
 
     def authenticate_admin
-      # TODO Add authentication logic here.
+      # TODO: Add authentication logic here.
     end
 
     def order
       @order ||= Administrate::Order.new(
         params.fetch(resource_name, {}).fetch(:order, default_sort[:order]),
-        params.fetch(resource_name, {}).fetch(:direction, default_sort[:direction]),
+        params.fetch(resource_name, {}).fetch(:direction, default_sort[:direction])
       )
     end
 

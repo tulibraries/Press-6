@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class CatalogsController < ApplicationController
-  before_action :set_catalog, only: [:show, :edit, :update, :destroy]
+  before_action :set_catalog, only: %i[show edit update destroy]
 
   # GET /catalogs
   # GET /catalogs.json
@@ -9,8 +11,7 @@ class CatalogsController < ApplicationController
 
   # GET /catalogs/1
   # GET /catalogs/1.json
-  def show
-  end
+  def show; end
 
   # GET /catalogs/new
   def new
@@ -18,8 +19,7 @@ class CatalogsController < ApplicationController
   end
 
   # GET /catalogs/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /catalogs
   # POST /catalogs.json
@@ -62,13 +62,14 @@ class CatalogsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_catalog
-      @catalog = Catalog.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def catalog_params
-      params.require(:catalog).permit(:code, :season, :year)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_catalog
+    @catalog = Catalog.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def catalog_params
+    params.require(:catalog).permit(:code, :season, :year)
+  end
 end
