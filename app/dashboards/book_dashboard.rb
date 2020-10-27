@@ -47,11 +47,10 @@ class BookDashboard < Administrate::BaseDashboard
     hotweight: Field::Select.with_options(
       collection: [1, 2, 3, 4, 5]
     ),
-    highlight: Field::Boolean,
     supplement: Field::String,
     edition: Field::String,
     suggested_reading_image: FileField,
-    course_adoptions: Field::Boolean,
+    course_adoption: Field::Boolean,
 
     series: Field::BelongsTo.with_options(order: 'title'),
     catalog: Field::BelongsTo.with_options(order: 'title'),
@@ -98,14 +97,13 @@ class BookDashboard < Administrate::BaseDashboard
     newsweight
     hot
     hotweight
-    course_adoptions
-    highlight
+    course_adoption
     catalog
     series
     promotion
     supplement
     edition
-    course_adoptions
+    course_adoption
     subject1
     subject2
     subject3
@@ -125,13 +123,12 @@ class BookDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     sort_title
     cover_image
-    highlight
     hot
     hotweight
     news
     newsweight
     news_text
-    course_adoptions
+    course_adoption
     suggested_reading_image
     guide_image
     guide_text

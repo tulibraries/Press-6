@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :subject do
     title { "John" }
-    code  { "Doe" }
+    code  { "1032" }
 
     trait :with_pdf do
       after :create do |subject|

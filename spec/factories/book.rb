@@ -2,21 +2,24 @@
 
 FactoryBot.define do
   factory :book do
+    book_id { 7 }
     title { "John" }
     news { false }
     news_text { "This is news text." }
-    newsweight sequence(:title) { |n| "#{n}" }
+    # newsweight sequence(:newsweight) { |n| "#{n}" }
     hot { false }
-    hotweight sequence(:title) { |n| "#{n}" }
-    highlight { false }
-    course_adoptions { false }
+    # hotweight sequence(:hotweight) { |n| "#{n}" }
+    course_adoption { false }
     subjects { ["Art","History","Literature"] }
     subject1 { "" }
     award { "" }
     award_year { "" }
     status { ['In Print', 'NP', 'OS', 'X', '...'] }
+    catalog_id { "1324" }
+    binding { }
+    
 
-    trait :suggested_reading do
+    trait :as_suggested_reading do
       after :create do |book|
         book.suggested_reading_image.attach(io:
           File.open(Rails.root.join("spec/fixtures/charles.jpg")),

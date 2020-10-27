@@ -45,10 +45,12 @@ namespace :db do
             binding.pry if newcatalog.text[2, 4].nil?
             r.season = 'Fall' if newcatalog.text[0, 2].downcase == 'fa'
             r.season = 'Spring' if newcatalog.text[0, 2].downcase == 'sp'
+            # Y2k concerns since all years are only last 2 digits
             decade = newcatalog.text[2, 4]
             current_century = Time.now.strftime('%C')
             r.year = "#{current_century}#{decade}"
             r.year = "19#{decade}" if decade.to_i >= 78 && decade.to_i <= 99
+            # Y2K Uncomment above line when running first time
             r.title = r.season.to_s + ' ' + r.year.to_s + ' Catalog'
           end # tap
 
