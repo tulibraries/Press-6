@@ -4,16 +4,16 @@ require "logger"
 
 class SyncService::Books
 
-  def self.call(xml_path: nil)
-    new(xml_path: xml_path).sync
+  def self.call(books_url: nil)
+    new(books_url: books_url).sync
   end
 
   def initialize(params = {})
     @log = Logger.new("log/sync-books.log")
     @stdout = Logger.new(STDOUT)
-    @xmlPath = params.fetch(:xml_path)
-    @booksDoc = File.open(@xmlPath) { |f| Nokogiri::XML(f) }
-    stdout_and_log("Syncing books from #{@xmlPath}")
+    @booksUrl = params.fetch(:books_url)
+    @booksDoc = Nokogiri::XML(open(@booksUrl))
+    stdout_and_log("Syncing books from #{@booksUrl}")
   end
 
   def sync
