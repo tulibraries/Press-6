@@ -3,8 +3,8 @@
 class CreateSeries < ActiveRecord::Migration[6.0]
   def change
     create_table :series do |t|
-      t.string  :series_code
-      t.string  :series_name
+      t.string  :code
+      t.string  :title
       t.string  :editors
       t.text    :description
       t.string  :founder

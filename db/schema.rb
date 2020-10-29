@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_27_143453) do
+ActiveRecord::Schema.define(version: 2020_10_13_132000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2020_10_27_143453) do
   create_table "books", force: :cascade do |t|
     t.string "book_id"
     t.string "title"
+    t.string "sort_title"
     t.string "subtitle"
     t.text "about_author"
     t.text "intro"
@@ -56,12 +57,9 @@ ActiveRecord::Schema.define(version: 2020_10_27_143453) do
     t.text "excerpt_text"
     t.text "binding"
     t.text "description"
-    t.text "reviews"
-    t.text "subjects"
     t.text "contents"
     t.text "author_byline"
     t.text "author_bios"
-    t.string "is_guide"
     t.string "cover_image"
     t.string "format"
     t.string "isbn"
@@ -70,20 +68,21 @@ ActiveRecord::Schema.define(version: 2020_10_27_143453) do
     t.string "pages_total"
     t.string "trim"
     t.string "illustrations"
-    t.string "award"
     t.string "status"
+    t.boolean "news"
     t.integer "newsweight"
     t.boolean "hot"
     t.integer "hotweight"
-    t.boolean "course_adoption"
-    t.string "award_year"
-    t.string "sort_title"
     t.string "supplement"
     t.string "edition"
     t.string "suggested_reading"
+    t.boolean "course_adoption"
+    t.string "subjects"
     t.string "subject1"
     t.string "subject2"
     t.string "subject3"
+    t.string "award_year"
+    t.string "award"
     t.string "award_year2"
     t.string "award2"
     t.string "award_year3"
@@ -91,25 +90,24 @@ ActiveRecord::Schema.define(version: 2020_10_27_143453) do
     t.string "award_year4"
     t.string "award4"
     t.decimal "price", precision: 5, scale: 2
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.boolean "news"
+    t.string "promotion_id"
     t.string "series_id"
     t.string "catalog_id"
-    t.text "promotion_id"
-    t.text "content_hash"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "promotion_ids"
     t.index ["catalog_id"], name: "index_books_on_catalog_id"
     t.index ["promotion_id"], name: "index_books_on_promotion_id"
     t.index ["series_id"], name: "index_books_on_series_id"
   end
 
   create_table "catalogs", force: :cascade do |t|
+    t.string "title"
     t.string "code"
     t.string "season"
     t.string "year"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "title"
   end
 
   create_table "promotions", force: :cascade do |t|
