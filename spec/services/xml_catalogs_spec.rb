@@ -5,13 +5,13 @@ require "rails_helper"
 RSpec.describe SyncService::Catalogs, type: :service do
 
   before(:all) do
-    @catalog_harvest = described_class.new(catalogs_url: file_fixture("books.xml").to_path)
+    @catalog_harvest = described_class.new(xml_path: file_fixture("books.xml").to_path)
     @catalogs = @catalog_harvest.read_catalogs
   end
 
   context "valid catalogs" do
     it "extracts the catalog hash" do
-      expect(@catalogs.first["code"]).to match(/^SP06$/)
+      expect(@catalogs.first["catalog"]).to match(/^SP06$/)
     end
 
     it "extracts all of the catalogs" do
@@ -22,19 +22,20 @@ RSpec.describe SyncService::Catalogs, type: :service do
       subject { @catalog_harvest.record_hash(@catalogs.first) }
 
       it "maps Code to code field" do
-        expect(subject["code"]).to match(@catalogs.first["code"])
+        # binding.pry 
+        expect(subject["code"]).to match(@catalogs.first["catalog"])
       end
 
       it "maps title to title field" do
-        expect(subject["title"]).to match(@books.first["title"])
+        expect(subject["title"]).to match("Spring 2006 Catalog")
       end
       
       it "maps season to season field" do
-        expect(subject["season"]).to match(@books.first["season"])
+        expect(subject["season"]).to match("Spring")
       end
       
       it "maps year to year field" do
-        expect(subject["year"]).to match(@books.first["year"])
+        expect(subject["year"]).to match("2006")
       end
     end
   end
@@ -49,7 +50,7 @@ RSpec.describe SyncService::Catalogs, type: :service do
     }
 
     let (:catalog2) {
-      Catalog.find_by(title: "FA05")
+      Catalog.find_by(code: "FA05")
     }
 
     it "syncs catalogs to the table" do
