@@ -6,6 +6,8 @@ class Book < ApplicationRecord
   has_rich_text :excerpt_text
   has_rich_text :news_text
 
+  has_many :reviews, -> { joins(:book_id) }
+
   belongs_to :series, optional: true
   belongs_to :catalog, optional: true
   belongs_to :promotion, optional: true
