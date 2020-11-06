@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 namespace :sync do
-  namespace :pressworks do
+  namespace :pressworks do |pressworks_ingest|
     desc "sync books"
     task :books, [:path] => :environment do |t, args|
       args.with_defaults(path: nil)
@@ -26,6 +26,12 @@ namespace :sync do
     task :subjects, [:path] => :environment do |t, args|
       args.with_defaults(path: nil)
       SyncService::Subjects.call(xml_path: args[:path])
+    end
+    desc "Do them all"
+    task :all, [:path] => :environment do |t, args|
+      pressworks_ingest.tasks.each do |task|
+        Rake::Task[task].invoke(xml_path: args[:path])       
+      end
     end
   end
 end

@@ -11,7 +11,7 @@ class SyncService::Subjects
   def initialize(params = {})
     @log = Logger.new("log/sync-subjects.log")
     @stdout = Logger.new(STDOUT)
-    @xmlPath = params.fetch(:xml_path)
+    @xmlPath = params.fetch(:xml_path)[:xml_path]
     @booksDoc = File.open(@xmlPath) { |f| Nokogiri::XML(f) }
     stdout_and_log("Syncing sujects from #{@xmlPath}")
   end
