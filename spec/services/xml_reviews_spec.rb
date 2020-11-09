@@ -1,53 +1,56 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require "pry"
 
-RSpec.describe SyncService::Series, type: :service do
+RSpec.describe SyncService::Reviews, type: :service do
 
   before(:all) do
-    @series_harvest = described_class.new(xml_path: file_fixture("books.xml").to_path)
-    @series = @series_harvest.read_series
+    @review_harvest = described_class.new( xml_path: {:xml_path => file_fixture("books.xml").to_path} )
+    @reviews = @review_harvest.read_reviews
   end
 
-  context "valid series" do
-    it "extracts the series hash" do
-      expect(@series.first["series"]["series_id"]).to match(/^S-183$/)
+  context "valid review" do
+    it "extracts the reviews hash" do
+      expect(@reviews.first["record"]["reviews"]["review"].first["review_id"]).to match("145014")
     end
 
-    it "extracts all of the series" do
-      expect(@series.count).to equal(3)
+    it "extracts all of the reviews" do
+      expect(@reviews.count).to equal(3)
     end
 
-    describe "maps series xml to db schema" do
-      subject { @series_harvest.record_hash(@series.first) }
+    describe "maps review xml to db schema" do
+      if @reviews #tests where reviews exist, need another test when reviews empty (inconsistent xml)
+        let subject { @review_harvest.record_hash(@reviews.first) }
 
-      it "maps Code to code field" do
-        expect(subject["code"]).to match(@series.first["series"]["series_id"])
-      end
+        it "maps Code to code field" do
+          expect(subject["review_id"]).to match(@reviews.first["record"]["reviews"]["review"].first["review_id"])
+        end
 
-      it "maps title to title field" do
-        expect(subject["title"]).to match(@series.first["series"]["series_title"])
+        it "maps title to title field" do
+          expect(subject["review"]).to match(@reviews.first["record"]["reviews"]["review"].first["review_text"])
+        end
       end
     end
   end
 
   context "write catalog to catalog table" do
     before(:each) do
-      @series_harvest.sync
+      @review_harvest.sync
     end
 
-    let (:series1) {
-      Series.find_by(code: "S-183")
+    let (:review1) {
+      Review.find_by(review_id: "145014")
     }
 
-    let (:series2) {
-      Series.find_by(code: "S-151")
+    let (:review2) {
+      Review.find_by(review_id: "145433")
     }
 
-    it "syncs series to the table" do
+    it "syncs reviews to the table" do
       # binding.pry
-      expect(series1).to be
-      expect(series2).to be
+      expect(review1).to be
+      expect(review2).to be
     end
 
   end

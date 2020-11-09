@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe SyncService::Books, type: :service do
 
   before(:all) do
-    @book_harvest = described_class.new(xml_path: file_fixture("books.xml").to_path)
+    @book_harvest = described_class.new( xml_path: {:xml_path => file_fixture("books.xml").to_path} )
     @books = @book_harvest.read_books
   end
 

@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe SyncService::Catalogs, type: :service do
 
   before(:all) do
-    @catalog_harvest = described_class.new(xml_path: file_fixture("books.xml").to_path)
+    @catalog_harvest = described_class.new( xml_path: {:xml_path => file_fixture("books.xml").to_path} )
     @catalogs = @catalog_harvest.read_catalogs
   end
 
