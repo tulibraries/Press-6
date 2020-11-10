@@ -39,6 +39,7 @@ class SyncService::Books
   end
 
   def record_hash(record)
+    # binding.pry if record.fetch('book_id') == "0206"
     {
       "book_id"             => record.fetch('book_id', nil),
       "title"               => record.fetch('title', nil),
@@ -71,6 +72,7 @@ class SyncService::Books
     else
       book = Book.new
     end
+    # binding.pry if record_hash["book_id"] == "0206"
 
     if record_hash["title"].present?
       book.assign_attributes(record_hash)

@@ -46,6 +46,7 @@ class SyncService::Subjects
   end
 
   def create_or_update!(record_hash)
+    binding.pry
     subjects = record_hash["subjects"]
 
     if subjects.size <= 2
