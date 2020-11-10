@@ -4,7 +4,6 @@ class CreatePromotions < ActiveRecord::Migration[6.0]
   def change
     create_table :promotions do |t|
       t.string :title
-      t.text :intro_text
       t.string :pdf_display_name
       t.boolean :active
       t.text :book_ids

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_02_184637) do
+ActiveRecord::Schema.define(version: 2020_11_10_182611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,7 +112,6 @@ ActiveRecord::Schema.define(version: 2020_11_02_184637) do
 
   create_table "promotions", force: :cascade do |t|
     t.string "title"
-    t.text "intro_text"
     t.string "pdf_display_name"
     t.boolean "active"
     t.text "book_ids"
@@ -145,6 +144,12 @@ ActiveRecord::Schema.define(version: 2020_11_02_184637) do
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "webpages", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

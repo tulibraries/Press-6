@@ -12,7 +12,7 @@ class PromotionDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     title: Field::String,
-    intro_text: Field::Text,
+    intro_text: TrixField,
     pdf: FileField,
     pdf_display_name: Field::String,
     active: Field::Boolean,
