@@ -8,3 +8,7 @@
 - The backend is being ported from Trestle to Administrate.
 - It will (might still) use a combination of local storage and AWS.
 - There is currently no authentication.
+
+# Load Data
+
+bundle exec rails sync:pressworks:all[press.xml]
