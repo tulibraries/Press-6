@@ -30,7 +30,7 @@ namespace :sync do
     desc "Do them all"
     task :all, [:path] => :environment do |t, args|
       pressworks_ingest.tasks.each do |task|
-        Rake::Task[task].invoke(xml_path: args[:path])       
+        Rake::Task[task].invoke(args[:path])       
       end
     end
   end

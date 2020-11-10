@@ -2,11 +2,9 @@
   subject_list = eval field.resource.subjects
   subjects = []
 
-  subject_list.each do |subject|
-    unless subject['subject']['subject_id'].nil?
-      subjects.push [subject['subject']['subject_title'],subject['subject']['subject_id']]
-    end
-  end
+  subject_list["subject"].each do |subject|
+    subjects.push [subject['subject_title'],subject['subject_id']]
+  end if subject_list["subject"].first[1].present?
 %>
 
 <div class="field-unit__label">
