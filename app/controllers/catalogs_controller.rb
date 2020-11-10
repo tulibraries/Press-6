@@ -28,7 +28,7 @@ class CatalogsController < ApplicationController
 
     respond_to do |format|
       if @catalog.save
-        format.html { redirect_to @catalog, notice: 'Catalog was successfully created.' }
+        format.html { redirect_to @catalog, notice: "Catalog was successfully created." }
         format.json { render :show, status: :created, location: @catalog }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class CatalogsController < ApplicationController
   def update
     respond_to do |format|
       if @catalog.update(catalog_params)
-        format.html { redirect_to @catalog, notice: 'Catalog was successfully updated.' }
+        format.html { redirect_to @catalog, notice: "Catalog was successfully updated." }
         format.json { render :show, status: :ok, location: @catalog }
       else
         format.html { render :edit }
@@ -56,20 +56,20 @@ class CatalogsController < ApplicationController
   def destroy
     @catalog.destroy
     respond_to do |format|
-      format.html { redirect_to catalogs_url, notice: 'Catalog was successfully destroyed.' }
+      format.html { redirect_to catalogs_url, notice: "Catalog was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_catalog
-    @catalog = Catalog.find(params[:id])
-  end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_catalog
+      @catalog = Catalog.find(params[:id])
+    end
 
-  # Only allow a list of trusted parameters through.
-  def catalog_params
-    params.require(:catalog).permit(:code, :season, :year)
-  end
+    # Only allow a list of trusted parameters through.
+    def catalog_params
+      params.require(:catalog).permit(:code, :season, :year)
+    end
 end

@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 class Catalog < ApplicationRecord
-  has_many :books
+  has_many :books, dependent: :destroy
 end

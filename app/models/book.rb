@@ -6,7 +6,7 @@ class Book < ApplicationRecord
   has_rich_text :excerpt_text
   has_rich_text :news_text
 
-  has_many :reviews, -> { joins(:book_id) }
+  has_many :reviews, foreign_key: "review_id", dependent: :destroy, inverse_of: :book
 
   belongs_to :series, optional: true
   belongs_to :catalog, optional: true

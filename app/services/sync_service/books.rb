@@ -3,7 +3,6 @@
 require "logger"
 
 class SyncService::Books
-
   def self.call(xml_path: nil)
     new(xml_path: xml_path).sync
   end
@@ -41,25 +40,25 @@ class SyncService::Books
   def record_hash(record)
     # binding.pry if record.fetch('book_id') == "0206"
     {
-      "book_id"             => record.fetch('book_id', nil),
-      "title"               => record.fetch('title', nil),
+      "book_id"             => record.fetch("book_id", nil),
+      "title"               => record.fetch("title", nil),
       "subtitle"            => record.fetch("subtitle", nil),
-      "author_byline"       => record.fetch('author_byline', nil),
-      "about_author"        => record.fetch('author_bios', nil),
-      "intro"               => record.fetch('intro', nil),
-      "blurb"               => record.fetch('blurb', nil),
-      "status"              => record.fetch('status', nil),
-      "pages_total"         => record.fetch('format/pages_total', nil),
-      "trim"                => record.fetch('format/trim', nil),
-      "illustrations"       => record.fetch('format/illustrations_copy', nil),
-      "isbn"                => record.fetch('isbn', nil),
-      "pub_date"            => record.fetch('pub_date', nil),
-      "series_id"           => record.fetch('series/series_id', nil),
-      "binding"             => record.fetch('bindings', nil),
-      "description"         => record.fetch('description', nil),
-      "subjects"            => record.fetch('subjects', nil),
-      "contents"            => record.fetch('contents', nil),
-      "catalog_id"          => record.fetch('catalog', nil)
+      "author_byline"       => record.fetch("author_byline", nil),
+      "about_author"        => record.fetch("author_bios", nil),
+      "intro"               => record.fetch("intro", nil),
+      "blurb"               => record.fetch("blurb", nil),
+      "status"              => record.fetch("status", nil),
+      "pages_total"         => record.fetch("format/pages_total", nil),
+      "trim"                => record.fetch("format/trim", nil),
+      "illustrations"       => record.fetch("format/illustrations_copy", nil),
+      "isbn"                => record.fetch("isbn", nil),
+      "pub_date"            => record.fetch("pub_date", nil),
+      "series_id"           => record.fetch("series/series_id", nil),
+      "binding"             => record.fetch("bindings", nil),
+      "description"         => record.fetch("description", nil),
+      "subjects"            => record.fetch("subjects", nil),
+      "contents"            => record.fetch("contents", nil),
+      "catalog_id"          => record.fetch("catalog", nil)
     }
   end
 
@@ -84,7 +83,7 @@ class SyncService::Books
         stdout_and_log(%Q(Record not saved for #{record_hash["title"]}))
         @updated += 1
       end
-    else 
+    else
       stdout_and_log(%Q(Record with blank title not saved for #{record_hash["book_id"]}))
       @skipped += 1
     end

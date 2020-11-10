@@ -10,17 +10,17 @@ Rails.application.routes.draw do
 
     resource :books, :series, :subjects, :promotions do
       member do
-        get ':id/detach' => :detach
+        get ":id/detach" => :detach
       end
     end
 
     resource :books, :series, :subjects, :promotions do
       member do
-        post 'detach' => :detach
+        post "detach" => :detach
       end
     end
 
-    root to: 'books#index'
+    root to: "books#index"
   end
 
   resources :books

@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe SyncService::Catalogs, type: :service do
 
   before(:all) do
-    @catalog_harvest = described_class.new( xml_path: file_fixture("books.xml").to_path )
+    @catalog_harvest = described_class.new(xml_path: file_fixture("books.xml").to_path)
     @catalogs = @catalog_harvest.read_catalogs
   end
 
@@ -22,18 +22,18 @@ RSpec.describe SyncService::Catalogs, type: :service do
       subject { @catalog_harvest.record_hash(@catalogs.first) }
 
       it "maps Code to code field" do
-        # binding.pry 
+        # binding.pry
         expect(subject["code"]).to match(@catalogs.first["catalog"])
       end
 
       it "maps title to title field" do
         expect(subject["title"]).to match("Spring 2006 Catalog")
       end
-      
+
       it "maps season to season field" do
         expect(subject["season"]).to match("Spring")
       end
-      
+
       it "maps year to year field" do
         expect(subject["year"]).to match("2006")
       end

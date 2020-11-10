@@ -28,7 +28,7 @@ class PromotionsController < ApplicationController
 
     respond_to do |format|
       if @promotion.save
-        format.html { redirect_to @promotion, notice: 'Promotion was successfully created.' }
+        format.html { redirect_to @promotion, notice: "Promotion was successfully created." }
         format.json { render :show, status: :created, location: @promotion }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PromotionsController < ApplicationController
   def update
     respond_to do |format|
       if @promotion.update(promotion_params)
-        format.html { redirect_to @promotion, notice: 'Promotion was successfully updated.' }
+        format.html { redirect_to @promotion, notice: "Promotion was successfully updated." }
         format.json { render :show, status: :ok, location: @promotion }
       else
         format.html { render :edit }
@@ -56,20 +56,20 @@ class PromotionsController < ApplicationController
   def destroy
     @promotion.destroy
     respond_to do |format|
-      format.html { redirect_to promotions_url, notice: 'Promotion was successfully destroyed.' }
+      format.html { redirect_to promotions_url, notice: "Promotion was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_promotion
-    @promotion = Promotion.find(params[:id])
-  end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_promotion
+      @promotion = Promotion.find(params[:id])
+    end
 
-  # Only allow a list of trusted parameters through.
-  def promotion_params
-    params.require(:promotion).permit(:title)
-  end
+    # Only allow a list of trusted parameters through.
+    def promotion_params
+      params.require(:promotion).permit(:title)
+    end
 end

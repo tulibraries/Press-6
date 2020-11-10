@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'administrate/base_dashboard'
+require "administrate/base_dashboard"
 
 class BookDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -36,7 +36,7 @@ class BookDashboard < Administrate::BaseDashboard
     trim: Field::String,
     illustrations: Field::String,
     status: Field::Select.with_options(
-      collection: ['In Print', 'NP', 'OS', 'X', '...']
+      collection: ["In Print", "NP", "OS", "X", "..."]
     ),
     news: Field::Boolean,
     news_text: TrixField,
@@ -52,9 +52,9 @@ class BookDashboard < Administrate::BaseDashboard
     suggested_reading_image: FileField,
     course_adoption: Field::Boolean,
 
-    series: Field::BelongsTo.with_options(order: 'title'),
-    catalog: Field::BelongsTo.with_options(order: 'title'),
-    promotion: Field::BelongsTo.with_options(order: 'title'),
+    series: Field::BelongsTo.with_options(order: "title"),
+    catalog: Field::BelongsTo.with_options(order: "title"),
+    promotion: Field::BelongsTo.with_options(order: "title"),
 
     subjects: Field::Text,
     subject1: SubjectsSelectField,

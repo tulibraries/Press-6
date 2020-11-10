@@ -3,7 +3,6 @@
 require "logger"
 
 class SyncService::Books
-
   def self.call(books_url: nil)
     new(books_url: books_url).sync
   end
@@ -40,25 +39,25 @@ class SyncService::Books
 
   def record_hash(record)
     {
-      "book_id"             => record.fetch('book_id', nil),
-      "title"               => record.fetch('title', nil),
+      "book_id"             => record.fetch("book_id", nil),
+      "title"               => record.fetch("title", nil),
       "subtitle"            => record.fetch("subtitle", nil),
-      "author_byline"       => record.fetch('author_byline', nil),
-      "about_author"        => record.fetch('author_bios', nil),
-      "intro"               => record.fetch('intro', nil),
-      "blurb"               => record.fetch('blurb', nil),
-      "status"              => record.fetch('status', nil),
-      "pages_total"         => record.fetch('format/pages_total', nil),
-      "trim"                => record.fetch('format/trim', nil),
-      "illustrations"       => record.fetch('format/illustrations_copy', nil),
-      "isbn"                => record.fetch('isbn', nil),
-      "pub_date"            => record.fetch('pub_date', nil),
-      "series_id"           => record.fetch('series/series_id', nil),
-      "binding"             => record.fetch('bindings', nil),
-      "description"         => record.fetch('description', nil),
-      "subjects"            => record.fetch('subjects', nil),
-      "contents"            => record.fetch('contents', nil),
-      "catalog_id"          => record.fetch('catalog', nil)
+      "author_byline"       => record.fetch("author_byline", nil),
+      "about_author"        => record.fetch("author_bios", nil),
+      "intro"               => record.fetch("intro", nil),
+      "blurb"               => record.fetch("blurb", nil),
+      "status"              => record.fetch("status", nil),
+      "pages_total"         => record.fetch("format/pages_total", nil),
+      "trim"                => record.fetch("format/trim", nil),
+      "illustrations"       => record.fetch("format/illustrations_copy", nil),
+      "isbn"                => record.fetch("isbn", nil),
+      "pub_date"            => record.fetch("pub_date", nil),
+      "series_id"           => record.fetch("series/series_id", nil),
+      "binding"             => record.fetch("bindings", nil),
+      "description"         => record.fetch("description", nil),
+      "subjects"            => record.fetch("subjects", nil),
+      "contents"            => record.fetch("contents", nil),
+      "catalog_id"          => record.fetch("catalog", nil)
     }
   end
 

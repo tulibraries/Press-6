@@ -3,7 +3,6 @@
 require "logger"
 
 class SyncService::Subjects
-
   def self.call(xml_path: nil)
     new(xml_path: xml_path).sync
   end
@@ -23,7 +22,7 @@ class SyncService::Subjects
       begin
         @log.info(%Q(Syncing Book: #{book["title"]}))
         record = record_hash(book)
-        create_or_update!(record) 
+        create_or_update!(record)
       rescue Exception => err
         stdout_and_log(%Q(Syncing Book: #{book["record"]["title"]} - errored -  #{err.message} \n #{err.backtrace}))
         @errored += 1
@@ -41,7 +40,7 @@ class SyncService::Subjects
 
   def record_hash(record)
     {
-      "subjects"   => record["record"]["subjects"].fetch('subject', nil)
+      "subjects" => record["record"]["subjects"].fetch("subject", nil)
     }
   end
 
@@ -55,7 +54,7 @@ class SyncService::Subjects
     else
       subjects.each do |subject|
         s = Subject.find_by(code: subject["subject_id"])
-      
+
         if s
           stdout_and_log(
             %Q(Incoming book with subject '#{subject["subject_id"]}' matched to existing subject '(code = #{s.code} )', level: :debug)
@@ -71,8 +70,8 @@ class SyncService::Subjects
 
         if s.save!
           stdout_and_log(%Q(Successfully saved record for: #{s["code"]}))
-        end 
-      end 
+        end
+      end
     end
   end
 

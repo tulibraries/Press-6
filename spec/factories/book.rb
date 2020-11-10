@@ -10,14 +10,14 @@ FactoryBot.define do
     hot { false }
     # hotweight sequence(:hotweight) { |n| "#{n}" }
     course_adoption { false }
-    subjects { ["Art","History","Literature"] }
+    subjects { ["Art", "History", "Literature"] }
     subject1 { "" }
     award { "" }
     award_year { "" }
-    status { ['In Print', 'NP', 'OS', 'X', '...'] }
+    status { ["In Print", "NP", "OS", "X", "..."] }
     catalog_id { "1324" }
-    binding { }
-    
+    binding {}
+
 
     trait :as_suggested_reading do
       after :create do |book|

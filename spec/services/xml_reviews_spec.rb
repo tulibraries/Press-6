@@ -6,7 +6,7 @@ require "pry"
 RSpec.describe SyncService::Reviews, type: :service do
 
   before(:all) do
-    @review_harvest = described_class.new( xml_path: file_fixture("books.xml").to_path )
+    @review_harvest = described_class.new(xml_path: file_fixture("books.xml").to_path)
     @reviews = @review_harvest.read_reviews
   end
 

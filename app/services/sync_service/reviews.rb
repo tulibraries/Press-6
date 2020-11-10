@@ -3,7 +3,6 @@
 require "logger"
 
 class SyncService::Reviews
-
   def self.call(xml_path: nil)
     new(xml_path: xml_path).sync
   end
@@ -23,7 +22,7 @@ class SyncService::Reviews
       begin
         @log.info(%Q(Syncing Book: #{book["title"]}))
         record = record_hash(book)
-        create_or_update!(record) 
+        create_or_update!(record)
       rescue Exception => err
         stdout_and_log(%Q(Syncing Book: #{book["record"]["title"]} - errored -  #{err.message} \n #{err.backtrace}))
         @errored += 1
@@ -41,8 +40,8 @@ class SyncService::Reviews
 
   def record_hash(record)
     {
-      "reviews"    => record.fetch('record', nil)["reviews"]["review"],
-      "book_id"    => record.fetch('record', nil)["book_id"]
+      "reviews"    => record.fetch("record", nil)["reviews"]["review"],
+      "book_id"    => record.fetch("record", nil)["book_id"]
     }
   end
 
@@ -69,8 +68,8 @@ class SyncService::Reviews
 
       if r.save!
         stdout_and_log(%Q(Successfully saved record for: #{r["review_id"]}))
-      end 
-    end 
+      end
+    end
   end
 
   def xml_hash(review)
