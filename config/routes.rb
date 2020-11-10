@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :subjects
     resources :catalogs, only: [:index, :show]
     resources :promotions
+    resources :webpages
 
     resource :books, :series, :subjects, :promotions do
       member do
