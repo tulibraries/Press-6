@@ -3,8 +3,8 @@
   subjects = []
 
   subject_list.each do |subject|
-    unless subject['subject']['subject_id'].nil?
-      subjects.push [subject['subject']['subject_title'],subject['subject']['subject_id']]
+    unless subject[1]['subject_id'].nil?
+      subjects.push [subject[1]['subject_title'],subject[1]['subject_id']]
     end
   end
 %>

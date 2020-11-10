@@ -11,7 +11,7 @@ class SyncService::Books
   def initialize(params = {})
     @log = Logger.new("log/sync-books.log")
     @stdout = Logger.new(STDOUT)
-    @xmlPath = params.fetch(:xml_path)[:xml_path]
+    @xmlPath = params.fetch(:xml_path)
     @booksDoc = File.open(@xmlPath) { |f| Nokogiri::XML(f) }
     stdout_and_log("Syncing books from #{@xmlPath}")
   end
@@ -39,6 +39,7 @@ class SyncService::Books
   end
 
   def record_hash(record)
+    # binding.pry if record.fetch('book_id') == "0206"
     {
       "book_id"             => record.fetch('book_id', nil),
       "title"               => record.fetch('title', nil),
@@ -71,15 +72,21 @@ class SyncService::Books
     else
       book = Book.new
     end
+    # binding.pry if record_hash["book_id"] == "0206"
 
-    book.assign_attributes(record_hash)
+    if record_hash["title"].present?
+      book.assign_attributes(record_hash)
 
-    if book.save!
-      stdout_and_log(%Q(Successfully saved record for #{record_hash["title"]}))
-      @updated += 1
-    else
-      stdout_and_log(%Q(Record not saved for #{record_hash["title"]}))
-      @updated += 1
+      if book.save!
+        stdout_and_log(%Q(Successfully saved record for #{record_hash["title"]}))
+        @updated += 1
+      else
+        stdout_and_log(%Q(Record not saved for #{record_hash["title"]}))
+        @updated += 1
+      end
+    else 
+      stdout_and_log(%Q(Record with blank title not saved for #{record_hash["book_id"]}))
+      @skipped += 1
     end
   end
 

@@ -11,7 +11,7 @@ class SyncService::Reviews
   def initialize(params = {})
     @log = Logger.new("log/sync-reviews.log")
     @stdout = Logger.new(STDOUT)
-    @xmlPath = params.fetch(:xml_path)[:xml_path]
+    @xmlPath = params.fetch(:xml_path)
     @booksDoc = File.open(@xmlPath) { |f| Nokogiri::XML(f) }
     stdout_and_log("Syncing reviews from #{@xmlPath}")
   end

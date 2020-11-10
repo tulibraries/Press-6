@@ -11,9 +11,9 @@ class SyncService::Subjects
   def initialize(params = {})
     @log = Logger.new("log/sync-subjects.log")
     @stdout = Logger.new(STDOUT)
-    @xmlPath = params.fetch(:xml_path)[:xml_path]
+    @xmlPath = params.fetch(:xml_path)
     @booksDoc = File.open(@xmlPath) { |f| Nokogiri::XML(f) }
-    stdout_and_log("Syncing sujects from #{@xmlPath}")
+    stdout_and_log("Syncing subjects from #{@xmlPath}")
   end
 
   def sync
@@ -41,19 +41,21 @@ class SyncService::Subjects
 
   def record_hash(record)
     {
-      "subjects"   => record.fetch('record', nil)["subjects"]["subject"],
+      "subjects"   => record["record"]["subjects"].fetch('subject', nil)
     }
   end
 
   def create_or_update!(record_hash)
+    binding.pry
     subjects = record_hash["subjects"]
 
     subjects.each do |subject|
+      # binding.pry if subject["subject_title"] == "Religion"
       s = Subject.find_by(code: subject["subject_id"])
 
       if s
         stdout_and_log(
-          %Q(Incoming book with subject '#{s["code"]}' matched to existing review '(code = #{s.code} )', level: :debug)
+          %Q(Incoming book with subject '#{subject["subject_id"]}' matched to existing subject '(code = #{s.code} )', level: :debug)
         )
         @updated += 1
       else
@@ -61,8 +63,8 @@ class SyncService::Subjects
         @created += 1
       end
 
-      s["code"] = subject["subject_id"]
-      s["title"] = subject["subject_title"]
+      s.code = subject["subject_id"]
+      s.title = subject["subject_title"]
 
       if s.save!
         stdout_and_log(%Q(Successfully saved record for: #{s["code"]}))
