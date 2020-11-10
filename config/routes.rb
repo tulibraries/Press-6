@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :books
     resources :series
     resources :subjects
-    # resources :catalogs
+    resources :catalogs, only: [:index, :show]
     resources :promotions
 
     resource :books, :series, :subjects, :promotions do
