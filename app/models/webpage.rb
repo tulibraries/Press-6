@@ -1,0 +1,2 @@
+class Webpage < ApplicationRecord
+end
