@@ -6,17 +6,17 @@ require "pry"
 RSpec.describe SyncService::Reviews, type: :service do
 
   before(:all) do
-    @review_harvest = described_class.new(xml_path: file_fixture("books.xml").to_path)
+    @review_harvest = described_class.new(xml_path: file_fixture("delta.xml").to_path)
     @reviews = @review_harvest.read_reviews
   end
 
   context "valid review" do
     it "extracts the reviews hash" do
-      expect(@reviews.first["record"]["reviews"]["review"].first["review_id"]).to match("145014")
+      expect(@reviews.last["record"]["reviews"]["review"].first["review_id"]).to match("145014")
     end
 
     it "extracts all of the reviews" do
-      expect(@reviews.count).to equal(3)
+      expect(@reviews.count).to equal(10)
     end
 
     describe "maps review xml to db schema" do
@@ -44,11 +44,10 @@ RSpec.describe SyncService::Reviews, type: :service do
     }
 
     let (:review2) {
-      Review.find_by(review_id: "145433")
+      Review.find_by(review_id: "145015")
     }
 
     it "syncs reviews to the table" do
-      # binding.pry
       expect(review1).to be
       expect(review2).to be
     end
