@@ -31,14 +31,13 @@ class SyncService::Books
   end
 
   def read_books
-    @booksDoc.xpath("//record").map do |node|
+    @booksDoc.at_xpath("//record").map do |node|
       node_xml = node.to_xml
       Hash.from_xml(node_xml)["record"].merge(xml: node_xml)
     end
   end
 
   def record_hash(record)
-    # binding.pry if record.fetch('book_id') == "0206"
     {
       "book_id"             => record.fetch("book_id", nil),
       "title"               => record.fetch("title", nil),

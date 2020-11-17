@@ -32,7 +32,7 @@ class SyncService::Reviews
   end
 
   def read_reviews
-    @booksDoc.xpath("//record").map do |node|
+    @booksDoc.at_xpath("//record").map do |node|
       node_xml = node.to_xml
       Hash.from_xml(node_xml).merge(xml: node_xml)
     end

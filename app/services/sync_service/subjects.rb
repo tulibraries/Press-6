@@ -11,12 +11,13 @@ class SyncService::Subjects
     @log = Logger.new("log/sync-subjects.log")
     @stdout = Logger.new(STDOUT)
     @xmlPath = params.fetch(:xml_path)
-    @booksDoc = File.open(@xmlPath) { |f| Nokogiri::XML(f) }
+    # @booksDoc = File.open(@xmlPath, 'rb:UTF-16le') { |f| Nokogiri::XML(f) } 
     stdout_and_log("Syncing subjects from #{@xmlPath}")
   end
 
   def sync
     @updated = @created = @errored = 0
+# 
     read_subjects.each do |book|
       next if book["record"]["subjects"]["subject"].first.any?(nil)
       begin
@@ -32,9 +33,16 @@ class SyncService::Subjects
   end
 
   def read_subjects
-    @booksDoc.xpath("//record").map do |node|
-      node_xml = node.to_xml
-      Hash.from_xml(node_xml).merge(xml: node_xml)
+    booksDoc = Nokogiri::XML(open(@xmlPath))
+    
+    bom_string_to_remove = booksDoc.to_s.slice(0, 41)
+    booksDoc = booksDoc.to_s.gsub(bom_string_to_remove,'')
+    booksDoc2 = Nokogiri::XML(booksDoc)
+    binding.pry
+    booksDoc.xpath("//record").map do |node|
+      # binding.pry
+      # node_xml = node.to_xml
+      Hash.from_xml(node.to_xml)
     end
   end
 
@@ -45,7 +53,6 @@ class SyncService::Subjects
   end
 
   def create_or_update!(record_hash)
-    binding.pry
     subjects = record_hash["subjects"]
 
     if subjects.size <= 2

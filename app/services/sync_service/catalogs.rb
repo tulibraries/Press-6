@@ -32,7 +32,7 @@ class SyncService::Catalogs
   end
 
   def read_catalogs
-    @booksDoc.xpath("//record/catalog").map do |node|
+    @booksDoc.at_xpath("//record/catalog").map do |node|
       node_xml = node.to_xml
       Hash.from_xml(node_xml).merge(xml: node_xml)
     end
