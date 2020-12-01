@@ -36,3 +36,5 @@ yarn-debug.log*
 .yarn-integrity
 *.sql
 *.xml
+.DS_Store
+.gitignore.swp
