@@ -37,4 +37,3 @@ yarn-debug.log*
 *.sql
 *.xml
 .DS_Store
-.gitignore.swp
