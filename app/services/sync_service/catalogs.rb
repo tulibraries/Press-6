@@ -11,20 +11,19 @@ class SyncService::Catalogs
     @log = Logger.new("log/sync-catalogs.log")
     @stdout = Logger.new(STDOUT)
     @xmlPath = params.fetch(:xml_path)
-    @booksDoc = File.open(@xmlPath) { |f| Nokogiri::XML(f) }
+    @booksDoc = Nokogiri::XML(File.open(@xmlPath)) { |config| config.noblanks }
     stdout_and_log("Syncing catalogs from #{@xmlPath}")
   end
 
   def sync
     @created = @skipped = @baddata = @errored = 0
-    read_catalogs.each do |book|
+    read_catalogs.each do |catalog|
       begin
-        @log.info(%Q(Syncing Book: #{book["title"]}))
-        record = record_hash(book)
-
+        @log.info(%Q(Syncing Catalog: #{catalog["title"]}))
+        record = record_hash(catalog)
         create_if_needed!(record)
       rescue Exception => err
-        stdout_and_log(%Q(Syncing Book: #{book["title"]} errored -  #{err.message} \n #{err.backtrace}))
+        stdout_and_log(%Q(Syncing catalog: #{catalog["title"]} errored -  #{err.message} \n #{err.backtrace}))
         @errored += 1
       end
     end
@@ -34,7 +33,7 @@ class SyncService::Catalogs
   def read_catalogs
     @booksDoc.xpath("//record/catalog").map do |node|
       node_xml = node.to_xml
-      Hash.from_xml(node_xml).merge(xml: node_xml)
+      Hash.from_xml(node_xml)
     end
   end
 
@@ -81,12 +80,6 @@ class SyncService::Catalogs
         @baddata += 1
       end
     end
-  end
-
-  def xml_hash(catalog)
-    Digest::SHA1.hexdigest(
-      catalog.fetch(:xml) { raise StandardError.new("No XML supplied") }
-    )
   end
 
   def stdout_and_log(message, level: :info)

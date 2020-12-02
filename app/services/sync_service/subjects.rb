@@ -16,38 +16,43 @@ class SyncService::Subjects
   end
 
   def sync
-    @updated = @created = @errored = 0
-    read_subjects.each do |book|
-      next if book["record"]["subjects"]["subject"].first.any?(nil)
+    @updated = @created = @errored = @skipped = 0
+
+    read_subjects.each do |subject|
+
+      next if subject["subjects"]["subject"].first.any?(nil)
       begin
-        @log.info(%Q(Syncing Book: #{book["title"]}))
-        record = record_hash(book)
+        record = record_hash(subject)
         create_or_update!(record)
       rescue Exception => err
-        stdout_and_log(%Q(Syncing Book: #{book["record"]["title"]} - errored -  #{err.message} \n #{err.backtrace}))
+        if err.message == "no implicit conversion of String into Integer" #empty tags
+          stdout_and_log("Empty subject tags:  #{err.message}")
+        else
+          stdout_and_log("Syncing Subject:  #{err.message} \n #{err.backtrace}")
+        end
         @errored += 1
       end
     end
-    stdout_and_log("Syncing completed with #{@created} created, #{@updated} skipped, and #{@errored} errored records.")
+    stdout_and_log("Syncing completed with #{@created} created/updated, #{@updated} duplicates, and #{@errored} invalid records.")
   end
 
   def read_subjects
-    @booksDoc.xpath("//record").map do |node|
+    @booksDoc.xpath("//record/subjects").map do |node|
       node_xml = node.to_xml
-      Hash.from_xml(node_xml).merge(xml: node_xml)
+      Hash.from_xml(node_xml)
     end
   end
 
   def record_hash(record)
     {
-      "subjects" => record["record"]["subjects"].fetch("subject", nil)
+      "subjects" => record["subjects"].fetch("subject", nil)
     }
   end
 
   def create_or_update!(record_hash)
     subjects = record_hash["subjects"]
 
-    if subjects.size <= 2
+    if subjects.size <= 1
       s = Subject.find_by(code: subjects["subject_id"])
 
     else
@@ -72,12 +77,6 @@ class SyncService::Subjects
         end
       end
     end
-  end
-
-  def xml_hash(review)
-    Digest::SHA1.hexdigest(
-      review.fetch(:xml) { raise StandardError.new("No XML supplied") }
-    )
   end
 
   def stdout_and_log(message, level: :info)
