@@ -10,12 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_182611) do
+ActiveRecord::Schema.define(version: 2020_12_02_173950) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "action_text_rich_texts", force: :cascade do |t|
+  create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
     t.string "record_type", null: false
@@ -25,7 +22,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_182611) do
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
-  create_table "active_storage_attachments", force: :cascade do |t|
+  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -35,7 +32,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_182611) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", force: :cascade do |t|
+  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -46,7 +43,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_182611) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "books", force: :cascade do |t|
+  create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "book_id"
     t.string "title"
     t.string "sort_title"
@@ -77,7 +74,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_182611) do
     t.string "edition"
     t.string "suggested_reading"
     t.boolean "course_adoption"
-    t.string "subjects"
+    t.text "subjects", size: :long
     t.string "subject1"
     t.string "subject2"
     t.string "subject3"
@@ -101,7 +98,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_182611) do
     t.index ["series_id"], name: "index_books_on_series_id"
   end
 
-  create_table "catalogs", force: :cascade do |t|
+  create_table "catalogs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.string "code"
     t.string "season"
@@ -110,7 +107,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_182611) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "promotions", force: :cascade do |t|
+  create_table "promotions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.string "pdf_display_name"
     t.boolean "active"
@@ -119,7 +116,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_182611) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "reviews", force: :cascade do |t|
+  create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "book_id"
     t.text "review"
     t.string "review_id"
@@ -128,7 +125,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_182611) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "series", force: :cascade do |t|
+  create_table "series", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "code"
     t.string "title"
     t.string "editors"
@@ -139,14 +136,14 @@ ActiveRecord::Schema.define(version: 2020_11_10_182611) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "subjects", force: :cascade do |t|
+  create_table "subjects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "code"
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "webpages", force: :cascade do |t|
+  create_table "webpages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "title"
