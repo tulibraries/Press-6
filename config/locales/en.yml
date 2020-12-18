@@ -40,3 +40,12 @@ en:
         show_website: Show in Website
         detach: Detach
         edit_resource: "Edit: %{name}"
+      tabs:
+        books:
+          book: book
+          subjects: subjects
+          catalog: catalog
+          awards: awards
+          guide: guide
+          homepage: homepage
+          promotions: promotions
