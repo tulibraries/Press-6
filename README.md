@@ -13,6 +13,10 @@
 
 ### Load Data
 
+To load data into your local instance, run the following command:
+
+`bundle exec rails sync:pressworks:all[press.xml]`
+
 ### Start the Application using Docker as an alternative
 
 If Docker is available, we defined a Makefile with many useful commands.
