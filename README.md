@@ -21,8 +21,6 @@ To load data into your local instance, run the following command:
 
 If Docker is available, we defined a Makefile with many useful commands.
 
-bundle exec rails sync:pressworks:all[press.xml]
-
 * To build prod image: ```make build ASSETS_PRECOMPILE=yes```
   * `ASSETS_PRECOMPILE=no` by default
 * To start the dockerized app, run ```make run```
