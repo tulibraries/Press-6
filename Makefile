@@ -48,7 +48,7 @@ scan:
 			trivy $(HARBOR)/$(IMAGE):$(VERSION); \
 		fi
 
-deploy: scan
+deploy: scan lint
 	@docker push $(HARBOR)/$(IMAGE):$(VERSION) \
 	# This "if" statement needs to be a one liner or it will fail.
 	# Do not edit indentation
