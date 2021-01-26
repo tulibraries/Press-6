@@ -1,5 +1,10 @@
+#Defaults
+include .env
+export
+
+#Set DOCKER_IMAGE_VERSION in the .env file OR by passing in
+DOCKER_IMAGE_VERSION ?= $(DOCKER_IMAGE_VERSION)
 IMAGE ?= tulibraries/tupress
-VERSION ?= 1.0.9
 HARBOR ?= harbor.k8s.temple.edu
 CLEAR_CACHES ?= no
 ASSETS_PRECOMPILE ?= no
