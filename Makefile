@@ -1,5 +1,5 @@
 IMAGE ?= tulibraries/tupress
-VERSION ?= 1.0.8
+VERSION ?= 1.0.9
 HARBOR ?= harbor.k8s.temple.edu
 CLEAR_CACHES ?= no
 ASSETS_PRECOMPILE ?= no
@@ -24,6 +24,12 @@ run:
 		-e "K8=yes" \
 		--rm -it \
 				$(HARBOR)/$(IMAGE):$(VERSION)
+
+lint:
+	@if [ $(CI) == false ]; \
+		then \
+			hadolint .docker/app/Dockerfile; \
+		fi
 
 shell:
 	@docker run --rm -it \
