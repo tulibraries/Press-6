@@ -1,11 +1,11 @@
 IMAGE ?= tulibraries/tupress
 VERSION ?= 1.0.8
 HARBOR ?= harbor.k8s.temple.edu
-CLEAR_CACHES=no
-ASSETS_PRECOMPILE=no
+CLEAR_CACHES ?= no
+ASSETS_PRECOMPILE ?= no
 
 build:
-	@ if [ $(ASSETS_PRECOMPILE) == yes ]; then \
+	@if [ $(ASSETS_PRECOMPILE) == yes ]; then \
 			RAILS_ENV=production TUPRESS_DB_HOST=localhost bundle exec rails assets:precompile; \
 		fi
 	@docker build --build-arg RAILS_ENV=production --build-arg SECRET_KEY_BASE=$(SECRET_KEY_BASE) \
