@@ -8,7 +8,6 @@ include:
 
 variables:
   IMAGE: "tulibraries/tupress"
-  BUILD_PATH: ".docker/app/."
 
 before_script:
   - source .env
@@ -29,7 +28,7 @@ build:
   stage: build
   extends: .build_image
   variables:
-    DF: "${BUILD_PATH}/Dockerfile"
+    DF: ".docker/app/Dockerfile --build-arg RAILS_ENV=production --build-arg SECRET_KEY_BASE=$SECRET_KEY_BASE  --no-cache"
 
 scan:
   stage: scan
