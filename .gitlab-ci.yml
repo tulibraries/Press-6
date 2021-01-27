@@ -32,7 +32,7 @@ build:
 
 scan:
   stage: scan
-  extends: .scanimage
+  extends: .scanimage_high
 
 tag:
   stage: tag
