@@ -6,7 +6,7 @@ COPY . .
 
 USER root
 
-RUN apk add --update --no-cache bash=5.0.17-r0 tzdata=2020f-r0 libxslt-dev=1.1.34-r0 mariadb-dev=10.4.15-r0 && \
+RUN apk add --update --no-cache bash=5.1.0-r0 tzdata=2021a-r0 libxslt-dev=1.1.34-r0 mariadb-dev=10.5.8-r0 && \
     apk add --no-cache --virtual build-dependencies git=2.26.2-r0 build-base=0.5-r2 && \
     gem install bundler:2.2.2  && \
     bundle config build.nokogiri --use-system-libraries && \
