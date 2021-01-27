@@ -8,7 +8,7 @@ include:
 
 variables:
   IMAGE: "tulibraries/tupress"
-  BUILD_PATH: ".docker/app/Dockerfile"
+  BUILD_PATH: ".docker/app/."
 
 before_script:
   - source .env
@@ -28,6 +28,8 @@ lint:
 build:
   stage: build
   extends: .build_image
+  variables:
+    DF: "${BUILD_PATH}"
 
 scan:
   stage: scan
