@@ -27,3 +27,4 @@ If Docker is available, we defined a Makefile with many useful commands.
 * To deploy prod image: ```make deploy VERSION=x```  VERSION=latest by default
 * To run security check on image: ```make secure``` depends on trivy (brew install aquasecurity/trivy/trivy)
 * To run a shell with image: ```make shell```
+* To run docker lint: ```make lint```

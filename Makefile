@@ -1,5 +1,10 @@
+#Defaults
+include .env
+export
+
+#Set DOCKER_IMAGE_VERSION in the .env file OR by passing in
+DOCKER_IMAGE_VERSION ?= $(DOCKER_IMAGE_VERSION)
 IMAGE ?= tulibraries/tupress
-VERSION ?= 1.0.8
 HARBOR ?= harbor.k8s.temple.edu
 CLEAR_CACHES ?= no
 ASSETS_PRECOMPILE ?= no
@@ -25,6 +30,12 @@ run:
 		--rm -it \
 				$(HARBOR)/$(IMAGE):$(VERSION)
 
+lint:
+	@if [ $(CI) == false ]; \
+		then \
+			hadolint .docker/app/Dockerfile; \
+		fi
+
 shell:
 	@docker run --rm -it \
 		--entrypoint=sh --user=root \
@@ -42,7 +53,7 @@ scan:
 			trivy $(HARBOR)/$(IMAGE):$(VERSION); \
 		fi
 
-deploy: scan
+deploy: scan lint
 	@docker push $(HARBOR)/$(IMAGE):$(VERSION) \
 	# This "if" statement needs to be a one liner or it will fail.
 	# Do not edit indentation
