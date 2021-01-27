@@ -102,7 +102,7 @@ RSpec.describe SyncService::Books, type: :service do
     end
 
     let (:book1) {
-      Book.find_by(title: "Vehicles of Decolonization")
+      Book.find_by(title: "Finished Business")
     }
 
     let(:book2) {

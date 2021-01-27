@@ -32,9 +32,11 @@ default: &default
 
 development:
   <<: *default
+  database: press6
 
 test:
   <<: *default
+  database: press6-test
 
 production:
   <<: *default

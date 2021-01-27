@@ -123,24 +123,15 @@ class BookDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     sort_title
     cover_image
-    hot
-    hotweight
-    news
-    newsweight
-    news_text
-    course_adoption
-    suggested_reading_image
-    guide_image
-    guide_text
+    status
     excerpt_image
     excerpt_text
     edition
     supplement
-    promotion
-    status
     subject1
     subject2
     subject3
+    catalog
     award
     award_year
     award2
@@ -149,6 +140,16 @@ class BookDashboard < Administrate::BaseDashboard
     award_year3
     award4
     award_year4
+    guide_image
+    guide_text
+    hot
+    hotweight
+    news
+    newsweight
+    news_text
+    suggested_reading_image
+    course_adoption
+    promotion
   ].freeze
 
   # COLLECTION_FILTERS
@@ -166,7 +167,7 @@ class BookDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how books are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(book)
-  #   "Book ##{book.id}"
-  # end
+  def display_resource(book)
+    book.title
+  end
 end

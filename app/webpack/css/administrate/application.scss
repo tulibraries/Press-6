@@ -27,6 +27,7 @@
 @import "./utilities/text-color";
 
 @import "trix/dist/trix";
+@import "bootstrap";
 
 // We need to override trix.css’s image gallery styles to accommodate the
 // <action-text-attachment> element we wrap around attachments. Otherwise,
