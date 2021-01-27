@@ -29,7 +29,7 @@ build:
   stage: build
   extends: .build_image
   variables:
-    DF: "${BUILD_PATH}"
+    DF: "${BUILD_PATH}/Dockerfile"
 
 scan:
   stage: scan
