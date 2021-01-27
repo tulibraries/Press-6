@@ -8,13 +8,17 @@ include:
 
 variables:
   IMAGE: "tulibraries/tupress"
-  VERSION: "${DOCKER_IMAGE_VERSION}-${CI_BUILD_ID}"
-  BUILD_PATH: ".docker/app/"
+  BUILD_PATH: ".docker/app/."
+
+before_script:
+  - source .env
+  - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
 
 stages:
   - lint
   - build
   - scan
+  - tag
 
 lint:
   extends: .lint_docker
@@ -26,3 +30,7 @@ build:
 scan:
   stage: scan
   extends: .scanimage
+
+tag:
+  stage: tag
+  extends: .tag_image
