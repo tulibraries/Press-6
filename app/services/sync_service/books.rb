@@ -43,6 +43,21 @@ class SyncService::Books
       "book_id"             => record["record"].fetch("book_id", nil),
       "title"               => record["record"].fetch("title", nil),
       "subtitle"            => record["record"].fetch("subtitle", nil),
+      "author_ids"          => record["record"].fetch("authors")["author"].map do |p|
+                                  p.size == 5 ? p["author_id"] : p[1]
+                                end,
+      "author_prefixes"     => record["record"].fetch("authors")["author"].map do |p|
+                                  p.size == 5 ? p["author_prefix"] : p[1]
+                                end,
+      "author_firsts"       => record["record"].fetch("authors")["author"].map do |p|
+                                  p.size == 5 ? p["author_first"] : p[1]
+                                end,
+      "author_lasts"        => record["record"].fetch("authors")["author"].map do |p|
+                                  p.size == 5 ? p["author_last"] : p[1]
+                                end,
+      "author_suffixes"     => record["record"].fetch("authors")["author"].map do |p|
+                                  p.size == 5 ? p["author_suffix"] : p[1]
+                                end,
       "author_byline"       => record["record"].fetch("author_byline", nil),
       "about_author"        => record["record"].fetch("author_bios", nil),
       "intro"               => record["record"].fetch("intro", nil),
