@@ -35,7 +35,7 @@ and renders all form fields for a resource's editable attributes.
 
 <nav>
   <div class="nav nav-tabs mb-4" id="nav-tab" role="tablist">
-  <% I18n.t("tupress.admin.tabs.books").each do |tabname| %>
+  <% @tab_names.each do |tabname| %>
     <%= link_to "#{tabname[1].humanize}", "##{tabname[1]}-tab", { :'class' => "nav-item nav-link", 
                                                             :'id' => "nav-#{tabname[1]}-tab",
                                                             :'data-toggle' => "tab",
@@ -100,6 +100,16 @@ and renders all form fields for a resource's editable attributes.
   <div class="tab-pane fade" id="catalog-tab" role="tabpanel" aria-labelledby="nav-catalog-tab">
   <% page.attributes.each do |attribute| %>
     <% if attribute.name == "catalog" %>
+      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
+      <%= render_field attribute, f: f %>
+      </div>
+    <% end %>
+  <% end %>
+  </div>
+
+  <div class="tab-pane fade" id="series-tab" role="tabpanel" aria-labelledby="nav-series-tab">
+  <% page.attributes.each do |attribute| %>
+    <% if attribute.name == "series" %>
       <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
       <%= render_field attribute, f: f %>
       </div>

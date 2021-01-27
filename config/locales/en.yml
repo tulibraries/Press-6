@@ -39,11 +39,11 @@ en:
         sync: Sync
         show_website: Show in Website
         detach: Detach
-        edit_resource: "Edit: %{name}"
       tabs:
         books:
           book: book
           subjects: subjects
+          series: series
           catalog: catalog
           awards: awards
           guide: guide
