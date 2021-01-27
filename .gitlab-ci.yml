@@ -22,6 +22,8 @@ stages:
 
 lint:
   extends: .lint_docker
+  variables:
+    DF: ".docker/app/Dockerfile"
 
 build:
   stage: build
