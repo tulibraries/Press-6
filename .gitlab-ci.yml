@@ -8,7 +8,7 @@ include:
 
 variables:
   IMAGE: "tulibraries/tupress"
-  BUILD_PATH: ".docker/app/."
+  BUILD_PATH: ".docker/app/Dockerfile"
 
 before_script:
   - source .env
