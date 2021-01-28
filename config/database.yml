@@ -1,7 +1,7 @@
 # Active Record typically reads its configuration from a file named database.yml
 # or an environment variable DATABASE_URL. Use the value mysql2 as the adapter
 # name. For example:
-# 
+#
 # development:
 #  adapter: mysql2
 #  encoding: utf8
@@ -36,7 +36,10 @@ development:
 
 test:
   <<: *default
-  database: press6-test
+  host: <%= ENV["TUPRESS_DB_HOST"] || "db" %>
+  database: <%= ENV["TUPRESS_DB_NAME"] || "press_6_db"  %>
+  username: <%= ENV["TUPRESS_DB_USER"] || "root" %>
+  password: <%= ENV["TUPRESS_DB_PASSWORD"] || "press_6_ci" %>
 
 production:
   <<: *default
