@@ -24,7 +24,7 @@ class BookDashboard < Administrate::BaseDashboard
     binding: Field::Text,
     description: Field::Text,
     contents: Field::Text,
-    author_byline: Field::Text,
+    author_byline: Field::String,
     author_bios: Field::Text,
     guide_image: ImageField,
     guide_text: TrixField,
@@ -100,12 +100,13 @@ class BookDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    sort_title
     cover_image
+    sort_title
+    author_byline
+    edition
     status
     excerpt_image
     excerpt_text
-    edition
     supplement
     subject1
     subject2
