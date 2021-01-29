@@ -6,8 +6,8 @@ COPY . .
 
 USER root
 
-RUN apk add --update --no-cache bash=5.1.0-r0 tzdata=2021a-r0 libxslt-dev=1.1.34-r0 mariadb-dev=10.5.8-r0 && \
-    apk add --no-cache --virtual build-dependencies git=2.30.0-r0 build-base=0.5-r2 && \
+RUN apk add --no-cache bash=5.0.17-r0 tzdata=2020f-r0 libxslt-dev=1.1.34-r0 mariadb-dev=10.4.15-r0 nodejs=12.20.1-r0 yarn=1.22.4-r0 && \
+    apk add --no-cache --virtual build-dependencies git=2.26.2-r0 build-base=0.5-r2 && \
     gem install bundler:2.2.2  && \
     bundle config build.nokogiri --use-system-libraries && \
     bundle config set --local without "development test" && \
@@ -17,7 +17,11 @@ RUN apk add --update --no-cache bash=5.1.0-r0 tzdata=2021a-r0 libxslt-dev=1.1.34
     apk del build-dependencies && \
     chown nobody -R /app/tmp && \
     chown nobody -R /app/log && \
-    rm -rf /var/cache/apk/
+    rm -rf /var/cache/apk/ && \
+    yarn install --check-files && \
+    RAILS_ENV=production bundle exec rake assets:precompile && \
+    rm -rf app/node_modules && \
+    rm -rf app/tmp/*
 
 USER nobody
 
