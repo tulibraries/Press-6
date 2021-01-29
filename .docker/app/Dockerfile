@@ -19,9 +19,9 @@ RUN apk add --no-cache bash=5.0.17-r0 tzdata=2020f-r0 libxslt-dev=1.1.34-r0 mari
     yarn install --check-files && \
     RAILS_ENV=production bundle exec rake assets:precompile && \
     rm -rf app/node_modules && \
-    rm -rf app/tmp/*
+    rm -rf app/tmp/* && \
     apk del build-dependencies && \
-    rm -rf /var/cache/apk/ && \
+    rm -rf /var/cache/apk/
 
 USER nobody
 
