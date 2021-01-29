@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.0"
+ruby "2.7.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 6.0.3.4"
@@ -29,8 +29,9 @@ gem 'mini_magick'
 
 gem "administrate"
 gem "administrate-field-scoped_has_many"
-gem "nokogiri", "1.10.8"
+gem "nokogiri", "1.11.0.rc4"
 gem "pry"
+gem "listen", "~> 3.2"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.2", require: false
@@ -49,7 +50,6 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem "listen", "~> 3.2"
   gem "web-console", ">= 3.3.0"
   gem "brakeman"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
