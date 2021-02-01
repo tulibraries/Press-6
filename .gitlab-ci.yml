@@ -29,7 +29,7 @@ build:
   stage: build
   extends: .build_image
   variables:
-    DF: ".docker/app/Dockerfile --build-arg RAILS_ENV=production --build-arg SECRET_KEY_BASE=$SECRET_KEY_BASE  --no-cache"
+    DF: ".docker/app/Dockerfile --build-arg RAILS_ENV=production --build-arg RAILS_MASTER_KEY=$RAILS_MASTER_KEY --no-cache"
 
 scan:
   stage: scan
