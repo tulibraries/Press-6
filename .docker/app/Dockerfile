@@ -15,6 +15,7 @@ RUN apk add --no-cache bash=5.1.0-r0 tzdata=2021a-r0 libxslt-dev=1.1.34-r0 maria
     find "$GEM_HOME" -name Gemfile.lock -exec rm "{}" \; && \
     find "$GEM_HOME" -name yarn.lock -exec rm "{}" \; && \
     chown nobody -R /app/tmp && \
+    chmod -R 755 /app/tmp && \
     chown nobody -R /app/log && \
     yarn install --check-files && \
     RAILS_ENV=production bundle exec rake assets:precompile && \
