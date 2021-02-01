@@ -16,6 +16,7 @@ module Admin
       @tab_content["guide"] = ["guide_image","guide_text"]
       @tab_content["homepage"] = ["hot","hotweight","newsweight","news_text","suggested_reading_image","course_adoption"]
       @tab_content["promotions"] = ["promotion"]
+      @tab_content["see_also"] = ["books"]
     end
 
     def default_sort

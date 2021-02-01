@@ -9,6 +9,7 @@ class Book < ApplicationRecord
   has_rich_text :news_text
 
   has_many :reviews, foreign_key: "review_id", dependent: :destroy, inverse_of: :book
+  has_many :books, foreign_key: "book_id", class_name: "Book"
 
   belongs_to :series, optional: true
   belongs_to :catalog, optional: true
