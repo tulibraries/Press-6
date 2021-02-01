@@ -35,160 +35,41 @@ and renders all form fields for a resource's editable attributes.
 
 <nav>
   <div class="nav nav-tabs mb-4" id="nav-tab" role="tablist">
-  <% I18n.t("tupress.admin.tabs.books").each do |tabname| %>
-    <%= link_to "#{tabname[1].humanize}", "##{tabname[1]}-tab", { :'class' => "nav-item nav-link", 
-                                                            :'id' => "nav-#{tabname[1]}-tab",
-                                                            :'data-toggle' => "tab",
-                                                            :'role' => "tab",
-                                                            :'aria-controls' => "nav-#{tabname[1]}",
-                                                            :'aria-selected' => "true" }
-                                                            %>
+  <% @tab_names.each do |tabname| %>
+    <%= link_to "#{tabname[1].humanize}", 
+                "##{tabname[1]}-tab", 
+                  { :'class' => "nav-item nav-link", 
+                    :'id' => "nav-#{tabname[1]}-tab",
+                    :'data-toggle' => "tab",
+                    :'role' => "tab",
+                    :'aria-controls' => "nav-#{tabname[1]}",
+                    :'aria-selected' => "true" }
+                  %>
   <% end %>
 </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="book-tab" role="tabpanel" aria-labelledby="nav-book-tab">
-  <% page.attributes.each do |attribute| %>
-    <% if attribute.name == "sort_title" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-    <% if attribute.name == "cover_image" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-    <% if attribute.name == "status" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-    <% if attribute.name == "excerpt_image" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-    <% if attribute.name == "excerpt_text" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-  <% end %>
-  </div>
 
-  <div class="tab-pane fade" id="subjects-tab" role="tabpanel" aria-labelledby="nav-subjects-tab">
-  <% page.attributes.each do |attribute| %>
-    <% if attribute.name == "subject1" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-    <% if attribute.name == "subject2" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-    <% if attribute.name == "subject3" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-  <% end %>
-  </div>
-  
-  <div class="tab-pane fade" id="catalog-tab" role="tabpanel" aria-labelledby="nav-catalog-tab">
-  <% page.attributes.each do |attribute| %>
-    <% if attribute.name == "catalog" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-  <% end %>
-  </div>
+  <% @tab_content.each do |tab, fields| %>
+    <div class="tab-pane fade show <%= "active" if tab == "book" %>" id=<%= "#{tab}-tab" %> role="tabpanel" aria-labelledby=<%= "nav-#{tab}-tab" %>>
 
-  <div class="tab-pane fade" id="awards-tab" role="tabpanel" aria-labelledby="nav-awards-tab">
-    <% page.attributes.each do |attribute| %>
-    <% if attribute.name == "award" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-    <% if attribute.name == "award2" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-    <% if attribute.name == "award3" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-  <% end %>
-  </div>
+      <% page.attributes.each do |attribute| %>
+          <% fields.each do |field| %>
+            <% if attribute.name == field %>
+              <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
+                <%= render_field attribute, f: f %>
+              </div>
+            <% end %>
+          <% end %>
+      <% end %>
 
-  <div class="tab-pane fade" id="guide-tab" role="tabpanel" aria-labelledby="nav-guide-tab">
-    <% page.attributes.each do |attribute| %>
-    <% if attribute.name == "guide_image" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-    <% if attribute.name == "guide_text" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
+    </div>
   <% end %>
-  </div>
-  <div class="tab-pane fade" id="homepage-tab" role="tabpanel" aria-labelledby="nav-homepage-tab">
-    <% page.attributes.each do |attribute| %>
-    <% if attribute.name == "hot" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-    <% if attribute.name == "hotweight" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-    <% if attribute.name == "newsweight" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-    <% if attribute.name == "news_text" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-    <% if attribute.name == "suggested_reading_image" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-    <% if attribute.name == "course_adoption" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-  <% end %>
-  </div>
-  <div class="tab-pane fade" id="promotions-tab" role="tabpanel" aria-labelledby="nav-promotions-tab">
-    <% page.attributes.each do |attribute| %>
-    <% if attribute.name == "promotion" %>
-      <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
-      </div>
-    <% end %>
-  <% end %>
-  </div>
+
 </div>
 
-  
+<div class="form-actions">
+  <%= f.submit %>
+</div>
 
-  <div class="form-actions">
-    <%= f.submit %>
-  </div>
 <% end %>

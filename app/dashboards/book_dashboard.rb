@@ -19,16 +19,16 @@ class BookDashboard < Administrate::BaseDashboard
     about_author: Field::Text,
     intro: Field::Text,
     blurb: Field::Text,
-    excerpt_image: FileField,
+    excerpt_image: ImageField,
     excerpt_text: TrixField,
     binding: Field::Text,
     description: Field::Text,
     contents: Field::Text,
-    author_byline: Field::Text,
+    author_byline: Field::String,
     author_bios: Field::Text,
-    guide_image: FileField,
+    guide_image: ImageField,
     guide_text: TrixField,
-    cover_image: FileField,
+    cover_image: ImageField,
     format: Field::String,
     ean: Field::String,
     pub_date: Field::String,
@@ -49,7 +49,7 @@ class BookDashboard < Administrate::BaseDashboard
     ),
     supplement: Field::String,
     edition: Field::String,
-    suggested_reading_image: FileField,
+    suggested_reading_image: ImageField,
     course_adoption: Field::Boolean,
 
     series: Field::BelongsTo.with_options(order: "title"),
@@ -86,47 +86,27 @@ class BookDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
+    cover_image
     sort_title
     author_byline
-    excerpt_text
-    guide_text
-    cover_image
     isbn
     ean
-    status
-    newsweight
-    hot
-    hotweight
-    course_adoption
     catalog
     series
     promotion
-    supplement
-    edition
-    course_adoption
-    subject1
-    subject2
-    subject3
-    award
-    award_year
-    award2
-    award_year2
-    award3
-    award_year3
-    award4
-    award_year4
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    sort_title
     cover_image
+    sort_title
+    author_byline
+    edition
     status
     excerpt_image
     excerpt_text
-    edition
     supplement
     subject1
     subject2
@@ -138,8 +118,6 @@ class BookDashboard < Administrate::BaseDashboard
     award_year2
     award3
     award_year3
-    award4
-    award_year4
     guide_image
     guide_text
     hot
@@ -150,6 +128,7 @@ class BookDashboard < Administrate::BaseDashboard
     suggested_reading_image
     course_adoption
     promotion
+    series
   ].freeze
 
   # COLLECTION_FILTERS
