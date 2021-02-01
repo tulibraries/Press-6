@@ -100,12 +100,11 @@ jobs:
 
       - run:
           name: Build docker container
-          command: docker build -t t trivy-ci-test:${CIRCLE_SHA1} -f .docker/app/Dockerfile
+          command: docker build -t trivy-ci-test:${CIRCLE_SHA1} -f .docker/ci-app/Dockerfile.ci .
 
       - run:
           name: Install trivy
           command: |
-            apk add --update-cache --upgrade curl
             VERSION=$(
                 curl --silent "https://api.github.com/repos/aquasecurity/trivy/releases/latest" | \
                 grep '"tag_name":' | \
@@ -114,7 +113,7 @@ jobs:
 
             wget https://github.com/aquasecurity/trivy/releases/download/v${VERSION}/trivy_${VERSION}_Linux-64bit.tar.gz
             tar zxvf trivy_${VERSION}_Linux-64bit.tar.gz
-            mv trivy /usr/local/bin
+            sudo mv trivy /usr/local/bin
       - run:
           name: Scan the local image with trivy
           command: trivy --exit-code 0 --no-progress trivy-ci-test:${CIRCLE_SHA1}
