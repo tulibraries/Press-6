@@ -19,6 +19,7 @@ stages:
   - build
   - scan
   - tag
+  - deploy
 
 lint:
   extends: .lint_docker
@@ -38,3 +39,10 @@ scan:
 tag:
   stage: tag
   extends: .tag_image
+
+deploy:
+  variables:
+    IMAGE: harbor.k8s.temple.edu/tulibraries/tupress
+  stage: deploy
+  extends: .kubectl_setup
+  script: kubectl --namespace=tupress set image deployment/tupress-app tupress-app=$IMAGE:$VERSION --record
