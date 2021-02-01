@@ -24,8 +24,8 @@ gem "json", ">= 2.3.0"
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
-gem 'image_processing', '~> 1.2'
-gem 'mini_magick'
+gem "image_processing", "~> 1.2"
+gem "mini_magick"
 
 gem "administrate"
 gem "administrate-field-scoped_has_many"
