@@ -14,7 +14,7 @@ build:
 			RAILS_ENV=production TUPRESS_DB_HOST=localhost bundle exec rails assets:precompile; \
 		fi
 	@docker build --build-arg RAILS_ENV=production --build-arg SECRET_KEY_BASE=$(SECRET_KEY_BASE) \
-			--tag $(HARBOR)/$(IMAGE):$(VERSION) \
+			--tag $(HARBOR)/$(IMAGE):$(DOCKER_IMAGE_VERSION) \
 			--tag $(HARBOR)/$(IMAGE):latest \
 			--file .docker/app/Dockerfile \
 			--no-cache .

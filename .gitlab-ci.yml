@@ -12,12 +12,14 @@ variables:
 before_script:
   - source .env
   - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
+  - echo "$MASTER_KEY" > config/master.key
 
 stages:
   - lint
   - build
   - scan
   - tag
+  - deploy
 
 lint:
   extends: .lint_docker
@@ -28,7 +30,7 @@ build:
   stage: build
   extends: .build_image
   variables:
-    DF: ".docker/app/Dockerfile --build-arg RAILS_ENV=production --build-arg SECRET_KEY_BASE=$SECRET_KEY_BASE  --no-cache"
+    DF: ".docker/app/Dockerfile --build-arg RAILS_ENV=production --build-arg RAILS_MASTER_KEY=$RAILS_MASTER_KEY --no-cache"
 
 scan:
   stage: scan
@@ -37,3 +39,10 @@ scan:
 tag:
   stage: tag
   extends: .tag_image
+
+deploy:
+  variables:
+    IMAGE: harbor.k8s.temple.edu/tulibraries/tupress
+  stage: deploy
+  extends: .kubectl_setup
+  script: kubectl --namespace=tupress set image deployment/tupress-app tupress-app=$IMAGE:$VERSION --record

@@ -1,0 +1,24 @@
+version: "3.4"
+
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: press_6_db
+      MYSQL_ROOT_PASSWORD: press_6_ci
+
+  test_app:
+    build:
+      context: .
+      dockerfile: .docker/ci-app/Dockerfile.ci
+    ports:
+      - "3000"
+    environment:
+      BUNDLE_PATH: /app/vendor/bundle
+      RAILS_ENV: test
+    entrypoint:
+      - "tail"
+      - "-f"
+      - /dev/null
