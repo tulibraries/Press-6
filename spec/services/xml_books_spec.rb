@@ -106,7 +106,7 @@ RSpec.describe SyncService::Books, type: :service do
     }
 
     let(:book2) {
-      Book.find_by(title: "How They Saw It")
+      Book.find_by(title: "Inspired Citizenship")
     }
 
     it "syncs books to the table" do
