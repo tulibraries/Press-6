@@ -11,7 +11,6 @@ RSpec.describe SyncService::Series, type: :service do
 
   context "valid series" do
     it "extracts the series hash" do
-      binding.pry
       expect(@series.first.children.first.text).to match(/^S-196$/)
     end
 
