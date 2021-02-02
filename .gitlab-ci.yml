@@ -1,18 +1,20 @@
 include:
   - project: "infrastructure-engineering-shared/gitlab-ci-templates"
-    file: "lint_docker.yaml"
-  - project: "infrastructure-engineering-shared/gitlab-ci-templates"
-    file: "build_docker.yaml"
-  - project: "infrastructure-engineering-shared/gitlab-ci-templates"
-    file: "security_scan.yaml"
+    file:
+      - "lint_docker.yaml"
+      - "build_docker.yaml"
+      - "security_scan.yaml"
+      - "kubectl_commands.yaml"
 
 variables:
   IMAGE: "tulibraries/tupress"
 
-before_script:
+.export_variables: &export_variables
   - source .env
   - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
-  - echo "$MASTER_KEY" > config/master.key
+
+before_script:
+  - *export_variables
 
 stages:
   - lint
@@ -30,7 +32,7 @@ build:
   stage: build
   extends: .build_image
   variables:
-    DF: ".docker/app/Dockerfile --build-arg RAILS_ENV=production --build-arg RAILS_MASTER_KEY=$RAILS_MASTER_KEY --no-cache"
+    DF: ".docker/app/Dockerfile --build-arg RAILS_MASTER_KEY=$MASTER_KEY --no-cache"
 
 scan:
   stage: scan
@@ -45,4 +47,6 @@ deploy:
     IMAGE: harbor.k8s.temple.edu/tulibraries/tupress
   stage: deploy
   extends: .kubectl_setup
-  script: kubectl --namespace=tupress set image deployment/tupress-app tupress-app=$IMAGE:$VERSION --record
+  script:
+    - *export_variables
+    - kubectl --namespace=tupress set image deployment/tupress-app tupress-app=$IMAGE:$VERSION --record

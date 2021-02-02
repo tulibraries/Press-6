@@ -29,6 +29,9 @@
 @import "trix/dist/trix";
 @import "bootstrap";
 
+@import "~selectize/dist/css/selectize";
+@import "~selectize/dist/css/selectize.default";
+
 // We need to override trix.css’s image gallery styles to accommodate the
 // <action-text-attachment> element we wrap around attachments. Otherwise,
 // images in galleries will be squished by the max-width: 33%; rule.
