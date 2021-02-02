@@ -2,6 +2,10 @@
 set -e
 
 rails db:migrate 2>/dev/null || rails db:setup
-rails sync:pressworks:all[press.xml]
+
+if [ "$DB_SYNC" != "no" ]; then
+  rails sync:pressworks:all[press.xml]
+fi
+
 rm -f /app/tmp/pids/server.pid
 exec "$@"

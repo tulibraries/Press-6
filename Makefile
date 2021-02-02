@@ -12,6 +12,7 @@ RAILS_MASTER_KEY ?= $(TUPRESS_MASTER_KEY)
 TUPRESS_DB_HOST ?= host.docker.internal
 TUPRESS_DB_NAME ?= tupress
 TUPRESS_DB_USER ?= root
+DB_SYNC ?= no
 
 
 build:
@@ -33,6 +34,7 @@ run:
 		-e "RAILS_ENV=production" \
 		-e "RAILS_SERVE_STATIC_FILES=yes" \
 		-e "K8=yes" \
+		-e "DB_SYNC=$(DB_SYNC)" \
 		--rm -it \
 		$(HARBOR)/$(IMAGE):$(VERSION)
 
