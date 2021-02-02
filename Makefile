@@ -31,7 +31,7 @@ run:
 		-e "RAILS_SERVE_STATIC_FILES=yes" \
 		-e "K8=yes" \
 		--rm -it \
-				$(HARBOR)/$(IMAGE):$(VERSION)
+		$(HARBOR)/$(IMAGE):$(VERSION)
 
 lint:
 	@if [ $(CI) == false ]; \
