@@ -36,10 +36,10 @@ development:
 
 test:
   <<: *default
-  host: <%= ENV["TUPRESS_DB_HOST"] || "db" %>
-  database: <%= ENV["TUPRESS_DB_NAME"] || "press_6_db"  %>
+  host: <%= ENV["TUPRESS_DB_HOST"] || "localhost" %>
+  database: <%= ENV["TUPRESS_DB_NAME"] || "press6-test"  %>
   username: <%= ENV["TUPRESS_DB_USER"] || "root" %>
-  password: <%= ENV["TUPRESS_DB_PASSWORD"] || "press_6_ci" %>
+  password: <%= ENV["TUPRESS_DB_PASSWORD"] || "" %>
 
 production:
   <<: *default
