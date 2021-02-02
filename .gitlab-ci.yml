@@ -1,10 +1,10 @@
 include:
   - project: "infrastructure-engineering-shared/gitlab-ci-templates"
-    file: "lint_docker.yaml"
-  - project: "infrastructure-engineering-shared/gitlab-ci-templates"
-    file: "build_docker.yaml"
-  - project: "infrastructure-engineering-shared/gitlab-ci-templates"
-    file: "security_scan.yaml"
+    file:
+      - "lint_docker.yaml"
+      - "build_docker.yaml"
+      - "security_scan.yaml"
+      - "kubectl_commands.yaml"
 
 variables:
   IMAGE: "tulibraries/tupress"
