@@ -9,9 +9,12 @@ include:
 variables:
   IMAGE: "tulibraries/tupress"
 
-before_script:
+.export_variables: &export_variables
   - source .env
   - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
+
+before_script:
+  - *export_variables
 
 stages:
   - lint
@@ -44,4 +47,6 @@ deploy:
     IMAGE: harbor.k8s.temple.edu/tulibraries/tupress
   stage: deploy
   extends: .kubectl_setup
-  script: kubectl --namespace=tupress set image deployment/tupress-app tupress-app=$IMAGE:$VERSION --record
+  script:
+    - *export_variables
+    - kubectl --namespace=tupress set image deployment/tupress-app tupress-app=$IMAGE:$VERSION --record
