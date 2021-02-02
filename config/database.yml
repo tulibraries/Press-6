@@ -32,7 +32,10 @@ default: &default
 
 development:
   <<: *default
-  database: press6
+  host: <%= ENV["TUPRESS_DB_HOST"] || "127.0.0.1" %>
+  database: <%= ENV["TUPRESS_DB_NAME"] || "press6"  %>
+  username: <%= ENV["TUPRESS_DB_USER"] || "root" %>
+  password: <%= ENV["TUPRESS_DB_PASSWORD"] || "password" %>
 
 test:
   <<: *default
