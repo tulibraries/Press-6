@@ -43,24 +43,6 @@ ActiveRecord::Schema.define(version: 2021_02_02_141624) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "agencies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "title"
-    t.string "contact"
-    t.string "address1"
-    t.string "address2"
-    t.string "address3"
-    t.string "city"
-    t.string "country"
-    t.string "phone"
-    t.string "fax"
-    t.string "email"
-    t.string "website"
-    t.string "region"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "rights"
-  end
-
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "book_id"
     t.string "title"
