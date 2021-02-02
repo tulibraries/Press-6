@@ -19,10 +19,10 @@
 default: &default
   adapter: mysql2
   encoding: utf8
-  database: tupress
-  username: root
-  password:
-  host: 127.0.0.1
+  host: <%= ENV["TUPRESS_DB_HOST"] || "127.0.0.1" %>
+  database: <%= ENV["TUPRESS_DB_NAME"] || "tupress"  %>
+  username: <%= ENV["TUPRESS_DB_USER"] || "root" %>
+  password: <%= ENV["TUPRESS_DB_PASSWORD"] || "" %>
   port: 3306
   flags:
     - -COMPRESS
@@ -36,10 +36,7 @@ development:
 
 test:
   <<: *default
-  host: <%= ENV["TUPRESS_DB_HOST"] || "localhost" %>
-  database: <%= ENV["TUPRESS_DB_NAME"] || "press6-test"  %>
-  username: <%= ENV["TUPRESS_DB_USER"] || "root" %>
-  password: <%= ENV["TUPRESS_DB_PASSWORD"] || "" %>
+  database: <%= ENV["TUPRESS_DB_NAME"] || "press6-test" %>
 
 production:
   <<: *default
