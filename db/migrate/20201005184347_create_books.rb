@@ -33,7 +33,7 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.string :edition
       t.string :suggested_reading
       t.boolean :course_adoption
-      t.string :subjects
+      t.text :subjects
       t.string :subject1
       t.string :subject2
       t.string :subject3
@@ -45,6 +45,12 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.string :award3
       t.string :award_year4
       t.string :award4
+
+      t.text :author_ids
+      t.text :author_prefixes
+      t.text :author_firsts
+      t.text :author_lasts
+      t.text :author_suffixes
 
       t.numeric :price, precision: 5, scale: 2
 
