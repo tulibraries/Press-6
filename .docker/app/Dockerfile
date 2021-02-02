@@ -17,7 +17,6 @@ RUN apk add -U --no-cache bash=5.1.0-r0 tzdata=2021a-r0 libxslt-dev=1.1.34-r0 ma
     bundle install --jobs=8 && \
     find "$GEM_HOME" -name Gemfile.lock -exec rm "{}" \; && \
     find "$GEM_HOME" -name yarn.lock -exec rm "{}" \; && \
-    yarn install --check-files && \
     RAILS_ENV=production bundle exec rails assets:precompile && \
     rm -rf app/node_modules && \
     rm -rf app/tmp/* && \
