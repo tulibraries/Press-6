@@ -10,7 +10,7 @@ class Book < ApplicationRecord
 
   has_many :reviews, foreign_key: "review_id", dependent: :destroy, inverse_of: :book
   has_many :books, class_name: "Book", dependent: :destroy, inverse_of: :book
-  
+
   belongs_to :series, optional: true
   belongs_to :catalog, optional: true
   belongs_to :promotion, optional: true
