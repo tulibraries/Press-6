@@ -3,29 +3,32 @@ include .env
 export
 
 #Set DOCKER_IMAGE_VERSION in the .env file OR by passing in
-DOCKER_IMAGE_VERSION ?= $(DOCKER_IMAGE_VERSION)
+VERSION ?= $(DOCKER_IMAGE_VERSION)
 IMAGE ?= tulibraries/tupress
 HARBOR ?= harbor.k8s.temple.edu
 CLEAR_CACHES ?= no
 ASSETS_PRECOMPILE ?= no
+RAILS_MASTER_KEY ?= $(TUPRESS_MASTER_KEY)
+
 
 build:
 	@if [ $(ASSETS_PRECOMPILE) == yes ]; then \
 			RAILS_ENV=production TUPRESS_DB_HOST=localhost bundle exec rails assets:precompile; \
 		fi
-	@docker build --build-arg RAILS_ENV=production --build-arg SECRET_KEY_BASE=$(SECRET_KEY_BASE) \
-			--tag $(HARBOR)/$(IMAGE):$(DOCKER_IMAGE_VERSION) \
-			--tag $(HARBOR)/$(IMAGE):latest \
-			--file .docker/app/Dockerfile \
-			--no-cache .
+	@docker build --build-arg RAILS_MASTER_KEY=$(RAILS_MASTER_KEY) \
+		--tag $(HARBOR)/$(IMAGE):$(DOCKER_IMAGE_VERSION) \
+		--tag $(HARBOR)/$(IMAGE):latest \
+		--file .docker/app/Dockerfile \
+		--no-cache .
 run:
 	@docker run --rm -it --name=tupress -p 127.0.0.1:3000:3000/tcp \
-		-v `pwd`/config/secrets.yml:/app/config/secrets.yml \
-		-e "RAILS_ENV=production" \
 		-e "TUPRESS_DB_HOST=$(TUPRESS_DB_HOST)" \
 		-e "TUPRESS_DB_NAME=$(TUPRESS_DB_NAME)" \
 		-e "TUPRESS_DB_USER=$(TUPRESS_DB_USER)" \
 		-e "TUPRESS_DB_PASSWORD=$(TUPRESS_DB_PASSWORD)" \
+		-e "RAILS_MASTER_KEY=$(RAILS_MASTER_KEY)" \
+		-e "RAILS_ENV=production" \
+		-e "RAILS_SERVE_STATIC_FILES=yes" \
 		-e "K8=yes" \
 		--rm -it \
 				$(HARBOR)/$(IMAGE):$(VERSION)
@@ -38,6 +41,9 @@ lint:
 
 shell:
 	@docker run --rm -it \
+		-e "RAILS_MASTER_KEY=$(RAILS_MASTER_KEY)" \
+		-e "RAILS_ENV=production" \
+		-e "RAILS_SERVE_STATIC_FILES=yes" \
 		--entrypoint=sh --user=root \
 		$(HARBOR)/$(IMAGE):$(VERSION)
 
