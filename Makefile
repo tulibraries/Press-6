@@ -9,6 +9,9 @@ HARBOR ?= harbor.k8s.temple.edu
 CLEAR_CACHES ?= no
 ASSETS_PRECOMPILE ?= no
 RAILS_MASTER_KEY ?= $(TUPRESS_MASTER_KEY)
+TUPRESS_DB_HOST ?= host.docker.internal
+TUPRESS_DB_NAME ?= tupress
+TUPRESS_DB_USER ?= root
 
 
 build:
