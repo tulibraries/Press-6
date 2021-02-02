@@ -12,7 +12,6 @@ variables:
 before_script:
   - source .env
   - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
-  - echo "$MASTER_KEY" > config/master.key
 
 stages:
   - lint
@@ -30,7 +29,7 @@ build:
   stage: build
   extends: .build_image
   variables:
-    DF: ".docker/app/Dockerfile --build-arg RAILS_ENV=production --build-arg RAILS_MASTER_KEY=$RAILS_MASTER_KEY --no-cache"
+    DF: ".docker/app/Dockerfile --build-arg RAILS_MASTER_KEY=$MASTER_KEY --no-cache"
 
 scan:
   stage: scan
