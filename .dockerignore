@@ -17,6 +17,8 @@ README.md
 config/secrets.yml
 credentials.yml.enc
 vendor/bundle/
+/public/assets
+/public/packs
 /public/packs-test
 yarn-debug.log*
 .yarn-integrity
