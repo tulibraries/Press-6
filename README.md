@@ -13,21 +13,23 @@
 
 ### Load Data
 
-To load data into your local instance, run the following command:
+#### For the local instance:
 
 `bundle exec rails sync:pressworks:all[press.xml]`
 
 #### For the docker instance:
-* By default the database sync is not run locally use `make run DB_SYNC=yes` to run it.
+* By default the database sync is not run locally. Use `make run DB_SYNC=yes` to run it.
 
 ### Start the Application using Docker as an alternative
 
-If Docker is available, we defined a Makefile with many useful commands.
+We defined a Makefile with many useful commands for local development. These commands replicate the process used to deploy in the Gitlab pipeline.
 
-* To build prod image: ```make build ASSETS_PRECOMPILE=yes```
-  * `ASSETS_PRECOMPILE=no` by default
+* To build an image: ```make build ```
 * To start the dockerized app, run ```make run```
-* To deploy prod image: ```make deploy VERSION=x```  VERSION=latest by default
-* To run security check on image: ```make secure``` depends on trivy (brew install aquasecurity/trivy/trivy)
+* To deploy prod image: ```make deploy VERSION=x```  
+    * VERSION=latest by default
+* To run security check on image: ```make scan```
+    * This depends on trivy. Run `brew install aquasecurity/trivy/trivy` to make this available locally.
 * To run a shell with image: ```make shell```
 * To run docker lint: ```make lint```
+    * This depends on hadolint. Run `brew install hadolint` to make this available locally.
