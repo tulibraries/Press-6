@@ -1,3 +1,6 @@
-import '../components/table'
-import '../components/date_time_picker'
+import '../javascripts/administrate/components/table'
+import '../javascripts/administrate/components/date_time_picker'
+import '../javascripts/administrate/components/has_many_form'
+import '../javascripts/administrate/components/select_all_button'
+import '../javascripts/administrate/components/associative'
 import '../javascripts/administrate/application'
