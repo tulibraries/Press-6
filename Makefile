@@ -1,29 +1,26 @@
 #Defaults
 include .env
-export
+export #exports the .env variables
 
 #Set DOCKER_IMAGE_VERSION in the .env file OR by passing in
 VERSION ?= $(DOCKER_IMAGE_VERSION)
 IMAGE ?= tulibraries/tupress
 HARBOR ?= harbor.k8s.temple.edu
 CLEAR_CACHES ?= no
-ASSETS_PRECOMPILE ?= no
 RAILS_MASTER_KEY ?= $(TUPRESS_MASTER_KEY)
 TUPRESS_DB_HOST ?= host.docker.internal
 TUPRESS_DB_NAME ?= tupress
 TUPRESS_DB_USER ?= root
 DB_SYNC ?= no
-
+CI ?= false
 
 build:
-	@if [ $(ASSETS_PRECOMPILE) == yes ]; then \
-			RAILS_ENV=production TUPRESS_DB_HOST=localhost bundle exec rails assets:precompile; \
-		fi
 	@docker build --build-arg RAILS_MASTER_KEY=$(RAILS_MASTER_KEY) \
 		--tag $(HARBOR)/$(IMAGE):$(DOCKER_IMAGE_VERSION) \
 		--tag $(HARBOR)/$(IMAGE):latest \
 		--file .docker/app/Dockerfile \
 		--no-cache .
+
 run:
 	@docker run --rm -it --name=tupress -p 127.0.0.1:3000:3000/tcp \
 		-e "TUPRESS_DB_HOST=$(TUPRESS_DB_HOST)" \
@@ -51,8 +48,6 @@ shell:
 		-e "RAILS_SERVE_STATIC_FILES=yes" \
 		--entrypoint=sh --user=root \
 		$(HARBOR)/$(IMAGE):$(VERSION)
-
-CI ?= false
 
 scan:
 	@if [ $(CLEAR_CACHES) == yes ]; \
