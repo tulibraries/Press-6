@@ -32,3 +32,16 @@ module Tupress
     # the framework and any gems in your application.
   end
 end
+
+sts = Aws::STS::Client.new(
+  access_key_id: Rails.application.credentials.dig(:aws, :access_key_id),
+  secret_access_key: Rails.application.credentials.dig(:aws, :secret_access_key)
+)
+
+
+Aws.config.update({
+   credentials: Aws::AssumeRoleCredentials.new(
+     client: sts,
+     role_arn: Rails.application.credentials.dig(:aws, :role_arn),
+     role_session_name: "session-name"
+   ) })
