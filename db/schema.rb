@@ -164,6 +164,7 @@ ActiveRecord::Schema.define(version: 2021_02_02_213712) do
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "file_label"
   end
 
   create_table "webpages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

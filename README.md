@@ -17,6 +17,9 @@ To load data into your local instance, run the following command:
 
 `bundle exec rails sync:pressworks:all[press.xml]`
 
+#### For the docker instance:
+* By default the database sync is not run locally use `make run DB_SYNC=yes` to run it.
+
 ### Start the Application using Docker as an alternative
 
 If Docker is available, we defined a Makefile with many useful commands.

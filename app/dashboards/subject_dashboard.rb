@@ -13,6 +13,7 @@ class SubjectDashboard < Administrate::BaseDashboard
     id: Field::Number,
     code: Field::String,
     title: Field::String,
+    file_label: Field::String,
     pdf: FileField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
@@ -40,6 +41,7 @@ class SubjectDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
+    file_label
     pdf
   ].freeze
 

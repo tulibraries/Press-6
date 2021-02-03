@@ -20,4 +20,6 @@ require("bootstrap")
 
 require("../administrate/index")
 
+require("selectize")
+
 import "../css/administrate/application"

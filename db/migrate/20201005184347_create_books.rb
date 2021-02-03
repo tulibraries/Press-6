@@ -58,6 +58,12 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.string :series_id
       t.string :catalog_id
 
+      t.text :author_ids
+      t.text :author_prefixes
+      t.text :author_firsts
+      t.text :author_lasts
+      t.text :author_suffixes
+
       t.index(:series_id)
       t.index(:catalog_id)
       t.index(:promotion_id)
