@@ -50,3 +50,21 @@ en:
           homepage: homepage
           promotions: promotions
           see_also: see_also
+      collections:
+        agencies:
+          regions:
+            China & Taiwan: China & Taiwan
+            Japan: Japan
+            Korea: Korea
+            Spanish & Portuguese languages, World: Spanish & Portuguese languages, World
+            Thailand & Vietnam / Indonesia: Thailand & Vietnam / Indonesia
+            Turkey: Turkey
+            All Other Territories: All Other Territories
+            Northeast and Mid-Atlantic: Northeast and Mid-Atlantic
+            Midwest: Midwest
+            Southeast: Southeast
+            West: West
+            Hawaii, Asia and the Pacific, including Australia and New Zealand: Hawaii, Asia and the Pacific, including Australia and New Zealand
+            Europe, the Middle East, and Africa: Europe, the Middle East, and Africa
+            All other areas and general sales inquiries: All other areas and general sales inquiries
+

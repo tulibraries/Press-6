@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :webpages
   namespace :admin do
+    resources :agencies
     resources :books
+    resources :catalogs
+    resources :promotions
     resources :series
     resources :subjects
-    resources :catalogs, only: [:index, :show]
-    resources :promotions
     resources :webpages
 
     resource :books, :series, :subjects, :promotions do
@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   resources :subjects
   resources :catalogs
   resources :promotions
+  resources :agencies
+  resources :webpages
 
   root to: "books#index"
 
