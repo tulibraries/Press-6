@@ -32,6 +32,10 @@ gem "administrate-field-scoped_has_many"
 gem "nokogiri", "1.11.0.rc4"
 gem "pry"
 gem "listen", "~> 3.2"
+gem "administrate-field-ordered_has_many"
+gem "jquery-rails"
+gem "bootstrap"
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.2", require: false
@@ -65,6 +69,7 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem "webdrivers"
   gem "factory_bot_rails"
+  gem "rails-controller-testing"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

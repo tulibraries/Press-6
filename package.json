@@ -11,6 +11,7 @@
     "flatpickr": "^4.6.6",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
+    "selectize": "^0.12.6",
     "trix": "^1.2.0",
     "turbolinks": "^5.2.0"
   },
