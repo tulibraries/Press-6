@@ -1,10 +1,11 @@
 include:
-  - project: "infrastructure-engineering-shared/gitlab-ci-templates"
+  - project: "tulibraries/gitlab-ci-templates"
     file:
       - "lint_docker.yaml"
       - "build_docker.yaml"
       - "security_scan.yaml"
       - "kubectl_commands.yaml"
+    ref: "4a283714e245f86b332311e5c8fed7d28da85be6"
 
 variables:
   IMAGE: "tulibraries/tupress"
@@ -17,16 +18,9 @@ before_script:
   - *export_variables
 
 stages:
-  - lint
   - build
   - scan
-  - tag
-  - deploy
 
-lint:
-  extends: .lint_docker
-  variables:
-    DF: ".docker/app/Dockerfile"
 
 build:
   stage: build
@@ -37,16 +31,3 @@ build:
 scan:
   stage: scan
   extends: .scanimage_high
-
-tag:
-  stage: tag
-  extends: .tag_image
-
-deploy:
-  variables:
-    IMAGE: harbor.k8s.temple.edu/tulibraries/tupress
-  stage: deploy
-  extends: .kubectl_setup
-  script:
-    - *export_variables
-    - kubectl --namespace=tupress set image deployment/tupress-app tupress-app=$IMAGE:$VERSION --record
