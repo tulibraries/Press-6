@@ -23,6 +23,7 @@ build:
 
 run:
 	@docker run --rm -it --name=tupress -p 127.0.0.1:3000:3000/tcp \
+		-e "EXECJS_RUNTIME=Disabled" \
 		-e "TUPRESS_DB_HOST=$(TUPRESS_DB_HOST)" \
 		-e "TUPRESS_DB_NAME=$(TUPRESS_DB_NAME)" \
 		-e "TUPRESS_DB_USER=$(TUPRESS_DB_USER)" \
