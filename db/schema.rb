@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_02_193723) do
+ActiveRecord::Schema.define(version: 2021_02_02_213712) do
 
   create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -41,6 +41,24 @@ ActiveRecord::Schema.define(version: 2020_12_02_193723) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "agencies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.string "contact"
+    t.string "address1"
+    t.string "address2"
+    t.string "address3"
+    t.string "city"
+    t.string "country"
+    t.string "phone"
+    t.string "fax"
+    t.string "email"
+    t.string "website"
+    t.string "region"
+    t.string "rights"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -146,6 +164,7 @@ ActiveRecord::Schema.define(version: 2020_12_02_193723) do
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "file_label"
   end
 
   create_table "webpages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

@@ -38,6 +38,7 @@ class BookDashboard < Administrate::BaseDashboard
     status: Field::Select.with_options(
       collection: ["In Print", "NP", "OS", "X", "..."]
     ),
+    books: Field::HasMany.with_options(order: "title"),
     news: Field::Boolean,
     news_text: TrixField,
     newsweight: Field::Select.with_options(
@@ -94,6 +95,7 @@ class BookDashboard < Administrate::BaseDashboard
     catalog
     series
     promotion
+    books
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -129,6 +131,7 @@ class BookDashboard < Administrate::BaseDashboard
     course_adoption
     promotion
     series
+    books
   ].freeze
 
   # COLLECTION_FILTERS

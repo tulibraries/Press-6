@@ -33,7 +33,7 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.string :edition
       t.string :suggested_reading
       t.boolean :course_adoption
-      t.string :subjects
+      t.text :subjects
       t.string :subject1
       t.string :subject2
       t.string :subject3
@@ -51,6 +51,12 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.string :promotion_id
       t.string :series_id
       t.string :catalog_id
+
+      t.text :author_ids
+      t.text :author_prefixes
+      t.text :author_firsts
+      t.text :author_lasts
+      t.text :author_suffixes
 
       t.index(:series_id)
       t.index(:catalog_id)
