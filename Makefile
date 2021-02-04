@@ -11,8 +11,17 @@ RAILS_MASTER_KEY ?= $(TUPRESS_MASTER_KEY)
 TUPRESS_DB_HOST ?= host.docker.internal
 TUPRESS_DB_NAME ?= tupress
 TUPRESS_DB_USER ?= root
-DB_SYNC ?= no
 CI ?= false
+DEFAULT_RUN_ARGS ?= -e "EXECJS_RUNTIME=Disabled" \
+		-e "K8=yes" \
+		-e "RAILS_ENV=production" \
+		-e "RAILS_MASTER_KEY=$(RAILS_MASTER_KEY)" \
+		-e "RAILS_SERVE_STATIC_FILES=yes" \
+		-e "TUPRESS_DB_HOST=$(TUPRESS_DB_HOST)" \
+		-e "TUPRESS_DB_NAME=$(TUPRESS_DB_NAME)" \
+		-e "TUPRESS_DB_PASSWORD=$(TUPRESS_DB_PASSWORD)" \
+		-e "TUPRESS_DB_USER=$(TUPRESS_DB_USER)" \
+		--rm -it
 
 build:
 	@docker build --build-arg RAILS_MASTER_KEY=$(RAILS_MASTER_KEY) \
@@ -22,18 +31,8 @@ build:
 		--no-cache .
 
 run:
-	@docker run --rm -it --name=tupress -p 127.0.0.1:3000:3000/tcp \
-		-e "EXECJS_RUNTIME=Disabled" \
-		-e "TUPRESS_DB_HOST=$(TUPRESS_DB_HOST)" \
-		-e "TUPRESS_DB_NAME=$(TUPRESS_DB_NAME)" \
-		-e "TUPRESS_DB_USER=$(TUPRESS_DB_USER)" \
-		-e "TUPRESS_DB_PASSWORD=$(TUPRESS_DB_PASSWORD)" \
-		-e "RAILS_MASTER_KEY=$(RAILS_MASTER_KEY)" \
-		-e "RAILS_ENV=production" \
-		-e "RAILS_SERVE_STATIC_FILES=yes" \
-		-e "K8=yes" \
-		-e "DB_SYNC=$(DB_SYNC)" \
-		--rm -it \
+	@docker run --name=tupress -p 127.0.0.1:3000:3000/tcp \
+		$(DEFAULT_RUN_ARGS) \
 		$(HARBOR)/$(IMAGE):$(VERSION)
 
 lint:
@@ -44,11 +43,14 @@ lint:
 
 shell:
 	@docker run --rm -it \
-		-e "RAILS_MASTER_KEY=$(RAILS_MASTER_KEY)" \
-		-e "RAILS_ENV=production" \
-		-e "RAILS_SERVE_STATIC_FILES=yes" \
+		$(DEFAULT_RUN_ARGS) \
 		--entrypoint=sh --user=root \
 		$(HARBOR)/$(IMAGE):$(VERSION)
+
+load-data:
+	@docker run --name=tupress-sync\
+		$(DEFAULT_RUN_ARGS) \
+		$(HARBOR)/$(IMAGE):$(VERSION) rails sync:pressworks:all[press.xml]
 
 scan:
 	@if [ $(CLEAR_CACHES) == yes ]; \
