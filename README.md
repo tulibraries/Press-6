@@ -18,7 +18,7 @@
 `bundle exec rails sync:pressworks:all[press.xml]`
 
 #### For the docker instance:
-* By default the database sync is not run locally. Use `make run DB_SYNC=yes` to run it.
+* By default the database sync is not run locally. Use `make load-data` to run it.
 
 ### Start the Application using Docker as an alternative
 
