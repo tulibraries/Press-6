@@ -10,6 +10,7 @@ local:
 amazon:
   service: S3
   bucket: tulib-press-prod
+  region: us-east-1
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
