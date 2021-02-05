@@ -25,7 +25,7 @@ DEFAULT_RUN_ARGS ?= -e "EXECJS_RUNTIME=Disabled" \
 
 build:
 	@docker build --build-arg RAILS_MASTER_KEY=$(RAILS_MASTER_KEY) \
-		--tag $(HARBOR)/$(IMAGE):$(DOCKER_IMAGE_VERSION) \
+		--tag $(HARBOR)/$(IMAGE):$(VERSION) \
 		--tag $(HARBOR)/$(IMAGE):latest \
 		--file .docker/app/Dockerfile \
 		--no-cache .
@@ -49,8 +49,9 @@ shell:
 
 load-data:
 	@docker run --name=tupress-sync\
+		--entrypoint=/bin/sh\
 		$(DEFAULT_RUN_ARGS) \
-		$(HARBOR)/$(IMAGE):$(VERSION) rails sync:pressworks:all[press.xml]
+		$(HARBOR)/$(IMAGE):$(VERSION) -c 'rails sync:pressworks:all[press.xml]'
 
 scan:
 	@if [ $(CLEAR_CACHES) == yes ]; \
