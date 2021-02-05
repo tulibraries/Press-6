@@ -49,8 +49,9 @@ shell:
 
 load-data:
 	@docker run --name=tupress-sync\
+		--entrypoint=/bin/sh\
 		$(DEFAULT_RUN_ARGS) \
-		$(HARBOR)/$(IMAGE):$(VERSION) rails sync:pressworks:all[press.xml]
+		$(HARBOR)/$(IMAGE):$(VERSION) -c 'rails sync:pressworks:all[press.xml]'
 
 scan:
 	@if [ $(CLEAR_CACHES) == yes ]; \
