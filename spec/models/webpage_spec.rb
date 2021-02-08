@@ -3,5 +3,18 @@
 require "rails_helper"
 
 RSpec.describe Webpage, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context "Required Fields" do
+    required_fields = [
+      "title",
+      "status"
+    ]
+
+    required_fields.each do |f|
+      example "missing #{f} field" do
+        book = FactoryBot.build(:book)
+        book[f] = ""
+        expect { book.save! }.to raise_error(/#{f.humanize(capitalize: true)} can't be blank/)
+      end
+    end
+  end
 end
