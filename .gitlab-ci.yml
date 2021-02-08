@@ -37,6 +37,8 @@ build:
 scan:
   stage: scan
   extends: .scanimage_high
+  variables:
+    THRESHOLD: 10
 
 tag:
   stage: tag
