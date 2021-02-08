@@ -6,10 +6,10 @@ FactoryBot.define do
 
     trait :with_image do
         after :create do |brochure|
-            brochure.image.attach(io:
-            File.open(Rails.root.join("spec/fixtures/charles.jpg")),
-            filename: "charles.jpg",
-            content_type: "image/jpeg")
+          brochure.image.attach(io:
+          File.open(Rails.root.join("spec/fixtures/charles.jpg")),
+          filename: "charles.jpg",
+          content_type: "image/jpeg")
         end
       end
   end

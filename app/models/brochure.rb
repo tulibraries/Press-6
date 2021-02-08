@@ -1,5 +1,7 @@
-class Brochure < ApplicationRecord
-    validates :title, presence: true
+# frozen_string_literal: true
 
-    has_one_attached :image, dependent: :destroy
+class Brochure < ApplicationRecord
+  validates :title, presence: true
+
+  has_one_attached :image, dependent: :destroy
 end

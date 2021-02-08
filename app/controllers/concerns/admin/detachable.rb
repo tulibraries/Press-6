@@ -7,11 +7,11 @@ module Admin
     def detach
       klass = params[:controller].split("/").last.classify
       @entity = klass.constantize.find(params[:id])
-      
+
       types = ["cover_image", "excerpt_image", "guide_image", "suggested_reading_image"] if klass == "Book"
       types = ["image"] if ["Brochure", "Series"].include?(klass)
       types = ["pdf"] if ["Promotion", "Subject"].include?(klass)
-       
+
       type = types.index(params[:field])
       field = types.at(type) if types.include? params[:field]
       @entity.public_send(field).purge

@@ -20,5 +20,5 @@ RSpec.shared_examples "imageable" do
       expect(factory_model.image.attachment).to be_nil
     end
   end
-  
+
 end

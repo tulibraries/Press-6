@@ -2,8 +2,6 @@
 
 module Admin
   class BrochuresController < Admin::ApplicationController
-
     include Admin::Detachable
-
   end
 end
