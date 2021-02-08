@@ -4,19 +4,20 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :agencies
     resources :books
+    resources :brochures
     resources :catalogs
     resources :promotions
     resources :series
     resources :subjects
     resources :webpages
 
-    resource :books, :series, :subjects, :promotions do
+    resource :books, :brochures, :series, :subjects, :promotions do
       member do
         get ":id/detach" => :detach
       end
     end
 
-    resource :books, :series, :subjects, :promotions do
+    resource :books, :brochures, :series, :subjects, :promotions do
       member do
         post "detach" => :detach
       end
