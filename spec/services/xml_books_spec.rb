@@ -99,6 +99,7 @@ RSpec.describe SyncService::Books, type: :service do
   context "write book to book table" do
     before(:each) do
       @book_harvest.sync
+      sleep 2
     end
 
     let (:book1) {
