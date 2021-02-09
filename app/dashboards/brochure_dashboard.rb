@@ -13,6 +13,7 @@ class BrochureDashboard < Administrate::BaseDashboard
     id: Field::Number,
     title: Field::String,
     image: ImageField,
+    pdf: FileField,
     promoted_to_homepage: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -34,6 +35,7 @@ class BrochureDashboard < Administrate::BaseDashboard
   title
   promoted_to_homepage
   image
+  pdf
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -43,6 +45,7 @@ class BrochureDashboard < Administrate::BaseDashboard
   title
   promoted_to_homepage
   image
+  pdf
   ].freeze
 
   # COLLECTION_FILTERS
