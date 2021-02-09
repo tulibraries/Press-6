@@ -11,7 +11,7 @@ class SyncService::Books
     @log = Logger.new("log/sync-books.log")
     @stdout = Logger.new(STDOUT)
     @xmlPath = params.fetch(:xml_path)
-    xml = File.open(@xmlPath, "rb:utf-16", &:read)
+    xml = File.open(@xmlPath, "rb:utf-8", &:read)
     @booksDoc = Nokogiri.XML(xml)
     stdout_and_log("Syncing books from #{@xmlPath}")
   end
