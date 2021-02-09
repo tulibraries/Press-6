@@ -25,7 +25,7 @@ DEFAULT_RUN_ARGS ?= -e "EXECJS_RUNTIME=Disabled" \
 
 build:
 	@docker build --build-arg RAILS_MASTER_KEY=$(RAILS_MASTER_KEY) \
-		--tag $(HARBOR)/$(IMAGE):$(DOCKER_IMAGE_VERSION) \
+		--tag $(HARBOR)/$(IMAGE):$(VERSION) \
 		--tag $(HARBOR)/$(IMAGE):latest \
 		--file .docker/app/Dockerfile \
 		--no-cache .
