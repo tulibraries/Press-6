@@ -6,7 +6,6 @@ RSpec.describe Book, type: :model do
 
   context "Required Fields" do
     required_fields = [
-      "title",
       "author_byline",
       "status"
     ]

@@ -39,7 +39,7 @@ gem "bootstrap"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.2", require: false
-gem "aws-sdk-s3"
+gem "aws-sdk-s3", require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -50,7 +50,7 @@ group :development, :test do
   gem "pry-byebug"
   gem "rspec-activemodel-mocks"
   gem "rspec-rails", "~> 4.0.1"
-
+  gem "aws-sdk-s3"
 end
 
 group :development do

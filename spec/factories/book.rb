@@ -19,13 +19,13 @@ FactoryBot.define do
     binding {}
 
 
-    trait :as_suggested_reading do
-      after :create do |book|
-        book.suggested_reading_image.attach(io:
-          File.open(Rails.root.join("spec/fixtures/charles.jpg")),
-          filename: "charles.jpg",
-          content_type: "image/jpeg")
-      end
-    end
+    # trait :as_suggested_reading do
+    #   after :create do |book|
+    #     book.suggested_reading_image.attach(io:
+    #       File.open(Rails.root.join("spec/fixtures/charles.jpg")),
+    #       filename: "charles.jpg",
+    #       content_type: "image/jpeg")
+    #   end
+    # end
   end
 end
