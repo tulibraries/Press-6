@@ -14,7 +14,8 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+const images = require.context('../images', true);
+
 // stylesheets
+import '../css/application';
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/books.scss";
-import "../css/partials/_vars.scss";

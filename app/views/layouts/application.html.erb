@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tupress</title>
+    <title>Temple University Press</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <%= yield :head %>
   </head>
 
   <body>
+
+  <div id="skip-link">
+    <%= link_to t("tupress.default.content_skip"), "#skiplink_ada", :class => "element-invisible", :tabindex => "1" %>
+    <%= link_to t("tupress.default.search_skip"), "#", :class => "element-invisible", :onclick => "document.getElementById('search-block').focus();", :tabindex => "2" %>
+  </div>
     <div class="container">
+    <% flash.each do |key, value| %>
+       <div class="flash <%= key %>"><%= value %></div>
+    <% end %>
+
+    <%= render "header_navbar.html.erb" %>
+
+    <a href="#" name="skiplink_ada" id="skiplink_ada" aria-label="skip link"></a>
+
       <%= yield %>
     </div>
+
+    <%= render "footer.html.erb" %>
+
   </body>
 </html>

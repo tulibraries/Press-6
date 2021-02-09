@@ -1,0 +1,177 @@
+<div id="header-navbar" class="container navbar navbar-static-top d-print-block" role="navigation">
+  <div class="col-8 col-sm-7 col-lg-4 logo-container text-left ">
+    <%= link_to root_path, class: "header-name", id: "header-logo" do %>
+      <%= image_pack_tag('temple-logo-t-box.svg', class: "header-logo", alt: "") %> 
+      <span><%= t("tupress.default.application.header_navbar.logo_tag") %></span>
+    <% end %>
+  </div>
+
+  <div id="header-search" class="col-12 col-sm-5 col-lg-5 d-none d-lg-block text-right d-print-none">
+    <%= render "header-search" %>
+  </div>
+
+
+  <div class="col-3 d-md-block d-lg-none text-right d-print-none">
+    <button id="mobile-search-button" class="navbar-toggler icon-toggler" type="button" data-toggle="collapse" data-target="#mobile-search" aria-controls="mobile-search" aria-expanded="false" aria-label="Toggle search form">
+    <span class="navbar-toggler-icon" id="search-toggler-icon">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </span>
+  </button>
+  </div>
+</div>
+
+<div id="wrapper">
+
+  <div id="header" class="row">
+    <div class="col">
+      <% unless @alert.blank? %>
+      <div class="container">
+        <%= image_pack_tag "information.png", class: "decorative", alt: "" , style: "display:inline-block;height: 42px;float:left;margin-right:10px" %>
+        <div>
+        <% @alert.each do |alert| %>
+          <% unless alert.link.blank? %>
+            <%= alert.scroll_text %> <%= link_to t("tupress.default.application.header_navbar.scroll_text"), alert.link %>
+          <% else %>
+            <%= alert.scroll_text %>
+          <% end %>
+        <% end %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div> <!-- #header -->
+
+  <div class="row d-none d-sm-none d-md-none d-lg-block" id="main-menu">
+    <div class="container nav-container">
+    <nav class="navbar navbar-expand-md navbar-light" id="main-nav">
+		  <%= button_tag("",
+						:class=>"navbar-toggler navbar-toggler-right",
+						:type=>"button",
+						:'data-toggle'=>"collapse",
+						:'data-target'=>"#navbarSupportedContent",
+						:'aria-controls'=>"navbarSupportedContent",
+						:'aria-expanded'=>"false",
+						:'aria-label'=>"Toggle navigation") do
+						%>
+		    <span class="navbar-toggler-icon"></span>
+		  <% end %>
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent" role="navigation">
+		    <ul class="navbar-nav nav-fill">
+		      <li class="nav-item">
+		        <%= link_to(root_path, :class=>"nav-link") do %>
+		        	Home <span class="sr-only">(current)</span>
+		        <% end %>
+		      </li>
+		      <li class="nav-item dropdown">
+		        <%= link_to "Our Books",
+								        "#",
+								        :class=>"nav-link dropdown-toggle",
+								        :id=>"navbarDropdownMenuLink",
+								        :'data-toggle'=>"dropdown",
+								        :'aria-haspopup'=>"true",
+								        :'aria-expanded'=>"false"
+								        %>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+		          <%= link_to "Award Winning Books", root_path+"awards", :class=>"dropdown-item" %>
+		          <%= link_to "Titles Index", root_path+"books", :class=>"dropdown-item" %>
+		          <%= link_to "Author Index", root_path+"byauthor", :class=>"dropdown-item" %>
+		          <%= link_to "Subject Index", root_path+"subjects", :class=>"dropdown-item" %>
+		          <%= link_to "Catalog Index", root_path+"catalogs", :class=>"dropdown-item" %>
+		          <%= link_to "Series Listing", root_path+"series", :class=>"dropdown-item" %>
+		          <%= link_to "Promotions", promotions_path, :class=>"dropdown-item" %>
+		          <%= link_to "Study Guides", root_path+"studyguides", :class=>"dropdown-item" %>
+		          <%= link_to "Books for Course Adoption", root_path+"course-adoptions", :class=>"dropdown-item" %>
+		          <span style="margin-left: 1.5rem;color:white;border-bottom:solid #aaa 0px;padding-bottom:2px">Open Access Books</span>
+		          <%= link_to ("&bull; Labor Studies & Work").html_safe, root_path+"open-access/labor-studies", :class=>"dropdown-item", :style=>"padding-left:2rem;" %>
+		          <%= link_to ("&bull; North Broad Press").html_safe, root_path+"open-access/north-broad-press", :class=>"dropdown-item", :style=>"padding-left:2rem;" %>
+		        </div>
+		      </li>
+		      <li class="nav-item dropdown">
+		        <%= link_to "Journals",
+								        "#",
+								        :class=>"nav-link dropdown-toggle",
+								        :id=>"navbarDropdownMenuLink",
+								        :'data-toggle'=>"dropdown",
+								        :'aria-haspopup'=>"true",
+								        :'aria-expanded'=>"false"
+								        %>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+		        <% get_journals.each do |j| %>
+		          <%= link_to j.title, j.url, :class=>"dropdown-item" %>
+		         <% end %>
+		        </div>
+		      </li>
+		      <li class="nav-item">
+		        <%= link_to "Contact Us", root_path+"contact", :class=>"nav-link" %>
+		      </li>
+		      <li class="nav-item dropdown">
+		        <%= link_to "Orders",
+								        "#",
+								        :class=>"nav-link dropdown-toggle",
+								        :id=>"navbarDropdownMenuLink",
+								        :'data-toggle'=>"dropdown",
+								        :'aria-haspopup'=>"true",
+								        :'aria-expanded'=>"false"
+								        %>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+		          <%= link_to "Ordering Information", root_path+"order", :class=>"dropdown-item" %>
+		          <%= link_to "Payment Terms", root_path+"payment", :class=>"dropdown-item" %>
+		          <%= link_to "Exam & Desk Copy Requests", root_path+"copy-request", :class=>"dropdown-item" %>
+		          <%= link_to "Sales Representatives", root_path+"sales-reps", :class=>"dropdown-item" %>
+		        </div>
+		      </li>
+		      <li class="nav-item dropdown">
+		        <%= link_to "Media",
+								        "#",
+								        :class=>"nav-link dropdown-toggle",
+								        :id=>"navbarDropdownMenuLink",
+								        :'data-toggle'=>"dropdown",
+								        :'aria-haspopup'=>"true",
+								        :'aria-expanded'=>"false"
+								        %>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+		          <%= link_to "Conferences", root_path+"conferences", :class=>"dropdown-item" %>
+		          <%= link_to "Event Calendar", root_path+"calendar", :class=>"dropdown-item" %>
+		          <%= link_to "Request a Review Copy", root_path+"review-copy", :class=>"dropdown-item" %>
+		        </div>
+		      </li>
+		      <li class="nav-item dropdown">
+		        <%= link_to "Press Info",
+								        "#",
+								        :class=>"nav-link dropdown-toggle",
+								        :id=>"navbarDropdownMenuLink",
+								        :'data-toggle'=>"dropdown",
+								        :'aria-haspopup'=>"true",
+								        :'aria-expanded'=>"false"
+								        %>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+		          <%= link_to "About the Press", root_path+"press-info", :class=>"dropdown-item" %>
+		          <%= link_to "People at the Press", root_path+"people", :class=>"dropdown-item" %>
+		          <%= link_to "Rights and Permissions", root_path+"rights", :class=>"dropdown-item" %>
+		          <%= link_to "Foreign Rights Agents", root_path+"foreign-rights", :class=>"dropdown-item" %>
+		          <%= link_to "Submissions", root_path+"submissions", :class=>"dropdown-item" %>
+		          <%= link_to "About University Presses", root_path+"university-presses", :class=>"dropdown-item" %>
+		          <%= link_to "Download Documents", root_path+"downloads", :class=>"dropdown-item" %>
+		          <%= link_to "FAQ", root_path+"faq", :class=>"dropdown-item" %>
+		        </div>
+		      </li>
+		      <li class="nav-item">
+		          <%= link_to "Links", root_path+"links", :class=>"nav-link" %>
+		      </li>
+
+		    </ul>
+		    </div>
+		</nav>
+    </div>
+  </div>
+  <div class="row d-block d-sm-block d-md-block d-lg-none text-center" id="mobile-search-container">
+    <%= render "mobile-search" %>
+  </div>
+
+  <div class="row d-block d-sm-block d-md-block d-lg-none" id="mobile-nav">
+    <%= render "mobile-nav" %>
+  </div>
+
+</div>

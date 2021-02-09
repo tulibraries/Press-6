@@ -1,25 +1,41 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col col-12 m-2 highlights" id="highlights">
+    <h3>Slidesow</h3>
+  </div>
+</div>
 
-<h1>Webpages</h1>
+<div class="row">
+  <div class="col col-3" style="outline: solid black 1px">
+    <h3>Side menu</h3>
+  </div>
+  <div class="col col-9" style="outline: solid black 1px">
+    <div class="row">
+      <div class="col-4"><h3>Noteworthy 1</h3></div>
+      <div class="col-4"><h3>Noteworthy 2</h3></div>
+      <div class="col-4"><h3>Noteworthy 3</h3></div>
+    </div>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="row">
+  <div class="col col-9">
+    <h3>In the news</h3>
+    <h3>In the news</h3>
+    <h3>In the news</h3>
+    <h3>In the news</h3>
+    <h3>In the news</h3>
+  </div>
 
-  <tbody>
-    <% @webpages.each do |webpage| %>
-      <tr>
-        <td><%= link_to 'Show', webpage %></td>
-        <td><%= link_to 'Edit', edit_webpage_path(webpage) %></td>
-        <td><%= link_to 'Destroy', webpage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="col-3">
+    <div class="feature-catalog mb-4">
+      <h2>Catalog</h2>
+    </div>
+    <div class="feature-other mb-4">
+      <h2>Brochure</h2>
+    </div>
+    <div class="feature-philly mb-4">
+      <h2>Philly</h2>
+    </div>
+  </div>
 
-<br>
-
-<%= link_to 'New Webpage', new_webpage_path %>
+  
