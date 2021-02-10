@@ -42,6 +42,7 @@ RSpec.describe SyncService::Catalogs, type: :service do
   context "write catalog to catalog table" do
     before(:each) do
       @catalog_harvest.sync
+      sleep 2
     end
 
     let (:catalog1) {
