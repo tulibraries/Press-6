@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "aws-sdk-s3"
+
 if  Rails.configuration.active_storage.service == :amazon
   sts = Aws::STS::Client.new(
     access_key_id: Rails.application.credentials.dig(:aws, :access_key_id),
