@@ -1,13 +1,26 @@
-<div class="header-search-container">
+  <div id="" class="col-12 col-sm-5 col-lg-4 text-right d-none d-lg-block d-print-none">
 
-	<%= form_tag(root_path+"search", method: "get", :class=>"form-inline my-2 my-lg-0", :id=>"search-block") do %>
-		<%= label_tag(:q, "Search for:", :class=>"element-invisible") %>
-		<%= text_field_tag(:q, nil, class: "form-control mr-sm-2", placeholder: "Search", size: "15") %>
-		<%= submit_tag("Search", id: "search-submit", class: "btn btn-outline-danger my-2 my-sm-0") %>
-	<% end %>
-	
+
+
 <div>
-	<%= link_to image_pack_tag("cart.png", :alt=>"shopping cart"), "https://cdcshoppingcart.uchicago.edu/Cart2/Cart.aspx?PRESS=temple", :class=>"nav-link", :style=>"float:right;position: absolute;bottom: -21px;right: 21px;z-index:1;" %>
+	<%= link_to image_pack_tag("cart.png", :alt=>"shopping cart"), 
+	"https://cdcshoppingcart.uchicago.edu/Cart2/Cart.aspx?PRESS=temple", :class=>"nav-link" %>
 </div>
+
+<div class="text-right">
+	<%= form_tag(root_path+"search", method: "get", :class=>"", :id=>"search-block") do %>
+		<%= label_tag(:q, "Search by title, author, ISBN...", :class=>"element-invisible") %>
+
+		<%= text_field_tag(:q, nil, class: "form-control w-75 d-inline-block mt-5 mr-0", 
+							placeholder: "Search by title, author, ISBN...",
+							results: "0"
+							) %>
+		<span class="search-glass">
+		<%= image_submit_tag(search_glass, style: "height:28px;") %>
+		</span>
+	<% end %>
+</div>
+
+
 
 </div>

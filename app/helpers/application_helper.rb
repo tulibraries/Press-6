@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  def search_glass
+    asset_pack_path('media/images/mag.png')
+  end
 	def get_journals
 		Journal.all
 	end
