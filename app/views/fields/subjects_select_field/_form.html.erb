@@ -1,11 +1,13 @@
 <%
-  field.resource.subjects = "{\"subject\"=>{\"subject_id\"=>nil, \"subject_title\"=>nil}}" if field.resource.subjects.nil?
   subject_list = eval field.resource.subjects
   subjects = []
-
+  
   subject_list["subject"].each do |subject|
-    subjects.push [subject['subject_title'],subject['subject_id']]
-  end if subject_list["subject"].first["subject_id"].present?
+    subjects.push [subject['subject_title'], subject['subject_id']] 
+  end if subject_list["subject"].kind_of?(Array)
+
+  subjects.push [subject_list["subject"]["subject_title"], subject_list["subject"]["subject_id"]] if subject_list["subject"].kind_of?(Hash)
+
 %>
 <div class="field-unit__label">
   <%= f.label field.attribute, for: "#{f.object_name}_#{field.attribute}" %>
