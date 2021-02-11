@@ -71,7 +71,7 @@ class SyncService::Books
       "series_id"           => record["record"].fetch("series/series_id", nil),
       "binding"             => record["record"].fetch("bindings", nil),
       "description"         => record["record"].fetch("description", nil),
-      "subjects"            => record["record"].fetch("subjects", nil),
+      "subjects"            => record["record"].fetch("subjects", "{\"subject\"=>{\"subject_id\"=>nil, \"subject_title\"=>nil}}"),
       "contents"            => record["record"].fetch("contents", nil),
       "catalog_id"          => record["record"].fetch("catalog", nil)
     }
