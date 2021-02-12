@@ -33,8 +33,7 @@ class SyncService::Books
 
   def read_books
     @booksDoc.xpath("//record").map do |node|
-      node_xml = Nokogiri.XML(node.to_xml)
-      Hash.from_xml(node_xml.to_xml)
+      Hash.from_xml(node.serialize(encoding: "UTF-8"))
     end
   end
 
@@ -71,7 +70,7 @@ class SyncService::Books
       "series_id"           => record["record"].fetch("series/series_id", nil),
       "binding"             => record["record"].fetch("bindings", nil),
       "description"         => record["record"].fetch("description", nil),
-      "subjects"            => record["record"].fetch("subjects", "{\"subject\"=>{\"subject_id\"=>nil, \"subject_title\"=>nil}}"),
+      "subjects"            => JSON.dump(record["record"].fetch("subjects", { "subject" => { "subject_id" => nil, "subject_title" => nil } })),
       "contents"            => record["record"].fetch("contents", nil),
       "catalog_id"          => record["record"].fetch("catalog", nil)
     }

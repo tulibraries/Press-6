@@ -1,20 +1,12 @@
 <%
-  subject_list = eval field.resource.subjects
-  subjects = []
-  
-  subject_list["subject"].each do |subject|
-    subjects.push [subject['subject_title'], subject['subject_id']] 
-  end if subject_list["subject"].kind_of?(Array)
-
-  subjects.push [subject_list["subject"]["subject_title"], subject_list["subject"]["subject_id"]] if subject_list["subject"].kind_of?(Hash)
-
+  subjects = field.resource.subjects_as_tuples
 %>
 <div class="field-unit__label">
   <%= f.label field.attribute, for: "#{f.object_name}_#{field.attribute}" %>
 </div>
 <div class="field-unit__field">
-  <%= select_tag "#{f.object_name}[#{field.attribute}]", 
-                  options_for_select(subjects, {selected: field.data.presence}), 
-                  include_blank: "(none)"
-                %>
+  <%= select_tag "#{f.object_name}[#{field.attribute}]",
+		  options_for_select(subjects, {selected: field.data.presence}),
+		  include_blank: "(none)"
+		%>
 </div>
