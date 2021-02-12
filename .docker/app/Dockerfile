@@ -14,11 +14,11 @@ RUN apk add -U --no-cache \
       libxslt-dev=1.1.34-r0 \
       mariadb-dev=10.5.8-r0 && \
     apk add -U --no-cache --virtual build-dependencies \
-      git=2.30.0-r0 \
+      git=2.30.1-r0 \
       build-base=0.5-r2 \
       nodejs=14.15.4-r0 \
       yarn=1.22.10-r0 && \
-    gem install bundler:2.2.2  && \
+    gem install bundler:2.2.4  && \
     bundle config build.nokogiri --use-system-libraries && \
     bundle config set --local without "development test" && \
     bundle install --jobs=8 && \

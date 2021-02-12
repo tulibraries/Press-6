@@ -31,4 +31,8 @@ class Book < ApplicationRecord
       self.sort_title = self.title
     end
   end
+
+  def subjects_as_tuples
+    [JSON.parse(self.subjects)["subject"]].flatten.map { |h| [h["subject_title"], h["subject_id"]] }
+  end
 end

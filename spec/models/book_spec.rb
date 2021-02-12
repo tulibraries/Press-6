@@ -4,6 +4,13 @@ require "rails_helper"
 
 RSpec.describe Book, type: :model do
 
+  it "can list subjects as tuples (arrays) of (title , id)" do
+    book = described_class.new
+    book.assign_attributes("subjects" => JSON.dump({ "subject" => { "subject_id" => 1, "subject_title" => "foo" } }))
+    expect(book.subjects_as_tuples).to eq [["foo", 1]]
+  end
+
+
   context "Required Fields" do
     required_fields = [
       "author_byline",
