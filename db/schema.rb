@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_08_190853) do
+ActiveRecord::Schema.define(version: 2021_02_15_173159) do
 
   create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 2021_02_08_190853) do
     t.text "author_firsts"
     t.text "author_lasts"
     t.text "author_suffixes"
+    t.string "suggested_reading_label"
     t.index ["catalog_id"], name: "index_books_on_catalog_id"
     t.index ["promotion_id"], name: "index_books_on_promotion_id"
     t.index ["series_id"], name: "index_books_on_series_id"
@@ -133,6 +134,13 @@ ActiveRecord::Schema.define(version: 2021_02_08_190853) do
     t.string "code"
     t.string "season"
     t.string "year"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "journals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
