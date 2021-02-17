@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :books
     resources :brochures
     resources :catalogs
+    resources :journals
     resources :promotions
     resources :series
     resources :subjects
@@ -34,7 +35,7 @@ Rails.application.routes.draw do
   resources :agencies
   resources :webpages
 
-  root to: "books#index"
+  root to: "webpages#index"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

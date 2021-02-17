@@ -34,6 +34,8 @@ en:
     default:
       fields:
         confirm: Are you sure?
+        content_skip: Skip to main content
+        search_skip: Skip to site search
     admin:
       actions:
         sync: Sync
