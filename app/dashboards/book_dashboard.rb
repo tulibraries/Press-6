@@ -51,6 +51,7 @@ class BookDashboard < Administrate::BaseDashboard
     supplement: Field::String,
     edition: Field::String,
     suggested_reading_image: ImageField,
+    suggested_reading_label: Field::String,
     course_adoption: Field::Boolean,
 
     series: Field::BelongsTo.with_options(order: "title"),
@@ -128,6 +129,7 @@ class BookDashboard < Administrate::BaseDashboard
     newsweight
     news_text
     suggested_reading_image
+    suggested_reading_label
     course_adoption
     promotion
     series
