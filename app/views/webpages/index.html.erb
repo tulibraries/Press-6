@@ -1,25 +1,132 @@
-<p id="notice"><%= notice %></p>
+<div class="text-center p-5" id="highlights">
+  <%= image_pack_tag "2021_Black_Hist_Month.jpg", style: "width:1000px" %>
+</div>
 
-<h1>Webpages</h1>
+<div style="background-color:#f3f3f3;">
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="container" style="">
 
-  <tbody>
-    <% @webpages.each do |webpage| %>
-      <tr>
-        <td><%= link_to 'Show', webpage %></td>
-        <td><%= link_to 'Edit', edit_webpage_path(webpage) %></td>
-        <td><%= link_to 'Destroy', webpage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row">
+  <div class="col col-3 mt-4" id="left-home-menu">
+    <ul class="list-unstyled" style="margin-bottom:0;">
+      <li>Resources for Authors</li>
+      <li>Resources for Booksellers</li>
+      <li>Conferences</li>
+      <li>Special Offers</li>
+      <li>Books for Course Adoption</li>
+      <li>Read Our Blog</li>
+      <li style="margin-bottom:0;">Donate to the Press</li>
+    </ul>
+  </div>
+  <div class="col col-9 mt-4 pt-2 pb-1" style="background-color: white;">
+    <h1 style="text-decoration:underline;margin-left: 35px">New & Forthcoming</h1>
+    <div class="row pt-3">
+      <div class="col-4 text-center">
+        <%= image_pack_tag "Giving_Back.jpg", style: "height:300px;max-width:200px;" %>
+        <p style="margin-top: 7px"><strong>Giving Back</strong></p>
+      </div>
+      <div class="col-4 text-center">
+      <%= image_pack_tag "Illegal_Immigrants_Model_Minorities.jpg", style: "height:300px;max-width:200px;" %>
+        <p style="margin-top: 7px"><strong>Illegal Immigrants Model Minorities</strong></p>
+      </div>
+      <div class="col-4 text-center">
+      <%= image_pack_tag "Women_s_Empowerment.jpg", style: "height:300px;max-width:200px;" %>
+        <p style="margin-top: 7px"><strong>Women's Empowerment and Disempowerment in Brazil</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
 
-<br>
+<div class="row mt-5" style="background-color: white;">
+  <div class="col col-9 pt-2 pl-4 pb-4" style="border-right:14px solid #f3f3f3;background-color:#bbb" id="news">
+    <h1 style="text-decoration:underline;">In the News</h1>
+    <div class="row" style="margin-top: 28px;">
+      <div class="media text-center" style="width: 160px;text-align:center">
+        <%= image_pack_tag "Allies_and_Obstacles.jpg" %>
+      </div>
+      <div class="media-body" style="padding-left: 28px;">
+      <h2>ALLIES AND OBSTACLES @ Institute on Disabilities at Temple University</h2>
+      <p>Wednesday, February 10, 2021</p>
+      <p></p><p>Join Allison C. Carey, Pamela Block, and Richard K. Scotch, authors of <a href="/book/20000000009747"><em>Allies and Obstacles:&nbsp;Disability Activism and Parents of Children with Disabilities</em></a>, for a book talk at the&nbsp;Institute on Disabilities at Temple University. Register for the event <a href="https://disabilities.temple.edu/miniseries/" target="_blank" rel="noopener">here</a>.</p><p></p>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 28px;">
+      <div class="media text-center" style="width: 160px;text-align:center">
+        <a style="width:100%;" href="/book/20000000010359">
+          <%= image_pack_tag "Harrison_0920_border.jpg" %>
+        </a>
+      </div>
+      <div class="media-body" style="padding-left: 28px;">
+      <h2><a href="/book/20000000010359">Do Right by Me</a>
+            <br><small><em>Learning to Raise Black Children in White Spaces</em></small>
+          </h2>
+          <p class="author">Valerie I. Harrison and Kathryn Peach D'Angelo</p>
+          <p style="line-height:1.2">
+              <strong>LISTEN:</strong>&nbsp;interview&nbsp;on 
+              <a href="http://bit.ly/35E1TLn" target="_blank" rel="noopener"><em>Radio Times</em></a>, 
+              (WHYY, 90.9 FM, Phila) Jan 12<br><strong>EVENTS</strong>: Feb 4 author reading at the 
+              <a href="http://bit.ly/35mCxSg" target="_blank" rel="noopener">FLOP</a>&nbsp;&amp; Feb 8 at 
+              <a href="http://bit.ly/35PZqh7" target="_blank" rel="noopener">Big Blue Marble Bookstore</a>
+              </p>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 28px;">
+      <div class="media text-center" style="width: 160px;text-align:center">
+        <a style="width:100%;" href="/book/20000000010359">
+          <%= image_pack_tag "Harrison_0920_border.jpg" %>
+        </a>
+      </div>
+      <div class="media-body" style="padding-left: 28px;">
+      <h2><a href="/book/20000000010359">Do Right by Me</a>
+            <br><small><em>Learning to Raise Black Children in White Spaces</em></small>
+          </h2>
+          <p class="author">Valerie I. Harrison and Kathryn Peach D'Angelo</p>
+          <p style="line-height:1.2">
+              <strong>LISTEN:</strong>&nbsp;interview&nbsp;on 
+              <a href="http://bit.ly/35E1TLn" target="_blank" rel="noopener"><em>Radio Times</em></a>, 
+              (WHYY, 90.9 FM, Phila) Jan 12<br><strong>EVENTS</strong>: Feb 4 author reading at the 
+              <a href="http://bit.ly/35mCxSg" target="_blank" rel="noopener">FLOP</a>&nbsp;&amp; Feb 8 at 
+              <a href="http://bit.ly/35PZqh7" target="_blank" rel="noopener">Big Blue Marble Bookstore</a>
+              </p>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 28px;">
+      <div class="media text-center" style="width: 160px;text-align:center">
+        <a style="width:100%;" href="/book/20000000010059">
+          <%= image_pack_tag "Modern_Mobility_Aloft_110819_sm.jpg" %>
+        </a>
+      </div>
+      <div class="media-body" style="padding-left: 28px;">
+        <h2><a href="/book/20000000010059">Modern Mobility Aloft</a>
+          <br><small><em>Elevated Highways, Architecture, and Urban Change in Pre-Interstate America</em></small>
+        </h2>
+        <p class="author">Amy D. Finstein</p>
+        <p style="line-height:1.2">
+          <small>
+            </small></p><p><small><big><strong>BOOK TALK:</strong> Feb 9 @ 6PM Join the Skyscraper Museum in New York City for an online talk with<strong>&nbsp;Amy D. Finstein</strong><a href="/book/20000000010059"><em>.</em></a><a href="https://bit.ly/3nzNfLS" target="_blank" rel="noopener">Register here</a>&nbsp;for the online lecture.</big></small></p><small>
+          </small>
+        <p></p>
+      </div>
+    </div>
 
-<%= link_to 'New Webpage', new_webpage_path %>
+  </div>
+
+  <div class="col-3">
+    <div class="feature-catalog mb-4 p-3 text-center" style="background-color: white;">
+      <h2 style="font-size:115%">Spring 2021 Catalog</h2>
+      <%= image_pack_tag "Cover_sp21_front.jpg" %>
+      <p class="mt-2">[PDF Version]</p>
+    </div>
+    <div class="feature-other mb-4 p-3 text-center" style="background-color: white;">
+      <h2 style="font-size:115%">Download our 50th Anniversary Newsletter</h2>
+      <%= image_pack_tag "50th_Newsletter.png" %>
+      <p class="mt-2">[PDF]</p>
+    </div>
+    <div class="feature-philly p-3 text-center pb-5" style="background-color: white;">
+      <h2 style="font-size:115%">Books on the Philadelphia Region</h2>
+      <%= image_pack_tag "phila.jpg" %>
+    </div>
+  </div>
+
+</div>
+</div>

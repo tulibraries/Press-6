@@ -22,4 +22,4 @@ require("../administrate/index")
 
 require("selectize")
 
-import "../css/administrate/application"
+import "../css/administrate/application";
