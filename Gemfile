@@ -50,7 +50,6 @@ group :development, :test do
   gem "pry-byebug"
   gem "rspec-activemodel-mocks"
   gem "rspec-rails", "~> 4.0.1"
-  gem "aws-sdk-s3"
 end
 
 group :development do
