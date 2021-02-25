@@ -1,12 +1,10 @@
-@import "_vars.scss";
-
 .flash.timedout {
 	display:none;
 }
 
 #header {
 	background-color: #F9E7BD;
-	color: #000;
+	color: $black;
 	font-size: 1.25rem;
 	img {
 		position: relative;
@@ -56,7 +54,7 @@
 		}
 	}
 	a.header-name, a.header-name:hover, a.header-name:focus {
-		color: #000;
+		color: $black;
 		font-size: 2.2rem;
 		vertical-align: bottom;
 		text-decoration: none;
