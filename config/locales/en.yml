@@ -1,4 +1,8 @@
 en:
+  helpers:
+    label:
+      book:
+        hot: New and Noteworthy
   tupress:
     default:
       fields:
