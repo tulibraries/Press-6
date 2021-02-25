@@ -15,6 +15,7 @@ class CatalogDashboard < Administrate::BaseDashboard
     season: Field::String,
     year: Field::String,
     title: Field::String,
+    suppress: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -44,6 +45,7 @@ class CatalogDashboard < Administrate::BaseDashboard
     title
     season
     year
+    suppress
   ].freeze
 
   # COLLECTION_FILTERS
