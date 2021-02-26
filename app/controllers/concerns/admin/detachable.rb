@@ -10,7 +10,7 @@ module Admin
 
       types = ["cover_image", "excerpt_image", "guide_image", "suggested_reading_image"] if klass == "Book"
       types = ["image"] if ["Brochure", "Series"].include?(klass)
-      types = ["pdf"] if ["Promotion", "Subject"].include?(klass)
+      types = ["pdf"] if ["SpecialOffer", "Subject"].include?(klass)
 
       type = types.index(params[:field])
       field = types.at(type) if types.include? params[:field]

@@ -48,7 +48,6 @@ class CreateBooks < ActiveRecord::Migration[6.0]
 
       t.numeric :price, precision: 5, scale: 2
 
-      t.string :promotion_id
       t.string :series_id
       t.string :catalog_id
 
@@ -60,7 +59,6 @@ class CreateBooks < ActiveRecord::Migration[6.0]
 
       t.index(:series_id)
       t.index(:catalog_id)
-      t.index(:promotion_id)
 
       t.timestamps
     end

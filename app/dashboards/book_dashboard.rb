@@ -56,7 +56,7 @@ class BookDashboard < Administrate::BaseDashboard
 
     series: Field::BelongsTo.with_options(order: "title"),
     catalog: Field::BelongsTo.with_options(order: "title"),
-    promotion: Field::BelongsTo.with_options(order: "title"),
+    special_offer: Field::BelongsTo.with_options(order: "title"),
 
     subjects: Field::Text,
     subject1: SubjectsSelectField,
@@ -95,7 +95,6 @@ class BookDashboard < Administrate::BaseDashboard
     ean
     catalog
     series
-    promotion
     books
   ].freeze
 
@@ -131,7 +130,7 @@ class BookDashboard < Administrate::BaseDashboard
     suggested_reading_image
     suggested_reading_label
     course_adoption
-    promotion
+    special_offer
     series
     books
   ].freeze

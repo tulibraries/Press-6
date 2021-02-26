@@ -13,7 +13,7 @@ class Book < ApplicationRecord
 
   belongs_to :series, optional: true
   belongs_to :catalog, optional: true
-  belongs_to :promotion, optional: true
+  belongs_to :special_offer, optional: true
 
   has_one_attached :cover_image, dependent: :destroy
   has_one_attached :excerpt_image, dependent: :destroy
