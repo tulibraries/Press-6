@@ -27,7 +27,7 @@ class BookDashboard < Administrate::BaseDashboard
     author_byline: Field::String,
     author_bios: Field::Text,
     guide_image: ImageField,
-    guide_text: TrixField,
+    guide_text: Field::String,
     cover_image: ImageField,
     format: Field::String,
     ean: Field::String,
@@ -42,12 +42,12 @@ class BookDashboard < Administrate::BaseDashboard
     news: Field::Boolean,
     news_text: TrixField,
     newsweight: Field::Select.with_options(
-      collection: [1, 2, 3, 4]
+      collection: [1, 2, 3]
     ),
     hot: Field::Boolean,
-    hotweight: Field::Select.with_options(
-      collection: [1, 2, 3, 4, 5]
-    ),
+    # hotweight: Field::Select.with_options(
+    #   collection: [1, 2, 3, 4, 5]
+    # ),
     supplement: Field::String,
     edition: Field::String,
     suggested_reading_image: ImageField,
@@ -123,7 +123,6 @@ class BookDashboard < Administrate::BaseDashboard
     guide_image
     guide_text
     hot
-    hotweight
     news
     newsweight
     news_text
