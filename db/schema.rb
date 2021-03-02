@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_26_165339) do
+ActiveRecord::Schema.define(version: 2021_03_02_180325) do
 
   create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -105,10 +105,12 @@ ActiveRecord::Schema.define(version: 2021_02_26_165339) do
     t.string "award_year4"
     t.string "award4"
     t.decimal "price", precision: 5, scale: 2
+    t.string "promotion_id"
     t.string "series_id"
     t.string "catalog_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "promotion_ids"
     t.text "author_ids"
     t.text "author_prefixes"
     t.text "author_firsts"
@@ -116,7 +118,9 @@ ActiveRecord::Schema.define(version: 2021_02_26_165339) do
     t.text "author_suffixes"
     t.string "suggested_reading_label"
     t.bigint "special_offer_id"
+    t.string "guide_file_label"
     t.index ["catalog_id"], name: "index_books_on_catalog_id"
+    t.index ["promotion_id"], name: "index_books_on_promotion_id"
     t.index ["series_id"], name: "index_books_on_series_id"
     t.index ["special_offer_id"], name: "index_books_on_special_offer_id"
   end
@@ -141,6 +145,15 @@ ActiveRecord::Schema.define(version: 2021_02_26_165339) do
   create_table "journals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.string "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "promotions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.string "pdf_display_name"
+    t.boolean "active"
+    t.text "book_ids"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
