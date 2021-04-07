@@ -27,7 +27,9 @@ class BookDashboard < Administrate::BaseDashboard
     author_byline: Field::String,
     author_bios: Field::Text,
     guide_image: ImageField,
-    guide_text: Field::String,
+    guide_file: FileField,
+    guide_file_label: Field::String,
+    guide_text: TrixField,
     cover_image: ImageField,
     format: Field::String,
     ean: Field::String,
@@ -56,7 +58,7 @@ class BookDashboard < Administrate::BaseDashboard
 
     series: Field::BelongsTo.with_options(order: "title"),
     catalog: Field::BelongsTo.with_options(order: "title"),
-    promotion: Field::BelongsTo.with_options(order: "title"),
+    special_offer: Field::BelongsTo.with_options(order: "title"),
 
     subjects: Field::Text,
     subject1: SubjectsSelectField,
@@ -95,7 +97,6 @@ class BookDashboard < Administrate::BaseDashboard
     ean
     catalog
     series
-    promotion
     books
   ].freeze
 
@@ -123,6 +124,8 @@ class BookDashboard < Administrate::BaseDashboard
     award_year3
     guide_image
     guide_text
+    guide_file
+    guide_file_label
     hot
     news
     newsweight
@@ -130,7 +133,7 @@ class BookDashboard < Administrate::BaseDashboard
     suggested_reading_image
     suggested_reading_label
     course_adoption
-    promotion
+    special_offer
     series
     books
   ].freeze
