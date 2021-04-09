@@ -1,8 +1,54 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="col col-3 book-cover mt-5 pt-3">
+      <%= image_tag @book.show_image if @book.cover_image.attachment.present? %>
+      <div class="social-share">
+      </div>
+    </div>
+    <div class="col col-9 book-info">
+      <div class="description mt-5 p-3">
+        <h1><%= strip_tags @book.title %></h1>
 
-<p>
-  <strong>Title:</strong>
-  <%= @book.title %>
-</p>
+        <p class="subtitle lead">
+        <% if @book.subtitle.present? %>
+        <em><%= @book.subtitle  %></em><br />
+        <% end %>
 
-<%= link_to 'Back', books_path %>
+        <%= @book.author_byline %></p>
+        <div class="description mt-4">
+          <%= fix_invalid_html(@book.description).html_safe %>
+        </div>
+      </div>
+      
+      <% if @reviews.present? %>
+      <div class="reviews mt-3 p-3" style="background-color: white;">
+        <h2>Reviews</h2>
+        <% @reviews.each do |review| %>
+          <div class="review mb-3">
+            <%= fix_invalid_html(review.review).html_safe %>
+          </div>
+        <% end %>
+      </div>
+      <% end %>
+
+      <% if @book.about_author.present? %>
+      <div class="author-bio mt-3 p-3" style="background-color: white;">
+        <h2>About the Author(s)</h2>
+          <%= fix_invalid_html(@book.about_author).html_safe %>
+      </div>
+      <% end %>
+      <% if @series.present? %>
+      <div class="author-bio mt-3 p-3" style="background-color: white;">
+        <h2 class="mb-3">In the Series</h2>
+          <p><%= link_to @series.title, @series, style: "font-size:larger;" %></p>
+          <p><%= fix_invalid_html(@series.description).html_safe %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col see-also">
+    </div>
+  </div>
+</div>

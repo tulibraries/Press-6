@@ -26,7 +26,7 @@ class SyncService::Reviews
         else #when node is returned from read_reviews
           unless book.at("review_id").nil?
             book = { "reviews" => [{ "review_id" => book.at("review_id").text,
-                                  "review_text" => book.at("review_text").text }],
+                                  "review_text" => Nokogiri::HTML::DocumentFragment.parse(book.at("review_text").text).to_xml(save_with: Nokogiri::XML::Node::SaveOptions::AS_HTML) }],
                     "book_id" => book.at("book_id").text }
             create_or_update!(book)
           else

@@ -83,4 +83,9 @@ end
     region = Region.find_by(id: id)
     region.region
   end
+  
+  # Close unclosed tags
+  def fix_invalid_html(html)
+    Nokogiri::HTML::DocumentFragment.parse(html).to_html
+  end
 end

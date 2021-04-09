@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Book < ApplicationRecord
+  include Imageable
   before_save :sort_titles
 
   has_rich_text :news_text

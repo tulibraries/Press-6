@@ -25,10 +25,11 @@ class BookDashboard < Administrate::BaseDashboard
     description: Field::Text,
     contents: Field::Text,
     author_byline: Field::String,
-    author_bios: Field::Text,
+    about_author: Field::Text,
     guide_image: ImageField,
     guide_text: Field::String,
     cover_image: ImageField,
+    cover: Field::String,
     format: Field::String,
     ean: Field::String,
     pub_date: Field::String,
@@ -104,6 +105,7 @@ class BookDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     cover_image
+    cover
     sort_title
     author_byline
     edition

@@ -3,21 +3,17 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show]
 
-  # GET /books
-  # GET /books.json
   def index
     @books = Book.where.not(title: "")
   end
 
-  # GET /books/1
-  # GET /books/1.json
   def show
+    @reviews = Review.where(book_id: @book.book_id)
+    @series = Series.find_by(code: @book.series_id)
   end
 
   private
-
-    # Use callbacks to share common setup or constraints between actions.
     def set_book
-      @book = Book.find(params[:id])
+      @book = Book.find_by(book_id: params[:id])
     end
 end
