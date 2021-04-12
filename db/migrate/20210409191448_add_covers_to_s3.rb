@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-class AddBookCoverFileNames < ActiveRecord::Migration[6.0]
+class AddCoversToS3 < ActiveRecord::Migration[6.0]
   def change
     # ###
-    # this migration should only be run once per initial db load
-    # and then disabled
-    # blobs and attachments locations are then stored in the db 
+    # path to local image store will need to be adjusted per local environment
     # ###
     
     @log = Logger.new("log/upload-book-covers-to-s3.log")
