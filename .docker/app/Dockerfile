@@ -12,11 +12,12 @@ RUN apk add -U --no-cache \
       bash=5.1.0-r0 \
       tzdata=2021a-r0 \
       libxslt-dev=1.1.34-r0 \
+      shared-mime-info=2.0-r0 \
       mariadb-dev=10.5.8-r0 && \
     apk add -U --no-cache --virtual build-dependencies \
-      git=2.30.1-r0 \
+      git=2.30.2-r0 \
       build-base=0.5-r2 \
-      nodejs=14.16.0-r0 \
+      nodejs=14.16.1-r1 \
       yarn=1.22.10-r0 && \
     gem install bundler:2.2.4  && \
     bundle config build.nokogiri --use-system-libraries && \
