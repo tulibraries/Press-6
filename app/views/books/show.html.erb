@@ -14,7 +14,7 @@
           <li><%= @book.illustrations %></li>
         </ul>
 
-        <%= link_to "ORDER", "https://cdcshoppingcart.uchicago.edu/Cart2/ChicagoBook.aspx?ISBN="+get_isbn+"&&PRESS=temple", 
+        <%= link_to "ORDER", "https://cdcshoppingcart.uchicago.edu/Cart2/ChicagoBook.aspx?ISBN="+get_isbn(@book)+"&&PRESS=temple", 
                               :class=>"buy-it-text", style: "color:white;background-color:#A50030;padding:5px 14px;text-align:center;display:inline-block;margin-bottom:14px;text-decoration:none;font-size:1.3rem" %>
 
         <div class="book-formats">

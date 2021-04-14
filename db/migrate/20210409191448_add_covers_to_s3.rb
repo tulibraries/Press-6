@@ -5,7 +5,7 @@ class AddCoversToS3 < ActiveRecord::Migration[6.0]
     # ###
     # path to local image store will need to be adjusted per local environment
     # ###
-    
+
     @log = Logger.new("log/upload-book-covers-to-s3.log")
     @stdout = Logger.new(STDOUT)
     Book.all.each do |book|
@@ -15,7 +15,7 @@ class AddCoversToS3 < ActiveRecord::Migration[6.0]
           filename: book.cover
         ) if book.cover.present?
       rescue Exception => err
-        stdout_and_log(%Q(Book: #{book.id}, image: #{book.cover} errored -  #{err.message} \n #{err.backtrace}))
+        stdout_and_log("Book: #{book.id}, image: #{book.cover} errored -  #{err.message} \n #{err.backtrace}")
       end
       book.save!
     end

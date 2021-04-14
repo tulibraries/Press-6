@@ -37,12 +37,12 @@ class Book < ApplicationRecord
   end
 
   def bindings_as_tuples
-    JSON.parse(self.bindings)["binding"].select{ |b| ["NP", "IP"].include? b["binding_status"] }.map { |b| 
+    JSON.parse(self.bindings)["binding"].select { |b| ["NP", "IP"].include? b["binding_status"] }.map { |b|
         {
-          format: b["format"], 
-          price: b["price"], 
-          ean: b["ean"], 
-          status: b["binding_status"], 
+          format: b["format"],
+          price: b["price"],
+          ean: b["ean"],
+          status: b["binding_status"],
           pub_date: b["pub_date_for_format"]
         }}
   end

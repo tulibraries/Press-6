@@ -39,7 +39,7 @@ class SyncService::Books
 
   def record_hash(record)
     {
-      "xml_id"             => record.dig("record", "book_id"),
+      "xml_id" => record.dig("record", "book_id"),
       "title"               => record.dig("record", "title"),
       "subtitle"            => record.dig("record", "subtitle"),
       "cover"               => record.dig("record", "cover_image").sub("http://www.temple.edu/tempress/titles/", ""),
@@ -63,12 +63,12 @@ class SyncService::Books
       "intro"               => record.dig("record", "intro"),
       "blurb"               => record.dig("record", "blurb"),
       "status"              => record.dig("record", "status"),
-      "pages_total"         => record.dig('record', 'format', 'pages_total'),
-      "trim"                => record.dig('record', 'format', 'trim'),
-      "illustrations"       => record.dig('record', 'format', 'illustrations_copy'),
+      "pages_total"         => record.dig("record", "format", "pages_total"),
+      "trim"                => record.dig("record", "format", "trim"),
+      "illustrations"       => record.dig("record", "format", "illustrations_copy"),
       "isbn"                => record.dig("record", "isbn"),
       "pub_date"            => record.dig("record", "pub_date"),
-      "series_id"           => record.dig('record', 'series', 'series_id'),
+      "series_id"           => record.dig("record", "series", "series_id"),
       "bindings"            => JSON.dump(record.dig("record", "bindings")),
       "description"         => record.dig("record", "description"),
       "subjects"            => JSON.dump(record["record"].fetch("subjects", { "subject" => { "subject_id" => nil, "subject_title" => nil } })),
