@@ -36,14 +36,14 @@ class Book < ApplicationRecord
     [JSON.parse(self.subjects)["subject"]].flatten.map { |h| [h["subject_title"], h["subject_id"]] }
   end
 
-  def bindings_as_tuples
-    JSON.parse(self.bindings)["binding"].select { |b| ["NP", "IP"].include? b["binding_status"] }.map { |b|
+  def bindings_as_tuples 
+    [JSON.parse(self.bindings)["binding"]].flatten.select { |b| ["NP", "IP"].include? b["binding_status"] }.map { |b|
         {
           format: b["format"],
           price: b["price"],
           ean: b["ean"],
           status: b["binding_status"],
           pub_date: b["pub_date_for_format"]
-        }}
-  end
+        }} 
+  end 
 end

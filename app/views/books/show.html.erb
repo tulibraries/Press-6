@@ -3,7 +3,7 @@
     <div class="col col-3 book-cover mt-5 pt-3">
       <%= image_tag @book.show_image if @book.cover_image.attachment.present? %>
       <div class="social-share text-right p-4">
-        <span style="font-weight:600;font-size:1.1rem">Share</span>
+        <span class="share-label">Share</span>
         <%= link_to image_pack_tag('twitter-icon.png', class: 'social-icon', alt: 'Twitter Icon', style: 'width:29px;filter: grayscale(100%);'), 'http://twitter.com/TempleUnivPress' %>
         <%= link_to image_pack_tag('fb-icon.png', class: 'social-icon', alt: 'Facebook Icon', style: 'width:29px;filter: grayscale(100%);'), 'http://facebook.com/TempleUnivPress' %>
       </div>
@@ -14,8 +14,12 @@
           <li><%= @book.illustrations %></li>
         </ul>
 
-        <%= link_to "ORDER", "https://cdcshoppingcart.uchicago.edu/Cart2/ChicagoBook.aspx?ISBN="+get_isbn(@book)+"&&PRESS=temple", 
+        <%# unless @book.bindings_as_tuples.first[:ean].nil? %>
+
+          <%= link_to "ORDER", "https://cdcshoppingcart.uchicago.edu/Cart2/ChicagoBook.aspx?ISBN=#{get_isbn(@book)}&&PRESS=temple", 
                               :class=>"buy-it-text", style: "color:white;background-color:#A50030;padding:5px 14px;text-align:center;display:inline-block;margin-bottom:14px;text-decoration:none;font-size:1.3rem" %>
+
+        <%# end %>
 
         <div class="book-formats">
           <ul class="list-unstyled" style="font-size:.9rem;">
@@ -34,12 +38,12 @@
 
         <% if @book.subjects.present? %>
         <div class="book-subjects mt-4">
-          <span style="font-size:1rem;font-weight:600;margin-top:10px;display:inline-block">
+          <span class="section-label">
             Subjects
           </span>
           <ul class="list-unstyled" style="font-size:.9rem;">
           <% @book.subjects_as_tuples.each do |subject| %>
-            <li><%= link_to subject[0], subject_path(subject[1]) %></li>
+            <li><%= link_to subject[0], subject_path(subject[1]) unless subject[0].nil? %></li>
           <% end %>
           </ul>
         </div>
@@ -68,9 +72,12 @@
         <% end %>
 
         <%= @book.author_byline %></p>
+
+        <% if @book.description.present? %>
         <div class="description mt-4">
           <%= fix_invalid_html(@book.description).html_safe %>
         </div>
+        <% end %>
       </div>
       
       <% if @reviews.present? %>

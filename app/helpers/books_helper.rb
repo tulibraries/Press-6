@@ -2,9 +2,10 @@
 
 module BooksHelper
   def get_isbn(book)
-    isbn = book.bindings_as_tuples.find do |format|
-      break format[:ean].tr("-", "") if ["NP", "IP"].include? format[:status]
+    isbn = book.bindings_as_tuples.find do |binding|
+      break binding[:ean].gsub("-", "") if ["NP", "IP"].include? binding[:status]
     end
+		isbn ? isbn : "0"
   end
 
   def book_format(format)
@@ -13,7 +14,7 @@ module BooksHelper
       "Paperback"
     when "HC"
       "Hard Cover"
-    when "EB"
+    when "Ebook"
       "eBook"
       else
       nil

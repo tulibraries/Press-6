@@ -1,3 +1,15 @@
 @import "partials/_vars.scss";
 
 .red { color: $red;}
+
+.share-label {
+	font-weight:600;
+	font-size:1.1rem;
+}
+
+.section-label {
+	font-size: 1rem;
+	font-weight: 600;
+	margin-top: 10px;
+	display: inline-block;
+}
