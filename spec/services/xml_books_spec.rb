@@ -50,15 +50,15 @@ RSpec.describe SyncService::Books, type: :service do
       end
 
       it "maps pages_total to pages_total field" do
-        expect(subject["pages_total"]).to match(@books.first["record"]["pages_total"])
+        expect(subject["pages_total"]).to match(@books.first["record"]["format"]["pages_total"])
       end
 
       it "maps trim to trim field" do
-        expect(subject["trim"]).to match(@books.first["record"]["trim"])
+        expect(subject["trim"]).to match(@books.first["record"]["format"]["trim"])
       end
 
       it "maps illustrations to illustrations field" do
-        expect(subject["illustrations"]).to match(@books.first["record"]["illustrations"])
+        expect(subject["illustrations"]).to match(@books.first["record"]["format"]["illustrations_copy"])
       end
 
       it "maps isbn to isbn field" do
@@ -70,11 +70,11 @@ RSpec.describe SyncService::Books, type: :service do
       end
 
       it "maps series_id to series_id field" do
-        expect(subject["series_id"]).to match(@books.first["record"]["series_id"])
+        expect(subject["series_id"]).to match(@books.first["record"]["series"]["series_id"])
       end
 
-      it "maps binding to binding field" do
-        expect(subject["binding"]).to match(@books.first["record"]["bindings"])
+      it "maps bindings to bindings field" do
+        expect(JSON.parse(subject["bindings"])).to eq(@books.first["record"]["bindings"])
       end
 
       it "maps description to description field" do
