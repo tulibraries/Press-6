@@ -29,7 +29,7 @@ module Imageable
   end
 
   def show_image
-    custom_image(265, 400)
+    custom_image(360, 560)
   end
 
   def show_image_path

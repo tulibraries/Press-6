@@ -1,30 +1,26 @@
-<div class="container">
+<div class="container books-show">
   <div class="row">
-    <div class="col col-3 book-cover mt-5 pt-3">
+    <div class="col col-4 book-cover text-center mt-5 pt-3">
       <%= image_tag @book.show_image if @book.cover_image.attachment.present? %>
       <div class="social-share text-right p-4">
         <span class="share-label">Share</span>
-        <%= link_to image_pack_tag('twitter-icon.png', class: 'social-icon', alt: 'Twitter Icon', style: 'width:29px;filter: grayscale(100%);'), 'http://twitter.com/TempleUnivPress' %>
-        <%= link_to image_pack_tag('fb-icon.png', class: 'social-icon', alt: 'Facebook Icon', style: 'width:29px;filter: grayscale(100%);'), 'http://facebook.com/TempleUnivPress' %>
+        <%= link_to image_pack_tag('twitter-icon.png', class: 'social-icon', alt: 'Twitter Icon'), 'http://twitter.com/TempleUnivPress' %>
+        <%= link_to image_pack_tag('fb-icon.png', class: 'social-icon', alt: 'Facebook Icon'), 'http://facebook.com/TempleUnivPress' %>
       </div>
-      <div class="book-details" style="background-color: white;line-height:1.75rem;padding:28px">
+      <div class="book-details text-left">
         <ul class="list-unstyled">
           <li><%= @book.pages_total %> pages</li>
           <li><%= @book.trim %></li>
           <li><%= @book.illustrations %></li>
         </ul>
 
-        <%# unless @book.bindings_as_tuples.first[:ean].nil? %>
-
-          <%= link_to "ORDER", "https://cdcshoppingcart.uchicago.edu/Cart2/ChicagoBook.aspx?ISBN=#{get_isbn(@book)}&&PRESS=temple", 
-                              :class=>"buy-it-text", style: "color:white;background-color:#A50030;padding:5px 14px;text-align:center;display:inline-block;margin-bottom:14px;text-decoration:none;font-size:1.3rem" %>
-
-        <%# end %>
+        <%= link_to "ORDER", "https://cdcshoppingcart.uchicago.edu/Cart2/ChicagoBook.aspx?ISBN=#{get_isbn(@book)}&&PRESS=temple", 
+                              class: "order-button" %>
 
         <div class="book-formats">
-          <ul class="list-unstyled" style="font-size:.9rem;">
+          <ul class="list-unstyled">
           <% @book.bindings_as_tuples.each do |b| %>          
-            <li style="font-size:1rem;font-weight:600;margin-top:10px;display:inline-block">
+            <li class="section-label">
               <%= book_format(b[:format]) %>
             </li>
             <li>Price: <%= b[:price] %></li>
@@ -41,7 +37,7 @@
           <span class="section-label">
             Subjects
           </span>
-          <ul class="list-unstyled" style="font-size:.9rem;">
+          <ul class="list-unstyled">
           <% @book.subjects_as_tuples.each do |subject| %>
             <li><%= link_to subject[0], subject_path(subject[1]) unless subject[0].nil? %></li>
           <% end %>
@@ -51,10 +47,10 @@
 
         <% if @book.excerpt.attached? && @book.excerpt_text.present? %>
         <div class="book-preview mt-4">
-          <span style="font-size:1rem;font-weight:600;margin-top:10px;display:inline-block">
+          <span class="section-label">
             Preview
           </span>
-          <ul class="list-unstyled" style="font-size:.9rem;">
+          <ul class="list-unstyled">
             <li><%= link_to @book.excerpt_text, url_for(@book.excerpt.attachment), disposition: "attachment" if @book.excerpt.attached? %></li>
           </ul>
         </div>
@@ -62,7 +58,7 @@
 
       </div>
     </div>
-    <div class="col col-9 book-info">
+    <div class="col col-8 book-info">
       <div class="description mt-5 p-3">
         <h1><%= strip_tags @book.title %></h1>
 
@@ -81,7 +77,7 @@
       </div>
       
       <% if @reviews.present? %>
-      <div class="reviews mt-3 p-3" style="background-color: white;">
+      <div class="reviews mt-3 p-3">
         <h2>Reviews</h2>
         <% @reviews.each do |review| %>
           <div class="review mb-3">
@@ -92,13 +88,13 @@
       <% end %>
 
       <% if @book.about_author.present? %>
-      <div class="author-bio mt-3 p-3" style="background-color: white;">
+      <div class="author-bio mt-3 p-3">
         <h2>About the Author(s)</h2>
           <%= fix_invalid_html(@book.about_author).html_safe %>
       </div>
       <% end %>
       <% if @series.present? %>
-      <div class="author-bio mt-3 p-3" style="background-color: white;">
+      <div class="series mt-3 p-3">
         <h2 class="mb-3">In the Series</h2>
           <p><%= link_to @series.title, @series, style: "font-size:larger;" %></p>
           <p><%= fix_invalid_html(@series.description).html_safe %>
@@ -108,7 +104,7 @@
   </div>
 
 <% if @book.books.present? %>
-  <div class="container mt-5 p-4 see-also" style="background-color:white;">
+  <div class="container mt-5 p-4 see-also">
     <div class="row mb-3">
         <div class="col-12">
           <h2>Also of Interest</h2>
@@ -117,9 +113,9 @@
     <div class="row">
     <% @book.books.take(4).each do |book| %>
       <div class="col col-3 text-center">
-      <%= link_to book_path(book.xml_id), style: "text-decoration:none;" do %>
-        <%= image_tag book.index_image if book.cover_image.attachment.present? %><br />
-        <span style="font-size:1.15rem;"><%= strip_tags book.title %></span><br />
+      <%= link_to book_path(book.xml_id) do %>
+        <%= image_tag book.index_image if book.cover_image.attachment.present? %>
+        <span><%= strip_tags book.title %></span>
       <% end %>
         <%= book.author_byline %>
       </div>
