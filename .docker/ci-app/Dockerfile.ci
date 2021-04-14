@@ -1,5 +1,5 @@
 FROM ruby:2.7.3-alpine3.13
-RUN apk --update add nodejs yarn git build-base bash  mariadb-dev sqlite-dev tzdata
+RUN apk --update add nodejs yarn git build-base bash mariadb-dev sqlite-dev tzdata
 RUN mkdir /app
 WORKDIR /app
 COPY . .
