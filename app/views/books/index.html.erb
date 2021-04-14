@@ -9,7 +9,7 @@
   <div class="row">
     <% @books.each do |book| %>
       <div class="col-4">
-        <p><%= link_to book.title, book %></p>
+        <p><%= link_to book.title, book_path(book.xml_id) %></p>
       </div>
     <% end %>
   </div>

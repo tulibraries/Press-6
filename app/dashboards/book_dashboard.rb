@@ -11,7 +11,7 @@ class BookDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    book_id: Field::String,
+    xml_id: Field::String,
     title: Field::String,
     subtitle: Field::String,
     sort_title: Field::String,
@@ -19,15 +19,15 @@ class BookDashboard < Administrate::BaseDashboard
     about_author: Field::Text,
     intro: Field::Text,
     blurb: Field::Text,
-    excerpt_image: ImageField,
-    excerpt_text: TrixField,
+    excerpt_text: Field::String,
+    excerpt: FileField,
     binding: Field::Text,
     description: Field::Text,
     contents: Field::Text,
     author_byline: Field::String,
     about_author: Field::Text,
     guide_image: ImageField,
-    guide_text: Field::String,
+    guide_file_label: Field::String,
     cover_image: ImageField,
     cover: Field::String,
     format: Field::String,
@@ -39,7 +39,7 @@ class BookDashboard < Administrate::BaseDashboard
     status: Field::Select.with_options(
       collection: ["In Print", "NP", "OS", "X", "..."]
     ),
-    books: Field::HasMany.with_options(order: "title"),
+    books: Field::HasMany.with_options(order: "sort_title"),
     news: Field::Boolean,
     news_text: TrixField,
     newsweight: Field::Select.with_options(
@@ -97,7 +97,6 @@ class BookDashboard < Administrate::BaseDashboard
     catalog
     series
     promotion
-    books
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -110,7 +109,7 @@ class BookDashboard < Administrate::BaseDashboard
     author_byline
     edition
     status
-    excerpt_image
+    excerpt
     excerpt_text
     supplement
     subject1
@@ -124,7 +123,7 @@ class BookDashboard < Administrate::BaseDashboard
     award3
     award_year3
     guide_image
-    guide_text
+    guide_file_label
     hot
     news
     newsweight

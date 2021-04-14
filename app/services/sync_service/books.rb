@@ -39,7 +39,7 @@ class SyncService::Books
 
   def record_hash(record)
     {
-      "book_id"             => record.dig("record", "book_id"),
+      "xml_id"             => record.dig("record", "book_id"),
       "title"               => record.dig("record", "title"),
       "subtitle"            => record.dig("record", "subtitle"),
       "cover"               => record.dig("record", "cover_image").sub("http://www.temple.edu/tempress/titles/", ""),
@@ -69,7 +69,7 @@ class SyncService::Books
       "isbn"                => record.dig("record", "isbn"),
       "pub_date"            => record.dig("record", "pub_date"),
       "series_id"           => record.dig('record', 'series', 'series_id'),
-      "binding"             => record.dig("record", "bindings"),
+      "bindings"            => JSON.dump(record.dig("record", "bindings")),
       "description"         => record.dig("record", "description"),
       "subjects"            => JSON.dump(record["record"].fetch("subjects", { "subject" => { "subject_id" => nil, "subject_title" => nil } })),
       "contents"            => record.dig("record", "contents"),
@@ -78,10 +78,10 @@ class SyncService::Books
   end
 
   def create_or_update_if_needed!(record_hash)
-    book = Book.find_by(book_id: record_hash["book_id"])
+    book = Book.find_by(xml_id: record_hash["xml_id"])
     if book
       stdout_and_log(
-        %Q(Incoming book with title #{record_hash["title"]} matched to existing book (book_id = #{book.book_id} ) with title #{book.title}), level: :debug
+        %Q(Incoming book with title #{record_hash["title"]} matched to existing book (xml_id = #{book.xml_id} ) with title #{book.title}), level: :debug
       )
     else
       book = Book.new
@@ -98,7 +98,7 @@ class SyncService::Books
         @updated += 1
       end
     else
-      stdout_and_log(%Q(Record with blank title not saved for #{record_hash["book_id"]}))
+      stdout_and_log(%Q(Record with blank title not saved for #{record_hash["xml_id"]}))
       @skipped += 1
     end
   end

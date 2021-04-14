@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :book do
-    book_id { 7 }
+    xml_id { 7 }
     title { "John" }
     news { false }
     news_text { "This is news text." }

@@ -5,7 +5,7 @@ module Imageable
   require Rails.root.join("lib/uploads.rb")
 
   def index_image
-    custom_image(220, 220)
+    custom_image(220, 320)
   end
 
   def index_image_path
@@ -29,7 +29,7 @@ module Imageable
   end
 
   def show_image
-    custom_image(250, 380)
+    custom_image(265, 400)
   end
 
   def show_image_path

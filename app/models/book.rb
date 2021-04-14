@@ -5,8 +5,7 @@ class Book < ApplicationRecord
   before_save :sort_titles
 
   has_rich_text :news_text
-  has_rich_text :guide_text
-  has_rich_text :excerpt_text
+  has_rich_text :guide_file_label
   has_rich_text :news_text
 
   has_many :reviews, foreign_key: "review_id", dependent: :destroy, inverse_of: :book
@@ -17,7 +16,7 @@ class Book < ApplicationRecord
   belongs_to :promotion, optional: true
 
   has_one_attached :cover_image, dependent: :destroy
-  has_one_attached :excerpt_image, dependent: :destroy
+  has_one_attached :excerpt, dependent: :destroy
   has_one_attached :suggested_reading_image, dependent: :destroy
   has_one_attached :guide_image, dependent: :destroy
 
@@ -35,5 +34,16 @@ class Book < ApplicationRecord
 
   def subjects_as_tuples
     [JSON.parse(self.subjects)["subject"]].flatten.map { |h| [h["subject_title"], h["subject_id"]] }
+  end
+
+  def bindings_as_tuples
+    JSON.parse(self.bindings)["binding"].select{ |b| ["NP", "IP"].include? b["binding_status"] }.map { |b| 
+        {
+          format: b["format"], 
+          price: b["price"], 
+          ean: b["ean"], 
+          status: b["binding_status"], 
+          pub_date: b["pub_date_for_format"]
+        }}
   end
 end

@@ -20,10 +20,12 @@ and is augmented with [Selectize].
 %>
 
 <div class="field-unit__label">
-  <%= f.label field.attribute, for: "#{f.object_name}_#{field.attribute_key}" %>
+  <%= f.label field.attribute, for: "#{f.object_name}_#{field.attribute.to_s}" %>
 </div>
-<div class="field-unit__field field-unit--has-many">
-  <%= f.select(field.attribute_key, nil, {}, {multiple: true}) do %>
-    <%= options_for_select(field.associated_resource_options.sort, field.selected_options) %>
-  <% end %>
+<div class="field-unit__field field-unit--has-many ">
+  <%= f.collection_select :book_ids, Book.where(["NP", "IP"].include? :status).order(:sort_title), 
+                          :id, 
+                          :title, 
+                          {prompt: true}, 
+                          {multiple: true} %>
 </div>

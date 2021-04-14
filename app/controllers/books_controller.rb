@@ -8,12 +8,13 @@ class BooksController < ApplicationController
   end
 
   def show
-    @reviews = Review.where(book_id: @book.book_id)
+    @reviews = Review.where(book_id: @book.xml_id)
     @series = Series.find_by(code: @book.series_id)
   end
 
   private
     def set_book
-      @book = Book.find_by(book_id: params[:id])
+      @book = Book.find_by(xml_id: params[:id])
+      @book = Book.find_by xml_id: params[:id]
     end
 end

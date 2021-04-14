@@ -3,7 +3,8 @@
 class CreateBooks < ActiveRecord::Migration[6.0]
   def change
     create_table :books do |t|
-      t.string :book_id
+      t.string :xml_id
+      t.text :book_id
       t.string :title
       t.string :sort_title
       t.string :subtitle
@@ -11,12 +12,12 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.text :intro
       t.text :blurb
       t.text :excerpt_text
-      t.text :binding
+      t.text :bindings
       t.text :description
       t.text :contents
       t.text :author_byline
       t.text :author_bios
-      t.string :cover_image
+      t.string :cover
       t.string :format
       t.string :isbn
       t.string :ean
@@ -31,7 +32,7 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.integer :hotweight
       t.string :supplement
       t.string :edition
-      t.string :suggested_reading
+      t.string :suggested_reading_label
       t.boolean :course_adoption
       t.text :subjects
       t.string :subject1
