@@ -6,40 +6,11 @@
   </div>
 
     <%= render "header-search" %>
-
-  <div class="col-3 d-md-block d-lg-none text-right d-print-none">
-    <button id="mobile-search-button" class="navbar-toggler icon-toggler" type="button" data-toggle="collapse" data-target="#mobile-search" aria-controls="mobile-search" aria-expanded="false" aria-label="Toggle search form">
-    <span class="navbar-toggler-icon" id="search-toggler-icon">
-      <div class="bar1"></div>
-      <div class="bar2"></div>
-      <div class="bar3"></div>
-    </span>
-  </button>
-  </div>
 </div>
 
 <div id="wrapper">
 
-  <div id="header" class="row">
-    <div class="col">
-      <% unless @alert.blank? %>
-      <div class="container">
-        <%= image_pack_tag "information.png", class: "decorative", alt: "" , style: "display:inline-block;height: 42px;float:left;margin-right:10px" %>
-        <div>
-        <% @alert.each do |alert| %>
-          <% unless alert.link.blank? %>
-            <%= alert.scroll_text %> <%= link_to t("tupress.default.application.header_navbar.scroll_text"), alert.link %>
-          <% else %>
-            <%= alert.scroll_text %>
-          <% end %>
-        <% end %>
-        </div>
-      </div>
-      <% end %>
-    </div>
-  </div> <!-- #header -->
-
-  <div class="row d-none d-sm-none d-md-none d-lg-block text-center" id="main-menu" style="margin-left:0;margin-right:0;max-width:100%;background-color:#000;margin-bottom: 0;">
+  <div class="row d-none d-sm-none d-md-none d-lg-block text-center" id="main-menu">
     <div class="nav py-2 nav-fill" style="width:1200px;margin:auto">
 
         <div class="btn-group ml-2 dropdown nav-item">
