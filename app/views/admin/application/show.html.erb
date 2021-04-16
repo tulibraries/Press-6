@@ -29,6 +29,12 @@ as well as a link to its edit page.
       [:edit, namespace, page.resource],
       class: "button",
     ) if valid_action?(:edit) && show_action?(:edit, page.resource) %>
+
+    <%= link_to(
+      t("Show in Site"),
+      "#{root_path}#{page.resource.class.to_s.downcase.pluralize}/#{page.resource.xml_id}",
+      class: "button pl-3",
+    ) if page.resource.class.eql? Book %>
   </div>
 </header>
 
