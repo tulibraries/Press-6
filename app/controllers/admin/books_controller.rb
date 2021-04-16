@@ -13,9 +13,9 @@ module Admin
       @tab_content["series"] = ["series"]
       @tab_content["catalog"] = ["catalog"]
       @tab_content["awards"] = ["award", "award2", "award3"]
-      @tab_content["guide"] = ["guide_image", "guide_file_label"]
+      @tab_content["guide"] = ["guide_file", "guide_file_label"]
       @tab_content["homepage"] = ["hot", "hotweight", "newsweight", "news_text", "course_adoption"]
-      @tab_content["promotions"] = ["promotion"]
+      @tab_content["special_offers"] = ["special_offer"]
       @tab_content["see_also"] = ["books"]
     end
 

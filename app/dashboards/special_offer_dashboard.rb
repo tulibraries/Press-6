@@ -2,7 +2,7 @@
 
 require "administrate/base_dashboard"
 
-class PromotionDashboard < Administrate::BaseDashboard
+class SpecialOfferDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -61,10 +61,10 @@ class PromotionDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how promotions are displayed
+  # Overwrite this method to customize how special offers are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(promotion)
-    promotion.title
+  def display_resource(special_offer)
+    special_offer.title
   end
 end

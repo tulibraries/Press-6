@@ -7,18 +7,18 @@ Rails.application.routes.draw do
     resources :brochures
     resources :catalogs
     resources :journals
-    resources :promotions
     resources :series
+    resources :special_offers
     resources :subjects
     resources :webpages
 
-    resource :books, :brochures, :series, :subjects, :promotions, :brochures do
+    resource :books, :brochures, :series, :subjects, :special_offers do
       member do
         get ":id/detach" => :detach
       end
     end
 
-    resource :books, :brochures, :series, :subjects, :promotions, :brochures do
+    resource :books, :brochures, :series, :subjects, :special_offers do
       member do
         post "detach" => :detach
       end
@@ -31,9 +31,9 @@ Rails.application.routes.draw do
   resources :series
   resources :subjects
   resources :catalogs
-  resources :promotions
   resources :agencies
   resources :webpages
+  resources :special_offers
 
   root to: "webpages#index"
 
