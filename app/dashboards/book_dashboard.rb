@@ -21,6 +21,8 @@ class BookDashboard < Administrate::BaseDashboard
     blurb: Field::Text,
     excerpt_text: Field::String,
     excerpt: FileField,
+    toc_file: FileField,
+    toc_label: Field::String,
     binding: Field::Text,
     description: Field::Text,
     contents: Field::Text,
@@ -97,7 +99,6 @@ class BookDashboard < Administrate::BaseDashboard
     ean
     catalog
     series
-    promotion
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -111,6 +112,8 @@ class BookDashboard < Administrate::BaseDashboard
     status
     excerpt
     excerpt_text
+    toc_file
+    toc_label
     supplement
     subject1
     subject2

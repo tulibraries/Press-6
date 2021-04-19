@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_13_175809) do
+ActiveRecord::Schema.define(version: 2021_04_19_165748) do
 
   create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 2021_04_13_175809) do
     t.string "guide_file_label"
     t.string "cover"
     t.text "book_id"
+    t.string "toc_label"
     t.index ["catalog_id"], name: "index_books_on_catalog_id"
     t.index ["promotion_id"], name: "index_books_on_promotion_id"
     t.index ["series_id"], name: "index_books_on_series_id"

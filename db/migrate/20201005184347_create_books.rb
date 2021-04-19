@@ -62,8 +62,6 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.index(:series_id)
       t.index(:catalog_id)
 
-      t.reference :special_offer, foreign_key: true
-
       t.timestamps
     end
   end

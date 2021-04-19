@@ -7,8 +7,6 @@ class AddSpecialOffers < ActiveRecord::Migration[6.0]
       t.string :pdf_display_name
       t.boolean :active
 
-      t.reference :book, foreign_key: true
-
       t.timestamps
     end
   end

@@ -1,6 +1,6 @@
 <div class="container books-show">
   <div class="row">
-    <div class="col col-4 book-cover text-center mt-5 pt-3">
+    <div class="col col-3 book-cover text-center mt-5 pt-3">
     <%= link_to action: "edit", controller: "admin/books", id: @book.id do %>
       <%= image_tag @book.show_image if @book.cover_image.attachment.present? %>
     <% end %>
@@ -47,20 +47,21 @@
         </div>
         <% end %>
 
-        <% if @book.excerpt.attached? && @book.excerpt_text.present? %>
+        <% if @book.excerpt_text.present? || @book.toc_label.present? %>
         <div class="book-preview mt-4">
           <span class="section-label">
             Preview
           </span>
           <ul class="list-unstyled">
             <li><%= link_to @book.excerpt_text, url_for(@book.excerpt.attachment), disposition: "attachment" if @book.excerpt.attached? %></li>
+            <li><%= link_to @book.toc_label, url_for(@book.toc_file.attachment), disposition: "attachment" if @book.toc_file.attached? %></li>
           </ul>
         </div>
         <% end %>
 
       </div>
     </div>
-    <div class="col col-8 book-info">
+    <div class="col col-9 book-info">
       <div class="description mt-5 p-3">
         <h1><%= strip_tags @book.title %></h1>
 

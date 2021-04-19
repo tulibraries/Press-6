@@ -18,6 +18,7 @@ class Book < ApplicationRecord
   has_one_attached :excerpt, dependent: :destroy
   has_one_attached :suggested_reading_image, dependent: :destroy
   has_one_attached :guide_file, dependent: :destroy
+  has_one_attached :toc_file, dependent: :destroy
 
   def sort_titles
     excludes = ["A", "An", "The"]
