@@ -84,7 +84,7 @@
         <div class="awards mt-4">
         <% @awards.each do |award| %>
         <ul class="list-unstyled">
-          <li><%= award %></li>
+          <li><%= award if award.present? %></li>
         </ul>
         <% end %>
         </div>
