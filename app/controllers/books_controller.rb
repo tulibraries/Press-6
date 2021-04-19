@@ -10,7 +10,7 @@ class BooksController < ApplicationController
   def show
     @reviews = Review.where(book_id: @book.xml_id)
     @series = Series.find_by(code: @book.series_id)
-    @awards = [@book.award,@book.award2,@book.award3]
+    @awards = [@book.award, @book.award2, @book.award3]
   end
 
   private
