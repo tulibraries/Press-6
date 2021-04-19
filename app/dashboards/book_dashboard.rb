@@ -57,6 +57,7 @@ class BookDashboard < Administrate::BaseDashboard
     suggested_reading_image: ImageField,
     suggested_reading_label: Field::String,
     course_adoption: Field::Boolean,
+    desk_copy: Field::Boolean,
 
     series: Field::BelongsTo.with_options(order: "title"),
     catalog: Field::BelongsTo.with_options(order: "title"),
@@ -115,6 +116,7 @@ class BookDashboard < Administrate::BaseDashboard
     toc_file
     toc_label
     supplement
+    desk_copy
     subject1
     subject2
     subject3

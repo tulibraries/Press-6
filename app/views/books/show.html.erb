@@ -59,6 +59,14 @@
         </div>
         <% end %>
 
+        <% if @book.desk_copy %>
+        <div class="book-desk-copy mt-5">
+          <ul class="list-unstyled mt-5">
+            <li><%= link_to "Request Desk/Exam Copy", "#"%></li> 
+          </ul>
+        </div>
+        <% end %>
+
       </div>
     </div>
     <div class="col col-9 book-info">
@@ -72,6 +80,16 @@
 
         <%= @book.author_byline %></p>
 
+        <% if @awards.present? %>
+        <div class="awards mt-4">
+        <% @awards.each do |award| %>
+        <ul class="list-unstyled">
+          <li><%= award %></li>
+        </ul>
+        <% end %>
+        </div>
+        <% end %>
+        
         <% if @book.description.present? %>
         <div class="description mt-4">
           <%= fix_invalid_html(@book.description).html_safe %>

@@ -47,6 +47,8 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.string :award_year4
       t.string :award4
       t.string :guide_file_label
+      t.string :toc_label
+      t.boolean :desk_copy
 
       t.numeric :price, precision: 5, scale: 2
 
