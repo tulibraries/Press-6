@@ -15,7 +15,7 @@
       <div class="nav py-2 nav-fill" style="width:1200px;margin:auto">
 
           <div class="btn-group ml-2 dropdown nav-item">
-              <%= button_tag t("Books"),
+              <%= button_tag "BOOKS",
                           {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
                           style: "display:inline-block;border:0;", 
                           "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
@@ -34,7 +34,7 @@
           </div>
 
           <div class="btn-group ml-2 dropdown nav-item">
-            <%= button_tag t("Open Access"), 
+            <%= button_tag "OPEN ACCESS",
                 {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
                 style: "display:inline-block;border:0;", 
                 "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
@@ -46,7 +46,7 @@
           </div>
 
           <div class="btn-group ml-2 dropdown nav-item">
-            <%= button_tag t("Journals"), 
+            <%= button_tag "JOURNALS", 
                 {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
                 style: "display:inline-block;border:0;", 
                 "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
@@ -63,11 +63,11 @@
           <% if action_name == "press-info" %>
             <ul class="list-unstyled" style="display:inline-block">
               <li class="active">
-                <span><%= t("Press Info") %></span>
+                <span><%= "PRESS INFO" %></span>
               </li>
             </ul>
           <% else %>
-            <%= button_tag t("Press Info"), 
+            <%= button_tag "PRESS INFO", 
                 {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
                 style: "display:inline-block;border:0;", 
                 "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
@@ -90,11 +90,11 @@
           <% if action_name == "orders" %>
             <ul class="list-unstyled" style="display:inline-block">
               <li class="active">
-                <span><%= t("Orders") %></span>
+                <span><%= "ORDERS" %></span>
               </li>
             </ul>
           <% else %>
-            <%= button_tag t("Orders"), 
+            <%= button_tag "ORDERS", 
                 {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
                 style: "display:inline-block;border:0;", 
                 "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
@@ -113,11 +113,11 @@
           <% if action_name == "news" %>
             <ul class="list-unstyled" style="display:inline-block">
               <li class="active">
-                <span><%= t("News & Events") %></span>
+                <span><%= "NEWS & EVENTS" %></span>
               </li>
             </ul>
           <% else %>
-            <%= button_tag t("News & Events"), 
+            <%= button_tag "NEWS & EVENTS", 
                 {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
                 style: "display:inline-block;border:0;", 
                 "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
