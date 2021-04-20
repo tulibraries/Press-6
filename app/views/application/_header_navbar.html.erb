@@ -1,193 +1,165 @@
- <div style="background-color:white;">
- <div id="header-navbar" class="container navbar navbar-static-top d-print-block" role="navigation" style="background-color: white;">
-  <div class="col-8 col-sm-7 col-lg-4 logo-container text-left ">
-    <%= link_to root_path, class: "header-name", id: "header-logo" do %>
-      <%= image_pack_tag('TUPress_2C_Red_Black.png', alt: "Temple University Press") %> 
-    <% end %>
-  </div>
-
-    <%= render "header-search" %>
-
-  <div class="col-3 d-md-block d-lg-none text-right d-print-none">
-    <button id="mobile-search-button" class="navbar-toggler icon-toggler" type="button" data-toggle="collapse" data-target="#mobile-search" aria-controls="mobile-search" aria-expanded="false" aria-label="Toggle search form">
-    <span class="navbar-toggler-icon" id="search-toggler-icon">
-      <div class="bar1"></div>
-      <div class="bar2"></div>
-      <div class="bar3"></div>
-    </span>
-  </button>
-  </div>
-</div>
-
-<div id="wrapper">
-
-  <div id="header" class="row">
-    <div class="col">
-      <% unless @alert.blank? %>
-      <div class="container">
-        <%= image_pack_tag "information.png", class: "decorative", alt: "" , style: "display:inline-block;height: 42px;float:left;margin-right:10px" %>
-        <div>
-        <% @alert.each do |alert| %>
-          <% unless alert.link.blank? %>
-            <%= alert.scroll_text %> <%= link_to t("tupress.default.application.header_navbar.scroll_text"), alert.link %>
-          <% else %>
-            <%= alert.scroll_text %>
-          <% end %>
-        <% end %>
-        </div>
-      </div>
+<div id="header-background">
+  <div id="header-navbar" class="container navbar navbar-static-top d-print-block" role="navigation">
+    <div class="col-8 col-sm-7 col-lg-4 logo-container text-left ">
+      <%= link_to root_path, class: "header-name", id: "header-logo" do %>
+        <%= image_pack_tag('TUPress_2C_Red_Black.png', alt: "Temple University Press") %> 
       <% end %>
     </div>
-  </div> <!-- #header -->
-</div>
-  <div class="row d-none d-sm-none d-md-none d-lg-block text-center" id="main-menu" style="margin-left:0;margin-right:0;max-width:100%;background-color:#000;margin-bottom: 0;">
-    <div class="nav py-2 nav-fill" style="width:1200px;margin:auto">
 
-        <div class="btn-group ml-2 dropdown nav-item">
-            <%= button_tag t("Books"),
-                        {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
-                        style: "display:inline-block;border:0;", 
-                        "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
-                        method: :get} %>
-            <div class="dropdown-menu p-2" aria-labelledby="navbarDropdownMenuLink" style="">
-		          <%= link_to "Award Winning Books", root_path+"awards", :class=>"dropdown-item" %>
-		          <%= link_to "Titles Index", root_path+"books", :class=>"dropdown-item" %>
-		          <%= link_to "Author Index", root_path+"byauthor", :class=>"dropdown-item" %>
-		          <%= link_to "Subject Index", root_path+"subjects", :class=>"dropdown-item" %>
-		          <%= link_to "Catalog Index", root_path+"catalogs", :class=>"dropdown-item" %>
-		          <%= link_to "Series Listing", root_path+"series", :class=>"dropdown-item" %>
-		          <%= link_to "Special Offers", special_offers_path, :class=>"dropdown-item" %>
-		          <%= link_to "Study Guides", root_path+"studyguides", :class=>"dropdown-item" %>
-		          <%= link_to "Books for Course Adoption", root_path+"course-adoptions", :class=>"dropdown-item" %>
-		         </div>
-        </div>
+      <%= render "header-search" %>
+  </div>
 
-        <div class="btn-group ml-2 dropdown nav-item">
-          <%= button_tag t("Open Access"), 
-              {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
-              style: "display:inline-block;border:0;", 
-              "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
-              method: :get} %>
-          <div class="dropdown-menu p-2" x-placement="bottom-start">
-            <li><%= link_to "North Broad Press", "http://tupress.temple.edu/open-access/north-broad-press", :class=>"dropdown-item" %></li>
-            <li><%= link_to "Labor Studies & Work", "http://tupress.temple.edu/open-access/labor-studies", :class=>"dropdown-item" %></li>
+  <div id="wrapper">
+
+    <div class="row d-none d-sm-none d-md-none d-lg-block text-center" id="main-menu">
+      <div class="nav py-2 nav-fill" style="width:1200px;margin:auto">
+
+          <div class="btn-group ml-2 dropdown nav-item">
+              <%= button_tag "BOOKS",
+                          {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
+                          style: "display:inline-block;border:0;", 
+                          "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
+                          method: :get} %>
+              <div class="dropdown-menu p-2" aria-labelledby="navbarDropdownMenuLink" style="">
+                <%= link_to "Award Winning Books", root_path+"awards", :class=>"dropdown-item" %>
+                <%= link_to "Titles Index", root_path+"books", :class=>"dropdown-item" %>
+                <%= link_to "Author Index", root_path+"byauthor", :class=>"dropdown-item" %>
+                <%= link_to "Subject Index", root_path+"subjects", :class=>"dropdown-item" %>
+                <%= link_to "Catalog Index", root_path+"catalogs", :class=>"dropdown-item" %>
+                <%= link_to "Series Listing", root_path+"series", :class=>"dropdown-item" %>
+                <%= link_to "Special Offers", special_offers_path, :class=>"dropdown-item" %>
+                <%= link_to "Study Guides", root_path+"studyguides", :class=>"dropdown-item" %>
+                <%= link_to "Books for Course Adoption", root_path+"course-adoptions", :class=>"dropdown-item" %>
+              </div>
           </div>
-        </div>
 
-        <div class="btn-group ml-2 dropdown nav-item">
-          <%= button_tag t("Journals"), 
-              {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
-              style: "display:inline-block;border:0;", 
-              "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
-              method: :get} %>
-
-          <div class="dropdown-menu p-2" x-placement="bottom-start">
-            <% get_journals.each do |i| %>
-              <li><%= link_to i.title, i.url, :class=>"dropdown-item" if i.url.present? %></li>
-            <% end %>
+          <div class="btn-group ml-2 dropdown nav-item">
+            <%= button_tag "OPEN ACCESS",
+                {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
+                style: "display:inline-block;border:0;", 
+                "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
+                method: :get} %>
+            <div class="dropdown-menu p-2" x-placement="bottom-start">
+              <li><%= link_to "North Broad Press", "http://tupress.temple.edu/open-access/north-broad-press", :class=>"dropdown-item" %></li>
+              <li><%= link_to "Labor Studies & Work", "http://tupress.temple.edu/open-access/labor-studies", :class=>"dropdown-item" %></li>
+            </div>
           </div>
-        </div>
 
-        <div class="btn-group ml-2 dropdown nav-item">
-        <% if action_name == "press-info" %>
-          <ul class="list-unstyled" style="display:inline-block">
-            <li class="active">
-              <span><%= t("Press Info") %></span>
-            </li>
-          </ul>
-        <% else %>
-          <%= button_tag t("Press Info"), 
-              {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
-              style: "display:inline-block;border:0;", 
-              "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
-              method: :get} %>
+          <div class="btn-group ml-2 dropdown nav-item">
+            <%= button_tag "JOURNALS", 
+                {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
+                style: "display:inline-block;border:0;", 
+                "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
+                method: :get} %>
 
-          <div class="dropdown-menu p-2" x-placement="bottom-start">
-              <%= link_to "About the Press", root_path+"press-info", :class=>"dropdown-item" %>
-		          <%= link_to "People at the Press", root_path+"people", :class=>"dropdown-item" %>
-		          <%= link_to "Rights and Permissions", root_path+"rights", :class=>"dropdown-item" %>
-		          <%= link_to "Foreign Rights Agents", root_path+"foreign-rights", :class=>"dropdown-item" %>
-		          <%= link_to "Submissions", root_path+"submissions", :class=>"dropdown-item" %>
-		          <%= link_to "About University Presses", root_path+"university-presses", :class=>"dropdown-item" %>
-		          <%= link_to "Download Documents", root_path+"downloads", :class=>"dropdown-item" %>
-		          <%= link_to "FAQ", root_path+"faq", :class=>"dropdown-item" %>
+            <div class="dropdown-menu p-2" x-placement="bottom-start">
+              <% get_journals.each do |i| %>
+                <li><%= link_to i.title, i.url, :class=>"dropdown-item" if i.url.present? %></li>
+              <% end %>
+            </div>
           </div>
-        <% end %>
-        </div>
 
-        <div class="btn-group ml-2 dropdown nav-item">
-        <% if action_name == "orders" %>
-          <ul class="list-unstyled" style="display:inline-block">
-            <li class="active">
-              <span><%= t("Orders") %></span>
-            </li>
-          </ul>
-        <% else %>
-          <%= button_tag t("Orders"), 
-              {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
-              style: "display:inline-block;border:0;", 
-              "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
-              method: :get} %>
+          <div class="btn-group ml-2 dropdown nav-item">
+          <% if action_name == "press-info" %>
+            <ul class="list-unstyled" style="display:inline-block">
+              <li class="active">
+                <span><%= "PRESS INFO" %></span>
+              </li>
+            </ul>
+          <% else %>
+            <%= button_tag "PRESS INFO", 
+                {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
+                style: "display:inline-block;border:0;", 
+                "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
+                method: :get} %>
 
-          <div class="dropdown-menu p-2" x-placement="bottom-start">
-		          <%= link_to "Ordering Information", root_path+"order", :class=>"dropdown-item" %>
-		          <%= link_to "Payment Terms", root_path+"payment", :class=>"dropdown-item" %>
-		          <%= link_to "Exam & Desk Copy Requests", root_path+"copy-request", :class=>"dropdown-item" %>
-		          <%= link_to "Sales Representatives", root_path+"sales-reps", :class=>"dropdown-item" %>
+            <div class="dropdown-menu p-2" x-placement="bottom-start">
+                <%= link_to "About the Press", root_path+"press-info", :class=>"dropdown-item" %>
+                <%= link_to "People at the Press", root_path+"people", :class=>"dropdown-item" %>
+                <%= link_to "Rights and Permissions", root_path+"rights", :class=>"dropdown-item" %>
+                <%= link_to "Foreign Rights Agents", root_path+"foreign-rights", :class=>"dropdown-item" %>
+                <%= link_to "Submissions", root_path+"submissions", :class=>"dropdown-item" %>
+                <%= link_to "About University Presses", root_path+"university-presses", :class=>"dropdown-item" %>
+                <%= link_to "Download Documents", root_path+"downloads", :class=>"dropdown-item" %>
+                <%= link_to "FAQ", root_path+"faq", :class=>"dropdown-item" %>
+            </div>
+          <% end %>
           </div>
-        <% end %>
-        </div>
 
-        <div class="btn-group ml-2 dropdown nav-item">
-        <% if action_name == "news" %>
-          <ul class="list-unstyled" style="display:inline-block">
-            <li class="active">
-              <span><%= t("News & Events") %></span>
-            </li>
-          </ul>
-        <% else %>
-          <%= button_tag t("News & Events"), 
-              {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
-              style: "display:inline-block;border:0;", 
-              "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
-              method: :get} %>
+          <div class="btn-group ml-2 dropdown nav-item">
+          <% if action_name == "orders" %>
+            <ul class="list-unstyled" style="display:inline-block">
+              <li class="active">
+                <span><%= "ORDERS" %></span>
+              </li>
+            </ul>
+          <% else %>
+            <%= button_tag "ORDERS", 
+                {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
+                style: "display:inline-block;border:0;", 
+                "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
+                method: :get} %>
 
-          <div class="dropdown-menu p-2" x-placement="bottom-start">
-          		<%= link_to "Media Inquiries", "#", :class=>"dropdown-item" %>
-          		<%= link_to "News of the week Blog", "#", :class=>"dropdown-item" %>
-          		<%= link_to "Blog", "#", :class=>"dropdown-item" %>
-          		<%= link_to "Conferences", "#", :class=>"dropdown-item" %>
-          		<%= link_to "Event Calendar", "#", :class=>"dropdown-item" %>
-          		<%= link_to "Special Offers", "#", :class=>"dropdown-item" %>
+            <div class="dropdown-menu p-2" x-placement="bottom-start">
+                <%= link_to "Ordering Information", root_path+"order", :class=>"dropdown-item" %>
+                <%= link_to "Payment Terms", root_path+"payment", :class=>"dropdown-item" %>
+                <%= link_to "Exam & Desk Copy Requests", root_path+"copy-request", :class=>"dropdown-item" %>
+                <%= link_to "Sales Representatives", root_path+"sales-reps", :class=>"dropdown-item" %>
+            </div>
+          <% end %>
           </div>
-        <% end %>
-        </div>
+
+          <div class="btn-group ml-2 dropdown nav-item">
+          <% if action_name == "news" %>
+            <ul class="list-unstyled" style="display:inline-block">
+              <li class="active">
+                <span><%= "NEWS & EVENTS" %></span>
+              </li>
+            </ul>
+          <% else %>
+            <%= button_tag "NEWS & EVENTS", 
+                {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
+                style: "display:inline-block;border:0;", 
+                "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
+                method: :get} %>
+
+            <div class="dropdown-menu p-2" x-placement="bottom-start">
+                <%= link_to "Media Inquiries", "#", :class=>"dropdown-item" %>
+                <%= link_to "News of the week Blog", "#", :class=>"dropdown-item" %>
+                <%= link_to "Blog", "#", :class=>"dropdown-item" %>
+                <%= link_to "Conferences", "#", :class=>"dropdown-item" %>
+                <%= link_to "Event Calendar", "#", :class=>"dropdown-item" %>
+                <%= link_to "Special Offers", "#", :class=>"dropdown-item" %>
+            </div>
+          <% end %>
+          </div>
 
 
-        <div class="btn-group ml-2 dropdown nav-item">
-        <% if action_name == "faq" %>
-          <ul class="list-unstyled" style="display:inline-block">
-            <li class="active">
-              <span><%= t("FAQ") %></span>
-            </li>
-          </ul>
-        <% else %>
-          <%= button_to "FAQ", "#", 
-              {
-                class: "btn btn-lg btn-secondary dropdown-toggle", 
-                style: "display:inline-block;border:0;background-color:transparent", "aria-haspopup" => "false", "aria-expanded" => "false"
-              } %>
-        <% end %>
-        </div>
+          <div class="btn-group ml-2 dropdown nav-item">
+          <% if action_name == "faq" %>
+            <ul class="list-unstyled" style="display:inline-block">
+              <li class="active">
+                <span><%= t("FAQ") %></span>
+              </li>
+            </ul>
+          <% else %>
+            <%= button_to "FAQ", "#", 
+                {
+                  class: "btn btn-lg btn-secondary dropdown-toggle", 
+                  style: "display:inline-block;border:0;background-color:transparent", "aria-haspopup" => "false", "aria-expanded" => "false"
+                } %>
+          <% end %>
+          </div>
 
+      </div>
     </div>
-  </div>
-  <div class="row d-block d-sm-block d-md-block d-lg-none text-center" id="mobile-search-container">
-    <%= render "mobile-search" %>
-  </div>
+    <div class="row d-block d-sm-block d-md-block d-lg-none text-center" id="mobile-search-container">
+      <%= render "mobile-search" %>
+    </div>
 
-  <div class="row d-block d-sm-block d-md-block d-lg-none" id="mobile-nav">
-    <%= render "mobile-nav" %>
-  </div>
+    <div class="row d-block d-sm-block d-md-block d-lg-none" id="mobile-nav">
+      <%= render "mobile-nav" %>
+    </div>
 
+  </div>
 </div>
