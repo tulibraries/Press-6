@@ -37,4 +37,6 @@ yarn-debug.log*
 .yarn-integrity
 *.sql
 .DS_Store
+*.xml
+/public/uploads
 /coverage
