@@ -79,7 +79,8 @@ jobs:
               docker-compose -p press_6 -f docker-compose.ci.yml exec test_app bundle exec rake spec
 
       - coveralls/upload:
-              flag_name: Press-6
+            path_to_lcov: ./coverage/lcov/press-6.lcov
+
   trivy_scan:
     docker:
       - image: cimg/base:2020.01
