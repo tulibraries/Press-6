@@ -48,7 +48,7 @@ group :test do
   gem "webdrivers"
   gem "factory_bot_rails"
   gem "rails-controller-testing"
-  gem "simplecov", require: false
+  gem "simplecov"
   gem "simplecov-lcov"
 end
 
