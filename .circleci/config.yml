@@ -14,7 +14,7 @@ orbs:
 jobs:
   run_tests:
     docker:
-      - image: cimg/base:2020.01
+      - image: cimg/ruby:2.7.3-node
         auth:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
