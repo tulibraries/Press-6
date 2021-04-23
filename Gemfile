@@ -22,7 +22,6 @@ gem "listen", "~> 3.2"
 gem "administrate-field-ordered_has_many"
 gem "jquery-rails"
 gem "bootstrap"
-gem "simplecov-lcov"
 
 gem "bootsnap", ">= 1.4.2", require: false
 gem "aws-sdk-s3", require: false
@@ -51,6 +50,7 @@ group :test do
   gem "factory_bot_rails"
   gem "rails-controller-testing"
   gem "simplecov", require: false
+  gem "simplecov-lcov"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
