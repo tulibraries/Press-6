@@ -8,7 +8,6 @@ workflows:
       - trivy_scan
 
 orbs:
-  ruby: circleci/ruby@1.0
   coveralls: coveralls/coveralls@1.0.6
 
 jobs:
@@ -79,8 +78,7 @@ jobs:
           command: |
               docker-compose -p press_6 -f docker-compose.ci.yml exec test_app bundle exec rake spec
 
-      - coveralls/upload: 
-            path_to_lcov: /app/coverage/lcov/press_6.lcov
+      - coveralls/upload:
 
   trivy_scan:
     docker:
