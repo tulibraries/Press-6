@@ -22,6 +22,7 @@ gem "listen", "~> 3.2"
 gem "administrate-field-ordered_has_many"
 gem "jquery-rails"
 gem "bootstrap"
+gem "simplecov-lcov"
 
 gem "bootsnap", ">= 1.4.2", require: false
 gem "aws-sdk-s3", require: false
@@ -34,7 +35,7 @@ group :development, :test do
   gem "pry-byebug"
   gem "rspec-activemodel-mocks"
   gem "rspec-rails", "~> 4.0.1"
-  gem "simplecov", require: false
+  gem 'simplecov', require: false
 end
 
 group :development do

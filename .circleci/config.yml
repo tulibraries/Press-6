@@ -7,6 +7,10 @@ workflows:
       - run_tests
       - trivy_scan
 
+orbs:
+  ruby: circleci/ruby@1.0
+  coveralls: coveralls/coveralls@1.0.4
+
 jobs:
   run_tests:
     docker:
@@ -75,6 +79,10 @@ jobs:
           name: Run ruby tests
           command: |
               docker-compose -p press_6 -f docker-compose.ci.yml exec test_app bundle exec rake spec
+
+      - run:
+          name: Upload coverage results to coveralls
+            path_to_lcov: ./coverage/lcov/project.lcov
 
   trivy_scan:
     docker:
