@@ -35,7 +35,6 @@ group :development, :test do
   gem "pry-byebug"
   gem "rspec-activemodel-mocks"
   gem "rspec-rails", "~> 4.0.1"
-  gem 'simplecov', require: false
 end
 
 group :development do
