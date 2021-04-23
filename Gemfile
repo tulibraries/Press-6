@@ -24,8 +24,6 @@ gem "jquery-rails"
 gem "bootstrap"
 gem "bootsnap", ">= 1.4.2", require: false
 gem "aws-sdk-s3", require: false
-gem "simplecov", require: false
-gem "simplecov-lcov"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
@@ -50,6 +48,8 @@ group :test do
   gem "webdrivers"
   gem "factory_bot_rails"
   gem "rails-controller-testing"
+  gem "simplecov", require: false
+  gem "simplecov-lcov"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
