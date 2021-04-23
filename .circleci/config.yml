@@ -9,7 +9,7 @@ workflows:
 
 orbs:
   ruby: circleci/ruby@1.0
-  coveralls: coveralls/coveralls@1.0.4
+  coveralls: coveralls/coveralls@1.0.6
 
 jobs:
   run_tests:
