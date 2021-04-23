@@ -24,8 +24,8 @@ gem "jquery-rails"
 gem "bootstrap"
 gem "bootsnap", ">= 1.4.2", require: false
 gem "aws-sdk-s3", require: false
-  gem "simplecov", require: false
-  gem "simplecov-lcov"
+gem "simplecov", require: false
+gem "simplecov-lcov"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
