@@ -80,9 +80,8 @@ jobs:
           command: |
               docker-compose -p press_6 -f docker-compose.ci.yml exec test_app bundle exec rake spec
 
-      - run:
-          name: Upload coverage results to coveralls
-            path_to_lcov: ./coverage/lcov/project.lcov
+      - coveralls/upload: 
+          path_to_lcov: ./coverage/lcov/project.lcov
 
   trivy_scan:
     docker:
