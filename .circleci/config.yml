@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 workflows:
   version: 2
@@ -7,10 +7,13 @@ workflows:
       - run_tests
       - trivy_scan
 
+orbs:
+  coveralls: coveralls/coveralls@1.0.6
+
 jobs:
   run_tests:
     docker:
-      - image: cimg/base:2020.01
+      - image: cimg/ruby:2.7.3-node
         auth:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
@@ -23,7 +26,6 @@ jobs:
             - gem-cache-v6-{{ arch }}-{{ .Branch }}
             - gem-cache-v6-{{ arch }}
             - yarn-cache-v6-{{ arch }}-{{ .Branch }}-{{ checksum "yarn.lock" }}
-
 
       - setup_remote_docker:
           docker_layer_caching: false
@@ -75,6 +77,11 @@ jobs:
           name: Run ruby tests
           command: |
               docker-compose -p press_6 -f docker-compose.ci.yml exec test_app bundle exec rake spec
+              docker cp press_6_test_app_1:/app/coverage/lcov/app.lcov ./app.lcov
+
+      - coveralls/upload:
+          path_to_lcov: ./app.lcov
+
 
   trivy_scan:
     docker:
