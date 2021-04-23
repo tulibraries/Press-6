@@ -33,7 +33,7 @@ group :development, :test do
   gem "pry-byebug"
   gem "rspec-activemodel-mocks"
   gem "rspec-rails", "~> 4.0.1"
-  gem 'simplecov', require: false
+  gem "simplecov", require: false
   gem "simplecov-lcov"
 end
 
