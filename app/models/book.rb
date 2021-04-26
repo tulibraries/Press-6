@@ -33,7 +33,6 @@ class Book < ApplicationRecord
   end
 
   def subjects_as_tuples
-    # binding.pry
     [JSON.parse(self.subjects, symbolize_keys: true)["subject"]].flatten.map { |h| [h["subject_title"], h["subject_id"]] } if self.subjects.present?
   end
 
