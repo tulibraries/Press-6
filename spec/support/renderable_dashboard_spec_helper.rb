@@ -12,7 +12,12 @@ end
 RSpec.shared_examples "renderable_dashboard" do
   let(:factory_model) { FactoryBot.create(model_name.to_sym) }
   # let(:account) { FactoryBot.create(:account) }
-  let(:index_path) { send("admin_#{model_name.pluralize}_path") }
+  let(:index_path) { send("admin_#{model_name.pluralize}_path") } 
+
+  # Why is series index route "index_series" instead of "series" like the other models?
+  let(:index_path) { send("admin_#{model_name.pluralize}_index_path") } if model_name == "series"
+  # why series
+
   let(:show_path) { send("admin_#{model_name}_path", factory_model) }
   let(:new_path) { send("new_admin_#{model_name}_path") }
   let(:edit_path) { send("edit_admin_#{model_name}_path", factory_model) }

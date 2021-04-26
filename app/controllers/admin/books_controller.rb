@@ -3,7 +3,7 @@
 module Admin
   class BooksController < Admin::ApplicationController
     include Admin::Detachable
-    before_action :set_tabs, only: [:edit]
+    before_action :set_tabs, only: [:edit, :new]
 
     def set_tabs
       @tab_names = I18n.t("tupress.admin.tabs.books")

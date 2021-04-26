@@ -1,12 +1,13 @@
-<%
-  subjects = field.resource.subjects_as_tuples
-%>
+<% subjects = field.resource.subjects_as_tuples %>
+
 <div class="field-unit__label">
   <%= f.label field.attribute, for: "#{f.object_name}_#{field.attribute}" %>
 </div>
 <div class="field-unit__field">
+<% if subjects.present? %>
   <%= select_tag "#{f.object_name}[#{field.attribute}]",
 		  options_for_select(subjects, {selected: field.data.presence}),
 		  include_blank: "(none)"
 		%>
+<% end %>
 </div>

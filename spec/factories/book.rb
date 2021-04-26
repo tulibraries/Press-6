@@ -10,14 +10,13 @@ FactoryBot.define do
     hot { false }
     # hotweight sequence(:hotweight) { |n| "#{n}" }
     course_adoption { false }
-    subjects { ["Art", "History", "Literature"] }
-    subject1 { "" }
-    award { "" }
-    award_year { "" }
+    subjects { '{ "subject":{ "subject_id":1, "subject_title":"foo" } }' }
+    subject1 { "foo" }
+    award { "Double digits award" }
+    award_year { "2020" }
     status { ["In Print", "NP", "OS", "X", "..."] }
     catalog_id { "1324" }
-    bindings { "{\"binding\":[{\"format\":\"PB\",\"price\":\"$31.95\",\"ean\":\"978-1-59213-386-4\",\"binding_status\":\"IP\",\"pub_date_for_format\":\"Jun 06\"}]}" }
-
+    bindings { '{"binding":[{"format":"PB","price":"$31.95","ean":"978-1-59213-386-4","binding_status":"IP","pub_date_for_format":"Jun 06"}]}' }
 
     # trait :as_suggested_reading do
     #   after :create do |book|

@@ -16,7 +16,6 @@ class BookDashboard < Administrate::BaseDashboard
     subtitle: Field::String,
     sort_title: Field::String,
     isbn: Field::String,
-    about_author: Field::Text,
     intro: Field::Text,
     blurb: Field::Text,
     excerpt_text: Field::String,
