@@ -16,6 +16,12 @@ RSpec.describe Book, type: :model do
     expect(book.bindings_as_tuples).to eq [{ format: "PB", price: "$31.95", ean: "978-1-59213-386-4", status: "IP", pub_date: "Jun 06" }]
   end
 
+  it "can add sort title to book before save" do
+    book = described_class.new
+    book.assign_attributes(title: "The Way to Nirvana")
+    expect(book.sort_titles).to eq "Way to Nirvana, The"
+  end
+
 
   context "Required Fields" do
     required_fields = [
