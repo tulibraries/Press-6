@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe SpecialOffer, type: :model do
+RSpec.describe Subject, type: :model do
   
   it_behaves_like "detachable"
 

@@ -22,9 +22,12 @@ RSpec.describe Book, type: :model do
     expect(book.sort_titles).to eq "Way to Nirvana, The"
   end
 
+  it_behaves_like "detachable"
 
   context "Required Fields" do
     required_fields = [
+      "title",
+      "xml_id",
       "author_byline",
       "status"
     ]

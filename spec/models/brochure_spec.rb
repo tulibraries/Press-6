@@ -17,4 +17,6 @@ RSpec.describe Brochure, type: :model do
     end
   end
   it_behaves_like "imageable"
+  it_behaves_like "detachable"
+
 end

@@ -10,6 +10,10 @@ RSpec.describe SyncService::Books, type: :service do
   end
 
   context "valid books" do
+    it "runs the sync" do
+      expect(@books).to be
+    end
+
     it "extracts the book hash" do
       expect(@books.first["record"]["title"]).to match(/^Vehicles of Decolonization/)
     end
