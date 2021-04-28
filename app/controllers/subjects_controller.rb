@@ -9,11 +9,6 @@ class SubjectsController < ApplicationController
 
   def show
   end
-
-  def new
-    @subject = Subject.new
-  end
-
   
   private
     def set_subject
