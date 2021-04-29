@@ -1,6 +1,37 @@
 {
   "ignored_warnings": [
     {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "4900e90799836afa282472e79a0a29eb5fab2ea2fe3be7c398baf907576e0b23",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/books/show.html.erb",
+      "line": 95,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "fix_invalid_html(Book.find_by(:xml_id => params[:id]).description)",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "BooksController",
+          "method": "show",
+          "line": 14,
+          "file": "app/controllers/books_controller.rb",
+          "rendered": {
+            "name": "books/show",
+            "file": "app/views/books/show.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "books/show"
+      },
+      "user_input": "Book.find_by(:xml_id => params[:id]).description",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
       "warning_type": "Remote Code Execution",
       "warning_code": 24,
       "fingerprint": "8d2501ea41801dd441c1ea7b3044ace44aa18f470e19149d4775314d85c2a7e0",
@@ -19,8 +50,101 @@
       "user_input": "params[:controller].split(\"/\").last.classify",
       "confidence": "High",
       "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "9f5ca488755ab0c58a7c03f6d18a9270d06222b4bc72bb4c50c1db99e0b29dc8",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/books/show.html.erb",
+      "line": 121,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "fix_invalid_html(Series.find_by(:code => Book.find_by(:xml_id => params[:id]).series_id).description)",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "BooksController",
+          "method": "show",
+          "line": 14,
+          "file": "app/controllers/books_controller.rb",
+          "rendered": {
+            "name": "books/show",
+            "file": "app/views/books/show.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "books/show"
+      },
+      "user_input": "Series.find_by(:code => Book.find_by(:xml_id => params[:id]).series_id).description",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "d4f29a8f43b027038e3e1613f4c118e73ecd41701d33d3b6d41b492e980db7eb",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/books/show.html.erb",
+      "line": 105,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "fix_invalid_html(Review.new.review)",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "BooksController",
+          "method": "show",
+          "line": 14,
+          "file": "app/controllers/books_controller.rb",
+          "rendered": {
+            "name": "books/show",
+            "file": "app/views/books/show.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "books/show"
+      },
+      "user_input": "Review.new.review",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "fd74bb9a2ee0003f792cbb203040632cadf18e2a547c0735def795241e1e2ba7",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/books/show.html.erb",
+      "line": 114,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "fix_invalid_html(Book.find_by(:xml_id => params[:id]).about_author)",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "BooksController",
+          "method": "show",
+          "line": 14,
+          "file": "app/controllers/books_controller.rb",
+          "rendered": {
+            "name": "books/show",
+            "file": "app/views/books/show.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "books/show"
+      },
+      "user_input": "Book.find_by(:xml_id => params[:id]).about_author",
+      "confidence": "Weak",
+      "note": ""
     }
   ],
-  "updated": "2021-01-29 11:56:57 -0500",
+  "updated": "2021-04-29 15:26:51 -0400",
   "brakeman_version": "5.0.0"
 }
