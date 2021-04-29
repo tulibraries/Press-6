@@ -6,7 +6,7 @@ module Imageable
 
   def index_image(image_field)
     custom_image(image_field, 220, 320)
-  end 
+  end
 
   def show_image(image_field)
     custom_image(image_field, 270, 420)
@@ -17,10 +17,10 @@ module Imageable
       self.send(image_field.to_sym).variant(image_variation(image_field, width, height)).processed
     else
       image
-    end if image_field.present? 
+    end if image_field.present?
   end
 
   def image_variation(image_field, width, height)
-    ActiveStorage::Variation.new(Uploads.resize_to_fill(width: width, height: height, blob: self.send(image_field.to_sym).blob)) if image_field.present? 
+    ActiveStorage::Variation.new(Uploads.resize_to_fill(width: width, height: height, blob: self.send(image_field.to_sym).blob)) if image_field.present?
   end
 end

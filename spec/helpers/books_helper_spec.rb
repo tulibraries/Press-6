@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe BooksHelper, type: :helper do
 
-  let(:formats) { [{"PB" => "Paperback"}, {"HC" => "Hard Cover"}, {"Ebook" => "eBook"}] }
+  let(:formats) { [{ "PB" => "Paperback" }, { "HC" => "Hard Cover" }, { "Ebook" => "eBook" }] }
 
   describe BooksHelper do
     describe "format lookup" do

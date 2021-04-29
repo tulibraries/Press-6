@@ -9,7 +9,7 @@ class SubjectsController < ApplicationController
 
   def show
   end
-  
+
   private
     def set_subject
       @subject = Subject.find(params[:id])

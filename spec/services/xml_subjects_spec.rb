@@ -30,7 +30,7 @@ RSpec.describe SyncService::Subjects, type: :service do
       end
     end
 
-    context "write subjects to subject table" do 
+    context "write subjects to subject table" do
       before(:each) do
         @subject_harvest.sync
         sleep 2
@@ -39,11 +39,11 @@ RSpec.describe SyncService::Subjects, type: :service do
       let (:subject1) {
         Subject.find_by(code: "1045")
       }
-  
+
       let (:subject2) {
         Subject.find_by(code: "1058")
       }
-  
+
       it "syncs subjects to the table" do
         expect(subject1).to be
         expect(subject2).to be

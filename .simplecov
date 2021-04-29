@@ -1,8 +1,10 @@
-require 'simplecov-lcov'
+# frozen_string_literal: true
+
+require "simplecov-lcov"
 
 SimpleCov::Formatter::LcovFormatter.config do |c|
   c.report_with_single_file = true
-  c.single_report_path = 'coverage/lcov.info'
+  c.single_report_path = "coverage/lcov.info"
 end
 SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
   [
@@ -10,6 +12,6 @@ SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
     SimpleCov::Formatter::LcovFormatter,
   ]
 )
-SimpleCov.start('rails') do
-  add_filter 'app/channels'
+SimpleCov.start("rails") do
+  add_filter "app/channels"
 end

@@ -42,12 +42,12 @@ RSpec.shared_examples "imageable" do
         expect(factory_model.show_image("image")).not_to raise_error if ["Brochure", "Series"].include?(model.to_s)
         expect(factory_model.show_image("cover_image")).not_to raise_error if ["Book"].include?(model.to_s)
       end
-    end 
+    end
 
     context "when custom_image is called" do
       it "the custom blob variant is returned" do
         expect(factory_model.custom_image("image", 270, 320)).not_to raise_error
       end
-    end 
+    end
   end
 end

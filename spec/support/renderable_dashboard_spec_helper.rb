@@ -12,7 +12,7 @@ end
 RSpec.shared_examples "renderable_dashboard" do
   let(:factory_model) { FactoryBot.create(model_name.to_sym) }
   # let(:account) { FactoryBot.create(:account) }
-  let(:index_path) { send("admin_#{model_name.pluralize}_path") } 
+  let(:index_path) { send("admin_#{model_name.pluralize}_path") }
 
   # Why is series index route "index_series" instead of "series" like the other models?
   let(:index_path) { send("admin_#{model_name.pluralize}_index_path") } if model_name == "series"
@@ -57,5 +57,5 @@ RSpec.shared_examples "renderable_dashboard" do
       get new_path
       expect(response).to have_http_status(200)
     end
-  end  
+  end
 end
