@@ -23,6 +23,7 @@ RSpec.describe Book, type: :model do
   end
 
   it_behaves_like "detachable"
+  it_behaves_like "attachable"
 
   context "Required Fields" do
     required_fields = [
