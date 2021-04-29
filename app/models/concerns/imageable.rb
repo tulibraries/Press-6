@@ -4,28 +4,23 @@ module Imageable
   extend ActiveSupport::Concern
   require Rails.root.join("lib/uploads.rb")
 
-  def index_image
-    custom_image(220, 320)
+  def index_image(image_field)
+    custom_image(image_field, 220, 320)
+  end 
+
+  def show_image(image_field)
+    custom_image(image_field, 270, 420)
   end
 
-  def thumb_image
-    custom_image(120, 120)
-  end
-
-  def show_image
-    custom_image(270, 420)
-  end
-
-  def custom_image(width, height)
-    if ((cover_image.blob.metadata[:width] != width) ||
-        (cover_image.blob.metadata[:height] != height))
-      cover_image.variant(image_variation(width, height)).processed
+  def custom_image(image_field, width, height)
+    if ((self.send(image_field.to_sym).blob.metadata[:width] != width) || (self.send(image_field.to_sym).attachment.blob.metadata[:height] != height))
+      self.send(image_field.to_sym).variant(image_variation(image_field, width, height)).processed
     else
       image
-    end
+    end if image_field.present? 
   end
 
-  def image_variation(width, height)
-    ActiveStorage::Variation.new(Uploads.resize_to_fill(width: width, height: height, blob: cover_image.blob))
+  def image_variation(image_field, width, height)
+    ActiveStorage::Variation.new(Uploads.resize_to_fill(width: width, height: height, blob: self.send(image_field.to_sym).blob)) if image_field.present? 
   end
 end
