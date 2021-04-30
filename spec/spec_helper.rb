@@ -12,6 +12,7 @@ SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
 
 SimpleCov.start("rails") do
   add_filter "app/channels"
+  add_filter "app/fields"
 end
 
 

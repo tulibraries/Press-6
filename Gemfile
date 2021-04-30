@@ -24,6 +24,7 @@ gem "jquery-rails"
 gem "bootstrap"
 gem "bootsnap", ">= 1.4.2", require: false
 gem "aws-sdk-s3", require: false
+gem "active_storage_validations"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
