@@ -8,7 +8,12 @@ SimpleCov::Formatter::LcovFormatter.config do |c|
   c.single_report_path = "coverage/lcov/app.lcov"
 end
 
-SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
+SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
+  [
+    SimpleCov::Formatter::HTMLFormatter,
+    SimpleCov::Formatter::LcovFormatter,
+  ]
+)
 
 SimpleCov.start("rails") do
   add_filter "app/channels"

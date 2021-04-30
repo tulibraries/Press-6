@@ -19,6 +19,7 @@ RSpec.describe Book, type: :model do
   it "can add sort title to book before save" do
     book = described_class.new
     book.assign_attributes(title: "The Way to Nirvana")
+
     expect(book.sort_titles).to eq "Way to Nirvana, The"
   end
 
