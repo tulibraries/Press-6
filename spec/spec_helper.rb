@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_storage_validations/matchers'
-
 require "simplecov"
 require "simplecov-lcov"
 
