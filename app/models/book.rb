@@ -4,6 +4,8 @@ class Book < ApplicationRecord
   include Imageable
   before_save :sort_titles
 
+  validates :title, :xml_id, :author_byline, :status, presence: true
+
   has_rich_text :news_text
   has_rich_text :news_text
 

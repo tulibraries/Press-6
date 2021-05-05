@@ -8,14 +8,5 @@ FactoryBot.define do
     editors { "NBC" }
     description { "World" }
     founder { "Washington" }
-
-    # trait :with_image do
-    #   after :create do |series|
-    #     series.image.attach(io:
-    #       File.open(Rails.root.join("spec/fixtures/charles.jpg")),
-    #       filename: "charles.jpg",
-    #       content_type: "image/jpeg")
-    #   end
-    # end
   end
 end

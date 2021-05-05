@@ -113,9 +113,14 @@ RSpec.describe SyncService::Books, type: :service do
       Book.find_by(title: "Inspired Citizenship")
     }
 
+    let(:notitle) {
+      Book.find_by(xml_id: "20000000010598")
+    }
+
     it "syncs books to the table" do
       expect(book1).to be
       expect(book2).to be
+      expect(notitle).not_to be
     end
 
   end

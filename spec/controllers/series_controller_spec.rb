@@ -7,7 +7,7 @@ RSpec.describe SeriesController, type: :controller do
   let(:series) { FactoryBot.create(:series) }
 
   describe "GET #index" do
-    it "returns json when requested" do
+    it "returns html when requested" do
       get :index, format: :html
       expect(response.header["Content-Type"]).to include "html"
     end

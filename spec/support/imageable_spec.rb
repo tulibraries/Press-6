@@ -14,10 +14,21 @@ RSpec.shared_examples "imageable" do
       factory_model.image.attach(file) if ["Brochure", "Series"].include?(model.to_s)
       factory_model.cover_image.attach(file) if ["Book"].include?(model.to_s)
     }
+    let(:bigattachment) {
+      file_path = Rails.root.join("spec/fixtures/orecchiette.jpg")
+      file = Rack::Test::UploadedFile.new(file_path, "image/jpeg")
+      factory_model.image.attach(file) if ["Brochure", "Series"].include?(model.to_s)
+      factory_model.cover_image.attach(file) if ["Book"].include?(model.to_s)
+    }
 
     def attachment_field(model)
       factory_model.image.attachment if ["Brochure", "Series"].include?(model.to_s)
       factory_model.cover_image.attachment if ["Book"].include?(model.to_s)
+    end
+
+    def large_attachment_field(model)
+      factory_model.image.bigattachment if ["Brochure", "Series"].include?(model.to_s)
+      factory_model.cover_image.bigattachment if ["Book"].include?(model.to_s)
     end
 
     it "has an image attachment" do
@@ -28,6 +39,10 @@ RSpec.shared_examples "imageable" do
       it "the attachment returns nil when not assigned" do
         expect(attachment_field(model)).to be_nil
       end
+    end
+
+    it "has an over-sized image attachment" do
+      expect { large_attachment_field(model) }.to raise_error
     end
 
     context "when index_image is called" do

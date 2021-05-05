@@ -39,7 +39,7 @@ class SyncService::Books
 
   def record_hash(record)
     {
-      "xml_id" => record.dig("record", "book_id"),
+      "xml_id"              => record.dig("record", "book_id"),
       "title"               => record.dig("record", "title"),
       "subtitle"            => record.dig("record", "subtitle"),
       "cover"               => record.dig("record", "cover_image").sub("http://www.temple.edu/tempress/titles/", ""),
