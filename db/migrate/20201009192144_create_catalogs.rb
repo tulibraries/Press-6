@@ -7,6 +7,7 @@ class CreateCatalogs < ActiveRecord::Migration[6.0]
       t.string :code
       t.string :season
       t.string :year
+      t.boolean :suppress
 
       t.timestamps
     end

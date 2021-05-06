@@ -35,6 +35,7 @@ class SpecialOfferDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     title
     pdf_display_name
+    pdf
     active
   ].freeze
 

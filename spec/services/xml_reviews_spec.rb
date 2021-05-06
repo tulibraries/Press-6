@@ -11,6 +11,14 @@ RSpec.describe SyncService::Reviews, type: :service do
   end
 
   context "valid review" do
+    it "runs the sync" do
+      expect(@reviews).to be
+    end
+
+    it "extracts the reviews hash" do
+      expect(@reviews.second["reviews"]).to be_nil
+    end
+
     it "extracts the reviews hash" do
       expect(@reviews.last["record"]["reviews"]["review"].first["review_id"]).to match("145014")
     end

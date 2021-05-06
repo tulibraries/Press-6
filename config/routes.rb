@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+
+  concern :imageable do
+    get "image/thumbnail", to: "images#thumbnail_image"
+    get "image/medium",    to: "images#medium_image"
+    get "image/large",     to: "images#large_image"
+  end
+
   namespace :admin do
     resources :agencies
     resources :books
@@ -27,13 +34,14 @@ Rails.application.routes.draw do
     root to: "books#index"
   end
 
-  resources :books
-  resources :series
-  resources :subjects
+  resources :books, concerns: [:imageable]
+  resources :series, concerns: [:imageable]
+  resources :subjects, concerns: [:imageable]
   resources :catalogs
   resources :agencies
   resources :webpages
-  resources :special_offers
+  resources :brochures, only: [:show], concerns: [:imageable]
+  resources :special_offers, concerns: [:imageable]
 
   root to: "webpages#index"
 

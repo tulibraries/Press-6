@@ -11,26 +11,27 @@ class BookDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    book_id: Field::String,
+    xml_id: Field::String,
     title: Field::String,
     subtitle: Field::String,
     sort_title: Field::String,
     isbn: Field::String,
-    about_author: Field::Text,
     intro: Field::Text,
     blurb: Field::Text,
-    excerpt_image: ImageField,
-    excerpt_text: TrixField,
+    excerpt_text: Field::String,
+    excerpt: FileField,
+    toc_file: FileField,
+    toc_label: Field::String,
     binding: Field::Text,
     description: Field::Text,
     contents: Field::Text,
     author_byline: Field::String,
-    author_bios: Field::Text,
-    guide_image: ImageField,
+    about_author: Field::Text,
     guide_file: FileField,
     guide_file_label: Field::String,
     guide_text: TrixField,
     cover_image: ImageField,
+    cover: Field::String,
     format: Field::String,
     ean: Field::String,
     pub_date: Field::String,
@@ -40,7 +41,7 @@ class BookDashboard < Administrate::BaseDashboard
     status: Field::Select.with_options(
       collection: ["In Print", "NP", "OS", "X", "..."]
     ),
-    books: Field::HasMany.with_options(order: "title"),
+    books: Field::HasMany.with_options(order: "sort_title"),
     news: Field::Boolean,
     news_text: TrixField,
     newsweight: Field::Select.with_options(
@@ -55,6 +56,7 @@ class BookDashboard < Administrate::BaseDashboard
     suggested_reading_image: ImageField,
     suggested_reading_label: Field::String,
     course_adoption: Field::Boolean,
+    desk_copy: Field::Boolean,
 
     series: Field::BelongsTo.with_options(order: "title"),
     catalog: Field::BelongsTo.with_options(order: "title"),
@@ -97,7 +99,6 @@ class BookDashboard < Administrate::BaseDashboard
     ean
     catalog
     series
-    books
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -105,13 +106,16 @@ class BookDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     cover_image
+    cover
     sort_title
-    author_byline
     edition
     status
-    excerpt_image
+    excerpt
     excerpt_text
+    toc_file
+    toc_label
     supplement
+    desk_copy
     subject1
     subject2
     subject3
@@ -122,8 +126,6 @@ class BookDashboard < Administrate::BaseDashboard
     award_year2
     award3
     award_year3
-    guide_image
-    guide_text
     guide_file
     guide_file_label
     hot

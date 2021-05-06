@@ -1,31 +1,43 @@
 # frozen_string_literal: true
 
-require "spec_helper"
+require "rails_helper"
 
-RSpec.shared_examples "detachable" do
+RSpec.shared_examples "detachable", type: :request do
 
-  describe "GET /admin/#{described_class}/:id/detach" do
-    let(:model) { described_class } # the class that includes the concern
-    let(:factory_model) { FactoryBot.create(model.to_s.underscore.to_sym) }
+  describe "GET /admin/#{described_class.to_s.underscore.pluralize}/:id/detach" do
+
+    let(:factory_model) { FactoryBot.create(described_class.to_s.underscore.to_sym) }
 
     before(:each) {
-      file_path = Rails.root.join("spec/fixtures/charles.jpg")
-      file = Rack::Test::UploadedFile.new(file_path, "image/jpg")
-      factory_model.image.attach(file)
+      image_file_path = Rails.root.join("spec/fixtures/charles.jpg")
+      image = Rack::Test::UploadedFile.new(image_file_path, "image/jpg")
+      pdf_file_path = Rails.root.join("spec/fixtures/guidelines.pdf")
+      pdf = Rack::Test::UploadedFile.new(pdf_file_path, "application/pdf")
+      factory_model.image.attach(image) if ["Brochure", "Series"].include?(described_class.to_s)
+      factory_model.pdf.attach(pdf) if ["SpecialOffer", "Subject"].include?(described_class.to_s)
+      factory_model.cover_image.attach(image) if ["Book"].include?(described_class.to_s)
     }
 
-    it "detaches image from #{described_class}" do
-      login_as(FactoryBot.create(:administrator), scope: :account)
-      show_page = ["/admin", described_class.to_s.pluralize.downcase, factory_model.id].join("/")
+    it "detaches file from #{described_class.to_s.underscore.pluralize}" do
+      # login_as(FactoryBot.create(:administrator), scope: :account)
+
+      show_page = ["/admin", described_class.to_s.pluralize.underscore, factory_model.id].join("/")
       get show_page
       expect(response).to render_template(:show)
-      expect(response.body).to include("charles.jpg")
 
-      get "#{show_page}/detach"
+      expect(response.body).to include("charles.jpg") if ["Book", "Brochure", "Series"].include?(described_class.to_s)
+      expect(response.body).to include("guidelines.pdf") if ["SpecialOffer", "Subject"].include?(described_class.to_s)
+
+      get "#{show_page}/detach?field=image" if ["Brochure", "Series"].include?(described_class.to_s)
+      get "#{show_page}/detach?field=pdf" if ["SpecialOffer", "Subject"].include?(described_class.to_s)
+      get "#{show_page}/detach?field=cover_image" if ["Book"].include?(described_class.to_s)
+
       follow_redirect!
 
       expect(response).to render_template(:show)
-      expect(response.body).to_not include("charles.jpg")
+
+      expect(response.body).to_not include("charles.jpg") if ["Book", "Brochure", "Series"].include?(described_class.to_s)
+      expect(response.body).to_not include("guidelines.pdf") if ["SpecialOffer", "Subject"].include?(described_class.to_s)
     end
   end
 end

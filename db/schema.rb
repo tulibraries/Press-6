@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_02_180325) do
+ActiveRecord::Schema.define(version: 2021_04_19_174105) do
 
   create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2021_03_02_180325) do
   end
 
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "book_id"
+    t.string "xml_id"
     t.string "title"
     t.string "sort_title"
     t.string "subtitle"
@@ -70,12 +70,11 @@ ActiveRecord::Schema.define(version: 2021_03_02_180325) do
     t.text "intro"
     t.text "blurb"
     t.text "excerpt_text"
-    t.text "binding"
+    t.text "bindings"
     t.text "description"
     t.text "contents"
     t.text "author_byline"
     t.text "author_bios"
-    t.string "cover_image"
     t.string "format"
     t.string "isbn"
     t.string "ean"
@@ -119,6 +118,10 @@ ActiveRecord::Schema.define(version: 2021_03_02_180325) do
     t.string "suggested_reading_label"
     t.bigint "special_offer_id"
     t.string "guide_file_label"
+    t.string "cover"
+    t.text "book_id"
+    t.string "toc_label"
+    t.boolean "desk_copy"
     t.index ["catalog_id"], name: "index_books_on_catalog_id"
     t.index ["promotion_id"], name: "index_books_on_promotion_id"
     t.index ["series_id"], name: "index_books_on_series_id"

@@ -1,3 +1,61 @@
 @import "partials/_vars.scss";
 
 .red { color: $red;}
+
+.share-label {
+	font-weight:600;
+	font-size:1.1rem;
+}
+
+.section-label {
+	font-size: 1rem;
+	font-weight: 600;
+	margin-top: 10px;
+	display: inline-block;
+}
+
+.order-button {
+	color: $white!important;
+	background-color: $red;
+	padding: 5px 14px;
+	text-align: center;
+	display: inline-block;
+	margin-bottom: 14px;
+	text-decoration: none!important;
+	font-size: 1.3rem;
+}
+
+.book-details {
+	background-color: $white;
+	line-height: 1.75rem;
+	padding: 28px;
+}
+
+.social-icon {
+	width: 29px;
+	filter: grayscale(100%);
+}
+
+.book-formats, .book-subjects, .book-preview {
+	.list-unstyled {
+		font-size: .9rem;
+	}
+}
+
+.reviews, .author-bio, .series, .see-also {
+	background-color: $white;
+}
+
+.see-also {
+	a {
+		text-decoration: none!important;
+		display: block;
+		margin: auto;
+	}
+}
+
+.awards {
+	li {
+		color: $award;
+	}
+}

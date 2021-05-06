@@ -1,8 +1,147 @@
-<p id="notice"><%= notice %></p>
+<div class="container books-show">
+  <div class="row">
+    <div class="col col-3 book-cover text-center mt-5 pt-3">
+    <%= link_to action: "edit", controller: "admin/books", id: @book.id do %>
+      <%= image_tag @book.show_image("cover_image") if @book.cover_image.attachment.present? %>
+    <% end %>
+      <div class="social-share text-right p-4">
+        <span class="share-label">Share</span>
+        <%= link_to image_pack_tag('twitter-icon.png', class: 'social-icon', alt: 'Twitter Icon'), 'http://twitter.com/TempleUnivPress' %>
+        <%= link_to image_pack_tag('fb-icon.png', class: 'social-icon', alt: 'Facebook Icon'), 'http://facebook.com/TempleUnivPress' %>
+      </div>
+      <div class="book-details text-left">
+        <ul class="list-unstyled">
+          <li><%= @book.pages_total %> pages</li>
+          <li><%= @book.trim %></li>
+          <li><%= @book.illustrations %></li>
+        </ul>
 
-<p>
-  <strong>Title:</strong>
-  <%= @book.title %>
-</p>
+        <%= link_to "ORDER", "https://cdcshoppingcart.uchicago.edu/Cart2/ChicagoBook.aspx?ISBN=#{@book.isbn}&&PRESS=temple", 
+                              class: "order-button" if @book.isbn.present? %>
 
-<%= link_to 'Back', books_path %>
+        <div class="book-formats">
+          <ul class="list-unstyled">
+          <% @book.bindings_as_tuples.each do |b| %>          
+            <li class="section-label">
+              <%= book_format(b[:format]) %>
+            </li>
+            <li>Price: <%= b[:price] %></li>
+            <li>EAN: <%= b[:ean] %></li>
+            <li>Publication: <%= b[:pub_date] %></li>
+          <% end %>
+          </ul>
+        </div>
+
+        <hr />
+
+        <% if @book.subjects.present? %>
+        <div class="book-subjects mt-4">
+          <span class="section-label">
+            Subjects
+          </span>
+          <ul class="list-unstyled">
+          <% @book.subjects_as_tuples.each do |subject| %>
+            <li><%= link_to subject[0], subject_path(subject[1]) unless subject[0].nil? %></li>
+          <% end %>
+          </ul>
+        </div>
+        <% end %>
+
+        <% if @book.excerpt_text.present? || @book.toc_label.present? %>
+        <div class="book-preview mt-4">
+          <span class="section-label">
+            Preview
+          </span>
+          <ul class="list-unstyled">
+            <li><%= link_to @book.excerpt_text, url_for(@book.excerpt.attachment), disposition: "attachment" if @book.excerpt.attached? %></li>
+            <li><%= link_to @book.toc_label, url_for(@book.toc_file.attachment), disposition: "attachment" if @book.toc_file.attached? %></li>
+          </ul>
+        </div>
+        <% end %>
+
+        <% if @book.desk_copy %>
+        <div class="book-desk-copy mt-5">
+          <ul class="list-unstyled mt-5">
+            <li><%= link_to "Request Desk/Exam Copy", "#"%></li> 
+          </ul>
+        </div>
+        <% end %>
+
+      </div>
+    </div>
+    <div class="col col-9 book-info">
+      <div class="description mt-5 p-3">
+        <h1><%= strip_tags @book.title %></h1>
+
+        <p class="subtitle lead">
+        <% if @book.subtitle.present? %>
+        <em><%= @book.subtitle  %></em><br />
+        <% end %>
+
+        <%= @book.author_byline %></p>
+
+        <% if @awards.present? %>
+        <div class="awards mt-4">
+        <% @awards.each do |award| %>
+        <ul class="list-unstyled">
+          <li><%= award if award.present? %></li>
+        </ul>
+        <% end %>
+        </div>
+        <% end %>
+        
+        <% if @book.description.present? %>
+        <div class="description mt-4">
+          <%= fix_invalid_html(@book.description).html_safe %>
+        </div>
+        <% end %>
+      </div>
+      
+      <% if @reviews.present? %>
+      <div class="reviews mt-3 p-3">
+        <h2>Reviews</h2>
+        <% @reviews.each do |review| %>
+          <div class="review mb-3">
+            <%= fix_invalid_html(review.review).html_safe %>
+          </div>
+        <% end %>
+      </div>
+      <% end %>
+
+      <% if @book.about_author.present? %>
+      <div class="author-bio mt-3 p-3">
+        <h2>About the Author(s)</h2>
+          <%= fix_invalid_html(@book.about_author).html_safe %>
+      </div>
+      <% end %>
+      <% if @series.present? %>
+      <div class="series mt-3 p-3">
+        <h2 class="mb-3">In the Series</h2>
+          <p><%= link_to @series.title, @series, style: "font-size:larger;" %></p>
+          <p><%= fix_invalid_html(@series.description).html_safe %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+<% if @book.books.present? %>
+  <div class="container mt-5 p-4 see-also">
+    <div class="row mb-3">
+        <div class="col-12">
+          <h2>Also of Interest</h2>
+        </div>
+    </div>
+    <div class="row">
+    <% @book.books.take(4).each do |book| %>
+      <div class="col col-3 text-center">
+      <%= link_to book_path(book.xml_id) do %>
+        <%= image_tag book.index_image if book.cover_image.attachment.present? %>
+        <p class="pt-2 mb-0"><%= strip_tags book.title %></p>
+      <% end %>
+        <%= book.author_byline %>
+      </div>
+    <% end %>
+    </div>
+  </div>
+  <% end %>
+</div>

@@ -53,7 +53,7 @@
                 method: :get} %>
 
             <div class="dropdown-menu p-2" x-placement="bottom-start">
-              <% get_journals.each do |i| %>
+              <% @journals.each do |i| %>
                 <li><%= link_to i.title, i.url, :class=>"dropdown-item" if i.url.present? %></li>
               <% end %>
             </div>

@@ -39,9 +39,10 @@ class SyncService::Books
 
   def record_hash(record)
     {
-      "book_id"             => record["record"].fetch("book_id", nil),
-      "title"               => record["record"].fetch("title", nil),
-      "subtitle"            => record["record"].fetch("subtitle", nil),
+      "xml_id"              => record.dig("record", "book_id"),
+      "title"               => record.dig("record", "title"),
+      "subtitle"            => record.dig("record", "subtitle"),
+      "cover"               => record.dig("record", "cover_image").sub("http://www.temple.edu/tempress/titles/", ""),
       "author_ids"          => record["record"].fetch("authors")["author"].map do |p|
                                   p.size == 5 ? p["author_id"] : p[1]
                                 end,
@@ -57,30 +58,30 @@ class SyncService::Books
       "author_suffixes"     => record["record"].fetch("authors")["author"].map do |p|
                                   p.size == 5 ? p["author_suffix"] : p[1]
                                 end,
-      "author_byline"       => record["record"].fetch("author_byline", nil),
-      "about_author"        => record["record"].fetch("author_bios", nil),
-      "intro"               => record["record"].fetch("intro", nil),
-      "blurb"               => record["record"].fetch("blurb", nil),
-      "status"              => record["record"].fetch("status", nil),
-      "pages_total"         => record["record"].fetch("format/pages_total", nil),
-      "trim"                => record["record"].fetch("format/trim", nil),
-      "illustrations"       => record["record"].fetch("format/illustrations_copy", nil),
-      "isbn"                => record["record"].fetch("isbn", nil),
-      "pub_date"            => record["record"].fetch("pub_date", nil),
-      "series_id"           => record["record"].fetch("series/series_id", nil),
-      "binding"             => record["record"].fetch("bindings", nil),
-      "description"         => record["record"].fetch("description", nil),
+      "author_byline"       => record.dig("record", "author_byline"),
+      "about_author"        => record.dig("record", "author_bios"),
+      "intro"               => record.dig("record", "intro"),
+      "blurb"               => record.dig("record", "blurb"),
+      "status"              => record.dig("record", "status"),
+      "pages_total"         => record.dig("record", "format", "pages_total"),
+      "trim"                => record.dig("record", "format", "trim"),
+      "illustrations"       => record.dig("record", "format", "illustrations_copy"),
+      "isbn"                => record.dig("record", "isbn"),
+      "pub_date"            => record.dig("record", "pub_date"),
+      "series_id"           => record.dig("record", "series", "series_id"),
+      "bindings"            => JSON.dump(record.dig("record", "bindings")),
+      "description"         => record.dig("record", "description"),
       "subjects"            => JSON.dump(record["record"].fetch("subjects", { "subject" => { "subject_id" => nil, "subject_title" => nil } })),
-      "contents"            => record["record"].fetch("contents", nil),
-      "catalog_id"          => record["record"].fetch("catalog", nil)
+      "contents"            => record.dig("record", "contents"),
+      "catalog_id"          => record.dig("record", "catalog")
     }
   end
 
   def create_or_update_if_needed!(record_hash)
-    book = Book.find_by(book_id: record_hash["book_id"])
+    book = Book.find_by(xml_id: record_hash["xml_id"])
     if book
       stdout_and_log(
-        %Q(Incoming book with title #{record_hash["title"]} matched to existing book (book_id = #{book.book_id} ) with title #{book.title}), level: :debug
+        %Q(Incoming book with title #{record_hash["title"]} matched to existing book (xml_id = #{book.xml_id} ) with title #{book.title}), level: :debug
       )
     else
       book = Book.new
@@ -97,7 +98,7 @@ class SyncService::Books
         @updated += 1
       end
     else
-      stdout_and_log(%Q(Record with blank title not saved for #{record_hash["book_id"]}))
+      stdout_and_log(%Q(Record with blank title not saved for #{record_hash["xml_id"]}))
       @skipped += 1
     end
   end
