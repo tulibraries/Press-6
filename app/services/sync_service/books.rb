@@ -17,7 +17,7 @@ class SyncService::Books
   end
 
   def sync
-    @updated = @skipped = @errored = 0
+    @updated = @not_saved = @skipped = @errored = 0
     read_books.each do |book|
       begin
         @log.info(%Q(Syncing Book: #{book["title"]}))
@@ -28,7 +28,7 @@ class SyncService::Books
         @errored += 1
       end
     end
-    stdout_and_log("Syncing completed with #{@updated} updated, #{@skipped} skipped, and #{@errored} errored records.")
+    stdout_and_log("Syncing completed with #{@updated} updated, #{@not_saved} not saved, #{@skipped} skipped, and #{@errored} errored records.")
   end
 
   def read_books
@@ -87,7 +87,7 @@ class SyncService::Books
       book = Book.new
     end
 
-    if record_hash["title"].present?
+    if record_hash["title"].present? && record_hash["status"].present? && record_hash["author_byline"].present?
       book.assign_attributes(record_hash)
 
       if book.save!
@@ -95,10 +95,10 @@ class SyncService::Books
         @updated += 1
       else
         stdout_and_log(%Q(Record not saved for #{record_hash["title"]}))
-        @updated += 1
+        @not_saved += 1
       end
     else
-      stdout_and_log(%Q(Record with blank title not saved for #{record_hash["xml_id"]}))
+      stdout_and_log(%Q(Record with blank title, status, or author_byline not saved for #{record_hash["xml_id"]}))
       @skipped += 1
     end
   end
