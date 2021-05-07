@@ -72,8 +72,7 @@ class BookDashboard < Administrate::BaseDashboard
     award2: Field::String,
     award_year3: Field::String,
     award3: Field::String,
-    award_year4: Field::String,
-    award4: Field::String,
+    featured_award_winner: Field::Boolean,
     price: Field::String.with_options(searchable: false),
     created_at: Field::DateTime,
     updated_at: Field::DateTime
@@ -120,6 +119,7 @@ class BookDashboard < Administrate::BaseDashboard
     subject2
     subject3
     catalog
+    featured_award_winner
     award
     award_year
     award2
