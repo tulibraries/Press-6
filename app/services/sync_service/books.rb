@@ -20,7 +20,7 @@ class SyncService::Books
     @updated = @not_saved = @skipped = @errored = 0
     read_books.each do |book|
       begin
-        @log.info(%Q(Syncing Book: #{book["title"]}))
+        # @log.info(%Q(Syncing Book: #{book["title"]}))
         record = record_hash(book)
         create_or_update_if_needed!(record)
       rescue Exception => err
@@ -28,7 +28,7 @@ class SyncService::Books
         @errored += 1
       end
     end
-    stdout_and_log("Syncing completed with #{@updated} updated, #{@not_saved} not saved, #{@skipped} skipped, and #{@errored} errored records.")
+    stdout_and_log("Syncing completed with #{@updated} updated, #{@not_saved} not saved, #{@skipped} bad data, and #{@errored} errored records.")
   end
 
   def read_books
@@ -62,6 +62,7 @@ class SyncService::Books
       "about_author"        => record.dig("record", "author_bios"),
       "intro"               => record.dig("record", "intro"),
       "blurb"               => record.dig("record", "blurb"),
+      "excerpt"             => record.dig("record", "excerpt"),
       "status"              => record.dig("record", "status"),
       "pages_total"         => record.dig("record", "format", "pages_total"),
       "trim"                => record.dig("record", "format", "trim"),
@@ -76,25 +77,21 @@ class SyncService::Books
       "catalog_id"          => record.dig("record", "catalog")
     }
   end
-
+  # .split(/tempress\/ */)[1].split(/\"> */)[0].split(/\/ */)[1]),
   def create_or_update_if_needed!(record_hash)
     book = Book.find_by(xml_id: record_hash["xml_id"])
-    if book
-      stdout_and_log(
-        %Q(Incoming book with title #{record_hash["title"]} matched to existing book (xml_id = #{book.xml_id} ) with title #{book.title}), level: :debug
-      )
-    else
+    unless book
       book = Book.new
     end
 
     if record_hash["title"].present? && record_hash["status"].present? && record_hash["author_byline"].present?
+      
       book.assign_attributes(record_hash)
-
+      
       if book.save!
-        stdout_and_log(%Q(Successfully saved record for #{record_hash["title"]}))
         @updated += 1
       else
-        stdout_and_log(%Q(Record not saved for #{record_hash["title"]}))
+        stdout_and_log(%Q(Record unable to be saved for #{record_hash["title"]}))
         @not_saved += 1
       end
     else

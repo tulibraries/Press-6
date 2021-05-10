@@ -2,9 +2,9 @@
 
 class Book < ApplicationRecord
   include Imageable
-  before_save :sort_titles
+  before_save :sort_titles, :get_excerpt
 
-  validates :title, :xml_id, :author_byline, :status, presence: true
+  # validates :title, :xml_id, :author_byline, :status, presence: true
 
   has_rich_text :news_text
   has_rich_text :news_text
@@ -31,6 +31,13 @@ class Book < ApplicationRecord
       self.sort_title = sort_title + ", " + first
     else
       self.sort_title = self.title
+    end
+  end
+
+  def get_excerpt
+    if self.excerpt.present?
+      self.excerpt.split(/tempress\/ */)[1].split(/\"> */)[0].split(/\/ */)[1]
+      self.excerpt_text = "Read the introduction (pdf)"
     end
   end
 
