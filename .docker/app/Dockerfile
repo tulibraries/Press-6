@@ -18,7 +18,7 @@ RUN apk add -U --no-cache \
       git=2.30.2-r0 \
       build-base=0.5-r2 \
       libxslt-dev=1.1.34-r0 \
-      mariadb-dev=10.5.8-r0 \
+      mariadb-dev=10.5.9-r0 \
       nodejs=14.16.1-r1 \
       yarn=1.22.10-r0 && \
     gem install bundler:2.2.4  && \

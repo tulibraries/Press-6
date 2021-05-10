@@ -19,5 +19,6 @@ FactoryBot.define do
     excerpt { '<p><a href="http://www.temple.edu/tempress/chapters_1400/1799_ch1.pdf">Read Chapter 1 (pdf).</a></p>' }
     excerpt_text { "" }
     excerpt_file_name { "" }
+    featured_award_winner { false }
   end
 end

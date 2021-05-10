@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.7.3"
 
-gem "rails", "~> 6.0.3.5"
+gem "rails", "~> 6.0.3.7"
 gem "mysql2", "~> 0.5.3"
 gem "puma", "~> 4.1"
 gem "webpacker", "~> 5.0"
@@ -14,12 +14,12 @@ gem "jbuilder", "~> 2.7"
 gem "json", ">= 2.3.0"
 gem "image_processing", "~> 1.2"
 gem "mini_magick"
-gem "administrate"
+gem "administrate", ">= 0.16.0"
 gem "administrate-field-scoped_has_many"
+gem "administrate-field-ordered_has_many"
 gem "nokogiri", "1.11.0.rc4"
 gem "pry"
 gem "listen", "~> 3.2"
-gem "administrate-field-ordered_has_many"
 gem "jquery-rails"
 gem "bootstrap"
 gem "bootsnap", ">= 1.4.2", require: false
