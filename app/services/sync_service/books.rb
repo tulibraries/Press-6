@@ -85,9 +85,9 @@ class SyncService::Books
     end
 
     if record_hash["title"].present? && record_hash["status"].present? && record_hash["author_byline"].present?
-      
+
       book.assign_attributes(record_hash)
-      
+
       if book.save!
         @updated += 1
       else

@@ -36,8 +36,8 @@ class Book < ApplicationRecord
 
   def get_excerpt
     if self.excerpt.present?
-      self.excerpt_text = self.excerpt.split(/.pdf\"> */)[1].split(/<\/a> */)[0]
-      self.excerpt_file_name = self.excerpt.split(/tempress\/ */)[1].split(/\"> */)[0].split(/\/ */)[1]
+      self.excerpt_text = self.excerpt.split(/.pdf\"> */)[1].present? ? self.excerpt.split(/.pdf\"> */)[1].split(/<\/a> */)[0] : "Read Chapter 1 (pdf)."
+      self.excerpt_file_name = self.excerpt.split(/tempress\/ */)[1].present? ? self.excerpt.split(/tempress\/ */)[1].split(/\"> */)[0] : nil
     end
   end
 
