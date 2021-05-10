@@ -77,7 +77,7 @@ class SyncService::Books
       "catalog_id"          => record.dig("record", "catalog")
     }
   end
-  # .split(/tempress\/ */)[1].split(/\"> */)[0].split(/\/ */)[1]),
+
   def create_or_update_if_needed!(record_hash)
     book = Book.find_by(xml_id: record_hash["xml_id"])
     unless book

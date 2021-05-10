@@ -16,5 +16,8 @@ FactoryBot.define do
     status { ["In Print", "NP", "OS", "X", "..."] }
     catalog_id { "1324" }
     bindings { '{"binding":[{"format":"PB","price":"$31.95","ean":"978-1-59213-386-4","binding_status":"IP","pub_date_for_format":"Jun 06"}]}' }
+    excerpt { '<p><a href="http://www.temple.edu/tempress/chapters_1400/1799_ch1.pdf">Read Chapter 1 (pdf).</a></p>' }
+    excerpt_text { "" }
+    excerpt_file_name { "" }
   end
 end

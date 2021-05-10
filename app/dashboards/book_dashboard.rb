@@ -19,7 +19,7 @@ class BookDashboard < Administrate::BaseDashboard
     intro: Field::Text,
     blurb: Field::Text,
     excerpt_text: Field::String,
-    excerpt: FileField,
+    excerpt_file: FileField,
     toc_file: FileField,
     toc_label: Field::String,
     binding: Field::Text,
@@ -110,7 +110,7 @@ class BookDashboard < Administrate::BaseDashboard
     sort_title
     edition
     status
-    excerpt
+    excerpt_file
     excerpt_text
     toc_file
     toc_label
