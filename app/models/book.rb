@@ -2,7 +2,7 @@
 
 class Book < ApplicationRecord
   include Imageable
-  before_save :sort_titles
+  before_save :sort_titles, :get_excerpt
 
   validates :title, :xml_id, :author_byline, :status, presence: true
 
@@ -17,7 +17,7 @@ class Book < ApplicationRecord
   belongs_to :special_offer, optional: true
 
   has_one_attached :cover_image, dependent: :destroy
-  has_one_attached :excerpt, dependent: :destroy
+  has_one_attached :excerpt_file, dependent: :destroy
   has_one_attached :suggested_reading_image, dependent: :destroy
   has_one_attached :guide_file, dependent: :destroy
   has_one_attached :toc_file, dependent: :destroy
@@ -31,6 +31,13 @@ class Book < ApplicationRecord
       self.sort_title = sort_title + ", " + first
     else
       self.sort_title = self.title
+    end
+  end
+
+  def get_excerpt
+    if self.excerpt.present?
+      self.excerpt_text = self.excerpt.split(/.pdf\"> */)[1].present? ? self.excerpt.split(/.pdf\"> */)[1].split(/<\/a> */)[0] : "Read Chapter 1 (pdf)."
+      self.excerpt_file_name = self.excerpt.split(/tempress\/ */)[1].present? ? self.excerpt.split(/tempress\/ */)[1].split(/\"> */)[0] : nil
     end
   end
 
