@@ -53,7 +53,6 @@ module Imageable
   end
 
   def resize_to_fill(width:, height:, blob:, gravity: "Center")
-
     @stdout = Logger.new(STDOUT)
     @log = Logger.new("log/activestorage-debug.log")
 
@@ -64,7 +63,7 @@ module Imageable
 
 
     stdout_and_log("metadata: {cols: #{cols}, rows: #{rows}}", :debug)
-    
+
     if width != cols || height != rows
       scale_x = width / cols
       scale_y = height / rows
@@ -76,7 +75,7 @@ module Imageable
           rows = (scale_y * (rows + 0.5)).round
           resize = "x#{rows}"
         end
-      rescue 
+      rescue
         stdout_and_log("\n INFINITY \n")
       end
     end
@@ -87,7 +86,7 @@ module Imageable
       background: "rgba(255,255,255,0.0)",
       extent: cols != width || rows != height ? "#{width}x#{height}" : ""
     }.to_s}\n\n", :debug)
-  
+
     {
       resize: resize,
       gravity: gravity,
