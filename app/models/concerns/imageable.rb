@@ -13,7 +13,7 @@ module Imageable
   end
 
   def custom_image(image_field, width, height)
-    if ((self.send(image_field.to_sym).blob.metadata[:width] != width) || (self.send(image_field.to_sym).attachment.blob.metadata[:height] != height))
+    if ((self.send(image_field.to_sym).blob.metadata[:width] != width) || (self.send(image_field.to_sym).blob.metadata[:height] != height))
       self.send(image_field.to_sym).variant(image_variation(image_field, width, height)).processed
     else
       image
