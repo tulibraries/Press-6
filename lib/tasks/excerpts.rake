@@ -25,10 +25,11 @@ namespace :upload do
           stdout_and_log("Book: #{book.id}, excerpt: #{book.excerpt_file_name} errored -  #{err.message}")
         end
         book.save!
+        stdout_and_log("Book: #{book.id}, excerpt: #{book.excerpt_file_name} successfully attached.")
         @saves += 1
       else
         @already_attached += 1
-        stdout_and_log("Book: #{book.id}, excerpt: #{book.excerpt} already attached.")
+        stdout_and_log("Book: #{book.id}, excerpt: #{book.excerpt_file_name} already attached.")
       end
     end
 
