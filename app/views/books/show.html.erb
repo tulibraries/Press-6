@@ -34,20 +34,20 @@
 
         <hr />
 
-        <% if @book.subjects.present? %>
+        <% if @subjects.present? %>
         <div class="book-subjects mt-4">
           <span class="section-label">
             Subjects
           </span>
           <ul class="list-unstyled">
-          <% @book.subjects_as_tuples.each do |subject| %>
-            <li><%= link_to subject[0], subject_path(subject[1]) unless subject[0].nil? %></li>
+          <% @subjects.each do |subject| %>
+            <li><%= link_to subject.title, subject_path(subject) %></li>
           <% end %>
           </ul>
         </div>
         <% end %>
 
-        <% if @book.excerpt_text.present? || @book.toc_label.present? %>
+        <% if @book.excerpt_file.attached? || @book.toc_file.attached? %>
         <div class="book-preview mt-4">
           <span class="section-label">
             Preview
@@ -62,7 +62,7 @@
         <% if @book.desk_copy %>
         <div class="book-desk-copy mt-5">
           <ul class="list-unstyled mt-5">
-            <li><%= link_to "Request Desk/Exam Copy", "#"%></li> 
+            <li><%= link_to "Request Desk/Exam Copy", "#" %></li> 
           </ul>
         </div>
         <% end %>
