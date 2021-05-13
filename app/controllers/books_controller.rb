@@ -11,6 +11,7 @@ class BooksController < ApplicationController
     @reviews = Review.where(book_id: @book.xml_id)
     @series = Series.find_by(code: @book.series_id)
     @awards = [@book.award, @book.award2, @book.award3]
+    @subjects = [Subject.find_by(code: @book.subject1), Subject.find_by(code: @book.subject2), Subject.find_by(code: @book.subject3)].compact
   end
 
   private
