@@ -35,9 +35,9 @@ class Book < ApplicationRecord
   end
 
   def get_excerpt
-    if self.excerpt.present?
-      self.excerpt_text = self.excerpt.split(/.pdf\"> */)[1].present? ? self.excerpt.split(/.pdf\"> */)[1].split(/<\/a> */)[0] : "Read Chapter 1 (pdf)."
-      self.excerpt_file_name = self.excerpt.split(/tempress\/ */)[1].present? ? self.excerpt.split(/tempress\/ */)[1].split(/\"> */)[0] : nil
+    if self.excerpt.present? && self.excerpt.include?("tempress/") # only runs during harvest
+      self.excerpt_text = self.excerpt.split(/.pdf\"> */i)[1].present? ? self.excerpt.split(/.pdf\"> */i)[1].split(/<\/a> */i)[0] : "Read An Excerpt (pdf)."
+      self.excerpt_file_name = self.excerpt.split(/tempress\/ */)[1].split(/\"> */)[0]
     end
   end
 
