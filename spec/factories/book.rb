@@ -10,7 +10,7 @@ FactoryBot.define do
     hot { false }
     course_adoption { false }
     subjects { '{ "subject":{ "subject_id":1, "subject_title":"foo" } }' }
-    subject1 { "foo" }
+    subject1 { FactoryBot.create(:subject)  }
     award { "Double digits award" }
     award_year { "2020" }
     status { ["In Print", "NP", "OS", "X", "..."] }
