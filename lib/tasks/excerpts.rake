@@ -18,18 +18,17 @@ namespace :upload do
         begin
           book.excerpt_file.attach(
             io: URI.open("https://alt.library.temple.edu/tupress/#{book.excerpt_file_name}"),
-            filename: book.excerpt_file_name
+            filename: book.excerpt_file_name.split(/\//)[1]
           ) if book.excerpt_file_name.present?
         rescue Exception => err
           @errors += 1
-          stdout_and_log("Book: #{book.id}, excerpt: #{book.excerpt_file_name} errored -  #{err.message}")
+          stdout_and_log("Book: #{book.id}, PW: #{book.xml_id}, excerpt: #{book.excerpt_file_name} errored -  #{err.message}")
         end
         book.save!
-        stdout_and_log("Book: #{book.id}, excerpt: #{book.excerpt_file_name} successfully attached.")
+        stdout_and_log("Book: #{book.id}, excerpt: #{book.excerpt_file_name} successfully attached.") if book.excerpt_file.attached?
         @saves += 1
       else
         @already_attached += 1
-        stdout_and_log("Book: #{book.id}, excerpt: #{book.excerpt_file_name} already attached.")
       end
     end
 
