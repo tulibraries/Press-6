@@ -7,7 +7,6 @@ class Book < ApplicationRecord
   validates :title, :xml_id, :author_byline, :status, presence: true
 
   has_rich_text :news_text
-  has_rich_text :news_text
 
   has_many :reviews, foreign_key: "review_id", dependent: :destroy, inverse_of: :book
   has_many :books, class_name: "Book", dependent: :nullify
