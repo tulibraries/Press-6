@@ -2,7 +2,11 @@
   <div class="row">
     <div class="col col-3 book-cover text-center mt-5 pt-3">
     <%= link_to action: "edit", controller: "admin/books", id: @book.id do %>
-      <%= image_tag @book.show_image("cover_image") if @book.cover_image.attachment.present? %>
+      <% if @book.cover_image.attached? %>
+        <%= image_tag @book.show_image("cover_image") %>
+      <% else %>
+        <%= image_pack_tag "see-also-default.gif", style: "width: 270px, height: 420px" %>
+      <% end %>
     <% end %>
       <div class="social-share text-right p-4">
         <span class="share-label">Share</span>
@@ -146,9 +150,15 @@
     </div>
     <div class="row">
     <% @book.books.take(4).each do |book| %>
+    
       <div class="col col-3 text-center">
       <%= link_to book_path(book.xml_id) do %>
-        <%= image_tag book.index_image if book.cover_image.attachment.present? %>
+      <% if book.cover_image.attached? %>
+        <%= image_tag book.index_image("cover_image") %>
+      <% else %>
+        <%= image_pack_tag "see-also-default.gif" %>
+      <% end %>
+        
         <p class="pt-2 mb-0"><%= strip_tags book.title %></p>
       <% end %>
         <%= book.author_byline %>

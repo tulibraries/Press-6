@@ -41,7 +41,9 @@ class BookDashboard < Administrate::BaseDashboard
     status: Field::Select.with_options(
       collection: ["In Print", "NP", "OS", "X", "..."]
     ),
-    books: Field::HasMany.with_options(order: "sort_title"),
+    books: Field::HasMany.with_options(
+      class_name: "Book",
+      order: "sort_title"),
     news: Field::Boolean,
     news_text: TrixField,
     newsweight: Field::Select.with_options(
