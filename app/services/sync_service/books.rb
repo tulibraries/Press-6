@@ -84,7 +84,7 @@ class SyncService::Books
       book = Book.new
     end
 
-    if record_hash["title"].present? && record_hash["status"].present? && record_hash["author_byline"].present?
+    if record_hash["title"].present? && record_hash["status"].present? && record_hash["author_byline"].present? && record_hash["isbn"].present?
 
       book.assign_attributes(record_hash)
 
@@ -95,7 +95,7 @@ class SyncService::Books
         @not_saved += 1
       end
     else
-      stdout_and_log(%Q(Record with blank title, status, or author_byline not saved for #{record_hash["xml_id"]}))
+      stdout_and_log(%Q(Record with blank title, status, isbn, or author_byline not saved for #{record_hash["xml_id"]}))
       @skipped += 1
     end
   end
