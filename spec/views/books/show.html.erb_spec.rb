@@ -5,8 +5,8 @@ require "rails_helper"
 RSpec.describe "books/show.html.erb", type: :view do
 
   before(:each) do
-    @book = FactoryBot.create(:book, :with_cover_image)
-    # assign(:links, [[@book.label_1, @book.link_1]])
+    @book = FactoryBot.create(:book)
+    assign(:links, [[@book.label_1, @book.link_1]])
   end
 
   it "populates expected instance variables" do
