@@ -25,6 +25,7 @@ en:
           homepage: homepage
           special_offers: special_offers
           see_also: see_also
+          links: links
       collections:
         agencies:
           regions:

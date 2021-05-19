@@ -68,6 +68,12 @@ class BookDashboard < Administrate::BaseDashboard
     subject1: SubjectsSelectField,
     subject2: SubjectsSelectField,
     subject3: SubjectsSelectField,
+    link_1: Field::String,
+    link_2: Field::String,
+    link_3: Field::String,
+    label_1: Field::String,
+    label_2: Field::String,
+    label_3: Field::String,
     award: Field::String,
     award_year: Field::String,
     award_year2: Field::String,
@@ -139,6 +145,12 @@ class BookDashboard < Administrate::BaseDashboard
     special_offer
     series
     books
+    label_1
+    link_1
+    label_2
+    link_2
+    label_3
+    link_3
   ].freeze
 
   # COLLECTION_FILTERS

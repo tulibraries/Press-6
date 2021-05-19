@@ -63,6 +63,19 @@
         </div>
         <% end %>
 
+        <% if @links.flatten.any? %>
+        <div class="book-related-links mt-4">
+          <span class="section-label">
+            Related Links
+          </span>
+          <ul class="list-unstyled">
+            <% @links.each do |link| %>
+              <li><%= link_to link[0], link[1] %></li> 
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+
         <% if @book.desk_copy %>
         <div class="book-desk-copy mt-5">
           <ul class="list-unstyled mt-5">
