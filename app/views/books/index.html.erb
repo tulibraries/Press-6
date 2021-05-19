@@ -1,16 +1,38 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
 <div class="row">
-<div class="col-12">
-  <h1>Books</h1>
+<div class="col-12 mb-5 mt-3">
+  <h1>Browse Books by Title</h1>
 </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <%= render "alphamenu" %>
+  </div>
 </div>
 
   <div class="row">
-    <% @books.each do |book| %>
-      <div class="col-4">
-        <p><%= link_to book.title, book_path(book.xml_id) %></p>
+    <% instance_variable_get(instance_var).each do |book| %>
+      <div class="col-3">
+        <%= link_to book_path(book.xml_id) do %>
+          <% if book.cover_image.attached? %>
+            <%= image_tag book.index_image("cover_image") %>
+          <% else %>
+            <%= image_pack_tag "see-also-default.gif", style: "width: 220px, height: 320px" %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="col-9">
+        <h2><%= link_to book.title, book_path(book.xml_id) %></h2>
       </div>
     <% end %>
   </div>
 
+  <div class="row">
+  <div class="col">
+  <%= paginate instance_variable_get(instance_var) %>
+  </div>
+  </div>
+
+</div>
