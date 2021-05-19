@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md col-md-12">
+<nav class="navbar navbar-expand-md col-md-12 p-0 mb-4">
 	<%= button_tag("", 
 								:class=>"navbar-toggler navbar-toggler-right", 
 								:type=>"button",
@@ -8,12 +8,12 @@
 								:'aria-expanded'=>"false",
 								:'aria-label'=>"Toggle navigation") do
 								%>
-		    <span class="navbar-toggler-icon">Titles Index</span>
+		    <span class="navbar-toggler-icon">Titles</span>
 		  <% end %>
 		  <div class="collapse navbar-collapse" id="navbarSupportedContent2">
 		    <ul id="alphamenu" class="navbar-nav justify-content-center nav-fill">
 		      <li class="nav-item alphalink">
-		        <%= link_to "0-9", books_path(id: "0") %>
+		        <%= link_to "0-9", books_path(id: "numeric") %>
 		      </li>
 		      <li class="nav-item alphalink">
 		        <%= link_to "A", books_path(id: "a") %>

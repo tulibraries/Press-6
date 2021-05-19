@@ -5,7 +5,7 @@ class BooksController < ApplicationController
 
   def index
     letter = params[:id] ? params[:id] : "a"
-    unless letter == "0"
+    unless letter == "numeric"
       instance_variable_set("@#{letter}_books", (Book.where("sort_title LIKE ?", "#{letter}%").order(:sort_title).page params[:page]))
     else
       instance_variable_set("@#{letter}_books", (Book.where("sort_title regexp ?", "^[0-9]+").order(:sort_title).page params[:page]))
