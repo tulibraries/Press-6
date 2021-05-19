@@ -17,7 +17,7 @@ module Admin
       @tab_content["homepage"] = ["hot", "hotweight", "newsweight", "news_text", "course_adoption"]
       @tab_content["special_offers"] = ["special_offer"]
       @tab_content["see_also"] = ["books"]
-      @tab_content["links"] = ["label_1","link_1","label_2","link_2","label_3","link_3",]
+      @tab_content["links"] = ["label_1", "link_1", "label_2", "link_2", "label_3", "link_3",]
     end
 
     def default_sort

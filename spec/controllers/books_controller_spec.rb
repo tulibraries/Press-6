@@ -24,5 +24,4 @@ RSpec.describe BooksController, type: :controller do
       expect(response.header["Content-Type"]).to include "html"
     end
   end
-
 end

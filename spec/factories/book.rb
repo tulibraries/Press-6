@@ -11,6 +11,8 @@ FactoryBot.define do
     course_adoption { false }
     subjects { '{ "subject":{ "subject_id":1, "subject_title":"foo" } }' }
     subject1 { FactoryBot.create(:subject)  }
+    label_1 { "Google"  }
+    link_1 { "http://google.com"  }
     award { "Double digits award" }
     award_year { "2020" }
     status { ["In Print", "NP", "OS", "X", "..."] }
@@ -20,5 +22,14 @@ FactoryBot.define do
     excerpt_text { "" }
     excerpt_file_name { "" }
     featured_award_winner { false }
+
+    trait :with_cover_image do
+      after :create do |book|
+        book.cover_image.attach(io:
+        File.open(Rails.root.join("spec/fixtures/charles.jpg")),
+        filename: "charles.jpg",
+        content_type: "image/jpeg")
+      end
+    end
   end
 end
