@@ -14,5 +14,5 @@ RSpec.describe "books/index.html.erb", type: :view do
   it "populates paginated list" do
     render
     expect(rendered).to match /#{book.title}/
-  end  
+  end
 end

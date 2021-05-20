@@ -3,8 +3,8 @@
 require "rails_helper"
 
 RSpec.describe BooksController, type: :controller do
-    let(:book) { FactoryBot.create(:book, title: "A Formation") }
-    let(:book2) { FactoryBot.create(:book, title: "Z Formation") }
+  let(:book) { FactoryBot.create(:book, title: "A Formation") }
+  let(:book2) { FactoryBot.create(:book, title: "Z Formation") }
 
   context "Get Views" do
 
