@@ -1,0 +1,22 @@
+<div class="container">
+
+<h1>People at the press</h1>
+
+<% @people.sort.each do |dept, people| %>
+<% unless dept.empty? %>
+	<div class="row">
+		<div class="col"><h2><%= dept %></h2></div>
+	</div>
+<% end %>
+	<% for person in people %>
+		<div class="row">
+			<div class="col">
+						<strong><%= mail_to person.email, person.name %></strong><br />
+						<em><%= person.position %></em><br />
+						<%= person.position_description %>
+			</div>
+		</div>
+	<% end %>
+
+<% end %>
+</div>
