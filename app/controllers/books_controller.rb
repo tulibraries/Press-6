@@ -4,7 +4,12 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show]
 
   def index
-    @books = Book.all
+    letter = params[:id] ? params[:id] : "a"
+    unless letter == "numeric"
+      @books = Book.where("sort_title LIKE ?", "#{letter}%").order(:sort_title).page params[:page]
+    else
+      @books = Book.where("sort_title regexp ?", "^[0-9]+").order(:sort_title).page params[:page]
+    end
   end
 
   def show

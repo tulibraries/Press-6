@@ -18,10 +18,6 @@ RSpec.describe SyncService::Books, type: :service do
       expect(@books.first["record"]["title"]).to match(/^Vehicles of Decolonization/)
     end
 
-    it "extracts all of the books" do
-      expect(@books.count).to equal(10)
-    end
-
     describe "maps books xml to db schema" do
       subject { @book_harvest.record_hash(@books.first) }
 
@@ -105,22 +101,30 @@ RSpec.describe SyncService::Books, type: :service do
       sleep 2
     end
 
-    let (:book1) {
-      Book.find_by(title: "For the Defense of Others")
-    }
-
-    let(:book2) {
-      Book.find_by(title: "Inspired Citizenship")
-    }
-
-    let(:notitle) {
-      Book.find_by(xml_id: "20000000010598")
-    }
+    let(:book1) { Book.find_by(xml_id: "20000000010482") }
+    let(:noisbn) { Book.find_by(xml_id: "20000000010597") }
+    let(:notitle) { Book.find_by(xml_id: "20000000010598") }
+    let(:nostatus) { Book.find_by(xml_id: "20000000010551") }
+    let(:badstatus) { Book.find_by(xml_id: "20000000010564") }
+    let(:noauthor) { Book.find_by(xml_id: "20000000010535") }
 
     it "syncs books to the table" do
       expect(book1).to be
-      expect(book2).to be
+    end
+    it "does not sync missing ISBN book" do
+      expect(noisbn).not_to be
+    end
+    it "does not sync missing TITLE book" do
       expect(notitle).not_to be
+    end
+    it "does not sync missing STATUS book" do
+      expect(nostatus).not_to be
+    end
+    it "does not sync NONDISPLAYABLE STATUSES book" do
+      expect(badstatus).not_to be
+    end
+    it "does not sync missing AUTHOR_BYLINE book" do
+      expect(noauthor).not_to be
     end
 
   end
