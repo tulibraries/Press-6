@@ -7,7 +7,7 @@
   </div>
 </div>
 
-    <% instance_variable_get(instance_var).each do |book| %>  
+    <% @books.each do |book| %>  
     <div class="row">
       <div class="col-3 mb-3">
         <%= link_to book_path(book.xml_id) do %>
@@ -44,7 +44,7 @@
 
   <div class="row">
   <div class="col">
-  <%= paginate instance_variable_get(instance_var) %>
+  <%= paginate @books %>
   </div>
   </div>
 
