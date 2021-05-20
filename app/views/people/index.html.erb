@@ -1,22 +1,39 @@
 <div class="container">
 
-<h1>People at the press</h1>
+<div class="row">
+  <div class="col pl-0">
+    <h1 class="mb-4 mt-5 ">People at the press</h1>
+  </div>
+</div>
 
 <% @people.sort.each do |dept, people| %>
+<section>
 <% unless dept.empty? %>
 	<div class="row">
-		<div class="col"><h2><%= dept %></h2></div>
+		<div class="col col-12 pl-0 pr-4 mb-0 mt-3">
+      <h2 class="dept-name pl-4 mx-0 mb-4">
+        <%= dept %>
+      </h2>
+    </div>
 	</div>
 <% end %>
-	<% for person in people %>
-		<div class="row">
-			<div class="col">
-						<strong><%= mail_to person.email, person.name %></strong><br />
-						<em><%= person.position %></em><br />
-						<%= person.position_description %>
-			</div>
-		</div>
-	<% end %>
+	<div class="row">
+	<% people.each do |person| %>
+    <div class="col col-6 mb-4 pr-4 p-0" >
+      <div class="p-4 person-card">
+      <article>
+        <%= image_tag person.thumb_image(:image), class: "person" if person.image.attached? %>
+        <%= image_pack_tag "see-also-default.gif", class: "person default", style: "width: 270px, height: 420px" unless person.image.attached?  %>
 
+        <p class="name"><%= person.name %></p>
+        <p><em><%= person.position %></em></p>
+        <p><%= person.position_description %></p>
+        <p><%= mail_to person.email, person.email %></p>
+      </article>
+      </div>
+    </div>
+	<% end %>
+	</div>
+</section>
 <% end %>
 </div>
