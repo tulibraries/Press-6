@@ -2,7 +2,7 @@
 
 class Person < ApplicationRecord
   include Imageable
-  validates :name, :email, presence: true
+  validates :name, :email, :department, presence: true
 
   has_rich_text :position_description
   has_one_attached :image, dependent: :destroy

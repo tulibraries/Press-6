@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :webpage do
     title { "John" }
-    body  { "1032" }
+    body  { ActionText::Content.new("Hello World") }
   end
 end

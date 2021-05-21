@@ -3,21 +3,12 @@
 require "rails_helper"
 
 RSpec.describe Agency, type: :model do
-  context "Required Fields" do
-    required_fields = [
-      "title",
-      "contact",
-      "address1",
-      "country",
-      "city",
-      "region",
-    ]
-    required_fields.each do |f|
-      example "missing #{f} field" do
-        agency = FactoryBot.build(:agency)
-        agency[f] = ""
-        expect { agency.save! }.to raise_error(/#{f.humanize(capitalize: true)} can't be blank/)
-      end
-    end
+  describe 'validations' do
+    it { should validate_presence_of(:title) }
+    it { should validate_presence_of(:contact) }
+    it { should validate_presence_of(:address1) }
+    it { should validate_presence_of(:country) }
+    it { should validate_presence_of(:city) }
+    it { should validate_presence_of(:region) }
   end
 end

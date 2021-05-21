@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     root to: "books#index"
   end
 
+  resources :agencies, only: [:index]
   resources :books, concerns: [:imageable]
   resources :brochures, only: [:show], concerns: [:imageable]
   resources :catalogs, only: [:show, :index]
