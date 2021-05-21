@@ -22,8 +22,8 @@
                           method: :get} %>
               <div class="dropdown-menu p-2" aria-labelledby="navbarDropdownMenuLink" style="">
                 <%= link_to "Award Winning Books", root_path+"awards", :class=>"dropdown-item" %>
-                <%= link_to "Titles Index", root_path+"books", :class=>"dropdown-item" %>
-                <%= link_to "Author Index", root_path+"byauthor", :class=>"dropdown-item" %>
+                <%= link_to "Books by Title", root_path+"books", :class=>"dropdown-item" %>
+                <%= link_to "Books by Author", root_path+"byauthor", :class=>"dropdown-item" %>
                 <%= link_to "Subject Index", root_path+"subjects", :class=>"dropdown-item" %>
                 <%= link_to "Catalog Index", root_path+"catalogs", :class=>"dropdown-item" %>
                 <%= link_to "Series Listing", root_path+"series", :class=>"dropdown-item" %>
@@ -40,6 +40,9 @@
                 "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
                 method: :get} %>
             <div class="dropdown-menu p-2" x-placement="bottom-start">
+              <% @journals.each do |i| %>
+                <li><%= link_to i.title, i.url, :class=>"dropdown-item" if i.url.present? && i.title == "Commonwealth" %></li>
+              <% end %>
               <li><%= link_to "North Broad Press", "http://tupress.temple.edu/open-access/north-broad-press", :class=>"dropdown-item" %></li>
               <li><%= link_to "Labor Studies & Work", "http://tupress.temple.edu/open-access/labor-studies", :class=>"dropdown-item" %></li>
             </div>
