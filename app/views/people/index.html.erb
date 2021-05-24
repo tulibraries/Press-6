@@ -23,7 +23,7 @@
       <div class="p-4 person-card">
       <article>
         <%= image_tag person.thumb_image(:image), class: "person" if person.image.attached? %>
-        <%= image_pack_tag "see-also-default.gif", class: "person default", style: "width: 270px, height: 420px" unless person.image.attached?  %>
+        <%= image_pack_tag "staff_placeholder.png", class: "person default" unless person.image.attached?  %>
 
         <p class="name"><%= person.name %></p>
         <p><em><%= person.position %></em></p>
