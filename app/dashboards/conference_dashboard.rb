@@ -6,8 +6,8 @@ class ConferenceDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     title: Field::String,
-    start_date: Field::DateTime.with_options(format: "%D - %I:%M %p"),
-    end_date: Field::DateTime,
+    start_date: Field::DatePicker,
+    end_date: Field::DatePicker,
     link: Field::String,
     venue: Field::String,
     location: Field::String,
@@ -20,6 +20,7 @@ class ConferenceDashboard < Administrate::BaseDashboard
     title
     location
     start_date
+    end_date
   ].freeze
 
   SHOW_PAGE_ATTRIBUTES = %i[
