@@ -3,8 +3,8 @@
 FactoryBot.define do
   factory :conference do
     title { "Spring 2014" }
-    start_date  { "2021-07-22 00:00:00" }
-    end_date { "2021-07-22 00:00:00" }
+    start_date  { DateTime.now }
+    end_date { DateTime.now.next_month }
     location { "Narbeth" }
     venue { "The Plaza" }
     booth { "E4" }

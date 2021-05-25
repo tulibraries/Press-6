@@ -1,0 +1,13 @@
+@import "partials/_vars.scss";
+
+#conferences {
+  .conference {
+    background-color: $white;
+    border-top: solid 21px $background-grey;
+    .month {
+      h2 {
+        border-bottom: solid black 1px;
+      }
+    }
+  }
+}

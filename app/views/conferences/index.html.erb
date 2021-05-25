@@ -11,9 +11,9 @@
 	</div>
 
 <% @conferences.each do |month, conferences| %>
-	<div class="row conference" style="background-color:white;border-top: solid 21px #f3f3f3;">
-		<div class="col-12 month p-3">
-			<h2 style="border-bottom:solid black 1px"><%= month %></h2>
+	<div class="row conference">
+		<div class="col-12 p-3 month">
+			<h2><%= month %></h2>
 		</div>
 
 		<div class="col-12 px-3">
@@ -31,7 +31,7 @@
 			<% end %>
 		</div>
 	</div>
-<% end %>
+<% end if @conferences.present? %>
 
 
 </div>
