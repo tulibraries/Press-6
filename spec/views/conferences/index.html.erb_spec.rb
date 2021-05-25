@@ -3,13 +3,12 @@
 require "rails_helper"
 
 RSpec.describe "conferences/index.html.erb", type: :view do
-  let(:today) { Date.today }
-  let(:conference1) { FactoryBot.create(:conference, start_date: today) }
+  let(:conference1) { FactoryBot.create(:conference, start_date: DateTime.now) }
   let(:conference2) { FactoryBot.create(:conference, start_date: DateTime.now.next_month) }
   let(:intro) { FactoryBot.create(:webpage) }
 
   before(:each) do
-    assign(:conferences, [conference1, conference2].group_by {|conference| conference.start_date.strftime("%B")})
+    assign(:conferences, [conference1, conference2].group_by { |conference| conference.start_date.strftime("%B") })
     assign(:intro, intro)
   end
 
