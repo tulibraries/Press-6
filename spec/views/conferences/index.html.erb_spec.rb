@@ -25,7 +25,7 @@ RSpec.describe "conferences/index.html.erb", type: :view do
 
   it "renders top of page intro" do
     render
-    expect(rendered).to match /1032/
+    expect(rendered).to match /Hello World/
   end
 
 end
