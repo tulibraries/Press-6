@@ -9,7 +9,7 @@ module Admin
       @entity = klass.constantize.find(params[:id])
 
       types = ["cover_image", "excerpt_image", "guide_image", "suggested_reading_image", "guide_file"] if klass == "Book"
-      types = ["image"] if ["Brochure", "Series"].include?(klass)
+      types = ["image"] if ["Brochure", "Series", "Person"].include?(klass)
       types = ["pdf"] if ["SpecialOffer", "Subject"].include?(klass)
 
       type = types.index(params[:field])

@@ -1,0 +1,24 @@
+@import "partials/_vars.scss";
+
+h2.dept-name {
+  background-color: $gold;
+  padding: 7px;
+}
+
+img.person {
+  border-radius: 50%;
+}
+
+.person-card {
+  background-color: $white; 
+  height: 100%;
+  p {
+    margin-bottom: .5rem;
+  }
+  .name {
+    font-weight: 600;
+    font-size: 115%;
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+}

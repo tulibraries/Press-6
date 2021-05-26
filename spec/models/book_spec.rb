@@ -3,22 +3,11 @@
 require "rails_helper"
 
 RSpec.describe Book, type: :model do
-
-  context "Required Fields" do
-    required_fields = [
-      "title",
-      "xml_id",
-      "author_byline",
-      "status"
-    ]
-
-    required_fields.each do |f|
-      example "missing #{f} field" do
-        book = FactoryBot.build(:book)
-        book[f] = ""
-        expect { book.save! }.to raise_error(/#{f.humanize(capitalize: true)} can't be blank/)
-      end
-    end
+  describe "validations" do
+    it { should validate_presence_of(:title) }
+    it { should validate_presence_of(:xml_id) }
+    it { should validate_presence_of(:author_byline) }
+    it { should validate_presence_of(:status) }
   end
 
   let(:book) { FactoryBot.create(:book) }
