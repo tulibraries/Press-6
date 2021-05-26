@@ -1,0 +1,16 @@
+@import "vars";
+
+#site-footer {
+  address {
+    h2 {
+      font-size: 200%;
+    }
+    .delivery-label {
+      margin-top: 1em;
+      font-size: 150%;
+    }
+    span {
+      font-size: 115%;
+    }
+  }
+}

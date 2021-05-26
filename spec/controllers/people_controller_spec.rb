@@ -2,9 +2,9 @@
 
 require "rails_helper"
 
-RSpec.describe AgenciesController, type: :controller do
+RSpec.describe PeopleController, type: :controller do
 
-  let(:agency) { FactoryBot.create(:agency) }
+  let(:person) { FactoryBot.create(:person) }
 
   describe "GET #index" do
     it "returns html when requested" do
