@@ -7,3 +7,20 @@
   background-color: $dark-blue;
   margin-bottom: 0;
 }
+
+nav.pagination {
+  text-align: center;
+  font-size: 135%;
+	display: block!important;
+	margin-bottom: 14px;
+  margin-top: 14px;
+  a {
+    color: $black!important;
+  }
+  .page {
+    margin: 0.75em;
+  }
+  .page.current {
+    color: $red;
+  }
+}
