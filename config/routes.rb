@@ -15,18 +15,19 @@ Rails.application.routes.draw do
     resources :catalogs
     resources :conferences
     resources :journals
+    resources :people
     resources :series
     resources :special_offers
     resources :subjects
     resources :webpages
 
-    resource :books, :brochures, :series, :subjects, :special_offers do
+    resource :books, :brochures, :people, :series, :subjects, :special_offers do
       member do
         get ":id/detach" => :detach
       end
     end
 
-    resource :books, :brochures, :series, :subjects, :special_offers do
+    resource :books, :brochures, :people, :series, :subjects, :special_offers do
       member do
         post "detach" => :detach
       end
@@ -35,15 +36,15 @@ Rails.application.routes.draw do
     root to: "books#index"
   end
 
+  resources :agencies, only: [:index]
   resources :books, concerns: [:imageable]
-  resources :series, concerns: [:imageable]
-  resources :subjects, concerns: [:imageable]
   resources :catalogs
   resources :conferences, only: [:index]
-  resources :agencies
-  resources :webpages
-  resources :brochures, only: [:show], concerns: [:imageable]
+  resources :people, only: [:index], concerns: [:imageable]
+  resources :series, concerns: [:imageable]
   resources :special_offers, concerns: [:imageable]
+  resources :subjects, concerns: [:imageable]
+  resources :webpages, only: [:show]
 
   root to: "webpages#index"
 

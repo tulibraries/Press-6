@@ -4,6 +4,10 @@ module Imageable
   extend ActiveSupport::Concern
   require Rails.root.join("lib/uploads.rb")
 
+  def thumb_image(image_field)
+    custom_image(image_field, 180, 190)
+  end
+
   def index_image(image_field)
     custom_image(image_field, 220, 320)
   end
