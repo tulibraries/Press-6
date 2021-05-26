@@ -1,0 +1,10 @@
+<div class="container">
+
+<h1 class="mt-4">Conferences</h1>
+
+<ul class="list-unstyled">
+    <% @conferences.each do |conference| %>
+        <li class="p-4" style="border-bottom: solid #ccc 1px;"><%= conference.title %></li>
+    <% end %>
+</ul>
+</div>
