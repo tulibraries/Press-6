@@ -1,0 +1,36 @@
+<div class="container" id="conferences">
+
+	<div class="row">
+		<div class="col px-3 mt-4">
+			<h1><%= "Conferences" %></h1>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col p-3"><%= @intro.body if @intro.present? %></div>
+	</div>
+
+<% @conferences.each do |month, conferences| %>
+	<div class="row conference">
+		<div class="col-12 p-3 month">
+			<h2><%= month %></h2>
+		</div>
+
+		<div class="col-12 px-3">
+			<% conferences.each do |conference| %>
+				<ul class="list-unstyled">
+					<li>
+						<%= conference.title unless conference.link.present? %>
+						<%= link_to conference.title, conference.link if conference.link.present? %>
+					</li>
+					<%= "<li>#{conference.location}</li>".html_safe if conference.location.present? %>
+					<%= "<li>#{conference.venue}</li>".html_safe if conference.venue.present? %>
+					<%= "<li>#{conference.booth}</li>".html_safe if conference.booth.present? %>
+					<%= "<li>#{dates(conference.start_date, conference.end_date)}</li>".html_safe if conference.start_date.present? %>
+				</ul>
+			<% end %>
+		</div>
+	</div>
+<% end if @conferences.present? %>
+
+</div>

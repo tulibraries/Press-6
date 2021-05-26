@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :books
     resources :brochures
     resources :catalogs
+    resources :conferences
     resources :journals
     resources :people
     resources :series
@@ -37,8 +38,8 @@ Rails.application.routes.draw do
 
   resources :agencies, only: [:index]
   resources :books, concerns: [:imageable]
-  resources :brochures, only: [:show], concerns: [:imageable]
-  resources :catalogs, only: [:show, :index]
+  resources :catalogs
+  resources :conferences, only: [:index]
   resources :people, only: [:index], concerns: [:imageable]
   resources :series, concerns: [:imageable]
   resources :special_offers, concerns: [:imageable]

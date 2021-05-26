@@ -2,7 +2,7 @@
 
 class CreatePeople < ActiveRecord::Migration[6.0]
   def change
-    create_table :people do |t|
+    create_table :people, if_not_exists: true do |t|
       t.string :name
       t.string :email
       t.string :position
