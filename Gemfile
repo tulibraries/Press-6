@@ -27,6 +27,7 @@ gem "aws-sdk-s3", require: false
 gem "active_storage_validations"
 gem "kaminari"
 gem "administrate-field-date_picker", "~> 0.2.0"
+gem "meta-tags"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]

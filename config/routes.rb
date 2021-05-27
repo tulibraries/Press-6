@@ -15,19 +15,20 @@ Rails.application.routes.draw do
     resources :catalogs
     resources :conferences
     resources :journals
+    resources :oabooks
     resources :people
     resources :series
     resources :special_offers
     resources :subjects
     resources :webpages
 
-    resource :books, :brochures, :people, :series, :subjects, :special_offers do
+    resource :books, :brochures, :oabooks, :people, :series, :subjects, :special_offers do
       member do
         get ":id/detach" => :detach
       end
     end
 
-    resource :books, :brochures, :people, :series, :subjects, :special_offers do
+    resource :books, :brochures, :oabooks, :people, :series, :subjects, :special_offers do
       member do
         post "detach" => :detach
       end
@@ -47,6 +48,19 @@ Rails.application.routes.draw do
   resources :webpages, only: [:show]
 
   root to: "webpages#index"
+
+  controller :oabooks do
+    get 'open-access/labor-studies'                => :labor_studies, as: "labor_studies"
+    get 'open-access/north-broad-press'            => :north_broad_press, as: "north_broad"
+    get 'open-access/labor-studies/:id'            => :show, as: "labor_studies_book"
+    get 'open-access/labor-studies/:id/epub'       => :download_epub
+    get 'open-access/labor-studies/:id/pdf'        => :download_pdf
+    get 'open-access/labor-studies/:id/mobi'       => :download_mobi
+    get 'open-access/north-broad-press/:id'        => :show, as: "north_broad_book"
+    get 'open-access/north-broad-press/:id/epub'   => :download_epub
+    get 'open-access/north-broad-press/:id/pdf'    => :download_pdf
+    get 'open-access/north-broad-press/:id/mobi'   => :download_mobi
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
