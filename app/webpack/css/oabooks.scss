@@ -1,5 +1,10 @@
 @import "partials/_vars.scss";
 
+h1.banner {
+  img {
+    width: 100%;
+  }
+}
 .oabook-home {
   background-color: $white;
 }

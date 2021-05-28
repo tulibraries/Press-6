@@ -7,13 +7,12 @@
     <%= image_tag(@oabook.show_image("image"), class: "mb-4") %>
   <% end %>
     <ul class="list-unstyled oabook-buttons">
-      <li><%= link_to "Read it online", @oabook.epub_link if @oabook.epub_link.present? %></li>
-      <li><%= link_to "Download Epub", @oabook.epub if @oabook.epub.attached? %></li>
-      <li><%= link_to "Download PDF", @oabook.pdf if @oabook.pdf.attached? %></li>
-      <li><%= link_to "Download Mobi", @oabook.mobi if @oabook.mobi.attached? %></li>
-      <li><%= link_to "Buy Print Copy", 
-              "https://cdcshoppingcart.uchicago.edu/Cart2/Chicagobook.aspx?PRESS=temple&ISBN=#{@oabook.print_isbn}" if (@oabook.pod.present? && @oabook.print_isbn.present?)
-              %>
+      <li><%= link_to t("tupress.oabooks.online_epub"), @oabook.epub_link if @oabook.epub_link.present? %></li>
+      <li><%= link_to t("tupress.oabooks.download.epub"), @oabook.epub if @oabook.epub.attached? %></li>
+      <li><%= link_to t("tupress.oabooks.download.pdf"), @oabook.pdf if @oabook.pdf.attached? %></li>
+      <li><%= link_to t("tupress.oabooks.download.mobi"), @oabook.mobi if @oabook.mobi.attached? %></li>
+      <li>
+        <%= link_to t("tupress.oabooks.print_copy"), purchase_link(@oabook.print_isbn) if @oabook.pod.present? && @oabook.print_isbn.present? %> 
       </li>
     </ul>
   </div>
