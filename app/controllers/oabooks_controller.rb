@@ -30,27 +30,6 @@ class OabooksController < ApplicationController
     @page = Webpage.find_by(title: "Labor Studies & Work Intro")
   end
 
-  def download_epub
-    send_file(@oabook.epub.current_path,
-        filename: @oabook.epub.filename,
-        disposition: "attachment",
-        url_based_filename: true)
-  end
-
-  def download_pdf
-    send_file(@oabook.pdf.current_path,
-        filename: @oabook.pdf.filename,
-        disposition: "attachment",
-        url_based_filename: true)
-  end
-
-  def download_mobi
-    send_file(@oabook.mobi.current_path,
-        filename: @oabook.mobi.filename,
-        disposition: "attachment",
-        url_based_filename: true)
-  end
-
   private
     def set_oabook
       @oabook = Oabook.find_by(id: params[:id])

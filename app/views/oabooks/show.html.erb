@@ -8,9 +8,9 @@
   <% end %>
     <ul class="list-unstyled oabook-buttons">
       <li><%= link_to t("tupress.oabooks.online_epub"), @oabook.epub_link if @oabook.epub_link.present? %></li>
-      <li><%= link_to t("tupress.oabooks.download.epub"), @oabook.epub if @oabook.epub.attached? %></li>
-      <li><%= link_to t("tupress.oabooks.download.pdf"), @oabook.pdf if @oabook.pdf.attached? %></li>
-      <li><%= link_to t("tupress.oabooks.download.mobi"), @oabook.mobi if @oabook.mobi.attached? %></li>
+      <li><%= link_to t("tupress.oabooks.download.epub"), @oabook.epub, disposition: "attachment" if @oabook.epub.attached? %></li>
+      <li><%= link_to t("tupress.oabooks.download.pdf"), @oabook.pdf, disposition: "attachment" if @oabook.pdf.attached? %></li>
+      <li><%= link_to t("tupress.oabooks.download.mobi"), @oabook.mobi, disposition: "attachment" if @oabook.mobi.attached? %></li>
       <li>
         <%= link_to t("tupress.oabooks.print_copy"), purchase_link(@oabook.print_isbn) if @oabook.pod.present? && @oabook.print_isbn.present? %> 
       </li>
