@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OabooksController < ApplicationController
   before_action :set_oabook, only: [:show, :download_epub, :download_pdf, :download_mobi]
 
@@ -10,10 +12,10 @@ class OabooksController < ApplicationController
     if @total.odd? || @total == 0
       @column_1 = @oabooks[0, ((@total / 2).floor + 1)]
     else
-      @column_1 = @oabooks[0, (@total/2).floor]
+      @column_1 = @oabooks[0, (@total / 2).floor]
     end
-    @column_2 = @oabooks.reverse[0, (@total/2).floor]
-    @page = Webpage.find_by_title("North Broad Press")
+    @column_2 = @oabooks.reverse[0, (@total / 2).floor]
+    @page = Webpage.find_by(title: "North Broad Press Intro")
   end
 
   def labor_studies
@@ -22,31 +24,31 @@ class OabooksController < ApplicationController
     if @total.odd? || @total == 0
       @column_1 = @oabooks[0, ((@total / 2).floor + 1)]
     else
-      @column_1 = @oabooks[0, (@total/2).floor]
+      @column_1 = @oabooks[0, (@total / 2).floor]
     end
-    @column_2 = @oabooks.reverse[0, (@total/2).floor]
-    @page = Webpage.find_by_title("Labor Studies & Work")
+    @column_2 = @oabooks.reverse[0, (@total / 2).floor]
+    @page = Webpage.find_by(title: "Labor Studies & Work Intro")
   end
 
   def download_epub
     send_file(@oabook.epub.current_path,
-        :filename => @oabook.epub.filename,
-        :disposition => 'attachment',
-        :url_based_filename => true)
+        filename: @oabook.epub.filename,
+        disposition: "attachment",
+        url_based_filename: true)
   end
 
   def download_pdf
     send_file(@oabook.pdf.current_path,
-        :filename => @oabook.pdf.filename,
-        :disposition => 'attachment',
-        :url_based_filename => true)
+        filename: @oabook.pdf.filename,
+        disposition: "attachment",
+        url_based_filename: true)
   end
-  
+
   def download_mobi
     send_file(@oabook.mobi.current_path,
-        :filename => @oabook.mobi.filename,
-        :disposition => 'attachment',
-        :url_based_filename => true)
+        filename: @oabook.mobi.filename,
+        disposition: "attachment",
+        url_based_filename: true)
   end
 
   private

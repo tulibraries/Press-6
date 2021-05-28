@@ -1,28 +1,31 @@
-<div class="container mt-3 pt-3" style="background-color: white;">
+<div class="container mt-3 pt-3 oabook-home">
 
 <% title "Labor Studies & Work" %>
 
 <div class="row">
     <div class="col">
-      <h1 class="mt-0 pt-0">
-          <%= image_pack_tag "neh_banner.jpg", style: "width: 100%;" %>
+      <h1 class="mt-0 pt-0 text-center">
+          <%= image_pack_tag 'neh_banner.jpg', alt: "Labor Studies & Work", style: "width: 100%;" %>
       </h1>
-      <%= sanitize @page.content.html_safe if @page.present? %>
+      <div class="mt-4 mx-3"><%= @page.body if @page.present? %></div>
   </div>
 </div>
 
-<div class="row mt-5">
-  <div class="column col-6" id="column_1">
-    <% @column_1.each do |oabook| %>
-      <%= render "ls_book_list", oabook: oabook %>
-    <% end if @column_1.present? %>
-  </div>
+<div class="mt-4" style="border-top: solid #ccc 2px;"></div>
 
-  <div class="column col-6" id="column_2">
-    <% @column_2.reverse.each do |oabook| %>
-      <%= render "ls_book_list", oabook: oabook  %>
-    <% end if @column_2.present? %>
-  </div>
-</div>
+<section>
+    <div class="row m-5">
+      <div class="column col-6 mb-5" id="column_1">
+        <% @column_1.each do |oabook| %>
+          <%= render "ls_book_list", oabook: oabook %>
+        <% end if @column_1.present? %>
+      </div>
 
+      <div class="column col-6  mb-5" id="column_2">
+        <% @column_2.reverse.each do |oabook| %>
+          <%= render "ls_book_list", oabook: oabook %>
+        <% end if @column_2.present? %>
+      </div>
+    </div>
+</section>
 </div>

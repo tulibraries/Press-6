@@ -50,16 +50,10 @@ Rails.application.routes.draw do
   root to: "webpages#index"
 
   controller :oabooks do
-    get 'open-access/labor-studies'                => :labor_studies, as: "labor_studies"
-    get 'open-access/north-broad-press'            => :north_broad_press, as: "north_broad"
-    get 'open-access/labor-studies/:id'            => :show, as: "labor_studies_book"
-    get 'open-access/labor-studies/:id/epub'       => :download_epub
-    get 'open-access/labor-studies/:id/pdf'        => :download_pdf
-    get 'open-access/labor-studies/:id/mobi'       => :download_mobi
-    get 'open-access/north-broad-press/:id'        => :show, as: "north_broad_book"
-    get 'open-access/north-broad-press/:id/epub'   => :download_epub
-    get 'open-access/north-broad-press/:id/pdf'    => :download_pdf
-    get 'open-access/north-broad-press/:id/mobi'   => :download_mobi
+    get "open-access/labor-studies"                => :labor_studies, as: "labor_studies"
+    get "open-access/north-broad-press"            => :north_broad_press, as: "north_broad"
+    get "open-access/labor-studies/:id"            => :show, as: "labor_studies_book"
+    get "open-access/north-broad-press/:id"        => :show, as: "north_broad_book"
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -10,5 +10,5 @@ class Oabook < ApplicationRecord
   has_one_attached :image, dependent: :destroy
   has_one_attached :epub, dependent: :destroy
   has_one_attached :pdf, dependent: :destroy
-	has_one_attached :mobi, dependent: :destroy
+  has_one_attached :mobi, dependent: :destroy
 end

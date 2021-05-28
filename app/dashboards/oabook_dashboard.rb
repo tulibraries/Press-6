@@ -57,6 +57,9 @@ class OabookDashboard < Administrate::BaseDashboard
     collection
     supplemental
     pod
+    epub
+    pdf
+    mobi
   ].freeze
 
   COLLECTION_FILTERS = {}.freeze

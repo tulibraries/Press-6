@@ -1,21 +1,32 @@
- <div class="container mt-3 pt-3" style="background-color: white;">
+ <div class="container mt-3 pt-3">
 
- <div class="neh-book row">
+ <div class="neh-book row mb-4">
 
-  <div class="col col-3 col-lg-2">
-    <%= link_to image_tag(@oabook.show_image("image")), north_broad_path(@oabook) %>
+  <div class="col col-3">
+  <%= link_to action: "edit", controller: "admin/oabooks", id: @oabook.id do %>
+    <%= image_tag(@oabook.show_image("image"), class: "mb-4") %>
+  <% end %>
+    <ul class="list-unstyled oabook-buttons">
+      <li><%= link_to "Read it online", @oabook.epub_link if @oabook.epub_link.present? %></li>
+      <li><%= link_to "Download Epub", @oabook.epub if @oabook.epub.attached? %></li>
+      <li><%= link_to "Download PDF", @oabook.pdf if @oabook.pdf.attached? %></li>
+      <li><%= link_to "Download Mobi", @oabook.mobi if @oabook.mobi.attached? %></li>
+      <li><%= link_to "Buy Print Copy", 
+              "https://cdcshoppingcart.uchicago.edu/Cart2/Chicagobook.aspx?PRESS=temple&ISBN=#{@oabook.print_isbn}" if (@oabook.pod.present? && @oabook.print_isbn.present?)
+              %>
+      </li>
+    </ul>
   </div>
 
-  <div class="col col-9 col-lg-10">
-    <%= link_to @oabook.title, north_broad_path(@oabook), class: 'oatitle' %><br>
-    <% unless @oabook.subtitle.nil? || @oabook.subtitle == ''%>
-      <em><%= @oabook.subtitle %></em><br>
-    <% end %>
-    <% unless @oabook.author.nil? %>
-      <span style="color: #a0a0a0;"><%= @oabook.author %></span><br>
-    <% end %>
-    <div class="oasupplemental">
-      <%= @oabook.supplemental %><br>
+  <div class="col col-9">
+    <h1><%= @oabook.title %></h1>
+      <%= "<em>#{@oabook.subtitle}</em><br/>".html_safe if @oabook.subtitle.present? %>
+      <%= "#{@oabook.author}<br/>".html_safe if @oabook.author.present? %>
+      <%= "#{@oabook.supplemental}<br/>".html_safe if @oabook.supplemental.present? %>
+      <%= @oabook.edition if @oabook.edition.present? %>
+    
+    <div class="mt-4 oabook-description">
+      <%= @oabook.description if @oabook.description.present? %>
     </div>
   </div>
   
