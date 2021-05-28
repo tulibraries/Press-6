@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class OabooksController < ApplicationController
-  before_action :set_oabook, only: [:show, :download_epub, :download_pdf, :download_mobi]
+  before_action :set_oabook, only: [:show]
 
   def show
   end
