@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   resources :books, concerns: [:imageable]
   resources :catalogs
   resources :conferences, only: [:index]
+  resources :oabooks, only: [:show], concerns: [:imageable]
   resources :people, only: [:index], concerns: [:imageable]
   resources :series, concerns: [:imageable]
   resources :special_offers, concerns: [:imageable]
@@ -49,12 +50,11 @@ Rails.application.routes.draw do
 
   root to: "webpages#index"
 
-  controller :oabooks do
-    get "open-access/labor-studies"                => :labor_studies, as: "labor_studies"
-    get "open-access/north-broad-press"            => :north_broad_press, as: "north_broad"
-    get "open-access/labor-studies/:id"            => :show, as: "labor_studies_book"
-    get "open-access/north-broad-press/:id"        => :show, as: "north_broad_book"
-  end
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  get "/open-access/north-broad-press" => "oabooks#north_broad_press", as: :north_broad
+  get "/open-access/labor-studies" => "oabooks#labor_studies", as: :labor_studies
+  get "/open-access/labor-studies/:id" => "oabooks#show", as: :labor_studies_book
+  get "/open-access/north-broad-press/:id" => "oabooks#show", as: :north_broad_book
+
 end

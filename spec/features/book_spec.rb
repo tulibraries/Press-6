@@ -7,8 +7,6 @@ RSpec.describe Book, type: :feature do
   let(:book_with_cover) { FactoryBot.create(:book, :with_cover_image, title: "With Cover") }
   let(:book) { FactoryBot.create(:book, books: [ book_with_cover, book_without_cover ]) }
 
-  # it { should have_many_and_belong_to(:books)  }
-
   it "has a cover image" do
     subject { create(:book, :with_cover_image) }
     expect { subject.cover_image.to be_attached }

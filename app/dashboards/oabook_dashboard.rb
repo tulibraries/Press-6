@@ -43,6 +43,9 @@ class OabookDashboard < Administrate::BaseDashboard
     description
     collection
     supplemental
+    epub
+    pdf
+    mobi
   ].freeze
 
   FORM_ATTRIBUTES = %i[
