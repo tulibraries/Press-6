@@ -1,0 +1,26 @@
+@import "partials/_vars.scss";
+
+h1.banner {
+  img {
+    width: 100%;
+  }
+}
+.oabook-home {
+  background-color: $white;
+}
+ul.oabook-buttons {
+  li {
+    text-align: center;
+    margin: 10px auto;
+    a, a:hover, a:visited {
+      display: block;
+      background-color: $red;
+      color: $white;
+      padding: 10px;
+      font-size: 1.25rem;
+    }
+  }
+}
+#dropDownMenuButton {
+  text-transform: capitalize;
+}

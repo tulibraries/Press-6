@@ -43,4 +43,16 @@ en:
             Hawaii, Asia and the Pacific, including Australia and New Zealand: Hawaii, Asia and the Pacific, including Australia and New Zealand
             Europe, the Middle East, and Africa: Europe, the Middle East, and Africa
             All other areas and general sales inquiries: All other areas and general sales inquiries
-
+    books:
+      purchase_link: https://cdcshoppingcart.uchicago.edu/Cart2/Chicagobook.aspx?PRESS=temple&ISBN=
+    oabooks:
+      online_epub: Read it Online
+      print_copy: Buy Print Copy
+      download:
+        epub: Download Epub
+        mobi: Download Mobi
+        pdf: Download PDF
+      nbpress: 
+        title: North Broad Press
+      labor_studies: 
+        title: Labor Studies & Work

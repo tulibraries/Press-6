@@ -1,0 +1,31 @@
+<div class="container mt-3 pt-3 oabook-home">
+
+<% title t("tupress.oabooks.labor_studies.title") %>
+
+<div class="row">
+    <div class="col">
+      <h1 class="mt-0 pt-0 text-center banner">
+          <%= image_pack_tag 'neh_banner.jpg', alt: t("tupress.oabooks.labor_studies.title") %>
+      </h1>
+      <div class="mt-4 mx-3"><%= @page.body if @page.present? %></div>
+  </div>
+</div>
+
+<div class="mt-4" style="border-top: solid #ccc 2px;"></div>
+
+<section>
+    <div class="row m-5">
+      <div class="column col-6 mb-5" id="column_1">
+        <% @column_1.each do |oabook| %>
+          <%= render "ls_book_list", oabook: oabook %>
+        <% end if @column_1.present? %>
+      </div>
+
+      <div class="column col-6  mb-5" id="column_2">
+        <% @column_2.reverse.each do |oabook| %>
+          <%= render "ls_book_list", oabook: oabook %>
+        <% end if @column_2.present? %>
+      </div>
+    </div>
+</section>
+</div>

@@ -12,17 +12,17 @@
   <div id="wrapper">
 
     <div class="row d-none d-sm-none d-md-none d-lg-block text-center" id="main-menu">
-      <div class="nav py-2 nav-fill" style="width:1200px;margin:auto">
+      <div class="nav nav-fill" style="width:1200px;margin:auto">
 
           <div class="btn-group ml-2 dropdown nav-item">
-              <%= button_tag "BOOKS",
+              <%= button_tag "Books",
                           {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
                           style: "display:inline-block;border:0;", 
                           "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
                           method: :get} %>
               <div class="dropdown-menu p-2" aria-labelledby="navbarDropdownMenuLink" style="">
                 <%= link_to "Award Winning Books", root_path+"awards", :class=>"dropdown-item" %>
-                <%= link_to "Books by Title", root_path+"books", :class=>"dropdown-item" %>
+                <%= link_to "Books by Title", books_path, :class=>"dropdown-item" %>
                 <%= link_to "Books by Author", root_path+"byauthor", :class=>"dropdown-item" %>
                 <%= link_to "Subject Index", root_path+"subjects", :class=>"dropdown-item" %>
                 <%= link_to "Catalog Index", root_path+"catalogs", :class=>"dropdown-item" %>
@@ -34,7 +34,7 @@
           </div>
 
           <div class="btn-group ml-2 dropdown nav-item">
-            <%= button_tag "OPEN ACCESS",
+            <%= button_tag "Open Access",
                 {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
                 style: "display:inline-block;border:0;", 
                 "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
@@ -43,13 +43,13 @@
               <% @journals.each do |i| %>
                 <li><%= link_to i.title, i.url, :class=>"dropdown-item" if i.url.present? && i.title == "Commonwealth" %></li>
               <% end %>
-              <li><%= link_to "North Broad Press", "http://tupress.temple.edu/open-access/north-broad-press", :class=>"dropdown-item" %></li>
-              <li><%= link_to "Labor Studies & Work", "http://tupress.temple.edu/open-access/labor-studies", :class=>"dropdown-item" %></li>
+              <li><%= link_to "North Broad Press", north_broad_path, :class=>"dropdown-item" %></li>
+              <li><%= link_to "Labor Studies & Work", labor_studies_path, :class=>"dropdown-item" %></li>
             </div>
           </div>
 
           <div class="btn-group ml-2 dropdown nav-item">
-            <%= button_tag "JOURNALS", 
+            <%= button_tag "Journals", 
                 {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
                 style: "display:inline-block;border:0;", 
                 "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
@@ -66,11 +66,11 @@
           <% if action_name == "press-info" %>
             <ul class="list-unstyled" style="display:inline-block">
               <li class="active">
-                <span><%= "PRESS INFO" %></span>
+                <span><%= "Press Info" %></span>
               </li>
             </ul>
           <% else %>
-            <%= button_tag "PRESS INFO", 
+            <%= button_tag "Press Info", 
                 {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
                 style: "display:inline-block;border:0;", 
                 "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
@@ -93,11 +93,11 @@
           <% if action_name == "orders" %>
             <ul class="list-unstyled" style="display:inline-block">
               <li class="active">
-                <span><%= "ORDERS" %></span>
+                <span><%= "Orders" %></span>
               </li>
             </ul>
           <% else %>
-            <%= button_tag "ORDERS", 
+            <%= button_tag "Orders", 
                 {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
                 style: "display:inline-block;border:0;", 
                 "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
@@ -116,11 +116,11 @@
           <% if action_name == "news" %>
             <ul class="list-unstyled" style="display:inline-block">
               <li class="active">
-                <span><%= "NEWS & EVENTS" %></span>
+                <span><%= "News & Events" %></span>
               </li>
             </ul>
           <% else %>
-            <%= button_tag "NEWS & EVENTS", 
+            <%= button_tag "News & Events", 
                 {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
                 style: "display:inline-block;border:0;", 
                 "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 

@@ -11,8 +11,10 @@ module Admin
       types = ["cover_image", "excerpt_image", "guide_image", "suggested_reading_image", "guide_file"] if klass == "Book"
       types = ["image"] if ["Brochure", "Series", "Person"].include?(klass)
       types = ["pdf"] if ["SpecialOffer", "Subject"].include?(klass)
+      types = ["image", "epub", "mobi"] if ["Oabook"].include?(klass)
 
       type = types.index(params[:field])
+
       field = types.at(type) if types.include? params[:field]
       @entity.public_send(field).purge
 

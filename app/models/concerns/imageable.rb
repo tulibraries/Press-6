@@ -5,7 +5,7 @@ module Imageable
   require Rails.root.join("lib/uploads.rb")
 
   def thumb_image(image_field)
-    custom_image(image_field, 180, 190)
+    custom_image(image_field, 160, 220)
   end
 
   def index_image(image_field)
