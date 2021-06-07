@@ -3,7 +3,7 @@
 </div>
 <div class="field-unit__field">
 	<% if field.data.attached? %>
-	  <%= image_tag field.data.variant(resize_to_limit: [350, 350]) %><br /><br />
+	  <%= image_tag field.data.variant(resize_to_limit: [350, 350])if field.data.variable? %><br /><br />
     <%= f.file_field field.attribute %>
     <%= link_to t("tupress.admin.actions.detach"), { action: :detach, field: (field.attribute) }, data: { confirm: t("tupress.default.fields.confirm") } %>
   <% else %>
