@@ -1,17 +1,8 @@
 # frozen_string_literal: true
 
 class AgenciesController < ApplicationController
-  before_action :set_agency, only: [:show]
-
   def index
-    @agencies = Agency.all
+    @agencies = Agency.all.group_by {|a| a.region}.map {|region, agencies| [region, agencies]}
+    # binding.pry
   end
-
-  def show
-  end
-
-  private
-    def set_agency
-      @agency = Agency.find(params[:id])
-    end
 end

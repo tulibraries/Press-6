@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 class Agency < ApplicationRecord
-  validates :title, :contact, :address1, :country, :city, :region, presence: true
+  validates :title, :region, presence: true
 end
