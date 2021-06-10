@@ -28,6 +28,7 @@ gem "active_storage_validations"
 gem "kaminari"
 gem "administrate-field-date_picker", "~> 0.2.0"
 gem "meta-tags"
+gem "activestorage-validator"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
