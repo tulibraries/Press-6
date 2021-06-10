@@ -6,33 +6,24 @@
   </div>
 
   <% @agencies.sort.each do |region, agencies| %>
+    <div class="row" id="regions">
+      <div class="col-12 px-0">
+        <%= render "region", region: region %>
+        <%= render "agencies", agencies: agencies %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @default_agency.present? %>
     <div class="row">
       <div class="col-12 px-0">
-        <h2 class="pl-3"><%= region %></h2> 
+        <h2 class="pl-3">All Other Territories</h2> 
       </div>
 
-      <div class="col-12 region mb-4" style="background-color:white;padding:10px">
-          <% agencies.each do |agency| %>
-            <div class="row">
-              <div class="col pl-5 mb-4">
-                <h3 style="font-size:125%;">
-                  <%= agency.title %>
-                </h3>
-                <ul class="list-unstyled">
-                  <%= "<li>#{agency.contact}</li>".html_safe if agency.contact.present? %>
-                  <%= "<li>#{agency.address1}</li>".html_safe if agency.address1.present? %>
-                  <%= "<li>#{agency.address2}</li>".html_safe if agency.address2.present? %>
-                  <%= "<li>#{agency.address3}</li>".html_safe if agency.address3.present? %>
-                  <%= "<li>#{agency.city}</li>".html_safe if agency.city.present? %>
-                  <%= "<li>#{agency.country}</li>".html_safe if agency.country.present? %>
-                  <%= "<li>#{agency.phone}</li>".html_safe if agency.phone.present? %>
-                  <%= "<li>#{agency.fax}</li>".html_safe if agency.fax.present? %>
-                  <%= "<li>#{mail_to agency.email, agency.email}</li>".html_safe if agency.email.present? %>
-                  <%= "<li>#{link_to agency.website, agency.website}</li>".html_safe if agency.website.present? %>
-                </ul>
-              </div>
-            </div>
-          <% end %>
+      <div class="col-12 region mb-4">
+        <div class="row">
+          <%= render "default_agency" %>
+        </div>
       </div>
     </div>
   <% end %>
