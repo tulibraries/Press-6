@@ -5,7 +5,7 @@
       <% if @book.cover_image.attached? %>
         <%= image_tag @book.show_image("cover_image") %>
       <% else %>
-        <%= image_pack_tag "see-also-default.gif", style: "width: 270px, height: 420px" %>
+        <%= image_pack_tag "default-book-cover-show.png", style: "width: 270px, height: 420px" %>
       <% end %>
     <% end %>
       <div class="social-share text-right p-4">
