@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AgenciesHelper
   def rights_coverage(region)
     case region

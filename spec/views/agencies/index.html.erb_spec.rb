@@ -27,7 +27,7 @@ RSpec.describe "agencies/index", type: :view do
   context "displays agency info" do
     before(:each) do
       assign(:default_agency, agency3)
-      assign(:agencies, [{agency1.region => [agency1]}, {agency2.region => [agency2]}])
+      assign(:agencies, [{ agency1.region => [agency1] }, { agency2.region => [agency2] }])
       render "agencies", agencies: [agency1, agency2]
     end
 
