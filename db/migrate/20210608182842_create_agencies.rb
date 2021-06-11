@@ -2,8 +2,9 @@
 
 class CreateAgencies < ActiveRecord::Migration[6.0]
   def change
-    create_table :agencies do |t|
+    create_table :agencies, force: true do |t|
       t.string :title
+      t.string :region
       t.string :contact
       t.string :address1
       t.string :address2
@@ -14,8 +15,6 @@ class CreateAgencies < ActiveRecord::Migration[6.0]
       t.string :fax
       t.string :email
       t.string :website
-      t.string :region
-      t.string :rights
 
       t.timestamps
     end
