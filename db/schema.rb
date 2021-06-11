@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_08_182842) do
+ActiveRecord::Schema.define(version: 2021_05_28_130530) do
 
   create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 2021_06_08_182842) do
 
   create_table "agencies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
-    t.string "region"
     t.string "contact"
     t.string "address1"
     t.string "address2"
@@ -56,6 +55,8 @@ ActiveRecord::Schema.define(version: 2021_06_08_182842) do
     t.string "fax"
     t.string "email"
     t.string "website"
+    t.string "region"
+    t.string "rights"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

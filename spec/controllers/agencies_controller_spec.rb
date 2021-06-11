@@ -11,8 +11,5 @@ RSpec.describe AgenciesController, type: :controller do
       get :index, format: :html
       expect(response.header["Content-Type"]).to include "html"
     end
-    # it "assigns instance variables" do
-    #   expect(assigns(:agencies)).to be
-    # end
   end
 end

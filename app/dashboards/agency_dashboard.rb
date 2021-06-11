@@ -23,6 +23,7 @@ class AgencyDashboard < Administrate::BaseDashboard
     email: Field::String,
     website: Field::String,
     region: Field::Select.with_options(collection: I18n.t("tupress.admin.collections.agencies.regions")),
+    rights: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -53,6 +54,7 @@ class AgencyDashboard < Administrate::BaseDashboard
     email
     website
     region
+    rights
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -60,7 +62,6 @@ class AgencyDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     title
-    region
     contact
     address1
     address2
@@ -71,6 +72,8 @@ class AgencyDashboard < Administrate::BaseDashboard
     fax
     email
     website
+    region
+    rights
   ].freeze
 
   # COLLECTION_FILTERS
@@ -88,7 +91,7 @@ class AgencyDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how agencies are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(agency)
-    agency.title
-  end
+  # def display_resource(agency)
+  #   "Agency ##{agency.id}"
+  # end
 end
