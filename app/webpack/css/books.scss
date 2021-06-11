@@ -86,3 +86,13 @@ ul#alphamenu {
 		content: "";
 	}
 }
+.book-listing {
+	border-bottom: solid #ccc 1px;
+}
+.book-details {
+	background-color: $white;
+}
+.order-button {
+	position: absolute;
+	bottom: 0;
+}

@@ -8,7 +8,7 @@
 </div>
 
     <% @books.each do |book| %>  
-    <div class="row pb-4 mb-4" style="border-bottom: solid #ccc 1px;">
+    <div class="row pb-4 mb-4 book-listing">
       <div class="col-3 pl-0">
         <%= link_to book_path(book.xml_id) do %>
           <% if book.cover_image.attached? %>
@@ -18,7 +18,7 @@
           <% end %>
         <% end %>
       </div>
-      <div class="col-9 p-4 pl-0" style="background-color: #fff;">
+      <div class="col-9 p-4 pl-0 book-details">
         <h2><%= link_to book.title, book_path(book.xml_id) %></h2>
         <p><em><%= book.subtitle if book.subtitle.present? %></em></p>
         <p><%= book.author_byline if book.author_byline.present? %></p>
@@ -29,7 +29,7 @@
           <%= "| #{book.illustrations}" if book.illustrations.present? %><br><br>
         </p>
 
-        <p style="position:absolute;bottom:0;">
+        <p class="order-button">
         <%= link_to "ORDER", "https://cdcshoppingcart.uchicago.edu/Cart2/ChicagoBook.aspx?ISBN=#{book.isbn}&&PRESS=temple", 
                               class: "order-button" if book.isbn.present? %>
         </p>
