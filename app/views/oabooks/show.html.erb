@@ -19,9 +19,9 @@
 
   <div class="col col-9">
     <h1><%= @oabook.title %></h1>
-      <%= escape_once "<em>#{@oabook.subtitle}</em><br/>".html_safe if @oabook.subtitle.present? %>
-      <%= escape_once "#{@oabook.author}<br/>".html_safe if @oabook.author.present? %>
-      <%= escape_once "#{@oabook.supplemental}<br/>".html_safe if @oabook.supplemental.present? %>
+      <%= "<em>#{@oabook.subtitle}</em><br/>".html_safe if @oabook.subtitle.present? %>
+      <%= "#{@oabook.author}<br/>".html_safe if @oabook.author.present? %>
+      <%= "#{@oabook.supplemental}<br/>".html_safe if @oabook.supplemental.present? %>
       <%= @oabook.edition if @oabook.edition.present? %>
     
     <div class="mt-4 oabook-description">

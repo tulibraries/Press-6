@@ -1,17 +1,8 @@
 # frozen_string_literal: true
 
 class AgenciesController < ApplicationController
-  before_action :set_agency, only: [:show]
-
   def index
-    @agencies = Agency.all
+    @default_agency = Agency.find_by(region: "All Other Territories")
+    @agencies = Agency.where.not(region: "All Other Territories").group_by { |a| a.region }.map { |region, agencies| [region, agencies] }
   end
-
-  def show
-  end
-
-  private
-    def set_agency
-      @agency = Agency.find(params[:id])
-    end
 end
