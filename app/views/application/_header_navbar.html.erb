@@ -78,9 +78,9 @@
 
             <div class="dropdown-menu p-2" x-placement="bottom-start">
                 <%= link_to "About the Press", root_path+"press-info", :class=>"dropdown-item" %>
-                <%= link_to "People at the Press", root_path+"people", :class=>"dropdown-item" %>
+                <%= link_to "People at the Press", people_path, :class=>"dropdown-item" %>
                 <%= link_to "Rights and Permissions", root_path+"rights", :class=>"dropdown-item" %>
-                <%= link_to "Foreign Rights Agents", root_path+"foreign-rights", :class=>"dropdown-item" %>
+                <%= link_to "Foreign Rights Agents", agencies_path, :class=>"dropdown-item" %>
                 <%= link_to "Submissions", root_path+"submissions", :class=>"dropdown-item" %>
                 <%= link_to "About University Presses", root_path+"university-presses", :class=>"dropdown-item" %>
                 <%= link_to "Download Documents", root_path+"downloads", :class=>"dropdown-item" %>
@@ -130,7 +130,7 @@
                 <%= link_to "Media Inquiries", "#", :class=>"dropdown-item" %>
                 <%= link_to "News of the week Blog", "#", :class=>"dropdown-item" %>
                 <%= link_to "Blog", "#", :class=>"dropdown-item" %>
-                <%= link_to "Conferences", "#", :class=>"dropdown-item" %>
+                <%= link_to "Conferences", conferences_path, :class=>"dropdown-item" %>
                 <%= link_to "Event Calendar", "#", :class=>"dropdown-item" %>
                 <%= link_to "Special Offers", "#", :class=>"dropdown-item" %>
             </div>

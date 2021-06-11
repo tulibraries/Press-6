@@ -1,0 +1,17 @@
+<div class="col pl-5 mb-4 mt-3 <%= @default_agency.title %>">
+  <h3 style="font-size:125%;">
+    <%= @default_agency.title %>
+  </h3>
+  <ul class="list-unstyled">
+    <%= "<li>#{@default_agency.contact}</li>".html_safe if @default_agency.contact.present? %>
+    <%= "<li>#{@default_agency.address1}</li>".html_safe if @default_agency.address1.present? %>
+    <%= "<li>#{@default_agency.address2}</li>".html_safe if @default_agency.address2.present? %>
+    <%= "<li>#{@default_agency.address3}</li>".html_safe if @default_agency.address3.present? %>
+    <%= "<li>#{@default_agency.city}</li>".html_safe if @default_agency.city.present? %>
+    <%= "<li>#{@default_agency.country}</li>".html_safe if @default_agency.country.present? %>
+    <%= "<li>#{@default_agency.phone} (phone)</li>".html_safe if @default_agency.phone.present? %>
+    <%= "<li>#{@default_agency.fax} (fax)</li>".html_safe if @default_agency.fax.present? %>
+    <%= "<li>#{mail_to @default_agency.email, @default_agency.email}</li>".html_safe if @default_agency.email.present? %>
+    <%= "<li>#{link_to @default_agency.website, @default_agency.website}</li>".html_safe if @default_agency.website.present? %>
+  </ul>
+</div>
