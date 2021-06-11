@@ -10,6 +10,7 @@ class BooksController < ApplicationController
     else
       @books = Book.where("sort_title regexp ?", "^[0-9]+").order(:sort_title).page params[:page]
     end
+    @selected = letter
   end
 
   def show

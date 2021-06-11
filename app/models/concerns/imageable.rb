@@ -9,7 +9,7 @@ module Imageable
   end
 
   def index_image(image_field)
-    custom_image(image_field, 220, 320)
+    custom_image(image_field, 250, 350)
   end
 
   def show_image(image_field)

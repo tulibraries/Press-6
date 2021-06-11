@@ -1,24 +1,24 @@
 <div class="container">
 
 <div class="row">
-  <div class="col-12 mb-3 mt-3 pr-0">
+  <div class="col-12 mb-3 mt-3 px-0">
     <h1 class="my-4">Browse Books by Title</h1>
     <%= render "alphamenu" %>
   </div>
 </div>
 
     <% @books.each do |book| %>  
-    <div class="row">
-      <div class="col-3 mb-3">
+    <div class="row pb-4 mb-4 book-listing">
+      <div class="col-3 pl-0">
         <%= link_to book_path(book.xml_id) do %>
           <% if book.cover_image.attached? %>
             <%= image_tag book.index_image("cover_image") %>
           <% else %>
-            <%= image_pack_tag "see-also-default.gif", style: "width: 220px, height: 320px" %>
+            <%= image_pack_tag "default-book-cover-index.png" %>
           <% end %>
         <% end %>
       </div>
-      <div class="col-9 p-4 mb-3" style="background-color: #fff;">
+      <div class="col-9 p-4 pl-0 book-details">
         <h2><%= link_to book.title, book_path(book.xml_id) %></h2>
         <p><em><%= book.subtitle if book.subtitle.present? %></em></p>
         <p><%= book.author_byline if book.author_byline.present? %></p>
@@ -29,17 +29,13 @@
           <%= "| #{book.illustrations}" if book.illustrations.present? %><br><br>
         </p>
 
-        <p style="position:absolute;bottom:0;">
+        <p class="order-button">
         <%= link_to "ORDER", "https://cdcshoppingcart.uchicago.edu/Cart2/ChicagoBook.aspx?ISBN=#{book.isbn}&&PRESS=temple", 
                               class: "order-button" if book.isbn.present? %>
         </p>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <hr />
-      </div>
-    </div>
+
     <% end %>
 
   <div class="row">
