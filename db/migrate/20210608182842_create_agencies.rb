@@ -2,7 +2,7 @@
 
 class CreateAgencies < ActiveRecord::Migration[6.0]
   def change
-    create_table :agencies do |t|
+    create_table :agencies, force: true do |t|
       t.string :title
       t.string :region
       t.string :contact
