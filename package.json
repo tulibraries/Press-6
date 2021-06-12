@@ -28,7 +28,8 @@
     "y18n": "4.0.1",
     "css-what": "5.0.1",
     "trim-newlines": "4.0.1",
-    "normalize-url": "6.0.1"
+    "normalize-url": "6.0.1",
+    "glob-parent": "^6.0.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"
