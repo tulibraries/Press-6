@@ -5,6 +5,7 @@ FactoryBot.define do
     name { "John" }
     email { "mori@jbooks.com" }
     department { "Access Services" }
+    head { true }
     position { "Up" }
   end
 

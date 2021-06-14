@@ -186,6 +186,9 @@ GEM
     nokogiri (1.11.4)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
+    orderly (0.1.1)
+      capybara (>= 1.1)
+      rspec (>= 2.14)
     parallel (1.20.1)
     parser (3.0.1.1)
       ast (~> 2.4.1)
@@ -244,6 +247,10 @@ GEM
       ffi (~> 1.0)
     regexp_parser (2.1.1)
     rexml (3.2.5)
+    rspec (3.10.0)
+      rspec-core (~> 3.10.0)
+      rspec-expectations (~> 3.10.0)
+      rspec-mocks (~> 3.10.0)
     rspec-activemodel-mocks (1.1.0)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
@@ -374,6 +381,7 @@ DEPENDENCIES
   mini_magick
   mysql2 (~> 0.5.3)
   nokogiri (= 1.11.4)
+  orderly
   pry
   pry-byebug
   pry-rails
