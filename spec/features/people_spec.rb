@@ -13,11 +13,11 @@
       expect(page.body).to match /John/
       expect(page.body).to match /Lemon Head/
     end
-    
+
     it "returns department head first" do
       visit people_path
       container = page.find("#people")
-      within(container) do 
+      within(container) do
         expect(default_person.name).to appear_before(dept_head.name, only_text: true)
       end
     end
