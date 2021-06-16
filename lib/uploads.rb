@@ -55,7 +55,7 @@ class Uploads
         else
           rows = (scale_y * (rows + 0.5)).round
           resize = "x#{rows}"
-        end 
+        end
       end unless cols == 0 || rows == 0 || width.to_f.nan? || height.to_f.nan?
 
       {
