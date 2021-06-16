@@ -20,4 +20,4 @@
       expect(dept_head.name).to appear_before(default_person.name, only_text: true)
     end
   end
- end
+end
