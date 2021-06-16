@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="people">
 
 <div class="row">
   <div class="col pl-0">
@@ -6,7 +6,7 @@
   </div>
 </div>
 
-<% @people.sort.each do |dept, people| %>
+<% @departments.each do |dept, people| %>
 <section>
 <% unless dept.empty? %>
 	<div class="row">
@@ -22,10 +22,12 @@
     <div class="col col-6 mb-4 pr-4 p-0" >
       <div class="p-4 person-card">
       <article>
+      <%= link_to action: "edit", controller: "admin/people", id: person.id do %>
         <%= image_tag person.thumb_image(:image), class: "person" if person.image.attached? %>
         <%= image_pack_tag "staff_placeholder.png", class: "person default" unless person.image.attached?  %>
-
+      <% end %>
         <p class="name"><%= person.name %></p>
+        <p><%= person.head %></p>
         <p><em><%= person.position %></em></p>
         <p><%= person.position_description %></p>
         <p><%= mail_to person.email, person.email %></p>
