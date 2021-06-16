@@ -55,7 +55,7 @@ class Uploads
         else
           rows = (scale_y * (rows + 0.5)).round
           resize = "x#{rows}"
-        end
+        end unless scale_x == 0
       end
 
       {
