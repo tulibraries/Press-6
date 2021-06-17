@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_08_182842) do
+ActiveRecord::Schema.define(version: 2021_06_17_124338) do
 
   create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 2021_06_08_182842) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "epub_link"
+    t.string "manifold"
   end
 
   create_table "people", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -196,6 +197,7 @@ ActiveRecord::Schema.define(version: 2021_06_08_182842) do
     t.string "document_contact"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "head"
   end
 
   create_table "promotions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -251,7 +253,6 @@ ActiveRecord::Schema.define(version: 2021_06_08_182842) do
     t.string "title"
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "books", "special_offers"
   add_foreign_key "special_offers", "books"
 end

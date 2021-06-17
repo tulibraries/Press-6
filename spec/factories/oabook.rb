@@ -12,6 +12,7 @@ FactoryBot.define do
     supplemental { "With a foreword by Billy Preston" }
     pod { false }
     description { ActionText::Content.new("Good Day Sunshine") }
+    manifold { "http://google.com" }
 
     after :create do |oabook|
       oabook.image.attach(io:
