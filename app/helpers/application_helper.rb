@@ -10,22 +10,23 @@ module ApplicationHelper
     Nokogiri::HTML::DocumentFragment.parse(html).to_html
   end
 
-  def edit_url
-    path = request.env["PATH_INFO"]
-    controller = path.split("/").slice(1)
-    id = path.split("/").slice(2)
+  def edit_url(book = nil)
+    id = params[:id]
     exemptions = [nil, "webpages", "books"]
 
-    unless exemptions.include?(controller)
-      "/admin/#{controller}/#{id}/edit" if action_name == "show"
-      "/admin/#{controller}" if action_name == "index"
-    else
-      if controller == "webpages" && action_name == "show"
-        "/admin/#{controller}/#{id}/edit"
-      elsif controller == "books" && action_name == "show"
-        "/admin/#{controller}/#{@book.id}/edit"
+    unless exemptions.include?(controller_name)
+      if ["index", "labor_studies", "north_broad_press"].include?(action_name)
+        "/admin/#{controller_name.pluralize}"
       else
-        "/admin/#{controller}"
+        "/admin/#{controller_name}/#{id}/edit"
+      end
+    else
+      if controller_name == "webpages" && action_name == "show"
+        "/admin/#{controller_name}/#{id}/edit"
+      elsif controller_name == "books" && action_name == "show"
+        "/admin/#{controller_name}/#{book}/edit"
+      else
+        "/admin/#{controller_name}"
       end
     end
   end

@@ -13,7 +13,7 @@ RSpec.shared_examples "show_editable" do
 
   describe "GET /#{model_name}/:id" do
     it "has an edit link" do
-      get :show, params: { id: model.id } 
+      get :show, params: { id: model.id }
       expect(response.body).to match /\/admin\/#{model_name.pluralize}\/#{model.id}\/edit\"/
     end
   end
