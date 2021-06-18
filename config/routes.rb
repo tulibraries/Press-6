@@ -46,11 +46,9 @@ Rails.application.routes.draw do
   resources :series, concerns: [:imageable]
   resources :special_offers, concerns: [:imageable]
   resources :subjects, concerns: [:imageable]
-  resources :webpages, only: [:show]
+  resources :webpages, only: [:index, :show]
 
   root to: "webpages#index"
-
-
 
   get "/open-access/north-broad-press" => "oabooks#north_broad_press", as: :north_broad
   get "/open-access/labor-studies" => "oabooks#labor_studies", as: :labor_studies

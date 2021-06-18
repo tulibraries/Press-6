@@ -25,4 +25,7 @@ RSpec.describe WebpagesController, type: :controller do
     end
   end
 
+  it_behaves_like "index_editable"
+  it_behaves_like "show_editable"
+
 end
