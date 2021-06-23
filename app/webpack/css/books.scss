@@ -14,7 +14,7 @@
 	display: inline-block;
 }
 
-.order-button {
+a.order-button {
 	color: $white!important;
 	background-color: $red;
 	padding: 5px 14px;
@@ -92,7 +92,7 @@ ul#alphamenu {
 .book-details {
 	background-color: $white;
 }
-.order-button {
+p.order-button {
 	position: absolute;
 	bottom: 0;
 }
