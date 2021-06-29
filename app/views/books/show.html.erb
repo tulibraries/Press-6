@@ -88,7 +88,7 @@
     </div>
     <div class="col col-9 book-info">
       <div class="description mt-5 p-3">
-        <h1><%= strip_tags @book.title %></h1>
+        <h1><%= render "title_link", title: @book.title %></h1>
 
         <p class="subtitle lead">
         <% if @book.subtitle.present? %>
