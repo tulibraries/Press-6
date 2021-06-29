@@ -56,6 +56,7 @@ group :test do
   gem "simplecov"
   gem "simplecov-lcov"
   gem "shoulda-matchers", "~> 4.0"
+  gem "orderly"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
