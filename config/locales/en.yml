@@ -92,6 +92,8 @@ en:
       purchase_link: https://cdcshoppingcart.uchicago.edu/Cart2/Chicagobook.aspx?PRESS=temple&ISBN=
     oabooks:
       online_epub: Read it Online
+      manifold_label: View Epub
+      manifold_link: https://temple.manifoldapp.org/read/
       print_copy: Buy Print Copy
       download:
         epub: Download Epub
