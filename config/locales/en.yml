@@ -5,10 +5,56 @@ en:
         hot: New and Noteworthy
   tupress:
     default:
+      menu:
+        books: 
+          title: Books
+          awards: Award Winning titles
+          by_title: Books by Title
+          by_author: Books by Author
+          subjects: Subjects Index
+          catalogs: Catalog Index
+          series: Series Listing
+          offers: Special Offers
+          guides: Study Guides
+          adoptions: Books for Course Adoption
+        open_access:
+          title: Open Access
+          nbp: North Broad Press
+          lsw: Labor Studies & Work
+          manifold_label: Manifold Editions
+          manifold_link: https://temple.manifoldapp.org/
+        journals:
+          title: Journals
+          commonwealth: Commonwealth
+        press_info:
+          title: Press Info
+          about: About the Press
+          people: People at the Press
+          rights: Rights and Permissions
+          agents: Foreign Rights Agents
+          submissions: Submissions
+          presses: About University Presses
+          download: Download Documents
+          faq: FAQ
+        orders:
+          title: Orders
+          info: Ordering Info
+          terms: Payments Terms
+          requests: Exam & Desk Copy Requests
+          reps: Sales Representatives
+        news:
+          title: News & Events
+          inquiries: Media Inquiries
+          blog: News of the Week Blog
+          conferences: Conferences
+          events: Event Calendar
+          offers: Special Offers
+        faq: 
+          title: FAQ
       fields:
-        confirm: Are you sure?
         content_skip: Skip to main content
         search_skip: Skip to site search
+        confirm: Are you sure?
     admin:
       actions:
         sync: Sync
