@@ -29,6 +29,8 @@ module ApplicationHelper
         "/admin/#{controller_name}"
       end
     end
+  end
+  
   def menu_button(text)
     button_tag text,
               { id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle",
