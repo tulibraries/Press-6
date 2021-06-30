@@ -2,6 +2,15 @@
 
 class PeopleController < ApplicationController
   def index
-    @people = Person.all.group_by { |t| t.department }
+    @people = Person.order(:name)
+    @departments = @people.group_by(&:department)
+
+    @departments.each do |department, people|
+      head = @people.select { |person| person.department == department && person.head }
+      people.delete_if(&:head)
+      head.sort_by(&:name).reverse.each do |person|
+        people.insert(0, person)
+      end
+    end
   end
 end

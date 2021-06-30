@@ -30,10 +30,21 @@
 		@media screen and (max-width: 449px) {
 			vertical-align: top;
 		}
-	}
-	
+	}	
 }
 
+#main-menu {
+	.nav-fill {
+		width: 1200px;
+		margin: auto;
+	}
+}
+
+.faq-button {
+	display: inline-block;
+	border: 0!important;
+	background-color: transparent!important;
+}
 
 #search-block {
 	input:focus {
@@ -46,7 +57,7 @@
 	width: 32px;
 	display: inline-block;
 	position: relative;
-	top: 5px;
+	top: 4px;
 	left: -17px;
 	border: solid #ccc 1px;
 	border-left: 0;

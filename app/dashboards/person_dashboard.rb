@@ -12,6 +12,7 @@ class PersonDashboard < Administrate::BaseDashboard
     department: Field::String,
     document_contact: Field::String,
     image: ImageField,
+    head: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -35,6 +36,7 @@ class PersonDashboard < Administrate::BaseDashboard
     position
     position_description
     department
+    head
     document_contact
   ].freeze
 

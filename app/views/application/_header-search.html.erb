@@ -11,7 +11,7 @@
 	<%= form_tag(root_path+"search", method: "get", :class=>"", :id=>"search-block") do %>
 		<%= label_tag(:q, "Search by title, author, ISBN...", :class=>"element-invisible") %>
 
-		<%= text_field_tag(:q, nil, class: "form-control w-75 d-inline-block mt-5 mr-0", 
+		<%= text_field_tag(:q, nil, class: "form-control w-75 d-inline-block mt-2 mr-0", 
 							placeholder: "Search by title, author, ISBN...",
 							results: "0"
 							) %>

@@ -21,7 +21,7 @@ class OabookDashboard < Administrate::BaseDashboard
     epub: FileField,
     mobi: FileField,
     pdf: FileField,
-
+    manifold: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -63,6 +63,7 @@ class OabookDashboard < Administrate::BaseDashboard
     epub
     pdf
     mobi
+    manifold
   ].freeze
 
   COLLECTION_FILTERS = {}.freeze

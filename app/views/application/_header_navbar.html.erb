@@ -11,148 +11,99 @@
   <div id="wrapper">
 
     <div class="row d-none d-sm-none d-md-none d-lg-block text-center" id="main-menu">
-      <div class="nav nav-fill" style="width:1200px;margin:auto">
+      <div class="nav nav-fill">
 
-          <div class="btn-group ml-2 dropdown nav-item">
-              <%= button_tag "Books",
-                          {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
-                          style: "display:inline-block;border:0;", 
-                          "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
-                          method: :get} %>
-              <div class="dropdown-menu p-2" aria-labelledby="navbarDropdownMenuLink" style="">
-                <%= link_to "Award Winning Books", root_path+"awards", :class=>"dropdown-item" %>
-                <%= link_to "Books by Title", books_path, :class=>"dropdown-item" %>
-                <%= link_to "Books by Author", root_path+"byauthor", :class=>"dropdown-item" %>
-                <%= link_to "Subject Index", root_path+"subjects", :class=>"dropdown-item" %>
-                <%= link_to "Catalog Index", root_path+"catalogs", :class=>"dropdown-item" %>
-                <%= link_to "Series Listing", root_path+"series", :class=>"dropdown-item" %>
-                <%= link_to "Special Offers", special_offers_path, :class=>"dropdown-item" %>
-                <%= link_to "Study Guides", root_path+"studyguides", :class=>"dropdown-item" %>
-                <%= link_to "Books for Course Adoption", root_path+"course-adoptions", :class=>"dropdown-item" %>
-              </div>
+        <div class="btn-group ml-2 dropdown nav-item">
+          <%= menu_button(t("tupress.default.menu.books.title")) %>
+          <div class="dropdown-menu p-2" aria-labelledby="navbarDropdownMenuLink">
+            <ul class="list-unstyled">
+              <li><%= link_to t("tupress.default.menu.books.awards"), root_path+"awards", :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.books.by_title"), books_path, :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.books.by_author"), root_path+"byauthor", :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.books.subjects"), root_path+"subjects", :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.books.catalogs"), catalogs_path, :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.books.series"), root_path+"series", :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.books.offers"), root_path+"special_offers", :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.books.guides"), root_path+"studyguides", :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.books.adoptions"), root_path+"course-adoptions", :class=>"dropdown-item" %></li>
+            </ul>
           </div>
+        </div>
 
-          <div class="btn-group ml-2 dropdown nav-item">
-            <%= button_tag "Open Access",
-                {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
-                style: "display:inline-block;border:0;", 
-                "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
-                method: :get} %>
-            <div class="dropdown-menu p-2" x-placement="bottom-start">
+        <div class="btn-group ml-2 dropdown nav-item">
+          <%= menu_button(t("tupress.default.menu.open_access.title")) %>
+          <div class="dropdown-menu p-2" x-placement="bottom-start">
+            <ul class="list-unstyled">
               <% @journals.each do |i| %>
-                <li><%= link_to i.title, i.url, :class=>"dropdown-item" if i.url.present? && i.title == "Commonwealth" %></li>
+                <li><%= link_to i.title, i.url, :class=>"dropdown-item" if i.url.present? && i.title == t("tupress.default.menu.journals.commonwealth") %></li>
               <% end %>
-              <li><%= link_to "North Broad Press", north_broad_path, :class=>"dropdown-item" %></li>
-              <li><%= link_to "Labor Studies & Work", labor_studies_path, :class=>"dropdown-item" %></li>
-            </div>
+              <li><%= link_to t("tupress.default.menu.open_access.nbp"), north_broad_path, :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.open_access.lsw"), labor_studies_path, :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.open_access.manifold_label"), t("tupress.default.menu.open_access.manifold_link"), :class=>"dropdown-item" %></li>
+            </ul>
           </div>
+        </div>
 
-          <div class="btn-group ml-2 dropdown nav-item">
-            <%= button_tag "Journals", 
-                {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
-                style: "display:inline-block;border:0;", 
-                "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
-                method: :get} %>
-
-            <div class="dropdown-menu p-2" x-placement="bottom-start">
+        <div class="btn-group ml-2 dropdown nav-item">
+          <%= menu_button(t("tupress.default.menu.journals.title")) %>
+          <div class="dropdown-menu p-2" x-placement="bottom-start">
+            <ul class="list-unstyled">
               <% @journals.each do |i| %>
                 <li><%= link_to i.title, i.url, :class=>"dropdown-item" if i.url.present? %></li>
               <% end %>
-            </div>
+            </ul>
           </div>
+        </div>
+
+        <div class="btn-group ml-2 dropdown nav-item">
+          <%= menu_button(t("tupress.default.menu.press_info.title")) %>
+          <div class="dropdown-menu p-2" x-placement="bottom-start">
+            <ul class="list-unstyled">
+              <li><%= link_to t("tupress.default.menu.press_info.about"), root_path+"press-info", :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.press_info.people"), people_path, :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.press_info.rights"), root_path+"rights", :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.press_info.agents"), agencies_path, :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.press_info.submissions"), root_path+"submissions", :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.press_info.presses"), root_path+"university-presses", :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.press_info.download"), root_path+"downloads", :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.press_info.faq"), root_path+"faq", :class=>"dropdown-item" %></li>
+            </ul>
+          </div>
+        </div>
 
           <div class="btn-group ml-2 dropdown nav-item">
-          <% if action_name == "press-info" %>
-            <ul class="list-unstyled" style="display:inline-block">
-              <li class="active">
-                <span><%= "Press Info" %></span>
-              </li>
-            </ul>
-          <% else %>
-            <%= button_tag "Press Info", 
-                {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
-                style: "display:inline-block;border:0;", 
-                "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
-                method: :get} %>
-
+          <%= menu_button(t("tupress.default.menu.orders.title")) %>
             <div class="dropdown-menu p-2" x-placement="bottom-start">
-                <%= link_to "About the Press", root_path+"press-info", :class=>"dropdown-item" %>
-                <%= link_to "People at the Press", people_path, :class=>"dropdown-item" %>
-                <%= link_to "Rights and Permissions", root_path+"rights", :class=>"dropdown-item" %>
-                <%= link_to "Foreign Rights Agents", agencies_path, :class=>"dropdown-item" %>
-                <%= link_to "Submissions", root_path+"submissions", :class=>"dropdown-item" %>
-                <%= link_to "About University Presses", root_path+"university-presses", :class=>"dropdown-item" %>
-                <%= link_to "Download Documents", root_path+"downloads", :class=>"dropdown-item" %>
-                <%= link_to "FAQ", root_path+"faq", :class=>"dropdown-item" %>
+              <ul class="list-unstyled">
+                <li><%= link_to t("tupress.default.menu.orders.info"), root_path+"order", :class=>"dropdown-item" %></li>
+                <li><%= link_to t("tupress.default.menu.orders.terms"), root_path+"payment", :class=>"dropdown-item" %></li>
+                <li><%= link_to t("tupress.default.menu.orders.requests"), root_path+"copy-request", :class=>"dropdown-item" %></li>
+                <li><%= link_to t("tupress.default.menu.orders.reps"), root_path+"sales-reps", :class=>"dropdown-item" %></li>
+              </ul>
             </div>
-          <% end %>
           </div>
 
           <div class="btn-group ml-2 dropdown nav-item">
-          <% if action_name == "orders" %>
-            <ul class="list-unstyled" style="display:inline-block">
-              <li class="active">
-                <span><%= "Orders" %></span>
-              </li>
-            </ul>
-          <% else %>
-            <%= button_tag "Orders", 
-                {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
-                style: "display:inline-block;border:0;", 
-                "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
-                method: :get} %>
-
+          <%= menu_button(t("tupress.default.menu.news.title")) %>
             <div class="dropdown-menu p-2" x-placement="bottom-start">
-                <%= link_to "Ordering Information", root_path+"order", :class=>"dropdown-item" %>
-                <%= link_to "Payment Terms", root_path+"payment", :class=>"dropdown-item" %>
-                <%= link_to "Exam & Desk Copy Requests", root_path+"copy-request", :class=>"dropdown-item" %>
-                <%= link_to "Sales Representatives", root_path+"sales-reps", :class=>"dropdown-item" %>
+              <ul class="list-unstyled">
+                <li><%= link_to t("tupress.default.menu.news.inquiries"), "#", :class=>"dropdown-item" %></li>
+                <li><%= link_to t("tupress.default.menu.news.blog"), "#", :class=>"dropdown-item" %></li>
+                <li><%= link_to t("tupress.default.menu.news.conferences"), conferences_path, :class=>"dropdown-item" %></li>
+                <li><%= link_to t("tupress.default.menu.news.events"), "#", :class=>"dropdown-item" %></li>
+                <li><%= link_to t("tupress.default.menu.news.offers"), "#", :class=>"dropdown-item" %></li>
+              </ul>
             </div>
-          <% end %>
           </div>
 
           <div class="btn-group ml-2 dropdown nav-item">
-          <% if action_name == "news" %>
-            <ul class="list-unstyled" style="display:inline-block">
-              <li class="active">
-                <span><%= "News & Events" %></span>
-              </li>
-            </ul>
-          <% else %>
-            <%= button_tag "News & Events", 
-                {id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle", 
-                style: "display:inline-block;border:0;", 
-                "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", 
-                method: :get} %>
-
-            <div class="dropdown-menu p-2" x-placement="bottom-start">
-                <%= link_to "Media Inquiries", "#", :class=>"dropdown-item" %>
-                <%= link_to "News of the week Blog", "#", :class=>"dropdown-item" %>
-                <%= link_to "Blog", "#", :class=>"dropdown-item" %>
-                <%= link_to "Conferences", conferences_path, :class=>"dropdown-item" %>
-                <%= link_to "Event Calendar", "#", :class=>"dropdown-item" %>
-                <%= link_to "Special Offers", "#", :class=>"dropdown-item" %>
-            </div>
-          <% end %>
-          </div>
-
-
-          <div class="btn-group ml-2 dropdown nav-item">
-          <% if action_name == "faq" %>
-            <ul class="list-unstyled" style="display:inline-block">
-              <li class="active">
-                <span><%= t("FAQ") %></span>
-              </li>
-            </ul>
-          <% else %>
-            <%= button_to "FAQ", "#", 
+            <%= button_to t("tupress.default.menu.faq.title"), "#", 
                 {
-                  class: "btn btn-lg btn-secondary dropdown-toggle", 
-                  style: "display:inline-block;border:0;background-color:transparent", "aria-haspopup" => "false", "aria-expanded" => "false"
+                  class: "btn btn-lg btn-secondary dropdown-toggle faq-button", 
+                  "aria-haspopup" => "false", "aria-expanded" => "false",
+                  method: :get
                 } %>
-          <% end %>
           </div>
-
       </div>
     </div>
     <div class="row d-block d-sm-block d-md-block d-lg-none text-center" id="mobile-search-container">
