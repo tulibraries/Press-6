@@ -40,6 +40,12 @@
 					<li><a href="http://temple.edu">Temple University</a></li>
 					<li><a href="/people">People at the Press</a></li>
 					<li><a href="/contact">Contact</a></li>
+					<li>
+						<%= link_to (image_pack_tag "gear.png",
+													class: "decorative", 
+													id: "login-link",
+													alt: "login link"), admin_url %>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -55,14 +61,5 @@
 		</div>
 	</div>
 
-
-	<div class="row">
-		<div class="col p-0" style="margin-top: 28px;">
-			<%= link_to (image_pack_tag "gear.png",
-										style: "width: 22px", 
-										class: "decorative", 
-										alt: ""), edit_url %>
-		</div>
-	</div>
 </div>
 </div>

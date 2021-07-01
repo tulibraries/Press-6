@@ -30,7 +30,15 @@ module ApplicationHelper
       end
     end
   end
-  
+
+  def admin_url
+    if controller_name == "webpages" && action_name == "index"
+      admin_root_path
+    else
+      send "admin_#{controller_name}_path"
+    end
+  end
+
   def menu_button(text)
     button_tag text,
               { id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle",

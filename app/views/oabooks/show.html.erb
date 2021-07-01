@@ -20,7 +20,7 @@
   </div>
 
   <div class="col col-9">
-    <h1><%= @oabook.title %></h1>
+    <h1><%= render "title_link", title: @oabook.title %></h1>
       <%= "<em>#{@oabook.subtitle}</em><br/>".html_safe if @oabook.subtitle.present? %>
       <%= "#{@oabook.author}<br/>".html_safe if @oabook.author.present? %>
       <%= "#{@oabook.supplemental}<br/>".html_safe if @oabook.supplemental.present? %>
