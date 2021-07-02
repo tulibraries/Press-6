@@ -1,6 +1,6 @@
 <% if current_user %>
-  <%= link_to title, edit_url(@book.id), class: "header-name", id: "header-logo" if controller_name == "books" && action_name == "show" %>
-  <%= link_to title, edit_url, class: "header-name", id: "header-logo" unless controller_name == "books" && action_name == "show" %>
+  <%= link_to title, edit_url %>
+  <%= link_to title, edit_url(@book.id) if controller_name == "books" && action_name == "show" %>
 <% else %>
- title
+  <%= title %>
 <% end %>
