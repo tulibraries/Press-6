@@ -93,6 +93,20 @@ en:
     books:
       purchase_link: https://cdcshoppingcart.uchicago.edu/Cart2/Chicagobook.aspx?PRESS=temple&ISBN=
       by_title: "Browse Books by Title"
+      share_label: Share
+      pages: pages
+      order_button: ORDER
+      price_label: Price
+      ean_label: EAN
+      publication_label: Publication
+      subjects: Subjects
+      preview: Preview
+      related_links: Related Links
+      desk_request: Request Desk/Exam Copy
+      reviews: Reviews
+      authors_about: About the Author(s)
+      series: In the Series
+      of_interest: Also of Interest
     conferences:
       title: Conferences
     oabooks:

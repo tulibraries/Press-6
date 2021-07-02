@@ -30,6 +30,10 @@ gem "administrate-field-date_picker", "~> 0.2.0"
 gem "meta-tags"
 gem "activestorage-validator"
 
+gem "devise"
+gem "omniauth"
+gem "omniauth-google-oauth2"
+
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "rubocop", require: false

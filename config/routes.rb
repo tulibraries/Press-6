@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
 
+  devise_for :users
   concern :imageable do
     get "image/thumbnail", to: "images#thumbnail_image"
     get "image/medium",    to: "images#medium_image"
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
     resources :series
     resources :special_offers
     resources :subjects
+    resources :users
     resources :webpages
 
     resource :books, :brochures, :oabooks, :people, :series, :subjects, :special_offers do
