@@ -1,0 +1,11 @@
+<% if current_user %>
+  <%= link_to action: "edit", controller: "admin/people", id: person.id do %>
+    <%= image_tag person.custom_image(:image, 220, 220), class: "person" if person.image.attached? %>
+    <%= image_pack_tag "staff_placeholder.png", class: "person default" unless person.image.attached?  %>
+  <% end %>
+<% else %>
+    <%= image_tag person.custom_image(:image, 220, 220), class: "person" if person.image.attached? %>
+    <%= image_pack_tag "staff_placeholder.png", class: "person default" unless person.image.attached?  %>
+<% end %>
+
+      
