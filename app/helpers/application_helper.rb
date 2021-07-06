@@ -46,4 +46,12 @@ module ApplicationHelper
               "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false",
               method: :get }
   end
+
+  def title_link(title=nil, id=nil)
+    if current_user
+      id.present? ? (link_to title, edit_url(id)) : (link_to title, edit_url)
+    else
+      title
+    end
+  end
 end
