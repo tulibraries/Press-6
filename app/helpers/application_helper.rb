@@ -10,24 +10,34 @@ module ApplicationHelper
     Nokogiri::HTML::DocumentFragment.parse(html).to_html
   end
 
-  def edit_url(book = nil)
+  def edit_url(book_id=nil, id_from_index=nil)
     id = params[:id]
     exemptions = [nil, "webpages", "books"]
 
-    unless exemptions.include?(controller_name)
-      if ["index", "labor_studies", "north_broad_press"].include?(action_name)
-        "/admin/#{controller_name.pluralize}"
-      else
-        "/admin/#{controller_name}/#{id}/edit"
-      end
-    else
+    if exemptions.include?(controller_name)
       if controller_name == "webpages" && action_name == "show"
         "/admin/#{controller_name}/#{id}/edit"
       elsif controller_name == "books" && action_name == "show"
-        "/admin/#{controller_name}/#{book}/edit"
+        "/admin/#{controller_name}/#{book_id}/edit"
       else
         "/admin/#{controller_name}"
       end
+    else
+      if ["index", "labor_studies", "north_broad_press"].include?(action_name)
+        (id_from_index.present?) ? ("/admin/#{controller_name}/#{id_from_index}/edit") : ("/admin/#{controller_name.pluralize}")
+      else
+        "/admin/#{controller_name}/#{id}/edit" if id.present?
+      end
+    end
+  end
+
+  def title_link(title=nil, id=nil)
+    if current_user && action_name == "index" 
+      id.present? ? (link_to title, edit_url(nil,id)) : (link_to title, edit_url)
+    elsif current_user && action_name == "show" 
+      link_to title, edit_url(id)
+    else
+      title if title.present?
     end
   end
 
@@ -47,11 +57,4 @@ module ApplicationHelper
               method: :get }
   end
 
-  def title_link(title=nil, id=nil)
-    if current_user
-      id.present? ? (link_to title, edit_url(id)) : (link_to title, edit_url)
-    else
-      title
-    end
-  end
 end
