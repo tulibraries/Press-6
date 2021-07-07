@@ -10,7 +10,7 @@ module ApplicationHelper
     Nokogiri::HTML::DocumentFragment.parse(html).to_html
   end
 
-  def edit_url(book_id=nil, id_from_index=nil)
+  def edit_url(book_id = nil, id_from_index = nil)
     id = params[:id]
     exemptions = [nil, "webpages", "books"]
 
@@ -31,13 +31,13 @@ module ApplicationHelper
     end
   end
 
-  def title_link(title=nil, id=nil)
-    if current_user && action_name == "index" 
-      id.present? ? (link_to title, edit_url(nil,id)) : (link_to title, edit_url)
-    elsif current_user && action_name == "show" 
+  def title_link(title = nil, id = nil)
+    if current_user && action_name == "index"
+      id.present? ? (link_to title, edit_url(nil, id)) : (link_to title, edit_url)
+    elsif current_user && action_name == "show"
       link_to title, edit_url(id)
     else
-      title if title.present?
+      title.presence
     end
   end
 
@@ -56,5 +56,4 @@ module ApplicationHelper
               "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false",
               method: :get }
   end
-
 end

@@ -7,9 +7,11 @@ RSpec.describe "agencies/index", type: :view do
   let(:agency2) { FactoryBot.create(:agency, title: "Mark", region: "Turkey") }
   let(:agency3) { FactoryBot.create(:agency, title: "Luke", region: "Midwest") }
   let(:agency4) { FactoryBot.create(:agency, title: "Ringo", region: "All Other Territories") }
+  let(:user) { FactoryBot.create(:user) }
 
   context "displays region info" do
     before(:each) do
+      allow(view).to receive(:current_user).and_return(user)
       render "region", region: agency1.region
     end
 
@@ -28,6 +30,7 @@ RSpec.describe "agencies/index", type: :view do
     before(:each) do
       assign(:default_agency, agency3)
       assign(:agencies, [{ agency1.region => [agency1] }, { agency2.region => [agency2] }])
+      allow(view).to receive(:current_user).and_return(user)
       render "agencies", agencies: [agency1, agency2]
     end
 
@@ -41,6 +44,7 @@ RSpec.describe "agencies/index", type: :view do
   context "displays default agency info if assigned" do
     before(:each) do
       assign(:default_agency, agency4)
+      allow(view).to receive(:current_user).and_return(user)
       render "default_agency"
     end
 

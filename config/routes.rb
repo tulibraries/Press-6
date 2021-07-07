@@ -21,7 +21,6 @@ Rails.application.routes.draw do
     resources :series
     resources :special_offers
     resources :subjects
-    resources :users
     resources :webpages
 
     resource :books, :brochures, :oabooks, :people, :series, :subjects, :special_offers do
