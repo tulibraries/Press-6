@@ -90,8 +90,27 @@ en:
             West: West
             Hawaii, Asia and the Pacific, including Australia and New Zealand: Hawaii, Asia and the Pacific, including Australia and New Zealand
             Europe, the Middle East, and Africa: Europe, the Middle East, and Africa
+    agencies:
+      title: Agencies
     books:
       purchase_link: https://cdcshoppingcart.uchicago.edu/Cart2/Chicagobook.aspx?PRESS=temple&ISBN=
+      by_title: "Browse Books by Title"
+      share_label: Share
+      pages: pages
+      order_button: ORDER
+      price_label: Price
+      ean_label: EAN
+      publication_label: Publication
+      subjects: Subjects
+      preview: Preview
+      related_links: Related Links
+      desk_request: Request Desk/Exam Copy
+      reviews: Reviews
+      authors_about: About the Author(s)
+      series: In the Series
+      of_interest: Also of Interest
+    conferences:
+      title: Conferences
     oabooks:
       online_epub: Read it Online
       manifold_label: View Epub
@@ -105,3 +124,5 @@ en:
         title: North Broad Press
       labor_studies: 
         title: Labor Studies & Work
+    people:
+      title: People at the Press

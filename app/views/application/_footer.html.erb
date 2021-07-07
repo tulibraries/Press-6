@@ -40,6 +40,17 @@
 					<li><a href="http://temple.edu">Temple University</a></li>
 					<li><a href="/people">People at the Press</a></li>
 					<li><a href="/contact">Contact</a></li>
+					<li>
+						<%= link_to (image_pack_tag "gear.png",
+													class: "decorative", 
+													id: "login-link",
+													alt: "login link"), admin_root_path unless current_user %>
+
+						<%= link_to (image_pack_tag "gear.png",
+													class: "decorative", 
+													id: "login-link",
+													alt: "login link"), destroy_user_session_path, method: :delete if current_user %>
+					</li>
 				</ul>
 			</nav>
 		</div>

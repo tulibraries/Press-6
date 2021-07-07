@@ -82,54 +82,7 @@ form {
  	padding-right: 10px;
  }
 }
-.no-padding {
-	padding: 0;
-}
-.breadcrumbs {
-	margin-bottom: 17px;
-}
 
-img {
-	max-width: 100%;
-}
-
-img.map {
-	min-height: 100%;
-	height: 100%;
-	max-height: 100%!important;
-}
-
-blockquote {
-	margin: 21px;
-}
-
-marquee {
-	color: $red;
-}
-
-.covid-alert {
-	font-family: 'Roboto';
-	background-color: #e5edf8;
-	border-top: solid $red 6px;
-	margin-bottom: 14px;
-	padding: 10px 0;
-  strong {
-    font-family: 'Roboto';
-    font-weight: 900;
-    font-size: 1.35rem;
-    display: block;
-    text-align: center;
-  }
-  p {
-    display: block;
-    padding-left: 7px;
-  }
-}
-
-.covid-alert.home {
-	margin-bottom: 0;
-	margin-top: 4px;
-}
 
 // tupress
 
@@ -239,4 +192,15 @@ li.list-inline-item {
 	img {
 		filter: grayscale(100%);
 	}
+}
+
+#login-link {
+	display: inline-block;
+	margin-top: 21px;
+	width: 22px;
+	filter: brightness(1) invert(.5);
+}
+
+a.news-image img {
+	max-width: 100%;
 }

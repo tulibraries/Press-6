@@ -46,6 +46,9 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  #prevent racing conditions: RSpec rolls back the transaction while active support tries to process attachments in the background.
+  config.active_job.queue_adapter = :test
+
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
 end

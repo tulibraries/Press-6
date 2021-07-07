@@ -27,4 +27,7 @@ RSpec.describe BooksController, type: :controller do
       end
     end
   end
+
+  it_behaves_like "index_editable"
+
 end

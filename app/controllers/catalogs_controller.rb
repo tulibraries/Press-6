@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CatalogsController < ApplicationController
-  before_action :set_catalog, only: %i[:show]
+  before_action :set_catalog, only: %i[show]
 
   def index
     @catalogs = Catalog.all
