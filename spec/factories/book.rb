@@ -13,8 +13,7 @@ FactoryBot.define do
     subject1 { FactoryBot.create(:subject)  }
     label_1 { "Google"  }
     link_1 { "http://google.com"  }
-    award { "Double digits award" }
-    award_year { "2020" }
+    award1 { "Double digits award" }
     status { ["In Print", "NP", "OS", "X", "..."] }
     catalog_id { "1324" }
     bindings { '{"binding":[{"format":"PB","price":"$31.95","ean":"978-1-59213-386-4","binding_status":"IP","pub_date_for_format":"Jun 06"}]}' }

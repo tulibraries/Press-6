@@ -12,7 +12,7 @@ module Admin
       @tab_content["subjects"] = ["subject1", "subject2", "subject3"]
       @tab_content["series"] = ["series"]
       @tab_content["catalog"] = ["catalog"]
-      @tab_content["awards"] = ["featured_award_winner", "award", "award2", "award3"]
+      @tab_content["awards"] = ["featured_award_winner", "award1", "award2", "award3"]
       @tab_content["guide"] = ["guide_file", "guide_file_label"]
       @tab_content["homepage"] = ["hot", "hotweight", "newsweight", "news_text", "course_adoption"]
       @tab_content["special_offers"] = ["special_offer"]

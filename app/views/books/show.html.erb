@@ -20,18 +20,26 @@
           <li><%= @book.illustrations %></li>
         </ul>
 
-        <%= link_to "ORDER", "https://cdcshoppingcart.uchicago.edu/Cart2/ChicagoBook.aspx?ISBN=#{@book.isbn}&&PRESS=temple", 
-                              class: "order-button" if @book.isbn.present? %>
+        <p><%= link_to "ORDER", "https://cdcshoppingcart.uchicago.edu/Cart2/ChicagoBook.aspx?ISBN=#{@book.isbn}&&PRESS=temple", 
+                              class: "order-button" if @book.isbn.present? %></p>
 
         <div class="book-formats">
           <ul class="list-unstyled">
-          <% @book.bindings_as_tuples.each do |b| %>          
-            <li class="section-label">
-              <%= book_format(b[:format]) %>
-            </li>
-            <li>Price: <%= b[:price] %></li>
-            <li>EAN: <%= b[:ean] %></li>
-            <li>Publication: <%= b[:pub_date] %></li>
+          <% @book.bindings_as_tuples.each do |b| %>    
+            <% if b[:format].present? %>      
+              <li class="section-label">
+                <%= book_format(b[:format]) %>
+              </li>
+              <% if b[:price].present? %>      
+                <li>Price: <%= b[:price] %></li>
+              <% end %>
+              <% if b[:ean].present? %>      
+                <li>EAN: <%= hyphen_strip(b[:ean]) %></li>
+              <% end %>
+              <% if b[:pub_date].present? %>
+                <li>Publication: <%= pub_date(b[:pub_date]) %></li>
+              <% end %>
+            <% end %>
           <% end %>
           </ul>
         </div>
@@ -62,8 +70,8 @@
           </ul>
         </div>
         <% end %>
-
-        <% if @links.flatten.any? %>
+        
+        <% unless @links.flatten.compact.all?(&:blank?) %>
         <div class="book-related-links mt-4">
           <span class="section-label">
             Related Links
@@ -131,6 +139,7 @@
           <%= fix_invalid_html(@book.about_author).html_safe %>
       </div>
       <% end %>
+
       <% if @series.present? %>
       <div class="series mt-3 p-3">
         <h2 class="mb-3">In the Series</h2>
@@ -149,7 +158,7 @@
         </div>
     </div>
     <div class="row">
-    <% @book.books.take(4).each do |book| %>
+    <% @book.books.sort_by{|b| b.sort_title}.take(4).each do |book| %>
     
       <div class="col col-3 text-center">
       <%= link_to book_path(book.xml_id) do %>
