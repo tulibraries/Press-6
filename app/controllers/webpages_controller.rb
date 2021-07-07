@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class WebpagesController < ApplicationController
-  before_action :set_webpage, only: %i[:show]
+  before_action :set_webpage, only: :show
 
   def index
     @webpages = Webpage.all

@@ -1,4 +1,13 @@
-<p id="notice"><%= notice %></p>
+<div class="container webpage">
+<div class="row">
+<div class="col">
+<h1><%= @webpage.title %></h1>
+</div>
+</div>
 
-<%= link_to 'Edit', edit_webpage_path(@webpage) %> |
-<%= link_to 'Back', webpages_path %>
+<div class="row">
+<div class="col">
+<%= @webpage.body %>
+</div>
+</div>
+</div>
