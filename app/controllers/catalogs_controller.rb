@@ -1,18 +1,19 @@
 # frozen_string_literal: true
 
 class CatalogsController < ApplicationController
-  before_action :set_catalog, only: %i[show]
+  before_action :set_catalog, only: :show
 
   def index
-    @catalogs = Catalog.where("suppress != ?", "").order(created_at: :desc)
-    @show_status = ["NP", "IP","OS","OP"]
+    @catalogs = Catalog.where(suppress: false)
+                        .order(:year).reverse
+                        .group_by { |c| c.year }
   end
 
   def show
-    @catalog = Catalog.find_by code: "#{params[:code]}"
-    @books = Book.where('catalog = ?', "#{params[:code]}").where({ status: ["NP","IP","OS","OP"] }).order(:sort_title)
-    @show_status = ["NP", "IP","OS","OP"]    
-    @brochures = Brochure.where(catalog_code: params[:code]).where(promoted_to_subject: true)
+    @catalog = Catalog.find_by(code: params[:id])
+    # @books = Book.where(catalog: params[:id])
+    #               .order(:sort_title)
+    # @brochures = Brochure.where(catalog_code: params[:code]).where(promoted_to_subject: true)
   end
 
   private
