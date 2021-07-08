@@ -6,8 +6,10 @@ RSpec.describe "conferences/index.html.erb", type: :view do
   let(:conference1) { FactoryBot.create(:conference, start_date: DateTime.now) }
   let(:conference2) { FactoryBot.create(:conference, start_date: DateTime.now.next_month) }
   let(:intro) { FactoryBot.create(:webpage) }
+  let(:user) { FactoryBot.create(:user) }
 
   before(:each) do
+    allow(view).to receive(:current_user).and_return(user)
     assign(:conferences, [conference1, conference2].group_by { |conference| conference.start_date.strftime("%B") })
     assign(:intro, intro)
   end

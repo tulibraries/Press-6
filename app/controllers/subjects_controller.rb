@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SubjectsController < ApplicationController
-  before_action :set_subject, only: %i[:show]
+  before_action :set_subject, only: %i[show]
 
   def index
     @subjects = Subject.all

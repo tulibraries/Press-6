@@ -5,7 +5,8 @@
 <div class="row">
     <div class="col">
       <h1 class="mt-0 pt-0 text-center banner">
-        <%= image_pack_tag 'nbp_banner.jpg', alt: t("tupress.oabooks.nbpress.title") %>
+        <%= link_to (image_pack_tag 'nbp_banner.jpg', alt: t("tupress.oabooks.nbpress.title")), edit_url if current_user %>
+        <%= image_pack_tag 'nbp_banner.jpg', alt: t("tupress.oabooks.nbpress.title") unless current_user %>
       </h1>
       <div class="mt-4 mx-3"><%= @page.body if @page.present? %></div>
   </div>

@@ -1,0 +1,11 @@
+<% if book.cover_image.attached? %>
+  <%= link_to (image_tag book.show_image("cover_image")), edit_admin_book_path(book.id) %>
+<% else %>
+  <%= link_to (image_pack_tag "default-book-cover-show.png"), edit_admin_book_path(book.id), {class: "default-show-cover"} %>
+<% end if current_user %>
+
+<% if book.cover_image.attached? %>
+  <%= image_tag book.show_image("cover_image") %>
+<% else %>
+  <%= image_pack_tag "default-book-cover-show.png", class: "default-show-cover" %>
+<% end unless current_user %>

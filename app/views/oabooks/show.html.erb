@@ -3,10 +3,7 @@
  <div class="neh-book row mb-4">
 
   <div class="col col-3">
-  <%= link_to action: "edit", controller: "admin/oabooks", id: @oabook.id do %>
-    <%= image_tag(@oabook.show_image("image"), class: "mb-4") if @oabook.image.attached? %>
-    <%= image_pack_tag "default-book-cover-show.png" unless @oabook.image.attached?  %>
-  <% end %>
+    <%= render "cover_image", oabook: @oabook %>
     <ul class="list-unstyled oabook-buttons">
       <li><%= link_to t("tupress.oabooks.online_epub"), @oabook.epub_link if @oabook.epub_link.present? %></li>
       <li><%= link_to t("tupress.oabooks.download.epub"), @oabook.epub, disposition: "attachment" if @oabook.epub.attached? %></li>
@@ -20,7 +17,7 @@
   </div>
 
   <div class="col col-9">
-    <h1><%= @oabook.title %></h1>
+    <h1><%= title_link(@oabook.title) %></h1>
       <%= "<em>#{@oabook.subtitle}</em><br/>".html_safe if @oabook.subtitle.present? %>
       <%= "#{@oabook.author}<br/>".html_safe if @oabook.author.present? %>
       <%= "#{@oabook.supplemental}<br/>".html_safe if @oabook.supplemental.present? %>
