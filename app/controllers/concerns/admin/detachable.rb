@@ -10,7 +10,7 @@ module Admin
 
       types = ["cover_image", "excerpt_file", "guide_file", "toc_file", "suggested_reading_image"] if klass == "Book"
       types = ["image"] if ["Brochure", "Series", "Person"].include?(klass)
-      types = ["pdf"] if ["SpecialOffer", "Subject"].include?(klass)
+      types = ["pdf"] if ["Catalog", "SpecialOffer", "Subject"].include?(klass)
       types = ["image", "epub", "mobi", "pdf"] if ["Oabook"].include?(klass)
 
       type = types.index(params[:field])

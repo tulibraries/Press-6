@@ -16,7 +16,7 @@
           <li><%= @book.illustrations %></li>
         </ul>
 
-        <%= link_to t("tupress.books.order_button"), "https://cdcshoppingcart.uchicago.edu/Cart2/ChicagoBook.aspx?ISBN=#{@book.isbn}&&PRESS=temple", 
+        <%= link_to t("tupress.books.order_button"), "#{t("tupress.books.purchase_link")}#{@book.isbn}", 
                               class: "order-button" if @book.isbn.present? %>
 
         <div class="book-formats">

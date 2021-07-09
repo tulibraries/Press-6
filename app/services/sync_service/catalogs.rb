@@ -39,20 +39,9 @@ class SyncService::Catalogs
 
   def record_hash(record)
     catalog_code = record["catalog"]
-    season = "Fall" if catalog_code[0, 2].downcase == "fa"
-    season = "Spring" if catalog_code[0, 2].downcase == "sp"
-    decade = catalog_code[2, 4]
-    # Y2k concerns since all years are only last 2 digits
-    current_century = Time.zone.now.strftime("%C")
-    year = "#{current_century}#{decade}"
-    # year = "19#{decade}" if decade.to_i >= 78 && decade.to_i <= 99
-    # Y2K Uncomment above line when running full xml or first time
-    title = season.to_s + " " + year.to_s + " Catalog"
     {
-      "code"   => catalog_code,
-      "title"  => title,
-      "season" => season,
-      "year"   => year
+      "code"      => catalog_code,
+      "suppress"  => false
     }
   end
 
