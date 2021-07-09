@@ -14,10 +14,10 @@
         <strong><%= year %></strong>
       </div>
     </div>
-    <div class="row mb-4" style="background-color:white">
+    <div class="row mb-4 seasons" style="background-color:white">
     <% catalog_year(catalogs).each do |catalog| %>
       <div class="col-3 offset-2 p-3">
-        <%= link_to catalog.title, catalog %>
+        <%= link_to catalog.title, catalog_path(catalog.code.downcase) %>
       </div>
     <% end %>
     </div>

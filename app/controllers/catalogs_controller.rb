@@ -10,14 +10,16 @@ class CatalogsController < ApplicationController
   end
 
   def show
-    @catalog = Catalog.find_by(code: params[:id])
-    # @books = Book.where(catalog: params[:id])
-    #               .order(:sort_title)
-    # @brochures = Brochure.where(catalog_code: params[:code]).where(promoted_to_subject: true)
+    @books = @catalog.books.select { |b| show_status.include?(b.status) }
+                           .sort_by { |b| b.sort_title }
   end
 
   private
     def set_catalog
-      @catalog = Catalog.find(params[:id])
+      @catalog = Catalog.find_by(code: params[:id])
+    end
+
+    def show_status
+      ["NP", "IP", "OS", "OP", "In Print"]
     end
 end

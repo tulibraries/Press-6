@@ -2,11 +2,10 @@
 
 class Catalog < ApplicationRecord
   before_save :set_century, :set_season, :set_title
-  has_many :books, dependent: :destroy
+  validates :title, :code, :season, :year, presence: true
 
-  def show_status
-    ["NP", "IP","OS","OP"]
-  end
+  has_many :books, primary_key: :code, class_name: "Book", dependent: :nullify
+  has_one_attached :pdf, dependent: :destroy
 
   def set_century
     decade = self.code[2, 4]
@@ -21,4 +20,3 @@ class Catalog < ApplicationRecord
     self.title = "#{self.season} #{self.year}"
   end
 end
-    

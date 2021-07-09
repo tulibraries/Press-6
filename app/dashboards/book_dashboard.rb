@@ -61,7 +61,6 @@ class BookDashboard < Administrate::BaseDashboard
     desk_copy: Field::Boolean,
 
     series: Field::BelongsTo.with_options(order: "title"),
-    catalog: Field::BelongsTo.with_options(order: "title"),
     special_offer: Field::BelongsTo.with_options(order: "title"),
 
     subjects: Field::Text,
@@ -104,7 +103,6 @@ class BookDashboard < Administrate::BaseDashboard
     author_byline
     isbn
     ean
-    catalog
     series
   ].freeze
 
@@ -125,7 +123,6 @@ class BookDashboard < Administrate::BaseDashboard
     subject1
     subject2
     subject3
-    catalog
     featured_award_winner
     award
     award_year
