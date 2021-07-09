@@ -2,7 +2,7 @@
 
 class Catalog < ApplicationRecord
   before_save :set_century, :set_season, :set_title
-  validates :title, :code, :season, :year, presence: true
+  validates :code, presence: true
 
   has_many :books, primary_key: :code, class_name: "Book", dependent: :nullify
   has_one_attached :pdf, dependent: :destroy
