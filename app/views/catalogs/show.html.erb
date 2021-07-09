@@ -1,19 +1,49 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<p>
-  <strong>Code:</strong>
-  <%= @catalog.code %>
-</p>
+<div class="row mb-3">
+  <div class="col-12 mt-3 px-0">
+    <h1 class="mt-4">
+      <%= link_to t("tupress.catalogs.index_title"), catalogs_path %>
+       > 
+      <%= title_link(@catalog.title, @catalog.id) %>
+    </h1>
+  </div>
+  <div class="col-12 social-sharing text-md-right">
+			<% if @catalog.pdf.attached? %>
+				<%= link_to "Download PDF version", @catalog.pdf.attachment, class: "text-right text-lg-left" %><br />
+			<% end %>
+	</div>
+</div>
 
-<p>
-  <strong>Season:</strong>
-  <%= @catalog.season %>
-</p>
+    <% @books.each do |book| %>  
+    <div class="row pb-4 mb-4 book-listing">
+      <div class="col-3 pl-0">
+        <%= link_to book_path(book.xml_id) do %>
+          <% if book.cover_image.attached? %>
+            <%= image_tag book.index_image("cover_image") %>
+          <% else %>
+            <%= image_pack_tag "default-book-cover-index.png" %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="col-9 p-4 pl-0 book-details">
+        <h2><%= link_to book.title, book_path(book.xml_id) %></h2>
+        <p><em><%= book.subtitle if book.subtitle.present? %></em></p>
+        <p><%= book.author_byline if book.author_byline.present? %></p>
+        <p class="mt-5"><%= sanitize book.blurb.html_safe if book.blurb.present? %></p>
+        <p class="mb-5">
+          <%= "#{book.pages_total} pages" if book.pages_total.present? %>
+          <%= "| #{book.trim}" if book.trim.present? %>
+          <%= "| #{book.illustrations}" if book.illustrations.present? %><br><br>
+        </p>
 
-<p>
-  <strong>Year:</strong>
-  <%= @catalog.year %>
-</p>
+        <p class="order-button">
+        <%= link_to "ORDER", "#{t("tupress.books.purchase_link")}#{book.isbn}", 
+                              class: "order-button" if book.isbn.present? %>
+        </p>
+      </div>
+    </div>
 
-<%= link_to 'Edit', edit_catalog_path(@catalog) %> |
-<%= link_to 'Back', catalogs_path %>
+    <% end %>
+
+</div>
