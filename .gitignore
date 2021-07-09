@@ -29,7 +29,6 @@
 /config/master.key
 config/secrets.yml
 
-*.xml
 /public/uploads
 /public/packs
 /public/packs-test
@@ -39,6 +38,5 @@ yarn-debug.log*
 .yarn-integrity
 *.sql
 .DS_Store
-*.xml
 /public/uploads
 /coverage

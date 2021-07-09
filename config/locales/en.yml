@@ -109,6 +109,8 @@ en:
       authors_about: About the Author(s)
       series: In the Series
       of_interest: Also of Interest
+    catalogs:
+      index_title: Catalog Index
     conferences:
       title: Conferences
     oabooks:

@@ -1,17 +1,25 @@
 # frozen_string_literal: true
 
 class CatalogsController < ApplicationController
-  before_action :set_catalog, only: %i[show]
+  before_action :set_catalog, only: :show
 
   def index
-    @catalogs = Catalog.all
+    @catalogs = Catalog.where(suppress: false)
+                        .order(:year).reverse
+                        .group_by { |c| c.year }
   end
 
   def show
+    @books = @catalog.books.select { |b| show_status.include?(b.status) }
+                           .sort_by { |b| b.sort_title }
   end
 
   private
     def set_catalog
-      @catalog = Catalog.find(params[:id])
+      @catalog = Catalog.find_by(code: params[:id])
+    end
+
+    def show_status
+      ["NP", "IP", "OS", "OP", "In Print"]
     end
 end

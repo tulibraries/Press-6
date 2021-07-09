@@ -11,7 +11,8 @@ module ApplicationHelper
   end
 
   def edit_url(book_id = nil, id_from_index = nil)
-    id = params[:id]
+    id = book_id.nil? ? params[:id] : book_id
+
     exemptions = [nil, "webpages", "books"]
 
     if exemptions.include?(controller_name)
