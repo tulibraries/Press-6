@@ -10,11 +10,11 @@ ARG RAILS_MASTER_KEY
 
 RUN apk add -U --no-cache \
       bash=5.1.0-r0 \
-      libxslt=1.1.34-r0 \
+      libxslt=1.1.34-r1 \
       tzdata=2021a-r0 \
-      mariadb-connector-c=3.1.11-r0 \
+      mariadb-connector-c=3.1.13-r0 \
       imagemagick=7.0.11.13-r0 \
-      shared-mime-info=2.0-r0 && \
+      shared-mime-info=2.1-r0 && \
     apk add -U --no-cache --virtual build-dependencies \
       git=2.30.2-r0 \
       build-base=0.5-r2 \
