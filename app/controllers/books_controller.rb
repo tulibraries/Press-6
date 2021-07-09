@@ -4,13 +4,16 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show]
 
   def index
-    letter = params[:id] ? params[:id] : "a"
-    unless letter == "numeric"
-      @books = Book.where("sort_title LIKE ?", "#{letter}%").order(:sort_title).page params[:page]
+    @selected = params[:id] ? params[:id] : "a"
+    unless @selected == "numeric"
+      @books = Book.where("sort_title LIKE ?", "#{@selected}%").where(status: show_status)
+                                                               .order(:sort_title)
+                                                               .page params[:page]
     else
-      @books = Book.where("sort_title regexp ?", "^[0-9]+").order(:sort_title).page params[:page]
+      @books = Book.where("sort_title regexp ?", "^[0-9]+").where(status: show_status)
+                                                           .order(:sort_title)
+                                                           .page params[:page]
     end
-    @selected = letter
   end
 
   def show
@@ -24,5 +27,9 @@ class BooksController < ApplicationController
   private
     def set_book
       @book = Book.find_by(xml_id: params[:id])
+    end
+
+    def show_status
+      ["NP", "IP", "OS", "OP", "In Print"]
     end
 end
