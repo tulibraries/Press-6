@@ -90,7 +90,7 @@ RSpec.describe SyncService::Books, type: :service do
       end
 
       it "maps catalog_id to catalog_id field" do
-        expect(subject["catalog_id"]).to match(@books.first["record"]["catalog"])
+        expect(subject["catalog_id"]).to match(@books.first["record"]["catalog"].downcase)
       end
     end
   end
