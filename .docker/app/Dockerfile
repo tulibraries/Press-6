@@ -22,7 +22,7 @@ RUN apk add -U --no-cache \
       mariadb-dev=10.5.11-r0 \
       nodejs=14.17.1-r0 \
       yarn=1.22.10-r0 && \
-    gem install bundler:2.2.4  && \
+    gem install bundler:2.1.4  && \
     bundle config build.nokogiri --use-system-libraries && \
     bundle config set --local without "development test" && \
     bundle install --jobs=8 && \
