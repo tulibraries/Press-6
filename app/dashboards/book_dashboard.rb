@@ -74,11 +74,11 @@ class BookDashboard < Administrate::BaseDashboard
     label_2: Field::String,
     label_3: Field::String,
     award: Field::String,
+    award2: Field::String,
+    award3: Field::String,
     award_year: Field::String,
     award_year2: Field::String,
-    award2: Field::String,
     award_year3: Field::String,
-    award3: Field::String,
     featured_award_winner: Field::Boolean,
     price: Field::String.with_options(searchable: false),
     created_at: Field::DateTime,
@@ -124,12 +124,12 @@ class BookDashboard < Administrate::BaseDashboard
     subject2
     subject3
     featured_award_winner
-    award
     award_year
-    award2
+    award
     award_year2
-    award3
+    award2
     award_year3
+    award3
     guide_file
     guide_file_label
     hot
