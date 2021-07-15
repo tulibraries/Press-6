@@ -27,13 +27,13 @@ class BooksController < ApplicationController
                           .or(Book.where.not(award_year2: nil))
                           .or(Book.where.not(award_year3: nil))
                           .select { |b| show_status.include?(b.status) }
-                          .pluck( :award_year, :award_year2, :award_year3)
+                          .pluck(:award_year, :award_year2, :award_year3)
                           .flatten
                           .reject(&:blank?)
                           .sort
                           .reverse
 
-    get_subjects( 
+    get_subjects(
       Book.where.not(award: nil)
       .or(Book.where.not(award2: nil))
       .or(Book.where.not(award3: nil))
@@ -42,8 +42,8 @@ class BooksController < ApplicationController
       .reject(&:blank?)
     )
 
-    @awards_by_subject = @subjects.uniq.sort_by{ |h| h[0] }
-    
+    @awards_by_subject = @subjects.uniq.sort_by { |h| h[0] }
+
     @recent_winners = Book.where(featured_award_winner: true)
                                 .where.not(award_year: nil)
                                 .or(Book.where.not(award_year2: nil))
@@ -73,7 +73,7 @@ class BooksController < ApplicationController
   end
 
   def awards_by_subject
-    @books = Book.where('subjects LIKE ?', "%#{params[:id]}%")
+    @books = Book.where("subjects LIKE ?", "%#{params[:id]}%")
                   .select { |b| show_status.include?(b.status) }
                   .sort_by { |b| b.sort_title }
   end
