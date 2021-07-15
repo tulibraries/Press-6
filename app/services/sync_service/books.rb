@@ -74,7 +74,7 @@ class SyncService::Books
       "description"         => record.dig("record", "description"),
       "subjects"            => JSON.dump(record["record"].fetch("subjects", { "subject" => { "subject_id" => nil, "subject_title" => nil } })),
       "contents"            => record.dig("record", "contents"),
-      "catalog_id"          => record.dig("record", "catalog")
+      "catalog_id"          => record.dig("record", "catalog").downcase
     }
   end
 
