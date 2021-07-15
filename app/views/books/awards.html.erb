@@ -43,8 +43,8 @@
     <div class="col-8 pl-5 pr-0 subject-listing">
       <h2 class="gold">Awards by Subject</h2>
       <ul class="list-unstyled p-3">
-      <% @awards_by_subject.each do |subject| %>  
-        <%= "<li>#{ link_to subject[0], awards_by_subject_path(subject[1]) if subject.present? }</li>" %>
+      <% @awards_by_subject.each do |subject| %>
+        <li><%= link_to subject[0], awards_by_subject_path(subject[1]) %></li>
       <% end %>
       </ul>
     </div>
