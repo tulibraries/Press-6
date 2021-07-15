@@ -42,6 +42,10 @@ module ApplicationHelper
     end
   end
 
+  def edit_intro(id)
+    link_to "[EDIT]", edit_admin_webpage_path(id) if current_user
+  end
+
   def admin_url
     if controller_name == "webpages" && action_name == "index"
       admin_root_path
