@@ -22,9 +22,11 @@ RSpec.shared_examples "index_editable" do
 
   describe "GET /#{model_name.pluralize}" do
     it "has an edit link" do
-      get :index
+      get :index unless model_name == "oabook"
+      get :north_broad_press if model_name == "oabook"
       expect(response.body).to match /\/admin\/#{model_name.pluralize}\"/
-      expect(response.body).to match /[EDIT]/ if described_class == "Oabook" || described_class == "Conference"
+      expect(response.body).to match /[EDIT]/ if model_name == "oabook" || model_name == "conference"
     end
+
   end
 end
