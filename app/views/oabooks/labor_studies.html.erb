@@ -14,19 +14,10 @@
 
 <div class="mt-4" style="border-top: solid #ccc 2px;"></div>
 
-<section>
-    <div class="row m-5">
-      <div class="column col-6 mb-5" id="column_1">
-        <% @column_1.each do |oabook| %>
-          <%= render "ls_book_list", oabook: oabook %>
-        <% end if @column_1.present? %>
-      </div>
+  <div class="neh-book row m-5">
+    <% @oabooks.each do |oabook| %>
+      <%= render "ls_book_list", oabook: oabook %>
+    <% end if @oabooks.present? %>
+  </div>
 
-      <div class="column col-6  mb-5" id="column_2">
-        <% @column_2.reverse.each do |oabook| %>
-          <%= render "ls_book_list", oabook: oabook %>
-        <% end if @column_2.present? %>
-      </div>
-    </div>
-</section>
 </div>
