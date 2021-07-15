@@ -8,11 +8,16 @@
         <%= link_to (image_pack_tag 'neh_banner.jpg', alt: t("tupress.oabooks.labor_studies.title")), edit_url if current_user %>
         <%= image_pack_tag 'neh_banner.jpg', alt: t("tupress.oabooks.labor_studies.title") unless current_user %>
       </h1>
-      <div class="mt-4 mx-3"><%= @page.body if @page.present? %></div>
+      <div class="mt-4 mx-3">
+        <% if @page.present? %>
+          <%= @page.body %>
+          <p class="mt-4"><%= edit_intro(@page.id) %></p>
+        <%  end %>
+      </div>
   </div>
 </div>
 
-<div class="mt-4" style="border-top: solid #ccc 2px;"></div>
+<div class="mt-2" style="border-top: solid #ccc 2px;"></div>
 
   <div class="neh-book row m-5">
     <% @oabooks.each do |oabook| %>

@@ -24,6 +24,7 @@ RSpec.shared_examples "index_editable" do
     it "has an edit link" do
       get :index
       expect(response.body).to match /\/admin\/#{model_name.pluralize}\"/
+      expect(response.body).to match /[EDIT]/ if described_class == "Oabook" || described_class == "Conference"
     end
   end
 end
