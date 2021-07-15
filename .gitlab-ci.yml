@@ -31,8 +31,12 @@ lint:
 build:
   stage: build
   extends: .build_image
+  image: harbor.k8s.temple.edu/gitlab-ci/docker:20
   variables:
     DF: ".docker/app/Dockerfile --build-arg RAILS_MASTER_KEY=$MASTER_KEY --no-cache"
+  services:
+    - name: harbor.k8s.temple.edu/gitlab-ci/docker:20-dind
+      command: ["--tls=false"]
 
 scan:
   stage: scan
