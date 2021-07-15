@@ -23,10 +23,7 @@ class BooksController < ApplicationController
   end
 
   def awards
-    @awards_by_year = Book.where.not(award_year: nil)
-                          .or(Book.where.not(award_year2: nil))
-                          .or(Book.where.not(award_year3: nil))
-                          .select { |b| show_status.include?(b.status) }
+    @awards_by_year = books_with_awards.select { |b| show_status.include?(b.status) }
                           .pluck(:award_year, :award_year2, :award_year3)
                           .flatten
                           .reject(&:blank?)
@@ -34,15 +31,13 @@ class BooksController < ApplicationController
                           .reverse
 
     get_subjects(
-      Book.where.not(award: nil)
-      .or(Book.where.not(award2: nil))
-      .or(Book.where.not(award3: nil))
-      .select { |b| show_status.include?(b.status) }
-      .map { |b| b.subjects_as_tuples }
-      .reject(&:blank?)
+      books_with_awards
+        .select { |b| show_status.include?(b.status) }
+        .map { |b| b.subjects_as_tuples }
+        .reject(&:blank?)
     )
 
-    @awards_by_subject = @subjects.uniq.sort_by { |h| h[0] }
+    @awards_by_subject = @subjects.uniq.sort_by { |h| binding.pry if h.nil? }
 
     @recent_winners = Book.where(featured_award_winner: true)
                                 .where.not(award_year: nil)
@@ -73,7 +68,12 @@ class BooksController < ApplicationController
   end
 
   def awards_by_subject
-    @books = Book.where("subjects LIKE ?", "%#{params[:id]}%")
+    @subject = Subject.find_by(code: params[:id]).title
+    @books = Book.where.not(award_year: nil)
+                  .where(award_year: params[:id])
+                  .or(Book.where(award_year2: params[:id]))
+                  .or(Book.where(award_year3: params[:id]))
+                  .where("subjects LIKE ?", "%#{params[:id]}%")
                   .select { |b| show_status.include?(b.status) }
                   .sort_by { |b| b.sort_title }
   end
@@ -81,5 +81,11 @@ class BooksController < ApplicationController
   private
     def set_book
       @book = Book.find_by(xml_id: params[:id])
+    end
+
+    def books_with_awards
+      Book.where.not(award_year: nil)
+          .or(Book.where(award_year2: params[:id]))
+          .or(Book.where(award_year3: params[:id]))
     end
 end
