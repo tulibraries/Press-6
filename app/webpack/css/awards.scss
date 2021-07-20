@@ -1,0 +1,9 @@
+@import "partials/_vars.scss";
+
+.year-listing, .subject-listing {
+  ul {
+    width: 100%;
+    background-color: $white;
+    line-height: 1.65rem;
+  }
+}

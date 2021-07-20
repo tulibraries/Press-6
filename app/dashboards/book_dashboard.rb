@@ -124,12 +124,12 @@ class BookDashboard < Administrate::BaseDashboard
     subject2
     subject3
     featured_award_winner
-    award
     award_year
-    award2
+    award
     award_year2
-    award3
+    award2
     award_year3
+    award3
     guide_file
     guide_file_label
     hot

@@ -18,8 +18,4 @@ class CatalogsController < ApplicationController
     def set_catalog
       @catalog = Catalog.find_by(code: params[:id])
     end
-
-    def show_status
-      ["NP", "IP", "OS", "OP", "In Print"]
-    end
 end
