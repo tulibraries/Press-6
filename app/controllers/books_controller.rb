@@ -2,7 +2,6 @@
 
 class BooksController < ApplicationController
   before_action :set_book, only: [:show]
-  # before_action :get_subjects, only: [:awards]
 
   def index
     letter = params[:id] ? params[:id] : "a"
