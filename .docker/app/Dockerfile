@@ -1,4 +1,4 @@
-FROM harbor.k8s.temple.edu/library/ruby@sha256:6b4f7a50694351d15aaa0c83db1741cac8cacdd2a236701e2e9de1fca518e801
+FROM harbor.k8s.temple.edu/library/ruby:2.7-alpine
 
 WORKDIR /app
 
@@ -9,18 +9,18 @@ USER root
 ARG RAILS_MASTER_KEY
 
 RUN apk add -U --no-cache \
-      bash=5.1.0-r0 \
-      libxslt=1.1.34-r0 \
+      bash=5.1.4-r0 \
+      libxslt=1.1.34-r1 \
       tzdata=2021a-r0 \
-      mariadb-connector-c=3.1.11-r0 \
+      mariadb-connector-c=3.1.13-r0 \
       imagemagick=7.0.11.13-r0 \
-      shared-mime-info=2.0-r0 && \
+      shared-mime-info=2.1-r0 && \
     apk add -U --no-cache --virtual build-dependencies \
-      git=2.30.2-r0 \
+      git=2.32.0-r0 \
       build-base=0.5-r2 \
-      libxslt-dev=1.1.34-r0 \
+      libxslt-dev=1.1.34-r1 \
       mariadb-dev=10.5.11-r0 \
-      nodejs=14.16.1-r1 \
+      nodejs=14.17.1-r0 \
       yarn=1.22.10-r0 && \
     gem install bundler:2.2.4  && \
     bundle config build.nokogiri --use-system-libraries && \

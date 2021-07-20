@@ -40,7 +40,7 @@ class SyncService::Catalogs
   def record_hash(record)
     catalog_code = record["catalog"]
     {
-      "code"      => catalog_code,
+      "code"      => catalog_code.downcase,
       "suppress"  => false
     }
   end
