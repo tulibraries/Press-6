@@ -61,7 +61,6 @@ class BookDashboard < Administrate::BaseDashboard
     desk_copy: Field::Boolean,
 
     series: Field::BelongsTo.with_options(order: "title"),
-    catalog: Field::BelongsTo.with_options(order: "title"),
     special_offer: Field::BelongsTo.with_options(order: "title"),
 
     subjects: Field::Text,
@@ -74,9 +73,12 @@ class BookDashboard < Administrate::BaseDashboard
     label_1: Field::String,
     label_2: Field::String,
     label_3: Field::String,
-    award1: TrixField,
-    award2: TrixField,
-    award3: TrixField,
+    award: Field::String,
+    award2: Field::String,
+    award3: Field::String,
+    award_year: Field::String,
+    award_year2: Field::String,
+    award_year3: Field::String,
     featured_award_winner: Field::Boolean,
     price: Field::String.with_options(searchable: false),
     created_at: Field::DateTime,
@@ -101,7 +103,6 @@ class BookDashboard < Administrate::BaseDashboard
     author_byline
     isbn
     ean
-    catalog
     series
   ].freeze
 
@@ -122,10 +123,12 @@ class BookDashboard < Administrate::BaseDashboard
     subject1
     subject2
     subject3
-    catalog
     featured_award_winner
-    award1
+    award_year
+    award
+    award_year2
     award2
+    award_year3
     award3
     guide_file
     guide_file_label

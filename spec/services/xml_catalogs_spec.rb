@@ -22,19 +22,7 @@ RSpec.describe SyncService::Catalogs, type: :service do
       subject { @catalog_harvest.record_hash(@catalogs.first) }
 
       it "maps Code to code field" do
-        expect(subject["code"]).to match(@catalogs.first["catalog"])
-      end
-
-      it "maps title to title field" do
-        expect(subject["title"]).to match("Fall 2021 Catalog")
-      end
-
-      it "maps season to season field" do
-        expect(subject["season"]).to match("Fall")
-      end
-
-      it "maps year to year field" do
-        expect(subject["year"]).to match("2021")
+        expect(subject["code"]).to match(@catalogs.first["catalog"].downcase)
       end
     end
   end

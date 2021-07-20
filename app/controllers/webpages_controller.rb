@@ -4,7 +4,6 @@ class WebpagesController < ApplicationController
   before_action :set_webpage, only: :show
 
   def index
-    @webpages = Webpage.all
   end
 
   def show
@@ -13,6 +12,6 @@ class WebpagesController < ApplicationController
 
   private
     def set_webpage
-      @webpage = Webpage.find(params[:id])
+      @page = Webpage.find(params[:id])
     end
 end

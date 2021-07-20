@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SeriesController < ApplicationController
-  before_action :set_series, only: %i[:show]
+  before_action :set_series, only: %i[show]
 
   def index
     @series = Series.all

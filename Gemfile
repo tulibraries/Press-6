@@ -3,9 +3,9 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.3"
+ruby "2.7.4"
 
-gem "rails", "~> 6.0.3.7"
+gem "rails", "~> 6.1.4"
 gem "mysql2", "~> 0.5.3"
 gem "puma", "~> 4.1"
 gem "webpacker", "~> 5.0"
@@ -29,6 +29,10 @@ gem "kaminari"
 gem "administrate-field-date_picker", "~> 0.2.0"
 gem "meta-tags"
 gem "activestorage-validator"
+
+gem "devise"
+gem "omniauth"
+gem "omniauth-google-oauth2"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]

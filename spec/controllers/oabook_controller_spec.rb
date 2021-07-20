@@ -18,4 +18,7 @@ RSpec.describe OabooksController, type: :controller do
       expect(response.header["Content-Type"]).to include "html"
     end
   end
+
+  it_behaves_like "index_editable"
+
 end

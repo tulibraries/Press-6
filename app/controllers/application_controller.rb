@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   def get_journals
     @journals = Journal.all
   end
+
+  def show_status
+    ["NP", "IP", "OS", "OP", "In Print"]
+  end
 end

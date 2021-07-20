@@ -27,7 +27,6 @@ class Book < ApplicationRecord
   has_many :books, class_name: "Book", dependent: :nullify
 
   belongs_to :series, optional: true
-  belongs_to :catalog, optional: true
   belongs_to :special_offer, optional: true
 
   def sort_titles

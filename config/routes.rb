@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
 
+  devise_for :users
   concern :imageable do
     get "image/thumbnail", to: "images#thumbnail_image"
     get "image/medium",    to: "images#medium_image"
@@ -22,13 +23,13 @@ Rails.application.routes.draw do
     resources :subjects
     resources :webpages
 
-    resource :books, :brochures, :oabooks, :people, :series, :subjects, :special_offers do
+    resource :books, :brochures, :catalogs, :oabooks, :people, :series, :subjects, :special_offers do
       member do
         get ":id/detach" => :detach
       end
     end
 
-    resource :books, :brochures, :oabooks, :people, :series, :subjects, :special_offers do
+    resource :books, :brochures, :catalogs, :oabooks, :people, :series, :subjects, :special_offers do
       member do
         post "detach" => :detach
       end
@@ -39,22 +40,25 @@ Rails.application.routes.draw do
 
   resources :agencies, only: [:index]
   resources :books, concerns: [:imageable]
-  resources :catalogs
+  resources :catalogs, concerns: [:imageable]
   resources :conferences, only: [:index]
   resources :oabooks, only: [:show], concerns: [:imageable]
   resources :people, only: [:index], concerns: [:imageable]
   resources :series, concerns: [:imageable]
   resources :special_offers, concerns: [:imageable]
   resources :subjects, concerns: [:imageable]
-  resources :webpages, only: [:show]
+  resources :webpages, only: [:index, :show]
 
   root to: "webpages#index"
 
 
+  get   "awards"				        => "books#awards", as: :awards
+  get   "awards/subject/:id"    => "books#awards_by_subject", as: :awards_by_subject
+  get   "awards/year/:id"       => "books#awards_by_year", as: :awards_by_year
 
-  get "/open-access/north-broad-press" => "oabooks#north_broad_press", as: :north_broad
-  get "/open-access/labor-studies" => "oabooks#labor_studies", as: :labor_studies
-  get "/open-access/labor-studies/:id" => "oabooks#show", as: :labor_studies_book
-  get "/open-access/north-broad-press/:id" => "oabooks#show", as: :north_broad_book
+  get "/open-access/north-broad-press"      => "oabooks#north_broad_press", as: :north_broad
+  get "/open-access/labor-studies"          => "oabooks#labor_studies", as: :labor_studies
+  get "/open-access/labor-studies/:id"      => "oabooks#show", as: :labor_studies_book
+  get "/open-access/north-broad-press/:id"  => "oabooks#show", as: :north_broad_book
 
 end

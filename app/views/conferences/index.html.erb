@@ -2,12 +2,17 @@
 
 	<div class="row">
 		<div class="col px-3 mt-4">
-			<h1><%= "Conferences" %></h1>
+			<h1><%= title_link(t("tupress.conferences.title")) %></h1>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col p-3"><%= @intro.body if @intro.present? %></div>
+		<div class="col p-3">
+			<% if @intro.present? %>
+				<%= @intro.body %>
+				<p class="mt-3"><%= edit_intro(@intro.id) %></p>
+			<%  end %>
+		</div>
 	</div>
 
 <% @conferences.each do |month, conferences| %>
@@ -20,7 +25,7 @@
 			<% conferences.each do |conference| %>
 				<ul class="list-unstyled">
 					<li>
-						<%= conference.title unless conference.link.present? %>
+						<%= title_link(conference.title, conference.id) unless conference.link.present? %>
 						<%= link_to conference.title, conference.link if conference.link.present? %>
 					</li>
 					<%= "<li>#{conference.location}</li>".html_safe if conference.location.present? %>
