@@ -34,7 +34,7 @@ class BooksController < ApplicationController
               [@book.label_9, @book.link_9],
               [@book.label_10, @book.link_10]
              ].compact
-    @see_alsos = @book.books.sort_by{|b| b.sort_title}.take(4)
+    @see_alsos = @book.books.sort_by { |b| b.sort_title }.take(4)
   end
 
   def awards
