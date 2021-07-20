@@ -101,3 +101,9 @@ p.order-button {
 	width: 270px;
 	height: 420px;
 }
+
+.container.see-also {
+	img.default {
+		outline: solid $news-grey 1px;
+	}
+}

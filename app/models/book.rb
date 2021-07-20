@@ -19,7 +19,7 @@ class Book < ApplicationRecord
   validates :excerpt_file, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
 
   has_rich_text :news_text
-  has_rich_text :award1
+  has_rich_text :award
   has_rich_text :award2
   has_rich_text :award3
 
