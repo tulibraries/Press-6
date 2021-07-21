@@ -34,7 +34,7 @@ class SyncService::Reviews
 
         end
       rescue Exception => err
-        stdout_and_log("sync:  #{book["record"]["title"]} - #{err.message} \n #{err.backtrace}")
+        stdout_and_log("sync error:  #{err.message} \n #{err.backtrace}")
         @errored += 1
       end
     end

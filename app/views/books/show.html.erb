@@ -26,10 +26,8 @@
               <%= book_format(b[:format]) %>
             </li>
             <li><%= t("tupress.books.price_label") %>: <%= b[:price] %></li>
-            <li><%= t("tupress.books.ean_label") %>: <%= hyphen_strip(b[:ean]) %></li>
-            <% if b[:pub_date].present? %>
-              <li><%= t("tupress.books.publication_label") %>: <%= pub_date(b[:pub_date]) %></li>
-            <% end %>
+            <li><%= t("tupress.books.ean_label") %>: <%= b[:ean] %></li>
+            <li><%= t("tupress.books.publication_label") %>: <%= b[:pub_date] %></li>
           <% end %>
           </ul>
         </div>
