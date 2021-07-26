@@ -25,8 +25,16 @@ class BooksController < ApplicationController
     @links = [
               [@book.label_1, @book.link_1],
               [@book.label_2, @book.link_2],
-              [@book.label_3, @book.link_3]
-             ]
+              [@book.label_3, @book.link_3],
+              [@book.label_4, @book.link_4],
+              [@book.label_5, @book.link_5],
+              [@book.label_6, @book.link_6],
+              [@book.label_7, @book.link_7],
+              [@book.label_8, @book.link_8],
+              [@book.label_9, @book.link_9],
+              [@book.label_10, @book.link_10]
+             ].compact
+    @see_alsos = @book.books.sort_by { |b| b.sort_title }.take(4)
   end
 
   def awards

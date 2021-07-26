@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_16_202208) do
+ActiveRecord::Schema.define(version: 2021_07_20_205949) do
 
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -103,14 +103,6 @@ ActiveRecord::Schema.define(version: 2021_07_16_202208) do
     t.string "subject1"
     t.string "subject2"
     t.string "subject3"
-    t.string "award_year"
-    t.string "award"
-    t.string "award_year2"
-    t.string "award2"
-    t.string "award_year3"
-    t.string "award3"
-    t.string "award_year4"
-    t.string "award4"
     t.decimal "price", precision: 5, scale: 2
     t.string "promotion_id"
     t.string "series_id"
@@ -139,6 +131,23 @@ ActiveRecord::Schema.define(version: 2021_07_16_202208) do
     t.string "label_2"
     t.string "link_3"
     t.string "label_3"
+    t.string "award_year"
+    t.string "award_year2"
+    t.string "award_year3"
+    t.string "link_4"
+    t.string "link_5"
+    t.string "link_6"
+    t.string "link_7"
+    t.string "link_8"
+    t.string "link_9"
+    t.string "link_10"
+    t.string "label_4"
+    t.string "label_5"
+    t.string "label_6"
+    t.string "label_7"
+    t.string "label_8"
+    t.string "label_9"
+    t.string "label_10"
     t.index ["catalog_id"], name: "index_books_on_catalog_id"
     t.index ["promotion_id"], name: "index_books_on_promotion_id"
     t.index ["series_id"], name: "index_books_on_series_id"

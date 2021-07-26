@@ -60,7 +60,6 @@ class BookDashboard < Administrate::BaseDashboard
     course_adoption: Field::Boolean,
     desk_copy: Field::Boolean,
 
-    series: Field::BelongsTo.with_options(order: "title"),
     special_offer: Field::BelongsTo.with_options(order: "title"),
 
     subjects: Field::Text,
@@ -70,12 +69,26 @@ class BookDashboard < Administrate::BaseDashboard
     link_1: Field::String,
     link_2: Field::String,
     link_3: Field::String,
+    link_4: Field::String,
+    link_5: Field::String,
+    link_6: Field::String,
+    link_7: Field::String,
+    link_8: Field::String,
+    link_9: Field::String,
+    link_10: Field::String,
     label_1: Field::String,
     label_2: Field::String,
     label_3: Field::String,
-    award: Field::String,
-    award2: Field::String,
-    award3: Field::String,
+    label_4: Field::String,
+    label_5: Field::String,
+    label_6: Field::String,
+    label_7: Field::String,
+    label_8: Field::String,
+    label_9: Field::String,
+    label_10: Field::String,
+    award: TrixField,
+    award2: TrixField,
+    award3: TrixField,
     award_year: Field::String,
     award_year2: Field::String,
     award_year3: Field::String,
@@ -103,7 +116,6 @@ class BookDashboard < Administrate::BaseDashboard
     author_byline
     isbn
     ean
-    series
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -140,7 +152,6 @@ class BookDashboard < Administrate::BaseDashboard
     suggested_reading_label
     course_adoption
     special_offer
-    series
     books
     label_1
     link_1
@@ -148,6 +159,20 @@ class BookDashboard < Administrate::BaseDashboard
     link_2
     label_3
     link_3
+    label_4
+    link_4
+    label_5
+    link_5
+    label_6
+    link_6
+    label_7
+    link_7
+    label_8
+    link_8
+    label_9
+    link_9
+    label_10
+    link_10
   ].freeze
 
   # COLLECTION_FILTERS
