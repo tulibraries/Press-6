@@ -16,14 +16,16 @@
 	</div>
 
 <% @conferences.each do |month, conferences| %>
-	<div class="row conference">
-		<div class="col-12 p-3 month">
+	<div class="row">
+		<div class="col-12 p-0 month">
 			<h2><%= month %></h2>
 		</div>
+	</div>
 
-		<div class="col-12 px-3">
+	<div class="row" style="background-color:white;">
+		<div class="col-12 px-3 conferences">
 			<% conferences.each do |conference| %>
-				<ul class="list-unstyled">
+				<ul class="list-unstyled ml-4">
 					<li>
 						<%= title_link(conference.title, conference.id) unless conference.link.present? %>
 						<%= link_to conference.title, conference.link if conference.link.present? %>
@@ -33,6 +35,7 @@
 					<%= "<li>#{conference.booth}</li>".html_safe if conference.booth.present? %>
 					<%= "<li>#{dates(conference.start_date, conference.end_date)}</li>".html_safe if conference.start_date.present? %>
 				</ul>
+			<%= "<hr />".html_safe unless conference == conferences.last %>
 			<% end %>
 		</div>
 	</div>

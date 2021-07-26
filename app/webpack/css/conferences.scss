@@ -1,13 +1,17 @@
 @import "partials/_vars.scss";
 
 #conferences {
-  .conference {
-    background-color: $white;
-    border-top: solid 21px $background-grey;
     .month {
       h2 {
-        border-bottom: solid black 1px;
-      }
+        margin-top:21px;
+        background-color: $gold;
+        padding: 7px;
+      }  
+    }
+  .conferences {
+    ul {
+      padding-top: 14px;
+      padding-bottom: 14px;
     }
   }
 }
