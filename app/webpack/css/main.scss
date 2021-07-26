@@ -213,3 +213,15 @@ li.list-inline-item {
 a.news-image img {
 	max-width: 100%;
 }
+
+.trix-content {
+	action-text-attachment {
+		figure {
+			figcaption {
+				.attachment__name, .attachment__size {
+					display: none;
+				}
+			}
+		}
+	}
+}
