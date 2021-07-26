@@ -26,8 +26,8 @@
               <%= book_format(b[:format]) %>
             </li>
             <li><%= t("tupress.books.price_label") %>: <%= b[:price] %></li>
-            <li><%= t("tupress.books.ean_label") %>: <%= b[:ean] %></li>
-            <li><%= t("tupress.books.publication_label") %>: <%= b[:pub_date] %></li>
+            <li><%= t("tupress.books.ean_label") %>: <%= hyphen_strip(b[:ean]) %></li>
+            <li><%= t("tupress.books.publication_label") %>: <%= pub_date(b[:pub_date]) %></li>
           <% end %>
           </ul>
         </div>
@@ -58,15 +58,15 @@
           </ul>
         </div>
         <% end %>
-
-        <% if @links.flatten.any? %>
+        
+        <% unless @links.flatten.compact.all?(&:blank?) %>
         <div class="book-related-links mt-4">
           <span class="section-label">
             <%= t("tupress.books.related_links") %>
           </span>
           <ul class="list-unstyled">
             <% @links.each do |link| %>
-              <li><%= link_to link[0], link[1] %></li> 
+              <li><%= link_to link[0], link[1] unless link.any?(nil) %></li> 
             <% end %>
           </ul>
         </div>
@@ -127,6 +127,7 @@
           <%= fix_invalid_html(@book.about_author).html_safe %>
       </div>
       <% end %>
+
       <% if @series.present? %>
       <div class="series mt-3 p-3">
         <h2 class="mb-3"><%= t("tupress.books.series") %></h2>
@@ -145,14 +146,14 @@
         </div>
     </div>
     <div class="row">
-    <% @book.books.take(4).each do |book| %>
+    <% @see_alsos.each do |book| %>
     
       <div class="col col-3 text-center">
       <%= link_to book_path(book.xml_id) do %>
       <% if book.cover_image.attached? %>
         <%= image_tag book.index_image("cover_image") %>
       <% else %>
-        <%= image_pack_tag "see-also-default.gif" %>
+        <%= image_pack_tag "see-also-default.gif", class: "default" %>
       <% end %>
         
         <p class="pt-2 mb-0"><%= strip_tags book.title %></p>
