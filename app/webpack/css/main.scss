@@ -218,7 +218,9 @@ a.news-image img {
 	action-text-attachment {
 		figure {
 			figcaption {
-				display: none;
+				.attachment__name, .attachment__size {
+					display: none;
+				}
 			}
 		}
 	}
