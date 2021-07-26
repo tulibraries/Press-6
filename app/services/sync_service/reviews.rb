@@ -24,19 +24,17 @@ class SyncService::Reviews
           record = record_hash(book)
           create_or_update!(record)
         else #when node is returned from read_reviews
-          unless book.at("review_id").nil?
-            book = { "reviews" => [{ "review_id" => book.at("review_id").text,
-                                  "review_text" => Nokogiri::HTML::DocumentFragment.parse(book.at("review_text").text)
-                                    .to_xml(save_with: Nokogiri::XML::Node::SaveOptions::AS_HTML) }],
-                    "book_id" => book.at("book_id").text }
+          reviews = book.at("reviews").children.map(&:to_xml)
+          if reviews.present?
+            book = { "reviews" => reviews }
             create_or_update!(book)
           else
-            @log.info(%Q(Syncing review: #{book.at("book_id").text}))
+            @log.info(%Q(Syncing review for book: #{book.at("book_id").text}))
           end
 
         end
       rescue Exception => err
-        stdout_and_log("sync: #{err.message} \n #{err.backtrace}")
+        stdout_and_log("sync error:  #{err.message} \n #{err.backtrace}")
         @errored += 1
       end
     end
@@ -72,9 +70,9 @@ class SyncService::Reviews
         reviews.each do |review|
           r = Review.find_by(review_id: review["review_id"])
           if r
-            # stdout_and_log(
-            #   %Q(Incoming book with review '#{r["review_id"]}' matched to existing review '(code = #{r.review_id} )', level: :debug)
-            # )
+            stdout_and_log(
+              %Q(Incoming book with review '#{r["review_id"]}' matched to existing review '(code = #{r.review_id} )', level: :debug)
+            )
             @updated += 1
           else
             r = Review.new
@@ -93,9 +91,9 @@ class SyncService::Reviews
         end
       rescue Exception => err
         if err.message == "no implicit conversion of String into Integer" #empty tags
-          # stdout_and_log(%Q(Empty review tags for:  #{book}))
+          stdout_and_log(%Q(Empty review tags for:  #{book["record"]["title"]}))
         else
-          stdout_and_log("Syncing Review:  #{err.message} \n #{err.backtrace}")
+          stdout_and_log("Syncing Review: #{book["record"]["title"]} - #{err.message} \n #{err.backtrace}")
         end
       end
     end
