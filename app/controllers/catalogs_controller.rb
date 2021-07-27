@@ -10,8 +10,9 @@ class CatalogsController < ApplicationController
   end
 
   def show
-    @books = @catalog.books.select { |b| show_status.include?(b.status) }
-                           .sort_by { |b| b.sort_title }
+    @books = @catalog.books.where(status: show_status)
+                           .order(:sort_title)
+                           .page params[:page]
   end
 
   private
