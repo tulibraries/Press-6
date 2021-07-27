@@ -8,7 +8,7 @@ class SubjectsController < ApplicationController
   end
 
   def show
-    @books = Book.where('subjects LIKE ?', "%#{params[:id]}%")
+    @books = Book.where("subjects LIKE ?", "%#{params[:id]}%")
                   .where(status: show_status)
                   .order(:sort_title)
                   .page params[:page]
