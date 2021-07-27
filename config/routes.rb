@@ -46,11 +46,10 @@ Rails.application.routes.draw do
   resources :people, only: [:index], concerns: [:imageable]
   resources :series, concerns: [:imageable]
   resources :special_offers, concerns: [:imageable]
-  resources :subjects, concerns: [:imageable]
+  resources :subjects, only: [:index, :show]
   resources :webpages, only: [:index, :show]
 
   root to: "webpages#index"
-
 
   get   "awards"				        => "books#awards", as: :awards
   get   "awards/subject/:id"    => "books#awards_by_subject", as: :awards_by_subject
