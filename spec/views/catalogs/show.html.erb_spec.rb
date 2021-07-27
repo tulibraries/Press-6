@@ -12,7 +12,7 @@ RSpec.describe "catalogs/show.html.erb", type: :view do
     @book1 = FactoryBot.create(:book, title: "The Paul", catalog_id: catalog.code)
     @book2 = FactoryBot.create(:book, title: "A Paul", catalog_id: catalog.code)
     assign(:catalog, catalog)
-    assign(:books, [@book, @book1, @book2])
+    assign(:books, Kaminari.paginate_array([@book, @book1, @book2]).page(1))
     render
   end
 
