@@ -4,7 +4,7 @@ class SubjectsController < ApplicationController
   before_action :set_subject, only: %i[show]
 
   def index
-    @subjects = Subject.all
+    @subjects = Subject.all.order(:title)
   end
 
   def show
