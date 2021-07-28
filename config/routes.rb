@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   end
 
   resources :agencies, only: [:index]
+  resources :authors, only: [:index, :show]
   resources :books, concerns: [:imageable]
   resources :catalogs, concerns: [:imageable]
   resources :conferences, only: [:index]
@@ -51,9 +52,9 @@ Rails.application.routes.draw do
 
   root to: "webpages#index"
 
-  get   "awards"				        => "books#awards", as: :awards
-  get   "awards/subject/:id"    => "books#awards_by_subject", as: :awards_by_subject
-  get   "awards/year/:id"       => "books#awards_by_year", as: :awards_by_year
+  get "awards"				        => "books#awards", as: :awards
+  get "awards/subject/:id"    => "books#awards_by_subject", as: :awards_by_subject
+  get "awards/year/:id"       => "books#awards_by_year", as: :awards_by_year
 
   get "/open-access/north-broad-press"      => "oabooks#north_broad_press", as: :north_broad
   get "/open-access/labor-studies"          => "oabooks#labor_studies", as: :labor_studies
