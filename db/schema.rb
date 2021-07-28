@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_20_205949) do
+ActiveRecord::Schema.define(version: 2021_07_28_143920) do
 
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -69,6 +69,17 @@ ActiveRecord::Schema.define(version: 2021_07_20_205949) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "authors", charset: "utf8mb3", force: :cascade do |t|
+    t.string "author_id"
+    t.string "title"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "prefix"
+    t.string "suffix"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "books", charset: "utf8mb3", force: :cascade do |t|
     t.string "xml_id"
     t.string "title"
@@ -111,10 +122,6 @@ ActiveRecord::Schema.define(version: 2021_07_20_205949) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "promotion_ids"
     t.text "author_ids"
-    t.text "author_prefixes"
-    t.text "author_firsts"
-    t.text "author_lasts"
-    t.text "author_suffixes"
     t.string "suggested_reading_label"
     t.bigint "special_offer_id"
     t.string "guide_file_label"
