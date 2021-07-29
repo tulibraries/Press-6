@@ -2,7 +2,7 @@
 
 class Book < ApplicationRecord
   include Imageable
-  before_save :sort_titles, :get_excerpt
+  before_save :sort_titles, :get_excerpt, :catalog_code
 
   validates :title, :xml_id, :author_byline, :status, presence: true
 
@@ -39,6 +39,10 @@ class Book < ApplicationRecord
     else
       self.sort_title = self.title
     end
+  end
+
+  def catalog_code
+    self.catalog_id.downcase if self.catalog_id.present?
   end
 
   def get_excerpt
