@@ -25,7 +25,7 @@ class SyncService::Books
         create_or_update_if_needed!(record)
       rescue Exception => err
 
-        
+
         stdout_and_log(%Q(Syncing Book: #{book["title"]} errored -  #{err.message} \n #{err.backtrace}))
         @errored += 1
       end
@@ -45,16 +45,13 @@ class SyncService::Books
       "title"               => record.dig("record", "title"),
       "subtitle"            => record.dig("record", "subtitle"),
       "cover"               => record.dig("record", "cover_image").sub("http://www.temple.edu/tempress/titles/", ""),
-      "author_ids"          => record["record"].fetch("authors")["author"].filter do |p|
-                                if p.kind_of?(Array)
-                                  binding.pry
-                                  p[0] == "author_id" ? p[1] : p[1]
-                                end
-                                if p.kind_of?(Hash)
-                                  binding.pry
-                                  p["author_id"]
-                                end
-                                end,
+      "author_ids"          => record["record"].fetch("authors")["author"].map do |author|
+                                  if author.size == 2
+                                    author[1] if author[0] == "author_id"
+                                  else
+                                    author["author_id"]
+                                  end
+                                end.compact,
       "author_byline"       => record.dig("record", "author_byline"),
       "about_author"        => record.dig("record", "author_bios"),
       "intro"               => record.dig("record", "intro"),
