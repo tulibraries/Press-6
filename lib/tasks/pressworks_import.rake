@@ -27,6 +27,11 @@ namespace :sync do
       args.with_defaults(path: nil)
       SyncService::Subjects.call(xml_path: args[:path])
     end
+    desc "sync authors"
+    task :authors, [:path] => :environment do |t, args|
+      args.with_defaults(path: nil)
+      SyncService::Authors.call(xml_path: args[:path])
+    end
     desc "Do them all"
     task :all, [:path] => :environment do |t, args|
       pressworks_ingest.tasks.each do |task|

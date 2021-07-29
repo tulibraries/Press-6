@@ -20,7 +20,7 @@ class SyncService::Books
     @updated = @not_saved = @skipped = @errored = 0
     read_books.each do |book|
       begin
-        # @log.info(%Q(Syncing Book: #{book["title"]}))
+        @log.info(%Q(Syncing Book: #{book["title"]}))
         record = record_hash(book)
         create_or_update_if_needed!(record)
       rescue Exception => err
@@ -44,19 +44,7 @@ class SyncService::Books
       "subtitle"            => record.dig("record", "subtitle"),
       "cover"               => record.dig("record", "cover_image").sub("http://www.temple.edu/tempress/titles/", ""),
       "author_ids"          => record["record"].fetch("authors")["author"].map do |p|
-                                  p.size == 5 ? p["author_id"] : p[1]
-                                end,
-      "author_prefixes"     => record["record"].fetch("authors")["author"].map do |p|
-                                  p.size == 5 ? p["author_prefix"] : p[1]
-                                end,
-      "author_firsts"       => record["record"].fetch("authors")["author"].map do |p|
-                                  p.size == 5 ? p["author_first"] : p[1]
-                                end,
-      "author_lasts"        => record["record"].fetch("authors")["author"].map do |p|
-                                  p.size == 5 ? p["author_last"] : p[1]
-                                end,
-      "author_suffixes"     => record["record"].fetch("authors")["author"].map do |p|
-                                  p.size == 5 ? p["author_suffix"] : p[1]
+                                  p.kind_of?(Hash) ? p["author_id"] : p[1]
                                 end,
       "author_byline"       => record.dig("record", "author_byline"),
       "about_author"        => record.dig("record", "author_bios"),
@@ -74,7 +62,7 @@ class SyncService::Books
       "description"         => record.dig("record", "description"),
       "subjects"            => JSON.dump(record["record"].fetch("subjects", { "subject" => { "subject_id" => nil, "subject_title" => nil } })),
       "contents"            => record.dig("record", "contents"),
-      "catalog_id"          => record.dig("record", "catalog").downcase
+      "catalog_id"          => record.dig("record", "catalog")
     }
   end
 
