@@ -1,14 +1,11 @@
-<p id="notice"><%= notice %></p>
+<div class="container subjects-show">
 
-<p>
-  <strong>Code:</strong>
-  <%= @subject.code %>
-</p>
+  <div class="row">
+    <div class="col mt-4">
+      <h1><%= @subject.title %></h1>
+    </div>
+  </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @subject.title %>
-</p>
+  <%= render "/books/books" %>
 
-<%= link_to 'Edit', edit_subject_path(@subject) %> |
-<%= link_to 'Back', subjects_path %>
+</div>
