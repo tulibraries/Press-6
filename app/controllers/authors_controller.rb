@@ -8,6 +8,7 @@ class AuthorsController < ApplicationController
   end
 
   def show
+    @books = Book.where(author_ids: [@author.id])
   end
 
   private
