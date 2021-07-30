@@ -1,37 +1,29 @@
-<p id="notice"><%= notice %></p>
+<div class="container authors-index">
 
-<h1>Authors</h1>
+  <div class="row">
+    <div class="col-12 mt-3 px-0">
+      <h1 class="my-4">
+        Authors
+      </h1>
+      <%= render "alphamenu" %>
+    </div>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Prefix</th>
-      <th>Suffix</th>
-      <th>Author</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="row p-4">
+    <div class="col authors">
+      <% @authors.each do |author| %>
+        <p class="p-2 author">
+          <%= link_to author.title, author_path(author.author_id) %>
+        </p>
+      <% end %>
+    </div>
+  </div>
 
-  <tbody>
-    <% @authors.each do |author| %>
-      <tr>
-        <td><%= author.title %></td>
-        <td><%= author.first_name %></td>
-        <td><%= author.last_name %></td>
-        <td><%= author.prefix %></td>
-        <td><%= author.suffix %></td>
-        <td><%= author.author_id %></td>
-        <td><%= link_to 'Show', author %></td>
-        <td><%= link_to 'Edit', edit_author_path(author) %></td>
-        <td><%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="row">
+    <div class="col">
+      <%= paginate @authors %>
+    </div>
+  </div>
 
-<br>
 
-<%= link_to 'New Author', new_author_path %>
+<div>
