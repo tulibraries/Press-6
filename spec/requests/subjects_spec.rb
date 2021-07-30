@@ -7,10 +7,10 @@
    let(:book) { FactoryBot.create(:book, subjects: '{ "subject":{ "subject_id":"#{subject.code}", "subject_title":"#{subject.title}" } }') }
 
    describe "index page renders subjects" do
-    it "returns a subject" do
-      expect { get subjects_path.to have_text(subject.title) }
-    end
-  end
+     it "returns a subject" do
+       expect { get subjects_path.to have_text(subject.title) }
+     end
+   end
 
    describe "show page renders books" do
      it "returns books by subject" do

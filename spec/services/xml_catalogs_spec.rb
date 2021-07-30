@@ -5,6 +5,7 @@ require "rails_helper"
 RSpec.describe SyncService::Catalogs, type: :service do
 
   before(:all) do
+    Catalog.delete_all
     @catalog_harvest = described_class.new(xml_path: file_fixture("delta.xml").to_path)
     @catalogs = @catalog_harvest.read_catalogs
   end
