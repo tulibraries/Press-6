@@ -1,0 +1,10 @@
+@import "partials/_vars.scss";
+
+.authors-index {
+  .authors {
+    column-count: 3;
+    .author {
+      background-color: $white;
+    }
+  }
+}
