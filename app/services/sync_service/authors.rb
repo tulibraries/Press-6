@@ -17,26 +17,35 @@ class SyncService::Authors
 
   def sync
     @updated = @created = @errored = 0
-    read_authors.each do |node|
-      begin
-        if node.kind_of?(Hash)
-          create_or_update!(node)
-        else
-          node.each do |author|
-            create_or_update!(author)
+
+    get_books.each do |book|
+      if ["NP", "IP", "OS", "OP"].include? book["record"]["status"]
+        authors = book["record"]["authors"]["author"]
+        if authors.kind_of?(Hash)
+          begin
+            create_or_update!(authors)
+          rescue Exception => err
+            stdout_and_log("sync error:  #{err.message} \n #{err.backtrace}")
+            @errored += 1
           end
-        end if node.present?
-      rescue Exception => err
-        stdout_and_log("sync error:  #{err.message} \n #{err.backtrace}")
-        @errored += 1
+        else
+          begin
+            authors.each do |author|
+              create_or_update!(author)
+            end
+          rescue Exception => err
+            stdout_and_log("sync error:  #{err.message} \n #{err.backtrace}")
+            @errored += 1
+          end
+        end 
       end
     end
     stdout_and_log("Syncing completed with #{@created} created, #{@updated} updated, and #{@errored} errored records.")
   end
 
-  def read_authors
-    @booksDoc.xpath("//record/authors").map do |node|
-      Hash.from_xml(node.serialize(encoding: "UTF-8"))["authors"]["author"]
+  def get_books
+    @booksDoc.xpath("//record").map do |node|
+      @status = Hash.from_xml(node.serialize(encoding: "UTF-8"))
     end
   end
 
