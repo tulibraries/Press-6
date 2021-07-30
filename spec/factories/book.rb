@@ -5,6 +5,7 @@ FactoryBot.define do
     xml_id { 7 }
     title { "John" }
     author_byline { "Joseph Heller" }
+    author_ids { ["\"1982\""] }
     news { false }
     news_text { "This is news text." }
     hot { false }

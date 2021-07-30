@@ -37,7 +37,7 @@ class SyncService::Authors
             stdout_and_log("sync error:  #{err.message} \n #{err.backtrace}")
             @errored += 1
           end
-        end 
+        end
       end
     end
     stdout_and_log("Syncing completed with #{@created} created, #{@updated} updated, and #{@errored} errored records.")
