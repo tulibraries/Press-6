@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   resources :conferences, only: [:index]
   resources :oabooks, only: [:show], concerns: [:imageable]
   resources :people, only: [:index], concerns: [:imageable]
-  resources :series, concerns: [:imageable]
+  resources :series, only: [:index, :show], concerns: [:imageable]
   resources :special_offers, concerns: [:imageable]
   resources :subjects, only: [:index, :show]
   resources :webpages, only: [:index, :show]

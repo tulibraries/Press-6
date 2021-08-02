@@ -36,30 +36,31 @@ a.order-button {
 	filter: grayscale(100%);
 }
 
-.book-formats, .book-subjects, .book-preview, .book-related-links {
-	.list-unstyled {
-		font-size: .9rem;
+.books-show {
+	.book-formats, .book-subjects, .book-preview, .book-related-links {
+		.list-unstyled {
+			font-size: .9rem;
+		}
+	}
+
+	.reviews, .author-bio, .series, .see-also {
+		background-color: $white;
+	}
+
+	.see-also {
+		a {
+			text-decoration: none!important;
+			display: block;
+			margin: auto;
+		}
+	}
+
+	.awards {
+		li {
+			color: $award;
+		}
 	}
 }
-
-.reviews, .author-bio, .series, .see-also {
-	background-color: $white;
-}
-
-.see-also {
-	a {
-		text-decoration: none!important;
-		display: block;
-		margin: auto;
-	}
-}
-
-.awards {
-	li {
-		color: $award;
-	}
-}
-
 ul#alphamenu {
 	width: 100%;
 	padding: 7px 0;

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_28_143920) do
+ActiveRecord::Schema.define(version: 2021_08_02_152028) do
 
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -252,6 +252,8 @@ ActiveRecord::Schema.define(version: 2021_07_28_143920) do
     t.string "image_link"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "book_id"
+    t.index ["book_id"], name: "index_series_on_book_id"
   end
 
   create_table "special_offers", charset: "utf8mb3", force: :cascade do |t|
@@ -292,5 +294,6 @@ ActiveRecord::Schema.define(version: 2021_07_28_143920) do
 
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "books", "special_offers"
+  add_foreign_key "series", "books"
   add_foreign_key "special_offers", "books"
 end

@@ -92,7 +92,7 @@
     </div>
     <div class="col col-9 book-info">
       <div class="description mt-5 p-3">
-        <h1><%= title_link(@book.title, @book.id) %></h1>
+        <h1><%= title_link(@book.title.html_safe, @book.id) %></h1>
 
         <p class="subtitle lead">
         <% if @book.subtitle.present? %>
@@ -139,7 +139,7 @@
       <% if @series.present? %>
       <div class="series mt-3 p-3">
         <h2 class="mb-3"><%= t("tupress.books.series") %></h2>
-          <p><%= link_to @series.title, @series, style: "font-size:larger;" %></p>
+          <p><%= link_to @series.title, series_path(@series.code), style: "font-size:larger;" %></p>
           <p><%= fix_invalid_html(@series.description).html_safe %>
       </div>
       <% end %>
@@ -164,7 +164,7 @@
         <%= image_pack_tag "see-also-default.gif", class: "default" %>
       <% end %>
         
-        <p class="pt-2 mb-0"><%= strip_tags book.title %></p>
+        <p class="pt-2 mb-0"><%= book.title.html_safe %></p>
       <% end %>
         <%= book.author_byline %>
       </div>

@@ -1,4 +1,19 @@
-<p id="notice"><%= notice %></p>
+<div class="container series-show">
 
-<%= link_to 'Edit', edit_series_path(@series) %> |
-<%= link_to 'Back', series_index_path %>
+<div class="row mb-3">
+  <div class="col-12 mt-3">
+    <h1 class="mt-4">
+      <%= title_link(@series.title, @series.id) %>
+    </h1>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col">
+    <%= @series.description if @series.description.present? %>
+  </div>
+</div>
+
+  <%= render "/books/books" %>
+
+</div>
