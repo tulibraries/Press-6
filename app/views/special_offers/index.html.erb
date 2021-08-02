@@ -1,25 +1,26 @@
-<p id="notice"><%= notice %></p>
+<div class="container special-offers-index">
 
-<h1>Special Offers</h1>
+  <div class="row">
+    <div class="col-12 mt-3 px-0">
+      <h1 class="pl-3 mt-4 mr-4 gold">
+        <%= title_link(t("tupress.special_offers.index_title")) %>
+      </h1>
+    </div>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @special_offers.each do |special_offer| %>
-      <tr>
-        <td><%= link_to 'Show', special_offer %></td>
-        <td><%= link_to 'Edit', edit_special_offer_path(special_offer) %></td>
-        <td><%= link_to 'Destroy', special_offer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+  <div class="row special-offers mt-2 g-3">
+    <% @special_offers.each do |so| %>
+      <div class="col-6 px-0">
+        <div class="so p-3 mr-4 mb-3" style="min-height:140px;">
+          <p style="font-size: 120%;">
+            <strong><%= link_to so.title, special_offer_path(so) %></strong>
+          </p>
+          <div class="pt-0">
+            <%= fix_invalid_html(so.intro_text.body.to_s.truncate(170)).html_safe %>
+          </div>
+          </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
 
-<br>
-
-<%= link_to 'New Special Offer', new_special_offer_path %>
+</div>

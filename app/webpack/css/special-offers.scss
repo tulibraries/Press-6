@@ -1,0 +1,11 @@
+@import "partials/_vars.scss";
+
+.special-offers-index {
+  .special-offers {
+    background-color: transparent;
+    column-count: 2;
+    .so {
+      background-color: $white;
+    }
+  }
+}

@@ -91,6 +91,8 @@ en:
             Europe, the Middle East, and Africa: Europe, the Middle East, and Africa
     agencies:
       title: Agencies
+    authors:
+      index_title: Authors
     awards:
       index_title: Award Winning Books
     books:
@@ -129,3 +131,9 @@ en:
         title: Labor Studies & Work
     people:
       title: People at the Press
+    series:
+      index_title: Series
+    special_offers:
+      index_title: Special Offers
+    subjects:
+      index_title: Subjects
