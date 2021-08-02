@@ -10,6 +10,12 @@ RSpec.describe Book, type: :model do
     it { should validate_presence_of(:status) }
   end
 
+
+  describe "associations" do
+    it { should have_many(:reviews) }
+    it { should have_many(:books) }
+  end
+
   let(:book) { FactoryBot.create(:book) }
 
   it "formats excerpt info from xml" do

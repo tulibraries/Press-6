@@ -9,9 +9,15 @@
 </div>
 
 <div class="row mb-3">
-  <div class="col">
+  <div class="col<%= "-9" if @series.image.attached? %>">
     <%= @series.description if @series.description.present? %>
   </div>
+  <% if @series.image.attached? %>
+  <div class="col-3">
+    <%= link_to (image_tag @series.custom_image("image", 270, 220)), @series.image_link if @series.image.attached? %>
+    <%= image_tag @series.custom_image("image", 270, 220) unless @series.image.attached? %>
+  </div>
+  <% end %>
 </div>
 
   <%= render "/books/books" %>
