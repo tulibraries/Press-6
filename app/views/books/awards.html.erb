@@ -2,7 +2,7 @@
 
   <div class="row">
     <div class="col-12 mt-3 px-0">
-      <h1 class="my-4">
+      <h1 class="my-4 pl-3 gold">
         <%= title_link(t("tupress.awards.index_title")) %>
       </h1>
     </div>
@@ -10,11 +10,11 @@
 
   <div class="row featured_awards">
     <div class="col-12 px-0">
-      <h2 class="gold">Recent Award Winners</h2>
+      <h2 class="pl-3">Recent Award Winners</h2>
     </div>
   </div>
 
-  <div class="row pb-4 mb-4 featured_awards" style="background-color:white;">
+  <div class="row pb-4 mb-4 featured_awards" >
       <% @recent_winners.each do |book| %>
       <div class="col-3 pt-4 pb-0 text-center">
         <%= link_to book_path(book.xml_id) do %>
@@ -32,7 +32,7 @@
   <div class="row">
 
     <div class="col-4 px-0 year-listing">
-      <h2 class="gold">Awards by Year</h2>
+      <h2 class="gold pl-3">Awards by Year</h2>
       <ul class="list-unstyled p-3">
       <% @awards_by_year.each do |year| %>  
         <li><%= link_to year, awards_by_year_path(year) %></li>
@@ -41,7 +41,7 @@
     </div>
 
     <div class="col-8 pl-5 pr-0 subject-listing">
-      <h2 class="gold">Awards by Subject</h2>
+      <h2 class="gold pl-3">Awards by Subject</h2>
       <ul class="list-unstyled p-3">
       <% @awards_by_subject.each do |subject| %>
         <li><%= link_to subject[0], awards_by_subject_path(subject[1]) %></li>
