@@ -2,11 +2,13 @@
 
   <div class="row">
     <div class="col mt-4">
-      <h1>Subjects</h1>
+      <h1 class="gold mr-4 pl-3">
+        <%= title_link(t("tupress.subjects.index_title")) %>
+      </h1>
     </div>
   </div>
 
-  <div class="row p-4">
+  <div class="row pl-3 pr-4 py-4">
     <div class="col subjects pl-0">
       <% @subjects.each do |subject| %>
         <p class="p-2 subject">

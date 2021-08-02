@@ -91,6 +91,8 @@ en:
             Europe, the Middle East, and Africa: Europe, the Middle East, and Africa
     agencies:
       title: Agencies
+    authors:
+      index_title: Authors
     awards:
       index_title: Award Winning Books
     books:
