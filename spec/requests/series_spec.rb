@@ -3,8 +3,8 @@
  require "rails_helper"
 
  RSpec.describe "/series", type: :request do
-  let(:series) { FactoryBot.create(:series) }
-  let(:series2) { FactoryBot.create(:series, title: "For No One", code: "NO-01") }
+   let(:series) { FactoryBot.create(:series) }
+   let(:series2) { FactoryBot.create(:series, title: "For No One", code: "NO-01") }
    let(:book) { FactoryBot.create(:book, series: series.code) }
 
    describe "index page renders subjects" do
@@ -17,7 +17,7 @@
      it "returns a book" do
        expect { get series_index_path.to have_text(book.title) }
      end
-     
+
    end
 
    describe "show page renders books" do
