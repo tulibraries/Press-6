@@ -27,6 +27,7 @@ class BookDashboard < Administrate::BaseDashboard
     contents: Field::Text,
     author_byline: Field::String,
     about_author: Field::Text,
+    active_guide: Field::Boolean,
     guide_file: FileField,
     guide_file_label: Field::String,
     guide_text: TrixField,
@@ -142,8 +143,10 @@ class BookDashboard < Administrate::BaseDashboard
     award2
     award_year3
     award3
+    active_guide
     guide_file
     guide_file_label
+    guide_text
     hot
     news
     newsweight
