@@ -8,6 +8,10 @@ class SpecialOffersController < ApplicationController
   end
 
   def show
+    @books = @special_offer.books
+                           .where(status: show_status)
+                           .order(:sort_title)
+                           .page params[:page]
   end
 
   private

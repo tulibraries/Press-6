@@ -1,4 +1,21 @@
-<p id="notice"><%= notice %></p>
+<div class="container special-offer-show">
 
-<%= link_to 'Edit', edit_special_offer_path(@special_offer) %> |
-<%= link_to 'Back', special_offers_path %>
+<div class="row mb-3">
+  <div class="col-12 mt-3 px-0">
+    <h1 class="mt-4 gold pl-3">
+      <%= title_link(@special_offer.title, @special_offer.id) %>
+    </h1>
+  </div>
+  <div class="col-12 social-sharing text-md-right">
+			<% if @special_offer.pdf.attached? %>
+				<%= link_to @special_offer.pdf_display_name, @special_offer.pdf.attachment, class: "text-right text-lg-left" %><br />
+			<% end %>
+	</div>
+  <div class="col-12">
+		<%= @special_offer.intro_text if @special_offer.intro_text.present? %>
+	</div>
+</div>
+
+    <%= render "/books/books" %>
+
+</div>
