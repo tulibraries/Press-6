@@ -30,7 +30,6 @@ module BooksHelper
   end
 
   def guide_label(book)
-    # binding.pry
     book.guide_file_label.present? ? "#{book.guide_file_label} [PDF]" : "Curriculum/Study Guide [PDF]"
   end
 end

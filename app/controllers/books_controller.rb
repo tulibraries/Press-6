@@ -54,8 +54,8 @@ class BooksController < ApplicationController
     @recent_winners = books_with_awards
                         .where(featured_award_winner: true)
                         .where(status: show_status)
+                        .order(:award_year)
                         .take(4)
-                        .order(:sort_title)
   end
 
   def awards_by_year
