@@ -1,0 +1,9 @@
+@import "partials/_vars.scss";
+
+.catalogs-index {
+  .seasons {
+    :nth-child(even).season {
+        border-right: solid #f7f6f4 4px;
+    }
+  }
+}

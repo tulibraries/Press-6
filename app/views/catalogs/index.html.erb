@@ -1,25 +1,23 @@
-<div class="container">
+<div class="container catalogs-index">
 
 <div class="row">
-  <div class="col-12 mb-3 mt-3 px-0">
-    <h1 class="my-4">
+  <div class="col-12 mb-0 mt-3 px-0">
+    <h1 class="my-4 gold pl-3">
       <%= title_link(t("tupress.catalogs.index_title")) %>
     </h1>
   </div>
 </div>
 
   <% @catalogs.each do |year,catalogs| %>  
-    <div class="row mb-2">
-      <div class="col-12 catalog-year p-2 pl-4" style="background-color: gold">
+    <div class="row mb-2 seasons" style="background-color:white">
+      <div class="col-1 p-3 text-center" style="background-color: gold">
         <strong><%= year %></strong>
       </div>
-    </div>
-    <div class="row mb-4 seasons" style="background-color:white">
-    <% catalog_year(catalogs).each do |catalog| %>
-      <div class="col-3 offset-2 p-3">
-        <%= link_to catalog.title, catalog_path(catalog.code.downcase) %>
-      </div>
-    <% end %>
+      <% catalog_year(catalogs).each do |catalog| %>
+        <div class="col-3 offset-2 p-3 season">
+          <%= link_to catalog.title, catalog_path(catalog.code.downcase) %>
+        </div>
+      <% end %>
     </div>
   <% end %>
 
