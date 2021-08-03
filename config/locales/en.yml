@@ -135,5 +135,7 @@ en:
       index_title: Series
     special_offers:
       index_title: Special Offers
+    study_guides:
+      title: Books with Study Guides
     subjects:
       index_title: Subjects
