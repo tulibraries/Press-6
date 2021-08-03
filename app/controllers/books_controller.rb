@@ -75,7 +75,7 @@ class BooksController < ApplicationController
 
   def study_guides
     @books = Book.where(status: show_status)
-                 .where(active_guide: true) unless params[:id].present?
+                 .where(active_guide: true) if params[:id].blank?
   end
 
 
