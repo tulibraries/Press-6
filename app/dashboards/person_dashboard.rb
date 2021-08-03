@@ -37,7 +37,6 @@ class PersonDashboard < Administrate::BaseDashboard
     position_description
     department
     head
-    document_contact
   ].freeze
 
   # COLLECTION_FILTERS

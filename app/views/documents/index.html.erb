@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Documents</h1>
+
+    <% @documents_by_type.each do |type, documents| %>
+
+    <h2><%= type %><span style="float:right;"><%= mail_to documents.first.person.email, documents.first.person.title %></span></h2>
+
+    <ul>
+    <% documents.each do |doc| %>
+      <li><%= doc.title %></li>
+    <% end %>
+    <li>
+
+    <% end %>
+

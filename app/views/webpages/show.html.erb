@@ -1,13 +1,16 @@
 <div class="container">
+
   <div class="row">
     <div class="col">
-      <h1><%= title_link(@page.title, @page.id) %></h1>
+      <h1 class="my-4 gold pl-3">
+        <%= title_link(@page.title, @page.id) %>
+      </h1>
     </div>
   </div>
 
   <div class="row">
     <div class="col">
-      <%= @page.body %>
+      <%= @page.body if @page.body.present? %>
     </div>
   </div>
 
