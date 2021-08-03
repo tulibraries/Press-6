@@ -34,7 +34,7 @@ FactoryBot.define do
           content_type: "image/jpeg")
       end
     end
-    
+
     trait :with_guide_file do
       after :create do |book|
         book.guide_file.attach(io:
