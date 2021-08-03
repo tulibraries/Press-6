@@ -74,6 +74,13 @@ class BooksController < ApplicationController
               .sort_by { |b| b.sort_title }
   end
 
+  def course_adoptions
+    @books = Book.where(status: show_status)
+                 .where(course_adoption: true)
+                 .order(:sort_title)
+                 .page params[:page]
+  end
+
   private
     def set_book
       @book = Book.find_by(xml_id: params[:id])
