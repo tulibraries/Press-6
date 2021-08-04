@@ -52,6 +52,8 @@ Rails.application.routes.draw do
 
   root to: "webpages#index"
 
+  get "course-adoptions"      => "books#course_adoptions", as: :course_adoptions
+
   get "study-guides"          => "books#study_guides", as: :study_guides
   get "study-guides/:id"      => "books#study_guides", as: :study_guide
 

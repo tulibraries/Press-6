@@ -73,6 +73,13 @@ class BooksController < ApplicationController
               .order(:sort_title)
   end
 
+  def course_adoptions
+    @books = Book.where(status: show_status)
+                 .where(course_adoption: true)
+                 .order(:sort_title)
+                 .page params[:page]
+  end
+
   def study_guides
     @books = Book.where(status: show_status)
                  .where(active_guide: true) if params[:id].blank?
