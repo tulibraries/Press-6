@@ -54,7 +54,7 @@ Rails.application.routes.draw do
 
   root to: "webpages#index"
 
-  get 'downloads',   to: "documents#index"
+  get "downloads",   to: "documents#index"
 
   get "awards"				        => "books#awards", as: :awards
   get "awards/subject/:id"    => "books#awards_by_subject", as: :awards_by_subject
