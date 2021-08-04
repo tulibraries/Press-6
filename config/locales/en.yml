@@ -118,6 +118,8 @@ en:
       title: Conferences
     downloads:
       index_title: Download Documents
+    course_adoptions: 
+      title: Books for Course Adoption
     oabooks:
       online_epub: Read it Online
       manifold_label: View Epub
@@ -137,5 +139,7 @@ en:
       index_title: Series
     special_offers:
       index_title: Special Offers
+    study_guides:
+      title: Books with Study Guides
     subjects:
       index_title: Subjects

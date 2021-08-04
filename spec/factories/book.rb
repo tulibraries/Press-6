@@ -23,6 +23,8 @@ FactoryBot.define do
     excerpt_text { "" }
     excerpt_file_name { "" }
     featured_award_winner { false }
+    active_guide { false }
+    guide_file_label { "" }
 
     trait :with_cover_image do
       after :create do |book|
@@ -30,6 +32,15 @@ FactoryBot.define do
           File.open(Rails.root.join("spec/fixtures/charles.jpg")),
           filename: "charles.jpg",
           content_type: "image/jpeg")
+      end
+    end
+
+    trait :with_guide_file do
+      after :create do |book|
+        book.guide_file.attach(io:
+          File.open(Rails.root.join("spec/fixtures/guidelines.pdf")),
+          filename: "guidelines.pdf",
+          content_type: "application/pdf")
       end
     end
   end

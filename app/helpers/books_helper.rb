@@ -28,4 +28,8 @@ module BooksHelper
   def hyphen_strip(ean)
     ean.gsub("-", "")
   end
+
+  def guide_label(book)
+    book.guide_file_label.present? ? "#{book.guide_file_label} [PDF]" : "Curriculum/Study Guide [PDF]"
+  end
 end
