@@ -80,9 +80,9 @@ class BooksController < ApplicationController
     end
 
     def books_with_awards
-      Book.where.not(award_year: nil)
-          .or(Book.where.not(award_year2: params[:id]))
-          .or(Book.where.not(award_year3: params[:id]))
+      Book.where(award_year: present?)
+          .or(Book.where(award_year2: present?))
+          .or(Book.where(award_year3: present?))
     end
 
     def get_subjects(tuples)
