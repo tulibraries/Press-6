@@ -116,6 +116,8 @@ en:
       index_title: Catalog Index
     conferences:
       title: Conferences
+    downloads:
+      index_title: Download Documents
     oabooks:
       online_epub: Read it Online
       manifold_label: View Epub
