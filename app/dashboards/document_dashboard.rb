@@ -8,7 +8,7 @@ class DocumentDashboard < Administrate::BaseDashboard
     title: Field::String,
     document: FileField,
     document_type: Field::Select.with_options(
-      collection: ["Art Information", "Copyright Information", "Manuscript Information", "Marketing Information", "Tax Forms"]
+      collection: I18n.t("tupress.downloads.document_types")
     ),
     person: Field::BelongsTo,
     created_at: Field::DateTime,
