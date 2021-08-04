@@ -10,21 +10,20 @@
 
 <% @documents_by_type.each do |type, documents| %>
 
-<div class="row p-4 mb-4" style="background-color: white">
+<div class="row p-4 mb-3" style="background-color: white">
   <div class="col-9 px-0">
-    <h2 class="">
-      <%= type %>    
-      <span class="d-none" style="float:right;font-size:1.25rem;">
-        Contact: <%= mail_to documents.first.person.email, documents.first.person.title, style: "color:black;text-decoration:underline" %>
-      </span>
+    <h2>
+      <%= type %>
     </h2>
   </div>
   <div class="col-3 text-right">
-    <span style="font-size:1.25rem;">Contact: <%= mail_to documents.first.person.email, documents.first.person.title %></span>
+    <span style="font-size:1.25rem;font-weight:normal">
+      Contact: <%= mail_to documents.first.person.email, documents.first.person.title %>
+    </span>
   </div>
 
   <div class="col-12 ">
-    <ul class="list-unstyled ml-2 mt-2">
+    <ul class="list-unstyled mt-2">
     <% documents.each do |doc| %>
       <li><%= link_to doc.title, doc.document.attachment if doc.document.attached? %></li>
     <% end %>
