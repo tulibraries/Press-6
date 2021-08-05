@@ -8,5 +8,6 @@ FactoryBot.define do
     first_name { "John" }
     last_name { "Mori Moto" }
     suffix { "" }
+    suppress { false }
   end
 end
