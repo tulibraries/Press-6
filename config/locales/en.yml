@@ -112,6 +112,8 @@ en:
       authors_about: About the Author(s)
       series: In the Series
       of_interest: Also of Interest
+      course_adoptions: 
+        title: Books for Course Adoption
     catalogs:
       index_title: Catalog Index
     conferences:
@@ -124,8 +126,6 @@ en:
         Manuscript Information: Manuscript Information
         Marketing Information: Marketing Information
         Tax Forms: Tax Forms
-    course_adoptions: 
-      title: Books for Course Adoption
     oabooks:
       online_epub: Read it Online
       manifold_label: View Epub
