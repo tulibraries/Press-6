@@ -8,7 +8,7 @@
   </div>
   <div class="col-12 social-sharing text-md-right">
 			<% if @special_offer.pdf.attached? %>
-				<%= link_to @special_offer.pdf_display_name, @special_offer.pdf.attachment, class: "text-right text-lg-left" %><br />
+				Download: <%= link_to @special_offer.pdf_display_name, @special_offer.pdf.attachment, class: "text-right text-lg-left" %><br />
 			<% end %>
 	</div>
   <div class="col-12">
