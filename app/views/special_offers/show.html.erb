@@ -12,7 +12,7 @@
         <%= link_to @special_offer.pdf_display_name, @special_offer.pdf.attachment, class: "text-right text-lg-left" %>
 			<% end %>
 	</div>
-  <div class="col-12">
+  <div class="col-12 mt-2">
 		<%= @special_offer.intro_text if @special_offer.intro_text.present? %>
 	</div>
 </div>
