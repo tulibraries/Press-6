@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_03_141839) do
+ActiveRecord::Schema.define(version: 2021_08_03_200807) do
 
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -191,6 +191,17 @@ ActiveRecord::Schema.define(version: 2021_08_03_141839) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "documents", charset: "utf8mb3", force: :cascade do |t|
+    t.string "title"
+    t.string "contact_name"
+    t.string "contact_email"
+    t.string "document_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "person_id"
+    t.index ["person_id"], name: "index_documents_on_person_id"
+  end
+
   create_table "journals", charset: "utf8mb3", force: :cascade do |t|
     t.string "title"
     t.string "url"
@@ -224,6 +235,8 @@ ActiveRecord::Schema.define(version: 2021_08_03_141839) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "head"
+    t.bigint "document_id"
+    t.index ["document_id"], name: "index_people_on_document_id"
   end
 
   create_table "promotions", charset: "utf8mb3", force: :cascade do |t|
@@ -295,6 +308,8 @@ ActiveRecord::Schema.define(version: 2021_08_03_141839) do
 
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "books", "special_offers"
+  add_foreign_key "documents", "people"
+  add_foreign_key "people", "documents"
   add_foreign_key "series", "books"
   add_foreign_key "special_offers", "books"
 end

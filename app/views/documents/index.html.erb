@@ -1,0 +1,36 @@
+<div class="container documents-index">
+
+<div class="row">
+  <div class="col px-0">
+    <h1 class="mt-4 mb-3 gold pl-3">
+      <%= title_link(t("tupress.downloads.index_title")) %>
+    </h1>
+  </div>
+</div>
+
+<% @documents_by_type.each do |type, documents| %>
+
+<div class="row p-4 mb-3" style="background-color: white">
+  <div class="col-9 px-0">
+    <h2>
+      <%= type %>
+    </h2>
+  </div>
+  <div class="col-3 text-right">
+    <span style="font-size:1.25rem;font-weight:normal">
+      Contact: <%= mail_to documents.first.person.email, documents.first.person.title %>
+    </span>
+  </div>
+
+  <div class="col-12 ">
+    <ul class="list-unstyled mt-2">
+    <% documents.each do |doc| %>
+      <li><%= link_to doc.title, doc.document.attachment if doc.document.attached? %></li>
+    <% end %>
+    <li>
+  </div>
+</div>
+
+<% end %>
+
+</div>

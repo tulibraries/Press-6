@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :brochures
     resources :catalogs
     resources :conferences
+    resources :documents
     resources :journals
     resources :oabooks
     resources :people
@@ -23,13 +24,13 @@ Rails.application.routes.draw do
     resources :subjects
     resources :webpages
 
-    resource :books, :brochures, :catalogs, :oabooks, :people, :series, :subjects, :special_offers do
+    resource :books, :brochures, :catalogs, :documents, :oabooks, :people, :series, :subjects, :special_offers do
       member do
         get ":id/detach" => :detach
       end
     end
 
-    resource :books, :brochures, :catalogs, :oabooks, :people, :series, :subjects, :special_offers do
+    resource :books, :brochures, :catalogs, :documents, :oabooks, :people, :series, :subjects, :special_offers do
       member do
         post "detach" => :detach
       end
@@ -43,6 +44,7 @@ Rails.application.routes.draw do
   resources :books, concerns: [:imageable]
   resources :catalogs, concerns: [:imageable]
   resources :conferences, only: [:index]
+  resources :documents, only: [:index]
   resources :oabooks, only: [:show], concerns: [:imageable]
   resources :people, only: [:index], concerns: [:imageable]
   resources :series, only: [:index, :show], concerns: [:imageable]
@@ -51,6 +53,8 @@ Rails.application.routes.draw do
   resources :webpages, only: [:index, :show]
 
   root to: "webpages#index"
+
+  get "downloads"             => "documents#index"
 
   get "course-adoptions"      => "books#course_adoptions", as: :course_adoptions
 

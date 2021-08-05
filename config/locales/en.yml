@@ -116,7 +116,16 @@ en:
       index_title: Catalog Index
     conferences:
       title: Conferences
-    course_adoptions: Books for Course Adoption
+    downloads:
+      index_title: Download Documents
+      document_types:
+        Art Information: Art Information
+        Copyright Information: Copyright Information
+        Manuscript Information: Manuscript Information
+        Marketing Information: Marketing Information
+        Tax Forms: Tax Forms
+    course_adoptions: 
+      title: Books for Course Adoption
     oabooks:
       online_epub: Read it Online
       manifold_label: View Epub
