@@ -1,0 +1,48 @@
+<div class="container sales-reps-index">
+
+<div class="row">
+  <div class="col-12 mb-0 mt-3 px-0">
+    <h1 class="my-4 gold pl-3">
+      <%= title_link(t("tupress.people.sales_reps")) %>
+    </h1>
+  </div>
+</div>
+
+  <% @people.each do |region, person| %>  
+    <div class="row mb-3 pl-0 people">
+      <div class="col-12 p-3 gold">
+        <h2 class="mb-0"><%= region %></h2>
+      </div>
+      <% person.each do |person| %>
+        <div class="col-12 p-3 person" style="background-color: white">
+        <ul class="list-unstyled">
+          <li>
+            <%= person.company %>
+          </li>
+          <li>
+            <strong><%= person.title %></strong>
+          </li>
+          <li>
+            <%= person.address %>
+          </li>
+          <li>
+            Telephone: <%= person.phone %>
+          </li>
+          <li>
+            Fax: <%= person.fax ? person.fax : "n/a" %>
+          </li>
+          <li>
+            Email: <%= person.email %>
+          </li>
+          <li>
+            <%= person.coverage %>
+          </li>
+          <li>
+            <%= person.title %>
+          </li>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+</div>
