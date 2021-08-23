@@ -2,19 +2,22 @@
 
 <div class="row">
   <div class="col-12 mb-0 mt-3 px-0">
-    <h1 class="my-4 gold pl-3">
+    <h1 class="my-4">
       <%= title_link(t("tupress.people.sales_reps")) %>
     </h1>
+    <div class="col-12 text-center my-4">
+      <%= image_pack_tag "regions.png" %>
+    </div>
   </div>
 </div>
 
   <% @people.each do |region, person| %>  
     <div class="row mb-3 pl-0 people">
-      <div class="col-12 p-3 gold">
+      <div class="col-12 p-3 gold mb-2">
         <h2 class="mb-0"><%= region %></h2>
       </div>
       <% person.each do |person| %>
-        <div class="col-12 p-3 person" style="background-color: white">
+        <div class="col-12 p-3 person">
         <ul class="list-unstyled">
           <li>
             <%= person.company %>
@@ -26,19 +29,19 @@
             <%= person.address %>
           </li>
           <li>
-            Telephone: <%= person.phone %>
+            <strong>Telephone</strong>: <%= person.phone %>
           </li>
           <li>
-            Fax: <%= person.fax ? person.fax : "n/a" %>
+            <strong>Fax</strong>: <%= person.fax.present? ? person.fax : "n/a" %>
           </li>
           <li>
-            Email: <%= person.email %>
+            <strong>Email</strong>: <%= person.email %>
           </li>
           <li>
-            <%= person.coverage %>
+            <strong>Covers accounts in</strong>: <%= person.coverage %>
           </li>
           <li>
-            <%= person.title %>
+            <%= person.website if person.website.present? %>
           </li>
         </div>
       <% end %>

@@ -10,7 +10,7 @@
 
 <% @departments.each do |dept, people| %>
 <section>
-<% unless dept.empty? %>
+<% unless dept == "Administration" %>
 	<div class="row">
 		<div class="col col-12 pl-0 pr-4 mb-0 mt-3">
       <h2 class="dept-name pl-4 mx-0 mb-4">

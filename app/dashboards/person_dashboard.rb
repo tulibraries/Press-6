@@ -9,7 +9,9 @@ class PersonDashboard < Administrate::BaseDashboard
     email: Field::String,
     position: Field::String,
     position_description: TrixField,
-    department: Field::String,
+    department: Field::Select.with_options(
+      collection: ["Administration", "Editorial", "Marketing", "Production", "Sales Reps"]
+    ),
     document_contact: Field::String,
     image: ImageField,
     head: Field::Boolean,
@@ -22,7 +24,6 @@ class PersonDashboard < Administrate::BaseDashboard
       collection: I18n.t("tupress.admin.people.regions")
     ),
     website: Field::String,
-    is_rep: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -47,7 +48,6 @@ class PersonDashboard < Administrate::BaseDashboard
     position_description
     department
     head
-    is_rep
     company
     region
     address
