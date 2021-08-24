@@ -42,13 +42,6 @@ jobs:
           command: docker-compose -p press_6 -f docker-compose.ci.yml up -d
 
       - run:
-          name: Run bundler on the test app container
-          command: |
-              docker-compose -p press_6 -f docker-compose.ci.yml exec test_app bundle install --path vendor/bundle
-              docker-compose -p press_6 -f docker-compose.ci.yml exec test_app bundle binstubs --all
-              docker-compose -p press_6 -f docker-compose.ci.yml exec test_app bundle binstubs bundler --force
-
-      - run:
           name: Run yarn install on the test app container
           command: |
               docker-compose -p press_6 -f docker-compose.ci.yml exec test_app yarn install --frozen-lockfile
