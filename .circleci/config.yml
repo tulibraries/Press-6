@@ -29,7 +29,7 @@ jobs:
 
       - setup_remote_docker:
           docker_layer_caching: false
-          version: 19.03.13
+          version: 20.10.6
 
       - run: if [ -e /var/run/docker.sock ]; then sudo chown circleci:circleci /var/run/docker.sock; fi
 
@@ -102,7 +102,7 @@ jobs:
 
       - setup_remote_docker:
           docker_layer_caching: false
-          version: 19.03.13
+          version: 20.10.6
 
       - run: if [ -e /var/run/docker.sock ]; then sudo chown circleci:circleci /var/run/docker.sock; fi
 
