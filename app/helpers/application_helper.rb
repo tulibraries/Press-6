@@ -13,7 +13,7 @@ module ApplicationHelper
   def edit_url(book_id = nil, id_from_index = nil)
     id = book_id.nil? ? params[:id] : book_id
 
-    exemptions = [nil, "webpages", "books"]
+    exemptions = [nil, "webpages", "books", "people"]
 
     if exemptions.include?(controller_name)
       if controller_name == "webpages" && action_name == "show"
@@ -33,7 +33,7 @@ module ApplicationHelper
   end
 
   def title_link(title = nil, id = nil)
-    if current_user && action_name == "index"
+    if current_user && ["index", "sales_reps"].include?(action_name)
       id.present? ? (link_to title, edit_url(nil, id)) : (link_to title, edit_url)
     elsif current_user && action_name == "show"
       link_to title, edit_url(id)

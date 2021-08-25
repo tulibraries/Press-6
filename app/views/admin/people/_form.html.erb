@@ -31,12 +31,12 @@
                     :'aria-selected' => "true" }
                   %>
   <% end if @tab_names.present? %>
-  </div>
+</div>
 </nav>
-
 <div class="tab-content" id="nav-tabContent">
+
   <% @tab_content.each do |tab, fields| %>
-    <div class="tab-pane fade show <%= "active" if tab == "book" %>" id=<%= "#{tab}-tab" %> role="tabpanel" aria-labelledby=<%= "nav-#{tab}-tab" %>>
+    <div class="tab-pane fade show <%= "active" if tab == "staff_info" %>" id=<%= "#{tab}-tab" %> role="tabpanel" aria-labelledby=<%= "nav-#{tab}-tab" %>>
 
       <% page.attributes.each do |attribute| %>
           <% fields.each do |field| %>
@@ -47,11 +47,9 @@
             <% end %>
           <% end %>
       <% end %>
-      
+
     </div>
   <% end if @tab_content.present? %>
-
-  <%= link_to "Return to edit screen", edit_admin_book_path(params[:id]) unless @tab_content.present? %>
 
 </div>
 

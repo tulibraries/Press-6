@@ -62,8 +62,8 @@ en:
         sync: Sync
         show_website: Show in Website
         detach: Detach
-      tabs:
-        books:
+      books:
+        tabs:
           book: book
           subjects: subjects
           catalog: catalog
@@ -89,6 +89,16 @@ en:
             West: West
             Hawaii, Asia and the Pacific, including Australia and New Zealand: Hawaii, Asia and the Pacific, including Australia and New Zealand
             Europe, the Middle East, and Africa: Europe, the Middle East, and Africa
+      people:
+        tabs:
+          staff_info: staff_info
+          sales_rep: sales_rep
+        regions:
+          Midwest: Midwest
+          West: West
+          Hawaii, Asia and the Pacific, including Australia and New Zealand: Hawaii, Asia and the Pacific, including Australia and New Zealand
+          Europe, the Middle East, and Africa: Europe, the Middle East, and Africa
+          All other areas and general sales inquiries: All other areas and general sales inquiries
     agencies:
       title: Agencies
     authors:
@@ -141,6 +151,7 @@ en:
         title: Labor Studies & Work
     people:
       title: People at the Press
+      sales_reps: Sales Representatives
     series:
       index_title: Series
     special_offers:

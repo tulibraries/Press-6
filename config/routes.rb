@@ -47,7 +47,7 @@ Rails.application.routes.draw do
   resources :conferences, only: [:index]
   resources :documents, only: [:index]
   resources :oabooks, only: [:show], concerns: [:imageable]
-  resources :people, only: [:index], concerns: [:imageable]
+  resources :people, only: [:index, :sales_reps], concerns: [:imageable]
   resources :series, only: [:index, :show], concerns: [:imageable]
   resources :special_offers, concerns: [:imageable]
   resources :subjects, only: [:index, :show]
@@ -56,6 +56,8 @@ Rails.application.routes.draw do
   root to: "webpages#index"
 
   get "downloads"             => "documents#index"
+
+  get "sales-reps"            => "people#sales_reps", as: :sales_reps
 
   get "course-adoptions"      => "books#course_adoptions", as: :course_adoptions
 

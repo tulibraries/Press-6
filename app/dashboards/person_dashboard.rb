@@ -9,10 +9,21 @@ class PersonDashboard < Administrate::BaseDashboard
     email: Field::String,
     position: Field::String,
     position_description: TrixField,
-    department: Field::String,
+    department: Field::Select.with_options(
+      collection: ["Administration", "Editorial", "Marketing", "Production", "Sales Reps"]
+    ),
     document_contact: Field::String,
     image: ImageField,
     head: Field::Boolean,
+    address: TrixField,
+    phone: Field::String,
+    fax: Field::String,
+    coverage: Field::String,
+    company: Field::String,
+    region: Field::Select.with_options(
+      collection: I18n.t("tupress.admin.people.regions")
+    ),
+    website: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -37,6 +48,13 @@ class PersonDashboard < Administrate::BaseDashboard
     position_description
     department
     head
+    company
+    region
+    address
+    phone
+    fax
+    coverage
+    website
   ].freeze
 
   # COLLECTION_FILTERS

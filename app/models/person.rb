@@ -5,6 +5,7 @@ class Person < ApplicationRecord
   validates :name, :email, :department, presence: true
 
   has_rich_text :position_description
+  has_rich_text :address
   has_one_attached :image, dependent: :destroy
   has_many :documents, dependent: :nullify
 
