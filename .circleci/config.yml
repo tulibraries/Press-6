@@ -124,4 +124,4 @@ jobs:
             sudo mv trivy /usr/local/bin
       - run:
           name: Scan the local image with trivy
-          command: trivy --exit-code 1 --severity HIGH,CRITICAL --no-progress trivy-ci-test:${CIRCLE_SHA1}
+          command: trivy --exit-code 1 --severity CRITICAL --no-progress trivy-ci-test:${CIRCLE_SHA1}
