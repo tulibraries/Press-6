@@ -20,7 +20,10 @@
     "trix": "^1.2.0",
     "turbolinks": "^5.2.0",
     "path-parse": "^1.0.7", 
-    "url-parse": "^1.5.2"
+    "url-parse": "^1.5.2",
+    "ansi-html": "^0.0.7",
+    "tar": "^6.1.9",
+    "braces": "^2.3.1"
   }, 
   "version": "0.1.0",
   "resolutions": {
@@ -34,7 +37,10 @@
     "glob-parent": "^6.0.0",
     "tar": "6.1.2",
     "path-parse": "1.0.7",
-    "url-parse": "1.5.2"
+    "url-parse": "1.5.2",
+    "ansi-html": "0.0.7",
+    "tar": "6.1.9",
+    "braces": "^2.3.1"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"

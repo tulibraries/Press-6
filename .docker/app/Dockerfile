@@ -20,7 +20,7 @@ RUN apk add -U --no-cache \
       build-base=0.5-r2 \
       libxslt-dev=1.1.34-r1 \
       mariadb-dev=10.5.12-r0 \
-      nodejs=14.17.4-r0 \
+      nodejs=14.17.6-r0 \
       yarn=1.22.10-r0 && \
     gem install bundler:2.2.4  && \
     bundle config build.nokogiri --use-system-libraries && \
