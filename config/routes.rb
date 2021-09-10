@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
 
+  resources :events
   devise_for :users
   concern :imageable do
     get "image/thumbnail", to: "images#thumbnail_image"
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
     resources :catalogs
     resources :conferences
     resources :documents
+    resources :events
     resources :journals
     resources :oabooks
     resources :people
@@ -46,6 +48,7 @@ Rails.application.routes.draw do
   resources :catalogs, concerns: [:imageable]
   resources :conferences, only: [:index]
   resources :documents, only: [:index]
+  resources :events, only: [:index]
   resources :oabooks, only: [:show], concerns: [:imageable]
   resources :people, only: [:index, :sales_reps], concerns: [:imageable]
   resources :series, only: [:index, :show], concerns: [:imageable]

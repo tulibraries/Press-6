@@ -1,0 +1,41 @@
+<div class="container" id="events">
+	<div class="row">
+		<div class="col px-3 mt-4">
+			<h1><%= title_link(t("tupress.events.title")) %></h1>
+		</div>
+	</div>
+  
+    <% @events.each do |events| %>
+      <div class="row mt-3">
+        <div class="col-12 p-0 month">
+          <h2 class="gold"><%= group_date(events[0]) %></h2>
+        </div>
+      </div>
+    
+      <div class="row" style="background-color:white;">
+        <div class="col-12 p-3 events">
+          <% events[1].each do |event| %>
+          <div class="row mb-4" style="line-height:1.75rem">
+            <div class="col col-2 pt-3" style="border-right: solid #ccc 1px;font-size:xx-large;text-align:center;vertical-align:middle;display:table-cell">
+            <%= event.start_date.strftime("%d") %>
+            </div>
+            <div class="col col-10 pl-4">
+              <div style="font-weight:700;font-size:150%">
+                <%= title_link(event.title, event.id) %>
+              </div>
+              <div style="color:#555">
+              <span style="font-size:115%;">
+                <%= date_range(event.start_date, event.end_date).html_safe %>
+              </span>
+                <%= event.time_zone if event.time_zone.present? %>
+                <br />
+                <%= event.location %>
+                <p><%= event.description %></p>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+</div>
