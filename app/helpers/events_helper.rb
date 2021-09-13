@@ -21,7 +21,7 @@ module EventsHelper
     end
     formatted_date.prepend("#{full_month} ")
   end
- 
+
   def date_range(starting, ending)
     if (starting.strftime("%h") == ending.strftime("%h")) && (starting.strftime("%d") == ending.strftime("%d"))
       [starting.strftime("%a %h"), "#{starting.strftime("%d").to_i.ordinalize},", starting.strftime("%l %P")].join(" ")
