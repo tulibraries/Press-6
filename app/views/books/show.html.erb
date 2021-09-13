@@ -94,12 +94,10 @@
       <div class="description mt-5 p-3">
         <h1><%= title_link(@book.title.html_safe, @book.id) %></h1>
 
-        <p class="subtitle lead">
-        <% if @book.subtitle.present? %>
-        <em><%= @book.subtitle  %></em><br />
-        <% end %>
-
-        <%= @book.author_byline %></p>
+        <div class="subtitle lead">
+          <%= sub_ed(@book).html_safe %>
+          <%= @book.author_byline %>
+        </div>
 
         <% if @awards.present? %>
         <div class="awards mt-4">

@@ -25,6 +25,8 @@ FactoryBot.define do
     featured_award_winner { false }
     active_guide { false }
     guide_file_label { "" }
+    subtitle { "A simple subtitle" }
+    edition { "2nd Edition" }
 
     trait :with_cover_image do
       after :create do |book|
