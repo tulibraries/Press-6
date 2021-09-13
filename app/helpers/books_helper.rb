@@ -9,7 +9,7 @@ module BooksHelper
       "Hard Cover"
     when "Ebook"
       "eBook"
-    else
+      else
       nil
     end
   end
@@ -31,5 +31,15 @@ module BooksHelper
 
   def guide_label(book)
     book.guide_file_label.present? ? "#{book.guide_file_label} [PDF]" : "Curriculum/Study Guide [PDF]"
+  end
+
+  def sub_ed(book)
+    if book.subtitle.present? && book.edition.present?
+      "<p><em>#{book.subtitle}<br />#{book.edition}</em></p>"
+    elsif book.subtitle.present? && book.edition.blank?
+      "<p><em>#{book.subtitle}</em></p>"
+    elsif book.subtitle.blank? && book.edition.present?
+      "<p><em>#{book.edition}</em></p>"
+    end
   end
 end

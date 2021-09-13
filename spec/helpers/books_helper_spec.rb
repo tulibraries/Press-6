@@ -5,6 +5,10 @@ require "rails_helper"
 RSpec.describe BooksHelper, type: :helper do
 
   let(:formats) { [{ "PB" => "Paperback" }, { "HC" => "Hard Cover" }, { "Ebook" => "eBook" }] }
+  let(:book) { FactoryBot.create(:book) }
+  let(:no_subtitle) { FactoryBot.create(:book, edition: "") }
+  let(:no_edition) { FactoryBot.create(:book, subtitle: "") }
+  let(:no_nothing) { FactoryBot.create(:book, edition: "", subtitle: "") }
 
   describe BooksHelper do
     describe "format lookup" do
@@ -12,6 +16,21 @@ RSpec.describe BooksHelper, type: :helper do
         formats.each do |format|
           expect(helper.book_format(format.keys.join)).to eq(format.values.join)
         end
+      end
+    end
+
+    describe "view formatting" do
+      it "handles both subtitle and editions" do
+        expect(helper.sub_ed(book)).to eq("<p><em>#{book.subtitle}<br />#{book.edition}</em></p>")
+      end
+      it "handles subtitle without editions" do
+        expect(helper.sub_ed(no_subtitle)).to eq("<p><em>#{book.subtitle}</em></p>")
+      end
+      it "handles edition without subtitle" do
+        expect(helper.sub_ed(no_edition)).to eq("<p><em>#{book.edition}</em></p>")
+      end
+      it "handles no edition and no subtitle" do
+        expect(helper.sub_ed(no_nothing)).to be_nil
       end
     end
   end
