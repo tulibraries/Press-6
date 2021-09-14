@@ -9,7 +9,7 @@ module BooksHelper
       "Hard Cover"
     when "Ebook"
       "eBook"
-      else
+    else
       nil
     end
   end
