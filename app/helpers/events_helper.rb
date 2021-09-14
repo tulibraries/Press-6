@@ -23,11 +23,98 @@ module EventsHelper
   end
 
   def date_range(starting, ending)
+    # no time display (set to midmight)
+    starting.strftime("%H") == "00" ?
+
+    # multi-day event
+    if (starting.strftime("%d") != ending.strftime("%d"))
+      "#{
+      [
+        starting.strftime("%a, %b"),
+        "#{starting.strftime("%d").to_i.ordinalize}"
+        ].join(" ")}
+      -
+      #{
+        [
+          ending.strftime("%a, %h"),
+          "#{ending.strftime("%d").to_i.ordinalize}"
+        ].join(" ")}"
+    else # single day event
+      [
+        starting.strftime("%a, %b"),
+        "#{starting.strftime("%d").to_i.ordinalize}"
+      ].join(" ")
+    end
+
+    :  # display times
+
+    # single day event, no end time
     if (starting.strftime("%h") == ending.strftime("%h")) && (starting.strftime("%d") == ending.strftime("%d"))
-      [starting.strftime("%a %h"), "#{starting.strftime("%d").to_i.ordinalize},", starting.strftime("%l %P")].join(" ")
-    elsif (starting.strftime("%h") == ending.strftime("%h")) && (starting.strftime("%d") != ending.strftime("%d"))
-      "#{[starting.strftime("%a %b"), "#{starting.strftime("%d").to_i.ordinalize},", starting.strftime("%l %P")].join(" ")}
-      - #{[ending.strftime("%a %h"), "#{ending.strftime("%d").to_i.ordinalize},", ending.strftime("%l %P")].join(" ")}"
+      [
+        starting.strftime("%a, %h"),
+        "#{starting.strftime("%d").to_i.ordinalize},",
+        starting.strftime("%l %P")
+      ].join(" ")
+    # single day event, start and end time
+    elsif
+      (starting.strftime("%h") == ending.strftime("%h")) && (starting.strftime("%d") == ending.strftime("%d"))
+      "#{
+        [
+          starting.strftime("%a, %h"),
+          "#{starting.strftime("%d").to_i.ordinalize},",
+          starting.strftime("%l %P")
+        ].join(" ")
+        }
+      -
+        #{
+        [
+          ending.strftime("%a %h"),
+          "#{ending.strftime("%d").to_i.ordinalize},"
+        ].join(" ")}"
+    elsif # multi day event, start but no end time
+      ending.strftime("%H") == "00" && (starting.strftime("%d") == ending.strftime("%d"))
+      "#{
+        [
+          starting.strftime("%a, %b"),
+          "#{starting.strftime("%d").to_i.ordinalize},",
+          starting.strftime("%l %P")
+          ].join(" ")}
+        -
+        #{
+          [
+            ending.strftime("%a, %h"),
+            "#{ending.strftime("%d").to_i.ordinalize}"
+          ].join(" ")}"
+        elsif # multi day event, same start and end time
+          (starting.strftime("%h") == ending.strftime("%h")) && (starting.strftime("%d") != ending.strftime("%d"))
+          "#{
+            [
+              starting.strftime("%a, %b"),
+              "#{starting.strftime("%d").to_i.ordinalize},",
+              starting.strftime("%l %P")
+              ].join(" ")}
+            -
+            #{
+              [
+                ending.strftime("%a, %h"),
+                "#{ending.strftime("%d").to_i.ordinalize},",
+                ending.strftime("%l %P")
+              ].join(" ")}"
+        elsif # multi day event, differing start and end time
+          (starting.strftime("%h") != ending.strftime("%h")) && (starting.strftime("%d") != ending.strftime("%d"))
+          "#{
+            [
+              starting.strftime("%a, %b"),
+              "#{starting.strftime("%d").to_i.ordinalize},",
+              starting.strftime("%l %P")
+              ].join(" ")}
+            -
+            #{
+              [
+                ending.strftime("%a, %h"),
+                "#{ending.strftime("%d").to_i.ordinalize},",
+                ending.strftime("%l %P")
+              ].join(" ")}"
     end
   end
 end
