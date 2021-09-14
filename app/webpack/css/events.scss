@@ -1,0 +1,33 @@
+@import "partials/_vars.scss";
+
+#events {
+  .start-date {
+    border-right: solid $news-grey 1px;
+    font-size: xx-large;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    span {
+      border-bottom: solid gold 2px;
+    }
+  }
+  .events {
+    .event {
+      background-color: $white;
+      line-height:1.75rem;
+      .event-title {
+        font-weight: 700;
+        font-size: 150%;
+      }
+      a, a:visited, a:active, a:link {
+        text-decoration: underline;
+      }
+      .dim {
+        color: $dim;
+      }
+      .dates {
+        font-size: 115%;
+      }
+    }
+  }
+}

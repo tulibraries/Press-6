@@ -136,6 +136,8 @@ en:
         Manuscript Information: Manuscript Information
         Marketing Information: Marketing Information
         Tax Forms: Tax Forms
+    events:
+      title: Event Calendar
     oabooks:
       online_epub: Read it Online
       manifold_label: View Epub

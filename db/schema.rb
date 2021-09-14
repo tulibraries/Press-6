@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_05_150146) do
+ActiveRecord::Schema.define(version: 2021_09_10_115329) do
 
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
-    t.text "body", size: :long
+    t.text "body"
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -83,7 +83,6 @@ ActiveRecord::Schema.define(version: 2021_08_05_150146) do
 
   create_table "books", charset: "utf8mb3", force: :cascade do |t|
     t.string "xml_id"
-    t.text "book_id"
     t.string "title"
     t.string "sort_title"
     t.string "subtitle"
@@ -96,7 +95,6 @@ ActiveRecord::Schema.define(version: 2021_08_05_150146) do
     t.text "contents"
     t.text "author_byline"
     t.text "author_bios"
-    t.string "cover"
     t.string "format"
     t.string "isbn"
     t.string "ean"
@@ -111,22 +109,27 @@ ActiveRecord::Schema.define(version: 2021_08_05_150146) do
     t.integer "hotweight"
     t.string "supplement"
     t.string "edition"
-    t.string "suggested_reading_label"
+    t.string "suggested_reading"
     t.boolean "course_adoption"
-    t.text "subjects"
+    t.text "subjects", size: :long
     t.string "subject1"
     t.string "subject2"
     t.string "subject3"
-    t.string "guide_file_label"
-    t.string "toc_label"
-    t.boolean "desk_copy"
     t.decimal "price", precision: 5, scale: 2
+    t.string "promotion_id"
     t.string "series_id"
     t.string "catalog_id"
-    t.text "author_ids"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "promotion_ids"
+    t.text "author_ids"
+    t.string "suggested_reading_label"
     t.bigint "special_offer_id"
+    t.string "guide_file_label"
+    t.string "cover"
+    t.text "book_id"
+    t.string "toc_label"
+    t.boolean "desk_copy"
     t.boolean "featured_award_winner"
     t.string "excerpt"
     t.string "excerpt_file_name"
@@ -155,6 +158,7 @@ ActiveRecord::Schema.define(version: 2021_08_05_150146) do
     t.string "label_10"
     t.boolean "active_guide"
     t.index ["catalog_id"], name: "index_books_on_catalog_id"
+    t.index ["promotion_id"], name: "index_books_on_promotion_id"
     t.index ["series_id"], name: "index_books_on_series_id"
     t.index ["special_offer_id"], name: "index_books_on_special_offer_id"
   end
@@ -171,9 +175,9 @@ ActiveRecord::Schema.define(version: 2021_08_05_150146) do
     t.string "code"
     t.string "season"
     t.string "year"
-    t.boolean "suppress"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "suppress"
   end
 
   create_table "conferences", charset: "utf8mb3", force: :cascade do |t|
@@ -197,6 +201,16 @@ ActiveRecord::Schema.define(version: 2021_08_05_150146) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "person_id"
     t.index ["person_id"], name: "index_documents_on_person_id"
+  end
+
+  create_table "events", charset: "utf8mb3", force: :cascade do |t|
+    t.string "title"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "time_zone"
+    t.string "location"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "journals", charset: "utf8mb3", force: :cascade do |t|
@@ -243,6 +257,15 @@ ActiveRecord::Schema.define(version: 2021_08_05_150146) do
     t.index ["document_id"], name: "index_people_on_document_id"
   end
 
+  create_table "promotions", charset: "utf8mb3", force: :cascade do |t|
+    t.string "title"
+    t.string "pdf_display_name"
+    t.boolean "active"
+    t.text "book_ids"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "reviews", charset: "utf8mb3", force: :cascade do |t|
     t.string "book_id"
     t.text "review"
@@ -278,9 +301,9 @@ ActiveRecord::Schema.define(version: 2021_08_05_150146) do
   create_table "subjects", charset: "utf8mb3", force: :cascade do |t|
     t.string "code"
     t.string "title"
-    t.string "file_label"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "file_label"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
@@ -289,11 +312,6 @@ ActiveRecord::Schema.define(version: 2021_08_05_150146) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -301,12 +319,11 @@ ActiveRecord::Schema.define(version: 2021_08_05_150146) do
   end
 
   create_table "webpages", charset: "utf8mb3", force: :cascade do |t|
-    t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "books", "special_offers"
   add_foreign_key "documents", "people"
