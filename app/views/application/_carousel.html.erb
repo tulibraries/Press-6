@@ -1,20 +1,17 @@
 <div class="container">
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators" style="bottom: -49px">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    <% @highlights.each_with_index do |highlight, index| %>
+      <li data-target="#carouselIndicators" data-slide-to="<%= index %>"<%= " class=\"active\"" if index == 1 %>></li>
+    <% end %>
   </ol>
-  <div class="carousel-inner text-center">
-    <div class="carousel-item active text-center" >
-      <%= image_pack_tag "2021_Black_Hist_Month.jpg", class: "d-block w-100", style: "margin:auto", alt: "Black History Month" %>
-    </div>
-    <div class="carousel-item text-center">
-      <%= image_pack_tag "2021_Black_Hist_Month.jpg", class: "d-block w-100", style: "margin:auto", alt: "Black History Month" %>
-    </div>
-    <div class="carousel-item text-center">
-      <%= image_pack_tag "2021_Black_Hist_Month.jpg", class: "d-block w-100", style: "margin:auto", alt: "Black History Month" %>
-    </div>
+  <div class="carousel-inner text-center" role="listbox">
+    <% @highlights.each_with_index do |highlight, index| %>
+      <div class="text-center carousel-item <%= "active" if index == 1 %>">
+        <%= link_to image_tag(highlight.image, class: 'highlight', 
+                                                alt: 'cover for '+highlight.title), highlight.link %>
+      </div>
+    <% end %>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
