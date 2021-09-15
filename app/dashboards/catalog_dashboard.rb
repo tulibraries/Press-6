@@ -17,6 +17,7 @@ class CatalogDashboard < Administrate::BaseDashboard
     title: Field::String,
     suppress: Field::Boolean,
     pdf: FileField,
+    image: ImageField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -47,6 +48,7 @@ class CatalogDashboard < Administrate::BaseDashboard
     season
     year
     pdf
+    image
     suppress
   ].freeze
 

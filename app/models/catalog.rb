@@ -6,6 +6,7 @@ class Catalog < ApplicationRecord
 
   has_many :books, primary_key: :code, class_name: "Book", dependent: :nullify
   has_one_attached :pdf, dependent: :destroy
+  has_one_attached :image, dependent: :destroy
 
   def set_century
     decade = self.code[2, 4]
