@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :conferences
     resources :documents
     resources :events
+    resources :highlights
     resources :journals
     resources :oabooks
     resources :people
@@ -27,13 +28,13 @@ Rails.application.routes.draw do
     resources :subjects
     resources :webpages
 
-    resource :books, :brochures, :catalogs, :documents, :oabooks, :people, :series, :subjects, :special_offers do
+    resource :books, :brochures, :catalogs, :documents, :highlights, :oabooks, :people, :series, :subjects, :special_offers do
       member do
         get ":id/detach" => :detach
       end
     end
 
-    resource :books, :brochures, :catalogs, :documents, :oabooks, :people, :series, :subjects, :special_offers do
+    resource :books, :brochures, :catalogs, :documents, :highlights, :oabooks, :people, :series, :subjects, :special_offers do
       member do
         post "detach" => :detach
       end
@@ -49,6 +50,7 @@ Rails.application.routes.draw do
   resources :conferences, only: [:index]
   resources :documents, only: [:index]
   resources :events, only: [:index]
+  resources :highlights, only: [:show], concerns: [:imageable]
   resources :oabooks, only: [:show], concerns: [:imageable]
   resources :people, only: [:index, :sales_reps], concerns: [:imageable]
   resources :series, only: [:index, :show], concerns: [:imageable]

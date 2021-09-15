@@ -4,6 +4,7 @@ class WebpagesController < ApplicationController
   before_action :set_webpage, only: :show
 
   def index
+    @highlights = Highlight.where(promote_to_homepage: true).sort
   end
 
   def show

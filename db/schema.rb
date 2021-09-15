@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_10_115329) do
+ActiveRecord::Schema.define(version: 2021_09_15_111232) do
 
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -209,6 +209,14 @@ ActiveRecord::Schema.define(version: 2021_09_10_115329) do
     t.datetime "end_date"
     t.string "time_zone"
     t.string "location"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "highlights", charset: "utf8mb3", force: :cascade do |t|
+    t.string "title"
+    t.boolean "promote_to_homepage"
+    t.string "link"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
