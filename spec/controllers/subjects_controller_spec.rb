@@ -4,7 +4,8 @@ require "rails_helper"
 
 RSpec.describe SubjectsController, type: :controller do
 
-  let(:subject) { FactoryBot.create(:subject) }
+  let(:brochure) { FactoryBot.create(:brochure) }
+  let(:subject) { FactoryBot.create(:subject, brochures: [brochure]) }
 
   describe "GET #index" do
     it "returns html when requested" do
@@ -15,12 +16,12 @@ RSpec.describe SubjectsController, type: :controller do
 
   describe "GET #show" do
     it "renders show template" do
-      get :show, params: { id: subject.id }
+      get :show, params: { id: subject.code }
       expect(response).to render_template("show")
     end
 
     it "returns html by default success" do
-      get :show, params: { id: subject.id }, format: :html
+      get :show, params: { id: subject.code }, format: :html
       expect(response.header["Content-Type"]).to include "html"
     end
   end
