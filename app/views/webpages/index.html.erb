@@ -126,22 +126,26 @@
   </div>
 
   <div class="col-3" id="features">
-  <% if @featured_catalog.present? %>
+    <% if @featured_catalog.present? %>
     <div class="mb-4 p-3 white" id="feature-catalog">
       <h2><%= @featured_catalog.title %> Catalog</h2>
-        <%= link_to catalog_image(@featured_catalog), catalog_path(@featured_catalog.code) %>
-        <p class="mt-2">
-          <%= link_to "[PDF Version]", @featured_catalog.pdf.attachment if @featured_catalog.pdf.attached? %>
-        </p>
+      <%= link_to display_image(@featured_catalog), catalog_path(@featured_catalog.code) %>
+      <p class="mt-2">
+        <%= link_to "[PDF Version]", @featured_catalog.pdf.attachment if @featured_catalog.pdf.attached? %>
+      </p>
     </div>
-  <% end %>
+    <% end %>
+
+    <% if @brochure.present? %>
     <div class="mb-4 p-3 white" id="feature-other">
-      <h2>Download our 50th Anniversary Newsletter</h2>
-      <%= link_to "#" do %>
-        <%= image_pack_tag "50th_Newsletter.png" %>
+      <h2><%= @brochure.title %></h2>
+      <%= link_to @brochure.pdf.attachment do %>
+        <%= display_image(@brochure) %>
         <p class="mt-2">[PDF]</p>
       <% end %>
     </div>
+    <% end %>
+
     <div class="p-3 pb-5 white" id="feature-philly">
       <h2>Books on the Philadelphia Region</h2>
       <%= link_to "#" do %>

@@ -10,6 +10,10 @@
 			<% if @catalog.pdf.attached? %>
 				<%= link_to "Download PDF version", @catalog.pdf.attachment, class: "text-right text-lg-left" %><br />
 			<% end %>
+
+      <% @catalog.brochures.each do |brochure| %>
+        <%= link_to brochure.title, brochure.pdf.attachment, class: "text-right text-lg-left" %>
+      <% end if @catalog.brochures.any? %>
 	</div>
 </div>
 

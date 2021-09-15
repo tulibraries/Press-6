@@ -12,6 +12,7 @@ class SubjectsController < ApplicationController
                   .where(status: show_status)
                   .order(:sort_title)
                   .page params[:page]
+    @brochures = @subject.brochures
   end
 
   private

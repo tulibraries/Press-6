@@ -1,10 +1,16 @@
 <div class="container subjects-show">
 
   <div class="row">
-    <div class="col mt-3 px-0">
+    <div class="col col-12 mt-3 px-0">
       <h1 class="mt-3">
         <%= title_link(@subject.title, @subject.id) %>
       </h1>
+    </div>
+
+    <div class="col-12 social-sharing text-md-right">
+      <% @subject.brochures.each do |brochure| %>
+        <%= link_to brochure.title, brochure.pdf.attachment, class: "text-right text-lg-left" %>
+      <% end if @subject.brochures.any? %>
     </div>
   </div>
 
