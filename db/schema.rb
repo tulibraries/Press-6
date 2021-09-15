@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_15_111232) do
+ActiveRecord::Schema.define(version: 2021_09_15_143521) do
 
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -224,6 +224,14 @@ ActiveRecord::Schema.define(version: 2021_09_15_111232) do
   create_table "journals", charset: "utf8mb3", force: :cascade do |t|
     t.string "title"
     t.string "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "news_items", charset: "utf8mb3", force: :cascade do |t|
+    t.string "title"
+    t.string "link"
+    t.boolean "promote_to_homepage"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
