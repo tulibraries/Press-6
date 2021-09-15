@@ -5,6 +5,7 @@ class WebpagesController < ApplicationController
 
   def index
     @news_items = NewsItem.where(promote_to_homepage: true).order(:created_at).take(4)
+    @highlights = Highlight.where(promote_to_homepage: true).sort
   end
 
   def show
