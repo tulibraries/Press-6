@@ -47,82 +47,17 @@
 <div class="row mt-5">
   <div class="col col-9 pt-2 pl-4 pb-4" id="news">
     <h1>In the News</h1>
+    <% @news_items.each do |news_item| %>
     <div class="row news-item">
       <div class="media">
-        <a class="news-image" href="/books/20000000010359">
-          <%= image_pack_tag "Allies_and_Obstacles.jpg" %>
-        </a>
+        <%= link_to image_tag(news_item.image.attachment), news_item.link, class: "news-image" %>
       </div>
       <div class="media-body">
-      <h2>ALLIES AND OBSTACLES @ Institute on Disabilities at Temple University</h2>
-      <p>Wednesday, February 10, 2021</p>
-      <p>Join Allison C. Carey, Pamela Block, and Richard K. Scotch, authors of 
-        <a href="/books/20000000009747"><em>Allies and Obstacles:&nbsp;Disability Activism and Parents of Children with Disabilities</em></a>, 
-        for a book talk at the&nbsp;Institute on Disabilities at Temple University. Register for the event 
-        <a href="https://disabilities.temple.edu/miniseries/" target="_blank" rel="noopener">here</a>.</p>
+        <h2><%= link_to news_item.title, news_item.link %></h2>
+        <%= news_item.description %>
       </div>
     </div>
-
-    <div class="row news-item">
-      <div class="media">
-        <a class="news-image" href="/books/20000000010359">
-          <%= image_pack_tag "Harrison_0920_border.jpg" %>
-        </a>
-      </div>
-      <div class="media-body">
-      <h2><a href="/books/20000000010359">Do Right by Me</a>
-            <br><small><em>Learning to Raise Black Children in White Spaces</em></small>
-          </h2>
-          <p class="author">Valerie I. Harrison and Kathryn Peach D'Angelo</p>
-          <p style="line-height:1.2">
-              <strong>LISTEN:</strong>&nbsp;interview&nbsp;on 
-              <a href="http://bit.ly/35E1TLn" target="_blank" rel="noopener"><em>Radio Times</em></a>, 
-              (WHYY, 90.9 FM, Phila) Jan 12<br><strong>EVENTS</strong>: Feb 4 author reading at the 
-              <a href="http://bit.ly/35mCxSg" target="_blank" rel="noopener">FLOP</a>&nbsp;&amp; Feb 8 at 
-              <a href="http://bit.ly/35PZqh7" target="_blank" rel="noopener">Big Blue Marble Bookstore</a>
-              </p>
-      </div>
-    </div>
-    <div class="row news-item">
-      <div class="media">
-        <a class="news-image" href="/books/20000000010359">
-          <%= image_pack_tag "Harrison_0920_border.jpg" %>
-        </a>
-      </div>
-      <div class="media-body">
-        <h2>
-          <a href="/books/20000000010359">Do Right by Me</a>
-          <br><small><em>Learning to Raise Black Children in White Spaces</em></small>
-        </h2>
-        <p class="author">Valerie I. Harrison and Kathryn Peach D'Angelo</p>
-        <p style="line-height:1.2">
-          <strong>LISTEN:</strong>&nbsp;interview&nbsp;on 
-          <a href="http://bit.ly/35E1TLn" target="_blank" rel="noopener"><em>Radio Times</em></a>, 
-          (WHYY, 90.9 FM, Phila) Jan 12<br><strong>EVENTS</strong>: Feb 4 author reading at the 
-          <a href="http://bit.ly/35mCxSg" target="_blank" rel="noopener">FLOP</a>&nbsp;&amp; Feb 8 at 
-          <a href="http://bit.ly/35PZqh7" target="_blank" rel="noopener">Big Blue Marble Bookstore</a>
-        </p>
-      </div>
-    </div>
-    <div class="row news-item">
-      <div class="media">
-        <a class="news-image" href="/books/20000000010059">
-          <%= image_pack_tag "Modern_Mobility_Aloft_110819_sm.jpg" %>
-        </a>
-      </div>
-      <div class="media-body">
-        <h2>
-          <a href="/books/20000000010059">Modern Mobility Aloft</a>
-          <br><small><em>Elevated Highways, Architecture, and Urban Change in Pre-Interstate America</em></small>
-        </h2>
-        <p class="author">Amy D. Finstein</p>
-        <p style="line-height:1.2">
-          <small>
-            </small></p><p><small><big><strong>BOOK TALK:</strong> Feb 9 @ 6PM Join the Skyscraper Museum in New York City for an online talk with<strong>&nbsp;Amy D. Finstein</strong><a href="/book/20000000010059"><em>.</em></a><a href="https://bit.ly/3nzNfLS" target="_blank" rel="noopener">Register here</a>&nbsp;for the online lecture.</big></small></p><small>
-          </small>
-        <p></p>
-      </div>
-    </div>
+    <% end %>
   </div>
 
   <div class="col-3" id="features">
