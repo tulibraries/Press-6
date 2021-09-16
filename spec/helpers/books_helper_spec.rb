@@ -6,6 +6,7 @@ RSpec.describe BooksHelper, type: :helper do
 
   let(:formats) { [{ "PB" => "Paperback" }, { "HC" => "Hard Cover" }, { "Ebook" => "eBook" }] }
   let(:book) { FactoryBot.create(:book) }
+  let(:book_with_cover) { FactoryBot.create(:book, :with_cover_image) }
   let(:no_subtitle) { FactoryBot.create(:book, edition: "") }
   let(:no_edition) { FactoryBot.create(:book, subtitle: "") }
   let(:no_nothing) { FactoryBot.create(:book, edition: "", subtitle: "") }
@@ -16,6 +17,15 @@ RSpec.describe BooksHelper, type: :helper do
         formats.each do |format|
           expect(helper.book_format(format.keys.join)).to eq(format.values.join)
         end
+      end
+    end
+
+    describe "homepage covers for forthcoming section" do
+      it "returns the cover when attached" do
+        expect(helper.hot_cover(book_with_cover)).to include("charles")
+      end
+      it "returns the default cover when no cover attached" do
+        expect(helper.hot_cover(book)).to include("default-book-cover-index")
       end
     end
 

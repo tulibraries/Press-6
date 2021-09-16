@@ -15,7 +15,6 @@ class WebpagesController < ApplicationController
   def show
   end
 
-
   private
     def set_webpage
       @page = Webpage.find(params[:id])
