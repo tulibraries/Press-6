@@ -8,5 +8,7 @@ FactoryBot.define do
     description { ActionText::Content.new("Good Day Sunshine") }
     time_zone { "[EST]" }
     location { "Charles Library" }
+    add_to_news { false }
+    news_text { ActionText::Content.new("Good Day Sunshine") }
   end
 end

@@ -17,6 +17,8 @@ class EventDashboard < Administrate::BaseDashboard
     time_zone: Field::String,
     location: Field::String,
     description: TrixField,
+    add_to_news: Field::Boolean,
+    news_text: TrixField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -52,6 +54,8 @@ class EventDashboard < Administrate::BaseDashboard
     time_zone
     location
     description
+    add_to_news
+    news_text
   ].freeze
 
   # COLLECTION_FILTERS
