@@ -13,6 +13,7 @@ class CatalogsController < ApplicationController
     @books = @catalog.books.where(status: show_status)
                            .order(:sort_title)
                            .page params[:page]
+    @brochures = @catalog.brochures
   end
 
   private

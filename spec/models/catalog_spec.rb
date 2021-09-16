@@ -9,6 +9,7 @@ RSpec.describe Catalog, type: :model do
 
   describe "associations" do
     it { should have_many(:books) }
+    it { should have_many(:brochures) }
   end
 
   it_behaves_like "detachable"

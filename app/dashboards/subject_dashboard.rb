@@ -15,6 +15,9 @@ class SubjectDashboard < Administrate::BaseDashboard
     title: Field::String,
     file_label: Field::String,
     pdf: FileField,
+    brochures: Field::HasMany.with_options(
+      class_name: "Brochure",
+      order: "sort_title"),
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -35,6 +38,7 @@ class SubjectDashboard < Administrate::BaseDashboard
     code
     title
     pdf
+    brochures
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -43,6 +47,7 @@ class SubjectDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     file_label
     pdf
+    brochures
   ].freeze
 
   # COLLECTION_FILTERS

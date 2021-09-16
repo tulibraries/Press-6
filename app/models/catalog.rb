@@ -4,8 +4,10 @@ class Catalog < ApplicationRecord
   before_save :set_century, :set_season, :set_title
   validates :code, presence: true
 
+  has_many :brochures, class_name: "Brochure", dependent: :nullify
   has_many :books, primary_key: :code, class_name: "Book", dependent: :nullify
   has_one_attached :pdf, dependent: :destroy
+  has_one_attached :image, dependent: :destroy
 
   def set_century
     decade = self.code[2, 4]
