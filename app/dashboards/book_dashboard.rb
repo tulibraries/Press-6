@@ -45,7 +45,7 @@ class BookDashboard < Administrate::BaseDashboard
     books: Field::HasMany.with_options(
       class_name: "Book",
       order: "sort_title"),
-    news: Field::Boolean,
+    add_to_news: Field::Boolean,
     news_text: TrixField,
     newsweight: Field::Select.with_options(
       collection: [1, 2, 3]
@@ -148,7 +148,7 @@ class BookDashboard < Administrate::BaseDashboard
     guide_file_label
     guide_text
     hot
-    news
+    add_to_news
     newsweight
     news_text
     suggested_reading_image
