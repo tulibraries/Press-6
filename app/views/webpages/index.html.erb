@@ -9,18 +9,18 @@
 <div class="row">
   <div class="col col-3 mt-4" id="left-home-menu">
     <ul class="list-unstyled">
-      <li><%= link_to "Resources for Authors", "#" %></li>
-      <li><%= link_to "Resources for Booksellers", "#" %></li>
-      <li><%= link_to "Conferences", conferences_path %></li>
-      <li><%= link_to "Special Offers", special_offers_path %></li>
-      <li><%= link_to "Books for Course Adoption", course_adoptions_path %></li>
-      <li><%= link_to "Read Our Blog", "#" %></li>
-      <li><%= link_to "Donate to the Press", "https://giving.temple.edu/givetotupress" %></li>
+      <li><%= link_to t("tupress.default.menu.author_info.label"), "#" %></li>
+      <li><%= link_to t("tupress.default.menu.bookseller_info.label"), "#" %></li>
+      <li><%= link_to t("tupress.default.menu.conferences.label"), conferences_path %></li>
+      <li><%= link_to t("tupress.default.menu.special_offers.label"), special_offers_path %></li>
+      <li><%= link_to t("tupress.default.menu.course_adoptions.label"), course_adoptions_path %></li>
+      <li><%= link_to t("tupress.default.menu.blog.label"), t("tupress.default.menu.blog.link") %></li>
+      <li><%= link_to t("tupress.default.donate_label"), t("tupress.default.donate_link") %></li>
     </ul>
   </div>
 
   <div class="col col-9 mt-4 pt-2 pb-1" id="new-forthcoming">
-    <h1>New & Forthcoming</h1>
+    <h1><%= t("tupress.webpages.index.forthcoming") %></h1>
     <div class="row pt-3">
     <% @hot.each do |item| %>
       <div class="col-4 text-center">
@@ -36,7 +36,7 @@
 
 <div class="row mt-5">
   <div class="col col-9 pt-2 pl-4 pb-4" id="news">
-    <h1>In the News</h1>
+    <h1><%= t("tupress.webpages.index.news") %></h1>
     <% @news_items.each do |news_item| %>
     <div class="row news-item">
       <div class="media">
@@ -72,7 +72,7 @@
     <% end %>
 
     <div class="p-3 pb-5 white" id="feature-philly">
-      <h2>Books on the Philadelphia Region</h2>
+      <h2><%= t("tupress.webpages.index.philly") %></h2>
       <%= link_to subject_path(@philly.code) do %>
         <%= image_pack_tag "phila.jpg" %>
       <% end %>
