@@ -11,35 +11,25 @@
     <ul class="list-unstyled">
       <li><%= link_to "Resources for Authors", "#" %></li>
       <li><%= link_to "Resources for Booksellers", "#" %></li>
-      <li><%= link_to "Conferences", "#" %></li>
-      <li><%= link_to "Special Offers", "#" %></li>
-      <li><%= link_to "Books for Course Adoption", "#" %></li>
+      <li><%= link_to "Conferences", conferences_path %></li>
+      <li><%= link_to "Special Offers", special_offers_path %></li>
+      <li><%= link_to "Books for Course Adoption", course_adoptions_path %></li>
       <li><%= link_to "Read Our Blog", "#" %></li>
-      <li><%= link_to "Donate to the Press", "#" %></li>
+      <li><%= link_to "Donate to the Press", "https://giving.temple.edu/givetotupress" %></li>
     </ul>
   </div>
 
   <div class="col col-9 mt-4 pt-2 pb-1" id="new-forthcoming">
     <h1>New & Forthcoming</h1>
     <div class="row pt-3">
+    <% @hot.each do |item| %>
       <div class="col-4 text-center">
-      <%= link_to "https://giving.temple.edu/givetotupress" do %>
-        <%= image_pack_tag "Giving_Back.jpg" %>
-        <p><strong>Giving Back</strong></p>
+      <%= link_to book_path(item.xml_id) do %>
+        <%= hot_cover(item) %>
+        <p><strong><%= item.title %></strong></p>
       <% end %>
       </div>
-      <div class="col-4 text-center">
-      <%= link_to "#" do %>
-      <%= image_pack_tag "Illegal_Immigrants_Model_Minorities.jpg" %>
-        <p><strong>Illegal Immigrants Model Minorities</strong></p>
-      <% end %>
-      </div>
-      <div class="col-4 text-center">
-      <%= link_to "#" do %>
-      <%= image_pack_tag "Women_s_Empowerment.jpg" %>
-        <p><strong>Women's Empowerment and Disempowerment in Brazil</strong></p>
-      <% end %>
-      </div>
+      <% end if @hot.present? %>
     </div>
   </div>
 </div>
@@ -83,7 +73,7 @@
 
     <div class="p-3 pb-5 white" id="feature-philly">
       <h2>Books on the Philadelphia Region</h2>
-      <%= link_to "#" do %>
+      <%= link_to subject_path(@philly.code) do %>
         <%= image_pack_tag "phila.jpg" %>
       <% end %>
     </div>
