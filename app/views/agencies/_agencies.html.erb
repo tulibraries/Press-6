@@ -6,9 +6,7 @@
     </h3>
     <ul class="list-unstyled">
       <%= "<li>#{agency.contact}</li>".html_safe if agency.contact.present? %>
-      <%= "<li>#{agency.address1}</li>".html_safe if agency.address1.present? %>
-      <%= "<li>#{agency.address2}</li>".html_safe if agency.address2.present? %>
-      <%= "<li>#{agency.address3}</li>".html_safe if agency.address3.present? %>
+      <%= "<li>#{agency.address}</li>" if agency.address.present? %>
       <%= "<li>#{agency.city}</li>".html_safe if agency.city.present? %>
       <%= "<li>#{agency.country}</li>".html_safe if agency.country.present? %>
       <%= "<li>#{agency.phone} (phone)</li>".html_safe if agency.phone.present? %>

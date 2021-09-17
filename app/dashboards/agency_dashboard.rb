@@ -13,9 +13,7 @@ class AgencyDashboard < Administrate::BaseDashboard
     id: Field::Number,
     title: Field::String,
     contact: Field::String,
-    address1: Field::String,
-    address2: Field::String,
-    address3: Field::String,
+    address: TrixField,
     city: Field::String,
     country: Field::String,
     phone: Field::String,
@@ -43,9 +41,7 @@ class AgencyDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     title
     contact
-    address1
-    address2
-    address3
+    address
     city
     country
     phone
@@ -62,9 +58,7 @@ class AgencyDashboard < Administrate::BaseDashboard
     title
     region
     contact
-    address1
-    address2
-    address3
+    address
     city
     country
     phone
