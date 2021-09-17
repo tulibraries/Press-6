@@ -13,7 +13,7 @@ module Admin
       @tab_content["catalog"] = ["catalog"]
       @tab_content["awards"] = ["featured_award_winner", "award_year", "award", "award_year2", "award2", "award_year3", "award3"]
       @tab_content["guide"] = ["active_guide", "guide_file", "guide_file_label", "guide_text"]
-      @tab_content["homepage"] = ["hot", "hotweight", "newsweight", "news_text", "course_adoption"]
+      @tab_content["homepage"] = ["hot", "hotweight", "add_to_news", "newsweight", "news_text", "course_adoption"]
       @tab_content["special_offers"] = ["special_offer"]
       @tab_content["see_also"] = ["books"]
       @tab_content["links"] = ["label_1", "link_1", "label_2", "link_2", "label_3", "link_3", "label_4", "link_4", "label_5", "link_5", "label_6", "link_6", "label_7", "link_7", "label_8", "link_8", "label_9", "link_9", "label_10", "link_10"]

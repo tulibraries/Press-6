@@ -7,7 +7,22 @@ en:
       fax: Fax
   tupress:
     default:
+      donate_label: Donate to the Press
+      donate_link: https://giving.temple.edu/givetotupress
       menu:
+        blog: 
+          label: Read Our Blog
+          link: https://templepress.wordpress.com
+        course_adoptions:
+          label: Books for Course Adoption
+        special_offers:
+          label: Special Offers
+        conferences:
+          label: Conferences
+        bookseller_info:
+          label: Resources for Booksellers
+        author_info:
+          label: Resources for Authors
         books: 
           title: Books
           awards: Award Winning titles
@@ -165,3 +180,8 @@ en:
       title: Books with Study Guides
     subjects:
       index_title: Subjects
+    webpages:
+      index:
+        forthcoming: New & Forthcoming
+        news: In the News
+        philly: Books on the Philadelphia Region

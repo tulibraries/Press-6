@@ -40,6 +40,15 @@ module BooksHelper
       "<p><em>#{book.subtitle}</em></p>"
     elsif book.subtitle.blank? && book.edition.present?
       "<p><em>#{book.edition}</em></p>"
+    else
+      ""
     end
+  end
+
+  def hot_cover(book)
+    book.cover_image.attached? ?
+      (image_tag book.custom_image(:cover_image, 200, 300))
+      :
+      (image_pack_tag "default-book-cover-index.png")
   end
 end
