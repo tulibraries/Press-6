@@ -3,6 +3,8 @@ en:
     label:
       book:
         hot: New and Noteworthy
+      phone: Phone
+      fax: Fax
   tupress:
     default:
       menu:
