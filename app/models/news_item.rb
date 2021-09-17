@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class NewsItem < ApplicationRecord
-  validates :title, :image, :link, presence: true
+  validates :title, :image, presence: true
   include Imageable
 
   has_one_attached :image

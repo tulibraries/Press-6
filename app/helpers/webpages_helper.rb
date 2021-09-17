@@ -10,20 +10,24 @@ module WebpagesHelper
 
   def news_image(model)
     unless model.class.to_s == "Event"
-      model.class.to_s == "Book" ? hot_cover(model) : (image_tag model.image)
+      model.class.to_s == "Book" ? hot_cover(model) : (image_tag model.image, class: "news-image")
     else
-      image_pack_tag "default-book-cover-index.png"
+      model.image.attached? ? (image_tag model.image, class: "news-image") : (image_pack_tag "default-book-cover-index.png", class: "news-image")
     end
   end
 
-  def news_link(model)
+  def news_link(model, type = nil)
     case model.class.to_s
     when "Book"
-      link_to model.title, book_path(model.xml_id)
+      type == "image" ?
+        (link_to news_image(model), book_path(model.xml_id))
+        :
+        (link_to model.title, book_path(model.xml_id))
     when "NewsItem"
-      link_to model.title, model.link
+      type == "image" ? (model.link.present? ? (link_to news_image(model), model.link) : (news_image(model))) :
+                        (model.link.present? ? (link_to model.title, model.link) : (model.title))
     when "Event"
-      link_to model.title, event_path(model)
+      type == "image" ? (link_to news_image(model), events_path) : (link_to model.title, events_path)
     end
   end
 
