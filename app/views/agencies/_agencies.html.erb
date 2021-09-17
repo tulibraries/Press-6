@@ -7,10 +7,8 @@
     <ul class="list-unstyled">
       <%= "<li>#{agency.contact}</li>".html_safe if agency.contact.present? %>
       <%= "<li>#{agency.address}</li>" if agency.address.present? %>
-      <%= "<li>#{agency.city}</li>".html_safe if agency.city.present? %>
-      <%= "<li>#{agency.country}</li>".html_safe if agency.country.present? %>
-      <%= "<li>#{agency.phone} (phone)</li>".html_safe if agency.phone.present? %>
-      <%= "<li>#{agency.fax} (fax)</li>".html_safe if agency.fax.present? %>
+      <%= "<li><strong>Phone</strong>: #{agency.phone} (phone)</li>".html_safe if agency.phone.present? %>
+      <%= "<li><strong>Fax</strong>: #{agency.fax} (fax)</li>".html_safe if agency.fax.present? %>
       <%= "<li>#{mail_to agency.email, agency.email}</li>".html_safe if agency.email.present? %>
       <%= "<li>#{link_to agency.website, agency.website}</li>".html_safe if agency.website.present? %>
     </ul>

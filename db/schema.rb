@@ -56,8 +56,6 @@ ActiveRecord::Schema.define(version: 2021_09_17_120930) do
     t.string "title"
     t.string "region"
     t.string "contact"
-    t.string "city"
-    t.string "country"
     t.string "phone"
     t.string "fax"
     t.string "email"

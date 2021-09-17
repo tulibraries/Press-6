@@ -14,8 +14,6 @@ class AgencyDashboard < Administrate::BaseDashboard
     title: Field::String,
     contact: Field::String,
     address: TrixField,
-    city: Field::String,
-    country: Field::String,
     phone: Field::String,
     fax: Field::String,
     email: Field::String,
@@ -42,8 +40,6 @@ class AgencyDashboard < Administrate::BaseDashboard
     title
     contact
     address
-    city
-    country
     phone
     fax
     email
@@ -59,8 +55,6 @@ class AgencyDashboard < Administrate::BaseDashboard
     region
     contact
     address
-    city
-    country
     phone
     fax
     email
