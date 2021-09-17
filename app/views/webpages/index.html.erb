@@ -37,17 +37,22 @@
 <div class="row mt-5">
   <div class="col col-9 pt-2 pl-4 pb-4" id="news">
     <h1><%= t("tupress.webpages.index.news") %></h1>
+
     <% @news.each do |item| %>
     <div class="row news-item">
+
       <div class="media">
-        <%= link_to news_image(item), news_link(item), class: "news-image" %>
+        <%= news_link(item,"image") %>
       </div>
+
       <div class="media-body">
         <h2><%= news_link(item) %></h2>
         <%= news_text(item) %>
       </div>
+      
     </div>
     <% end %>
+    
   </div>
 
   <div class="col-3" id="features">

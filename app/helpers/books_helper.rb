@@ -47,8 +47,8 @@ module BooksHelper
 
   def hot_cover(book)
     book.cover_image.attached? ?
-      (image_tag book.custom_image(:cover_image, 200, 300))
+      (image_tag book.custom_image(:cover_image, 200, 300), class: "news-image")
       :
-      (image_pack_tag "default-book-cover-index.png")
+      (image_pack_tag "default-book-cover-index.png", class: "news-image")
   end
 end
