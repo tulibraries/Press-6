@@ -40,7 +40,7 @@ RSpec.describe BooksHelper, type: :helper do
         expect(helper.sub_ed(no_edition)).to eq("<p><em>#{book.edition}</em></p>")
       end
       it "handles no edition and no subtitle" do
-        expect(helper.sub_ed(no_nothing)).to be_nil
+        expect(helper.sub_ed(no_nothing)).to eq("")
       end
     end
   end
