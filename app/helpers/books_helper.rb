@@ -40,6 +40,8 @@ module BooksHelper
       "<p><em>#{book.subtitle}</em></p>"
     elsif book.subtitle.blank? && book.edition.present?
       "<p><em>#{book.edition}</em></p>"
+    else
+      ""
     end
   end
 
