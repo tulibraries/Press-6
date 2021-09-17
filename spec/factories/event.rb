@@ -10,5 +10,14 @@ FactoryBot.define do
     location { "Charles Library" }
     add_to_news { false }
     news_text { ActionText::Content.new("Good Day Sunshine") }
+
+    trait :with_image do
+      after :create do |event|
+        event.image.attach(io:
+          File.open(Rails.root.join("spec/fixtures/charles.jpg")),
+          filename: "charles.jpg",
+          content_type: "image/jpeg")
+      end
+    end
   end
 end
