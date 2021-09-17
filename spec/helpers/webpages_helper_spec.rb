@@ -32,7 +32,7 @@ RSpec.describe WebpagesHelper, type: :helper do
     it "returns default image when model image nil" do
       expect(helper.news_image(book_no_image)).to include("default-book-cover-index")
     end
-  end 
+  end
 
   describe "displays news text" do
     it "returns news text from book model" do
@@ -45,7 +45,7 @@ RSpec.describe WebpagesHelper, type: :helper do
       expect(helper.news_text(news_item)).to eq(news_item.description)
     end
   end
-  
+
   describe "displays news text" do
     it "returns news text from book model" do
       expect(helper.news_text(book)).to eq(book.news_text)
@@ -56,7 +56,7 @@ RSpec.describe WebpagesHelper, type: :helper do
     it "returns image from news_item model" do
       expect(helper.news_text(news_item)).to eq(news_item.description)
     end
-  end  
+  end
 
   describe "displays news links" do
     it "returns link to book model" do
