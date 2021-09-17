@@ -4,11 +4,7 @@ FactoryBot.define do
   factory :agency do
     title { "John" }
     contact { "Mori Moto" }
-    address1 { "123 Cherry Blossom Way" }
-    address2 {}
-    address3 {}
-    city { "Tokyo" }
-    country { "Japan" }
+    address { ActionText::Content.new("123 Cherry Blossom Way Tokyo Japan") }
     phone { "81 03(3230)4084" }
     fax { "81 03(3234)5249" }
     email { "mori@jbooks.com" }
