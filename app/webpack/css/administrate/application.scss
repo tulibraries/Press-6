@@ -26,11 +26,15 @@
 
 @import "./utilities/text-color";
 
-@import "trix/dist/trix";
+@import "trix";
+@import  "richtext.scss";
+
 @import "bootstrap";
 
 @import "~selectize/dist/css/selectize";
 @import "~selectize/dist/css/selectize.default";
+
+@import "flatpickr/dist/flatpickr.min";
 
 // We need to override trix.css’s image gallery styles to accommodate the
 // <action-text-attachment> element we wrap around attachments. Otherwise,
@@ -80,4 +84,4 @@
 	opacity: 0.65;
 }
 
-@import "flatpickr/dist/flatpickr.min";
+

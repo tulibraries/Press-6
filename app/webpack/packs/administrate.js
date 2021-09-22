@@ -5,18 +5,11 @@
 
 require("@rails/ujs").start()
 require("turbolinks").start()
-
-// The next line you only need if you want ActiveStorage support
 require("@rails/activestorage").start()
-
-// The next two lines you only need if you want ActionText support
-require("trix")
 require("@rails/actiontext")
-
+require("../javascripts/administrate/trix-1.3.1")
 require("bootstrap")
-
 require("../administrate/index")
-
 require("selectize")
 
 import "../css/administrate/application";
