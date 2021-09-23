@@ -13,7 +13,7 @@
     <div class="col authors px-0">
       <% @authors.each do |author| %>
         <p class="p-2 author">
-          <%= link_to author.title, author_path(author.author_id) %>
+          <%= link_to author.title, author_path(author) %>
         </p>
       <% end %>
     </div>

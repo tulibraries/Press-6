@@ -27,5 +27,13 @@ module Admin
     # def records_per_page
     #   params[:per_page] || 20
     # end
+
+    def find_resource(param)
+      unless scoped_resource.class.to_s == "ActiveStorage::Attachment::ActiveRecord_Relation"
+        scoped_resource.friendly.find(param)
+      else
+        scoped_resource.find(param)
+      end
+    end
   end
 end

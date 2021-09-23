@@ -2,6 +2,7 @@
 
 class WebpagesController < ApplicationController
   before_action :set_webpage, only: :show
+  include SetInstance
 
   def index
     @news_items = NewsItem.where(promote_to_homepage: true).order(:created_at).take(1)

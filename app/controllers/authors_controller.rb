@@ -2,6 +2,7 @@
 
 class AuthorsController < ApplicationController
   before_action :set_author, only: :show
+  include SetInstance
 
   def index
     @selected = params[:id] ? params[:id] : "a"

@@ -5,6 +5,7 @@ require "administrate/base_dashboard"
 class OabookDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
+    slug: Field::String,
     title: Field::String,
     subtitle: Field::String,
     author: Field::String,
@@ -51,6 +52,7 @@ class OabookDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     image
     title
+    slug
     subtitle
     author
     edition

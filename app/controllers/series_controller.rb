@@ -2,6 +2,7 @@
 
 class SeriesController < ApplicationController
   before_action :set_series, only: :show
+  include SetInstance
 
   def index
     @series = Series.all.order(:title)

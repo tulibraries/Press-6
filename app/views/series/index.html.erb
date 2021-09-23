@@ -13,7 +13,7 @@
     <% if s.books.count > 0 %>
       <div class="col-4 series pl-0">
           <p class="p-2 s">
-            <%= link_to s.title, series_path(s.code) %>
+            <%= link_to s.title, series_path(s) %>
           </p>
       </div>
     <% end %>

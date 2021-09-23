@@ -5,7 +5,8 @@ require "administrate/base_dashboard"
 class PersonDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    name: Field::String,
+    slug: Field::String,
+    title: Field::String,
     email: Field::String,
     position: Field::String,
     position_description: TrixField,
@@ -29,20 +30,21 @@ class PersonDashboard < Administrate::BaseDashboard
   }.freeze
 
   COLLECTION_ATTRIBUTES = %i[
-  name
+  title
   position
   ].freeze
 
   SHOW_PAGE_ATTRIBUTES = %i[
   image
-  name
+  title
   position
   department
   ].freeze
 
   FORM_ATTRIBUTES = %i[
     image
-    name
+    title
+    slug
     email
     position
     position_description
@@ -73,6 +75,6 @@ class PersonDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(person)
-    person.name
+    person.title
   end
 end

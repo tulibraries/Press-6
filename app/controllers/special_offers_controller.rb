@@ -2,6 +2,7 @@
 
 class SpecialOffersController < ApplicationController
   before_action :set_special_offer, only: :show
+  include SetInstance
 
   def index
     @special_offers = SpecialOffer.all.where(active: true)

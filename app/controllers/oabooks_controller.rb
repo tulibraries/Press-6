@@ -2,6 +2,7 @@
 
 class OabooksController < ApplicationController
   before_action :set_oabook, only: [:show]
+  include SetInstance
 
   def show
   end

@@ -2,6 +2,7 @@
 
 class CatalogsController < ApplicationController
   before_action :set_catalog, only: :show
+  include SetInstance
 
   def index
     @catalogs = Catalog.where(suppress: false)

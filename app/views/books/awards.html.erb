@@ -17,7 +17,7 @@
   <div class="row pb-4 mb-4 featured_awards" >
       <% @recent_winners.each do |book| %>
       <div class="col-3 pt-4 pb-0 text-center">
-        <%= link_to book_path(book.xml_id) do %>
+        <%= link_to book_path(book) do %>
           <% if book.cover_image.attached? %>
             <%= image_tag book.custom_image("cover_image", 180, 280) %>
           <% else %>
@@ -44,7 +44,7 @@
       <h2 class="gold pl-3">Awards by Subject</h2>
       <ul class="list-unstyled p-3">
       <% @awards_by_subject.each do |subject| %>
-        <li><%= link_to subject[0], awards_by_subject_path(subject[1]) %></li>
+        <li><%= link_to subject.title, awards_by_subject_path(subject) %></li>
       <% end %>
       </ul>
     </div>

@@ -11,7 +11,25 @@
     <div class="row" id="regions">
       <div class="col-12 p-0">
         <%= render "region", region: region %>
-        <%= render "agencies", agencies: agencies %>
+        <% agencies.each do |agency| %>
+        <div class="row m-0">
+          <div class="col pl-5 my-2 pt-3 agency">
+            <h3 style="font-size:125%;">
+              <%= title_link(agency) %>
+            </h3>
+            <ul class="list-unstyled">
+              <%= "<li>#{agency.contact}</li>".html_safe if agency.contact.present? %>
+              <% if agency.address.present? %>
+                <li><%= agency.address %></li>
+              <% end %>
+              <%= "<li><strong>#{t("helpers.label.phone")}</strong>: #{agency.phone} (phone)</li>".html_safe if agency.phone.present? %>
+              <%= "<li><strong>#{t("helpers.label.fax")}</strong>: #{agency.fax} (fax)</li>".html_safe if agency.fax.present? %>
+              <%= "<li>#{mail_to agency.email, agency.email}</li>".html_safe if agency.email.present? %>
+              <%= "<li>#{link_to agency.website, agency.website}</li>".html_safe if agency.website.present? %>
+            </ul>
+          </div>
+        </div>
+        <% end %>
       </div>
     </div>
   <% end %>

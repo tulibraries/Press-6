@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col mt-4 px-0">
       <h1 class="">
-        <%= title_link(@author.title, @author.id) %>
+        <%= title_link(@author) %>
       </h1>
     </div>
   </div>
@@ -11,7 +11,7 @@
   <div class="row">
     <% @books.each do |book| %>
     <div class="col-3 mt-4 text-center">
-      <%= link_to book_path(book.xml_id) do %>
+      <%= link_to book_path(book) do %>
       <% if book.cover_image.attached? %>
         <%= image_tag book.index_image("cover_image") %>
       <% else %>

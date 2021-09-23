@@ -4,19 +4,22 @@ module SetInstance
   extend ActiveSupport::Concern
   def find_instance
     model = controller_name.classify.constantize
+    model_name = model.to_s
     unless params[:id].nil?
-      case model       
-        when Book
-          model.find_by(xml_id: params[:id])
-        when Author
-          model.find_by(author_id: params[:id])
-        when Catalog || Series || Subject
-          model.find_by(code: params[:id])
-        else
-          model.friendly.find(params[:id])
+      if model_name == "Book"
+        is_number?(params[:id]) ?
+          instance = model.find_by(xml_id: params[:id])
+          :
+          instance = model.friendly.find(params[:id])
+      else
+        instance = model.friendly.find(params[:id])
       end
     else
       raise ActionController::RoutingError.new("Not Found")
     end
+  end
+
+  def is_number?(string)
+    true if Float(string) rescue false
   end
 end

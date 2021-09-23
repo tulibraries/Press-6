@@ -13,14 +13,53 @@ module ApplicationHelper
   def edit_url(book_id = nil, id_from_index = nil)
     id = book_id.nil? ? params[:id] : book_id
 
-    exemptions = [nil, "webpages", "books", "people"]
+    exemptions = [nil, "webpages", "books", "people", "agencies", "conferences"]
 
     if exemptions.include?(controller_name)
-      if controller_name == "webpages" && action_name == "show"
-        "/admin/#{controller_name}/#{id}/edit"
-      elsif controller_name == "books" && action_name == "show"
-        "/admin/#{controller_name}/#{book_id}/edit"
-      else
+      case controller_name
+      when "webpages"
+        "/admin/#{controller_name}/#{id}/edit" if action_name == "show"
+      when "books"
+        if action_name == "show"
+          "/admin/#{controller_name}/#{book_id}/edit"
+        elsif action_name == "awards_by_subject"
+          "/admin/subjects/#{id_from_index}/edit"
+        elsif action_name == "awards_by_year"
+          "/admin/#{controller_name}"
+        elsif action_name == "course_adoptions"
+          "/admin/#{controller_name}"
+        elsif action_name == "study_guides"
+          "/admin/#{controller_name}"
+        elsif action_name == "study_guide"
+          "/admin/#{controller_name}"
+        end
+      when "agencies"
+        if book_id.nil? && id_from_index.nil?
+          "/admin/#{controller_name}"
+        else
+          "/admin/#{controller_name}/#{id_from_index}/edit"
+        end
+      when "people"
+        if action_name == "index"
+          if book_id.nil? && id_from_index.nil?
+            "/admin/#{controller_name}"
+          else
+            "/admin/#{controller_name}/#{id_from_index}/edit"
+          end
+        elsif action_name == "sales_reps"
+          if book_id.nil? && id_from_index.nil?
+            "/admin/#{controller_name}"
+          else
+            "/admin/#{controller_name}/#{id_from_index}/edit"
+          end
+        end
+      when "conferences"
+        if book_id.nil? && id_from_index.nil?
+          "/admin/#{controller_name}"
+        else
+          "/admin/#{controller_name}/#{id_from_index}/edit"
+        end
+        else
         "/admin/#{controller_name}"
       end
     else
@@ -32,13 +71,20 @@ module ApplicationHelper
     end
   end
 
-  def title_link(title = nil, id = nil)
-    if current_user && ["index", "sales_reps"].include?(action_name)
-      id.present? ? (link_to title, edit_url(nil, id)) : (link_to title, edit_url)
-    elsif current_user && action_name == "show"
-      link_to title, edit_url(id)
+  def title_link(linkable)
+    if current_user
+      if ["index", "sales_reps", "conferences", "study_guide", "study_guides", "course_adoptions",
+          "agencies", "awards_by_subject", "awards_by_year"].include?(action_name)
+        unless linkable.is_a?(String)
+          link_to linkable.title, edit_url(nil, linkable.slug)
+        else
+          link_to linkable, edit_url
+        end
+      elsif action_name == "show"
+        link_to linkable.title, edit_url(linkable.slug)
+      end
     else
-      title.presence
+      linkable.is_a?(String) ? linkable.presence : linkable.title
     end
   end
 
