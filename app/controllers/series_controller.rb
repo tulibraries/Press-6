@@ -16,6 +16,6 @@ class SeriesController < ApplicationController
 
   private
     def set_series
-      @series = Series.find_by(code: params[:id])
+      @series = find_instance
     end
 end

@@ -19,6 +19,6 @@ class AuthorsController < ApplicationController
 
   private
     def set_author
-      @author = Author.find_by(author_id: params[:id])
+      @author = find_instance
     end
 end

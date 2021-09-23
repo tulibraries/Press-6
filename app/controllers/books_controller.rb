@@ -88,7 +88,7 @@ class BooksController < ApplicationController
 
   private
     def set_book
-      @book = Book.find_by(xml_id: params[:id]) if params[:id].present?
+      @book = find_instance
     end
 
     def books_with_awards

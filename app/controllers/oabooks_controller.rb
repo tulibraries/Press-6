@@ -18,6 +18,6 @@ class OabooksController < ApplicationController
 
   private
     def set_oabook
-      @oabook = Oabook.find_by(id: params[:id])
+      @oabook = find_instance
     end
 end

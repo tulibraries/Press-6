@@ -16,6 +16,6 @@ class SpecialOffersController < ApplicationController
 
   private
     def set_special_offer
-      @special_offer = SpecialOffer.find(params[:id])
+      @special_offer = find_instance
     end
 end

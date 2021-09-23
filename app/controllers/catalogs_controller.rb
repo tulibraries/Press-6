@@ -18,6 +18,6 @@ class CatalogsController < ApplicationController
 
   private
     def set_catalog
-      @catalog = Catalog.find_by(code: params[:id])
+      @catalog = find_instance
     end
 end

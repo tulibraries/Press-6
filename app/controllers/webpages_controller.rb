@@ -20,6 +20,6 @@ class WebpagesController < ApplicationController
 
   private
     def set_webpage
-      @page = Webpage.find(params[:id])
+      @page = find_instance
     end
 end

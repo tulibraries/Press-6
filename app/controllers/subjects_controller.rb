@@ -17,6 +17,6 @@ class SubjectsController < ApplicationController
 
   private
     def set_subject
-      @subject = Subject.find_by(code: params[:id])
+      @subject = find_instance
     end
 end
