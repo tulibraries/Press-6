@@ -2,6 +2,9 @@
 
 class Highlight < ApplicationRecord
   include Imageable
-  validates :image, :link, presence: true
+  include Friendable
+
+  validates :title, :image, :link, presence: true
+
   has_one_attached :image
 end

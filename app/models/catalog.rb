@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 class Catalog < ApplicationRecord
+  include Friendable
+
   before_save :set_century, :set_season, :set_title
+
   validates :code, presence: true
 
   has_many :brochures, class_name: "Brochure", dependent: :nullify
