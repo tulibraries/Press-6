@@ -4,6 +4,7 @@ class Oabook < ApplicationRecord
   include Imageable
   include Friendable
 
+  validates :title, :isbn, :author, :collection, presence: true
   validates :image, presence: false, blob: { content_type: ["image/png", "image/jpg", "image/jpeg", "image/gif"], size_range: 1..5.megabytes }
   validates :pdf, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
   validates :epub, presence: false, blob: { content_type: ["application/epub+zip"], size_range: 1..250.megabytes }

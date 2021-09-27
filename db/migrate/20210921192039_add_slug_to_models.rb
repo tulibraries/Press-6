@@ -47,6 +47,11 @@ class AddSlugToModels < ActiveRecord::Migration[6.1]
       add_index :highlights, :slug, unique: true
     end
 
+    unless column_exists?(:journals, :slug)
+      add_column :journals, :slug, :string
+      add_index :journals, :slug, unique: true
+    end
+
     unless column_exists?(:news_items, :slug)
       add_column :news_items, :slug, :string
       add_index :news_items, :slug, unique: true

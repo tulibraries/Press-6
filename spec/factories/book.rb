@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :book do
     xml_id { 7 }
     title { "John" }
+    slug { "slug" }
     author_byline { "Joseph Heller" }
     author_ids { ["\"1982\""] }
     news { false }

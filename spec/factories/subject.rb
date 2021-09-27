@@ -3,6 +3,7 @@
 FactoryBot.define do
   factory :subject do
     title { "The Subject of John" }
+    slug { "slug" }
     code  { "1032" }
 
     trait :with_pdf do

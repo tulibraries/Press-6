@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
 require "rails_helper"
-require "pry"
 
 RSpec.describe SyncService::Reviews, type: :service do
-
   before(:all) do
     @review_harvest = described_class.new(xml_path: file_fixture("delta.xml").to_path)
     @reviews = @review_harvest.read_reviews
@@ -27,6 +25,19 @@ RSpec.describe SyncService::Reviews, type: :service do
       expect(@reviews.count).to equal(10)
     end
 
+    let (:review1) {
+      Review.find_by(review_id: "145014")
+    }
+
+    let (:review2) {
+      Review.find_by(review_id: "145015")
+    }
+
+    it "syncs reviews to the table" do
+      expect(review1).to be
+      expect(review2).to be
+    end
+
     describe "maps review xml to db schema" do
       if @reviews #tests where reviews exist, need another test when reviews empty (inconsistent xml)
         let subject { @review_harvest.record_hash(@reviews.first) }
@@ -42,25 +53,26 @@ RSpec.describe SyncService::Reviews, type: :service do
     end
   end
 
-  context "write catalog to catalog table" do
-    before(:each) do
-      @review_harvest.sync
-      sleep 2
-    end
+  # context "write review to reviews table" do
+  #   before(:each) do
+  #     @review_harvest.read_reviews
+  #     sleep 2
+  #   end
 
-    let (:review1) {
-      Review.find_by(review_id: "145014")
-    }
+  #   let (:review1) {
+  #     binding.pry
+  #     Review.find_by(review_id: "145014")
+  #   }
 
-    let (:review2) {
-      Review.find_by(review_id: "145015")
-    }
+  #   let (:review2) {
+  #     Review.find_by(review_id: "145015")
+  #   }
 
-    it "syncs reviews to the table" do
-      expect(review1).to be
-      expect(review2).to be
-    end
+  #   it "syncs reviews to the table" do
+  #     expect(review1).to be
+  #     expect(review2).to be
+  #   end
 
-  end
+  # end
 
 end

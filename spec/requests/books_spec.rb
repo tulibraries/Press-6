@@ -12,7 +12,7 @@ RSpec.describe Book, type: :request do
 
   describe "show page returns expected results" do
     it "returns assigned subjects" do
-      expect { get collection_path(book.xml_id).to have_text("foo") }
+      expect { get collection_path(book.slug).to have_text("foo") }
     end
 
     it "returns assigned subjects" do
@@ -37,15 +37,15 @@ RSpec.describe Book, type: :request do
       expect(response).to render_template(:study_guides)
     end
     it "routes to show" do
-      get study_guide_path(book4.xml_id)
-      expect(response).to render_template(:study_guides)
+      get study_guide_path(book4.slug)
+      expect(response).to render_template(:study_guide)
     end
     it "lists book on index view" do
       expect { get study_guides_path.to have_text(book4.title) }
       expect { get study_guides_path.not_to have_text(book3.title) }
     end
     it "displays pdf link text in show view" do
-      expect { get study_guide_path(book4.xml_id).to have_text("Curriculum/Study Guide [PDF]") }
+      expect { get study_guide_path(book4.slug).to have_text("Curriculum/Study Guide [PDF]") }
     end
 
   end

@@ -15,12 +15,12 @@ RSpec.describe SeriesController, type: :controller do
 
   describe "GET #show" do
     it "renders show template" do
-      get :show, params: { id: series.code }
+      get :show, params: { id: series.slug }
       expect(response).to render_template("show")
     end
 
     it "returns html by default success" do
-      get :show, params: { id: series.code }, format: :html
+      get :show, params: { id: series.slug }, format: :html
       expect(response.header["Content-Type"]).to include "html"
     end
   end

@@ -3,7 +3,8 @@
 FactoryBot.define do
   factory :oabook do
     title { "John Paul George and Ringo" }
-    subtitle { "The Beatles " }
+    slug { "slug" }
+    subtitle { "The Beatles" }
     author { "George Martin" }
     edition { "5th" }
     isbn { "123456789" }

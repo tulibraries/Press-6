@@ -3,6 +3,7 @@
 FactoryBot.define do
   factory :document do
     title { "Working with Word" }
+    slug { "slug" }
     document_type { "Art Information" }
     association :person, factory: :person
 

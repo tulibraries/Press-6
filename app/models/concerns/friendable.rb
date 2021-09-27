@@ -8,15 +8,28 @@ module Friendable
   end
 
   def title_and_sequence
-    slug = self.title.parameterize
-    sequence = self.class.where("slug like ?", "%#{slug}%").count
-    "#{slug}--#{sequence}"
+    if self.class == "Review"
+      slug = self.book.title 
+    else
+      if title.present?
+        slug = self.title.parameterize
+      end
+    end
+      sequence = self.class.where("slug like ?", "%#{slug}%").count
+      "#{slug}--#{sequence}"
   end
 
   def slug_candidates
-    [
-      [:title],
-      [:title_and_sequence]
-    ]
+    if self.class == "Review"
+      [
+        [self.book.title],
+        [:title_and_sequence]
+      ]
+    else 
+      [
+        [:title],
+        [:title_and_sequence]
+      ]
+    end
   end
 end

@@ -17,7 +17,7 @@ class SyncService::Reviews
 
   def sync
     @updated = @created = @errored = 0
-    read_reviews.each do |book|
+    read_reviews.each do |book|          
       begin
         if book.is_a?(Hash)
           @log.info(%Q(Syncing reviews for: #{book["record"]["title"]}))
@@ -31,7 +31,6 @@ class SyncService::Reviews
           else
             @log.info(%Q(Syncing review for book: #{book.at("book_id").text}))
           end
-
         end
       rescue Exception => err
         stdout_and_log("sync error:  #{err.message} \n #{err.backtrace}")
@@ -47,7 +46,7 @@ class SyncService::Reviews
       begin
         Hash.from_xml(node_xml)
       rescue REXML::ParseException => err
-        node
+       node
       end
     end
   end

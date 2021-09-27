@@ -16,12 +16,12 @@ RSpec.describe SubjectsController, type: :controller do
 
   describe "GET #show" do
     it "renders show template" do
-      get :show, params: { id: subject.code }
+      get :show, params: { id: subject.slug }
       expect(response).to render_template("show")
     end
 
     it "returns html by default success" do
-      get :show, params: { id: subject.code }, format: :html
+      get :show, params: { id: subject.slug }, format: :html
       expect(response.header["Content-Type"]).to include "html"
     end
   end

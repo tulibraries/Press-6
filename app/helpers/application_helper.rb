@@ -22,6 +22,8 @@ module ApplicationHelper
       when "books"
         if action_name == "show"
           "/admin/#{controller_name}/#{book_id}/edit"
+        elsif action_name == "index"
+          "/admin/#{controller_name}"
         elsif action_name == "awards_by_subject"
           "/admin/subjects/#{id_from_index}/edit"
         elsif action_name == "awards_by_year"
@@ -75,10 +77,10 @@ module ApplicationHelper
     if current_user
       if ["index", "sales_reps", "conferences", "study_guide", "study_guides", "course_adoptions",
           "agencies", "awards_by_subject", "awards_by_year"].include?(action_name)
-        unless linkable.is_a?(String)
-          link_to linkable.title, edit_url(nil, linkable.slug)
-        else
+        if linkable.is_a?(String)
           link_to linkable, edit_url
+        else
+          link_to linkable.title, edit_url(nil, linkable.slug)
         end
       elsif action_name == "show"
         link_to linkable.title, edit_url(linkable.slug)

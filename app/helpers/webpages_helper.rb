@@ -20,9 +20,9 @@ module WebpagesHelper
     case model.class.to_s
     when "Book"
       type == "image" ?
-        (link_to news_image(model), book_path(model.xml_id))
+        (link_to news_image(model), book_path(model))
         :
-        (link_to model.title, book_path(model.xml_id))
+        (link_to model.title, book_path(model))
     when "NewsItem"
       type == "image" ? (model.link.present? ? (link_to news_image(model), model.link) : (news_image(model))) :
                         (model.link.present? ? (link_to model.title, model.link) : (model.title))

@@ -258,6 +258,8 @@ ActiveRecord::Schema.define(version: 2021_09_22_123043) do
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_journals_on_slug", unique: true
   end
 
   create_table "news_items", charset: "utf8mb3", force: :cascade do |t|
@@ -374,8 +376,10 @@ ActiveRecord::Schema.define(version: 2021_09_22_123043) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
   create_table "webpages", charset: "utf8mb3", force: :cascade do |t|
