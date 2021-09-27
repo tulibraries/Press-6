@@ -25,7 +25,6 @@ class Book < ApplicationRecord
   has_rich_text :award2
   has_rich_text :award3
 
-  has_many :reviews, foreign_key: "review_id", dependent: :destroy, inverse_of: :review
   has_many :books, class_name: "Book", dependent: :nullify
 
   belongs_to :series, optional: true
