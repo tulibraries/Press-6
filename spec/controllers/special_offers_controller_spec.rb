@@ -25,4 +25,6 @@ RSpec.describe SpecialOffersController, type: :controller do
     end
   end
 
+  it_behaves_like "index_editable"
+
 end

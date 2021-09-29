@@ -49,5 +49,4 @@ RSpec.describe Book, type: :request do
     end
 
   end
-
 end

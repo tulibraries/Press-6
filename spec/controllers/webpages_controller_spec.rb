@@ -24,7 +24,4 @@ RSpec.describe WebpagesController, type: :controller do
       expect(response.header["Content-Type"]).to include "html"
     end
   end
-
-  it_behaves_like "show_editable"
-
 end

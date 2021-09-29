@@ -61,8 +61,6 @@ module ApplicationHelper
         else
           "/admin/#{controller_name}/#{id_from_index}/edit"
         end
-        else
-        "/admin/#{controller_name}"
       end
     else
       if ["index", "labor_studies", "north_broad_press"].include?(action_name)

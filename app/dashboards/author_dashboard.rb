@@ -27,6 +27,7 @@ class AuthorDashboard < Administrate::BaseDashboard
   ].freeze
 
   FORM_ATTRIBUTES = %i[
+    title
     slug
     suppress
   ].freeze
