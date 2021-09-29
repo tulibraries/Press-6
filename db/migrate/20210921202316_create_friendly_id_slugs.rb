@@ -16,7 +16,7 @@ class CreateFriendlyIdSlugs < MIGRATION_CLASS
         t.string   :sluggable_type, limit: 50
         t.string   :scope
         t.datetime :created_at
-      end 
+      end
 
       change_table :friendly_id_slugs, bulk: true do
         add_index :friendly_id_slugs, [:sluggable_type, :sluggable_id]

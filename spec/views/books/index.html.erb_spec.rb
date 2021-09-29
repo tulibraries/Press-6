@@ -21,5 +21,5 @@ RSpec.describe "books/index.html.erb", type: :view do
   it "- returns admin link to model instance" do
     expect { get book_path(book).to have_text(admin_book_path(book)) }
     expect { get books_path.to have_text(admin_books_path) }
-  end 
+  end
 end

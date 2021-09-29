@@ -17,7 +17,7 @@ RSpec.describe ApplicationHelper, type: :helper do
     sign_in user
   end
 
-  after do 
+  after do
     sign_out user
   end
 
@@ -50,25 +50,25 @@ RSpec.describe ApplicationHelper, type: :helper do
       end
     end
 
-    describe "title_link for agencies" do 
+    describe "title_link for agencies" do
       it "- returns admin links" do
         allow(controller).to receive(:controller_name).and_return "agencies"
         allow(controller).to receive(:action_name).and_return "index"
         expect(helper.title_link("Agencies")).to eq(link_to "Agencies", admin_agencies_path)
         expect(helper.title_link(agency)).to eq(link_to agency.title, edit_admin_agency_path(agency))
-      end 
+      end
     end
 
-    describe "title_link for authors" do 
+    describe "title_link for authors" do
       it "- returns admin links" do
         allow(controller).to receive(:controller_name).and_return "authors"
         allow(controller).to receive(:action_name).and_return "index"
         expect(helper.title_link("Authors")).to eq(link_to "Authors", admin_authors_path)
         expect(helper.title_link(author)).to eq(link_to author.title, edit_admin_author_path(author))
-      end 
+      end
     end
 
-    describe "title_link for books" do 
+    describe "title_link for books" do
       it "- returns admin links to model instance" do
         allow(controller).to receive(:controller_name).and_return "books"
         allow(controller).to receive(:action_name).and_return "show"
@@ -85,18 +85,18 @@ RSpec.describe ApplicationHelper, type: :helper do
         expect(helper.title_link("Awards by Year")).to eq(link_to "Awards by Year", admin_books_path)
         allow(controller).to receive(:action_name).and_return "awards_by_subject"
         expect(helper.title_link(subject)).to eq(link_to subject.title, edit_admin_subject_path(subject))
-      end 
+      end
 
-      describe "title_link for conferences" do 
+      describe "title_link for conferences" do
         it "- returns admin links" do
           allow(controller).to receive(:controller_name).and_return "conferences"
           allow(controller).to receive(:action_name).and_return "index"
           expect(helper.title_link("Conferences")).to eq(link_to "Conferences", admin_conferences_path)
           expect(helper.title_link(conference)).to eq(link_to conference.title, edit_admin_conference_path(conference))
-        end 
+        end
       end
 
-      describe "title_link for people" do 
+      describe "title_link for people" do
         it "- returns admin links" do
           allow(controller).to receive(:controller_name).and_return "people"
           allow(controller).to receive(:action_name).and_return "index"
@@ -105,33 +105,33 @@ RSpec.describe ApplicationHelper, type: :helper do
           allow(controller).to receive(:action_name).and_return "sales_reps"
           expect(helper.title_link("Sales Reps")).to eq(link_to "Sales Reps", admin_people_path)
           expect(helper.title_link(person)).to eq(link_to person.title, edit_admin_person_path(person))
-        end 
+        end
       end
 
-      describe "title_link for series" do 
+      describe "title_link for series" do
         it "- returns admin links" do
           allow(controller).to receive(:controller_name).and_return "series"
           allow(controller).to receive(:action_name).and_return "show"
           expect(helper.title_link(series)).to eq(link_to series.title, edit_admin_series_path(series))
-        end 
+        end
       end
 
 
-      describe "title_link for webpages" do 
+      describe "title_link for webpages" do
         it "- returns admin links" do
           allow(controller).to receive(:controller_name).and_return "webpages"
           allow(controller).to receive(:action_name).and_return "show"
           expect(helper.title_link(webpage)).to eq(link_to webpage.title, edit_admin_webpage_path(webpage))
-        end 
+        end
       end
 
-      describe "title_link for logged out webpages" do 
+      describe "title_link for logged out webpages" do
         it "- returns non-admin links" do
           sign_out user
           allow(controller).to receive(:controller_name).and_return "webpages"
           allow(controller).to receive(:action_name).and_return "show"
           expect(helper.title_link(webpage.title)).to eq(webpage.title)
-        end 
+        end
       end
     end
   end
