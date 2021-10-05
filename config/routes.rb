@@ -80,4 +80,9 @@ Rails.application.routes.draw do
   get "/open-access/labor-studies/:id"      => "oabooks#show", as: :labor_studies_book
   get "/open-access/north-broad-press/:id"  => "oabooks#show", as: :north_broad_book
 
+  controller :application do
+    get 'search' => :search
+    get 'search2' => :search2
+  end
+
 end

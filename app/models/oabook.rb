@@ -16,4 +16,10 @@ class Oabook < ApplicationRecord
   validates :pdf, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
   validates :epub, presence: false, blob: { content_type: ["application/epub+zip"], size_range: 1..250.megabytes }
   validates :mobi, presence: false, blob: { content_type: ["application/x-mobipocket-ebook"], size_range: 1..250.megabytes }
+
+  def self.search(q)
+	  if q
+	    @oabooks = Oabook.where("title LIKE ?", "%#{q}%").or(Oabook.where("subtitle LIKE ?", "%#{q}%")).or(Oabook.where("author LIKE ?", "%#{q}%")).order(:title)
+		end
+	end
 end

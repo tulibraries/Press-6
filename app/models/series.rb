@@ -8,4 +8,11 @@ class Series < ApplicationRecord
 
   validates :image, presence: false, blob: { content_type: ["image/png", "image/jpg", "image/jpeg", "image/gif"], size_range: 1..5.megabytes }
   validates :code, :title, presence: true
+
+  def self.search(q)
+		if q
+			# @series = Series.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
+			@series = Series.where("title LIKE ?", "%#{q}%")
+		end
+	end
 end
