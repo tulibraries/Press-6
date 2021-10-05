@@ -11,7 +11,7 @@ ARG RAILS_MASTER_KEY
 RUN apk add -U --no-cache \
       bash=5.1.4-r0 \
       libxslt=1.1.34-r1 \
-      tzdata=2021a-r0 \
+      tzdata=2021c-r0 \
       mariadb-connector-c=3.1.13-r0 \
       imagemagick=7.0.11.13-r0 \
       shared-mime-info=2.1-r0 && \
@@ -22,7 +22,7 @@ RUN apk add -U --no-cache \
       mariadb-dev=10.5.12-r0 \
       nodejs=14.17.6-r0 \
       yarn=1.22.10-r0 && \
-    gem install bundler:2.2.4  && \
+    gem install bundler:2.2.26  && \
     bundle config build.nokogiri --use-system-libraries && \
     bundle config set --local without "development test" && \
     bundle install --jobs=8 && \
