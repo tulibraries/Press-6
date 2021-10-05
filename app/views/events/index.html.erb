@@ -7,24 +7,15 @@
 	</div>
   
   <% @events.each do |events| %>
-  <div class="row mt-2">
-    <div class="col-12 p-0 month">
-      <h2 class="gold ml-3 pl-3"><%= group_date(events[0]) %></h2>
-    </div>
-  </div>
-
-  <div class="row event-backer">
-    <div class="col-12 mx-3 events">
-      <% events[1].each do |event| %>
-      <div class="row mb-3 mr-1 event">
-        <div class="col col-2 pt-5 start-date">
-        <span><%= event.start_date.strftime("%d") %></span>
-        </div>
+    <div class="row mt-2">
+      <div class="col-12 p-0 month">
+        <h2 class="gold ml-3 pl-3"><%= group_date(events[0]) %></h2>
       </div>
-    
-      <div class="row event-backer">
-        <div class="col-12 mx-3 events">
-          <% events[1].each do |event| %>
+    </div>
+
+    <div class="row event-backer">
+      <div class="col-12 mx-3 events">
+        <% events[1].each do |event| %>
           <div class="row mb-3 mr-1 event">
             <div class="col col-2 pt-5 start-date">
             <span><%= event.start_date.strftime("%d") %></span>
@@ -34,9 +25,9 @@
                 <%= title_link(event) %>
               </div>
               <div class="dim">
-              <span class="dates">
-                <%= date_range(event.start_date, event.end_date).html_safe %>
-              </span>
+                <span class="dates">
+                  <%= date_range(event.start_date, event.end_date).html_safe %>
+                </span>
                 <%= event.time_zone if event.time_zone.present? %>
                 <br />
                 <%= event.location %>
@@ -44,11 +35,9 @@
               </div>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
-      <% end %>
     </div>
-  </div>
   <% end %>
 
 </div>
