@@ -27,7 +27,7 @@
 			<% conferences.each do |conference| %>
 				<ul class="list-unstyled ml-4">
 					<li>
-						<%= title_link(conference.title, conference.id) unless conference.link.present? %>
+						<%= title_link(conference) unless conference.link.present? %>
 						<%= link_to conference.title, conference.link if conference.link.present? %>
 					</li>
 					<%= "<li>#{conference.location}</li>".html_safe if conference.location.present? %>

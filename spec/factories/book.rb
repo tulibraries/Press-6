@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :book do
     xml_id { 7 }
     title { "John" }
+    slug { "slug" }
     author_byline { "Joseph Heller" }
     author_ids { ["\"1982\""] }
     news { false }
@@ -11,7 +12,7 @@ FactoryBot.define do
     hot { false }
     course_adoption { false }
     subjects { '{ "subject":{ "subject_id":1032, "subject_title":"The Subject of John" } }' }
-    subject1 { FactoryBot.create(:subject)  }
+    subject1 { FactoryBot.create(:subject) }
     label_1 { "Google"  }
     link_1 { "http://google.com"  }
     award { "Double digits award" }

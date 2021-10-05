@@ -16,8 +16,8 @@ RSpec.describe OabooksController, type: :routing do
     end
 
     it "routes to show for any collection" do
-      expect(get: north_broad_book_path(nb_oabook)).to route_to(controller: "oabooks", action: "show", id: nb_oabook.id.to_s)
-      expect(get: labor_studies_book_path(ls_oabook)).to route_to(controller: "oabooks", action: "show", id: ls_oabook.id.to_s)
+      expect(get: north_broad_book_path(nb_oabook)).to route_to(controller: "oabooks", action: "show", id: nb_oabook.slug)
+      expect(get: labor_studies_book_path(ls_oabook)).to route_to(controller: "oabooks", action: "show", id: ls_oabook.slug)
     end
   end
 end

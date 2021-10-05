@@ -3,11 +3,27 @@
 require "rails_helper"
 
 RSpec.describe "agencies/index", type: :view do
-  let(:agency1) { FactoryBot.create(:agency, region: "Japan") }
-  let(:agency2) { FactoryBot.create(:agency, title: "Mark", region: "Turkey") }
-  let(:agency3) { FactoryBot.create(:agency, title: "Luke", region: "Midwest") }
-  let(:agency4) { FactoryBot.create(:agency, title: "Ringo", region: "All Other Territories") }
+  let(:agency1) { FactoryBot.create(:agency, contact: "John", region: "Japan") }
+  let(:agency2) { FactoryBot.create(:agency, contact: "Mark", region: "Turkey") }
+  let(:agency3) { FactoryBot.create(:agency, contact: "Luke", region: "Midwest") }
+  let(:agency4) { FactoryBot.create(:agency, contact: "Ringo", region: "All Other Territories") }
   let(:user) { FactoryBot.create(:user) }
+
+
+  context "displays agency info" do
+    before(:each) do
+      assign(:default_agency, agency3)
+      assign(:agencies, [{ agency1.region => [agency1] }, { agency2.region => [agency2] }])
+      allow(view).to receive(:current_user).and_return(user)
+      render "agencies", agencies: [agency1, agency2]
+    end
+
+    it "renders a list of agencies by region" do
+      expect(rendered).to match /#{agency1.contact}/
+      expect(rendered).to match /#{agency2.contact}/
+      expect(rendered).not_to match /#{agency3.contact}/
+    end
+  end
 
   context "displays region info" do
     before(:each) do
@@ -26,21 +42,6 @@ RSpec.describe "agencies/index", type: :view do
     end
   end
 
-  context "displays agency info" do
-    before(:each) do
-      assign(:default_agency, agency3)
-      assign(:agencies, [{ agency1.region => [agency1] }, { agency2.region => [agency2] }])
-      allow(view).to receive(:current_user).and_return(user)
-      render "agencies", agencies: [agency1, agency2]
-    end
-
-    it "renders a list of agencies by region" do
-      expect(rendered).to match /#{agency1.title}/
-      expect(rendered).to match /#{agency2.title}/
-      expect(rendered).not_to match /#{agency3.title}/
-    end
-  end
-
   context "displays default agency info if assigned" do
     before(:each) do
       assign(:default_agency, agency4)
@@ -49,10 +50,10 @@ RSpec.describe "agencies/index", type: :view do
     end
 
     it "renders only default agency" do
-      expect(rendered).not_to match /#{agency1.title}/
-      expect(rendered).not_to match /#{agency2.title}/
-      expect(rendered).not_to match /#{agency3.title}/
-      expect(rendered).to match /#{agency4.title}/
+      expect(rendered).not_to match /#{agency1.contact}/
+      expect(rendered).not_to match /#{agency2.contact}/
+      expect(rendered).not_to match /#{agency3.contact}/
+      expect(rendered).to match /#{agency4.contact}/
     end
   end
 

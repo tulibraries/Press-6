@@ -2,6 +2,7 @@
 
 class AuthorsController < ApplicationController
   before_action :set_author, only: :show
+  include SetInstance
 
   def index
     @selected = params[:id] ? params[:id] : "a"
@@ -19,6 +20,6 @@ class AuthorsController < ApplicationController
 
   private
     def set_author
-      @author = Author.find_by(author_id: params[:id])
+      @author = find_instance
     end
 end

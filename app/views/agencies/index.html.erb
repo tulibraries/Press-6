@@ -7,7 +7,7 @@
     </div>
   </div>
 
-  <% @agencies.sort.each do |region, agencies| %>
+  <% @agencies.each do |region, agencies| %>
     <div class="row" id="regions">
       <div class="col-12 p-0">
         <%= render "region", region: region %>

@@ -12,6 +12,7 @@ class SpecialOfferDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     title: Field::String,
+    slug: Field::String,
     intro_text: TrixField,
     pdf: FileField,
     pdf_display_name: Field::String,
@@ -44,6 +45,7 @@ class SpecialOfferDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     title
+    slug
     intro_text
     pdf
     pdf_display_name

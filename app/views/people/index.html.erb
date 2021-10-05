@@ -25,7 +25,7 @@
       <div class="p-4 person-card">
       <article>
         <%= render "image_link", person: person %>
-        <p class="name"><%= person.name %></p>
+        <p class="name"><%= person.title %></p>
         <p><em><%= person.position %></em></p>
         <p><%= person.position_description %></p>
         <p><%= mail_to person.email, person.email %></p>

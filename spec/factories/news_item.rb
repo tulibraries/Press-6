@@ -3,6 +3,7 @@
 FactoryBot.define do
   factory :news_item do
     title { "John Paul George and Ringo" }
+    slug { "slug" }
     description { ActionText::Content.new("Good Day Sunshine") }
     link { "http://google.com" }
     promote_to_homepage { false }

@@ -5,8 +5,6 @@
  RSpec.describe "/authors", type: :request do
   let(:author) { FactoryBot.create(:author) }
   let(:author2) { FactoryBot.create(:author, suppress: true) }
-  let(:book) { FactoryBot.create(:book, author_ids: ["\"#{author.author_id}\""]) }
-  let(:book2) { FactoryBot.create(:book, author_ids: ["\"#{author2.author_id}\""]) }
 
   describe "GET /index" do
     it "renders a successful response" do

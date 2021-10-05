@@ -2,6 +2,7 @@
 
 class SeriesController < ApplicationController
   before_action :set_series, only: :show
+  include SetInstance
 
   def index
     @series = Series.all.order(:title)
@@ -16,6 +17,6 @@ class SeriesController < ApplicationController
 
   private
     def set_series
-      @series = Series.find_by(code: params[:id])
+      @series = find_instance
     end
 end

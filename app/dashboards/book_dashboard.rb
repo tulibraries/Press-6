@@ -12,6 +12,7 @@ class BookDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     xml_id: Field::String,
+    slug: Field::String,
     title: Field::String,
     subtitle: Field::String,
     sort_title: Field::String,
@@ -125,6 +126,7 @@ class BookDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     cover_image
     sort_title
+    slug
     edition
     status
     excerpt_file

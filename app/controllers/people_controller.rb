@@ -2,7 +2,7 @@
 
 class PeopleController < ApplicationController
   def index
-    @people = Person.where.not(department: "Sales Reps").order(:name)
+    @people = Person.where.not(department: "Sales Reps").order(:title)
     @departments = @people.group_by(&:department).sort
 
     @departments.each do |department, people|

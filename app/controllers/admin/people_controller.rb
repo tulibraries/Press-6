@@ -8,7 +8,7 @@ module Admin
     def set_tabs
       @tab_names = I18n.t("tupress.admin.people.tabs")
       @tab_content = {}
-      @tab_content["staff_info"] = ["image", "name", "email", "position", "position_description", "department", "head"]
+      @tab_content["staff_info"] = ["image", "title", "slug", "email", "position", "position_description", "department", "head"]
       @tab_content["sales_rep"] = ["company", "region", "address", "phone", "fax", "coverage", "website"]
     end
   end

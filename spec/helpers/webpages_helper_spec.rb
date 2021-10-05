@@ -62,9 +62,9 @@ RSpec.describe WebpagesHelper, type: :helper do
     end
   end
 
-  describe "displays news links" do
+  describe "/ news_link helper /" do
     it "returns link to book model" do
-      expect(helper.news_link(book)).to include(book_path(book.xml_id))
+      expect(helper.news_link(book)).to include(book_path(book.slug))
     end
     it "returns link to event model" do
       expect(helper.news_link(event)).to include(events_path)

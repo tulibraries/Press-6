@@ -3,6 +3,7 @@
 FactoryBot.define do
   factory :highlight do
     title { "John Paul George and Ringo" }
+    slug { "slug" }
     link { "http://google.com" }
 
     before :create do |highlight|

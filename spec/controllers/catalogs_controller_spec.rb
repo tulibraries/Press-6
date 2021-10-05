@@ -15,14 +15,16 @@ RSpec.describe CatalogsController, type: :controller do
 
   describe "GET #show" do
     it "renders show template" do
-      get :show, params: { id: catalog.code }
+      get :show, params: { id: catalog.slug }
       expect(response).to render_template("show")
     end
 
     it "returns html by default success" do
-      get :show, params: { id: catalog.code }, format: :html
+      get :show, params: { id: catalog.slug }, format: :html
       expect(response.header["Content-Type"]).to include "html"
     end
   end
+
+  it_behaves_like "index_editable"
 
 end

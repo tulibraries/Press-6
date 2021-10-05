@@ -6,10 +6,16 @@
     </div>
 
     <div class="col col-9 col-lg-8">
-        <%= link_to oabook.title.html_safe, north_broad_book_path(oabook), style: "font-size: 1.25rem;display:block;" %>
-        <%= "<em>#{oabook.subtitle}</em><br/>".html_safe if oabook.subtitle.present? %>
-        <%= "#{oabook.author}<br/>".html_safe if oabook.author.present? %>
-        <%= "<p class=\"mt-4\">#{oabook.supplemental}</p>".html_safe if oabook.supplemental.present? %>
+        <%= link_to oabook.title, north_broad_book_path(oabook), style: "font-size: 1.25rem;display:block;" %>
+        <% if oabook.subtitle.present? %>
+          <em><%= oabook.subtitle%></em><br/>
+        <% end %>
+        <% if oabook.author.present? %>
+          <%= oabook.author %><br/>
+        <% end %>
+        <% if oabook.supplemental.present? %>
+          <p class="mt-4"><%= oabook.supplemental %></p>
+        <% end %>
     </div>
   </div>
 </div>
