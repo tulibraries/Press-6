@@ -5,6 +5,7 @@ require "administrate/base_dashboard"
 class AuthorDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
+    slug: Field::String,
     author_id: Field::String,
     title: Field::String,
     first_name: Field::String,
@@ -26,6 +27,8 @@ class AuthorDashboard < Administrate::BaseDashboard
   ].freeze
 
   FORM_ATTRIBUTES = %i[
+    title
+    slug
     suppress
   ].freeze
 

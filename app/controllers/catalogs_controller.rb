@@ -2,6 +2,7 @@
 
 class CatalogsController < ApplicationController
   before_action :set_catalog, only: :show
+  include SetInstance
 
   def index
     @catalogs = Catalog.where(suppress: false)
@@ -18,6 +19,6 @@ class CatalogsController < ApplicationController
 
   private
     def set_catalog
-      @catalog = Catalog.find_by(code: params[:id])
+      @catalog = find_instance
     end
 end

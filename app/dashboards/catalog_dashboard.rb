@@ -12,6 +12,7 @@ class CatalogDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     code: Field::String,
+    slug: Field::String,
     season: Field::String,
     year: Field::String,
     title: Field::String,
@@ -48,6 +49,7 @@ class CatalogDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     code
     title
+    slug
     season
     year
     pdf

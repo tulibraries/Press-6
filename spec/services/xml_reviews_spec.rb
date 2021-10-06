@@ -45,7 +45,7 @@ RSpec.describe SyncService::Reviews, type: :service do
   context "write catalog to catalog table" do
     before(:each) do
       @review_harvest.sync
-      sleep 2
+      sleep 4
     end
 
     let (:review1) {

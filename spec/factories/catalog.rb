@@ -7,6 +7,8 @@ FactoryBot.define do
     season { "Spring" }
     year { "2014" }
 
+    slug { "spring-2014" }
+
     before :create do |catalog|
       catalog.image.attach(io:
         File.open(Rails.root.join("spec/fixtures/charles.jpg")),

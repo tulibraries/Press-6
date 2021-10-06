@@ -3,6 +3,7 @@
 FactoryBot.define do
   factory :agency do
     title { "John" }
+    slug { "slug" }
     contact { "Mori Moto" }
     address { ActionText::Content.new("123 Cherry Blossom Way Tokyo Japan") }
     phone { "81 03(3230)4084" }

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :study_guides]
+  before_action :set_book, only: [:show, :study_guide]
+  include SetInstance
 
   def index
     letter = params[:id] ? params[:id] : "a"
@@ -46,10 +47,18 @@ class BooksController < ApplicationController
                         .sort
                         .reverse
 
-    @awards_by_subject = get_subjects(books_with_awards
+    awards_by_subject = get_subjects(books_with_awards
                                         .where(status: show_status)
                                         .map { |b| b.subjects_as_tuples }
                                         .reject(&:blank?))
+    subjects = []
+    awards_by_subject.each do |subject|
+      s = Subject.find_by(code: subject[1])
+      subjects << s
+    end
+
+    @awards_by_subject = subjects
+
 
     @recent_winners = books_with_awards
                         .where(featured_award_winner: true)
@@ -67,9 +76,13 @@ class BooksController < ApplicationController
   end
 
   def awards_by_subject
-    @subject = Subject.find_by(code: params[:id]).title
+    is_number?(params[:id]) ?
+      @subject = Subject.find_by(code: params[:id])
+      :
+      @subject = Subject.friendly.find(params[:id])
+
     @books = books_with_awards
-              .where("subjects LIKE ?", "%#{params[:id]}%")
+              .where("subjects LIKE ?", "%#{@subject.code}%")
               .order(:sort_title)
   end
 
@@ -85,10 +98,13 @@ class BooksController < ApplicationController
                  .where(active_guide: true) if params[:id].blank?
   end
 
+  def study_guide
+  end
+
 
   private
     def set_book
-      @book = Book.find_by(xml_id: params[:id]) if params[:id].present?
+      @book = find_instance
     end
 
     def books_with_awards

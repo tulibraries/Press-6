@@ -15,16 +15,13 @@ RSpec.describe WebpagesController, type: :controller do
 
   describe "GET #show" do
     it "renders show template" do
-      get :show, params: { id: webpage.id }
+      get :show, params: { id: webpage.slug }
       expect(response).to render_template("show")
     end
 
     it "returns html by default success" do
-      get :show, params: { id: webpage.id }, format: :html
+      get :show, params: { id: webpage.slug }, format: :html
       expect(response.header["Content-Type"]).to include "html"
     end
   end
-
-  it_behaves_like "show_editable"
-
 end

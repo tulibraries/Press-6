@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-12 mb-3 mt-3 px-0">
     <h1 class="my-3">
-      <%= "Award Winning Books: #{title_link(@subject)}" %>
+      <%= "Award Winning Books: #{title_link(@subject)}".html_safe %>
     </h1>
   </div>
 </div>
@@ -11,7 +11,7 @@
     <% @books.each do |book| %>  
     <div class="row pb-4 mb-4 book-listing">
       <div class="col-3 pl-0">
-        <%= link_to book_path(book.xml_id) do %>
+        <%= link_to book_path(book) do %>
           <% if book.cover_image.attached? %>
             <%= image_tag book.index_image("cover_image") %>
           <% else %>
@@ -20,7 +20,7 @@
         <% end %>
       </div>
       <div class="col-9 p-4 pl-0 book-details">
-        <h2><%= link_to book.title.html_safe, book_path(book.xml_id) %></h2>
+        <h2><%= link_to book.title.html_safe, book_path(book) %></h2>
         <p><em><%= book.subtitle if book.subtitle.present? %></em></p>
         <p><%= book.author_byline if book.author_byline.present? %></p>
         <p class="mt-5"><%= sanitize book.blurb.html_safe if book.blurb.present? %></p>

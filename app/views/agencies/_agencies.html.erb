@@ -2,7 +2,7 @@
 <div class="row m-0">
   <div class="col pl-5 my-2 pt-3 agency">
     <h3 style="font-size:125%;">
-      <%= title_link(agency.title, agency.id) %>
+      <%= title_link(agency) %>
     </h3>
     <ul class="list-unstyled">
       <%= "<li>#{agency.contact}</li>".html_safe if agency.contact.present? %>

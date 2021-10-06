@@ -2,13 +2,14 @@
 
 class SubjectsController < ApplicationController
   before_action :set_subject, only: :show
+  include SetInstance
 
   def index
     @subjects = Subject.all.order(:title)
   end
 
   def show
-    @books = Book.where("subjects LIKE ?", "%#{params[:id]}%")
+    @books = Book.where("subjects LIKE ?", "%#{@subject.code}%")
                   .where(status: show_status)
                   .order(:sort_title)
                   .page params[:page]
@@ -17,6 +18,6 @@ class SubjectsController < ApplicationController
 
   private
     def set_subject
-      @subject = Subject.find_by(code: params[:id])
+      @subject = find_instance
     end
 end

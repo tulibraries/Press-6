@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :author do
     author_id { 7 }
     title { "John Mori Moto" }
+    slug { "slug" }
     prefix { "" }
     first_name { "John" }
     last_name { "Mori Moto" }
