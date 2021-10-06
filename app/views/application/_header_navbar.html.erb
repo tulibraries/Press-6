@@ -67,7 +67,7 @@
               <li><%= link_to t("tupress.default.menu.press_info.submissions"), root_path+"submissions", :class=>"dropdown-item" %></li>
               <li><%= link_to t("tupress.default.menu.press_info.presses"), root_path+"university-presses", :class=>"dropdown-item" %></li>
               <li><%= link_to t("tupress.default.menu.press_info.download"), documents_path, :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.press_info.faq"), root_path+"faq", :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.press_info.faq"), faqs_path, :class=>"dropdown-item" %></li>
             </ul>
           </div>
         </div>
@@ -99,7 +99,7 @@
           </div>
 
           <div class="btn-group ml-2 dropdown nav-item">
-            <%= button_to t("tupress.default.menu.faq.title"), "#", 
+            <%= button_to t("tupress.default.menu.faq.title"), faqs_path, 
                 {
                   class: "btn btn-lg btn-secondary dropdown-toggle faq-button", 
                   "aria-haspopup" => "false", "aria-expanded" => "false",
