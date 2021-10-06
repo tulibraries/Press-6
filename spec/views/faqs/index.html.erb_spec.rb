@@ -1,10 +1,15 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe "faqs/index", type: :view do
+  let(:faq1) { FactoryBot.create(:faq) }
+  let(:faq2) { FactoryBot.create(:faq) }
+
   before(:each) do
     assign(:faqs, [
-      Faq.create!(),
-      Faq.create!()
+      faq1,
+      faq2
     ])
   end
 

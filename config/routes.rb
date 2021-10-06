@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  
+
   concern :imageable do
     get "image/thumbnail", to: "images#thumbnail_image"
     get "image/medium",    to: "images#medium_image"

@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 class FaqsController < ApplicationController
+  include SetInstance
   before_action :set_faq, only: %i[ show ]
 
   def index
@@ -10,7 +13,6 @@ class FaqsController < ApplicationController
 
   private
     def set_faq
-      @faq = Faq.find(params[:id])
+      @faq = find_instance
     end
-
 end
