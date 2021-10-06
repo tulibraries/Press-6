@@ -2,9 +2,16 @@
 
 class Book < ApplicationRecord
   include Imageable
+  include Friendable
+
   before_save :sort_titles, :get_excerpt, :catalog_code
 
   validates :title, :xml_id, :author_byline, :status, presence: true
+  validates :cover_image, presence: false, blob: { content_type: ["image/png", "image/jpg", "image/jpeg", "image/gif"], size_range: 1..5.megabytes }
+  validates :suggested_reading_image, presence: false, blob: { content_type: ["image/png", "image/jpg", "image/jpeg", "image/gif"], size_range: 1..5.megabytes }
+  validates :toc_file, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
+  validates :guide_file, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
+  validates :excerpt_file, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
 
   has_one_attached :cover_image, dependent: :destroy
   has_one_attached :excerpt_file, dependent: :destroy
@@ -12,19 +19,12 @@ class Book < ApplicationRecord
   has_one_attached :guide_file, dependent: :destroy
   has_one_attached :toc_file, dependent: :destroy
 
-  validates :cover_image, presence: false, blob: { content_type: ["image/png", "image/jpg", "image/jpeg", "image/gif"], size_range: 1..5.megabytes }
-  validates :suggested_reading_image, presence: false, blob: { content_type: ["image/png", "image/jpg", "image/jpeg", "image/gif"], size_range: 1..5.megabytes }
-  validates :toc_file, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
-  validates :guide_file, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
-  validates :excerpt_file, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
-
   has_rich_text :news_text
   has_rich_text :guide_text
   has_rich_text :award
   has_rich_text :award2
   has_rich_text :award3
 
-  has_many :reviews, foreign_key: "review_id", dependent: :destroy, inverse_of: :book
   has_many :books, class_name: "Book", dependent: :nullify
 
   belongs_to :series, optional: true

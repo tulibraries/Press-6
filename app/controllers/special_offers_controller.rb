@@ -2,6 +2,7 @@
 
 class SpecialOffersController < ApplicationController
   before_action :set_special_offer, only: :show
+  include SetInstance
 
   def index
     @special_offers = SpecialOffer.all.where(active: true)
@@ -16,6 +17,6 @@ class SpecialOffersController < ApplicationController
 
   private
     def set_special_offer
-      @special_offer = SpecialOffer.find(params[:id])
+      @special_offer = find_instance
     end
 end

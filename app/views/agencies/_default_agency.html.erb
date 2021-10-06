@@ -1,6 +1,6 @@
-  <div class="col pl-5 my-2 pt-3 agency <%= @default_agency.title %>">
+  <div class="col pl-5 my-2 pt-3 agency">
   <h3 style="font-size:125%;">
-    <%= @default_agency.title %>
+    <%= title_link(@default_agency.title) %>
   </h3>
   <ul class="list-unstyled">
     <%= "<li>#{@default_agency.contact}</li>".html_safe if @default_agency.contact.present? %>

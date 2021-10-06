@@ -69,7 +69,7 @@ Rails.application.routes.draw do
   get "course-adoptions"      => "books#course_adoptions", as: :course_adoptions
 
   get "study-guides"          => "books#study_guides", as: :study_guides
-  get "study-guides/:id"      => "books#study_guides", as: :study_guide
+  get "study-guides/:id"      => "books#study_guide", as: :study_guide
 
   get "awards"				        => "books#awards", as: :awards
   get "awards/subject/:id"    => "books#awards_by_subject", as: :awards_by_subject

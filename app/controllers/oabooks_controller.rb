@@ -2,6 +2,7 @@
 
 class OabooksController < ApplicationController
   before_action :set_oabook, only: [:show]
+  include SetInstance
 
   def show
   end
@@ -18,6 +19,6 @@ class OabooksController < ApplicationController
 
   private
     def set_oabook
-      @oabook = Oabook.find_by(id: params[:id])
+      @oabook = find_instance
     end
 end

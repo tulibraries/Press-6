@@ -15,7 +15,7 @@
       </div>
       <% catalog_year(catalogs).each do |catalog| %>
         <div class="col-3 offset-2 p-3 season">
-          <%= link_to catalog.title, catalog_path(catalog.code.downcase) %>
+          <%= link_to catalog.title, catalog_path(catalog) %>
         </div>
       <% end %>
     </div>

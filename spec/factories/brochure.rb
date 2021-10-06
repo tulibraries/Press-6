@@ -3,6 +3,7 @@
 FactoryBot.define do
   factory :brochure do
     title { "John" }
+    slug { "slug" }
     promoted_to_homepage { false }
 
     before :create do |brochure|

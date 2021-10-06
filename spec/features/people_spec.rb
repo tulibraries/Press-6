@@ -4,8 +4,8 @@
 
  RSpec.describe "/people", type: :feature do
   it "displays all people" do
-    dept_head = FactoryBot.create(:person, :with_image, name: "Not a Lemon Head", department: "Human Resources", head: true)
-    default_person = FactoryBot.create(:person, :with_image, name: "Lemon Head", department: "Human Resources", head: false)
+    dept_head = FactoryBot.create(:person, :with_image, title: "Not a Lemon Head", department: "Human Resources", head: true)
+    default_person = FactoryBot.create(:person, :with_image, title: "Lemon Head", department: "Human Resources", head: false)
     person = FactoryBot.create(:person, :with_image)
     visit people_path
     container = page.find("#people")
@@ -17,13 +17,13 @@
   end
 
   it "returns department head first" do
-    dept_head = FactoryBot.create(:person, :with_image, name: "Not a Lemon Head", department: "Human Resources", head: true)
-    default_person = FactoryBot.create(:person, :with_image, name: "Lemon Head", department: "Human Resources", head: false)
+    dept_head = FactoryBot.create(:person, :with_image, title: "Not a Lemon Head", department: "Human Resources", head: true)
+    default_person = FactoryBot.create(:person, :with_image, title: "Lemon Head", department: "Human Resources", head: false)
     person = FactoryBot.create(:person, :with_image)
     visit people_path
     container = page.find("#people")
     within(container) do
-      expect(dept_head.name).to appear_before(default_person.name, only_text: true)
+      expect(dept_head.title).to appear_before(default_person.title, only_text: true)
     end
   end
 end

@@ -26,7 +26,7 @@
               <li><%= link_to t("tupress.default.menu.books.series"), series_index_path, :class=>"dropdown-item" %></li>
               <li><%= link_to t("tupress.default.menu.books.offers"), special_offers_path, :class=>"dropdown-item" %></li>
               <li><%= link_to t("tupress.default.menu.books.guides"), study_guides_path, :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.books.adoptions"), root_path+"course-adoptions", :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.books.adoptions"), course_adoptions_path, :class=>"dropdown-item" %></li>
             </ul>
           </div>
         </div>
@@ -66,7 +66,7 @@
               <li><%= link_to t("tupress.default.menu.press_info.agents"), agencies_path, :class=>"dropdown-item" %></li>
               <li><%= link_to t("tupress.default.menu.press_info.submissions"), root_path+"submissions", :class=>"dropdown-item" %></li>
               <li><%= link_to t("tupress.default.menu.press_info.presses"), root_path+"university-presses", :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.press_info.download"), root_path+"downloads", :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.press_info.download"), documents_path, :class=>"dropdown-item" %></li>
               <li><%= link_to t("tupress.default.menu.press_info.faq"), root_path+"faq", :class=>"dropdown-item" %></li>
             </ul>
           </div>
@@ -93,7 +93,7 @@
                 <li><%= link_to t("tupress.default.menu.news.blog"), "#", :class=>"dropdown-item" %></li>
                 <li><%= link_to t("tupress.default.menu.news.conferences"), conferences_path, :class=>"dropdown-item" %></li>
                 <li><%= link_to t("tupress.default.menu.news.events"), events_path, :class=>"dropdown-item" %></li>
-                <li><%= link_to t("tupress.default.menu.news.offers"), "#", :class=>"dropdown-item" %></li>
+                <li><%= link_to t("tupress.default.menu.news.offers"), special_offers_path, :class=>"dropdown-item" %></li>
               </ul>
             </div>
           </div>

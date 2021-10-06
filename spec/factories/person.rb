@@ -2,7 +2,8 @@
 
 FactoryBot.define do
   factory :person do
-    name { "Moto Mori" }
+    title { "Moto Mori" }
+    slug { "slug" }
     email { "mori@jbooks.com" }
     department { "Access Services" }
     head { true }

@@ -1,0 +1,33 @@
+<div class="container study-guides">
+  <div class="row">
+    <div class="col-12 my-3 px-0">
+      <h1 class="mt-2">
+        <%= title_link(t("tupress.study_guides.title")) %>
+      </h1>
+    </div>
+  </div>
+
+  <div class="row pb-4 mb-4 book-listing">
+    <div class="col-3 pl-0">
+      <%= link_to book_path(@book) do %>
+        <% if @book.cover_image.attached? %>
+          <%= image_tag @book.index_image("cover_image") %>
+        <% else %>
+          <%= image_pack_tag "default-book-cover-index.png" %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-9 px-4 pl-0 pb-4">
+      <h2><%= link_to @book.title.html_safe, book_path(@book) %></h2>
+      <%= ("<p><em>#{@book.subtitle}</em></p>").html_safe if @book.subtitle.present? %>
+      <%= ("<p>#{@book.author_byline}</p>").html_safe if @book.author_byline.present? %>
+      <p class="pdf-link"><%= link_to guide_label(@book), @book.guide_file.attachment if @book.guide_file.attached? %></p>
+
+      <div class="guide-wrapper mt-4 pt-1 pl-4 pr-2 pb-3">
+        <div class="guide-text">
+          <%= @book.guide_text if @book.guide_text %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

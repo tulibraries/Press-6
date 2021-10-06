@@ -8,7 +8,7 @@ module Admin
     def set_tabs
       @tab_names = I18n.t("tupress.admin.books.tabs")
       @tab_content = {}
-      @tab_content["book"] = ["sort_title", "author_byline", "edition", "status", "cover_image", "cover", "excerpt_file", "excerpt_text", "toc_file", "toc_label", "supplement", "suggested_reading_image", "suggested_reading_label", "desk_copy"]
+      @tab_content["book"] = ["slug", "sort_title", "author_byline", "edition", "status", "cover_image", "cover", "excerpt_file", "excerpt_text", "toc_file", "toc_label", "supplement", "suggested_reading_image", "suggested_reading_label", "desk_copy"]
       @tab_content["subjects"] = ["subject1", "subject2", "subject3"]
       @tab_content["catalog"] = ["catalog"]
       @tab_content["awards"] = ["featured_award_winner", "award_year", "award", "award_year2", "award2", "award_year3", "award3"]

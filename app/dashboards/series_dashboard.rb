@@ -12,6 +12,7 @@ class SeriesDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     code: Field::String,
+    slug: Field::String,
     title: Field::String,
     editors: Field::String,
     description: Field::Text,
@@ -50,6 +51,7 @@ class SeriesDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     image
     image_link
+    slug
     founder
   ].freeze
 

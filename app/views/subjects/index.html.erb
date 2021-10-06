@@ -12,7 +12,7 @@
     <div class="col subjects pl-0">
       <% @subjects.each do |subject| %>
         <p class="p-2 subject">
-          <%= link_to subject.title, subject_path(subject.code) %>
+          <%= link_to subject.title, subject_path(subject) %>
         </p>
       <% end %>
     </div>

@@ -10,7 +10,6 @@ RSpec.describe BooksController, type: :controller do
   render_views
 
   context "Get Views" do
-
     describe "GET #index" do
       it "returns html when requested" do
         get :index, format: :html
@@ -20,12 +19,12 @@ RSpec.describe BooksController, type: :controller do
 
     describe "GET #show" do
       it "renders show template" do
-        get :show, params: { id: book.xml_id }
+        get :show, params: { id: book }
         expect(response).to render_template("show")
       end
 
       it "returns html by default success" do
-        get :show, params: { id: book.xml_id }, format: :html
+        get :show, params: { id: book }, format: :html
         expect(response.header["Content-Type"]).to include "html"
       end
     end

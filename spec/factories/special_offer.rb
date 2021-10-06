@@ -3,6 +3,7 @@
 FactoryBot.define do
     factory :special_offer do
       title { "Fall Giveaway" }
+      slug { "slug" }
       intro_text { "Get your free books here." }
       pdf_display_name { "PDF File" }
       active { false }

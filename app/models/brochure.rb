@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 class Brochure < ApplicationRecord
+  include Friendable
+
   validates :title, :pdf, :image, presence: true
+
   belongs_to :subject, optional: true
   belongs_to :catalog, optional: true
 

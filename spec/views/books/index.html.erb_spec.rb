@@ -13,8 +13,13 @@ RSpec.describe "books/index.html.erb", type: :view do
     ]).page(1))
   end
 
-  it "populates paginated list" do
+  it "- populates paginated list" do
     render
     expect(rendered).to match /#{book.title}/
+  end
+
+  it "- returns admin link to model instance" do
+    expect { get book_path(book).to have_text(admin_book_path(book)) }
+    expect { get books_path.to have_text(admin_books_path) }
   end
 end
