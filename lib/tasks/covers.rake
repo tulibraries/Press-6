@@ -1,38 +1,22 @@
 # frozen_string_literal: true
 
 require "logger"
-require "open-uri"
 
-namespace :upload do
-  task covers: [:environment] do
+namespace :update do
+  task slugs: [:environment] do
 
-    @log = Logger.new("log/upload-book-covers-to-s3.log")
+    @log = Logger.new("log/slug-fest.log")
     @stdout = Logger.new(STDOUT)
-    stdout_and_log("Syncing book covers.")
-    @saves = 0
-    @errors = 0
-    @already_attached = 0
+    stdout_and_log("Updating model slugs.")
 
-    Book.all.each do |book|
-      unless book.cover_image.attached?
-        begin
-          book.cover_image.attach(
-            io: URI.open("http://tupress.temple.edu/uploads/book/cover_images/#{book.cover}"),
-            filename: book.cover
-          ) if book.cover.present?
-        rescue Exception => err
-          @errors += 1
-          stdout_and_log("Book: #{book.id}, image: #{book.cover} errored -  #{err.message}")
-        end
-        book.save!
-        @saves += 1
-      else
-        @already_attached += 1
-        stdout_and_log("Book: #{book.id}, image: #{book.cover} already attached.")
+    models = [Agency, Author, Book, Brochure, Catalog, Conference, Document, Event, Highlight, Journal, NewsItem, Oabook, Series, SpecialOffer, Subject, Webpage]
+
+    models.each do |model|
+      model.all.each do |m|
+        m.save!
+        stdout_and_log("Saved: #{model}, id: #{m.id}, slug: #{m.slug}")
       end
     end
-
-    stdout_and_log("Uploads: #{@saves} -- Errors: #{@errors} -- Skipped (attached already): #{@already_attached}")
   end
 end
 
