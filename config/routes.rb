@@ -2,8 +2,8 @@
 
 Rails.application.routes.draw do
 
-  resources :events
   devise_for :users
+
   concern :imageable do
     get "image/thumbnail", to: "images#thumbnail_image"
     get "image/medium",    to: "images#medium_image"
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :conferences
     resources :documents
     resources :events
+    resources :faqs
     resources :highlights
     resources :journals
     resources :news_items
@@ -51,6 +52,7 @@ Rails.application.routes.draw do
   resources :conferences, only: [:index]
   resources :documents, only: [:index]
   resources :events, only: [:index]
+  resources :faqs, only: [:index, :show]
   resources :news_items, only: [:show], concerns: [:imageable]
   resources :highlights, only: [:show], concerns: [:imageable]
   resources :oabooks, only: [:show], concerns: [:imageable]

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_22_123043) do
+ActiveRecord::Schema.define(version: 2021_10_05_170048) do
 
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -230,6 +230,13 @@ ActiveRecord::Schema.define(version: 2021_09_22_123043) do
     t.boolean "add_to_news"
     t.string "slug"
     t.index ["slug"], name: "index_events_on_slug", unique: true
+  end
+
+  create_table "faqs", charset: "utf8mb3", force: :cascade do |t|
+    t.string "title"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "friendly_id_slugs", charset: "utf8mb3", force: :cascade do |t|

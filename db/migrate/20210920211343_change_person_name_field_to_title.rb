@@ -2,6 +2,8 @@
 
 class ChangePersonNameFieldToTitle < ActiveRecord::Migration[6.1]
   def change
-    rename_column :people, :name, :title
+    if column_exists?(:people, :name)
+      rename_column :people, :name, :title
+    end
   end
 end

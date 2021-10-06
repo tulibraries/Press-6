@@ -52,7 +52,7 @@ en:
           submissions: Submissions
           presses: About University Presses
           download: Download Documents
-          faq: FAQ
+          faq: FAQs
         orders:
           title: Orders
           info: Ordering Info
@@ -69,7 +69,7 @@ en:
           events: Event Calendar
           offers: Special Offers
         faq: 
-          title: FAQ
+          title: FAQs
       fields:
         content_skip: Skip to main content
         search_skip: Skip to site search
