@@ -6,6 +6,7 @@ RSpec.describe Highlight, type: :model do
   describe "validations" do
     it { should validate_presence_of(:link) }
     it { should validate_presence_of(:image) }
+    it { should validate_presence_of(:alt_text) }
   end
 
   it_behaves_like "attachable"
