@@ -5,6 +5,7 @@ FactoryBot.define do
     title { "John Paul George and Ringo" }
     slug { "slug" }
     link { "http://google.com" }
+    alt_text { "Image of Nothing" }
 
     before :create do |highlight|
       highlight.image.attach(io:
