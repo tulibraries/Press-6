@@ -3,7 +3,7 @@
 class Faq < ApplicationRecord
   include Friendable
 
-  validates :title, :answering, presence: true
+  validates :title, :answer, presence: true
   has_rich_text :answer
   has_one :action_text_rich_text, class_name: "ActionText::RichText", as: :record, dependent: :nullify
 
