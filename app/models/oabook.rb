@@ -22,11 +22,11 @@ class Oabook < ApplicationRecord
   validates :mobi, presence: false, blob: { content_type: ["application/x-mobipocket-ebook"], size_range: 1..250.megabytes }
 
   def self.search(q)
-	  if q
+    if q
       Oabook.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
             .or(Oabook.where("subtitle REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
             .or(Oabook.where("author REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
             .order(:title)
-		end
-	end
+    end
+  end
 end

@@ -10,8 +10,8 @@ class Subject < ApplicationRecord
   has_many :brochures, class_name: "Brochure", dependent: :nullify
 
   def self.search(q)
-		if q
-			Subject.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)").sort
-		end
-	end
+    if q
+      Subject.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)").sort
+    end
+  end
 end

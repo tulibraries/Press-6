@@ -14,8 +14,8 @@ class Author < ApplicationRecord
   end
 
   def self.search(q)
-		if q
+    if q
       Author.where("first_name REGEXP ?", "(^|\\W)#{q}(\\W|$)")
-		end
-	end
+    end
+  end
 end

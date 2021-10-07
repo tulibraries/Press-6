@@ -5,8 +5,8 @@ class Journal < ApplicationRecord
   validates :title, :url, presence: true
 
   def self.search(q)
-	  if q
-	    Journal.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
-		end
-	end
+    if q
+      Journal.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
+    end
+  end
 end

@@ -20,7 +20,7 @@ class WebpagesController < ApplicationController
   end
 
   def search
-    @books = Book.search(params[:q]).where({ status: ["NP","IP","OS","OP"] }).order(:sort_title)
+    @books = Book.search(params[:q]).where({ status: ["NP", "IP", "OS", "OP"] }).order(:sort_title)
     @subjects = Subject.search(params[:q])
     @series = Series.search(params[:q])
     @people = Person.search(params[:q])
@@ -28,7 +28,7 @@ class WebpagesController < ApplicationController
     @authors = Author.search(params[:q])
     events = Event.search(params[:q])
     conferences = Conference.search(params[:q])
-    @confevents = (events + conferences).sort_by{ |e| e.title }
+    @confevents = (events + conferences).sort_by { |e| e.title }
     @faqs = Faq.search(params[:q])
     @journals = Journal.search(params[:q])
     @oabooks = Oabook.search(params[:q])

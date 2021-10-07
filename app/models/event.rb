@@ -10,8 +10,8 @@ class Event < ApplicationRecord
   has_one_attached :image
 
   def self.search(q)
-	  if q
-	    Event.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
-		end
-	end
+    if q
+      Event.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
+    end
+  end
 end

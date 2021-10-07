@@ -14,8 +14,8 @@ class Series < ApplicationRecord
   validates :code, :title, presence: true
 
   def self.search(q)
-		if q
-			Series.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)").sort
-		end
-	end
+    if q
+      Series.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)").sort
+    end
+  end
 end
