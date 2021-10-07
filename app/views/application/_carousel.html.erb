@@ -8,8 +8,8 @@
   <div class="carousel-inner text-center" role="listbox">
     <% @highlights.each_with_index do |highlight, index| %>
       <div class="text-center carousel-item <%= "active" if index == 1 %>">
-        <%= link_to image_tag(highlight.image, class: 'highlight', 
-                                                alt: 'cover for '+highlight.title), highlight.link %>
+        <%= link_to image_tag(highlight.image, {class: "highlight", 
+                                                alt: highlight.alt_text}), highlight.link %>
       </div>
     <% end %>
   </div>
