@@ -64,12 +64,10 @@ Rails.application.routes.draw do
 
   root to: "webpages#index"
 
-  get "downloads"             => "documents#index"
-
+  get "search"                => "webpages#search", as: :search
+  get "downloads"             => "documents#index", as: :downloads
   get "sales-reps"            => "people#sales_reps", as: :sales_reps
-
   get "course-adoptions"      => "books#course_adoptions", as: :course_adoptions
-
   get "study-guides"          => "books#study_guides", as: :study_guides
   get "study-guides/:id"      => "books#study_guide", as: :study_guide
 
@@ -81,10 +79,4 @@ Rails.application.routes.draw do
   get "/open-access/labor-studies"          => "oabooks#labor_studies", as: :labor_studies
   get "/open-access/labor-studies/:id"      => "oabooks#show", as: :labor_studies_book
   get "/open-access/north-broad-press/:id"  => "oabooks#show", as: :north_broad_book
-
-  controller :application do
-    get 'search' => :search
-    get 'search2' => :search2
-  end
-
 end
