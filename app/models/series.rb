@@ -15,8 +15,7 @@ class Series < ApplicationRecord
 
   def self.search(q)
 		if q
-			# @series = Series.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
-			@series = Series.where("title LIKE ?", "%#{q}%")
+			Series.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)").sort
 		end
 	end
 end

@@ -23,7 +23,10 @@ class Oabook < ApplicationRecord
 
   def self.search(q)
 	  if q
-	    @oabooks = Oabook.where("title LIKE ?", "%#{q}%").or(Oabook.where("subtitle LIKE ?", "%#{q}%")).or(Oabook.where("author LIKE ?", "%#{q}%")).order(:title)
+      Oabook.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
+            .or(Oabook.where("subtitle REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
+            .or(Oabook.where("author REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
+            .order(:title)
 		end
 	end
 end

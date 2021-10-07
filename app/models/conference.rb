@@ -7,8 +7,7 @@ class Conference < ApplicationRecord
 
   def self.search(q)
 	  if q
-	    # @conferences = Conference.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
-	    @conferences = Conference.where("title LIKE ?", "%#{q}%")
+	    Conference.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
 		end
 	end
 end

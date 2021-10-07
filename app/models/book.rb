@@ -70,8 +70,11 @@ class Book < ApplicationRecord
 
   def self.search(q)
 	  if q
-	    # @books = Book.where({ status: ["NP","IP","OS","OP"] }).where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)").or(Book.where("subtitle REGEXP ?", "(^|\\W)#{q}(\\W|$)")).or(Book.where("author_byline REGEXP ?", "(^|\\W)#{q}(\\W|$)")).order(:sort_title)
-	    @books = Book.where({ status: ["NP","IP","OS","OP"] }).where("title LIKE ?", "%#{q}%").or(Book.where("subtitle LIKE ?", "%#{q}%")).or(Book.where("author_byline LIKE ?", "%#{q}%")).order(:sort_title)
+      Book.where({ status: ["NP","IP","OS","OP"] })
+      .where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
+      .or(Book.where("subtitle REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
+      .or(Book.where("author_byline REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
+      .order(:sort_title)
 		end
 	end
 end

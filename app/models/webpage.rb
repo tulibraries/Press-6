@@ -5,12 +5,13 @@ class Webpage < ApplicationRecord
   include Friendable
 
   validates :title, presence: true
+  has_rich_text :body
+
+  has_one :action_text_rich_text, class_name: 'ActionText::RichText', as: :record
 
   def self.search(q)
 	  if q
-			# @site = Webpage.where("title REGEXP ? AND id != 10 AND id != 11 AND id != 12", "(^|\\W)#{q}(\\W|$)").or(Page.where("content REGEXP ? AND id != 11 AND id != 12", "(^|\\W)#{q}(\\W|$)"))
-			# @site = Webpage.where("title LIKE ? AND id != 10 AND id != 11 AND id != 12", "%#{q}%").or(Page.where("body LIKE ? AND id != 11 AND id != 12", "%#{q}%"))
+      Webpage.joins(:action_text_rich_text).where("action_text_rich_texts.body REGEXP ? OR title REGEXP ?", "(^|\\W)#{q}(\\W|$)", "(^|\\W)#{q}(\\W|$)")
 		end
 	end
-  has_rich_text :body
 end

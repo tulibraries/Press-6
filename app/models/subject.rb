@@ -11,8 +11,7 @@ class Subject < ApplicationRecord
 
   def self.search(q)
 		if q
-			# @subjects = Subject.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
-			@subjects = Subject.where("title LIKE ?", "%#{q}%")
+			Subject.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)").sort
 		end
 	end
 end

@@ -1,9 +1,10 @@
 <div class="container index" id="search-results">
 	<div class="row">
 		<div class="col">
-			<h1 class="my-3">You searched for: <small><%= params[:q] %></small></h1>
+			<h1 class="my-4">You searched for: <small><%= params[:q] %></small></h1>
 		</div>
 	</div>
+	<% if @results.present? %>
 	<div class="row">
 		<% if @books.present? %>
 		<div class="col-7">
@@ -28,23 +29,24 @@
 			</div>
 			<% end %>
 		</div>
-		<div class="col-4 offset-1 mt-3"> <!-- right column -->
+		<div class="col-5 pl-5 mt-3"> <!-- right column -->
 		<% else %>
-		<div class="mt-3"> <!-- right column -->
+		<div class="col mt-3"> <!-- right column -->
 		<% end %>
-			<% if @oabooks.present? %>
-			<h2 class="gold">Open Access Books</h2>
-			<ul>
-				<% @oabooks.each do |book| %>
-					<li><%= link_to book.title, oabook_path(book) %></li>
-				<% end %>
-			</ul>
-			<% end %>
+
+		<% if @oabooks.present? %>
+		<h2 class="gold">Open Access Books</h2>
+		<ul class="list-unstyled bg-white p-3">
+		<% @oabooks.each do |book| %>
+			<li><%= link_to book.title, oabook_path(book) %></li>
+		<% end %>
+		</ul>
+		<% end %>
 
 
 		<% if @journals.present? %>
 			<h2 class="gold">Journals</h2>
-			<ul>
+			<ul class="list-unstyled bg-white p-3">
 				<% @journals.each do |journal| %>
 					<li><%= link_to journal.title, journal.url %></li>
 				<% end %>
@@ -53,7 +55,7 @@
 
 			<% if @confevents.present? %>
 			 <h2 class="gold">Conferences/Events</h2>
-			 <ul>
+			 <ul class="list-unstyled bg-white p-3">
 				<% @confevents.each do |confevent| %>
 					<li>
 						<%= link_to confevent.title, events_path if confevent.class.to_s == "Event" %>
@@ -65,7 +67,7 @@
 
 			<% if @people.present? %>
 				<h2 class="gold">People @ the Press</h2>
-				<ul>
+				<ul class="list-unstyled bg-white p-3">
 					<% @people.each do |person| %>
 						<% unless person.department == "Sales Reps" %>
 							<li><%= link_to person.title, {controller: "people", action: "index"} %><br />
@@ -85,9 +87,18 @@
 				</ul>
 			<% end %>
 
+			<% if @authors.present? %>
+			<h2 class="gold">Authors</h2>
+			<ul class="list-unstyled bg-white p-3">
+				<% @authors.each do |author| %>
+					<li><%= link_to author.title, author_path(author) %></li>
+				<% end %>
+			</ul>
+			<% end %>
+
 			<% if @subjects.present? %>
 			<h2 class="gold">Subjects Areas</h2>
-			<ul>
+			<ul class="list-unstyled bg-white p-3">
 				<% @subjects.each do |subject| %>
 					<li><%= link_to subject.title, subject_path(subject) %></li>
 				<% end %>
@@ -96,9 +107,27 @@
 
 			<% if @series.present? %>
 			<h2 class="gold">Series</h2>
-			<ul>
+			<ul class="list-unstyled bg-white p-3">
 				<% @series.each do |series| %>
 					<li><%= link_to series.title, series_path(series) %></li>
+				<% end %>
+			</ul>
+			<% end %>
+
+			<% if @faqs.present? %>
+			<h2 class="gold">FAQs</h2>
+			<ul class="list-unstyled bg-white p-3">
+				<% @faqs.each do |faq| %>
+					<li><%= link_to faq.title, faq_path(faq) %></li>
+				<% end %>
+			</ul>
+			<% end %>
+
+			<% if @site.present? %>
+			<h2 class="gold">Other Results</h2>
+			<ul class="list-unstyled bg-white p-3">
+				<% @site.each do |webpage| %>
+					<li><%= link_to webpage.title, webpage_path(webpage) %></li>
 				<% end %>
 			</ul>
 			<% end %>
@@ -107,5 +136,11 @@
 		</div>
 
   </div>
-
+	<% else %>
+	<div class="row">
+		<div class="col text-center">
+			<h2>No results</h2>
+		</div>
+	</div>
+<% end %>
 </div>
