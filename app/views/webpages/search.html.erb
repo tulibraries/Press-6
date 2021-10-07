@@ -1,22 +1,22 @@
 <div class="container" id="search-results">
 	<div class="row">
 		<div class="col">
-			<h1>Search Results for: <small><%= params[:q] %></small></h1>
+			<h1 class="my-3">You searched for: <small><%= params[:q] %></small></h1>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-7">
-			<h2>Book Results</h2>
+			<h2 class="gold mt-3">Book Results</h2>
 			<% unless @books.blank? %>
 
 			<% @books.each do |book| %>
 
-			<div class="row book-row">
+			<div class="book-row">
 				<div class="media">
 					<%= link_to image_tag(book.index_image("cover_image"), class: 'd-flex mr-3'), book_path(book) if book.cover_image.attached? %>
 				</div>
 				<div class="media-body">
-					<h2><%= link_to book.title.html_safe, book_path(book) %>
+					<%= link_to book.title.html_safe, book_path(book) %>
 						<% unless book.subtitle.blank? %>
 							<p class="subtitle"><%= book.subtitle.html_safe %>
 						<% end %>
@@ -25,7 +25,6 @@
 						<% else %>
 							</p>
 						<% end %>
-					</h2>
 					<p class="author"><%= book.author_byline %></p>					
 				</div>
 			</div>
@@ -37,7 +36,7 @@
 
 		<div class="col-4 offset-1">
 			<% unless @oabooks.blank? %>
-			<h2>Open Access Books</h2>
+			<h2 class="gold">Open Access Books</h2>
 			<ul>
 				<% @oabooks.each do |book| %>
 					<li><%= link_to book.title, oabook_path(book) %></li>
@@ -47,10 +46,10 @@
 
 
 		<% unless @confevents.blank? && @journals.blank? %>
-			<h2>Other Results</h2>
+			<h2 class="gold">Other Results</h2>
 
 			<% unless @journals.blank? %>
-			<h2>Journals</h2>
+			<h2 class="gold">Journals</h2>
 			<ul>
 				<% @journals.each do |journal| %>
 					<li><%= link_to journal.title, journal.url %></li>
@@ -59,7 +58,7 @@
 			<% end %>
 
 			<% unless @confevents.blank? %>
-			 <h2>Conferences and Events</h2>
+			 <h2 class="gold">Conferences and Events</h2>
 			 <ul>
 				<% @confevents.each do |confevent| %>
 					<li>
@@ -74,7 +73,7 @@
 			<% end %>
 
 			<% unless @people.blank? %>
-				<h2>People @ the Press</h2>
+				<h2 class="gold">People @ the Press</h2>
 				<ul>
 					<% @people.each do |person| %>
 						<% unless person.department == "Sales Reps" %>
@@ -96,7 +95,7 @@
 			<% end %>
 
 			<% unless @subjects.blank? %>
-			<h2>Subjects Areas</h2>
+			<h2 class="gold">Subjects Areas</h2>
 			<ul>
 				<% @subjects.each do |subject| %>
 					<li><%= link_to subject.title, subject_path(subject) %></li>
@@ -105,7 +104,7 @@
 			<% end %>
 
 			<% unless @series.blank? %>
-			<h2>Series</h2>
+			<h2 class="gold">Series</h2>
 			<ul>
 				<% @series.each do |series| %>
 					<li><%= link_to series.title, series_path(series) %></li>
