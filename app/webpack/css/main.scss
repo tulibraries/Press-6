@@ -17,6 +17,10 @@ html, body {
 	overflow: scroll;
 }
 
+.container.index, .container.show {
+	min-height: 60vh;
+}
+
 strong {
 	font-family: "Roboto-Bold";
 }
@@ -179,10 +183,6 @@ form {
 	h2 {
 		font-size: 115%;
 	}
-	a {
-		// text-align: center;
-	}
-
 }
 
 .white {

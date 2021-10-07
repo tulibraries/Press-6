@@ -24,4 +24,16 @@ RSpec.describe WebpagesController, type: :controller do
       expect(response.header["Content-Type"]).to include "html"
     end
   end
+
+  describe "GET #search" do
+    it "- renders show template" do
+      get :search, params: { q: webpage.title  }
+      expect(response).to render_template("search")
+    end
+
+    it "- redirects  if blank" do
+      get :search, params: { q: ""  }
+      expect(response).to redirect_to("/")
+    end
+  end
 end

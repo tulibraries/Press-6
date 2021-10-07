@@ -12,4 +12,10 @@ class Author < ApplicationRecord
   def set_title
     self.title = [self.prefix, self.first_name, self.last_name, self.suffix].join(" ").strip
   end
+
+  def self.search(q)
+    if q
+      Author.where("first_name REGEXP ?", "(^|\\W)#{q}(\\W|$)")
+    end
+  end
 end

@@ -15,4 +15,10 @@ class Person < ApplicationRecord
   def name
     title
   end
+
+  def self.search(q)
+    if q
+      Person.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)").or(Person.where("position REGEXP ?", "(^|\\W)#{q}(\\W|$)")).sort
+    end
+  end
 end

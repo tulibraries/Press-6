@@ -1,0 +1,146 @@
+<div class="container index" id="search-results">
+	<div class="row">
+		<div class="col">
+			<h1 class="my-4">You searched for: <small><%= params[:q] %></small></h1>
+		</div>
+	</div>
+	<% if @results.present? %>
+	<div class="row">
+		<% if @books.present? %>
+		<div class="col-7">
+			<h2 class="gold mt-3 mx-1">Book Results</h2>
+			<% @books.each do |book| %>
+			<div class="row book-row mx-1 bg-white p-4" style="border-bottom: solid #ccc 1px">
+				<div class="media">
+					<%= link_to image_tag(book.thumb_image("cover_image"), class: 'd-flex mr-3'), book_path(book) if book.cover_image.attached? %>
+				</div>
+				<div class="media-body">
+					<%= link_to book.title.html_safe, book_path(book), class: "book" %>
+						<% unless book.subtitle.blank? %>
+							<p class="subtitle"><%= book.subtitle.html_safe %>
+						<% end %>
+						<% unless book.edition.blank? %>
+							<br /><%= book.edition.html_safe %>
+						<% else %>
+							</p>
+						<% end %>
+					<p class="author"><%= book.author_byline %></p>					
+				</div>
+			</div>
+			<% end %>
+		</div>
+		<div class="col-5 pl-5 mt-3"> <!-- right column -->
+		<% else %>
+		<div class="col mt-3"> <!-- right column -->
+		<% end %>
+
+		<% if @oabooks.present? %>
+		<h2 class="gold">Open Access Books</h2>
+		<ul class="list-unstyled bg-white p-3">
+		<% @oabooks.each do |book| %>
+			<li><%= link_to book.title, oabook_path(book) %></li>
+		<% end %>
+		</ul>
+		<% end %>
+
+
+		<% if @journals.present? %>
+			<h2 class="gold">Journals</h2>
+			<ul class="list-unstyled bg-white p-3">
+				<% @journals.each do |journal| %>
+					<li><%= link_to journal.title, journal.url %></li>
+				<% end %>
+			</ul>
+		<% end %>
+
+			<% if @confevents.present? %>
+			 <h2 class="gold">Conferences/Events</h2>
+			 <ul class="list-unstyled bg-white p-3">
+				<% @confevents.each do |confevent| %>
+					<li>
+						<%= link_to confevent.title, events_path if confevent.class.to_s == "Event" %>
+						<%= link_to confevent.title, conferences_path if confevent.class.to_s == "Conference" %>
+					</li>
+				<% end %>
+			</ul>
+			<% end %>
+
+			<% if @people.present? %>
+				<h2 class="gold">People @ the Press</h2>
+				<ul class="list-unstyled bg-white p-3">
+					<% @people.each do |person| %>
+						<% unless person.department == "Sales Reps" %>
+							<li><%= link_to person.title, {controller: "people", action: "index"} %><br />
+								<small style="font-style:italic;"><%= person.position %></small></li>
+						<% else %>
+							<li><%= link_to person.title, sales_reps_path %><br />
+							<small style="font-style:italic;">
+								<% if person.region.to_i >= 10  %>
+									<%= get_region(person.region) %>
+								<% else %>
+									<%= person.region %>
+								<% end %>
+							</small>
+						</li>
+						<% end %>
+					<% end %>
+				</ul>
+			<% end %>
+
+			<% if @authors.present? %>
+			<h2 class="gold">Authors</h2>
+			<ul class="list-unstyled bg-white p-3">
+				<% @authors.each do |author| %>
+					<li><%= link_to author.title, author_path(author) %></li>
+				<% end %>
+			</ul>
+			<% end %>
+
+			<% if @subjects.present? %>
+			<h2 class="gold">Subjects Areas</h2>
+			<ul class="list-unstyled bg-white p-3">
+				<% @subjects.each do |subject| %>
+					<li><%= link_to subject.title, subject_path(subject) %></li>
+				<% end %>
+			</ul>
+			<% end %>
+
+			<% if @series.present? %>
+			<h2 class="gold">Series</h2>
+			<ul class="list-unstyled bg-white p-3">
+				<% @series.each do |series| %>
+					<li><%= link_to series.title, series_path(series) %></li>
+				<% end %>
+			</ul>
+			<% end %>
+
+			<% if @faqs.present? %>
+			<h2 class="gold">FAQs</h2>
+			<ul class="list-unstyled bg-white p-3">
+				<% @faqs.each do |faq| %>
+					<li><%= link_to faq.title, faq_path(faq) %></li>
+				<% end %>
+			</ul>
+			<% end %>
+
+			<% if @site.present? %>
+			<h2 class="gold">Other Results</h2>
+			<ul class="list-unstyled bg-white p-3">
+				<% @site.each do |webpage| %>
+					<li><%= link_to webpage.title, webpage_path(webpage) %></li>
+				<% end %>
+			</ul>
+			<% end %>
+
+
+		</div>
+
+  </div>
+	<% else %>
+	<div class="row">
+		<div class="col text-center">
+			<h2>No results</h2>
+		</div>
+	</div>
+<% end %>
+</div>
