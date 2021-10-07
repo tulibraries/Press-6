@@ -5,3 +5,15 @@
     padding: 21px;
   }
 }
+
+#search-results {
+  a {
+    font-size: 1.15rem;
+  }
+  a.book {
+    font-size: 1.5rem;
+  }
+  .bg-white {
+    background-color: $white;
+  }
+}
