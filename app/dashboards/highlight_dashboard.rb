@@ -13,6 +13,7 @@ class HighlightDashboard < Administrate::BaseDashboard
     id: Field::Number,
     title: Field::String,
     image: ImageField,
+    alt_text: Field::String,
     promote_to_homepage: Field::Boolean,
     link: Field::String,
     created_at: Field::DateTime,
@@ -44,6 +45,7 @@ class HighlightDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     title
     image
+    alt_text
     link
     promote_to_homepage
   ].freeze
