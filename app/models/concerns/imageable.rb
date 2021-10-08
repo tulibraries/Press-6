@@ -24,15 +24,19 @@ module Imageable
     end if image_field.present?
   end
 
+  def image_variation(image_field, width, height)
+    ActiveStorage::Variation.new(Uploads.resize_to_fill(width: width, height: height, blob: self.send(image_field.to_sym).blob)) if image_field.present?
+  end
+
   def custom_hot_image(image_field, width, height)
     if ((image_field.blob.metadata[:width] != width) || (image_field.blob.metadata[:height] != height))
-      image_field.variant(image_variation(image_field, width, height)).processed
+      image_field.variant(hot_image_variation(image_field, width, height)).processed
     else
       image_field
     end if image_field.present?
   end
 
-  def image_variation(image_field, width, height)
-    ActiveStorage::Variation.new(Uploads.resize_to_fill(width: width, height: height, blob: self.send(image_field.to_sym).blob)) if image_field.present?
+  def hot_image_variation(image_field, width, height)
+    ActiveStorage::Variation.new(Uploads.resize_to_fill(width: width, height: height, blob: image_field.blob)) if image_field.present?
   end
 end
