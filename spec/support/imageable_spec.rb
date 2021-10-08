@@ -63,9 +63,6 @@ RSpec.shared_examples "imageable" do
       it "the custom blob variant is returned" do
         expect(factory_model.custom_image("image", 270, 320)).not_to raise_error
       end
-      it "the custom homepage blob variant is returned" do
-        expect(bigattachmemt.custom_hot_image("image", 270, 320)).not_to raise_error
-      end
     end
   end
 end
