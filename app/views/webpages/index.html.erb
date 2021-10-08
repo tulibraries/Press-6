@@ -24,7 +24,7 @@
     <div class="row pt-3">
     <% @hot.each do |item| %>
       <div class="col-4 text-center">
-      <%= link_to book_path(item.xml_id) do %>
+      <%= link_to book_path(item) do %>
         <%= hot_cover(item) %>
         <p><strong><%= item.title %></strong></p>
       <% end %>
