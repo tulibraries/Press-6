@@ -6,7 +6,7 @@ module Admin
 
     def detach
       klass = params[:controller].split("/").last.classify
-      @entity = klass.constantize.find(params[:id])
+      @entity = klass.constantize.friendly.find(params[:id])
 
       types = ["cover_image", "excerpt_file", "guide_file", "toc_file", "suggested_reading_image"] if klass == "Book"
       types = ["image"] if ["Brochure", "Series", "Person", "Highlight", "NewsItem"].include?(klass)

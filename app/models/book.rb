@@ -70,7 +70,7 @@ class Book < ApplicationRecord
 
   def self.search(q)
     if q
-      Book.where({ status: ["NP", "IP", "OS", "OP"] })
+      Book.where({ status: ["NP", "IP", "OS", "OP", "In Print"] })
       .where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
       .or(Book.where("subtitle REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
       .or(Book.where("author_byline REGEXP ?", "(^|\\W)#{q}(\\W|$)"))

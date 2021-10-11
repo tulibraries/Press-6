@@ -41,7 +41,7 @@ class BookDashboard < Administrate::BaseDashboard
     trim: Field::String,
     illustrations: Field::String,
     status: Field::Select.with_options(
-      collection: ["In Print", "NP", "OS", "X", "..."]
+      collection: ["In Print", "IP", "NP", "OS", "X", "..."]
     ),
     books: Field::HasMany.with_options(
       class_name: "Book",

@@ -20,7 +20,7 @@ module Imageable
     if ((self.send(image_field.to_sym).blob.metadata[:width] != width) || (self.send(image_field.to_sym).blob.metadata[:height] != height))
       self.send(image_field.to_sym).variant(image_variation(image_field, width, height)).processed
     else
-      image
+      self.send(image_field.to_sym)
     end if image_field.present?
   end
 
