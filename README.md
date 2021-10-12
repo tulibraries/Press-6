@@ -33,3 +33,7 @@ We defined a Makefile with many useful commands for local development. These com
 * To run a shell with image: ```make shell```
 * To run docker lint: ```make lint```
     * This depends on hadolint. Run `brew install hadolint` to make this available locally.
+
+## Deployment
+### QA
+* Deploys to https://tupress.k8s.temple.edu
