@@ -23,6 +23,9 @@ DEFAULT_RUN_ARGS ?= -e "EXECJS_RUNTIME=Disabled" \
 		-e "TUPRESS_DB_USER=$(TUPRESS_DB_USER)" \
 		--rm -it
 
+db-init:
+	@bundle exec rails db:migrate 2>/dev/null || rails db:setup
+
 build:
 	@docker build --build-arg RAILS_MASTER_KEY=$(RAILS_MASTER_KEY) \
 		--tag $(HARBOR)/$(IMAGE):$(VERSION) \
