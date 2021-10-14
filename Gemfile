@@ -30,6 +30,7 @@ gem "administrate-field-date_picker", "~> 0.2.0"
 gem "meta-tags"
 gem "activestorage-validator"
 gem "friendly_id"
+gem "okcomputer"
 
 gem "devise"
 gem "omniauth"
