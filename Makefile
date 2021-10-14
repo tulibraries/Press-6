@@ -48,7 +48,7 @@ shell:
 		$(HARBOR)/$(IMAGE):$(VERSION)
 
 db-init:
-	@docker run --name=tupress-sync\
+	@docker run --name=tupress-db-init\
 		--entrypoint=/bin/sh\
 		$(DEFAULT_RUN_ARGS) \
 		$(HARBOR)/$(IMAGE):$(VERSION) -c 'rails db:migrate 2>/dev/null || rails db:setup'
