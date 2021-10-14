@@ -23,9 +23,6 @@ DEFAULT_RUN_ARGS ?= -e "EXECJS_RUNTIME=Disabled" \
 		-e "TUPRESS_DB_USER=$(TUPRESS_DB_USER)" \
 		--rm -it
 
-db-init:
-	@bundle exec rails db:migrate 2>/dev/null || rails db:setup
-
 build:
 	@docker build --build-arg RAILS_MASTER_KEY=$(RAILS_MASTER_KEY) \
 		--tag $(HARBOR)/$(IMAGE):$(VERSION) \
@@ -49,6 +46,12 @@ shell:
 		$(DEFAULT_RUN_ARGS) \
 		--entrypoint=sh --user=root \
 		$(HARBOR)/$(IMAGE):$(VERSION)
+
+db-init:
+	@docker run --name=tupress-sync\
+		--entrypoint=/bin/sh\
+		$(DEFAULT_RUN_ARGS) \
+		$(HARBOR)/$(IMAGE):$(VERSION) -c 'rails db:migrate 2>/dev/null || rails db:setup'
 
 load-data:
 	@docker run --name=tupress-sync\
