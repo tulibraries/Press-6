@@ -25,7 +25,6 @@ class SyncService::Reviews
           create_or_update!(record)
         else #when node is returned from read_reviews
           reviews = book.at("reviews").children.map(&:to_xml)
-          binding.pry
           if reviews.present?
             book = { "reviews" => reviews }
             create_or_update!(book)
