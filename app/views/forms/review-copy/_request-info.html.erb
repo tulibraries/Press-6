@@ -1,0 +1,28 @@
+<%= f.input :media_type, as: :radio_buttons, 
+				collection: ["Radio/TV", "Magazine", "Journal", "Newspaper", "Exam/Desk Copy", "Other"],
+				label: "Media Type", 
+				required: :true %>
+				
+<%= f.input :website, required: :false %>
+<%= f.input :request_statement, as: :text, 
+				label: "Request",
+				required: :false %>
+<%= f.input :address_line_1, required: :false %>
+<%= f.input :address_line_2, required: :false %>
+
+<%= f.input :state, 
+				label: t("State/Province/Region"), 
+				required: :false %>
+<%= f.input :zip, 
+				label: t("Zip/Postal Code"), 
+				required: :false %>
+<%= f.input :country, as: :string,
+				label: t("Country (if not US)"), 
+				required: :false %>
+
+
+<p>
+	<strong>Please note</strong>: all requests are indeed that—requests. Unfortunately, we cannot always honor all of them. 
+	If you think we are unfamiliar with your publication, please send a sample/tearsheets with your request. 
+	Thank you.
+</p>

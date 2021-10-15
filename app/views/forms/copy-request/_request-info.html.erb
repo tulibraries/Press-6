@@ -1,0 +1,29 @@
+
+<%= f.input :format, as: :radio_buttons, 
+								collection: ["eBook", "Print"],
+          			item_wrapper_class: "form-check inline",
+								required: :true %>
+
+<fieldset class="form-section">
+	<legend>Book 1</legend>			
+		<%= f.input :book_1_title, label: "Title", required: :false %>
+		<%= f.input :book_1_author, label: "Author", required: :false %>
+</fieldset>
+
+<fieldset class="form-section">
+	<legend>Book 2</legend>			
+		<%= f.input :book_2_title, label: "Title", required: :false %>
+		<%= f.input :book_2_author, label: "Author", required: :false %>
+</fieldset>
+
+<fieldset class="form-section">
+	<legend>Book 3</legend>			
+		<%= f.input :book_3_title, label: "Title", required: :false %>
+		<%= f.input :book_3_author, label: "Author", required: :false %>
+</fieldset>
+
+<%= f.input :authorized_bookstore, hint: "(required for Desk Copy requests)", required: :false %>
+
+<%= f.input :comments, as: :text, required: :false %>
+
+
