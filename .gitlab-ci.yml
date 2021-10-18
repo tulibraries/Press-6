@@ -49,11 +49,13 @@ tag:
   stage: tag
   extends: .tag_image
 
-deploy:
-  variables:
-    IMAGE: harbor.k8s.temple.edu/tulibraries/tupress
-  stage: deploy
-  extends: .kubectl_setup
+qa_deploy:
+  extends: .helm_setup
+  stage: qa_deploy
+  only:
+    - main
   script:
     - *export_variables
-    - kubectl --namespace=tupress set image deployment/tupress-app tupress-app=$IMAGE:$VERSION --record
+    - helm repo add tulibraries https://$HARBOR/chartrepo/tulibraries
+    - helm pull tulibraries/tupress --untar
+    - helm upgrade tupress ./tupress
