@@ -51,7 +51,7 @@ tag:
 
 qa_deploy:
   extends: .helm_setup
-  stage: qa_deploy
+  stage: deploy
   only:
     - main
   script:
