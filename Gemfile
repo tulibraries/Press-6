@@ -32,7 +32,7 @@ gem "activestorage-validator"
 gem "friendly_id"
 gem "simple_form"
 gem "mail_form"
-
+gem "cocoon"
 gem "devise"
 gem "omniauth"
 gem "omniauth-google-oauth2"

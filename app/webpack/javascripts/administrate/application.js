@@ -5,6 +5,7 @@
 //= require datetime_picker
 //= require_tree .
 
+require("@nathanvda/cocoon")
 (function() {
   
   var HOST = "https://d13txem1unpe48.cloudfront.net/"

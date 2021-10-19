@@ -57,7 +57,8 @@ en:
           title: Orders
           info: Ordering Info
           terms: Payments Terms
-          requests: Exam & Desk Copy Requests
+          copy-request: Exam & Desk Copy Requests
+          review-request: Request a Review Copy
           reps: Sales Representatives
         news:
           title: News & Events
@@ -155,6 +156,99 @@ en:
         Tax Forms: Tax Forms
     events:
       title: Event Calendar
+    forms:
+      contact-us:
+        title: Contact Us
+        prefix_html: >-
+          <p>To order, please call 1-800-621-2736 or fax 1-800-621-8476.</p>
+          <p>If you want to send us a message, fill out the following form. You can also call 215-204-8787 or write to:</p>
+          <p class="col col-md-12 offset-md-1" style="font-weight: 600;">Temple University Press<br>1900 N. 13th Street<br>
+          Philadelphia, PA 19122</p>
+        suffix_html: >-
+          <p><strong>Privacy Policy</strong>: Temple University Press respects your privacy. We carefully 
+          control the distribution of our customer information, and although we occasionally buy, sell, and 
+          swap mailing lists, we do so only with like-minded organizations. If you wish to be removed from 
+          either the postal mailing list or the email distribution list, please 
+          <a class="inline" href="mailto:tempress@temple.edu: send a note to the webmaster</a>.</p>
+        e_catalog: Send me an e-catalog
+        print_catalog: Send me a printed catalog
+        add_to_mailing_list: Add my name to the mailing list
+        remove_from_mailing_list: Remove my name from the mailing list
+        removal_description_placeholder: Please describe the mailing piece you received 
+        new_and_special: Send me e-newsletters about new books and special offers
+        preferred_subjects: "My preferred subjects of interest are:"
+        preferred_subjects_hint: (hold the CTRL/CMD key to select multiple subjects)
+        subjects:
+          African American Studies: African American Studies
+          Aging: Aging
+          American Studies: American Studies
+          Animals and Society: Animals and Society
+          Anthropology: Anthropology
+          Art and Photography: Art and Photography
+          Asian American Studies: Asian American Studies
+          Asian Studies: Asian Studies
+          Biography: Biography
+          Business/Economics: Business/Economics
+          Children's Books: Children's Books
+          Cinema Studies: Cinema Studies
+          Community Organizing: Community Organizing
+          Cultural Studies: Cultural Studies
+          Death and Dying: Death and Dying
+          Disability Studies: Disability Studies
+          Education: Education
+          Family Policy: Family Policy
+          Gender Studies: Gender Studies
+          General Interest: General Interest
+          Geography: Geography
+          Health and Health Policy: Health and Health Policy
+          History: History
+          Immigration Studies: Immigration Studies
+          Jewish Studies: Jewish Studies
+          Labor Studies and Work: Labor Studies and Work
+          Latin/Caribbean Studies: Latin/Caribbean Studies
+          Latino/a Studies: Latino/a Studies
+          Law and Criminology: Law and Criminology
+          Literature and Drama: Literature and Drama
+          Mass Media and Communications: Mass Media and Communications
+          Music and Dance: Music and Dance
+          Nature and the Environment: Nature and the Environment
+          Philadelphia Region: Philadelphia Region
+          Philosophy and Ethics: Philosophy and Ethics
+          Political Science and Public Policy: Political Science and Public Policy
+          Psychology: Psychology
+          Race and Ethnicity: Race and Ethnicity
+          Religion: Religion
+          Science: Science
+          Sexual Identity: Sexual Identity
+          Sociology: Sociology
+          Sports: Sports
+          Technology: Technology
+          Urban Studies: Urban Studies
+          Women's Studies: Women's Studies
+          Youth Studies: Youth Studies
+      review-copy: 
+        title: Request a Review Copy
+      copy-request: 
+        title: Request a Desk or Exam Copy
+      rights-permissions: 
+        title: Rights & Permissions
+        prefix_html: >-
+          <p>For permission to use material from one of our publications, please fill out the following form. 
+          The following information/material is required before requests for permission to use material from 
+          Temple University Press books will be considered.</p>
+          <p>This form should only be used for requests to reproduce material copyrighted by Temple University 
+          Press in forthcoming books for publication. <strong>Please submit all requests for photocopies for 
+          academic use and for electronic course reserve via Copyright Clearance Center</strong> at 
+          <a href="http://www.copyright.com: www.copyright.com</a>.</p>
+        suffix_html: >-
+          <p>If selection is an excerpt, adaptation, or is altered in any way from its copyrighted form, a 
+          photocopy of the pages of material to be reprinted, indicating any edits, should be sent to:</p>
+          <p class="address: Rights &amp; Permissions Manager<br>Temple University Press 
+          <br>1900 N. 13th Street<br>Philadelphia, PA 19122</p>
+          <p>Fax: 215.204.2142</p>
+          <p>If this request is for a reuse of material for which permission was previously granted, please 
+          supply a copy of the previous permission agreement and any additional information regarding 
+          the previous use.</p>
     oabooks:
       online_epub: Read it Online
       manifold_label: View Epub

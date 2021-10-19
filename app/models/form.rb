@@ -2,17 +2,24 @@
 
 class Form < MailForm::Base
   attribute :form_type
+
+  # common fields
   attribute :name
   attribute :email
-  attribute :media_type
-  attribute :website
-  attribute :request_statement
   attribute :address_line_1
   attribute :address_line_2
+  attribute :city
   attribute :state
   attribute :zip
   attribute :country
+  attribute :comments
 
+  # review-copy
+  attribute :media_type
+  attribute :website
+  attribute :request_statement
+
+  #copy-request
   attribute :request_type
   attribute :university
   attribute :department
@@ -30,12 +37,37 @@ class Form < MailForm::Base
   attribute :book_3_author
   attribute :format
   attribute :authorized_bookstore
-  attribute :comments
+
+  # rights-permissions
+  attribute :book_title
+  attribute :book_author_editor
+  attribute :chapter_title
+  attribute :chapter_author_editor
+  attribute :page_numbers
+  attribute :reprint_price
+  attribute :your_publisher
+  attribute :reprint_title
+  attribute :publication_editor_author
+  attribute :number_of_pages
+  attribute :number_of_copies
+  attribute :publication_date
+  attribute :rights_requested
+
+  # contact-us
+  attribute :e_catalog
+  attribute :print_catalog
+  attribute :add_to_mailing_list
+  attribute :remove_from_mailing_list
+  attribute :removal_description
+  attribute :new_and_special_news
+  attribute :subjects
 
   def get_subject
     @forms = {
       "review-copy" => ["Request a Review Copy", ["cdoyle@temple.edu"]],
-      "copy-request" => ["Exam & Desk Copy Request", ["cdoyle@temple.edu"]]
+      "copy-request" => ["Exam & Desk Copy Request", ["cdoyle@temple.edu"]],
+      "right-permissions" => ["Rights & Permissions", ["cdoyle@temple.edu"]],
+      "contact-us" => ["Contact Us", ["cdoyle@temple.edu"]]
     }
     @forms.fetch(form_type)
   end

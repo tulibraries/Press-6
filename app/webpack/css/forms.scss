@@ -1,11 +1,15 @@
 form.simple_form {
-  fieldset {
-    .form-section {
-      border: solid #ccc 2px;
-      padding: 21px;
-      border-radius: 7px;
-      margin-bottom: 35px;
-    }
+  fieldset.bordered {
+    border: solid #ccc 2px;
+    padding: 21px;
+    border-radius:7px;
+    margin-bottom: 35px;
+    // .form-section {
+    //   border: solid #ccc 2px;
+    //   padding: 21px;
+    //   border-radius: 7px;
+    //   margin-bottom: 35px;
+    // }
     legend {
       width: auto;
       padding: 0 21px;

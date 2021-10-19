@@ -1,0 +1,36 @@
+<%= f.input :e_catalog, as: :boolean, 
+                        label: t("tupress.forms.contact-us.e_catalog"),
+                        required: false %>
+<%= f.input :print_catalog, as: :boolean, 
+                        label: t("tupress.forms.contact-us.print_catalog"),
+                        required: false %>
+<%= f.input :add_to_mailing_list, as: :boolean, 
+                        label: t("tupress.forms.contact-us.add_to_mailing_list"),
+                        required: false %>
+
+<fieldset class="bordered">
+<%= f.input :remove_from_mailing_list, as: :boolean, 
+                        label: t("tupress.forms.contact-us.remove_from_mailing_list"),
+                        required: false %>
+<%= f.input :removal_description, as: :text, 
+                        label: false,
+                        placeholder: t("tupress.forms.contact-us.removal_description_placeholder"),
+                        required: false %>
+</fieldset>
+
+
+<fieldset class="bordered">
+<%= f.input :new_and_special_news, as: :boolean, 
+                        label: t("tupress.forms.contact-us.new_and_special"),
+                        required: false %>
+<%= f.input :subjects, as: :select, 
+                        include_blank: true, 
+                        input_html: { multiple: true, size: 10 }, 
+                        label: t("tupress.forms.contact-us.preferred_subjects"),
+                        collection:  t("tupress.forms.contact-us.subjects"), 
+                        hint: t("tupress.forms.contact-us.preferred_subjects_hint"), 
+                        required: false %>
+</fieldset>
+<%= f.input :comments, as: :text, required: false %>
+
+<%= t("tupress.forms.contact-us.suffix_html") %>
