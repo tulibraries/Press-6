@@ -82,7 +82,7 @@ to display a collection of resources in an HTML table.
           ) if show_action? :edit, resource%></td>
         <% end %>
 
-        <% unless ["book","catalog","series","subject"].include?(collection_presenter.resource_name) %>
+        <% unless ["book","series","subject"].include?(collection_presenter.resource_name) %>
           <% if valid_action? :destroy, collection_presenter.resource_name %>
             <td><%= link_to(
               t("administrate.actions.destroy"),

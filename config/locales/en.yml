@@ -84,7 +84,6 @@ en:
         tabs:
           book: book
           subjects: subjects
-          catalog: catalog
           awards: awards
           guide: guide
           homepage: homepage
