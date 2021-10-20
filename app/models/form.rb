@@ -59,9 +59,9 @@ class Form < MailForm::Base
   def get_subject
     @forms = {
       "review-copy" => ["Request a Review Copy", ["cdoyle@temple.edu"]],
-      "copy-request" => ["Exam & Desk Copy Request", ["cdoyle@temple.edu"]],
-      "right-permissions" => ["Rights & Permissions", ["cdoyle@temple.edu"]],
-      "media-inquiries" => ["Contact Us", ["cdoyle@temple.edu"]]
+      "copy-request" => ["Request a Desk or Exam Copy", ["cdoyle@temple.edu"]],
+      "rights-permissions" => ["Rights &amp; Permissions", ["cdoyle@temple.edu"]],
+      "media-inquiries" => ["Media Inquiries", ["cdoyle@temple.edu"]]
     }
     @forms.fetch(form_type)
   end

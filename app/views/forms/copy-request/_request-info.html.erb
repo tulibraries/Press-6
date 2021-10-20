@@ -6,7 +6,7 @@
 
 <%= f.collection_select :requested_books, @books, 
 											:select_value, 
-											:title,
+											:select_value,
 											{prompt: t("tupress.forms.copy-request.prompt")},
 											{multiple: true, required: true}
 												%>
