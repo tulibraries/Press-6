@@ -1,12 +1,12 @@
 <%= f.input :media_type, as: :radio_buttons, 
-				collection: t("tupress.forms.review-copy.media_type"),
-				label: t("tupress.forms.review-copy.media_type_label"),
+        collection: t("tupress.forms.review-copy.media_type"),
+        label: t("tupress.forms.review-copy.media_type_label"),
         item_wrapper_class: "form-check inline mt-2 mb-3",
-				required: true %>
-				
+        required: true %>
+        
 <%= f.input :request_statement, as: :text, 
-				label: t("tupress.forms.review-copy.request_statement"),
-				input_html: { cols: 60, rows: 5 },
-				required: true %>
+        label: t("tupress.forms.review-copy.request_statement"),
+        input_html: { cols: 60, rows: 5 },
+        required: true %>
 
 <%= t("tupress.forms.review-copy.suffix_html") %>

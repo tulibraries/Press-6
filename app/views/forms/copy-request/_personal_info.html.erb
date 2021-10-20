@@ -4,19 +4,19 @@
 <%= f.input :department, required: false %>
 <%= f.input :address_line_1, required: true %>
 <%= f.input :address_line_2, required: false %>
-<%= f.input :state, 
-				label: t("tupress.forms.shared_fields.state"), 
-				required: true %>
+<%= f.input :state,
+        label: t("tupress.forms.shared_fields.state"), 
+        required: true %>
 <%= f.input :zip, 
-				label: t("tupress.forms.shared_fields.zip"), 
-				required: true %>
+        label: t("tupress.forms.shared_fields.zip"), 
+        required: true %>
 <%= f.input :country, as: :string,
-				label: t("tupress.forms.shared_fields.country"), 
-				required: false %>
+        label: t("tupress.forms.shared_fields.country"), 
+        required: false %>
 <%= f.input :address_type, as: :radio_buttons,
-				collection: t("tupress.forms.copy-request.address_type"),
+        collection: t("tupress.forms.copy-request.address_type"),
         item_wrapper_class: "form-check inline",
-				required: true %>
+        required: true %>
 <%= f.input :instructor, required: false %>
 <%= f.input :course_title, required: false %>
 <%= f.input :projected_enrollment, required: false %>
