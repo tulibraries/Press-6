@@ -20,6 +20,8 @@
 #### For the docker instance:
 * By default the database sync is not run locally. Use `make load-data` to run it.
 
+The app database needs to be initialized in oder for `make load-data` to work.  If that has not happened, then run `make db-init` (this only needs to run once).
+
 ### Start the Application using Docker as an alternative
 
 We defined a Makefile with many useful commands for local development. These commands replicate the process used to deploy in the Gitlab pipeline.
@@ -33,3 +35,7 @@ We defined a Makefile with many useful commands for local development. These com
 * To run a shell with image: ```make shell```
 * To run docker lint: ```make lint```
     * This depends on hadolint. Run `brew install hadolint` to make this available locally.
+
+## Deployment
+### QA
+* Deploys to https://tupress.k8s.temple.edu
