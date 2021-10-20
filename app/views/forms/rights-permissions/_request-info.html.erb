@@ -1,17 +1,16 @@
-<%= f.input :book_title, required: :false %>
-<%= f.input :book_author_editor, required: :false %>
-<%= f.input :chapter_title, required: :false %>
-<%= f.input :chapter_author_editor, required: :false %>
-<%= f.input :page_numbers, required: :false %>
-<%= f.input :reprint_price, required: :false %>
-<%= f.input :your_publisher, required: :false %>
-<%= f.input :reprint_title, required: :false %>
-<%= f.input :publication_editor_author, required: :false %>
-<%= f.input :number_of_pages, required: :false %>
-<%= f.input :number_of_copies, required: :false %>
-<%= f.input :publication_date, required: :false %>
-<%= f.input :rights_requested, required: :false %>
-<%= f.input :comments, as: :text, required: :false %>
-
+<%= f.input :book_title, required: false %>
+<%= f.input :book_author_editor, required: false %>
+<%= f.input :chapter_title, required: false %>
+<%= f.input :chapter_author_editor, required: false %>
+<%= f.input :page_numbers, required: false %>
+<%= f.input :reprint_price, required: false %>
+<%= f.input :your_publisher, required: false %>
+<%= f.input :reprint_title, required: false %>
+<%= f.input :publication_editor_author, required: false %>
+<%= f.input :number_of_pages, required: false %>
+<%= f.input :number_of_copies, required: false %>
+<%= f.input :publication_date, required: false %>
+<%= f.input :rights_requested, required: false %>
+<%= f.input :comments, as: :text, input_html: { cols: 60, rows: 5 }, required: false %>
 
 <%= t("tupress.forms.rights-permissions.suffix_html") %>

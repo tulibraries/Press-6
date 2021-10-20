@@ -1,15 +1,15 @@
 <%= f.input :name, required: true %>
 <%= f.input :email, required: true %>
-<%= f.input :university, required: :false %>
-<%= f.input :department, required: :false %>
-<%= f.input :address_line_1, required: :false %>
-<%= f.input :address_line_2, required: :false %>
+<%= f.input :university, required: false %>
+<%= f.input :department, required: false %>
+<%= f.input :address_line_1, required: false %>
+<%= f.input :address_line_2, required: false %>
 <%= f.input :state, 
-				label: t("State/Province/Region"), 
-				required: :false %>
+				label: t("tupress.forms.shared_fields.state"), 
+				required: true %>
 <%= f.input :zip, 
-				label: t("Zip/Postal Code"), 
-				required: :false %>
+				label: t("tupress.forms.shared_fields.zip"), 
+				required: true %>
 <%= f.input :country, as: :string,
-				label: t("Country (if not US)"), 
-				required: :false %>
+				label: t("tupress.forms.shared_fields.country"), 
+				required: false %>

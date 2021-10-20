@@ -157,6 +157,55 @@ en:
     events:
       title: Event Calendar
     forms:
+      shared_fields:
+        state: State/Province/Region
+        country: Country (if not US)
+        zip: Zip/Postal Code
+      attributes:
+        name: Name
+        email: Email
+        address_line_1: Address Line 1
+        address_line_2: Address Line 2
+        city: City
+        state: State
+        zip: Zip
+        country: Country
+        comments: Coments
+        media_type: Media Type
+        website: Website
+        request_statement: Request
+        request_type: Request Type
+        university: University
+        department: Department
+        address_type: Address Type
+        instructor: Instructor
+        course_title: Course Title
+        projected_enrollment: Projected Enrollment
+        semester_taught: Semester Taught
+        requested_books: Requested Books
+        format: Format
+        authorized_bookstore: Authorized Bookstore
+        book_title: Book Title
+        book_author_editor: Book Author/Editor
+        chapter_title: Chapter Title
+        chapter_author_editor: Chapter Author/Editor
+        page_numbers: Page Numbers
+        reprint_price: Reprint Price
+        your_publisher: Reprint Publisher
+        reprint_title: Reprint Title
+        publication_editor_author: Publication Author/Editor
+        number_of_pages: Number of Pages
+        number_of_copies: Number of Copies
+        publication_date: Publication Date
+        rights_requested: Rights Requested
+        e_catalog: E-Catalog
+        print_catalog: Print Catalog 
+        add_to_mailing_list: Add to Mailing List
+        remove_from_mailing_list: Remove From Mailing List
+        removal_description: Removal Description
+        new_and_special_news: Add to New & Special Events
+        subjects: Subject Interested In
+
       media-inquiries:
         title: Media Inquiries
         prefix_html: >-
@@ -223,8 +272,31 @@ en:
           Urban Studies: Urban Studies
           Women's Studies: Women's Studies
           Youth Studies: Youth Studies
+
       review-copy: 
         title: Request a Review Copy
+        intro_html: >-
+          <p>
+          <strong>We are currently fulfilling all examination copies as an ebook (when available).&nbsp; If requesting a desk copy please select print or ebook below.</strong>
+          </p>
+          <hr />
+          <p>We invite you to fill out the form below or to write on departmental letterhead for an examination copy of any paperback title you wish to consider for course adoption or request for desk copies. <strong>For examination copies</strong>, please state course title, semester, and projected enrollment. <strong>For desk copies</strong>, please provide course ID, instructor's name, projected enrollment, semester class will be taught, and the name of the bookstore that will be placing the order. Please note: book(s) will not be sent until bookstore order is confirmed. All orders can be forwarded to: <a href="mailto:examcopy@temple.edu" target="_blank" rel="noopener">examcopy@temple.edu</a>&nbsp;</p>
+        media_type_label: Media Type
+        media_type:
+          Radio_TV: Radio/TV
+          Magazine: Magazine
+          Journal: Journal
+          Newspaper: Newspaper
+          Exam_Desk_Copy: Exam/Desk Copy
+          Other: Other
+        request_statement: Request
+        suffix_html: >-
+          <p>
+            <strong>Please note</strong>: all requests are indeed that—requests. Unfortunately, we cannot always honor all of them. 
+            If you think we are unfamiliar with your publication, please send a sample/tearsheets with your request. 
+            Thank you.
+          </p>
+
       copy-request: 
         title: Request a Desk or Exam Copy
         prefix_html: >-
@@ -236,6 +308,12 @@ en:
           <a href="mailto:examcopy@temple.edu">examcopy@temple.edu,</a> fax your request on 
           letterhead to 215-204-2142, or use our <a href="/forms/copy-request">online form</a>. 
           Thanks.</p>
+        prompt: "Click then begin typing to select one or more books       "
+        hint: (required for Desk Copy requests)
+        books: Requested Books
+        address_type:
+          Business:  Business
+          Residential: Residential
 
       rights-permissions: 
         title: Rights & Permissions
@@ -256,6 +334,7 @@ en:
           <p>If this request is for a reuse of material for which permission was previously granted, please 
           supply a copy of the previous permission agreement and any additional information regarding 
           the previous use.</p>
+
     oabooks:
       online_epub: Read it Online
       manifold_label: View Epub

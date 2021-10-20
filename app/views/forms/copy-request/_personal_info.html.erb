@@ -5,16 +5,16 @@
 <%= f.input :address_line_1, required: true %>
 <%= f.input :address_line_2, required: false %>
 <%= f.input :state, 
-				label: t("State/Province/Region"), 
+				label: t("tupress.forms.shared_fields.state"), 
 				required: true %>
 <%= f.input :zip, 
-				label: t("Zip/Postal Code"), 
+				label: t("tupress.forms.shared_fields.zip"), 
 				required: true %>
 <%= f.input :country, as: :string,
-				label: t("Country (if not US)"), 
+				label: t("tupress.forms.shared_fields.country"), 
 				required: false %>
 <%= f.input :address_type, as: :radio_buttons,
-				collection: ["Business", "Residential"],
+				collection: t("tupress.forms.copy-request.address_type"),
         item_wrapper_class: "form-check inline",
 				required: true %>
 <%= f.input :instructor, required: false %>

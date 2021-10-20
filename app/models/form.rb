@@ -2,7 +2,7 @@
 
 class Form < MailForm::Base
   attribute :form_type
-  attribute :preferred_date
+
   # common fields
   attribute :name
   attribute :email
@@ -13,6 +13,7 @@ class Form < MailForm::Base
   attribute :zip
   attribute :country
   attribute :comments
+  attribute :request_type
 
   # review-copy
   attribute :media_type
@@ -20,10 +21,8 @@ class Form < MailForm::Base
   attribute :request_statement
 
   #copy-request
-  attribute :request_type
   attribute :university
   attribute :department
-  attribute :request_type
   attribute :address_type
   attribute :instructor
   attribute :course_title
