@@ -9,12 +9,6 @@
 												%>
 <div class="my-2"></div>
 
-<%= f.input :preferred_date, as: :date, 
-                    start_year: Date.today.year, end_year: Date.today.year+1, order: [:month, :day, :year], 
-                    label: "Date", 
-                    required: :true, 
-                    html5: true %>
-
 <%= f.input :format, as: :radio_buttons, 
 								collection: ["eBook", "Print"],
           			item_wrapper_class: "form-check inline",
