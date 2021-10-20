@@ -1,29 +1,29 @@
+<label class="string pr-0" for="form_books">Requested Books</label>
+<abbr title="required">*</abbr>
+
+<%= f.collection_select :requested_books, @books, 
+											:select_value, 
+											:title,
+											{prompt: "Click then begin typing to select one or more books       "},
+											{multiple: true}
+												%>
+<div class="my-2"></div>
+
+<%= f.input :preferred_date, as: :date, 
+                    start_year: Date.today.year, end_year: Date.today.year+1, order: [:month, :day, :year], 
+                    label: "Date", 
+                    required: :true, 
+                    html5: true %>
 
 <%= f.input :format, as: :radio_buttons, 
 								collection: ["eBook", "Print"],
           			item_wrapper_class: "form-check inline",
-								required: :true %>
+								legend_html: { class: "pl-0" },
+								required: true %>
 
-<fieldset class="form-section">
-	<legend>Book 1</legend>			
-		<%= f.input :book_1_title, label: "Title", required: :false %>
-		<%= f.input :book_1_author, label: "Author", required: :false %>
-</fieldset>
+<%= f.input :authorized_bookstore, hint: "(required for Desk Copy requests)", required: false,
+											item_wrapper_class: "mt-3" %>
 
-<fieldset class="form-section">
-	<legend>Book 2</legend>			
-		<%= f.input :book_2_title, label: "Title", required: :false %>
-		<%= f.input :book_2_author, label: "Author", required: :false %>
-</fieldset>
-
-<fieldset class="form-section">
-	<legend>Book 3</legend>			
-		<%= f.input :book_3_title, label: "Title", required: :false %>
-		<%= f.input :book_3_author, label: "Author", required: :false %>
-</fieldset>
-
-<%= f.input :authorized_bookstore, hint: "(required for Desk Copy requests)", required: :false %>
-
-<%= f.input :comments, as: :text, required: :false %>
+<%= f.input :comments, as: :text, required: false %>
 
 

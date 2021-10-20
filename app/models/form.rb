@@ -2,7 +2,7 @@
 
 class Form < MailForm::Base
   attribute :form_type
-
+  attribute :preferred_date
   # common fields
   attribute :name
   attribute :email
@@ -29,12 +29,7 @@ class Form < MailForm::Base
   attribute :course_title
   attribute :projected_enrollment
   attribute :semester_taught
-  attribute :book_1_title
-  attribute :book_1_author
-  attribute :book_2_title
-  attribute :book_2_author
-  attribute :book_3_title
-  attribute :book_3_author
+  attribute :requested_books
   attribute :format
   attribute :authorized_bookstore
 
@@ -53,7 +48,7 @@ class Form < MailForm::Base
   attribute :publication_date
   attribute :rights_requested
 
-  # contact-us
+  # media-inquiries
   attribute :e_catalog
   attribute :print_catalog
   attribute :add_to_mailing_list
@@ -67,7 +62,7 @@ class Form < MailForm::Base
       "review-copy" => ["Request a Review Copy", ["cdoyle@temple.edu"]],
       "copy-request" => ["Exam & Desk Copy Request", ["cdoyle@temple.edu"]],
       "right-permissions" => ["Rights & Permissions", ["cdoyle@temple.edu"]],
-      "contact-us" => ["Contact Us", ["cdoyle@temple.edu"]]
+      "media-inquiries" => ["Contact Us", ["cdoyle@temple.edu"]]
     }
     @forms.fetch(form_type)
   end

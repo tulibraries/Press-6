@@ -6,6 +6,7 @@
 //= require_tree .
 
 require("@nathanvda/cocoon")
+
 (function() {
   
   var HOST = "https://d13txem1unpe48.cloudfront.net/"
@@ -70,9 +71,9 @@ require("@nathanvda/cocoon")
 
 })();
 
-var Trix = require("./trix-1.3.1")
+import { config, Attachment } from "./trix-1.3.1";
 
-Trix.config.textAttributes.center = {
+config.textAttributes.center = {
   tagName: "center",
   parser: false,
   inheritable: true
@@ -115,7 +116,7 @@ addEventListener("trix-action-invoke", function (event) {
   }
 
   function buildHorizontalRule() {
-    return new Trix.Attachment({ content: "<hr>", contentType: "vnd.rubyonrails.horizontal-rule.html" })
+    return new Attachment({ content: "<hr>", contentType: "vnd.rubyonrails.horizontal-rule.html" })
   }
 })
 

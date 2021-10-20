@@ -239,6 +239,12 @@ ActiveRecord::Schema.define(version: 2021_10_07_125945) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "forms", charset: "utf8mb3", force: :cascade do |t|
+    t.string "title"
+    t.bigint "book_id_id", null: false
+    t.index ["book_id_id"], name: "index_forms_on_book_id_id"
+  end
+
   create_table "friendly_id_slugs", charset: "utf8mb3", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false

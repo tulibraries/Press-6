@@ -89,7 +89,7 @@
           <%= menu_button(t("tupress.default.menu.news.title")) %>
             <div class="dropdown-menu p-2" x-placement="bottom-start">
               <ul class="list-unstyled">
-                <li><%= link_to t("tupress.default.menu.news.inquiries"), "#", :class=>"dropdown-item" %></li>
+                <li><%= link_to t("tupress.default.menu.news.inquiries"), root_path+["forms", "media-inquiries"].join("/"), :class=>"dropdown-item" %></li>
                 <li><%= link_to t("tupress.default.menu.news.podcast"), t("tupress.default.menu.news.podcast_link"), :class=>"dropdown-item" %></li>
                 <li><%= link_to t("tupress.default.menu.news.blog"), "#", :class=>"dropdown-item" %></li>
                 <li><%= link_to t("tupress.default.menu.news.conferences"), conferences_path, :class=>"dropdown-item" %></li>

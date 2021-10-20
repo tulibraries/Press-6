@@ -5,6 +5,7 @@ class FormsController < ApplicationController
     @form = Form.new
     if existing_forms.include? params[:type]
       @type = params[:type]
+      @books = Book.where(status: show_status).order(:title)
       render template: "forms/create"
     else
       render "errors/not_found", status: :not_found

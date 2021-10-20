@@ -52,7 +52,7 @@ Rails.application.routes.draw do
   resources :conferences, only: [:index]
   resources :documents, only: [:index]
   resources :events, only: [:index]
-  resources :faqs, only: [:index, :show]  
+  resources :faqs, only: [:index, :show]
   resources :forms, only: [:new, :create]
   resources :news_items, only: [:show], concerns: [:imageable]
   resources :highlights, only: [:show], concerns: [:imageable]
