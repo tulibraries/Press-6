@@ -13,7 +13,7 @@ class Catalog < ApplicationRecord
   has_one_attached :image, dependent: :destroy
 
   def set_title
-    if code.present? 
+    if code.present?
       decade = code[2, 4]
       year = (decade >= "78" && decade <= "99") ? "19#{decade}" : "20#{decade}"
       season = code[0, 2].downcase == "fa" ? "Fall" : "Spring"
