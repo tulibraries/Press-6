@@ -99,6 +99,8 @@
           <%= @book.author_byline %>
         </div>
 
+        <%= "<p>#{@book.supplement}</p>".html_safe if @book.supplement.present? %>
+        
         <% if @awards.present? %>
         <div class="awards mt-4">
         <% @awards.each do |award| %>
