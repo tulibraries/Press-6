@@ -1,0 +1,88 @@
+# frozen_string_literal: true
+
+class Form < MailForm::Base
+  attribute :form_type
+
+  # common fields
+  attribute :name
+  attribute :email
+  attribute :address_line_1
+  attribute :address_line_2
+  attribute :city
+  attribute :state
+  attribute :zip
+  attribute :country
+  attribute :comments
+  attribute :request_type
+
+  # review-copy
+  attribute :media_type
+  attribute :website
+  attribute :request_statement
+
+  #copy-request
+  attribute :university
+  attribute :department
+  attribute :address_type
+  attribute :instructor
+  attribute :course_title
+  attribute :projected_enrollment
+  attribute :semester_taught
+  attribute :requested_books
+  attribute :format
+  attribute :authorized_bookstore
+
+  # rights-permissions
+  attribute :book_title
+  attribute :book_author_editor
+  attribute :chapter_title
+  attribute :chapter_author_editor
+  attribute :page_numbers
+  attribute :reprint_price
+  attribute :your_publisher
+  attribute :reprint_title
+  attribute :publication_editor_author
+  attribute :number_of_pages
+  attribute :number_of_copies
+  attribute :publication_date
+  attribute :rights_requested
+
+  # media-inquiries
+  attribute :e_catalog
+  attribute :print_catalog
+  attribute :add_to_mailing_list
+  attribute :remove_from_mailing_list
+  attribute :removal_description
+  attribute :new_and_special_news
+  attribute :subjects
+
+  def get_subject
+    @forms = {
+      "review-copy" => ["Request a Review Copy", ["cdoyle@temple.edu"]],
+      "copy-request" => ["Request a Desk or Exam Copy", ["cdoyle@temple.edu"]],
+      "rights-permissions" => ["Rights &amp; Permissions", ["cdoyle@temple.edu"]],
+      "media-inquiries" => ["Media Inquiries", ["cdoyle@temple.edu"]]
+    }
+    @forms.fetch(form_type)
+  end
+
+  # Some forms don't supply an email and name, so they're failing
+  def default_from_name
+    "Temple University Press"
+  end
+
+  def default_from_email
+    "tempress@temple.edu"
+  end
+
+  # Declare the e-mail headers. It accepts anything the mail method
+  # in ActionMailer accepts.
+  def headers
+    {
+      subject: get_subject[0],
+      to: get_subject[1],
+      cc: email,
+      from: %("#{name || default_from_name }" <#{email || default_from_email }>)
+    }
+  end
+end

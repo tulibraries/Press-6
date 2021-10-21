@@ -77,4 +77,8 @@ class Book < ApplicationRecord
       .order(:sort_title)
     end
   end
+
+  def select_value
+    "#{self.title.to_s} -- #{self.author_byline}"
+  end
 end

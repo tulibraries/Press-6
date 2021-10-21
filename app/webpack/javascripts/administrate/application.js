@@ -1,6 +1,5 @@
 //= require jquery
 //= require jquery_ujs
-//= require selectize
 //= require moment
 //= require datetime_picker
 //= require_tree .
@@ -69,9 +68,9 @@
 
 })();
 
-var Trix = require("./trix-1.3.1")
+import { config, Attachment } from "./trix-1.3.1";
 
-Trix.config.textAttributes.center = {
+config.textAttributes.center = {
   tagName: "center",
   parser: false,
   inheritable: true
@@ -114,7 +113,7 @@ addEventListener("trix-action-invoke", function (event) {
   }
 
   function buildHorizontalRule() {
-    return new Trix.Attachment({ content: "<hr>", contentType: "vnd.rubyonrails.horizontal-rule.html" })
+    return new Attachment({ content: "<hr>", contentType: "vnd.rubyonrails.horizontal-rule.html" })
   }
 })
 

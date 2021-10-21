@@ -1,0 +1,46 @@
+<div class="container form">
+  <div class="row">
+    <div class="col-12 col-lg-9">
+
+      <div class="row">
+        <div class="col">
+          <h1 class="mt-3"><%= title t("tupress.forms.#{@type}.title").html_safe %></h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <%= render "forms/#{@type}/intro" %>
+        </div>
+      </div>
+
+      <%= simple_form_for @form, html: {class: "form-horizontal", enctype: "multipart" } do |f| %>
+      <%= f.input :form_type, as: :hidden, input_html: { value: "#{@type}" } %>
+
+        <div class="row">
+          <div class="col">
+            <fieldset class="bordered">
+              <legend><%= t("manifold.forms.shared.your_info") %></legend>
+              <%= render "forms/#{@type}/personal_info", f: f %>
+            </fieldset>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <fieldset class="bordered">
+              <legend><%= t("manifold.forms.shared.request_info") %></legend>
+              <%= render "forms/#{@type}/request-info", f: f %>
+            </fieldset>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 28px;">
+          <div class="col">
+            <%= f.button :submit, "Submit", class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -40,7 +40,7 @@ It renders the `_table` partial to display details about the resources.
     ) %>
   <% end %>
 
-  <% unless ["book","series","subject","catalog"].include?(page.resource_name) %>
+  <% unless ["book","series","subject"].include?(page.resource_name) %>
     <div>
       <%= link_to(
         t(

@@ -3,7 +3,7 @@
     <div class="col-8 col-sm-7 col-lg-4 logo-container text-left ">
       <%= link_to image_pack_tag('TUPress_2C_Red_Black.png', alt: "Temple University Press"),
                     root_path, class: "header-name", id: "header-logo" unless current_user %>
-      <%= link_to (image_pack_tag 'TUPress_2C_Red_Black.png', alt: "Temple University Press"), edit_url if current_user %>
+      <%= link_to (image_pack_tag 'TUPress_2C_Red_Black.png', alt: "Temple University Press"), admin_url if current_user %>
     </div>
 
       <%= render "header-search" %>
@@ -62,7 +62,7 @@
             <ul class="list-unstyled">
               <li><%= link_to t("tupress.default.menu.press_info.about"), root_path+"press-info", :class=>"dropdown-item" %></li>
               <li><%= link_to t("tupress.default.menu.press_info.people"), people_path, :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.press_info.rights"), root_path+"rights", :class=>"dropdown-item" %></li>
+              <li><%= link_to t("tupress.default.menu.press_info.rights"), root_path+["forms", "rights-permissions"].join("/"), :class=>"dropdown-item" %></li>
               <li><%= link_to t("tupress.default.menu.press_info.agents"), agencies_path, :class=>"dropdown-item" %></li>
               <li><%= link_to t("tupress.default.menu.press_info.submissions"), root_path+"submissions", :class=>"dropdown-item" %></li>
               <li><%= link_to t("tupress.default.menu.press_info.presses"), root_path+"university-presses", :class=>"dropdown-item" %></li>
@@ -78,7 +78,8 @@
               <ul class="list-unstyled">
                 <li><%= link_to t("tupress.default.menu.orders.info"), root_path+"order", :class=>"dropdown-item" %></li>
                 <li><%= link_to t("tupress.default.menu.orders.terms"), root_path+"payment", :class=>"dropdown-item" %></li>
-                <li><%= link_to t("tupress.default.menu.orders.requests"), root_path+"copy-request", :class=>"dropdown-item" %></li>
+                <li><%= link_to t("tupress.default.menu.orders.copy-request"), root_path+["forms", "copy-request"].join("/"), :class=>"dropdown-item" %></li>
+                <li><%= link_to t("tupress.default.menu.orders.review-request"), root_path+["forms", "review-copy"].join("/"), :class=>"dropdown-item" %></li>
                 <li><%= link_to t("tupress.default.menu.orders.reps"), sales_reps_path, :class=>"dropdown-item" %></li>
               </ul>
             </div>
@@ -88,7 +89,7 @@
           <%= menu_button(t("tupress.default.menu.news.title")) %>
             <div class="dropdown-menu p-2" x-placement="bottom-start">
               <ul class="list-unstyled">
-                <li><%= link_to t("tupress.default.menu.news.inquiries"), "#", :class=>"dropdown-item" %></li>
+                <li><%= link_to t("tupress.default.menu.news.inquiries"), root_path+["forms", "media-inquiries"].join("/"), :class=>"dropdown-item" %></li>
                 <li><%= link_to t("tupress.default.menu.news.podcast"), t("tupress.default.menu.news.podcast_link"), :class=>"dropdown-item" %></li>
                 <li><%= link_to t("tupress.default.menu.news.blog"), "#", :class=>"dropdown-item" %></li>
                 <li><%= link_to t("tupress.default.menu.news.conferences"), conferences_path, :class=>"dropdown-item" %></li>

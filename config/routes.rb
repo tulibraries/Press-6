@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   resources :documents, only: [:index]
   resources :events, only: [:index]
   resources :faqs, only: [:index, :show]
+  resources :forms, only: [:new, :create]
   resources :news_items, only: [:show], concerns: [:imageable]
   resources :highlights, only: [:show], concerns: [:imageable]
   resources :oabooks, only: [:show], concerns: [:imageable]
@@ -79,4 +80,7 @@ Rails.application.routes.draw do
   get "/open-access/labor-studies"          => "oabooks#labor_studies", as: :labor_studies
   get "/open-access/labor-studies/:id"      => "oabooks#show", as: :labor_studies_book
   get "/open-access/north-broad-press/:id"  => "oabooks#show", as: :north_broad_book
+
+  get "forms", to: "forms#index", as: "forms_index"
+  get "forms/*type", to: "forms#new"
 end

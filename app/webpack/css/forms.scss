@@ -1,0 +1,32 @@
+@import "partials/_vars.scss";
+
+form.simple_form {
+  fieldset.bordered {
+    border: solid #ccc 2px;
+    padding: 21px;
+    border-radius:7px;
+    margin-bottom: 35px;
+    background-color: transparent;
+    legend {
+      width: auto;
+      padding: 0 21px;
+    }
+  }
+
+  .radio_buttons {
+    legend {
+      padding-left: 0!important;
+      font-weight: 600;
+    }
+  }
+
+  .inline {
+    display: inline-block;
+    margin-left: 1rem;
+  }
+
+  abbr[title="required"] {
+    color: $red;
+    text-decoration: none;
+  }
+}

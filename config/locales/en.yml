@@ -57,7 +57,8 @@ en:
           title: Orders
           info: Ordering Info
           terms: Payments Terms
-          requests: Exam & Desk Copy Requests
+          copy-request: Exam & Desk Copy Requests
+          review-request: Request a Review Copy
           reps: Sales Representatives
         news:
           title: News & Events
@@ -83,7 +84,6 @@ en:
         tabs:
           book: book
           subjects: subjects
-          catalog: catalog
           awards: awards
           guide: guide
           homepage: homepage
@@ -155,6 +155,185 @@ en:
         Tax Forms: Tax Forms
     events:
       title: Event Calendar
+    forms:
+      shared_fields:
+        state: State/Province/Region
+        country: Country (if not US)
+        zip: Zip/Postal Code
+      attributes:
+        name: Name
+        email: Email
+        address_line_1: Address Line 1
+        address_line_2: Address Line 2
+        city: City
+        state: State
+        zip: Zip
+        country: Country
+        comments: Coments
+        media_type: Media Type
+        website: Website
+        request_statement: Request
+        request_type: Request Type
+        university: University
+        department: Department
+        address_type: Address Type
+        instructor: Instructor
+        course_title: Course Title
+        projected_enrollment: Projected Enrollment
+        semester_taught: Semester Taught
+        requested_books: Requested Books
+        format: Format
+        authorized_bookstore: Authorized Bookstore
+        book_title: Book Title
+        book_author_editor: Book Author/Editor
+        chapter_title: Chapter Title
+        chapter_author_editor: Chapter Author/Editor
+        page_numbers: Page Numbers
+        reprint_price: Reprint Price
+        your_publisher: Reprint Publisher
+        reprint_title: Reprint Title
+        publication_editor_author: Publication Author/Editor
+        number_of_pages: Number of Pages
+        number_of_copies: Number of Copies
+        publication_date: Publication Date
+        rights_requested: Rights Requested
+        e_catalog: E-Catalog
+        print_catalog: Print Catalog 
+        add_to_mailing_list: Add to Mailing List
+        remove_from_mailing_list: Remove From Mailing List
+        removal_description: Removal Description
+        new_and_special_news: Add to New & Special Events
+        subjects: Subject Interested In
+
+      media-inquiries:
+        title: Media Inquiries
+        prefix_html: >-
+          <p>To order, please call 1-800-621-2736 or fax 1-800-621-8476.</p>
+          <p>If you want to send us a message, fill out the following form. You can also call 215-204-8787 or write to:</p>
+          <p class="col col-md-12 offset-md-1" style="font-weight: 600;">Temple University Press<br>1900 N. 13th Street<br>
+          Philadelphia, PA 19122</p>
+        suffix_html: >-
+          <p class="mt-5"><strong>Privacy Policy</strong>: Temple University Press respects your privacy. We carefully control the distribution of our customer information, and although we occasionally buy, sell, and swap mailing lists, we do so only with like-minded organizations. If you wish to be removed from either the postal mailing list or the email distribution list, 
+          please <a class="inline" href="mailto:tempress@temple.edu">send a note to the webmaster</a>.</p>
+        e_catalog: Send me an e-catalog
+        print_catalog: Send me a printed catalog
+        add_to_mailing_list: Add my name to the mailing list
+        remove_from_mailing_list: Remove my name from the mailing list
+        removal_description_placeholder: Please describe the mailing piece you received 
+        new_and_special: Send me e-newsletters about new books and special offers
+        preferred_subjects: "My preferred subjects of interest are:"
+        preferred_subjects_hint: (hold the CTRL/CMD key to select multiple subjects)
+        subjects:
+          African American Studies: African American Studies
+          Aging: Aging
+          American Studies: American Studies
+          Animals and Society: Animals and Society
+          Anthropology: Anthropology
+          Art and Photography: Art and Photography
+          Asian American Studies: Asian American Studies
+          Asian Studies: Asian Studies
+          Biography: Biography
+          Business/Economics: Business/Economics
+          Children's Books: Children's Books
+          Cinema Studies: Cinema Studies
+          Community Organizing: Community Organizing
+          Cultural Studies: Cultural Studies
+          Death and Dying: Death and Dying
+          Disability Studies: Disability Studies
+          Education: Education
+          Family Policy: Family Policy
+          Gender Studies: Gender Studies
+          General Interest: General Interest
+          Geography: Geography
+          Health and Health Policy: Health and Health Policy
+          History: History
+          Immigration Studies: Immigration Studies
+          Jewish Studies: Jewish Studies
+          Labor Studies and Work: Labor Studies and Work
+          Latin/Caribbean Studies: Latin/Caribbean Studies
+          Latino/a Studies: Latino/a Studies
+          Law and Criminology: Law and Criminology
+          Literature and Drama: Literature and Drama
+          Mass Media and Communications: Mass Media and Communications
+          Music and Dance: Music and Dance
+          Nature and the Environment: Nature and the Environment
+          Philadelphia Region: Philadelphia Region
+          Philosophy and Ethics: Philosophy and Ethics
+          Political Science and Public Policy: Political Science and Public Policy
+          Psychology: Psychology
+          Race and Ethnicity: Race and Ethnicity
+          Religion: Religion
+          Science: Science
+          Sexual Identity: Sexual Identity
+          Sociology: Sociology
+          Sports: Sports
+          Technology: Technology
+          Urban Studies: Urban Studies
+          Women's Studies: Women's Studies
+          Youth Studies: Youth Studies
+
+      review-copy: 
+        title: Request a Review Copy
+        intro_html: >-
+          <p>
+          <strong>We are currently fulfilling all examination copies as an ebook (when available).&nbsp; If requesting a desk copy please select print or ebook below.</strong>
+          </p>
+          <hr />
+          <p>We invite you to fill out the form below or to write on departmental letterhead for an examination copy of any paperback title you wish to consider for course adoption or request for desk copies. <strong>For examination copies</strong>, please state course title, semester, and projected enrollment. <strong>For desk copies</strong>, please provide course ID, instructor's name, projected enrollment, semester class will be taught, and the name of the bookstore that will be placing the order. Please note: book(s) will not be sent until bookstore order is confirmed. All orders can be forwarded to: <a href="mailto:examcopy@temple.edu" target="_blank" rel="noopener">examcopy@temple.edu</a>&nbsp;</p>
+        media_type_label: Media Type
+        media_type:
+          Radio_TV: Radio/TV
+          Magazine: Magazine
+          Journal: Journal
+          Newspaper: Newspaper
+          Exam_Desk_Copy: Exam/Desk Copy
+          Other: Other
+        request_statement: Request
+        suffix_html: >-
+          <p>
+            <strong>Please note</strong>: all requests are indeed that—requests. Unfortunately, we cannot always honor all of them. 
+            If you think we are unfamiliar with your publication, please send a sample/tearsheets with your request. 
+            Thank you.
+          </p>
+
+      copy-request: 
+        title: Request a Desk or Exam Copy
+        prefix_html: >-
+          <p class="mt-3">To request a copy of a Temple University Press book, please fax your request on 
+          company letterhead to: Gary Kramer at 215.204.2160. If you would like to email your 
+          request, please include your name and contact information.</p>
+          <p><strong>If you are a professor</strong> wishing to request an examination copy 
+          or a desk copy of a book that you've ordered for your class, you may email us at: 
+          <a href="mailto:examcopy@temple.edu">examcopy@temple.edu,</a> fax your request on 
+          letterhead to 215-204-2142, or use our <a href="/forms/copy-request">online form</a>. 
+          Thanks.</p>
+        prompt: "Click then begin typing to select one or more books       "
+        hint: (required for Desk Copy requests)
+        books: Requested Books
+        address_type:
+          Business:  Business
+          Residential: Residential
+
+      rights-permissions: 
+        title: Rights &amp; Permissions
+        prefix_html: >-
+          <p>For permission to use material from one of our publications, please fill out the following form. 
+          The following information/material is required before requests for permission to use material from 
+          Temple University Press books will be considered.</p>
+          <p>This form should only be used for requests to reproduce material copyrighted by Temple University 
+          Press in forthcoming books for publication. <strong>Please submit all requests for photocopies for 
+          academic use and for electronic course reserve via Copyright Clearance Center</strong> at 
+          <a href="http://www.copyright.com">www.copyright.com</a>.</p>
+        suffix_html: >-
+          <p>If selection is an excerpt, adaptation, or is altered in any way from its copyrighted form, a 
+          photocopy of the pages of material to be reprinted, indicating any edits, should be sent to:</p>
+          <p class="address">Rights &amp; Permissions Manager<br>Temple University Press 
+          <br>1900 N. 13th Street<br>Philadelphia, PA 19122</p>
+          <p>Fax: 215.204.2142</p>
+          <p>If this request is for a reuse of material for which permission was previously granted, please 
+          supply a copy of the previous permission agreement and any additional information regarding 
+          the previous use.</p>
+
     oabooks:
       online_epub: Read it Online
       manifold_label: View Epub

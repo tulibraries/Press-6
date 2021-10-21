@@ -9,7 +9,7 @@ require("@rails/activestorage").start()
 require("@rails/actiontext")
 require("../javascripts/administrate/trix-1.3.1")
 require("bootstrap")
-require("../administrate/index")
 require("selectize")
+require("../administrate/index")
 
 import "../css/administrate/application";

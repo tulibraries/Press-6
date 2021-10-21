@@ -107,14 +107,14 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
 
-  # config.action_mailer.smtp_settings = {
-  #   address: "smtp.gmail.com",
-  #   port: 587,
-  #   user_name: "templelibraries@gmail.com",
-  #   password: ENV["FORMS_EMAIL_PASSWORD"],
-  #   authentication: :plain,
-  #   enable_starttls_auto: true
-  # }
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    user_name: "templelibraries@gmail.com",
+    password: ENV["FORMS_EMAIL_PASSWORD"],
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
 
   # Rails.application.routes.default_url_options[:host] = ENV["MANIFOLD_FQDN"]
   # Rails.application.routes.default_url_options[:protocol] = "https"

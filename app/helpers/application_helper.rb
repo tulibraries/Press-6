@@ -93,8 +93,10 @@ module ApplicationHelper
   end
 
   def admin_url
-    if controller_name == "webpages" && action_name == "index"
+    if (controller_name == "webpages" && action_name == "index") || controller_name == "forms"
       admin_root_path
+    elsif controller_name == "series"
+      send "admin_#{controller_name}_index_path"
     else
       send "admin_#{controller_name}_path"
     end
