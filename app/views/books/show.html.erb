@@ -1,0 +1,173 @@
+<div class="container books show">
+  <div class="row">
+    <div class="col col-3 book-cover text-center mt-5 pt-3">
+
+      <%= render "cover_image", book: @book %>
+      
+      <div class="social-share text-right p-4">
+        <span class="share-label"><%= t("tupress.books.share_label") %></span>
+        <%= link_to image_pack_tag('twitter-icon.png', class: 'social-icon', alt: 'Twitter Icon'), 'http://twitter.com/TempleUnivPress' %>
+        <%= link_to image_pack_tag('fb-icon.png', class: 'social-icon', alt: 'Facebook Icon'), 'http://facebook.com/TempleUnivPress' %>
+      </div>
+      <div class="book-details text-left">
+        <ul class="list-unstyled">
+          <li><%= "#{@book.pages_total} #{t("tupress.books.pages")}" %></li>
+          <li><%= @book.trim %></li>
+          <li><%= @book.illustrations %></li>
+        </ul>
+
+        <%= link_to t("tupress.books.order_button"), "#{t("tupress.books.purchase_link")}#{@book.isbn}", 
+                              class: "order-button" if @book.isbn.present? %>
+
+        <div class="book-formats">
+          <ul class="list-unstyled">
+          <% @book.bindings_as_tuples.each do |b| %>    
+            <% if b[:format].present? %>      
+              <li class="section-label">
+                <%= book_format(b[:format]) %>
+              </li>
+              <% if b[:price].present? %>      
+                <li>Price: <%= b[:price] %></li>
+              <% end %>
+              <% if b[:ean].present? %>      
+                <li>EAN: <%= hyphen_strip(b[:ean]) %></li>
+              <% end %>
+              <% if b[:pub_date].present? %>
+                <li>Publication: <%= pub_date(b[:pub_date]) %></li>
+              <% end %>
+            <% end %>
+          <% end %>
+          </ul>
+        </div>
+
+        <hr />
+
+        <% if @subjects.present? %>
+        <div class="book-subjects mt-4">
+          <span class="section-label">
+            <%= t("tupress.books.subjects") %>
+          </span>
+          <ul class="list-unstyled">
+          <% @subjects.each do |subject| %>
+            <li><%= link_to subject.title, subject_path(subject) %></li>
+          <% end %>
+          </ul>
+        </div>
+        <% end %>
+
+        <% if @book.excerpt_file.attached? || @book.toc_file.attached? %>
+        <div class="book-preview mt-4">
+          <span class="section-label">
+            <%= t("tupress.books.preview") %>
+          </span>
+          <ul class="list-unstyled">
+            <li><%= link_to @book.excerpt_text, url_for(@book.excerpt_file.attachment), disposition: "attachment" if @book.excerpt_file.attached? %></li>
+            <li><%= link_to @book.toc_label, url_for(@book.toc_file.attachment), disposition: "attachment" if @book.toc_file.attached? %></li>
+          </ul>
+        </div>
+        <% end %>
+        
+        <% unless @links.flatten.compact.all?(&:blank?) %>
+        <div class="book-related-links mt-4">
+          <span class="section-label">
+            <%= t("tupress.books.related_links") %>
+          </span>
+          <ul class="list-unstyled">
+            <% @links.each do |link| %>
+              <li><%= link_to link[0], link[1] unless link.any?(nil) %></li> 
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+
+        <% if @book.desk_copy %>
+        <div class="book-desk-copy mt-5">
+          <ul class="list-unstyled mt-5">
+            <li><%= link_to t("tupress.books.desk_request") %>, "#" %></li> 
+          </ul>
+        </div>
+        <% end %>
+
+      </div>
+    </div>
+    <div class="col col-9 book-info">
+      <div class="description mt-5 p-3">
+        <h1><%= title_link(@book) %></h1>
+
+        <div class="subtitle lead">
+          <%= sub_ed(@book).html_safe %>
+          <%= @book.author_byline %>
+        </div>
+
+        <% if @awards.present? %>
+        <div class="awards mt-4">
+        <% @awards.each do |award| %>
+        <ul class="list-unstyled">
+          <li><%= award if award.present? %></li>
+        </ul>
+        <% end %>
+        </div>
+        <% end %>
+        
+        <% if @book.description.present? %>
+        <div class="description mt-4">
+          <%= fix_invalid_html(@book.description).html_safe %>
+        </div>
+        <% end %>
+      </div>
+      
+      <% if @reviews.present? %>
+      <div class="reviews mt-3 p-3">
+        <h2><%= t("tupress.books.reviews") %></h2>
+        <% @reviews.each do |review| %>
+          <div class="review mb-3">
+            <%= fix_invalid_html(review.review).html_safe %>
+          </div>
+        <% end %>
+      </div>
+      <% end %>
+
+      <% if @book.about_author.present? %>
+      <div class="author-bio mt-3 p-3">
+        <h2><%= t("tupress.books.authors_about") %></h2>
+          <%= fix_invalid_html(@book.about_author).html_safe %>
+      </div>
+      <% end %>
+
+      <% if @series.present? %>
+      <div class="series mt-3 p-3">
+        <h2 class="mb-3"><%= t("tupress.books.series") %></h2>
+          <p><%= link_to @series.title, series_path(@series), style: "font-size:larger;" %></p>
+          <p><%= fix_invalid_html(@series.description).html_safe %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+<% if @book.books.present? %>
+  <div class="container mt-5 p-4 see-also">
+    <div class="row mb-3">
+        <div class="col-12">
+          <h2><%= t("tupress.books.of_interest") %></h2>
+        </div>
+    </div>
+    <div class="row">
+    <% @see_alsos.each do |book| %>
+    
+      <div class="col col-3 text-center">
+      <%= link_to book_path(book.xml_id) do %>
+      <% if book.cover_image.attached? %>
+        <%= image_tag book.index_image("cover_image") %>
+      <% else %>
+        <%= image_pack_tag "see-also-default.gif", class: "default" %>
+      <% end %>
+        
+        <p class="pt-2 mb-0"><%= book.title.html_safe %></p>
+      <% end %>
+        <%= book.author_byline %>
+      </div>
+    <% end %>
+    </div>
+  </div>
+  <% end %>
+</div>

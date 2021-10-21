@@ -13,7 +13,7 @@ module SetInstance
           :
           instance = model.friendly.find(params[:id])
       when "Series"
-        params[:id][0,2] == "S-" ?
+        params[:id][0, 2] == "S-" ?
           instance = model.find_by(code: params[:id])
           :
           instance = model.friendly.find(params[:id])
