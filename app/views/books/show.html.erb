@@ -139,7 +139,7 @@
       <% if @series.present? %>
       <div class="series mt-3 p-3">
         <h2 class="mb-3"><%= t("tupress.books.series") %></h2>
-          <p><%= link_to @series.title, series_path(@series.code), style: "font-size:larger;" %></p>
+          <p><%= link_to @series.title, series_path(@series), style: "font-size:larger;" %></p>
           <p><%= fix_invalid_html(@series.description).html_safe %>
       </div>
       <% end %>
