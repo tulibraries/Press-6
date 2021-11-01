@@ -16,6 +16,7 @@ trix-toolbar {
 }
 
 trix-editor {
+  min-height: 250px;
   [data-trix-mutable].attachment[data-trix-content-type~="vnd.rubyonrails.horizontal-rule.html"] {
     box-shadow: 0 0 0 2px highlight;
   }
