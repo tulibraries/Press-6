@@ -6,9 +6,15 @@ module SetInstance
     model = controller_name.classify.constantize
     model_name = model.to_s
     unless params[:id].nil?
-      if model_name == "Book"
+      case model_name
+      when "Book"
         is_number?(params[:id]) ?
           instance = model.find_by(xml_id: params[:id])
+          :
+          instance = model.friendly.find(params[:id])
+      when "Series"
+        params[:id][0, 2] == "S-" ?
+          instance = model.find_by(code: params[:id])
           :
           instance = model.friendly.find(params[:id])
       else
