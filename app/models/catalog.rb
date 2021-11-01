@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-class Catalog < ApplicationRecord
+class Catalog < ApplicationRecord  
+  include Imageable
   include Friendable
 
   before_save :set_century, :set_season, :set_title
