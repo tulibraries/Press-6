@@ -3,7 +3,7 @@
 class Brochure < ApplicationRecord
   include Friendable
 
-  validates :title, :pdf, :image, presence: true
+  validates :title, :pdf, presence: true
 
   belongs_to :subject, optional: true
   belongs_to :catalog, optional: true
