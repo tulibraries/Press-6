@@ -29,7 +29,7 @@ namespace :import do
         ) unless brochure.image.attached?
         @images += 1
       rescue OpenURI::HTTPError => err
-        stdout_and_log(%Q(Syncing Brochure #{brochure.id}, image -- errored --  #{err.message} ))
+        stdout_and_log("Syncing Brochure #{brochure.id}, image -- errored --  #{err.message} ")
         @errored += 1
       end
     end
@@ -54,7 +54,7 @@ namespace :import do
         ActiveRecord::Base.connection.execute("UPDATE catalogs SET brochure_id = \"#{code}\" WHERE catalogs.id = #{catalog.id};")
       rescue => error
         puts error
-        stdout_and_log(%Q(Brochure catalog unable to be saved for #{catalog.title}))
+        stdout_and_log("Brochure catalog unable to be saved for #{catalog.title}")
         @not_saved += 1
       end
       ActiveRecord::Base.connection.execute("SET FOREIGN_KEY_CHECKS = 1")
@@ -67,7 +67,7 @@ namespace :import do
         ActiveRecord::Base.connection.execute("UPDATE subjects SET brochure_id = \"#{code}\" WHERE subjects.id = #{subject.id};")
       rescue => error
         puts error
-        stdout_and_log(%Q(Brochure subject unable to be saved for #{brochure.title}))
+        stdout_and_log("Brochure subject unable to be saved for #{brochure.title}")
         @not_saved += 1
       end
       ActiveRecord::Base.connection.execute("SET FOREIGN_KEY_CHECKS = 1")
@@ -76,15 +76,15 @@ namespace :import do
     brochures.each do |brochure|
 
       brochure_to_update = (
-                              Brochure.find_by(title: brochure["title"]) ? 
-                              Brochure.find_by(title: brochure["title"]) 
-                              : 
+                              Brochure.find_by(title: brochure["title"]) ?
+                              Brochure.find_by(title: brochure["title"])
+                              :
                               Brochure.new
                             )
 
-      new_brochure = true if brochure_to_update.title.blank? 
+      new_brochure = true if brochure_to_update.title.blank?
 
-      record_hash = 
+      record_hash =
       {
         "title"                 => brochure.dig("title"),
         "subject_code"          => brochure.dig("subject_id"),
@@ -97,7 +97,7 @@ namespace :import do
       catalog = Catalog.find_by(code: record_hash["catalog_code"])
       subject = Subject.find_by(code: record_hash["subject_code"])
 
-      brochure_to_update.assign_attributes(record_hash.except("pdf", "image", "catalog_code", "subject_code")) 
+      brochure_to_update.assign_attributes(record_hash.except("pdf", "image", "catalog_code", "subject_code"))
 
       attach_pdf(brochure_to_update, record_hash["pdf"]) if record_hash["pdf"].present?
       attach_image(brochure_to_update, record_hash["image"]) if record_hash["image"].present?

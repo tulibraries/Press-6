@@ -29,7 +29,7 @@ namespace :import do
         ) unless book.cover_image.attached?
         @covers += 1
       rescue OpenURI::HTTPError => err
-        stdout_and_log(%Q(Syncing Book #{book.xml_id}, cover_image -- errored --  #{err.message} ))
+        stdout_and_log("Syncing Book #{book.xml_id}, cover_image -- errored --  #{err.message} ")
         @errored += 1
       end
     end
@@ -42,7 +42,7 @@ namespace :import do
         ) unless book.excerpt_file.attached?
         @excerpts += 1
       rescue OpenURI::HTTPError => err
-        stdout_and_log(%Q(Syncing Book #{book.xml_id}, excerpt_file -- errored --  #{err.message} ))
+        stdout_and_log("Syncing Book #{book.xml_id}, excerpt_file -- errored --  #{err.message} ")
         @errored += 1
       end
     end
@@ -55,7 +55,7 @@ namespace :import do
         ) unless book.guide_file.attached?
         @guides += 1
       rescue OpenURI::HTTPError => err
-        stdout_and_log(%Q(Syncing Book #{book.xml_id}, guide_file  -- errored --  #{err.message} ))
+        stdout_and_log("Syncing Book #{book.xml_id}, guide_file  -- errored --  #{err.message} ")
         @errored += 1
       end
     end
@@ -63,9 +63,9 @@ namespace :import do
     books.each do |book|
 
       book_to_update = (Book.find_by(xml_id: book["book_id"]) ? Book.find_by(xml_id: book["book_id"]) : Book.new)
-      new_book = true if book_to_update.title.blank? 
+      new_book = true if book_to_update.title.blank?
 
-      record_hash = 
+      record_hash =
       {
         "xml_id"              => book.dig("book_id"),
         "title"               => book.dig("title"),
@@ -89,13 +89,13 @@ namespace :import do
         "news_text"           => book.dig("news_text")
       }
 
-      unless record_hash["status"].present?
+      if record_hash["status"].blank?
         record_hash["status"] = "X"
       end
 
       if book_to_update.present? && record_hash["title"].present? && record_hash["author_byline"].present?
 
-        book_to_update.assign_attributes(record_hash.except("guide_file", "cover_image", "excerpt_file")) 
+        book_to_update.assign_attributes(record_hash.except("guide_file", "cover_image", "excerpt_file"))
 
         attach_guide_file(book_to_update, record_hash["guide_file"]) if record_hash["guide_file"].present?
         attach_cover_image(book_to_update, record_hash["cover_image"]) if record_hash["cover_image"].present?

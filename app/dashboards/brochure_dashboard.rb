@@ -14,13 +14,12 @@ class BrochureDashboard < Administrate::BaseDashboard
     title: Field::String,
     catalog_id: Field::Select.with_options(
       collection: Catalog.all
-                          .sort_by{|catalog| [catalog.year, catalog.season]}
+                          .sort_by { |catalog| [catalog.year, catalog.season] }
                           .reverse
-                          .map{|catalog| [catalog.title, catalog.code]}
+                          .map { |catalog| [catalog.title, catalog.code] }
     ),
     subject_id: Field::Select.with_options(
-      collection: Subject.all.map{|subject| [subject.title, subject.code]}.sort
-      # collection: Subject.all.sort
+      collection: Subject.all.map { |subject| [subject.title, subject.code] }.sort
     ),
     image: ImageField,
     pdf: FileField,
