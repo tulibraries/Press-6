@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Catalog < ApplicationRecord
+  include Imageable
   include Friendable
 
   before_validation :set_title

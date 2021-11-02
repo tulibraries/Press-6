@@ -5,7 +5,15 @@
     <h1 class="mt-4">
       <%= title_link(@catalog) %>
     </h1>
-  </div>
+      <% if @catalog.pdf.attached? %>
+        <div class="text-right">
+        <%= link_to @catalog.pdf.attachment do%>
+          <%= image_tag(@catalog.custom_image("image", 100, 200)) if @catalog.image.attached? %>
+          <%= link_to "<br />Download PDF version".html_safe, @catalog.pdf.attachment, class: "text-right text-lg-left mt-2" %><br />
+        <% end %>
+        </div>
+      <% end %>
+    </div>
   <div class="col-12 social-sharing text-md-right">
 			<% if @catalog.pdf.attached? %>
 				<%= link_to "Download PDF version", @catalog.pdf.attachment, class: "text-right text-lg-left" %><br />

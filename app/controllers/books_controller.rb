@@ -7,9 +7,15 @@ class BooksController < ApplicationController
   def index
     letter = params[:id] ? params[:id] : "a"
     unless letter == "numeric"
-      @books = Book.where("sort_title LIKE ?", "#{letter}%").order(:sort_title).page params[:page]
+      @books = Book.where(status: show_status)
+                    .where("sort_title LIKE ?", "#{letter}%")
+                    .order(:sort_title)
+                    .page params[:page]
     else
-      @books = Book.where("sort_title regexp ?", "^[0-9]+").order(:sort_title).page params[:page]
+      @books = Book.where(status: show_status)
+                    .where("sort_title regexp ?", "^[0-9]+")
+                    .order(:sort_title)
+                    .page params[:page]
     end
     @selected = letter
   end

@@ -6,7 +6,6 @@ RSpec.describe Brochure, type: :model do
   describe "validations" do
     it { should validate_presence_of(:title) }
     it { should validate_presence_of(:pdf) }
-    it { should validate_presence_of(:image) }
   end
 
   it_behaves_like "attachable"
