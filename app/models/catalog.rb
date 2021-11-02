@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Catalog < ApplicationRecord  
+class Catalog < ApplicationRecord
   include Imageable
   include Friendable
 
