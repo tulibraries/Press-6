@@ -81,7 +81,7 @@ namespace :import do
                               Oabook.new
                             )
 
-      new_oabook = true if oabook_to_update.id.blank?
+      new_oabook = true if oabook_to_update.title.blank?
 
       record_hash =
       {

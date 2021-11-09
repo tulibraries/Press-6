@@ -63,7 +63,7 @@ namespace :import do
     books.each do |book|
 
       book_to_update = (Book.find_by(xml_id: book["book_id"]) ? Book.find_by(xml_id: book["book_id"]) : Book.new)
-      new_book = true if book_to_update.title.blank?
+      new_book = true if book_to_update.xml_id.blank?
 
       record_hash =
       {

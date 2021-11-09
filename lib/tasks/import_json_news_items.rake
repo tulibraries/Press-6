@@ -42,7 +42,7 @@ namespace :import do
                               NewsItem.new
                             )
 
-      new_news_item = true if news_item_to_update.id.blank?
+      new_news_item = true if news_item_to_update.title.blank?
 
       record_hash =
       {

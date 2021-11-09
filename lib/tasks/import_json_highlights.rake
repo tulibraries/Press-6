@@ -42,7 +42,7 @@ namespace :import do
                               Highlight.new
                             )
 
-      new_highlight = true if highlight_to_update.id.blank?
+      new_highlight = true if highlight_to_update.title.blank?
 
       record_hash =
       {

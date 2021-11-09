@@ -29,7 +29,7 @@ namespace :import do
                               Person.new
                             )
 
-      new_person = true if person_to_update.id.blank?
+      new_person = true if person_to_update.email.blank?
 
       record_hash =
       {
