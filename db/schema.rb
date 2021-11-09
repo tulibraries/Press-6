@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_07_125945) do
+ActiveRecord::Schema.define(version: 2021_11_08_185014) do
 
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -203,6 +203,7 @@ ActiveRecord::Schema.define(version: 2021_10_07_125945) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
+    t.string "dates"
     t.index ["slug"], name: "index_conferences_on_slug", unique: true
   end
 
@@ -229,6 +230,7 @@ ActiveRecord::Schema.define(version: 2021_10_07_125945) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "add_to_news"
     t.string "slug"
+    t.integer "news_weight"
     t.index ["slug"], name: "index_events_on_slug", unique: true
   end
 
@@ -241,6 +243,8 @@ ActiveRecord::Schema.define(version: 2021_10_07_125945) do
 
   create_table "forms", charset: "utf8mb3", force: :cascade do |t|
     t.string "title"
+    t.bigint "book_id_id", null: false
+    t.index ["book_id_id"], name: "index_forms_on_book_id_id"
   end
 
   create_table "friendly_id_slugs", charset: "utf8mb3", force: :cascade do |t|
@@ -346,13 +350,13 @@ ActiveRecord::Schema.define(version: 2021_10_07_125945) do
     t.string "code"
     t.string "title"
     t.string "editors"
-    t.text "description"
     t.string "founder"
     t.string "image_link"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "book_id"
     t.text "slug"
+    t.text "description"
     t.index ["book_id"], name: "index_series_on_book_id"
   end
 
