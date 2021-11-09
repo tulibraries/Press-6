@@ -30,7 +30,7 @@ namespace :import do
       begin
         event.image.attach(
           io: URI.open("http://tupress.temple.edu#{path}"),
-          filename: path.sub("/uploads/documents/", ""),
+          filename: path.sub("/uploads/event/", ""),
         ) unless event.image.attached?
         @images += 1
       rescue => err
