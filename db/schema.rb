@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_10_021253) do
+ActiveRecord::Schema.define(version: 2021_11_10_135639) do
 
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -186,8 +186,8 @@ ActiveRecord::Schema.define(version: 2021_11_10_021253) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "suppress"
-    t.bigint "brochure_id"
     t.string "slug"
+    t.bigint "brochure_id"
     t.index ["brochure_id"], name: "index_catalogs_on_brochure_id"
     t.index ["slug"], name: "index_catalogs_on_slug", unique: true
   end
@@ -385,8 +385,8 @@ ActiveRecord::Schema.define(version: 2021_11_10_021253) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "file_label"
-    t.bigint "brochure_id"
     t.string "slug"
+    t.bigint "brochure_id"
     t.index ["brochure_id"], name: "index_subjects_on_brochure_id"
     t.index ["slug"], name: "index_subjects_on_slug", unique: true
   end
@@ -415,11 +415,8 @@ ActiveRecord::Schema.define(version: 2021_11_10_021253) do
 
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "brochures", "catalogs"
-  add_foreign_key "brochures", "subjects"
-  add_foreign_key "catalogs", "brochures"
   add_foreign_key "documents", "people"
   add_foreign_key "people", "documents"
   add_foreign_key "series", "books"
   add_foreign_key "special_offers", "books"
-  add_foreign_key "subjects", "brochures"
 end

@@ -16,9 +16,9 @@ class Catalog < ApplicationRecord
   def set_title
     if code.present?
       decade = code[2, 4]
-      year = (decade >= "78" && decade <= "99") ? "19#{decade}" : "20#{decade}"
-      season = code[0, 2].downcase == "fa" ? "Fall" : "Spring"
-      title = "#{season} #{year}"
+      self.year = (decade >= "78" && decade <= "99") ? "19#{decade}" : "20#{decade}"
+      self.season = code[0, 2].downcase == "fa" ? "Fall" : "Spring"
+      self.title = "#{season} #{year}"
     end
   end
 end

@@ -48,29 +48,23 @@ namespace :import do
     end
 
     def assign_catalog(brochure, code, catalog)
-      ActiveRecord::Base.connection.execute("SET FOREIGN_KEY_CHECKS = 0")
       begin
-        ActiveRecord::Base.connection.execute("UPDATE brochures SET catalog_id = \"#{code}\" WHERE brochures.id = #{brochure.id};")
         ActiveRecord::Base.connection.execute("UPDATE catalogs SET brochure_id = \"#{code}\" WHERE catalogs.id = #{catalog.id};")
       rescue => error
         puts error
         stdout_and_log("Brochure catalog unable to be saved for #{catalog.title}")
         @not_saved += 1
       end
-      ActiveRecord::Base.connection.execute("SET FOREIGN_KEY_CHECKS = 1")
     end
 
     def assign_subject(brochure, code, subject)
-      ActiveRecord::Base.connection.execute("SET FOREIGN_KEY_CHECKS = 0")
       begin
-        ActiveRecord::Base.connection.execute("UPDATE brochures SET subject_id = \"#{code}\" WHERE brochures.id = #{brochure.id};")
         ActiveRecord::Base.connection.execute("UPDATE subjects SET brochure_id = \"#{code}\" WHERE subjects.id = #{subject.id};")
       rescue => error
         puts error
         stdout_and_log("Brochure subject unable to be saved for #{brochure.title}")
         @not_saved += 1
       end
-      ActiveRecord::Base.connection.execute("SET FOREIGN_KEY_CHECKS = 1")
     end
 
     brochures.each do |brochure|
@@ -87,25 +81,25 @@ namespace :import do
       record_hash =
       {
         "title"                 => brochure.dig("title"),
-        "subject_code"          => brochure.dig("subject_id"),
-        "catalog_code"          => brochure.dig("catalog_code"),
+        "subject_id"            => brochure.dig("subject_id"),
+        "catalog_id"            => brochure.dig("catalog_code"),
         "promoted_to_homepage"  => brochure.dig("promoted_to_homepage"),
         "pdf"                   => brochure.dig("pdf")["url"],
-        "image"                 => brochure.dig("image")["url"],
+        "image"                 => brochure.dig("image")["url"]
       }
 
-      catalog = Catalog.find_by(code: record_hash["catalog_code"])
-      subject = Subject.find_by(code: record_hash["subject_code"])
+      catalog = Catalog.find_by(code: record_hash["catalog_id"])
+      subject = Subject.find_by(code: record_hash["subject_id"])
 
-      brochure_to_update.assign_attributes(record_hash.except("pdf", "image", "catalog_code", "subject_code"))
+      brochure_to_update.assign_attributes(record_hash.except("pdf", "image", "catalog_id", "subject_id"))
 
       attach_pdf(brochure_to_update, record_hash["pdf"]) if record_hash["pdf"].present?
       attach_image(brochure_to_update, record_hash["image"]) if record_hash["image"].present?
 
       if brochure_to_update.pdf.present?
         if brochure_to_update.save!
-          assign_catalog(brochure_to_update, record_hash["catalog_code"], catalog) if record_hash["catalog_code"].present?
-          assign_subject(brochure_to_update, record_hash["subject_code"], subject) if record_hash["subject_code"].present?
+          assign_catalog(record_hash["catalog_id"], catalog) if record_hash["catalog_id"].present?
+          assign_subject(record_hash["subject_id"], subject) if record_hash["subject_id"].present?
           @updated += 1 unless new_brochure
           @created += 1 if new_brochure
         else
