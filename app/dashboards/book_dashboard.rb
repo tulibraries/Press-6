@@ -62,7 +62,9 @@ class BookDashboard < Administrate::BaseDashboard
     course_adoption: Field::Boolean,
     desk_copy: Field::Boolean,
 
-    special_offer: Field::BelongsTo.with_options(order: "title"),
+    special_offers: Field::HasMany.with_options(
+      class_name: "SpecialOffer",
+      order: "title"),
 
     subjects: Field::Text,
     subject1: SubjectsSelectField,
@@ -156,7 +158,7 @@ class BookDashboard < Administrate::BaseDashboard
     suggested_reading_image
     suggested_reading_label
     course_adoption
-    special_offer
+    special_offers
     books
     label_1
     link_1

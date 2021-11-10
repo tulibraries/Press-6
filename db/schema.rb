@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_08_185014) do
+ActiveRecord::Schema.define(version: 2021_11_10_021253) do
 
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -360,6 +360,13 @@ ActiveRecord::Schema.define(version: 2021_11_08_185014) do
     t.index ["book_id"], name: "index_series_on_book_id"
   end
 
+  create_table "special_offer_books", charset: "utf8mb3", force: :cascade do |t|
+    t.integer "special_offer_id"
+    t.integer "book_id"
+    t.index ["book_id"], name: "index_special_offer_books_on_book_id"
+    t.index ["special_offer_id"], name: "index_special_offer_books_on_special_offer_id"
+  end
+
   create_table "special_offers", charset: "utf8mb3", force: :cascade do |t|
     t.string "title"
     t.string "pdf_display_name"
@@ -407,7 +414,6 @@ ActiveRecord::Schema.define(version: 2021_11_08_185014) do
   end
 
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "books", "special_offers"
   add_foreign_key "brochures", "catalogs"
   add_foreign_key "brochures", "subjects"
   add_foreign_key "catalogs", "brochures"
