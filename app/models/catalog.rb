@@ -8,7 +8,9 @@ class Catalog < ApplicationRecord
 
   validates :code, presence: true
 
-  has_many :brochures, class_name: "Brochure", dependent: :nullify
+  has_many :catalog_brochure, dependent: :nullify
+  has_many :brochures, through: :catalog_brochure, source: :brochure
+
   has_many :books, primary_key: :code, class_name: "Book", dependent: :nullify
   has_one_attached :pdf, dependent: :destroy
   has_one_attached :image, dependent: :destroy

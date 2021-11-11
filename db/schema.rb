@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_10_135639) do
+ActiveRecord::Schema.define(version: 2021_11_10_021253) do
 
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -188,7 +188,6 @@ ActiveRecord::Schema.define(version: 2021_11_10_135639) do
     t.boolean "suppress"
     t.string "slug"
     t.bigint "brochure_id"
-    t.index ["brochure_id"], name: "index_catalogs_on_brochure_id"
     t.index ["slug"], name: "index_catalogs_on_slug", unique: true
   end
 
@@ -387,7 +386,6 @@ ActiveRecord::Schema.define(version: 2021_11_10_135639) do
     t.string "file_label"
     t.string "slug"
     t.bigint "brochure_id"
-    t.index ["brochure_id"], name: "index_subjects_on_brochure_id"
     t.index ["slug"], name: "index_subjects_on_slug", unique: true
   end
 

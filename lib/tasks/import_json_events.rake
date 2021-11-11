@@ -94,12 +94,6 @@ namespace :import do
         record_hash["end_date"] = record_hash["start_time"]
       end
 
-      # unless record_hash["location"].present?
-      #   stdout_and_log(%Q(location check: #{record_hash["title"]}))
-      #   record_hash["location"] = "Not specified"
-      # end
-      # event_to_update.assign_attributes(record_hash) 
-      # binding.pry if record_hash["title"] == "Northeast Modern Language Association"
       event_to_update.update(record_hash.except("image","start_time","end_time"))
       attach_image(event_to_update, record_hash["image"]) if record_hash["image"].present?
 
@@ -116,7 +110,7 @@ namespace :import do
         @not_saved += 1
       end
 
-      stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved.")
+      # stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved.")
     end
 
     def stdout_and_log(message, level: :info)

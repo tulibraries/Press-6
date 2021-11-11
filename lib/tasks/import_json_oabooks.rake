@@ -92,7 +92,7 @@ namespace :import do
         "isbn"                   => oabook.dig("isbn"),
         "print_isbn"             => oabook.dig("print_isbn"),
         "description"            => oabook.dig("description"),
-        "manifold"                   => oabook.dig("manifold"),
+        "manifold"               => oabook.dig("manifold"),
         "collection"             => oabook.dig("collection"),
         "supplemental"           => oabook.dig("supplemental"),
         "pod"                    => oabook.dig("pod"),
@@ -101,6 +101,8 @@ namespace :import do
         "mobi"                   => oabook.dig("mobi")["url"],
         "pdf"                    => oabook.dig("pdf")["url"]
       }
+
+      record_hash["collection"] = "Labor Studies & Work" if record_hash["collection"] == "Labor Studies"
 
       oabook_to_update.update(record_hash.except("image","epub","mobi","pdf"))
       attach_image(oabook_to_update, record_hash["image"]) if record_hash["image"].present?
@@ -121,7 +123,7 @@ namespace :import do
         @not_saved += 1
       end
 
-      stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved.")
+      # stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved.")
     end
 
     def stdout_and_log(message, level: :info)

@@ -36,16 +36,17 @@ namespace :import do
     news_items.each do |news_item|
 
       news_item_to_update = (
-                              NewsItem.find_by(title: news_item["title"]) ?
-                              NewsItem.find_by(title: news_item["title"])
+                              NewsItem.find_by(id: news_item["id"]) ?
+                              NewsItem.find_by(id: news_item["id"])
                               :
                               NewsItem.new
                             )
 
-      new_news_item = true if news_item_to_update.title.blank?
+      new_news_item = true if news_item_to_update.id.blank?
 
       record_hash =
       {
+        "id"                       => news_item.dig("id"),
         "title"                    => news_item.dig("title"),
         "promote_to_homepage"      => news_item.dig("homepage"),
         "link"                     => news_item.fetch("link"){ "https://tupress.temple.edu" },
@@ -65,11 +66,11 @@ namespace :import do
           @not_saved += 1
         end
       rescue => err
-        stdout_and_log(%Q(NewsItem title: #{record_hash["title"]} -- #{err.message}))
+        stdout_and_log(%Q(NewsItem id: #{record_hash["id"]} -- #{err.message}))
         @not_saved += 1
       end
 
-      stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved.")
+      # stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved.")
     end
 
     def stdout_and_log(message, level: :info)

@@ -29,7 +29,7 @@ namespace :import do
         ) unless book.cover_image.attached?
         @covers += 1
       rescue OpenURI::HTTPError => err
-        stdout_and_log("Syncing Book #{book.xml_id}, cover_image -- errored --  #{err.message} ")
+        # stdout_and_log("Syncing Book #{book.xml_id}, cover_image -- errored --  #{err.message} ")
         @errored += 1
       end
     end
@@ -93,7 +93,7 @@ namespace :import do
         record_hash["status"] = "X"
       end
 
-      if book_to_update.present? && record_hash["title"].present? && record_hash["author_byline"].present?
+      if book_to_update.present? && record_hash["title"].present? && record_hash["author_byline"].present? && ["NP", "IP", "OS", "OP", "In Print"].include?(record_hash["status"])
 
         book_to_update.assign_attributes(record_hash.except("guide_file", "cover_image", "excerpt_file"))
 
@@ -109,21 +109,16 @@ namespace :import do
           @not_saved += 1
         end
       else
-        stdout_and_log("")
+        stdout_and_log("#{record_hash["title"]}: missing required field values")
       end
 
-      stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved. \n Covers: #{@covers}, Excerpts: #{@excerpts}, Guides: #{@guides}")
+      # stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved. \n Covers: #{@covers}, Excerpts: #{@excerpts}, Guides: #{@guides}")
 
     end
-
-
 
     def stdout_and_log(message, level: :info)
       @log.send(level, message)
       @stdout.send(level, message)
     end
-
-
-
   end
 end

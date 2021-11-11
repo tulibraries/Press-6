@@ -47,22 +47,14 @@ namespace :import do
       end
     end
 
-    def assign_catalog(brochure, code, catalog)
+    def assign_brochure(model, id)
+      model_class = model.class.to_s.downcase
+      join = "#{model.class.to_s}Brochure".constantize.new
       begin
-        ActiveRecord::Base.connection.execute("UPDATE catalogs SET brochure_id = \"#{code}\" WHERE catalogs.id = #{catalog.id};")
+        join.update(brochure_id: id, "#{model_class}_id".to_sym => model.id)
+        stdout_and_log("Brochure (#{id}) associated with #{model_class}")
       rescue => error
-        puts error
-        stdout_and_log("Brochure catalog unable to be saved for #{catalog.title}")
-        @not_saved += 1
-      end
-    end
-
-    def assign_subject(brochure, code, subject)
-      begin
-        ActiveRecord::Base.connection.execute("UPDATE subjects SET brochure_id = \"#{code}\" WHERE subjects.id = #{subject.id};")
-      rescue => error
-        puts error
-        stdout_and_log("Brochure subject unable to be saved for #{brochure.title}")
+        stdout_and_log("Brochure (#{id}) unable to be associated with #{model_class}: #{error}")
         @not_saved += 1
       end
     end
@@ -81,31 +73,34 @@ namespace :import do
       record_hash =
       {
         "title"                 => brochure.dig("title"),
-        "subject_id"            => brochure.dig("subject_id"),
-        "catalog_id"            => brochure.dig("catalog_code"),
+        "subject_code"          => brochure.dig("subject_id"),
+        "catalog_code"          => brochure.dig("catalog_code"),
         "promoted_to_homepage"  => brochure.dig("promoted_to_homepage"),
         "pdf"                   => brochure.dig("pdf")["url"],
         "image"                 => brochure.dig("image")["url"]
       }
 
-      catalog = Catalog.find_by(code: record_hash["catalog_id"])
-      subject = Subject.find_by(code: record_hash["subject_id"])
-
-      brochure_to_update.assign_attributes(record_hash.except("pdf", "image", "catalog_id", "subject_id"))
+      brochure_to_update.assign_attributes(record_hash.except("pdf", "image", "catalog_code", "subject_code"))
 
       attach_pdf(brochure_to_update, record_hash["pdf"]) if record_hash["pdf"].present?
       attach_image(brochure_to_update, record_hash["image"]) if record_hash["image"].present?
 
       if brochure_to_update.pdf.present?
         if brochure_to_update.save!
-          assign_catalog(record_hash["catalog_id"], catalog) if record_hash["catalog_id"].present?
-          assign_subject(record_hash["subject_id"], subject) if record_hash["subject_id"].present?
           @updated += 1 unless new_brochure
           @created += 1 if new_brochure
+          
+          catalog = Catalog.find_by(code: record_hash["catalog_code"])
+          subject = Subject.find_by(code: record_hash["subject_code"])
+          assign_brochure(catalog, brochure_to_update.id) if catalog.present?
+          assign_brochure(subject, brochure_to_update.id) if subject.present?
+
         else
           stdout_and_log(%Q(Brochure record unable to be saved for #{record_hash["title"]}))
           @not_saved += 1
         end
+      else
+        stdout_and_log(%Q(Brochure record unable to be saved for #{record_hash["title"]} -- No PDF))
       end
 
       stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved. \n Covers: #{@images}, Excerpts: #{@pdfs}")

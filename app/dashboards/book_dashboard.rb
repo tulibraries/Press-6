@@ -110,12 +110,14 @@ class BookDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     title
     author_byline
+    xml_id
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     cover_image
+    xml_id
     sort_title
     author_byline
     isbn
@@ -127,6 +129,7 @@ class BookDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     cover_image
+    xml_id
     sort_title
     slug
     edition

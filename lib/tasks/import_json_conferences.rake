@@ -44,11 +44,10 @@ namespace :import do
       }
 
       unless record_hash["location"].present?
-        stdout_and_log(%Q(location check: #{record_hash["title"]}))
+        stdout_and_log(%Q(No location: #{record_hash["title"]}))
         record_hash["location"] = "Not specified"
       end
-      # conference_to_update.assign_attributes(record_hash) 
-      # binding.pry if record_hash["title"] == "Northeast Modern Language Association"
+
       conference_to_update.update(record_hash)
 
       begin
@@ -64,7 +63,7 @@ namespace :import do
         @not_saved += 1
       end
 
-      stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved.")
+      # stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved.")
     end
 
     def stdout_and_log(message, level: :info)

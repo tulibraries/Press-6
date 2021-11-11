@@ -76,7 +76,7 @@ namespace :import do
         @not_saved += 1
       end
 
-      stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved.")
+      # stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved.")
     end
 
     def stdout_and_log(message, level: :info)
