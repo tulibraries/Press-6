@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_10_021253) do
+ActiveRecord::Schema.define(version: 2021_11_10_170034) do
 
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -178,6 +178,13 @@ ActiveRecord::Schema.define(version: 2021_11_10_021253) do
     t.index ["subject_id"], name: "index_brochures_on_subject_id"
   end
 
+  create_table "catalog_brochures", charset: "utf8mb3", force: :cascade do |t|
+    t.integer "brochure_id"
+    t.integer "catalog_id"
+    t.index ["brochure_id"], name: "index_catalog_brochures_on_brochure_id", unique: true
+    t.index ["catalog_id"], name: "index_catalog_brochures_on_catalog_id", unique: true
+  end
+
   create_table "catalogs", charset: "utf8mb3", force: :cascade do |t|
     t.string "title"
     t.string "code"
@@ -187,7 +194,6 @@ ActiveRecord::Schema.define(version: 2021_11_10_021253) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "suppress"
     t.string "slug"
-    t.bigint "brochure_id"
     t.index ["slug"], name: "index_catalogs_on_slug", unique: true
   end
 
@@ -378,6 +384,13 @@ ActiveRecord::Schema.define(version: 2021_11_10_021253) do
     t.index ["slug"], name: "index_special_offers_on_slug", unique: true
   end
 
+  create_table "subject_brochures", charset: "utf8mb3", force: :cascade do |t|
+    t.integer "brochure_id"
+    t.integer "subject_id"
+    t.index ["brochure_id"], name: "index_subject_brochures_on_brochure_id", unique: true
+    t.index ["subject_id"], name: "index_subject_brochures_on_subject_id", unique: true
+  end
+
   create_table "subjects", charset: "utf8mb3", force: :cascade do |t|
     t.string "code"
     t.string "title"
@@ -385,7 +398,6 @@ ActiveRecord::Schema.define(version: 2021_11_10_021253) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "file_label"
     t.string "slug"
-    t.bigint "brochure_id"
     t.index ["slug"], name: "index_subjects_on_slug", unique: true
   end
 

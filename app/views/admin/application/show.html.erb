@@ -45,7 +45,7 @@ as well as a link to its edit page.
       <%= t(
         "helpers.label.#{resource_name}.#{attribute.name}",
         default: attribute.name
-      ).upcase %>
+      ).humanize.upcase %>
       </dt>
 
       <dd class="attribute-data attribute-data--<%=attribute.html_class%>"
