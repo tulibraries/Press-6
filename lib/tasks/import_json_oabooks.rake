@@ -25,7 +25,7 @@ namespace :import do
         oabook.image.attach(
           io: URI.open("http://tupress.temple.edu#{path}"),
           filename: path.sub("/uploads/oabook/cover_images/", ""),
-        ) 
+        )
         @images += 1
       rescue => err
         stdout_and_log("Syncing Oabook #{oabook.title}, -- image errored --  #{err.message} ")
@@ -38,7 +38,7 @@ namespace :import do
         oabook.mobi.attach(
           io: URI.open("http://tupress.temple.edu#{path}"),
           filename: path.sub("/uploads/oabooks/", ""),
-        ) 
+        )
         @images += 1
       rescue => err
         stdout_and_log("Syncing Oabook #{oabook.title}, -- mobi errored --  #{err.message} ")
@@ -51,7 +51,7 @@ namespace :import do
         oabook.pdf.attach(
           io: URI.open("http://tupress.temple.edu#{path}"),
           filename: path.sub("/uploads/oabooks/", ""),
-        ) 
+        )
         @images += 1
       rescue => err
         stdout_and_log("Syncing Oabook #{oabook.title}, -- pdf errored --  #{err.message} ")
@@ -64,7 +64,7 @@ namespace :import do
         oabook.epub.attach(
           io: URI.open("http://tupress.temple.edu#{path}"),
           filename: path.sub("/uploads/oabooks/", ""),
-        ) 
+        )
         @images += 1
       rescue => err
         stdout_and_log("Syncing Oabook #{oabook.title}, -- epub errored --  #{err.message} ")
@@ -104,7 +104,7 @@ namespace :import do
 
       record_hash["collection"] = "Labor Studies & Work" if record_hash["collection"] == "Labor Studies"
 
-      oabook_to_update.update(record_hash.except("image","epub","mobi","pdf"))
+      oabook_to_update.update(record_hash.except("image", "epub", "mobi", "pdf"))
       attach_image(oabook_to_update, record_hash["image"]) if record_hash["image"].present?
       attach_epub(oabook_to_update, record_hash["epub"]) if record_hash["epub"].present?
       attach_pdf(oabook_to_update, record_hash["pdf"]) if record_hash["pdf"].present?

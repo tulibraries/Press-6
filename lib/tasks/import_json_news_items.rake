@@ -49,7 +49,7 @@ namespace :import do
         "id"                       => news_item.dig("id"),
         "title"                    => news_item.dig("title"),
         "promote_to_homepage"      => news_item.dig("homepage"),
-        "link"                     => news_item.fetch("link"){ "https://tupress.temple.edu" },
+        "link"                     => news_item.fetch("link") { "https://tupress.temple.edu" },
         "image"                    => news_item.dig("image")["url"],
         "description"              => news_item.dig("description")
       }

@@ -25,7 +25,7 @@ namespace :import do
         sob.pdf.attach(
           io: URI.open("http://tupress.temple.edu#{path}"),
           filename: path.sub("/uploads/promotions/", ""),
-        ) 
+        )
         @images += 1
       rescue => err
         stdout_and_log("Syncing #{sob.title}, -- pdf errored --  #{err.message} ")

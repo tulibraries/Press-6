@@ -43,7 +43,7 @@ namespace :import do
         "booth"           => conference.dig("booth")
       }
 
-      unless record_hash["location"].present?
+      if record_hash["location"].blank?
         stdout_and_log(%Q(No location: #{record_hash["title"]}))
         record_hash["location"] = "Not specified"
       end

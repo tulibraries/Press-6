@@ -48,7 +48,7 @@ namespace :import do
       {
         "title"                    => highlight.dig("title"),
         "promote_to_homepage"      => highlight.dig("homepage"),
-        "link"                     => highlight.fetch("link"){ "https://tupress.temple.edu" },
+        "link"                     => highlight.fetch("link") { "https://tupress.temple.edu" },
         "image"                    => highlight.dig("image")["url"],
         "alt_text"                 => "Alt text needed"
       }

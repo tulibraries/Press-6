@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddBrochureAssociationTables < ActiveRecord::Migration[6.1]
   def change
     change_table :subjects do |t|
@@ -12,6 +14,7 @@ class AddBrochureAssociationTables < ActiveRecord::Migration[6.1]
 
       t.index(:brochure_id, unique: true)
       t.index(:catalog_id, unique: true)
+      t.timestamps
     end
     create_table :subject_brochures do |t|
       t.integer :brochure_id
@@ -19,6 +22,7 @@ class AddBrochureAssociationTables < ActiveRecord::Migration[6.1]
 
       t.index(:brochure_id, unique: true)
       t.index(:subject_id, unique: true)
+      t.timestamps
     end
   end
 end

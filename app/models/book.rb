@@ -26,7 +26,7 @@ class Book < ApplicationRecord
   has_rich_text :award3
 
   has_many :books, class_name: "Book", dependent: :nullify
-  
+
   has_many :special_offer_book, dependent: :nullify
   has_many :special_offers, through: :special_offer_book, source: :special_offer
 

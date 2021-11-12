@@ -2,7 +2,7 @@
 
 class Subject < ApplicationRecord
   include Friendable
-  
+
   validates :pdf, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
   validates :title, presence: true
 

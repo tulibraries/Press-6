@@ -89,7 +89,7 @@ namespace :import do
         if brochure_to_update.save!
           @updated += 1 unless new_brochure
           @created += 1 if new_brochure
-          
+
           catalog = Catalog.find_by(code: record_hash["catalog_code"])
           subject = Subject.find_by(code: record_hash["subject_code"])
           assign_brochure(catalog, brochure_to_update.id) if catalog.present?

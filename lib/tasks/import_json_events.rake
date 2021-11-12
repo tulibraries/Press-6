@@ -21,7 +21,7 @@ namespace :import do
     @stdout = Logger.new(STDOUT)
 
     def combine(d, t)
-      d = Date.parse(d) if d.is_a? String 
+      d = Date.parse(d) if d.is_a? String
       t = Time.zone.parse(t) if t.is_a? String
       DateTime.new(d.year, d.month, d.day, t.hour, t.min, t.sec)
     end
@@ -94,7 +94,7 @@ namespace :import do
         record_hash["end_date"] = record_hash["start_time"]
       end
 
-      event_to_update.update(record_hash.except("image","start_time","end_time"))
+      event_to_update.update(record_hash.except("image", "start_time", "end_time"))
       attach_image(event_to_update, record_hash["image"]) if record_hash["image"].present?
 
       begin

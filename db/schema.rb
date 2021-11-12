@@ -181,6 +181,8 @@ ActiveRecord::Schema.define(version: 2021_11_10_170034) do
   create_table "catalog_brochures", charset: "utf8mb3", force: :cascade do |t|
     t.integer "brochure_id"
     t.integer "catalog_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["brochure_id"], name: "index_catalog_brochures_on_brochure_id", unique: true
     t.index ["catalog_id"], name: "index_catalog_brochures_on_catalog_id", unique: true
   end
@@ -368,6 +370,8 @@ ActiveRecord::Schema.define(version: 2021_11_10_170034) do
   create_table "special_offer_books", charset: "utf8mb3", force: :cascade do |t|
     t.integer "special_offer_id"
     t.integer "book_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_special_offer_books_on_book_id"
     t.index ["special_offer_id"], name: "index_special_offer_books_on_special_offer_id"
   end
@@ -387,6 +391,8 @@ ActiveRecord::Schema.define(version: 2021_11_10_170034) do
   create_table "subject_brochures", charset: "utf8mb3", force: :cascade do |t|
     t.integer "brochure_id"
     t.integer "subject_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["brochure_id"], name: "index_subject_brochures_on_brochure_id", unique: true
     t.index ["subject_id"], name: "index_subject_brochures_on_subject_id", unique: true
   end
