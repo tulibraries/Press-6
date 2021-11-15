@@ -36,7 +36,7 @@ namespace :import do
         "title"         => agency.fetch("title") { "Temple" },
         "email"         => agency.dig("email"),
         "contact"       => agency.dig("contact"),
-        "address"       => agency.dig("address1")+"\n"+agency.dig("address2")+"\n"+agency.dig("address3")+"\n"+agency.dig("city")+"\n"+agency.dig("country"),
+        "address"       => agency.dig("address1") + "<br>" + agency.dig("address2") + "<br>" + agency.dig("address3") + "<br>" + agency.dig("city") + "<br>" + agency.dig("country"),
         "phone"         => agency.dig("phone"),
         "fax"           => agency.dig("fax"),
         "region"        => agency.dig("region"),
