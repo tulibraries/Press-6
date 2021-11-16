@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_07_125945) do
+ActiveRecord::Schema.define(version: 2021_11_10_170034) do
 
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -178,6 +178,15 @@ ActiveRecord::Schema.define(version: 2021_10_07_125945) do
     t.index ["subject_id"], name: "index_brochures_on_subject_id"
   end
 
+  create_table "catalog_brochures", charset: "utf8mb3", force: :cascade do |t|
+    t.integer "brochure_id"
+    t.integer "catalog_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["brochure_id"], name: "index_catalog_brochures_on_brochure_id", unique: true
+    t.index ["catalog_id"], name: "index_catalog_brochures_on_catalog_id", unique: true
+  end
+
   create_table "catalogs", charset: "utf8mb3", force: :cascade do |t|
     t.string "title"
     t.string "code"
@@ -186,9 +195,7 @@ ActiveRecord::Schema.define(version: 2021_10_07_125945) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "suppress"
-    t.bigint "brochure_id"
     t.string "slug"
-    t.index ["brochure_id"], name: "index_catalogs_on_brochure_id"
     t.index ["slug"], name: "index_catalogs_on_slug", unique: true
   end
 
@@ -203,6 +210,7 @@ ActiveRecord::Schema.define(version: 2021_10_07_125945) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
+    t.string "dates"
     t.index ["slug"], name: "index_conferences_on_slug", unique: true
   end
 
@@ -229,6 +237,7 @@ ActiveRecord::Schema.define(version: 2021_10_07_125945) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "add_to_news"
     t.string "slug"
+    t.integer "news_weight"
     t.index ["slug"], name: "index_events_on_slug", unique: true
   end
 
@@ -241,6 +250,8 @@ ActiveRecord::Schema.define(version: 2021_10_07_125945) do
 
   create_table "forms", charset: "utf8mb3", force: :cascade do |t|
     t.string "title"
+    t.bigint "book_id_id", null: false
+    t.index ["book_id_id"], name: "index_forms_on_book_id_id"
   end
 
   create_table "friendly_id_slugs", charset: "utf8mb3", force: :cascade do |t|
@@ -346,14 +357,23 @@ ActiveRecord::Schema.define(version: 2021_10_07_125945) do
     t.string "code"
     t.string "title"
     t.string "editors"
-    t.text "description"
     t.string "founder"
     t.string "image_link"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "book_id"
     t.text "slug"
+    t.text "description"
     t.index ["book_id"], name: "index_series_on_book_id"
+  end
+
+  create_table "special_offer_books", charset: "utf8mb3", force: :cascade do |t|
+    t.integer "special_offer_id"
+    t.integer "book_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_special_offer_books_on_book_id"
+    t.index ["special_offer_id"], name: "index_special_offer_books_on_special_offer_id"
   end
 
   create_table "special_offers", charset: "utf8mb3", force: :cascade do |t|
@@ -368,15 +388,22 @@ ActiveRecord::Schema.define(version: 2021_10_07_125945) do
     t.index ["slug"], name: "index_special_offers_on_slug", unique: true
   end
 
+  create_table "subject_brochures", charset: "utf8mb3", force: :cascade do |t|
+    t.integer "brochure_id"
+    t.integer "subject_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["brochure_id"], name: "index_subject_brochures_on_brochure_id", unique: true
+    t.index ["subject_id"], name: "index_subject_brochures_on_subject_id", unique: true
+  end
+
   create_table "subjects", charset: "utf8mb3", force: :cascade do |t|
     t.string "code"
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "file_label"
-    t.bigint "brochure_id"
     t.string "slug"
-    t.index ["brochure_id"], name: "index_subjects_on_brochure_id"
     t.index ["slug"], name: "index_subjects_on_slug", unique: true
   end
 
@@ -403,13 +430,9 @@ ActiveRecord::Schema.define(version: 2021_10_07_125945) do
   end
 
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "books", "special_offers"
   add_foreign_key "brochures", "catalogs"
-  add_foreign_key "brochures", "subjects"
-  add_foreign_key "catalogs", "brochures"
   add_foreign_key "documents", "people"
   add_foreign_key "people", "documents"
   add_foreign_key "series", "books"
   add_foreign_key "special_offers", "books"
-  add_foreign_key "subjects", "brochures"
 end

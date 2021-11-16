@@ -47,30 +47,16 @@ namespace :import do
       end
     end
 
-    def assign_catalog(brochure, code, catalog)
-      ActiveRecord::Base.connection.execute("SET FOREIGN_KEY_CHECKS = 0")
+    def assign_brochure(model, id)
+      model_class = model.class.to_s.downcase
+      join = "#{model.class.to_s}Brochure".constantize.new
       begin
-        ActiveRecord::Base.connection.execute("UPDATE brochures SET catalog_id = \"#{code}\" WHERE brochures.id = #{brochure.id};")
-        ActiveRecord::Base.connection.execute("UPDATE catalogs SET brochure_id = \"#{code}\" WHERE catalogs.id = #{catalog.id};")
+        join.update(brochure_id: id, "#{model_class}_id".to_sym => model.id)
+        stdout_and_log("Brochure (#{id}) associated with #{model_class}")
       rescue => error
-        puts error
-        stdout_and_log("Brochure catalog unable to be saved for #{catalog.title}")
+        stdout_and_log("Brochure (#{id}) unable to be associated with #{model_class}: #{error}")
         @not_saved += 1
       end
-      ActiveRecord::Base.connection.execute("SET FOREIGN_KEY_CHECKS = 1")
-    end
-
-    def assign_subject(brochure, code, subject)
-      ActiveRecord::Base.connection.execute("SET FOREIGN_KEY_CHECKS = 0")
-      begin
-        ActiveRecord::Base.connection.execute("UPDATE brochures SET subject_id = \"#{code}\" WHERE brochures.id = #{brochure.id};")
-        ActiveRecord::Base.connection.execute("UPDATE subjects SET brochure_id = \"#{code}\" WHERE subjects.id = #{subject.id};")
-      rescue => error
-        puts error
-        stdout_and_log("Brochure subject unable to be saved for #{brochure.title}")
-        @not_saved += 1
-      end
-      ActiveRecord::Base.connection.execute("SET FOREIGN_KEY_CHECKS = 1")
     end
 
     brochures.each do |brochure|
@@ -91,11 +77,8 @@ namespace :import do
         "catalog_code"          => brochure.dig("catalog_code"),
         "promoted_to_homepage"  => brochure.dig("promoted_to_homepage"),
         "pdf"                   => brochure.dig("pdf")["url"],
-        "image"                 => brochure.dig("image")["url"],
+        "image"                 => brochure.dig("image")["url"]
       }
-
-      catalog = Catalog.find_by(code: record_hash["catalog_code"])
-      subject = Subject.find_by(code: record_hash["subject_code"])
 
       brochure_to_update.assign_attributes(record_hash.except("pdf", "image", "catalog_code", "subject_code"))
 
@@ -104,14 +87,20 @@ namespace :import do
 
       if brochure_to_update.pdf.present?
         if brochure_to_update.save!
-          assign_catalog(brochure_to_update, record_hash["catalog_code"], catalog) if record_hash["catalog_code"].present?
-          assign_subject(brochure_to_update, record_hash["subject_code"], subject) if record_hash["subject_code"].present?
           @updated += 1 unless new_brochure
           @created += 1 if new_brochure
+
+          catalog = Catalog.find_by(code: record_hash["catalog_code"])
+          subject = Subject.find_by(code: record_hash["subject_code"])
+          assign_brochure(catalog, brochure_to_update.id) if catalog.present?
+          assign_brochure(subject, brochure_to_update.id) if subject.present?
+
         else
           stdout_and_log(%Q(Brochure record unable to be saved for #{record_hash["title"]}))
           @not_saved += 1
         end
+      else
+        stdout_and_log(%Q(Brochure record unable to be saved for #{record_hash["title"]} -- No PDF))
       end
 
       stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved. \n Covers: #{@images}, Excerpts: #{@pdfs}")
