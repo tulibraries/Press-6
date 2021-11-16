@@ -12,15 +12,6 @@ class BrochureDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     title: Field::String,
-    catalog_id: Field::Select.with_options(
-      collection: Catalog.all
-                          .sort_by { |catalog| [catalog.year, catalog.season] }
-                          .reverse
-                          .select { |catalog| [catalog.title, catalog.code] }
-    ),
-    subject_id: Field::Select.with_options(
-      collection: Subject.all.map { |subject| [subject.title, subject.code] }.sort
-    ),
     image: ImageField,
     pdf: FileField,
     promoted_to_homepage: Field::Boolean,
@@ -54,8 +45,6 @@ class BrochureDashboard < Administrate::BaseDashboard
   title
   image
   pdf
-  catalog_id
-  subject_id
   promoted_to_homepage
   ].freeze
 

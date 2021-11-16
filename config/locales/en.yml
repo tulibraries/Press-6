@@ -3,6 +3,8 @@ en:
     label:
       book:
         hot: New and Noteworthy
+        xml_id: PW ID
+        XML_ID: PW ID
       phone: Phone
       fax: Fax
   tupress:

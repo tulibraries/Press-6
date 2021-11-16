@@ -5,8 +5,10 @@ class Brochure < ApplicationRecord
 
   validates :title, :pdf, presence: true
 
-  belongs_to :subject, optional: true
-  belongs_to :catalog, optional: true
+  has_many :catalog_brochure, dependent: :nullify
+  has_many :catalogs, through: :catalog_brochure, source: :catalog
+  has_many :subject_brochure, dependent: :nullify
+  has_many :subjects, through: :subject_brochure, source: :subject
 
   has_one_attached :image, dependent: :destroy
   has_one_attached :pdf, dependent: :destroy
