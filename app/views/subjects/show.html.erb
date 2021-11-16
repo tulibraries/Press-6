@@ -8,9 +8,11 @@
     </div>
 
     <div class="col-12 social-sharing text-md-right">
+    <% console %>
       <% @subject.brochures.each do |brochure| %>
         <%= link_to brochure.title, brochure.pdf.attachment, class: "text-right text-lg-left" %>
-      <% end if @subject.brochures.any? %>
+        <%= display_image(brochure) %>
+      <% end %>
     </div>
   </div>
 

@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   end
 
   def show_status
-    ["NP", "IP", "OS", "OP", "In Print"]
+    ["NP", "IP", "OS", "OP"]
   end
 end
