@@ -25,6 +25,8 @@ module Imageable
   end
 
   def image_variation(image_field, width, height)
+    self.send(image_field.to_sym).blob.analyze
+
     if self.send(image_field.to_sym).blob.metadata[:width] > self.send(image_field.to_sym).blob.metadata[:height]
       ActiveStorage::Variation.new(Uploads.resize_x_and_pad(width: width, height: height, blob: self.send(image_field.to_sym).blob))
     else
