@@ -66,12 +66,24 @@ class Uploads
       }.merge(optimize_hash(blob))
     end
 
-    def resize_and_pad(width:, height:, blob:, background: :transparent, gravity: "Center")
+    def resize_x_and_pad(width:, height:, blob:, background: :transparent, gravity: "North")
+      blob.analyze
+      cols = blob.metadata[:width].to_f
+      rows = blob.metadata[:height].to_f
+
+      if width != cols
+        scale_x = width / cols
+        scale_y = height / rows
+        cols = (scale_x * (cols - 0.5)).round
+        rows = cols
+        resize = "#{cols.to_s}"
+      end
+
       {
-        thumbnail: "#{width}x#{height}>",
+        thumbnail: resize,
         background: background == :transparent ? "rgba(255, 255, 255, 0.0)" : background,
         gravity: gravity,
-        extent: "#{width}x#{height}"
+        extent: "#{width}x#{rows}"
       }.merge(optimize_hash(blob))
     end
   end

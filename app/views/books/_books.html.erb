@@ -1,9 +1,9 @@
   <% @books.each do |book| %>  
     <div class="row pb-4 mt-4 mb-4 book-listing">
-      <div class="col-3 pl-0">
+      <div class="col-3 pl-0 text-center">
         <%= link_to book_path(book) do %>
           <% if book.cover_image.attached? %>
-            <%= image_tag book.index_image("cover_image") %>
+            <%= image_tag book.index_image("cover_image"), class: "cover-image"  %>
           <% else %>
             <%= image_pack_tag "default-book-cover-index.png" %>
           <% end %>

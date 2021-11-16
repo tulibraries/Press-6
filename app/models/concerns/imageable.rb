@@ -13,7 +13,7 @@ module Imageable
   end
 
   def show_image(image_field)
-    custom_image(image_field, 270, 420)
+    custom_image(image_field, 271, 421)
   end
 
   def custom_image(image_field, width, height)
@@ -25,6 +25,12 @@ module Imageable
   end
 
   def image_variation(image_field, width, height)
-    ActiveStorage::Variation.new(Uploads.resize_to_fill(width: width, height: height, blob: self.send(image_field.to_sym).blob)) if image_field.present?
+    self.send(image_field.to_sym).blob.analyze
+
+    if self.send(image_field.to_sym).blob.metadata[:width] > self.send(image_field.to_sym).blob.metadata[:height]
+      ActiveStorage::Variation.new(Uploads.resize_x_and_pad(width: width, height: height, blob: self.send(image_field.to_sym).blob))
+    else
+      ActiveStorage::Variation.new(Uploads.resize_to_fit(width: width, height: height, blob: self.send(image_field.to_sym).blob))
+    end if image_field.present?
   end
 end

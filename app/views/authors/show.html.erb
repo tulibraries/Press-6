@@ -13,7 +13,7 @@
     <div class="col-3 mt-4 text-center">
       <%= link_to book_path(book) do %>
       <% if book.cover_image.attached? %>
-        <%= image_tag book.index_image("cover_image") %>
+        <%= image_tag book.index_image("cover_image"), class: "cover-image" %>
       <% else %>
         <%= image_pack_tag "see-also-default.gif", class: "default" %>
       <% end %>
