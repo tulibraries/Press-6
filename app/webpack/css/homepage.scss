@@ -1,6 +1,10 @@
 @import "partials/_vars.scss";
 
 #highlights {
+  .carousel-inner {
+    max-height: 549px;
+    overflow: hidden;
+  }
   .carousel-item {
     img.highlight {
       outline: solid red 4px;
