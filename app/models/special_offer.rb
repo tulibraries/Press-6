@@ -7,6 +7,9 @@ class SpecialOffer < ApplicationRecord
   validates :title, presence: true
 
   has_rich_text :intro_text
-  has_many :books, class_name: "Book", dependent: :nullify
+
+  has_many :special_offer_book, dependent: :nullify
+  has_many :books, through: :special_offer_book, source: :book
+
   has_one_attached :pdf, dependent: :destroy
 end

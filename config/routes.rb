@@ -30,13 +30,13 @@ Rails.application.routes.draw do
     resources :subjects
     resources :webpages
 
-    resource :books, :brochures, :catalogs, :documents, :highlights, :news_items, :oabooks, :people, :series, :subjects, :special_offers do
+    resource :books, :brochures, :catalogs, :documents, :events, :highlights, :news_items, :oabooks, :people, :series, :subjects, :special_offers do
       member do
         get ":id/detach" => :detach
       end
     end
 
-    resource :books, :brochures, :catalogs, :documents, :highlights, :news_items, :oabooks, :people, :series, :subjects, :special_offers do
+    resource :books, :brochures, :catalogs, :documents, :events, :highlights, :news_items, :oabooks, :people, :series, :subjects, :special_offers do
       member do
         post "detach" => :detach
       end
