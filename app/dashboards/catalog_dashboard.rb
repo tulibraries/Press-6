@@ -20,7 +20,6 @@ class CatalogDashboard < Administrate::BaseDashboard
     pdf: FileField,
     image: ImageField,
     brochures: Field::HasMany.with_options(
-      class_name: "Brochure",
       order: "sort_title"),
     created_at: Field::DateTime,
     updated_at: Field::DateTime

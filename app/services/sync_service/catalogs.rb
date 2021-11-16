@@ -47,27 +47,19 @@ class SyncService::Catalogs
 
   def create_if_needed!(record_hash)
     catalog_exists = Catalog.find_by(code: record_hash["code"])
-    if catalog_exists
-      stdout_and_log(
-        %Q(Incoming book with catalog #{record_hash["code"]} matched to existing catalog (code = #{catalog_exists.code} ), level: :debug)
-      )
-      @skipped += 1
-    else
-      catalog_new = Catalog.new
-    end
 
-    if catalog_new
-      # messy data in PW db
-      if %w[sp fa].include?(record_hash["code"][0, 2].downcase) && Float(record_hash["code"][2, 4], exception: false)
-        catalog_new.assign_attributes(record_hash)
-        if catalog_new.save!
-          stdout_and_log(%Q(Successfully saved record for #{record_hash["code"]}))
-          @created += 1
-        end
-      else
-        stdout_and_log(%Q(Malformed catalog code: #{record_hash["code"]}))
-        @baddata += 1
+    catalog_to_update = catalog_exists ? catalog_exists : Catalog.new
+
+    # messy data in PW db
+    if %w[sp fa].include?(record_hash["code"][0, 2].downcase) && Float(record_hash["code"][2, 4], exception: false)
+      catalog_to_update.assign_attributes(record_hash)
+      if catalog_to_update.save!
+        stdout_and_log(%Q(Successfully saved record for #{record_hash["code"]}))
+        @created += 1
       end
+    else
+      stdout_and_log(%Q(Malformed catalog code: #{record_hash["code"]}))
+      @baddata += 1
     end
   end
 

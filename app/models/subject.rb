@@ -7,7 +7,9 @@ class Subject < ApplicationRecord
   validates :title, presence: true
 
   has_one_attached :pdf, dependent: :destroy
-  has_many :brochures, class_name: "Brochure", dependent: :nullify
+
+  has_many :subject_brochure, dependent: :nullify
+  has_many :brochures, through: :subject_brochure, source: :brochure
 
   def self.search(q)
     if q
