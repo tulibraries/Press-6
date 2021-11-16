@@ -7,6 +7,7 @@ class ConferenceDashboard < Administrate::BaseDashboard
     id: Field::Number,
     title: Field::String,
     slug: Field::String,
+    dates: Field::String,
     start_date: Field::DatePicker,
     end_date: Field::DatePicker,
     link: Field::String,
@@ -37,6 +38,7 @@ class ConferenceDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     title
     slug
+    dates
     start_date
     end_date
     location

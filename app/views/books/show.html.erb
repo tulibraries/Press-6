@@ -36,7 +36,7 @@
                 <li>Publication: <%= pub_date(b[:pub_date]) %></li>
               <% end %>
             <% end %>
-          <% end %>
+          <% end unless @book.bindings.nil? %>
           </ul>
         </div>
 

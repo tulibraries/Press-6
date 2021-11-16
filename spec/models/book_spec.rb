@@ -12,6 +12,7 @@ RSpec.describe Book, type: :model do
 
   describe "- associations" do
     it { should have_many(:books) }
+    it { should have_many(:special_offers) }
   end
 
   let(:book) { FactoryBot.create(:book) }
