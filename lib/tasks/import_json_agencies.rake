@@ -7,7 +7,7 @@ require "logger"
 namespace :import do
   task agencies_json: [:environment] do
 
-    response = HTTParty.get("http://localhost:3001/agencies.json")
+    response = HTTParty.get("http://tupress.temple.edu/agencies.json")
     agencies = JSON.parse(response.body)
 
     @updated = 0
