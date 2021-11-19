@@ -11,5 +11,5 @@ class SpecialOffer < ApplicationRecord
   has_many :special_offer_book, dependent: :nullify
   has_many :books, through: :special_offer_book, source: :book
 
-  has_one_attached :pdf, dependent: :destroy
+  has_many_attached :pdf, dependent: :destroy
 end

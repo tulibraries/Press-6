@@ -93,7 +93,7 @@ namespace :import do
         record_hash["status"] = "X"
       end
 
-      if book_to_update.present? && record_hash["title"].present? && record_hash["author_byline"].present? && ["NP", "IP", "OS", "OP", "In Print"].include?(record_hash["status"])
+      if book_to_update.present? && record_hash["title"].present? && record_hash["author_byline"].present? && ["NP", "IP", "OP"].include?(record_hash["status"])
 
         book_to_update.assign_attributes(record_hash.except("guide_file", "cover_image", "excerpt_file"))
 

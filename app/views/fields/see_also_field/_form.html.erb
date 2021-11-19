@@ -23,7 +23,7 @@ and is augmented with [Selectize].
   <%= f.label field.attribute, for: "#{f.object_name}_#{field.attribute.to_s}" %>
 </div>
 <div class="field-unit__field field-unit--has-many ">
-  <%= f.collection_select :book_ids, Book.where(["NP", "IP"].include? :status).order(:sort_title), 
+  <%= f.collection_select :book_ids, Book.where(["NP", "IP", "OP"].include? :status).order(:sort_title), 
                           :id, 
                           :title, 
                           {prompt: true}, 

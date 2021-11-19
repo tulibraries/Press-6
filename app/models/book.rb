@@ -60,7 +60,7 @@ class Book < ApplicationRecord
   end
 
   def bindings_as_tuples
-    [JSON.parse(self.bindings)["binding"]].flatten.select { |b| ["NP", "IP"].include? b["binding_status"] }.map { |b|
+    [JSON.parse(self.bindings)["binding"]].flatten.select { |b| ["NP", "IP", "OP"].include? b["binding_status"] }.map { |b|
         {
           format: b["format"],
           price: b["price"],
@@ -72,7 +72,7 @@ class Book < ApplicationRecord
 
   def self.search(q)
     if q
-      Book.where({ status: ["NP", "IP", "OS", "OP", "In Print"] })
+      Book.where({ status: ["NP", "IP", "OP"] })
       .where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
       .or(Book.where("subtitle REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
       .or(Book.where("author_byline REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
