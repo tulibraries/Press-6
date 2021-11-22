@@ -22,7 +22,6 @@ RSpec.describe Book, type: :request do
     end
 
     it "returns awards by subject" do
-      # binding.pry
       get "/awards/subject/#{book2.subjects_as_tuples.first[1]}"
       expect(response).to render_template(:awards_by_subject)
     end

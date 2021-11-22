@@ -94,8 +94,6 @@ class BooksController < ApplicationController
               .select { |b| b.subjects.include?(@subject.code) }
               .sort_by { |b| b.sort_title }
               .uniq
-
-    # binding.pry
   end
 
   def course_adoptions
