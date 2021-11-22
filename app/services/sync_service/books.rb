@@ -66,7 +66,7 @@ class SyncService::Books
       "series_id"           => record.dig("record", "series", "series_id"),
       "bindings"            => JSON.dump(record.dig("record", "bindings")),
       "description"         => record.dig("record", "description"),
-      "subjects"            => JSON.dump(record["record"].fetch("subjects", { "subject" => { "subject_id" => nil, "subject_title" => nil } })),
+      "subjects"            => JSON.dump(record.dig("record", "subjects", "subject")),
       "contents"            => record.dig("record", "contents"),
       "catalog_id"          => record.dig("record", "catalog").present? ? record.dig("record", "catalog").downcase : record.dig("record", "catalog")
     }
@@ -80,7 +80,7 @@ class SyncService::Books
 
     if record_hash["title"].present? && record_hash["status"].present? && record_hash["author_byline"].present? && record_hash["isbn"].present?
 
-      book.assign_attributes(record_hash) if ["NP", "IP", "OS", "OP"].include? record_hash["status"]
+      book.assign_attributes(record_hash) if ["NP", "IP", "OP"].include? record_hash["status"]
 
       if book.save!
         @updated += 1

@@ -82,7 +82,7 @@ RSpec.describe SyncService::Books, type: :service do
       end
 
       it "maps subjects to subjects field" do
-        expect(JSON.parse(subject["subjects"])).to eq(@books.first["record"]["subjects"])
+        expect(JSON.parse(subject["subjects"])).to eq(@books.first["record"]["subjects"]["subject"])
       end
 
       it "maps contents to contents field" do

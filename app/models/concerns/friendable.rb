@@ -15,8 +15,10 @@ module Friendable
         slug = self.title.parameterize
       end
     end
-    sequence = self.class.where("slug like ?", "%#{slug}%").count
-    "#{slug}--#{sequence}"
+    if self.class.count > 1
+      sequence = self.class.where("slug like ?", "%#{slug}%").count
+      "#{slug}--#{sequence}"
+    end
   end
 
   def slug_candidates

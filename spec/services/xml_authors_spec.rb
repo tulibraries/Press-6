@@ -22,10 +22,10 @@ RSpec.describe SyncService::Authors, type: :service do
 
     describe "checks book status" do
       it "allows authors from good status books" do
-        expect(["NP", "IP", "OS", "OP"].include?(@status)).to be_truthy
+        expect(["NP", "IP", "OP"].include?(@status)).to be_truthy
       end
       it "disallows authors from bad status books" do
-        expect(["NP", "IP", "OS", "OP"].include?("X")).to be_falsey
+        expect(["NP", "IP", "OP"].include?("X")).to be_falsey
       end
     end
 
