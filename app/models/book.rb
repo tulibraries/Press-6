@@ -6,7 +6,7 @@ class Book < ApplicationRecord
 
   before_save :sort_titles, :get_excerpt, :catalog_code
 
-  validates :title, :xml_id, :author_byline, :status, presence: true
+  validates :title, :xml_id, :author_byline, :author_ids, :status, presence: true
   validates :cover_image, presence: false, blob: { content_type: ["image/png", "image/jpg", "image/jpeg", "image/gif"], size_range: 1..5.megabytes }
   validates :suggested_reading_image, presence: false, blob: { content_type: ["image/png", "image/jpg", "image/jpeg", "image/gif"], size_range: 1..5.megabytes }
   validates :toc_file, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
@@ -56,7 +56,7 @@ class Book < ApplicationRecord
   end
 
   def subjects_as_tuples
-    [JSON.parse(self.subjects, symbolize_keys: true)["subject"]].flatten.map { |h| [h["subject_title"], h["subject_id"]] } if self.subjects.present?
+    [JSON.parse(self.subjects)].flatten.map { |h| [h["subject_title"], h["subject_id"]] } if self.subjects.present?
   end
 
   def bindings_as_tuples

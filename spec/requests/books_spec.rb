@@ -10,12 +10,8 @@ RSpec.describe Book, type: :request do
   let(:book5) { FactoryBot.create(:book, :with_guide_file, active_guide: true, guide_file_label: "no file") }
   let(:subject) { FactoryBot.create(:subject) }
 
-  describe "show page returns expected results" do
-    it "returns assigned subjects" do
-      expect { get collection_path(book.slug).to have_text("foo") }
-    end
-
-    it "returns assigned subjects" do
+  describe "awards pages" do
+    it "returns awards main page" do
       get "/awards"
       expect(response).to render_template(:awards)
     end
@@ -26,6 +22,7 @@ RSpec.describe Book, type: :request do
     end
 
     it "returns awards by subject" do
+      # binding.pry
       get "/awards/subject/#{book2.subjects_as_tuples.first[1]}"
       expect(response).to render_template(:awards_by_subject)
     end
