@@ -61,17 +61,17 @@ namespace :import do
             @updated += 1 unless new_author
             @created += 1 if new_author
           else
-            stdout_and_log(%Q(#{new_author}: Author record unable to be saved for #{author_id}))
+            stdout_and_log("#{new_author}: Author record unable to be saved for #{author_id}")
             @not_saved += 1
           end
         rescue => err
-          stdout_and_log(%Q(#{new_author}: Author id: #{author_id} -- #{err.message}))
+          stdout_and_log("#{new_author}: Author id: #{author_id} -- #{err.message}")
           @not_saved += 1
         end
 
       end
     end
-        stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved.")
+    stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved.")
 
     def stdout_and_log(message, level: :info)
       @log.send(level, message)
