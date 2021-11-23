@@ -13,7 +13,7 @@ RUN apk add -U --no-cache \
       libxslt=1.1.34-r1 \
       tzdata=2021e-r0 \
       mariadb-connector-c=3.1.13-r0 \
-      imagemagick=7.0.11.13-r0 \
+      imagemagick=7.0.11.14-r0 \
       shared-mime-info=2.1-r0 && \
     apk add -U --no-cache --virtual build-dependencies \
       git=2.32.0-r0 \
