@@ -13,7 +13,7 @@ RUN apk add -U --no-cache \
       libxslt=1.1.34-r1 \
       tzdata=2021e-r0 \
       mariadb-connector-c=3.1.13-r0 \
-      imagemagick=7.0.11.13-r0 \
+      imagemagick=7.0.11.14-r0 \
       shared-mime-info=2.1-r0 && \
     apk add -U --no-cache --virtual build-dependencies \
       git=2.32.0-r0 \
@@ -22,7 +22,7 @@ RUN apk add -U --no-cache \
       mariadb-dev=10.5.13-r0 \
       nodejs=14.18.1-r0 \
       yarn=1.22.10-r0 && \
-    gem install bundler:2.2.26  && \
+    gem install bundler:2.2.27  && \
     bundle config build.nokogiri --use-system-libraries && \
     bundle config set --local without "development test" && \
     bundle install --jobs=8 && \

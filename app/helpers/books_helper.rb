@@ -51,4 +51,8 @@ module BooksHelper
       :
       (image_pack_tag "default-book-cover-index.png", class: "news-image")
   end
+
+  def get_awards(book)
+    [book.award, book.award2, book.award3]
+  end
 end

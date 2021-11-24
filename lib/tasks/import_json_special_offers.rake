@@ -7,7 +7,7 @@ require "logger"
 namespace :import do
   task special_offers_json: [:environment] do
 
-    response = HTTParty.get("http://localhost:3001/promotions.json")
+    response = HTTParty.get("http://tupress.temple.edu/promotions.json")
     special_offers = JSON.parse(response.body)
 
     @updated = 0
@@ -68,11 +68,11 @@ namespace :import do
           @updated += 1 unless new_special_offer
           @created += 1 if new_special_offer
         else
-          stdout_and_log(%Q(Rep record unable to be saved for #{record_hash["title"]}))
+          stdout_and_log(%Q(Special Offer unable to be saved for #{record_hash["title"]}))
           @not_saved += 1
         end
       rescue => err
-        stdout_and_log(%Q(Rep title: #{record_hash["title"]} -- #{err.message}))
+        stdout_and_log(%Q(Special Offer: #{record_hash["title"]} -- #{err.message}))
         @not_saved += 1
       end
 

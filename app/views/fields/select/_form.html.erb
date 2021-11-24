@@ -20,7 +20,6 @@ to be displayed on a resource's edit form page.
 </div>
 <div class="field-unit__field">
   <% if field.selectable_options.first&.is_a?(Array) %>
-  <%# binding.pry %>
     <%= f.select(
       field.attribute,
       options_from_collection_for_select(

@@ -46,18 +46,21 @@ class BooksController < ApplicationController
 
   def awards
     @awards_by_year = books_with_awards
-                        .where(status: show_status)
+                        .select { |b| show_status.include?(b.status) }
                         .pluck(:award_year, :award_year2, :award_year3)
                         .flatten
                         .reject(&:blank?)
                         .sort
                         .reverse
+                        .uniq
 
     awards_by_subject = get_subjects(books_with_awards
-                                        .where(status: show_status)
-                                        .map { |b| b.subjects_as_tuples }
-                                        .reject(&:blank?))
+                                      .select { |b| show_status.include?(b.status) }
+                                      .map { |b| b.subjects_as_tuples }
+                                      .reject(&:blank?))
+
     subjects = []
+
     awards_by_subject.each do |subject|
       s = Subject.find_by(code: subject[1])
       subjects << s
@@ -65,11 +68,11 @@ class BooksController < ApplicationController
 
     @awards_by_subject = subjects
 
-
     @recent_winners = books_with_awards
-                        .where(featured_award_winner: true)
-                        .where(status: show_status)
-                        .order(:award_year)
+                        .select { |b| show_status.include?(b.status) }
+                        .select { |b| b.featured_award_winner == true }
+                        .sort_by { |b| b.award_year }
+                        .uniq
                         .take(4)
   end
 
@@ -88,14 +91,15 @@ class BooksController < ApplicationController
       @subject = Subject.friendly.find(params[:id])
 
     @books = books_with_awards
-              .where("subjects LIKE ?", "%#{@subject.code}%")
-              .order(:sort_title)
+              .select { |b| b.subjects.include?(@subject.code) }
+              .sort_by { |b| b.sort_title }
+              .uniq
   end
 
   def course_adoptions
     @books = Book.where(status: show_status)
                  .where(course_adoption: true)
-                 .order(:sort_title)
+                 .sort_by { |b| b.sort_title }
                  .page params[:page]
   end
 
@@ -114,19 +118,17 @@ class BooksController < ApplicationController
     end
 
     def books_with_awards
-      Book.where.not(award_year: blank?)
-          .or(Book.where.not(award_year2: blank?))
-          .or(Book.where.not(award_year3: blank?))
+      Book.select { |b| b.award_year.present? } + Book.select { |b| b.award_year2.present? } + Book.select { |b| b.award_year3.present? }.uniq
     end
 
     def get_subjects(tuples)
-      @subjects = []
+      subjects = []
       tuples.each do |subject|
         subject.each do |s|
-          @subjects << s
+          subjects << s unless s.any? { |value| value.nil? }
         end
-        @subjects.reject(&:blank?)
+        subjects.reject(&:blank?)
       end
-      @subjects.uniq.sort_by { |h| h[0] }
+      subjects.uniq.sort_by { |h| h[0] }
     end
 end

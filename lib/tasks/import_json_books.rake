@@ -7,7 +7,7 @@ require "logger"
 namespace :import do
   task books_json: [:environment] do
 
-    response = HTTParty.get("http://localhost:3001/books.json")
+    response = HTTParty.get("http://tupress.temple.edu/books.json")
     books = JSON.parse(response.body)
 
     @updated = 0
@@ -29,7 +29,7 @@ namespace :import do
         ) unless book.cover_image.attached?
         @covers += 1
       rescue OpenURI::HTTPError => err
-        # stdout_and_log("Syncing Book #{book.xml_id}, cover_image -- errored --  #{err.message} ")
+        stdout_and_log("Syncing Book #{book.xml_id}, cover_image -- errored --  #{err.message} ")
         @errored += 1
       end
     end
@@ -61,7 +61,6 @@ namespace :import do
     end
 
     books.each do |book|
-
       book_to_update = (Book.find_by(xml_id: book["book_id"]) ? Book.find_by(xml_id: book["book_id"]) : Book.new)
       new_book = true if book_to_update.xml_id.blank?
 
@@ -69,7 +68,9 @@ namespace :import do
       {
         "xml_id"              => book.dig("book_id"),
         "title"               => book.dig("title"),
+        "author_ids"          => book.dig("author_id"),
         "author_byline"       => book.dig("author_byline"),
+        "subjects"            => book.dig("subjects"),
         "subject1"            => book.dig("subject1"),
         "subject2"            => book.dig("subject2"),
         "subject3"            => book.dig("subject3"),
@@ -89,13 +90,18 @@ namespace :import do
         "news_text"           => book.dig("news_text")
       }
 
+      if record_hash["subjects"].present?
+        record_hash["subjects"] = JSON.dump(record_hash["subjects"].map { |h| h["subject"] })
+      else
+        record_hash["subject"] = { "subject" => { "subject_id" => nil, "subject_title" => nil } }
+      end
+
       if record_hash["status"].blank?
         record_hash["status"] = "X"
       end
 
-      if book_to_update.present? && record_hash["title"].present? && record_hash["author_byline"].present? && ["NP", "IP", "OS", "OP", "In Print"].include?(record_hash["status"])
-
-        book_to_update.assign_attributes(record_hash.except("guide_file", "cover_image", "excerpt_file"))
+      if book_to_update.present? && record_hash["title"].present? && record_hash["author_byline"].present? && ["NP", "IP", "OP"].include?(record_hash["status"])
+        book_to_update.update(record_hash.except("guide_file", "cover_image", "excerpt_file"))
 
         attach_guide_file(book_to_update, record_hash["guide_file"]) if record_hash["guide_file"].present?
         attach_cover_image(book_to_update, record_hash["cover_image"]) if record_hash["cover_image"].present?
@@ -112,7 +118,7 @@ namespace :import do
         stdout_and_log("#{record_hash["title"]}: missing required field values")
       end
 
-      # stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved. \n Covers: #{@covers}, Excerpts: #{@excerpts}, Guides: #{@guides}")
+      stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved. \n Covers: #{@covers}, Excerpts: #{@excerpts}, Guides: #{@guides}")
 
     end
 

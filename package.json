@@ -42,7 +42,8 @@
     "tar": "6.1.9",
     "trim-newlines": "4.0.1",
     "url-parse": "1.5.2",
-    "y18n": "4.0.1"
+    "y18n": "4.0.1",
+    "json-schema": "0.4.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^4.1.1"
