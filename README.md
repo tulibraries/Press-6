@@ -38,4 +38,4 @@ We defined a Makefile with many useful commands for local development. These com
 
 ## Deployment
 ### QA
-* Deploys to https://tupress.k8s.temple.edu
+* Deploys to https://tupress-qa.k8s.temple.edu
