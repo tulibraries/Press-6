@@ -3,8 +3,6 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.4"
-
 gem "rails", "~> 6.1.4"
 gem "mysql2", "~> 0.5.3"
 gem "puma", "~> 4.3"
@@ -18,7 +16,6 @@ gem "administrate", ">= 0.16.0"
 gem "administrate-field-scoped_has_many"
 gem "administrate-field-ordered_has_many"
 gem "nokogiri", "1.12.5"
-gem "pry"
 gem "listen", "~> 3.2"
 gem "jquery-rails"
 gem "bootstrap"
@@ -42,6 +39,7 @@ group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
+  gem "pry"
   gem "pry-rails"
   gem "pry-byebug"
   gem "rspec-activemodel-mocks"
