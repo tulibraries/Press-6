@@ -3,7 +3,7 @@
 class Author < ApplicationRecord
   include Friendable
 
-  before_save :set_title
+  before_validation :set_title
 
   validates :author_id, :last_name, presence: true
 
