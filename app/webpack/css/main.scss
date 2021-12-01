@@ -47,6 +47,10 @@ strong {
 	}
 }
 
+.flash.timedout {
+  display: none;
+}
+
 a.inline {
 	color: $red;
 	text-decoration: underline;
