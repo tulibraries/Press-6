@@ -20,13 +20,6 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-            - gem-cache-v6-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - gem-cache-v6-{{ arch }}-{{ .Branch }}
-            - gem-cache-v6-{{ arch }}
-            - yarn-cache-v6-{{ arch }}-{{ .Branch }}-{{ checksum "yarn.lock" }}
-
       - setup_remote_docker:
           docker_layer_caching: false
           version: 20.10.6
@@ -39,44 +32,22 @@ jobs:
 
       - run:
           name: Build docker containers
-          command: docker-compose -p press_6 -f docker-compose.ci.yml up -d
-
-      - run:
-          name: Run bundler on the test app container
-          command: |
-              docker-compose -p Press_6 -f docker-compose.ci.yml exec test_app gem install bundler:2.2.26
-              docker-compose -p press_6 -f docker-compose.ci.yml exec test_app bundle install --path vendor/bundle
-              docker-compose -p press_6 -f docker-compose.ci.yml exec test_app bundle binstubs --all
-              docker-compose -p press_6 -f docker-compose.ci.yml exec test_app bundle binstubs bundler --force
-
-      - run:
-          name: Run yarn install on the test app container
-          command: |
-              docker-compose -p press_6 -f docker-compose.ci.yml exec test_app yarn install --frozen-lockfile
-
-      - save_cache:
-          key: gem-cache-v6-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-              - vendor/bundle
-      - save_cache:
-          key: yarn-cache-v6-{{ arch }}-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          paths:
-              - node_modules
+          command: docker-compose -p press_6 -f docker-compose.yaml up -d
 
       - run:
           name: Run linter
           command: |
-              docker-compose -p press_6 -f docker-compose.ci.yml exec test_app bundle exec rubocop -c .rubocop.yml
+              docker-compose -p press_6 -f docker-compose.yaml exec --user root test_app bundle exec  rubocop -c .rubocop.yml
 
       - run:
           name: Database migrations
           command: |
-              docker-compose -p press_6 -f docker-compose.ci.yml exec test_app bundle exec rails db:migrate
+              docker-compose -p press_6 -f docker-compose.yaml exec --user root test_app bundle exec  rails db:migrate
 
       - run:
           name: Run ruby tests
           command: |
-              docker-compose -p press_6 -f docker-compose.ci.yml exec test_app bundle exec rake spec
+              docker-compose -p press_6 -f docker-compose.yaml exec --user root test_app bundle exec  rake spec
               docker cp press_6_test_app_1:/app/coverage/lcov/app.lcov ./app.lcov
 
       - coveralls/upload:
@@ -108,7 +79,10 @@ jobs:
 
       - run:
           name: Build docker container
-          command: docker build -t trivy-ci-test:${CIRCLE_SHA1} -f .docker/ci-app/Dockerfile.ci .
+          command: "source .env && docker build \
+                    --build-arg BASE_IMAGE_NAME=${BASE_IMAGE_NAME} \
+                    --build-arg RAILS_ENV=test \
+                    -t trivy-ci-test:${CIRCLE_SHA1} -f .docker/app/Dockerfile ."
 
       - run:
           name: Install trivy

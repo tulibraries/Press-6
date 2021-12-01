@@ -12,6 +12,7 @@ TUPRESS_DB_HOST ?= host.docker.internal
 TUPRESS_DB_NAME ?= tupress
 TUPRESS_DB_USER ?= root
 CI ?= false
+
 DEFAULT_RUN_ARGS ?= -e "EXECJS_RUNTIME=Disabled" \
 		-e "K8=yes" \
 		-e "RAILS_ENV=production" \

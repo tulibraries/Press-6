@@ -1,7 +1,0 @@
-FROM ruby:2.7.4-alpine3.14
-RUN apk --update add nodejs yarn git build-base bash mariadb-dev sqlite-dev tzdata imagemagick
-RUN mkdir /app
-WORKDIR /app
-COPY . .
-RUN ls config/*example | xargs -I{} echo {} |  cut -d '.' -f-2 | xargs -I{} cp {}.example {}
-CMD ["bash"]

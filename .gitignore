@@ -41,3 +41,4 @@ yarn-debug.log*
 /public/uploads
 /coverage
 /sync-logs
+.ruby-version

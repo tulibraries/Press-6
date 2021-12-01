@@ -1,12 +1,16 @@
-FROM harbor.k8s.temple.edu/library/ruby:2.7-alpine
+# For circleci this arg gets overridden by value in the .env file.
+ARG BASE_IMAGE_NAME="harbor.k8s.temple.edu/library/ruby:2.7-alpine" \
+  RAILS_MASTER_KEY=foobar \
+  RAILS_ENV=production
+
+# hadolint ignore=DL3006,DL3026
+FROM "${BASE_IMAGE_NAME}"
 
 WORKDIR /app
 
 COPY . .
 
 USER root
-
-ARG RAILS_MASTER_KEY
 
 RUN apk add -U --no-cache \
       bash=5.1.8-r0 \
@@ -24,14 +28,14 @@ RUN apk add -U --no-cache \
       yarn=1.22.17-r0 && \
     gem install bundler:2.2.27  && \
     bundle config build.nokogiri --use-system-libraries && \
-    bundle config set --local without "development test" && \
+    if [ "${RAILS_ENV}" == "production" ]; then bundle config set --local without "development test"; fi && \
     bundle install --jobs=8 && \
     find "$GEM_HOME" -name Gemfile.lock -exec rm "{}" \; && \
     find "$GEM_HOME" -name yarn.lock -exec rm "{}" \; && \
-    RAILS_ENV=production bundle exec rails assets:precompile && \
-    rm -rf node_modules && \
-    rm -rf tmp/* && \
-    apk del build-dependencies && \
+    bundle exec rails assets:precompile && \
+    if [ "${RAILS_ENV}" == "production" ]; then rm -rf node_modules; fi && \
+    if [ "${RAILS_ENV}" == "production" ]; then rm -rf tmp/*; fi && \
+    if [ "${RAILS_ENV}" == "production" ]; then apk del build-dependencies; fi && \
     rm -rf /var/cache/apk/ && \
     chown nobody -R /app/tmp && \
     chown nobody -R /app/log
