@@ -65,5 +65,4 @@ qa_2_deploy:
   script:
     - helm repo add tulibraries https://$HARBOR/chartrepo/tulibraries
     - helm pull tulibraries/tupress --untar
-    - "helm upgrade tupress ./tupress --history-max=5 --namespace=tupress-qa \
-       --set image.repository=${IMAGE}:${VERSION}"
+    - helm upgrade tupress ./tupress --history-max=5 --namespace=tupress-qa --set image.repository=$IMAGE:$VERSION
