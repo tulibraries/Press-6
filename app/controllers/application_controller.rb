@@ -9,10 +9,10 @@ class ApplicationController < ActionController::Base
 
   def set_menu
     @journals = Journal.all
-    @ordering_information = Webpage.friendly.find("ordering-information")
-    @submissions = Webpage.friendly.find("submissions")
-    @about = Webpage.friendly.find("about-the-press")
-    @about_u_presses = Webpage.friendly.find("about-university-presses")
-    @payment_terms = Webpage.friendly.find("payment-terms")
+    @ordering_information = Webpage.find_by(slug: "ordering-information")
+    @submissions = Webpage.find_by(slug: "submissions")
+    @about = Webpage.find_by(slug: "about-the-press")
+    @about_u_presses = Webpage.find_by(slug: "about-university-presses")
+    @payment_terms = Webpage.find_by(slug: "payment-terms")
   end
 end
