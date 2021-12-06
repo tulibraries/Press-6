@@ -13,6 +13,10 @@ class Author < ApplicationRecord
     self.title = [self.prefix, self.first_name, self.last_name, self.suffix].join(" ").strip
   end
 
+  def index_title
+    [self.first_name, self.last_name, self.suffix].join(" ").strip
+  end
+
   def self.search(q)
     if q
       Author.where("first_name REGEXP ?", "(^|\\W)#{q}(\\W|$)").or(Author.where "last_name REGEXP ?", "(^|\\W)#{q}(\\W|$)").sort_by { |a| [a.last_name, a.first_name] }
