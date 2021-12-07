@@ -60,12 +60,12 @@
           <%= menu_button(t("tupress.default.menu.press_info.title")) %>
           <div class="dropdown-menu p-2" x-placement="bottom-start">
             <ul class="list-unstyled">
-              <li><%= link_to t("tupress.default.menu.press_info.about"), root_path+"press-info", :class=>"dropdown-item" %></li>
+              <%= %Q(<li>#{link_to t("tupress.default.menu.press_info.about"), webpage_path(@about), :class=>"dropdown-item"}</li>).html_safe if @about.present? %>
               <li><%= link_to t("tupress.default.menu.press_info.people"), people_path, :class=>"dropdown-item" %></li>
               <li><%= link_to t("tupress.default.menu.press_info.rights"), root_path+["forms", "rights-permissions"].join("/"), :class=>"dropdown-item" %></li>
               <li><%= link_to t("tupress.default.menu.press_info.agents"), agencies_path, :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.press_info.submissions"), root_path+"submissions", :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.press_info.presses"), root_path+"university-presses", :class=>"dropdown-item" %></li>
+              <%= %Q(<li>#{link_to t("tupress.default.menu.press_info.submissions"), webpage_path(@submissions), :class=>"dropdown-item"}</li>).html_safe if @submissions.present? %>
+              <%= %Q(<li>#{link_to t("tupress.default.menu.press_info.presses"), webpage_path(@about_u_presses), :class=>"dropdown-item"}</li>).html_safe if @about_u_presses.present? %>
               <li><%= link_to t("tupress.default.menu.press_info.download"), documents_path, :class=>"dropdown-item" %></li>
               <li><%= link_to t("tupress.default.menu.press_info.faq"), faqs_path, :class=>"dropdown-item" %></li>
             </ul>
@@ -76,8 +76,8 @@
           <%= menu_button(t("tupress.default.menu.orders.title")) %>
             <div class="dropdown-menu p-2" x-placement="bottom-start">
               <ul class="list-unstyled">
-                <li><%= link_to t("tupress.default.menu.orders.info"), root_path+"order", :class=>"dropdown-item" %></li>
-                <li><%= link_to t("tupress.default.menu.orders.terms"), root_path+"payment", :class=>"dropdown-item" %></li>
+                <%= %Q(<li>#{link_to t("tupress.default.menu.orders.info"), webpage_path(@ordering_information), :class=>"dropdown-item"}</li>).html_safe if @ordering_information.present? %>
+                <%= %Q(<li>#{link_to t("tupress.default.menu.orders.terms"), webpage_path(@payment_terms), :class=>"dropdown-item"}</li>).html_safe if @payment_terms.present? %>
                 <li><%= link_to t("tupress.default.menu.orders.copy-request"), root_path+["forms", "copy-request"].join("/"), :class=>"dropdown-item" %></li>
                 <li><%= link_to t("tupress.default.menu.orders.review-request"), root_path+["forms", "review-copy"].join("/"), :class=>"dropdown-item" %></li>
                 <li><%= link_to t("tupress.default.menu.orders.reps"), sales_reps_path, :class=>"dropdown-item" %></li>
