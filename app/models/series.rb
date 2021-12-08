@@ -15,6 +15,7 @@ class Series < ApplicationRecord
 
   def self.search(q)
     if q
+      q = q.last.present? ? q : q[0...-1]
       Series.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)").sort
     end
   end

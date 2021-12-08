@@ -23,6 +23,7 @@ class Oabook < ApplicationRecord
 
   def self.search(q)
     if q
+      q = q.last.present? ? q : q[0...-1]
       Oabook.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
             .or(Oabook.where("subtitle REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
             .or(Oabook.where("author REGEXP ?", "(^|\\W)#{q}(\\W|$)"))

@@ -18,7 +18,10 @@ class Person < ApplicationRecord
 
   def self.search(q)
     if q
-      Person.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)").or(Person.where("position REGEXP ?", "(^|\\W)#{q}(\\W|$)")).sort
+      q = q.last.present? ? q : q[0...-1]
+      Person.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
+            .or(Person.where("position REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
+            .sort
     end
   end
 end
