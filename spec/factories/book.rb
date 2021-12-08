@@ -29,6 +29,7 @@ FactoryBot.define do
     subtitle { "A simple subtitle" }
     edition { "2nd Edition" }
     add_to_news { false }
+    isbn { "123456789" }
 
     trait :with_cover_image do
       after :create do |book|
