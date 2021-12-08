@@ -55,4 +55,14 @@ module BooksHelper
   def get_awards(book)
     [book.award, book.award2, book.award3]
   end
+
+  def order_button(book)
+    unless book.status == "OP"
+      link_to t("tupress.books.order_button"), 
+                "#{t("tupress.books.purchase_link")}#{book.isbn}", 
+                class: "order-button" if @book.isbn.present?
+    else
+      "[OUT OF PRINT]"
+    end
+  end
 end
