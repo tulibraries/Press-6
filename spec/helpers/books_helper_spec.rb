@@ -9,7 +9,7 @@ RSpec.describe BooksHelper, type: :helper do
   let(:book_with_cover) { FactoryBot.create(:book, :with_cover_image) }
   let(:no_subtitle) { FactoryBot.create(:book, edition: "") }
   let(:no_edition) { FactoryBot.create(:book, subtitle: "") }
-  let(:no_nothing) { FactoryBot.create(:book, edition: "", subtitle: "") }
+  let(:no_nothing) { FactoryBot.create(:book, edition: "", subtitle: "", status: "OP") }
 
   describe BooksHelper do
     describe "format lookup" do
@@ -41,6 +41,12 @@ RSpec.describe BooksHelper, type: :helper do
       end
       it "handles no edition and no subtitle" do
         expect(helper.sub_ed(no_nothing)).to eq("")
+      end
+      it "displays order button" do
+        expect(helper.order_button(book)).to include("ORDER")
+      end
+      it "displays 'out of print' for OP status" do
+        expect(helper.order_button(no_nothing)).to eq("[OUT OF PRINT]")
       end
     end
   end

@@ -16,8 +16,7 @@
           <li><%= @book.illustrations %></li>
         </ul>
 
-        <%= link_to t("tupress.books.order_button"), "#{t("tupress.books.purchase_link")}#{@book.isbn}", 
-                              class: "order-button" if @book.isbn.present? %>
+        <%= order_button(@book) %>
 
         <div class="book-formats">
           <ul class="list-unstyled">
