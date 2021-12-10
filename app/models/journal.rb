@@ -6,6 +6,7 @@ class Journal < ApplicationRecord
 
   def self.search(q)
     if q
+      q = q.last.present? ? q : q[0...-1]
       Journal.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
     end
   end
