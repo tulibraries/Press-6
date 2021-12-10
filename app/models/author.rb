@@ -19,7 +19,10 @@ class Author < ApplicationRecord
 
   def self.search(q)
     if q
-      Author.where("first_name REGEXP ?", "(^|\\W)#{q}(\\W|$)").or(Author.where "last_name REGEXP ?", "(^|\\W)#{q}(\\W|$)").sort_by { |a| [a.last_name, a.first_name] }
+      q = q.last.present? ? q : q[0...-1]
+      Author.where("first_name REGEXP ?", "(^|\\W)#{q}(\\W|$)")
+            .or(Author.where "last_name REGEXP ?", "(^|\\W)#{q}(\\W|$)")
+            .sort_by { |a| [a.last_name, a.first_name] }
     end
   end
 end

@@ -72,6 +72,7 @@ class Book < ApplicationRecord
 
   def self.search(q)
     if q
+      q = q.last.present? ? q : q[0...-1]
       Book.where({ status: ["NP", "IP", "OP"] })
       .where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
       .or(Book.where("subtitle REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
