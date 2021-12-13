@@ -16,23 +16,23 @@ module Imageable
   end
 
   def custom_image(image_field, width, height)
-    the_image = self.send(image_field.to_sym)
-    if (the_image.blob.metadata[:width] != width) || (the_image.blob.metadata[:height] != height)
-      if the_image.blob.metadata[:width] > the_image.blob.metadata[:height]
-        the_image.variant(format: :png,
+    self.send(image_field.to_sym).blob.analyze
+    if (self.send(image_field.to_sym).blob.metadata[:width] != width) || (self.send(image_field.to_sym).blob.metadata[:height] != height)
+      if self.send(image_field.to_sym).blob.metadata[:width] > self.send(image_field.to_sym).blob.metadata[:height]
+        self.send(image_field.to_sym).variant(format: :png,
                       background: :transparent,
                       gravity: "North",
                       resize_to_fit: [width, height]
                     ).processed
       else
-        the_image.variant(format: :png,
+        self.send(image_field.to_sym).variant(format: :png,
           background: :transparent,
           gravity: :center,
           resize_and_pad: [width, height]
         ).processed
       end
     else
-      the_image
+      self.send(image_field.to_sym)
     end
   end
 end

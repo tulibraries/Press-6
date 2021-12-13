@@ -465,7 +465,6 @@ DEPENDENCIES
   listen (~> 3.2)
   mail_form
   meta-tags
-  mini_magick
   mysql2 (~> 0.5.3)
   nokogiri (= 1.12.5)
   okcomputer
