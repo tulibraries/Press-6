@@ -131,6 +131,11 @@ form {
 			margin-bottom: 0;
 		}
 	}
+  @media (max-width: 999px) {
+    li {
+      margin-bottom: 0!important;
+    }
+  }
 }
 
 #new-forthcoming {
