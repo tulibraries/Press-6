@@ -59,7 +59,7 @@
     <% if @featured_catalog.present? %>
     <div class="mb-4 p-3 white" id="feature-catalog">
       <h2><%= @featured_catalog.title %> Catalog</h2>
-      <%= link_to display_image(@featured_catalog), catalog_path(@featured_catalog.code) %>
+      <%= link_to display_image(@featured_catalog), catalog_path(@featured_catalog) %>
       <p class="mt-2">
         <%= link_to "[PDF Version]", @featured_catalog.pdf.attachment if @featured_catalog.pdf.attached? %>
       </p>
