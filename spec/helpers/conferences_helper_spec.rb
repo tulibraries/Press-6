@@ -11,10 +11,11 @@ RSpec.describe ConferencesHelper, type: :helper do
   describe ConferencesHelper do
     describe "dates formatter" do
       it "returns the date range within the same year" do
-        expect(helper.dates(today, next_month)).to eq("#{today.strftime("%b %d, %Y")} - #{next_month.strftime("%b %d, %Y")}")
-      end
-      it "returns the date range into the next year" do
-        expect(helper.dates(today, next_year)).to eq("#{today.strftime("%b %d, %Y")} - #{next_year.strftime("%b %d, %Y")}")
+        if today.strftime("%Y") == next_month.strftime("%Y")
+          expect(helper.dates(today, next_month)).to eq("#{today.strftime("%b %d")} - #{next_month.strftime("%b %d, %Y")}")
+        else
+          expect(helper.dates(today, next_month)).to eq("#{today.strftime("%b %d, %Y")} - #{next_month.strftime("%b %d, %Y")}")
+        end
       end
       it "returns single date with year" do
         expect(helper.dates(today)).to eq("#{today.strftime("%b %d, %Y")}")
