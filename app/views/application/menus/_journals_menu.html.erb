@@ -1,0 +1,5 @@
+<ul class="list-unstyled">
+  <% @journals.each do |i| %>
+    <li><%= link_to i.title, i.url, :class=>"dropdown-item" if i.url.present? %></li>
+  <% end %>
+</ul>

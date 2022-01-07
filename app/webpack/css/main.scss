@@ -4,6 +4,10 @@
     max-width: 1200px;
     min-width: 1200px;
 	}
+	@media (max-width: 1199px) {
+    max-width: 100%;
+    min-width: 100%;
+	}
 }
 
 html, body {
@@ -27,6 +31,9 @@ strong {
 
 #wrapper {
 	margin-top: 14px;
+  @media screen and (max-width: 999px) {
+    margin-top: 0;
+  }
 }
 
 .gold {
@@ -132,8 +139,11 @@ form {
 		}
 	}
   @media (max-width: 999px) {
+    padding-left: 0!important;
+    padding-right: 0!important;
     li {
       margin-bottom: 0!important;
+      padding-left: 35px!important;
     }
   }
 }
@@ -143,6 +153,9 @@ form {
 	h1 {
 		text-decoration: underline;
 		margin-left: 35px;
+    @media screen and (max-width: 999px) {
+      margin-left: 0;
+    }
 	}
 	p {
 		margin-top: 7px;
@@ -162,6 +175,13 @@ form {
 #news {
 	border-right: 14px solid $background-grey;
 	background-color: $news-grey;
+  @media (max-width: 999px) {
+    border-right: 0;
+    margin-bottom: 21px;
+    .news-item {
+      padding-right: 21px;
+    }
+  }
 	h1 {
 		text-decoration: underline;
 	}
@@ -193,6 +213,10 @@ form {
 	h2 {
 		font-size: 115%;
 	}
+  @media (max-width: 999px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .white {

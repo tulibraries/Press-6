@@ -7,10 +7,12 @@
 #header-navbar {
 	padding-bottom: 0;
 	padding-right: 0;
+  @media screen and (min-width: 0) and (max-width: 999px) {
+    margin: 0;
+  }
 	.col {
 		padding-left: 0;
 	}
-
 	.logo-container {
 		padding-left: 0;
 		@media (max-width: 640px) {
@@ -37,6 +39,9 @@
 	.nav-fill {
 		width: 1200px;
 		margin: auto;
+    @media screen and (max-width: 1199px) {
+      width: 100%;
+    }
 	}
 }
 

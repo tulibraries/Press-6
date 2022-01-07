@@ -7,8 +7,8 @@
 <div class="container homepage">
 
 <div class="row">
-  <div class="col col-12 col-lg-3 mt-4" id="left-home-menu">
-    <ul class="list-unstyled">
+  <div class="col-12 col-lg-3 mt-4" id="left-home-menu">
+    <ul class="list-unstyled pl-md-3">
       <li><%= link_to t("tupress.default.menu.author_info.label"), "#" %></li>
       <li><%= link_to t("tupress.default.menu.bookseller_info.label"), "#" %></li>
       <li><%= link_to t("tupress.default.menu.conferences.label"), conferences_path %></li>
@@ -19,11 +19,11 @@
     </ul>
   </div>
 
-  <div class="col col-9 mt-4 pt-2 pb-1" id="new-forthcoming">
+  <div class="col-12 col-lg-9 mt-4 pt-2 pb-1" id="new-forthcoming">
     <h1><%= t("tupress.webpages.index.forthcoming") %></h1>
     <div class="row pt-3">
     <% @hot.each do |item| %>
-      <div class="col-4 text-center">
+      <div class="col-6 col-lg-4 text-center">
       <%= link_to book_path(item) do %>
         <%= hot_cover(item) %>
         <p><strong><%= item.title %></strong></p>
@@ -35,7 +35,7 @@
 </div>
 
 <div class="row mt-5">
-  <div class="col col-9 pt-2 pl-4 pb-4" id="news">
+  <div class="col-12 col-lg-9 pt-2 pl-lg-4 pb-4" id="news">
     <h1><%= t("tupress.webpages.index.news") %></h1>
 
     <% @news.each do |item| %>
@@ -55,11 +55,11 @@
     
   </div>
 
-  <div class="col-3" id="features">
+  <div class="col-12 col-lg-3" id="features">
     <% if @featured_catalog.present? %>
     <div class="mb-4 p-3 white" id="feature-catalog">
       <h2><%= @featured_catalog.title %> Catalog</h2>
-      <%= link_to display_image(@featured_catalog), catalog_path(@featured_catalog.code) %>
+      <%= link_to display_image(@featured_catalog), catalog_path(@featured_catalog) %>
       <p class="mt-2">
         <%= link_to "[PDF Version]", @featured_catalog.pdf.attachment if @featured_catalog.pdf.attached? %>
       </p>
