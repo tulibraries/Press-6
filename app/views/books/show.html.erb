@@ -1,15 +1,15 @@
 <div class="container books show">
   <div class="row">
-    <div class="col col-3 book-cover text-center mt-5 pt-3">
+    <div class="col-12 col-md-4 col-lg-3 book-cover text-center mt-lg-5 pt-3" id="book-cover">
 
       <%= render "cover_image", book: @book %>
       
-      <div class="social-share text-right p-4">
+      <div class="social-share text-right p-4" id="social-share">
         <span class="share-label"><%= t("tupress.books.share_label") %></span>
         <%= link_to image_pack_tag('twitter-icon.png', class: 'social-icon', alt: 'Twitter Icon'), 'http://twitter.com/TempleUnivPress' %>
         <%= link_to image_pack_tag('fb-icon.png', class: 'social-icon', alt: 'Facebook Icon'), 'http://facebook.com/TempleUnivPress' %>
       </div>
-      <div class="book-details text-left">
+      <div class="book-details text-left" id="book-details">
         <ul class="list-unstyled">
           <li><%= "#{@book.pages_total} #{t("tupress.books.pages")}" %></li>
           <li><%= @book.trim %></li>
@@ -89,8 +89,9 @@
 
       </div>
     </div>
-    <div class="col col-9 book-info">
-      <div class="description mt-5 p-3">
+    <div class="col-12 col-md-8 col-lg-9 book-info">
+      <div class="description mt-lg-5 p-3">
+      <div id="book-title">
         <h1><%= title_link(@book) %></h1>
 
         <div class="subtitle lead">
@@ -109,9 +110,11 @@
         <% end %>
         </div>
         <% end %>
-        
+
+        </div>
+
         <% if @book.description.present? %>
-        <div class="description mt-4">
+        <div class="description mt-4" id="book-description">
           <%= fix_invalid_html(@book.description).html_safe %>
         </div>
         <% end %>
