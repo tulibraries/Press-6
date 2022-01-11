@@ -1,0 +1,7 @@
+<ul class="list-unstyled">
+  <%= %Q(<li>#{link_to t("tupress.default.menu.orders.info"), webpage_path(@ordering_information), :class=>"dropdown-item"}</li>).html_safe if @ordering_information.present? %>
+  <%= %Q(<li>#{link_to t("tupress.default.menu.orders.terms"), webpage_path(@payment_terms), :class=>"dropdown-item"}</li>).html_safe if @payment_terms.present? %>
+  <li><%= link_to t("tupress.default.menu.orders.copy-request"), root_path+["forms", "copy-request"].join("/"), :class=>"dropdown-item" %></li>
+  <li><%= link_to t("tupress.default.menu.orders.review-request"), root_path+["forms", "review-copy"].join("/"), :class=>"dropdown-item" %></li>
+  <li><%= link_to t("tupress.default.menu.orders.reps"), sales_reps_path, :class=>"dropdown-item" %></li>
+</ul>

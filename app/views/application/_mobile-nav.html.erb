@@ -5,43 +5,77 @@
         <div class="bar2"></div>
         <div class="bar3"></div>
       </span>
-      <span class="navbar-brand" id="main-navbar-brand"><%= t("tupress.default.application.mobile_nav.main_menu") %></span>
+      <span class="navbar-brand" id="main-navbar-brand"><%= t("tupress.default.application.mobile_nav.menu") %></span>
     </button>
     <div class="collapse navbar-collapse" id="mobile-menu">
       <div class="navbar-nav">
         <div class="row">
           <div class="col">
-            <%= link_to t("tupress.header.books"), "#" %>
+            <button id="books-button" class="navbar-toggler icon-toggler" type="button" data-toggle="collapse" data-target="#books-menu" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation">
+              <span>Books</span>
+            </button>
+            <div class="collapse navbar-collapse" id="books-menu">
+              <%= render "application/menus/books_menu" %>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <%= link_to t("tupress.header.open-access"), "#" %>
+            <button id="oa-button" class="navbar-toggler icon-toggler" type="button" data-toggle="collapse" data-target="#oa-menu" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation">
+              Open Access
+            </button>
+            <div class="collapse navbar-collapse" id="oa-menu">
+            <%= render "application/menus/oa_menu" %>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <%= link_to t("tupress.header.journals"), "#" %>
+            <button id="journals-button" class="navbar-toggler icon-toggler" type="button" data-toggle="collapse" data-target="#journals-menu" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation">
+              Journals
+            </button>
+            <div class="collapse navbar-collapse" id="journals-menu">
+            <%= render "application/menus/journals_menu" %>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <%= link_to t("tupress.header.press-info"), "#" %>
+            <button id="press-button" class="navbar-toggler icon-toggler" type="button" data-toggle="collapse" data-target="#press-menu" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation">
+              Press Info
+            </button>
+            <div class="collapse navbar-collapse" id="press-menu">
+            <%= render "application/menus/press_menu" %>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <%= link_to t("tupress.header.faq"), "#" %>
+            <button id="orders-button" class="navbar-toggler icon-toggler" type="button" data-toggle="collapse" data-target="#orders-menu" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation">
+              Orders
+            </button>
+            <div class="collapse navbar-collapse" id="orders-menu">
+            <%= render "application/menus/orders_menu" %>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <%= link_to t("tupress.header.orders"), "#" %>
+            <button id="events-button" class="navbar-toggler icon-toggler" type="button" data-toggle="collapse" data-target="#events-menu" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation">
+              Events
+            </button>
+            <div class="collapse navbar-collapse" id="events-menu">
+            <%= render "application/menus/events_menu" %></div>
           </div>
         </div>
         <div class="row">
-          <div class="col">
-            <%= link_to t("tupress.header.news-events"), "#" %>
+          <div class="col">  
+            <%= button_to t("tupress.default.menu.faq.title"), faqs_path, 
+                {
+                  class: "btn btn-lg btn-secondary dropdown-toggle faq-button", 
+                  "aria-haspopup" => "false", "aria-expanded" => "false",
+                  method: :get
+                } %>
           </div>
         </div>
       </div>
