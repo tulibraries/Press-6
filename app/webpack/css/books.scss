@@ -94,6 +94,9 @@ ul#alphamenu {
 }
 .book-listing {
 	border-bottom: solid #ccc 1px;
+  @media screen and (max-width: 999px) {
+    border-top: solid #ccc 1px;
+  }
 }
 .book-details {
 	background-color: $white;

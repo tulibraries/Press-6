@@ -165,6 +165,8 @@ GEM
     ffi (1.15.3)
     flatpickr_rails (1.1.0)
       railties (>= 3.0)
+    font-awesome-rails (4.7.0.8)
+      railties (>= 3.2, < 8.0)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
     globalid (0.5.2)
@@ -455,6 +457,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   devise
   factory_bot_rails
+  font-awesome-rails
   friendly_id
   httparty
   image_processing (~> 1.2)

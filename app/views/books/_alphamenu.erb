@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md col-md-12 p-0 mb-2">
+<nav class="navbar navbar-expand-md col-12 p-0 mb-2">
 	<%= button_tag("", 
 								:class=>"navbar-toggler navbar-toggler-right", 
 								:type=>"button",
@@ -11,7 +11,7 @@
 		    <span class="navbar-toggler-icon">Titles</span>
 		  <% end %>
 		  <div class="collapse navbar-collapse" id="navbarSupportedContent2">
-		    <ul id="alphamenu" class="navbar-nav justify-content-center nav-fill">
+		    <ul id="alphamenu" class="navbar-nav justify-content-lg-center nav-lg-fill">
 		      <li class="nav-item<%= " active" if @selected == "numeric" %>">
 		        <%= link_to "0-9", books_path(id: "numeric") %>
 		      </li>
