@@ -17,85 +17,42 @@
         <div class="btn-group ml-2 dropdown nav-item">
           <%= menu_button(t("tupress.default.menu.books.title")) %>
           <div class="dropdown-menu p-2" aria-labelledby="navbarDropdownMenuLink">
-            <ul class="list-unstyled">
-              <li><%= link_to t("tupress.default.menu.books.awards"), awards_path, :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.books.by_title"), books_path, :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.books.by_author"), authors_path, :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.books.subjects"), subjects_path, :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.books.catalogs"), catalogs_path, :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.books.series"), series_index_path, :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.books.offers"), special_offers_path, :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.books.guides"), study_guides_path, :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.books.adoptions"), course_adoptions_path, :class=>"dropdown-item" %></li>
-            </ul>
+            <%= render "application/menus/books_menu" %>
           </div>
         </div>
 
         <div class="btn-group ml-2 dropdown nav-item">
           <%= menu_button(t("tupress.default.menu.open_access.title")) %>
-          <div class="dropdown-menu p-2" x-placement="bottom-start">
-            <ul class="list-unstyled">
-              <% @journals.each do |i| %>
-                <li><%= link_to i.title, i.url, :class=>"dropdown-item" if i.url.present? && i.title == t("tupress.default.menu.journals.commonwealth") %></li>
-              <% end %>
-              <li><%= link_to t("tupress.default.menu.open_access.nbp"), north_broad_path, :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.open_access.lsw"), labor_studies_path, :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.open_access.manifold_label"), t("tupress.default.menu.open_access.manifold_link"), :class=>"dropdown-item" %></li>
-            </ul>
+          <div class="dropdown-menu p-2" aria-labelledby="navbarDropdownMenuLink">
+            <%= render "application/menus/oa_menu" %>
           </div>
         </div>
 
         <div class="btn-group ml-2 dropdown nav-item">
           <%= menu_button(t("tupress.default.menu.journals.title")) %>
-          <div class="dropdown-menu p-2" x-placement="bottom-start">
-            <ul class="list-unstyled">
-              <% @journals.each do |i| %>
-                <li><%= link_to i.title, i.url, :class=>"dropdown-item" if i.url.present? %></li>
-              <% end %>
-            </ul>
+          <div class="dropdown-menu p-2" aria-labelledby="navbarDropdownMenuLink">
+            <%= render "application/menus/journals_menu" %>
           </div>
         </div>
 
         <div class="btn-group ml-2 dropdown nav-item">
           <%= menu_button(t("tupress.default.menu.press_info.title")) %>
-          <div class="dropdown-menu p-2" x-placement="bottom-start">
-            <ul class="list-unstyled">
-              <%= %Q(<li>#{link_to t("tupress.default.menu.press_info.about"), webpage_path(@about), :class=>"dropdown-item"}</li>).html_safe if @about.present? %>
-              <li><%= link_to t("tupress.default.menu.press_info.people"), people_path, :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.press_info.rights"), root_path+["forms", "rights-permissions"].join("/"), :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.press_info.agents"), agencies_path, :class=>"dropdown-item" %></li>
-              <%= %Q(<li>#{link_to t("tupress.default.menu.press_info.submissions"), webpage_path(@submissions), :class=>"dropdown-item"}</li>).html_safe if @submissions.present? %>
-              <%= %Q(<li>#{link_to t("tupress.default.menu.press_info.presses"), webpage_path(@about_u_presses), :class=>"dropdown-item"}</li>).html_safe if @about_u_presses.present? %>
-              <li><%= link_to t("tupress.default.menu.press_info.download"), documents_path, :class=>"dropdown-item" %></li>
-              <li><%= link_to t("tupress.default.menu.press_info.faq"), faqs_path, :class=>"dropdown-item" %></li>
-            </ul>
+          <div class="dropdown-menu p-2" aria-labelledby="navbarDropdownMenuLink">
+            <%= render "application/menus/press_menu" %>
           </div>
         </div>
 
           <div class="btn-group ml-2 dropdown nav-item">
-          <%= menu_button(t("tupress.default.menu.orders.title")) %>
-            <div class="dropdown-menu p-2" x-placement="bottom-start">
-              <ul class="list-unstyled">
-                <%= %Q(<li>#{link_to t("tupress.default.menu.orders.info"), webpage_path(@ordering_information), :class=>"dropdown-item"}</li>).html_safe if @ordering_information.present? %>
-                <%= %Q(<li>#{link_to t("tupress.default.menu.orders.terms"), webpage_path(@payment_terms), :class=>"dropdown-item"}</li>).html_safe if @payment_terms.present? %>
-                <li><%= link_to t("tupress.default.menu.orders.copy-request"), root_path+["forms", "copy-request"].join("/"), :class=>"dropdown-item" %></li>
-                <li><%= link_to t("tupress.default.menu.orders.review-request"), root_path+["forms", "review-copy"].join("/"), :class=>"dropdown-item" %></li>
-                <li><%= link_to t("tupress.default.menu.orders.reps"), sales_reps_path, :class=>"dropdown-item" %></li>
-              </ul>
+            <%= menu_button(t("tupress.default.menu.orders.title")) %>
+            <div class="dropdown-menu p-2" aria-labelledby="navbarDropdownMenuLink">
+              <%= render "application/menus/orders_menu" %>
             </div>
           </div>
 
           <div class="btn-group ml-2 dropdown nav-item">
-          <%= menu_button(t("tupress.default.menu.news.title")) %>
-            <div class="dropdown-menu p-2" x-placement="bottom-start">
-              <ul class="list-unstyled">
-                <li><%= link_to t("tupress.default.menu.news.inquiries"), root_path+["forms", "media-inquiries"].join("/"), :class=>"dropdown-item" %></li>
-                <li><%= link_to t("tupress.default.menu.news.podcast"), t("tupress.default.menu.news.podcast_link"), :class=>"dropdown-item" %></li>
-                <li><%= link_to t("tupress.default.menu.news.blog"), "#", :class=>"dropdown-item" %></li>
-                <li><%= link_to t("tupress.default.menu.news.conferences"), conferences_path, :class=>"dropdown-item" %></li>
-                <li><%= link_to t("tupress.default.menu.news.events"), events_path, :class=>"dropdown-item" %></li>
-                <li><%= link_to t("tupress.default.menu.news.offers"), special_offers_path, :class=>"dropdown-item" %></li>
-              </ul>
+            <%= menu_button(t("tupress.default.menu.events.title")) %>
+            <div class="dropdown-menu p-2" aria-labelledby="navbarDropdownMenuLink">
+              <%= render "application/menus/events_menu" %>
             </div>
           </div>
 

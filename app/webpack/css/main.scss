@@ -1,20 +1,24 @@
 .container {
-	max-width: 100%;
-	@media (min-width: 1200px) {
+  max-width: 100%;
+  @media (min-width: 1200px) {
     max-width: 1200px;
     min-width: 1200px;
-	}
+  }
+  @media (max-width: 1199px) {
+    max-width: 100%;
+    min-width: 100%;
+  }
 }
 
 html, body {
-	background-color: $background-grey!important;
-	font-family: "Roboto"!important;
-	font-size: 16px;
-	margin: 0px;
-	padding: 0px;
-	width: 100%;
-	position: static;
-	overflow: scroll;
+  background-color: $background-grey!important;
+  font-family: "Roboto"!important;
+  font-size: 16px;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  position: static;
+  overflow: scroll;
 }
 
 .container.index, .container.show {
@@ -27,11 +31,14 @@ html, body {
 }
 
 strong {
-	font-family: "Roboto-Bold";
+  font-family: "Roboto-Bold";
 }
 
 #wrapper {
-	margin-top: 14px;
+  margin-top: 14px;
+  @media screen and (max-width: 999px) {
+    margin-top: 0;
+  }
 }
 
 .gold {
@@ -40,16 +47,16 @@ strong {
 }
 
 .flash {
-	background-color: $gold;
-	padding:10px;
-	width: 100%;
-	text-align: center;
-	margin-bottom: 0;
-	color: $black;
-	font-size: 1.5rem;
-	.error {
-		color: $red;
-	}
+  background-color: $gold;
+  padding:10px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0;
+  color: $black;
+  font-size: 1.5rem;
+  .error {
+    color: $red;
+  }
 }
 
 .flash.timedout {
@@ -57,17 +64,17 @@ strong {
 }
 
 a.inline {
-	color: $red;
-	text-decoration: underline;
+  color: $red;
+  text-decoration: underline;
 }
 #content {
-	margin: 0;
-	background-color: $white;
-	padding-bottom: 42px;
+  margin: 0;
+  background-color: $white;
+  padding-bottom: 42px;
 }
 .home #content {
-	margin-top: 46px;
-	padding-bottom: 0!important;
+  margin-top: 46px;
+  padding-bottom: 0!important;
 }
 #skip-link {
   left: 50%;
@@ -77,7 +84,7 @@ a.inline {
   width: auto;
   z-index: 50;
   a, a:visited, a:link {
-  	background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.6);
     color: $white;
     display: block;
     font-size: 0.94em;
@@ -87,154 +94,49 @@ a.inline {
   }
 }
 .element-invisible {
-	position: absolute !important;
-	clip: rect(1px 1px 1px 1px);
-	overflow: hidden;
-	height: 1px;
-}
-.home #mobile-search-button .navbar-toggler-icon {
-	display: none;
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  overflow: hidden;
+  height: 1px;
 }
 form {
-	#q-error, #email-error {
-	 	color: $red;
-	 	font-size: 85%;
- 	}
+  #q-error, #email-error {
+     color: $red;
+     font-size: 85%;
+   }
  label {
- 	font-weight: 600;
- 	padding-right: 10px;
+   font-weight: 600;
+   padding-right: 10px;
  }
 }
 
 
 // tupress
 
-
-#highlights {
-	background-image: url(~highlights.jpg);
-	background-position: 50% 100%;
-	background-repeat: repeat-x;
-	margin-top:0;
-	border-bottom: solid 14px gold;
-}
-
-#dropdownMenuButton {
-	background-color: transparent;
-}
-
-#left-home-menu {
-	ul {
-		margin-bottom: 0;
-		color: $red;
-		li {
-			font-size:120%;
-			padding: 10px;
-			background-color: $white;
-			margin-bottom: 21px;
-		}
-		li:last-of-type {
-			margin-bottom: 0;
-		}
-	}
-}
-
-#new-forthcoming {
-	background-color: $white;
-	h1 {
-		text-decoration: underline;
-		margin-left: 35px;
-	}
-	p {
-		margin-top: 7px;
-		color: $red;
-	}
-	img {
-		height: 300px;
-		max-width: 200px;
-	}
-	a {
-		display: block;
-		font-weight: 600;
-		margin-top: 7px;
-	}
-}
-
-#news {
-	border-right: 14px solid $background-grey;
-	background-color: $news-grey;
-	h1 {
-		text-decoration: underline;
-	}
-	h2 {
-		font-size: 135%;
-	}
-	.news-item {
-		margin-top: 28px;
-		.media {
-			width: 160px;
-			text-align: center;
-			a {
-				width: 100%;
-			}
-			.news-image {
-				height: 180px;
-				max-width: 120px;
-				margin: auto;
-			}
-		}
-		.media-body {
-			padding-left: 28px;
-		}
-	}
-}
-
-#features {
-	text-align: center;
-	h2 {
-		font-size: 115%;
-	}
-}
-
 .white {
-	background-color: $white;
+  background-color: $white;
 }
 
 :root {
-	a, a:active, a:hover, a:visited {
-		color: $red;
-	}
-}
-
-#site-footer {
-	margin-top: 21px;
-	background-color: #ccc;
+  a, a:active, a:hover, a:visited {
+    color: $red;
+  }
 }
 
 li.list-inline-item {
-	img {
-		filter: grayscale(100%);
-	}
-}
-
-#login-link {
-	display: inline-block;
-	margin-top: 21px;
-	width: 22px;
-	filter: brightness(1) invert(.5);
-}
-
-a.news-image img {
-	max-width: 100%;
+  img {
+    filter: grayscale(100%);
+  }
 }
 
 .trix-content {
-	action-text-attachment {
-		figure {
-			figcaption {
-				.attachment__name, .attachment__size {
-					display: none;
-				}
-			}
-		}
-	}
+  action-text-attachment {
+    figure {
+      figcaption {
+        .attachment__name, .attachment__size {
+          display: none;
+        }
+      }
+    }
+  }
 }
