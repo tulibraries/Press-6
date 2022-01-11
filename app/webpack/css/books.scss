@@ -92,6 +92,9 @@ ul#alphamenu {
 		content: "";
 	}
 }
+.alphamenu.mobile {
+  font-size: 120%;
+}
 .book-listing {
 	border-bottom: solid #ccc 1px;
   @media screen and (max-width: 999px) {

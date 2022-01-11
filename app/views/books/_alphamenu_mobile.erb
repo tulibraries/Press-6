@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md d-block col-12 mb-2 text-center">
+<nav class="navbar navbar-expand-md d-block col-12 mb-2">
 	<%= button_tag("", 
 								:class=>"btn btn-lg btn-secondary dropdown-toggle disabled pl-0", 
 								:type=>"button",
@@ -8,10 +8,12 @@
 								:'aria-expanded'=>"false",
 								:'aria-label'=>"Toggle navigation") do
 								%>
-		    <span class="navbar-toggler-icon w-100">Books beginning with... <span style="color: #A50030;font-weight:600;"><%= @selected.upcase %><span></span>
+		    <span class="navbar-toggler-icon w-100">
+          Books beginning with... <span><%= @selected.upcase %><span>
+        </span>
 		  <% end %>
 		  <div class="collapse" id="navbarSupportedContentMobile">
-		    <div id="alphamenu" class="text-center" style="font-size: 115%;">
+		    <div class="alphamenu mobile">
 		        <%= link_to "0-9", books_path(id: "numeric"), class: "pr-2" %>
 		        <%= link_to "A", books_path(id: "a"), class: "pr-2" %>
 		        <%= link_to "B", books_path(id: "b"), class: "pr-2" %>
