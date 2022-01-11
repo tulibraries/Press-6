@@ -19,6 +19,11 @@ html, body {
 
 .container.index, .container.show {
 	min-height: 60vh;
+	@media (min-width: 768px) and (max-width: 1199px) {
+    margin-left: 0!important;
+    margin-right: 0!important;
+    max-width: 100%!important;
+	}
 }
 
 strong {

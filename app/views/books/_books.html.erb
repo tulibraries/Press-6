@@ -1,15 +1,15 @@
   <% @books.each do |book| %>  
     <div class="row pb-lg-4 mt-lg-4 mb-lg-4 book-listing">
-      <div class="col-12 col-lg-3 pl-0 py-3 text-center">
+      <div class="col-12 col-md-4 col-lg-3 pl-0 py-3 text-center">
         <%= link_to book_path(book) do %>
           <% if book.cover_image.attached? %>
-            <%= image_tag book.index_image("cover_image"), class: "cover-image"  %>
+            <%= image_tag book.index_image("cover_image"), class: "cover-image mr-5", style: "position:relative;z-index:1000"  %>
           <% else %>
-            <%= image_pack_tag "default-book-cover-index.png" %>
+            <%= image_pack_tag "default-book-cover-index.png", style: "position: relative;z-index:1000"  %>
           <% end %>
         <% end %>
       </div>
-      <div class="col-12 col-lg-9 p-4 pl-0 book-details">
+      <div class="col-12 col-md-8 col-lg-9 p-4 pl-0 book-details" style="position: relative; z-index:100">
         <h2><%= link_to book.title.html_safe, book_path(book) %></h2>
         <p>
           <em><%= book.subtitle if book.subtitle.present? %></em>
