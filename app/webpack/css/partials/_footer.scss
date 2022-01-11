@@ -1,6 +1,8 @@
 @import "vars";
 
 #site-footer {
+  margin-top: 21px;
+  background-color: #ccc;
   padding-top: 2rem;
   address {
     h2 {
@@ -13,5 +15,11 @@
     span {
       font-size: 100%;
     }
+  }
+  #login-link {
+    display: inline-block;
+    margin-top: 21px;
+    width: 22px;
+    filter: brightness(1) invert(.5);
   }
 }
