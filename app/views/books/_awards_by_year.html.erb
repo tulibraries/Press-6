@@ -1,0 +1,5 @@
+<ul class="list-unstyled p-3">
+<% @awards_by_year.each do |year| %>  
+  <li><%= link_to year, awards_by_year_path(year) %></li>
+<% end %>
+</ul>

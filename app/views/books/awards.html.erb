@@ -33,24 +33,54 @@
     <%= render "featured_awards" %>
   </div>
 
-  <div class="row d-none">
+  <div class="row">
 
-    <div class="col-4 px-0 year-listing">
-      <h2 class="gold pl-3">Awards by Year</h2>
-      <ul class="list-unstyled p-3">
-      <% @awards_by_year.each do |year| %>  
-        <li><%= link_to year, awards_by_year_path(year) %></li>
-      <% end %>
-      </ul>
+    <div class="col-12 col-lg-4 px-0 year-listing gold">
+      <h2 class="d-none d-md-block gold pl-3">Awards by Year</h2>
+        <%= button_tag("", 
+            :class=>"btn btn-lg btn-secondary dropdown-toggle disabled pl-0 text-center w-100", 
+            :type=>"button",
+            :'data-toggle'=>"collapse",
+            :'data-target'=>"#awards_by_year",
+            :'aria-controls'=>"awards_by_year",
+            :'aria-expanded'=>"false",
+            :'aria-label'=>"Toggle Awards by Year") do
+            %>
+          <span class="navbar-toggler-icon pt-0 text-center w-auto gold">Awards by Year</span>
+        <% end %>
+
+        <div class="d-none d-lg-block row pb-4 mb-4 awards_by_year">
+          <%= render "awards_by_year" %>
+        </div>
+
+        <div class="d-lg-none collapse navbar-collapse" id="awards_by_year">
+          <%= render "awards_by_year" %>
+        </div>
     </div>
 
-    <div class="col-8 pl-5 pr-0 subject-listing">
-      <h2 class="gold pl-3">Awards by Subject</h2>
-      <ul class="list-unstyled p-3">
-      <% @awards_by_subject.each do |subject| %>
-        <li><%= link_to subject.title, awards_by_subject_path(subject) %></li>
-      <% end %>
-      </ul>
+    <div class="col-12 col-lg-8 pl-lg-5 px-0 pr-0 subject-listing gold">
+      <h2 class="d-none d-md-block gold pl-3">Awards by Subject</h2>
+          <%= button_tag("", 
+            :class=>"btn btn-lg btn-secondary dropdown-toggle disabled pl-0 text-center w-100", 
+            :type=>"button",
+            :'data-toggle'=>"collapse",
+            :'data-target'=>"#awards_by_subject",
+            :'aria-controls'=>"awards_by_subject",
+            :'aria-expanded'=>"false",
+            :'aria-label'=>"Toggle Awards by Subject") do
+            %>
+          <span class="navbar-toggler-icon pt-0 text-center w-auto gold">Awards by Subject</span>
+        <% end %>
+
+
+    <div class="d-none d-lg-block row pb-4 mb-4 awards_by_subject">
+      <%= render "awards_by_subject" %>
+    </div>
+
+    <div class="d-lg-none collapse navbar-collapse" id="awards_by_subject">
+      <%= render "awards_by_subject" %>
+    </div>
+
     </div>
 
   </div>
