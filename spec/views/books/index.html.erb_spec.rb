@@ -11,6 +11,7 @@ RSpec.describe "books/index.html.erb", type: :view do
     assign(:books, Kaminari.paginate_array([
       book
     ]).page(1))
+    assign(:selected, "a")
   end
 
   it "- populates paginated list" do
