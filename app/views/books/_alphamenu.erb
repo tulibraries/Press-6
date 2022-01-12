@@ -1,98 +1,98 @@
 <nav class="navbar navbar-expand-md col-12 p-0 mb-2 mt-4">
-	<%= button_tag("", 
-								:class=>"navbar-toggler navbar-toggler-right", 
-								:type=>"button",
-								:'data-toggle'=>"collapse",
-								:'data-target'=>"#navbarSupportedContent2",
-								:'aria-controls'=>"navbarSupportedContent2",
-								:'aria-expanded'=>"false",
-								:'aria-label'=>"Toggle navigation") do
-								%>
-		    <span class="navbar-toggler-icon">Books beginning with...</span>
-		  <% end %>
-		  <div class="collapse navbar-collapse" id="navbarSupportedContent2">
-		    <ul id="alphamenu" class="navbar-nav justify-content-lg-center nav-lg-fill">
-		      <li class="nav-item<%= " active" if @selected == "numeric" %>">
-		        <%= link_to "0-9", books_path(id: "numeric") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "a" %>">
-		        <%= link_to "A", books_path(id: "a") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "b" %>">
-		        <%= link_to "B", books_path(id: "b") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "c" %>">
-		        <%= link_to "C", books_path(id: "c") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "d" %>">
-		        <%= link_to "D", books_path(id: "d") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "e" %>">
-		        <%= link_to "E", books_path(id: "e") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "f" %>">
-		        <%= link_to "F", books_path(id: "f") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "g" %>">
-		        <%= link_to "G", books_path(id: "g") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "h" %>">
-		        <%= link_to "H", books_path(id: "h") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "i" %>">
-		        <%= link_to "I", books_path(id: "i") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "j" %>">
-		        <%= link_to "J", books_path(id: "j") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "k" %>">
-		        <%= link_to "K", books_path(id: "k") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "l" %>">
-		        <%= link_to "L", books_path(id: "l") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "m" %>">
-		        <%= link_to "M", books_path(id: "m") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "n" %>">
-		        <%= link_to "N", books_path(id: "n") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "o" %>">
-		        <%= link_to "O", books_path(id: "o") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "p" %>">
-		        <%= link_to "P", books_path(id: "p") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "q" %>">
-		        <%= link_to "Q", books_path(id: "q") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "r" %>">
-		        <%= link_to "R", books_path(id: "r") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "s" %>">
-		        <%= link_to "S", books_path(id: "s") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "t" %>">
-		        <%= link_to "T", books_path(id: "t") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "u" %>">
-		        <%= link_to "U", books_path(id: "u") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "v" %>">
-		        <%= link_to "V", books_path(id: "v") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "w" %>">
-		        <%= link_to "W", books_path(id: "w") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "x" %>">
-		        <%= link_to "X", books_path(id: "x") %>
-		      </li>
-		      <li class="nav-item<%= " active" if @selected == "y" %>">
-		        <%= link_to "Y", books_path(id: "y") %>
-		      </li>
-		      <li class="nav-item last<%= " active" if @selected == "z" %>">
-		        <%= link_to "Z", books_path(id: "z") %>
-		      </li>
-		     </ul>
-		   </div>
-	</nav>
+  <%= button_tag("", 
+                :class=>"navbar-toggler navbar-toggler-right", 
+                :type=>"button",
+                :'data-toggle'=>"collapse",
+                :'data-target'=>"#navbarSupportedContent2",
+                :'aria-controls'=>"navbarSupportedContent2",
+                :'aria-expanded'=>"false",
+                :'aria-label'=>"Toggle navigation") do
+                %>
+        <span class="navbar-toggler-icon">Books beginning with...</span>
+      <% end %>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+        <ul id="alphamenu" class="navbar-nav justify-content-lg-center nav-lg-fill">
+          <li class="nav-item<%= " active" if @selected == "numeric" %>">
+            <%= link_to "0-9", books_path(id: "numeric") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "a" %>">
+            <%= link_to "A", books_path(id: "a") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "b" %>">
+            <%= link_to "B", books_path(id: "b") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "c" %>">
+            <%= link_to "C", books_path(id: "c") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "d" %>">
+            <%= link_to "D", books_path(id: "d") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "e" %>">
+            <%= link_to "E", books_path(id: "e") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "f" %>">
+            <%= link_to "F", books_path(id: "f") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "g" %>">
+            <%= link_to "G", books_path(id: "g") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "h" %>">
+            <%= link_to "H", books_path(id: "h") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "i" %>">
+            <%= link_to "I", books_path(id: "i") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "j" %>">
+            <%= link_to "J", books_path(id: "j") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "k" %>">
+            <%= link_to "K", books_path(id: "k") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "l" %>">
+            <%= link_to "L", books_path(id: "l") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "m" %>">
+            <%= link_to "M", books_path(id: "m") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "n" %>">
+            <%= link_to "N", books_path(id: "n") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "o" %>">
+            <%= link_to "O", books_path(id: "o") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "p" %>">
+            <%= link_to "P", books_path(id: "p") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "q" %>">
+            <%= link_to "Q", books_path(id: "q") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "r" %>">
+            <%= link_to "R", books_path(id: "r") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "s" %>">
+            <%= link_to "S", books_path(id: "s") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "t" %>">
+            <%= link_to "T", books_path(id: "t") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "u" %>">
+            <%= link_to "U", books_path(id: "u") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "v" %>">
+            <%= link_to "V", books_path(id: "v") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "w" %>">
+            <%= link_to "W", books_path(id: "w") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "x" %>">
+            <%= link_to "X", books_path(id: "x") %>
+          </li>
+          <li class="nav-item<%= " active" if @selected == "y" %>">
+            <%= link_to "Y", books_path(id: "y") %>
+          </li>
+          <li class="nav-item last<%= " active" if @selected == "z" %>">
+            <%= link_to "Z", books_path(id: "z") %>
+          </li>
+         </ul>
+       </div>
+  </nav>

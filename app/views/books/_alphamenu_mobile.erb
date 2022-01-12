@@ -1,46 +1,46 @@
 <nav class="navbar navbar-expand-md d-block col-12 mb-2">
-	<%= button_tag("", 
-								:class=>"btn btn-lg btn-secondary dropdown-toggle disabled pl-0", 
-								:type=>"button",
-								:'data-toggle'=>"collapse",
-								:'data-target'=>"#navbarSupportedContentMobile",
-								:'aria-controls'=>"navbarSupportedContentMobile",
-								:'aria-expanded'=>"false",
-								:'aria-label'=>"Toggle navigation") do
-								%>
-		    <span class="navbar-toggler-icon w-100">
+  <%= button_tag("", 
+                :class=>"btn btn-lg btn-secondary dropdown-toggle disabled pl-0", 
+                :type=>"button",
+                :'data-toggle'=>"collapse",
+                :'data-target'=>"#navbarSupportedContentMobile",
+                :'aria-controls'=>"navbarSupportedContentMobile",
+                :'aria-expanded'=>"false",
+                :'aria-label'=>"Toggle navigation") do
+                %>
+        <span class="navbar-toggler-icon w-100">
           Books beginning with... <span><%= @selected.upcase %><span>
         </span>
-		  <% end %>
-		  <div class="collapse" id="navbarSupportedContentMobile">
-		    <div class="alphamenu mobile">
-		        <%= link_to "0-9", books_path(id: "numeric"), class: "pr-2" %>
-		        <%= link_to "A", books_path(id: "a"), class: "pr-2" %>
-		        <%= link_to "B", books_path(id: "b"), class: "pr-2" %>
-		        <%= link_to "C", books_path(id: "c"), class: "pr-2" %>
-		        <%= link_to "D", books_path(id: "d"), class: "pr-2" %>
-		        <%= link_to "E", books_path(id: "e"), class: "pr-2" %>
-		        <%= link_to "F", books_path(id: "f"), class: "pr-2" %>
-		        <%= link_to "G", books_path(id: "g"), class: "pr-2" %>
-		        <%= link_to "H", books_path(id: "h"), class: "pr-2" %>
-		        <%= link_to "I", books_path(id: "i"), class: "pr-2" %>
-		        <%= link_to "J", books_path(id: "j"), class: "pr-2" %>
-		        <%= link_to "K", books_path(id: "k"), class: "pr-2" %>
-		        <%= link_to "L", books_path(id: "l"), class: "pr-2" %>
-		        <%= link_to "M", books_path(id: "m") %><br />
-		        <%= link_to "N", books_path(id: "n"), class: "pr-2" %>
-		        <%= link_to "O", books_path(id: "o"), class: "pr-2" %>
-		        <%= link_to "P", books_path(id: "p"), class: "pr-2" %>
-		        <%= link_to "Q", books_path(id: "q"), class: "pr-2" %>
-		        <%= link_to "R", books_path(id: "r"), class: "pr-2" %>
-		        <%= link_to "S", books_path(id: "s"), class: "pr-2" %>
-		        <%= link_to "T", books_path(id: "t"), class: "pr-2" %>
-		        <%= link_to "U", books_path(id: "u"), class: "pr-2" %>
-		        <%= link_to "V", books_path(id: "v"), class: "pr-2" %>
-		        <%= link_to "W", books_path(id: "w"), class: "pr-2" %>
-		        <%= link_to "X", books_path(id: "x"), class: "pr-2" %>
-		        <%= link_to "Y", books_path(id: "y"), class: "pr-2" %>
-		        <%= link_to "Z", books_path(id: "z") %>
-		     </div>
-		   </div>
-	</nav>
+      <% end %>
+      <div class="collapse" id="navbarSupportedContentMobile">
+        <div class="alphamenu mobile">
+            <%= link_to "0-9", books_path(id: "numeric"), class: "pr-2" %>
+            <%= link_to "A", books_path(id: "a"), class: "pr-2" %>
+            <%= link_to "B", books_path(id: "b"), class: "pr-2" %>
+            <%= link_to "C", books_path(id: "c"), class: "pr-2" %>
+            <%= link_to "D", books_path(id: "d"), class: "pr-2" %>
+            <%= link_to "E", books_path(id: "e"), class: "pr-2" %>
+            <%= link_to "F", books_path(id: "f"), class: "pr-2" %>
+            <%= link_to "G", books_path(id: "g"), class: "pr-2" %>
+            <%= link_to "H", books_path(id: "h"), class: "pr-2" %>
+            <%= link_to "I", books_path(id: "i"), class: "pr-2" %>
+            <%= link_to "J", books_path(id: "j"), class: "pr-2" %>
+            <%= link_to "K", books_path(id: "k"), class: "pr-2" %>
+            <%= link_to "L", books_path(id: "l"), class: "pr-2" %>
+            <%= link_to "M", books_path(id: "m") %><br />
+            <%= link_to "N", books_path(id: "n"), class: "pr-2" %>
+            <%= link_to "O", books_path(id: "o"), class: "pr-2" %>
+            <%= link_to "P", books_path(id: "p"), class: "pr-2" %>
+            <%= link_to "Q", books_path(id: "q"), class: "pr-2" %>
+            <%= link_to "R", books_path(id: "r"), class: "pr-2" %>
+            <%= link_to "S", books_path(id: "s"), class: "pr-2" %>
+            <%= link_to "T", books_path(id: "t"), class: "pr-2" %>
+            <%= link_to "U", books_path(id: "u"), class: "pr-2" %>
+            <%= link_to "V", books_path(id: "v"), class: "pr-2" %>
+            <%= link_to "W", books_path(id: "w"), class: "pr-2" %>
+            <%= link_to "X", books_path(id: "x"), class: "pr-2" %>
+            <%= link_to "Y", books_path(id: "y"), class: "pr-2" %>
+            <%= link_to "Z", books_path(id: "z") %>
+         </div>
+       </div>
+  </nav>
