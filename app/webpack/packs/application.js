@@ -18,6 +18,7 @@ require("selectize")
 
 require("../components/links/index")
 require("../components/selectize")
+require("../javascripts/jumble.js")
 
 const images = require.context('../images', true);
 
