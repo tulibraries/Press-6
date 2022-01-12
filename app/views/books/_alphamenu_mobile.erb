@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-md d-block col-12 mb-2">
+<nav class="navbar navbar-expand-md d-block col-12 mt-3 mb-2 gold">
   <%= button_tag("", 
-                :class=>"btn btn-lg btn-secondary dropdown-toggle disabled pl-0", 
+                :class=>"btn btn-lg btn-secondary dropdown-toggle disabled pl-0 text-center w-100", 
                 :type=>"button",
                 :'data-toggle'=>"collapse",
                 :'data-target'=>"#navbarSupportedContentMobile",
@@ -8,7 +8,7 @@
                 :'aria-expanded'=>"false",
                 :'aria-label'=>"Toggle navigation") do
                 %>
-        <span class="navbar-toggler-icon w-100">
+        <span class="navbar-toggler-icon pt-0 w-auto gold">
           Books beginning with... <span><%= @selected.upcase %><span>
         </span>
       <% end %>
