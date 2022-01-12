@@ -6,6 +6,9 @@
   max-width: 100%;
   background-color: $dark-blue;
   margin-bottom: 0;
+  .dropdown-toggle {
+    color: $white!important;
+  }
 }
 
 nav.pagination {

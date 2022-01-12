@@ -9,10 +9,10 @@
   </div>
 
   <div class="row featured_awards">
-    <div class="col-12 px-0 gold text-center navbar navbar-expand-md">
-      <h2 class="d-none d-lg-block pl-3 gold">Recent Award Winners</h2>
+    <div class="col-12 px-0 mb-1 mb-lg-0 text-center">
+      <h2 class="d-none d-lg-block pl-3 gold" style="border-bottom: solid #f3f3f3 7px">Recent Award Winners</h2>
       <%= button_tag("", 
-								:class=>"btn btn-lg btn-secondary dropdown-toggle disabled pl-0 text-center w-100", 
+								:class=>"btn btn-lg btn-secondary dropdown-toggle pl-0 text-center gold w-100 d-lg-none", 
 								:type=>"button",
 								:'data-toggle'=>"collapse",
 								:'data-target'=>"#featured_awards",
@@ -22,67 +22,60 @@
 								%>
         <span class="navbar-toggler-icon pt-0 text-center w-auto gold">Recent Award Winners</span>
       <% end %>
+
+      <div class="d-none d-lg-flex mx-0 row mb-0 featured_awards">
+        <%= render "featured_awards" %>
+      </div>
+      <div class="d-lg-none row collapse navbar-collapse featured_awards" id="featured_awards">
+        <%= render "featured_awards" %>
+      </div>
     </div>
   </div>
 
-  <div class="d-none d-lg-block row pb-4 mb-4 featured_awards">
-    <%= render "featured_awards" %>
-  </div>
+  <div class="row mt-lg-3">
+    <div class="col-12 col-lg-4 mb-1 px-0 year-listing">
+      <h2 class="d-none d-lg-block pl-3 gold">Awards by Year</h2>
+      <%= button_tag("", 
+          :class=>"btn btn-lg btn-secondary dropdown-toggle pl-0 text-center gold w-100 d-lg-none", 
+          :type=>"button",
+          :'data-toggle'=>"collapse",
+          :'data-target'=>"#awards_by_year",
+          :'aria-controls'=>"awards_by_year",
+          :'aria-expanded'=>"false",
+          :'aria-label'=>"Toggle Awards by Year") do
+          %>
+        <span class="navbar-toggler-icon pt-0 text-center w-auto gold">Awards by Year</span>
+      <% end %>
 
-  <div class="d-lg-none collapse navbar-collapse" id="featured_awards">
-    <%= render "featured_awards" %>
-  </div>
-
-  <div class="row">
-
-    <div class="col-12 col-lg-4 px-0 year-listing gold">
-      <h2 class="d-none d-md-block gold pl-3">Awards by Year</h2>
-        <%= button_tag("", 
-            :class=>"btn btn-lg btn-secondary dropdown-toggle disabled pl-0 text-center w-100", 
-            :type=>"button",
-            :'data-toggle'=>"collapse",
-            :'data-target'=>"#awards_by_year",
-            :'aria-controls'=>"awards_by_year",
-            :'aria-expanded'=>"false",
-            :'aria-label'=>"Toggle Awards by Year") do
-            %>
-          <span class="navbar-toggler-icon pt-0 text-center w-auto gold">Awards by Year</span>
-        <% end %>
-
-        <div class="d-none d-lg-block row pb-4 mb-4 awards_by_year">
-          <%= render "awards_by_year" %>
-        </div>
-
-        <div class="d-lg-none collapse navbar-collapse" id="awards_by_year">
-          <%= render "awards_by_year" %>
-        </div>
+      <div class="d-none d-lg-flex mx-0 row pb-4 mb-4 awards_by_year">
+        <%= render "awards_by_year" %>
+      </div>
+      <div class="d-lg-none collapse navbar-collapse" id="awards_by_year">
+        <%= render "awards_by_year" %>
+      </div>
     </div>
 
-    <div class="col-12 col-lg-8 pl-lg-5 px-0 pr-0 subject-listing gold">
-      <h2 class="d-none d-md-block gold pl-3">Awards by Subject</h2>
-          <%= button_tag("", 
-            :class=>"btn btn-lg btn-secondary dropdown-toggle disabled pl-0 text-center w-100", 
-            :type=>"button",
-            :'data-toggle'=>"collapse",
-            :'data-target'=>"#awards_by_subject",
-            :'aria-controls'=>"awards_by_subject",
-            :'aria-expanded'=>"false",
-            :'aria-label'=>"Toggle Awards by Subject") do
-            %>
-          <span class="navbar-toggler-icon pt-0 text-center w-auto gold">Awards by Subject</span>
-        <% end %>
+    <div class="col-12 mb-1 col-lg-8 pl-lg-5 px-0 pr-0 subject-listing">
+      <h2 class="d-none d-lg-block gold pl-3">Awards by Subject</h2>
+      <%= button_tag("", 
+        :class=>"btn btn-lg btn-secondary dropdown-toggle pl-0 text-center gold w-100 d-lg-none", 
+        :type=>"button",
+        :'data-toggle'=>"collapse",
+        :'data-target'=>"#awards_by_subject",
+        :'aria-controls'=>"awards_by_subject",
+        :'aria-expanded'=>"false",
+        :'aria-label'=>"Toggle Awards by Subject") do
+        %>
+        <span class="navbar-toggler-icon pt-0 text-center w-auto gold">Awards by Subject</span>
+      <% end %>
 
-
-    <div class="d-none d-lg-block row pb-4 mb-4 awards_by_subject">
-      <%= render "awards_by_subject" %>
+      <div class="d-none d-lg-flex mx-0 row pb-4 mb-4 awards_by_subject">
+        <%= render "awards_by_subject" %>
+      </div>
+      <div class="d-lg-none collapse navbar-collapse" id="awards_by_subject">
+        <%= render "awards_by_subject" %>
+      </div>
     </div>
-
-    <div class="d-lg-none collapse navbar-collapse" id="awards_by_subject">
-      <%= render "awards_by_subject" %>
-    </div>
-
-    </div>
-
   </div>
 
 </div>
