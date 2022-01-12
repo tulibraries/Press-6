@@ -33,6 +33,7 @@ gem "devise"
 gem "omniauth"
 gem "omniauth-google-oauth2"
 gem "httparty"
+gem "font-awesome-rails"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
