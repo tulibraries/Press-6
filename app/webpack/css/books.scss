@@ -3,63 +3,63 @@
 .red { color: $red;}
 
 .share-label {
-	font-weight:600;
-	font-size:1.1rem;
+  font-weight:600;
+  font-size:1.1rem;
 }
 
 .section-label {
-	font-size: 1rem;
-	font-weight: 600;
-	margin-top: 10px;
-	display: inline-block;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 10px;
+  display: inline-block;
 }
 
 a.order-button {
-	color: $white!important;
-	background-color: $red;
-	padding: 5px 14px;
-	text-align: center;
-	display: inline-block;
-	margin-bottom: 14px;
-	text-decoration: none!important;
-	font-size: 1.3rem;
+  color: $white!important;
+  background-color: $red;
+  padding: 5px 14px;
+  text-align: center;
+  display: inline-block;
+  margin-bottom: 14px;
+  text-decoration: none!important;
+  font-size: 1.3rem;
 }
 
 .book-details {
-	background-color: $white;
-	line-height: 1.75rem;
-	padding: 28px;
+  background-color: $white;
+  line-height: 1.75rem;
+  padding: 28px;
 }
 
 .social-icon {
-	width: 29px;
-	filter: grayscale(100%);
+  width: 29px;
+  filter: grayscale(100%);
 }
 
 .books.show {
-	.book-formats, .book-subjects, .book-preview, .book-related-links {
-		.list-unstyled {
-			font-size: .9rem;
-		}
-	}
+  .book-formats, .book-subjects, .book-preview, .book-related-links {
+    .list-unstyled {
+      font-size: .9rem;
+    }
+  }
 
-	.reviews, .author-bio, .series, .see-also {
-		background-color: $white;
-	}
+  .reviews, .author-bio, .series, .see-also {
+    background-color: $white;
+  }
 
-	.see-also {
-		a {
-			text-decoration: none!important;
-			display: block;
-			margin: auto;
-		}
-	}
+  .see-also {
+    a {
+      text-decoration: none!important;
+      display: block;
+      margin: auto;
+    }
+  }
 
-	.awards {
-		li {
-			color: $award;
-		}
-	}
+  .awards {
+    li {
+      color: $award;
+    }
+  }
 }
 .awards {
   .trix-content {
@@ -67,49 +67,55 @@ a.order-button {
   }
 }
 ul#alphamenu {
-	width: 100%;
-	padding: 7px 0;
-	margin: 0;
-	color: #000;
-	li {
-		text-align: center;
-	}
-	li a {
-		padding: 0 10px;
-		color: #903;
-		font-size: 125%;
-	}
-	li.active a {
-		padding: 0 10px;
-		color: $white;
-		background-color: $dark-blue;
-		font-size: 125%;
-	}
-	li::after {
-		content: " | ";
-	}
-	li.last::after {
-		content: "";
-	}
+  width: 100%;
+  padding: 7px 0;
+  margin: 0;
+  color: #000;
+  li {
+    text-align: center;
+  }
+  li a {
+    padding: 0 10px;
+    color: #903;
+    font-size: 125%;
+  }
+  li.active a {
+    padding: 0 10px;
+    color: $white;
+    background-color: $dark-blue;
+    font-size: 125%;
+  }
+  li::after {
+    content: " | ";
+  }
+  li.last::after {
+    content: "";
+  }
+}
+.alphamenu.mobile {
+  font-size: 120%;
 }
 .book-listing {
-	border-bottom: solid #ccc 1px;
+  border-bottom: solid #ccc 1px;
+  @media screen and (max-width: 999px) {
+    border-top: solid #ccc 1px;
+  }
 }
 .book-details {
-	background-color: $white;
+  background-color: $white;
 }
 p.order-button {
-	position: absolute;
-	bottom: 0;
+  position: absolute;
+  bottom: 0;
 }
 
 .default-show-cover {
-	width: 270px;
-	height: 420px;
+  width: 270px;
+  height: 420px;
 }
 
 .container.see-also {
-	img.default {
-		outline: solid $news-grey 1px;
-	}
+  img.default {
+    outline: solid $news-grey 1px;
+  }
 }
