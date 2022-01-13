@@ -1,0 +1,12 @@
+<% @recent_winners.each do |book| %>
+  <div class="col-12 col-md-6 col-lg-3 py-4 pb-0 text-center">
+    <%= link_to book_path(book) do %>
+      <% if book.cover_image.attached? %>
+        <%= image_tag book.custom_image("cover_image", 180, 280) %>
+      <% else %>
+        <%= image_pack_tag "default-book-cover-index.png", style: "outline: solid #ccc 1px" %>
+      <% end %>        
+      <p class="pt-2"><%= strip_tags book.title %></p>
+    <% end %>
+  </div>
+  <% end if @recent_winners %>
