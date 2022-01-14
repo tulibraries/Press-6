@@ -10,7 +10,7 @@
 
   <div class="row">
     <% @books.each do |book| %>
-    <div class="col-3 mt-4 text-center">
+    <div class="col-12 col-md-6 col-lg-3 mt-4 text-center">
       <%= link_to book_path(book) do %>
       <% if book.cover_image.attached? %>
         <%= image_tag book.index_image("cover_image"), class: "cover-image" %>
