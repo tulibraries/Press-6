@@ -3,22 +3,18 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.4"
-
 gem "rails", "~> 6.1.4"
 gem "mysql2", "~> 0.5.3"
-gem "puma", "~> 4.1"
+gem "puma", "~> 4.3"
 gem "webpacker", "~> 5.0"
 gem "turbolinks", "~> 5"
 gem "jbuilder", "~> 2.7"
 gem "json", ">= 2.3.0"
 gem "image_processing", "~> 1.2"
-gem "mini_magick"
 gem "administrate", ">= 0.16.0"
 gem "administrate-field-scoped_has_many"
 gem "administrate-field-ordered_has_many"
-gem "nokogiri", "1.11.4"
-gem "pry"
+gem "nokogiri", "1.12.5"
 gem "listen", "~> 3.2"
 gem "jquery-rails"
 gem "bootstrap"
@@ -30,18 +26,21 @@ gem "administrate-field-date_picker", "~> 0.2.0"
 gem "meta-tags"
 gem "activestorage-validator"
 gem "friendly_id"
-
+gem "simple_form"
+gem "mail_form"
+gem "okcomputer"
 gem "devise"
 gem "omniauth"
 gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
 gem "httparty"
 gem "font-awesome-rails"
-gem "omniauth-rails_csrf_protection"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
+  gem "pry"
   gem "pry-rails"
   gem "pry-byebug"
   gem "rspec-activemodel-mocks"
