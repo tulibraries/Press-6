@@ -5,18 +5,21 @@
       <h1 class="my-3">
       <%= title_link(t("tupress.authors.index_title")) %>
       </h1>
+      <div class="d-none d-xl-block">
       <%= render "alphamenu" %>
+      </div>
+      <div class="d-block d-xl-none text-center">
+      <%= render "alphamenu_mobile" %>
+      </div>
     </div>
   </div>
 
-  <div class="row py-4 px-0">
-    <div class="col authors px-0">
-      <% @authors.each do |author| %>
-        <p class="p-2 author">
-          <%= link_to author.index_title, author_path(author) %>
-        </p>
-      <% end %>
+  <div class="row authors py-4 px-0">
+    <% @authors.each do |author| %>
+    <div class="col-12 col-md-6 col-lg-4 px-3 my-1">
+      <%= link_to author.index_title, author_path(author), class: "d-inline-block p-2 w-100 author" %>
     </div>
+    <% end %>
   </div>
 
   <div class="row">
