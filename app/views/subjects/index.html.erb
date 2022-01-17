@@ -11,7 +11,7 @@
   <div class="row subjects py-4 px-0">
     <% @subjects.each do |subject| %>
     <div class="col-12 col-md-6 col-lg-4 px-3 my-1">
-      <%= link_to subject.index_title, subject_path(subject), class: "d-inline-block p-2 w-100 subject" %>
+      <%= link_to subject.title, subject_path(subject), class: "d-inline-block p-2 w-100 subject" %>
     </div>
     <% end %>
   </div>
