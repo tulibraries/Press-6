@@ -16,7 +16,16 @@
           <em><%= sanitize("<br />#{book.edition}").html_safe if book.edition.present? %></em>
         </p>
         <p><%= book.author_byline if book.author_byline.present? %></p>
-        <p class="mt-5"><%= sanitize book.blurb.html_safe if book.blurb.present? %></p>
+
+        <% if book.award_year.present? && (["awards_by_subject", "awards_by_year"].include? action_name) %>
+          <div class="awards mt-4">
+          <% get_awards(book).each do |award| %>
+            <%= award %>
+          <% end %>
+          </div>
+        <% end %>
+
+        <p class="mt-4"><%= sanitize book.blurb.html_safe if book.blurb.present? %></p>
         <p class="mb-5">
           <%= "#{book.pages_total} pages" if book.pages_total.present? %>
           <%= "| #{book.trim}" if book.trim.present? %>
@@ -34,6 +43,6 @@
 
     <div class="row">
       <div class="col">
-        <%= paginate @books %>
+        <%= paginate @books unless ["awards_by_subject", "awards_by_year"].include? action_name %>
       </div>
     </div>
