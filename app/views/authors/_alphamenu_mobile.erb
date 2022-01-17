@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-md d-block col-12 mt-3 mb-2 gold">
+  <%= button_tag("", 
+                :class=>"btn btn-lg btn-secondary dropdown-toggle disabled pl-0 text-center w-100", 
+                :type=>"button",
+                :'data-toggle'=>"collapse",
+                :'data-target'=>"#navbarSupportedContentMobile",
+                :'aria-controls'=>"navbarSupportedContentMobile",
+                :'aria-expanded'=>"false",
+                :'aria-label'=>"Toggle navigation") do
+                %>
+        <span class="navbar-toggler-icon pt-0 w-auto gold">
+          Last name... <span><%= @selected.upcase %><span>
+        </span>
+      <% end %>
+      <div class="collapse" id="navbarSupportedContentMobile">
+        <div class="alphamenu mobile">
+            <%= link_to "0-9", authors_path(id: "numeric"), class: "pr-2" %>
+            <%= link_to "A", authors_path(id: "a"), class: "pr-2" %>
+            <%= link_to "B", authors_path(id: "b"), class: "pr-2" %>
+            <%= link_to "C", authors_path(id: "c"), class: "pr-2" %>
+            <%= link_to "D", authors_path(id: "d"), class: "pr-2" %>
+            <%= link_to "E", authors_path(id: "e"), class: "pr-2" %>
+            <%= link_to "F", authors_path(id: "f"), class: "pr-2" %>
+            <%= link_to "G", authors_path(id: "g"), class: "pr-2" %>
+            <%= link_to "H", authors_path(id: "h"), class: "pr-2" %>
+            <%= link_to "I", authors_path(id: "i"), class: "pr-2" %>
+            <%= link_to "J", authors_path(id: "j"), class: "pr-2" %>
+            <%= link_to "K", authors_path(id: "k"), class: "pr-2" %>
+            <%= link_to "L", authors_path(id: "l"), class: "pr-2" %>
+            <%= link_to "M", authors_path(id: "m") %><br />
+            <%= link_to "N", authors_path(id: "n"), class: "pr-2" %>
+            <%= link_to "O", authors_path(id: "o"), class: "pr-2" %>
+            <%= link_to "P", authors_path(id: "p"), class: "pr-2" %>
+            <%= link_to "Q", authors_path(id: "q"), class: "pr-2" %>
+            <%= link_to "R", authors_path(id: "r"), class: "pr-2" %>
+            <%= link_to "S", authors_path(id: "s"), class: "pr-2" %>
+            <%= link_to "T", authors_path(id: "t"), class: "pr-2" %>
+            <%= link_to "U", authors_path(id: "u"), class: "pr-2" %>
+            <%= link_to "V", authors_path(id: "v"), class: "pr-2" %>
+            <%= link_to "W", authors_path(id: "w"), class: "pr-2" %>
+            <%= link_to "X", authors_path(id: "x"), class: "pr-2" %>
+            <%= link_to "Y", authors_path(id: "y"), class: "pr-2" %>
+            <%= link_to "Z", authors_path(id: "z") %>
+         </div>
+       </div>
+  </nav>
