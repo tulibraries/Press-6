@@ -8,14 +8,12 @@
     </div>
   </div>
 
-  <div class="row pr-4 py-3">
-    <div class="col subjects pl-0">
-      <% @subjects.each do |subject| %>
-        <p class="p-2 subject">
-          <%= link_to subject.title, subject_path(subject) %>
-        </p>
-      <% end %>
+  <div class="row subjects py-4 px-0">
+    <% @subjects.each do |subject| %>
+    <div class="col-12 col-md-6 col-lg-4 px-3 my-1">
+      <%= link_to subject.title, subject_path(subject), class: "d-inline-block p-2 w-100 subject" %>
     </div>
+    <% end %>
   </div>
 
 </div>

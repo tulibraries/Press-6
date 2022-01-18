@@ -10,7 +10,7 @@
 
   <div class="row special-offers mt-2 g-3">
     <% @special_offers.each do |so| %>
-      <div class="col-6 px-0">
+      <div class="col-12 col-md-6 px-0">
         <div class="so p-3 mr-4 mb-3" style="min-height:140px;">
           <p style="font-size: 120%;">
             <strong><%= link_to so.title, special_offer_path(so) %></strong>
