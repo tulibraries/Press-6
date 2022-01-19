@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'a48b48e81f507e198a70c68b0d92face9911830692572b736b7935179d446eeaa618af2796393d0001ee994b36e5a3e5d267e30f01374efd99a2ed70c29aa660'
+  config.secret_key = "a48b48e81f507e198a70c68b0d92face9911830692572b736b7935179d446eeaa618af2796393d0001ee994b36e5a3e5d267e30f01374efd99a2ed70c29aa660"
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -164,7 +164,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  config.remember_for = 2.weeks
+  # config.remember_for = 2.weeks
 
   # Invalidates all the remember me tokens when the user signs out.
   config.expire_all_remember_me_on_sign_out = true
@@ -295,6 +295,8 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+  config.omniauth :google_oauth2, ENV["GOOGLE_OAUTH_CLIENT_ID"], ENV["GOOGLE_OAUTH_SECRET"],
+    scope: "email"
 
   # ==> Turbolinks configuration
   # If your app is using Turbolinks, Turbolinks::Controller needs to be included to make redirection work correctly:

@@ -4,6 +4,7 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem "rails", "~> 6.1.4.4"
+
 gem "mysql2", "~> 0.5.3"
 gem "puma", "~> 4.3"
 gem "webpacker", "~> 5.0"
@@ -32,6 +33,7 @@ gem "okcomputer"
 gem "devise"
 gem "omniauth"
 gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
 gem "httparty"
 gem "font-awesome-rails"
 
