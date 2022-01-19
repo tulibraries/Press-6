@@ -359,6 +359,8 @@ en:
       download: Download PDF
     study_guides:
       title: Books with Study Guides
+    study_guide:
+      title: "Study Guide for:"
     subjects:
       index_title: Subjects
     webpages:
