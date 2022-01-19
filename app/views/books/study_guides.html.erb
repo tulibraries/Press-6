@@ -8,8 +8,8 @@
   </div>
 
   <% @books.each do |book| %>  
-  <div class="row pb-4 mb-4 book-listing">
-    <div class="col-2 pl-0">
+  <div class="row book-listing">
+    <div class="col-12 col-md-4 col-lg-3 py-3 text-center">
       <%= link_to study_guide_path(book) do %>
         <% if book.cover_image.attached? %>
           <%= image_tag book.thumb_image("cover_image"), class: "cover-image" %>
@@ -18,13 +18,12 @@
         <% end %>
       <% end %>
     </div>
-    <div class="col-10 p-4 pl-0 book-details">
+    <div class="col-12 col-md-8 col-lg-9 p-4 pl-0 book-details">
       <h2><%= link_to book.title.html_safe, study_guide_path(book) %></h2>
       <%= sanitize("<p><em>#{book.subtitle}</em></p>").html_safe if book.subtitle.present? %>
       <%= sanitize("<p>#{book.author_byline}</p>").html_safe if book.author_byline.present? %>
       <%= link_to guide_label(book), book.guide_file.attachment if book.guide_file.attached? %>
     </div>
-
-  </div>
+  </div> 
   <% end %>
 </div>
