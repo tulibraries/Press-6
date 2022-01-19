@@ -1,0 +1,5 @@
+<ul class="list-unstyled bg-white p-3 w-100">
+  <% @subjects.each do |subject| %>
+    <li><%= link_to subject.title, subject_path(subject) %></li>
+  <% end %>
+</ul>

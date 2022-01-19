@@ -1,0 +1,5 @@
+<ul class="list-unstyled bg-white p-3 w-100">
+  <% @site.each do |webpage| %>
+    <li><%= link_to webpage.title, webpage_path(webpage) %></li>
+  <% end %>
+</ul>

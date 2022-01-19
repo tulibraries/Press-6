@@ -1,0 +1,5 @@
+<ul class="list-unstyled bg-white p-3 w-100">
+  <% @journals.each do |journal| %>
+    <li><%= link_to journal.title, journal.url %></li>
+  <% end %>
+</ul>

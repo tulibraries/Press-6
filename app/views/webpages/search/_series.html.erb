@@ -1,0 +1,5 @@
+<ul class="list-unstyled bg-white p-3 w-100">
+  <% @series.each do |series| %>
+    <li><%= link_to series.title, series_path(series) %></li>
+  <% end %>
+</ul>
