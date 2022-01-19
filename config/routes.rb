@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   concern :imageable do
     get "image/thumbnail", to: "images#thumbnail_image"
