@@ -12,6 +12,10 @@ class SyncService::Reviews
     @stdout = Logger.new(STDOUT)
     @xmlPath = params.fetch(:xml_path)
     @booksDoc = Nokogiri::XML(File.open(@xmlPath)) { |config| config.noblanks }
+    @deleted_ids = []
+    @xml_review_ids = []
+    @xml_book_ids = []
+    @db_review_ids = []
     stdout_and_log("Syncing reviews from #{@xmlPath}")
   end
 
@@ -37,7 +41,10 @@ class SyncService::Reviews
         @errored += 1
       end
     end
-    stdout_and_log("Syncing completed with #{@created} created, #{@updated} updated, and #{@errored} errored records.")
+
+    prune_reviews
+
+    stdout_and_log("Syncing completed with #{@created} created, #{@updated} updated, #{@deleted_ids.length.to_s} deleted, and #{@errored} errored records.")
   end
 
   def read_reviews
@@ -93,6 +100,31 @@ class SyncService::Reviews
           stdout_and_log(%Q(Empty review tags for:  #{book["record"]["title"]}))
         else
           stdout_and_log("Syncing Review: #{book["record"]["title"]} - #{err.message} \n #{err.backtrace}")
+        end
+      end
+    end
+  end
+
+  def prune_reviews
+    # Check for reviews in the db but no longer in the feed
+    # review must be for a title in the xml
+    db_reviews = Review.all.each do |review|
+      @db_review_ids << review.review_id
+    end
+    @booksDoc.xpath("//record/reviews/review").map do |xml|
+      @xml_review_ids << xml.xpath("review_id").text
+    end
+    @booksDoc.xpath("//record").map do |xml|
+      @xml_book_ids << xml.xpath("book_id").text
+    end
+    @xml_book_ids.each do |book_id| #for each book in the delta
+      db_reviews = []
+      db_reviews = Review.where(book_id: book_id) # collect all its review ids from the db
+      db_reviews.each do |dbreview|
+        if @xml_review_ids.exclude? dbreview.review_id # if review from db is not in xml
+          toDelete = Review.find_by(review_id: dbreview.review_id) #delete that review
+          @deleted_ids << dbreview.review_id.to_s
+          toDelete.destroy
         end
       end
     end
