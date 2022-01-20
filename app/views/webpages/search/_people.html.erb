@@ -1,0 +1,18 @@
+<ul class="list-unstyled bg-white p-3 w-100">
+  <% @people.each do |person| %>
+    <% unless person.department == "Sales Reps" %>
+      <li><%= link_to person.title, {controller: "people", action: "index"} %><br />
+        <small style="font-style:italic;"><%= person.position %></small></li>
+    <% else %>
+      <li><%= link_to person.title, sales_reps_path %><br />
+      <small style="font-style:italic;">
+        <% if person.region.to_i >= 10  %>
+          <%= get_region(person.region) %>
+        <% else %>
+          <%= person.region %>
+        <% end %>
+      </small>
+    </li>
+    <% end %>
+  <% end %>
+</ul>

@@ -1,0 +1,8 @@
+<ul class="list-unstyled bg-white p-3 w-100">
+  <% @confevents.each do |confevent| %>
+    <li>
+      <%= link_to confevent.title, events_path if confevent.class.to_s == "Event" %>
+      <%= link_to confevent.title, conferences_path if confevent.class.to_s == "Conference" %>
+    </li>
+  <% end %>
+</ul>

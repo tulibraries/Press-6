@@ -1,0 +1,5 @@
+<ul class="list-unstyled bg-white p-3 w-100">
+<% @oabooks.each do |book| %>
+  <li><%= link_to book.title, oabook_path(book) %></li>
+<% end %>
+</ul>
