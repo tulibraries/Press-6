@@ -1,8 +1,8 @@
 <div class="container index" id="people">
 
 <div class="row">
-  <div class="col pl-0">
-    <h1 class="mb-4 mt-5 ">
+  <div class="col-12">
+    <h1 class="mb-4 mt-4">
       <%= title_link(t("tupress.people.title")) %>
     </h1>
   </div>
@@ -12,8 +12,8 @@
 <section>
 <% unless dept == "Administration" %>
 	<div class="row">
-		<div class="col col-12 pl-0 pr-4 mb-0 mt-3">
-      <h2 class="dept-name pl-4 mx-0 mb-4">
+		<div class="col-12 mb-0 mt-3">
+      <h2 class="dept-name pl-4 mb-4">
         <%= dept %>
       </h2>
     </div>
@@ -21,7 +21,7 @@
 <% end %>
 	<div class="row">
 	<% people.each do |person| %>
-    <div class="col col-6 mb-4 pr-4 p-0" >
+    <div class="col-12 col-md-6 mb-4 pr-4" >
       <div class="p-4 person-card">
       <article>
         <%= render "image_link", person: person %>
