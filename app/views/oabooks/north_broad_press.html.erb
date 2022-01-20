@@ -19,7 +19,7 @@
 
 <div class="mt-2" style="border-top: solid #ccc 2px;"></div>
 
-  <div class="neh-book row m-5">
+  <div class="neh-book row m-3">
     <% @oabooks.each do |oabook| %>
       <%= render "nb_book_list", oabook: oabook %>
     <% end if @oabooks.present? %>

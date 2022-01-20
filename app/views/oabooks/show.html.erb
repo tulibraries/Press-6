@@ -2,7 +2,7 @@
 
  <div class="neh-book row mb-4">
 
-  <div class="col col-3">
+  <div class="col-12 col-md-5 col-lg-4 text-center">
     <%= render "cover_image", oabook: @oabook %>
     <ul class="list-unstyled oabook-buttons">
       <li><%= link_to t("tupress.oabooks.online_epub"), @oabook.epub_link if @oabook.epub_link.present? %></li>
@@ -16,7 +16,7 @@
     </ul>
   </div>
 
-  <div class="col col-9">
+  <div class="col-12 col-md-7 col-lg-8">
     <h1><%= title_link(@oabook) %></h1>
       <%= "<em>#{@oabook.subtitle}</em><br/>".html_safe if @oabook.subtitle.present? %>
       <%= "#{@oabook.author}<br/>".html_safe if @oabook.author.present? %>
