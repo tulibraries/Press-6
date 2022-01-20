@@ -1,0 +1,5 @@
+<ul class="list-unstyled bg-white p-3 w-100">
+  <% @faqs.each do |faq| %>
+    <li><%= link_to faq.title, faq_path(faq) %></li>
+  <% end %>
+</ul>

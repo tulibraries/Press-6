@@ -22,3 +22,13 @@
     }
   }
 }
+
+#search-results {
+  .navbar-collapse {
+    position: relative;
+    top: -16px;
+  }
+  #book-results {
+    top: 0;
+  }
+}
