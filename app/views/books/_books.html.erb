@@ -1,6 +1,6 @@
   <% @books.each do |book| %>  
-    <div class="row pb-lg-4 mt-lg-4 mb-lg-4 book-listing">
-      <div class="col-12 col-md-4 col-lg-3 pl-0 py-3 text-center">
+    <div class="row pb-lg-4 mt-lg-4 mb-lg-4 px-3 book-listing">
+      <div class="col-12 col-md-4 col-lg-3 py-3 text-center">
         <%= link_to book_path(book) do %>
           <% if book.cover_image.attached? %>
             <%= image_tag book.index_image("cover_image"), class: "cover-image" %>
@@ -9,7 +9,7 @@
           <% end %>
         <% end %>
       </div>
-      <div class="col-12 col-md-8 col-lg-9 p-4 pl-0 book-details">
+      <div class="col-12 col-md-8 col-lg-9 p-4 book-details">
         <h2><%= link_to book.title.html_safe, book_path(book) %></h2>
         <p>
           <em><%= book.subtitle if book.subtitle.present? %></em>

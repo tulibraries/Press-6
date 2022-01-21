@@ -2,19 +2,19 @@
 
   <div class="row">
     <div class="col-12 mt-2 px-0">
-      <h1 class="my-3">
+      <h1 class="my-3 pl-3">
       <%= title_link(t("tupress.authors.index_title")) %>
       </h1>
       <div class="d-none d-xl-block">
       <%= render "alphamenu" %>
       </div>
-      <div class="d-block d-xl-none text-center">
+      <div class="d-block d-xl-none text-center px-0">
       <%= render "alphamenu_mobile" %>
       </div>
     </div>
   </div>
 
-  <div class="row authors py-4 px-0">
+  <div class="row authors py-4">
     <% @authors.each do |author| %>
     <div class="col-12 col-md-6 col-lg-4 px-3 my-1">
       <%= link_to author.index_title, author_path(author), class: "d-inline-block p-2 w-100 author" %>
