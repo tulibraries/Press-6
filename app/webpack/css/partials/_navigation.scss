@@ -84,7 +84,7 @@ nav.pagination {
         text-align: center;
         a {
           width: 100%;
-          color: $white;
+          color: $black;
           font-family: Roboto!important;
           font-size: 1.25rem;
         }
@@ -114,6 +114,7 @@ nav.pagination {
   li {
     display: block;
     padding-left: 14px;
+    padding-right: 14px;
     font-size: 1.5rem;
     padding-bottom: 7px;
     a {
@@ -125,7 +126,7 @@ nav.pagination {
     }
   }
   .navbar-collapse {
-    background-color: dimgray;
+    background-color: #c4cede;
     padding-top: 10px;
   }
   .navbar-toggler {
@@ -133,7 +134,7 @@ nav.pagination {
     width: 100%;
   }
   .navbar-toggler[aria-expanded="true"] {
-    background-color: dimgray!important;
+    background-color: #9dadc9!important;
     color: #000;
     padding: 10px 0;
     font-size: 1.5rem;
