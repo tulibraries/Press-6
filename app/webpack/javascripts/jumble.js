@@ -6,7 +6,7 @@ $(window).resize(function() {
 });
 
 function desktop () {
-  $('#book-details').insertAfter('#social-share');
+  $('#book-details').appendTo('#book-cover');
   $('#social-share').insertBefore('#book-details');
   $('#book-cover').insertBefore('#right-side');
   $('#book-title').prependTo('#book-info');
