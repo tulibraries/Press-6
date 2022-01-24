@@ -9,7 +9,8 @@
         <%= link_to image_pack_tag('twitter-icon.png', class: 'social-icon', alt: 'Twitter Icon'), 'http://twitter.com/TempleUnivPress' %>
         <%= link_to image_pack_tag('fb-icon.png', class: 'social-icon', alt: 'Facebook Icon'), 'http://facebook.com/TempleUnivPress' %>
       </div>
-      <div class="book-details text-left" id="book-details">
+
+      <div class="book-details text-left p-3" id="book-details">
         <ul class="list-unstyled">
           <li><%= "#{@book.pages_total} #{t("tupress.books.pages")}" %></li>
           <li><%= @book.trim %></li>
@@ -89,28 +90,28 @@
 
       </div>
     </div>
-    <div class="col-12 col-md-8 col-lg-9 book-info">
-      <div class="description mt-lg-5 p-3">
-      <div id="book-title">
-        <h1><%= title_link(@book) %></h1>
 
-        <div class="subtitle lead">
-          <%= sub_ed(@book).html_safe %>
-          <%= @book.author_byline %>
-        </div>
+    <div class="col-12 col-md-8 col-lg-9 book-info" id="right-side">
+      <div class="description mt-lg-5 p-3" id="book-info">
+        <div id="book-title">
+          <h1><%= title_link(@book) %></h1>
 
-        <%= "<p>#{@book.supplement}</p>".html_safe if @book.supplement.present? %>
-        
-        <% if @awards.present? %>
-        <div class="awards mt-4">
-        <% @awards.each do |award| %>
-        <ul class="list-unstyled">
-          <li><%= award if award.present? %></li>
-        </ul>
-        <% end %>
-        </div>
-        <% end %>
+          <div class="subtitle lead">
+            <%= sub_ed(@book).html_safe %>
+            <%= @book.author_byline %>
+          </div>
 
+          <%= "<p>#{@book.supplement}</p>".html_safe if @book.supplement.present? %>
+          
+          <% if @awards.present? %>
+          <div class="awards mt-4">
+          <% @awards.each do |award| %>
+            <ul class="list-unstyled">
+              <li><%= award if award.present? %></li>
+            </ul>
+          <% end %>
+          </div>
+          <% end %>
         </div>
 
         <% if @book.description.present? %>
