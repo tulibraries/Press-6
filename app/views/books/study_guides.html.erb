@@ -1,6 +1,6 @@
  <div class="container index study-guides">
   <div class="row">
-    <div class="col-12 mb-3 mt-3 px-0">
+    <div class="col-12 mb-3 mt-3">
       <h1 class="my-3">
       <%= title_link(t("tupress.study_guides.title")) %>
       </h1>
@@ -8,8 +8,8 @@
   </div>
 
   <% @books.each do |book| %>  
-  <div class="row book-listing">
-    <div class="col-12 col-md-4 col-lg-3 py-3 text-center">
+  <div class="row book-listing mx-0">
+    <div class="col-12 col-md-4 col-lg-3 py-3 mt-4 mt-md-0 text-center">
       <%= link_to study_guide_path(book) do %>
         <% if book.cover_image.attached? %>
           <%= image_tag book.thumb_image("cover_image"), class: "cover-image" %>
@@ -18,7 +18,7 @@
         <% end %>
       <% end %>
     </div>
-    <div class="col-12 col-md-8 col-lg-9 p-4 pl-0 book-details">
+    <div class="col-12 col-md-8 col-lg-9 p-4 mt-3 mt-md-0 book-details">
       <h2><%= link_to book.title.html_safe, study_guide_path(book) %></h2>
       <%= sanitize("<p><em>#{book.subtitle}</em></p>").html_safe if book.subtitle.present? %>
       <%= sanitize("<p>#{book.author_byline}</p>").html_safe if book.author_byline.present? %>
