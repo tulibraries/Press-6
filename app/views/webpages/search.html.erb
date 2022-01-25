@@ -115,10 +115,10 @@
         <span class="navbar-toggler-icon pt-0 text-center w-auto gold">People @ the Press</span>
       <% end %>
 
-      <div class="d-none d-lg-flex mx-0 row pb-4 mb-4 confevents">
+      <div class="d-none d-lg-flex mx-0 row pb-4 mb-4 people">
         <%= render "webpages/search/people" %>
       </div>
-      <div class="d-lg-none collapse navbar-collapse" id="confevents">
+      <div class="d-lg-none collapse navbar-collapse" id="people">
         <%= render "webpages/search/people" %>
       </div>
     <% end %>
@@ -129,18 +129,18 @@
         :class=>"btn btn-lg btn-secondary dropdown-toggle pl-0 mb-3 text-center gold w-100 d-lg-none", 
         :type=>"button",
         :'data-toggle'=>"collapse",
-        :'data-target'=>"#people",
-        :'aria-controls'=>"people",
+        :'data-target'=>"#authors",
+        :'aria-controls'=>"authors",
         :'aria-expanded'=>"false",
         :'aria-label'=>"Toggle Authors") do
         %>
         <span class="navbar-toggler-icon pt-0 text-center w-auto gold">Authors</span>
       <% end %>
 
-      <div class="d-none d-lg-flex mx-0 row pb-4 mb-4 confevents">
+      <div class="d-none d-lg-flex mx-0 row pb-4 mb-4 authors">
         <%= render "webpages/search/authors" %>
       </div>
-      <div class="d-lg-none collapse navbar-collapse" id="confevents">
+      <div class="d-lg-none collapse navbar-collapse" id="authors">
         <%= render "webpages/search/authors" %>
       </div>
     <% end %>
