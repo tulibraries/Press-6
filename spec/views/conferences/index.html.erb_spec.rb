@@ -16,7 +16,7 @@ RSpec.describe "conferences/index.html.erb", type: :view do
 
   it "creates link to conference site" do
     render
-    expect(rendered).to include "href=\"#{conference1.link}
+    expect(rendered).to include "href=\"#{conference1.link}"
   end
 
   it "groups conferences by month" do
