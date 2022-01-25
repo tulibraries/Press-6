@@ -100,7 +100,6 @@ class BooksController < ApplicationController
     @books = Book.where(status: show_status)
                  .where(course_adoption: true)
                  .sort_by { |b| b.sort_title }
-                 .page params[:page]
   end
 
   def study_guides
