@@ -27,7 +27,7 @@ RSpec.describe "conferences/index.html.erb", type: :view do
 
   it "renders top of page intro" do
     render
-    expect(rendered).to include "Hello World
+    expect(rendered).to include "Hello World"
   end
 
 end
