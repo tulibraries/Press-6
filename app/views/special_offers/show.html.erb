@@ -1,7 +1,7 @@
 <div class="container special-offer show">
 
 <div class="row mb-3">
-  <div class="col-12 mt-3 px-0">
+  <div class="col-12 mt-3">
     <h1 class="mt-3">
       <%= title_link(@special_offer) %>
     </h1>
@@ -12,7 +12,7 @@
         <%= link_to @special_offer.pdf_display_name, @special_offer.pdf.attachment, class: "text-right text-lg-left" %>
 			<% end %>
 	</div>
-  <div class="col-12 mt-2">
+  <div class="col-12 mt-4">
 		<%= @special_offer.intro_text if @special_offer.intro_text.present? %>
 	</div>
 </div>
