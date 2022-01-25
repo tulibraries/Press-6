@@ -1,7 +1,7 @@
 <div class="container documents index">
 
 <div class="row">
-  <div class="col mt-3 px-0">
+  <div class="col mt-3">
     <h1 class="my-3">
       <%= title_link(t("tupress.downloads.index_title")) %>
     </h1>
@@ -10,8 +10,8 @@
 
 <% @documents_by_type.each do |type, documents| %>
 
-<div class="row">
-  <div class="col-12 gold px-0">
+<div class="row mx-1">
+  <div class="col-12 gold">
     <h2 class="pl-3 mb-0">
       <%= type %>
       <span class="d-inline-block float-right pr-3 pt-2" style="font-size: 1.2rem;">
