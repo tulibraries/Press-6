@@ -16,6 +16,7 @@ class FormsController < ApplicationController
     @form = Form.new(params[:form])
     @form.request = request
     @type = params[:form][:form_type]
+    @intro = Webpage.find_by(slug: "copy-request-intro") if @type == "copy-request"
     if @form.deliver
       redirect_to root_path(@form), notice: "Thank you for your message. We will contact you soon!"
     else
