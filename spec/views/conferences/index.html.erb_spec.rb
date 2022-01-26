@@ -21,8 +21,8 @@ RSpec.describe "conferences/index.html.erb", type: :view do
 
   it "groups conferences by month" do
     render
-    expect(rendered).to include "<h2>#{conference1.start_date.strftime("%B")}"
-    expect(rendered).to include "<h2>#{conference2.start_date.strftime("%B")}"
+    expect(rendered).to include "#{conference1.start_date.strftime("%B")}</h2>"
+    expect(rendered).to include "#{conference2.start_date.strftime("%B")}</h2>"
   end
 
   it "renders top of page intro" do
