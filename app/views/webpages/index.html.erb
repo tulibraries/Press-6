@@ -6,9 +6,9 @@
 
 <div class="container homepage">
 
-<div class="row">
+<div class="row px-3">
   <div class="col-12 col-lg-3 mt-4" id="left-home-menu">
-    <ul class="list-unstyled pl-md-3">
+    <ul class="list-unstyled px-3 pr-lg-0">
       <li><%= link_to t("tupress.default.menu.author_info.label"), "#" %></li>
       <li><%= link_to t("tupress.default.menu.bookseller_info.label"), "#" %></li>
       <li><%= link_to t("tupress.default.menu.conferences.label"), conferences_path %></li>
@@ -20,10 +20,14 @@
   </div>
 
   <div class="col-12 col-lg-9 mt-4 pt-2 pb-1" id="new-forthcoming">
-    <h1><%= t("tupress.webpages.index.forthcoming") %></h1>
-    <div class="row pt-3">
+    <div class="row">
+      <div class="col-12">
+        <h1><%= t("tupress.webpages.index.forthcoming") %></h1>
+      </div>
+    </div>
+    <div class="row pt-3 mr-3">
     <% @hot.each do |item| %>
-      <div class="col-6 col-lg-4 text-center">
+      <div class="col-12 col-sm-6 col-lg-4 text-center">
       <%= link_to book_path(item) do %>
         <%= hot_cover(item) %>
         <p><strong><%= item.title %></strong></p>
@@ -34,19 +38,19 @@
   </div>
 </div>
 
-<div class="row mt-5">
+<div class="row mt-5 px-3">
   <div class="col-12 col-lg-9 pt-2 pl-lg-4 pb-4" id="news">
     <h1><%= t("tupress.webpages.index.news") %></h1>
 
     <% @news.each do |item| %>
     <div class="row news-item">
 
-      <div class="media">
+      <div class="col-12 col-sm-3 left">
         <%= news_link(item,"image") %>
       </div>
 
-      <div class="media-body">
-        <h2><%= news_link(item) %></h2>
+      <div class="col-12 col-sm-9 right">
+        <h2 class="pt-3 text-center text-sm-left pt-sm-0"><%= news_link(item) %></h2>
         <%= news_text(item) %>
       </div>
       

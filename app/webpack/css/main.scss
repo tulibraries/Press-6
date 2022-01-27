@@ -47,8 +47,13 @@ strong {
   border-radius: 0!important;
 }
 
-button.gold, nav.gold, .so, .author {
-  border-bottom: solid #E0BF00 2px!important;
+button.gold, nav.gold, .so, .author, #left-home-menu li {
+  border-bottom: solid $dark-gold 1px!important;
+  @media (max-width: 999px) {
+    border-bottom: 0!important;
+    padding-left: 14px!important;
+    border-left: solid $dark-gold 2px!important;
+  }
 }
 
 .flash {
