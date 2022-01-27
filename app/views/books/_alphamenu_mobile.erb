@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md d-block col-12 mt-3 mb-2 gold">
   <%= button_tag("", 
-                :class=>"btn btn-lg btn-secondary dropdown-toggle disabled pl-0 text-center w-100", 
+                :class=>"btn btn-lg btn-secondary dropdown-toggle disabled pl-0 text-center w-100",
                 :type=>"button",
                 :'data-toggle'=>"collapse",
                 :'data-target'=>"#navbarSupportedContentMobile",
@@ -12,7 +12,7 @@
           Books beginning with... <span><%= @selected.upcase %><span>
         </span>
       <% end %>
-      <div class="collapse" id="navbarSupportedContentMobile">
+      <div class="collapse pt-2" id="navbarSupportedContentMobile">
         <div class="alphamenu mobile">
             <%= link_to "0-9", books_path(id: "numeric"), class: "pr-2" %>
             <%= link_to "A", books_path(id: "a"), class: "pr-2" %>

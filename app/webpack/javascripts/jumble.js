@@ -6,13 +6,15 @@ $(window).resize(function() {
 });
 
 function desktop () {
-  $('#book-details').insertAfter('#social-share');
+  $('#book-details').appendTo('#book-cover');
   $('#social-share').insertBefore('#book-details');
-  $('#book-cover').insertBefore('#book-info');
+  $('#book-cover').insertBefore('#right-side');
+  $('#book-title').prependTo('#book-info');
 }
 
 function mobile () {
   $('#book-details').insertBefore('#book-description');
-  $('#social-share').appendTo('#book-cover');
+  $('#book-title').appendTo('#book-cover');
+  $('#social-share').appendTo('#book-title');
 }
 
