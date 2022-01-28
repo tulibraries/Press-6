@@ -11,7 +11,7 @@ class PersonDashboard < Administrate::BaseDashboard
     position: Field::String,
     position_description: TrixField,
     department: Field::Select.with_options(
-      collection: ["Administration", "Editorial", "Marketing", "Production", "Sales Reps"]
+      collection: I18n.t("tupress.admin.people.departments")
     ),
     document_contact: Field::String,
     image: ImageField,
