@@ -23,4 +23,14 @@
     <% end %>
   </div>
 
+  <% if @author.qa.attached? %>
+  <div class="row mt-5 border-top border-bottom pt-4 pb-2">
+    <div class="col-12">
+      <ul class="list-unstyled">
+        <li><h2 class="h4"><%= link_to "Questions & Answers with #{@author.title}", @author.qa.attachment %></h2></li> 
+      </ul>
+    </div>
+  </div>
+  <% end %>
+
 </div>
