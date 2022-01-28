@@ -36,7 +36,6 @@
     padding-right: 0!important;
     li {
       margin-bottom: 0!important;
-      padding-left: 35px!important;
     }
   }
 }
@@ -45,7 +44,7 @@
   background-color: $white;
   h1 {
     text-decoration: underline;
-    margin-left: 35px;
+    margin-left: 14px;
     @media screen and (max-width: 999px) {
       margin-left: 0;
     }
@@ -83,19 +82,19 @@
   }
   .news-item {
     margin-top: 28px;
-    .media {
+    .left {
       width: 160px;
       text-align: center;
       a {
         width: 100%;
       }
       .news-image {
-        height: 180px;
-        max-width: 120px;
+        height: 200px;
+        max-width: 140px;
         margin: auto;
       }
     }
-    .media-body {
+    .right {
       padding-left: 28px;
     }
   }
@@ -116,5 +115,7 @@
     padding-left: 0;
     padding-right: 0;
   }
+  img {
+    max-width: 100%;
+  }
 }
-
