@@ -112,6 +112,12 @@ en:
         tabs:
           staff_info: staff_info
           sales_rep: sales_rep
+        departments:
+          Administration: Administration
+          Editorial Department: Editorial Department
+          Marketing Department: Marketing Department
+          Production Departmen: Production Department
+          Sales Representatives: Sales Representatives
         regions:
           Midwest: Midwest
           West: West
