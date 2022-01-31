@@ -1,5 +1,5 @@
 <ul class="list-unstyled bg-white p-3 w-100">
   <% @authors.each do |author| %>
-    <li><%= link_to author.title, author_path(author) %></li>
+    <li><%= link_to author.index_title, author_path(author) %></li>
   <% end %>
 </ul>
