@@ -98,6 +98,7 @@ class BookDashboard < Administrate::BaseDashboard
     award_year3: Field::String,
     featured_award_winner: Field::Boolean,
     price: Field::String.with_options(searchable: false),
+    qa: FileField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -138,6 +139,7 @@ class BookDashboard < Administrate::BaseDashboard
     excerpt_text
     toc_file
     toc_label
+    qa
     supplement
     desk_copy
     subject1

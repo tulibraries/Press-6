@@ -12,12 +12,14 @@ class Book < ApplicationRecord
   validates :toc_file, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
   validates :guide_file, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
   validates :excerpt_file, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
+  validates :qa, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
 
   has_one_attached :cover_image, dependent: :destroy
   has_one_attached :excerpt_file, dependent: :destroy
   has_one_attached :suggested_reading_image, dependent: :destroy
   has_one_attached :guide_file, dependent: :destroy
   has_one_attached :toc_file, dependent: :destroy
+  has_one_attached :qa, dependent: :destroy
 
   has_rich_text :news_text
   has_rich_text :guide_text
