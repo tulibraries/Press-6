@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_10_170034) do
+ActiveRecord::Schema.define(version: 2022_02_01_192914) do
 
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2021_11_10_170034) do
 
   create_table "authors", charset: "utf8mb3", force: :cascade do |t|
     t.string "author_id"
-    t.string "title"
+    t.text "title"
     t.string "first_name"
     t.string "last_name"
     t.string "prefix"
@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 2021_11_10_170034) do
     t.string "guide_file_label"
     t.string "cover"
     t.text "book_id"
-    t.string "toc_label"
+    t.string "qa_label"
     t.boolean "desk_copy"
     t.boolean "featured_award_winner"
     t.string "excerpt"

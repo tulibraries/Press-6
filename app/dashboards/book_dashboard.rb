@@ -22,7 +22,7 @@ class BookDashboard < Administrate::BaseDashboard
     excerpt_text: Field::String,
     excerpt_file: FileField,
     toc_file: FileField,
-    toc_label: Field::String,
+    qa_label: Field::String,
     binding: Field::Text,
     description: Field::Text,
     contents: Field::Text,
@@ -138,7 +138,7 @@ class BookDashboard < Administrate::BaseDashboard
     excerpt_file
     excerpt_text
     toc_file
-    toc_label
+    qa_label
     qa
     supplement
     desk_copy
