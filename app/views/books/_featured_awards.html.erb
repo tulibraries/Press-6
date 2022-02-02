@@ -6,7 +6,7 @@
       <% else %>
         <%= image_pack_tag "default-book-cover-index.png", style: "outline: solid #ccc 1px" %>
       <% end %>        
-      <p class="pt-2"><%= strip_tags book.title %></p>
+      <p class="pt-2"><%= book.title.html_safe %></p>
     <% end %>
   </div>
   <% end if @recent_winners %>

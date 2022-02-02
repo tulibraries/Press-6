@@ -8,8 +8,11 @@ module Friendable
   end
 
   def title_and_sequence
-    if self.class == "Review"
-      slug = self.book.title
+    case self.class
+    when "Review"
+      slug = [cleanup(self.book.sort_title)]
+    when "Book"
+      slug = [cleanup(self.sort_title)]
     else
       if title.present?
         slug = self.title.parameterize
@@ -22,16 +25,26 @@ module Friendable
   end
 
   def slug_candidates
-    if self.class == "Review"
+    case self.class
+    when "Review"
       [
-        [self.book.title],
+        [cleanup(self.book.sort_title)],
+        [:title_and_sequence]
+      ]
+    when "Book"
+      [
+        [cleanup(self.sort_title)],
         [:title_and_sequence]
       ]
     else
       [
-        [:title],
+        [cleanup(self.title)],
         [:title_and_sequence]
       ]
     end
+  end
+
+  def cleanup(html)
+    ActionController::Base.helpers.strip_tags(html)
   end
 end
