@@ -139,7 +139,7 @@
       <% end %>
       <% if @book.qa.attached? %>
         <ul>
-          <li><%= link_to "Questions & Answers with #{@book.author_byline}", @book.qa.attachment %></li> 
+          <li><%= link_to @book.qa_label, @book.qa.attachment %></li> 
         </ul>
       </div>
       <% else %>

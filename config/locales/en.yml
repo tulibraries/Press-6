@@ -5,7 +5,8 @@ en:
         hot: New and Noteworthy
         xml_id: PW ID
         XML_ID: PW ID
-        qa: Q&As
+        qa: Q&A's
+        qa_label: Q&A label
       phone: Phone
       fax: Fax
   tupress:
