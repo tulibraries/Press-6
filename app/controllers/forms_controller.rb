@@ -6,7 +6,7 @@ class FormsController < ApplicationController
     if existing_forms.include? params[:type]
       @type = params[:type]
       @intro = Webpage.find_by(slug: "copy-request-intro").body if @type == "copy-request"
-      @books = Book.where(status: show_status).order(:title)
+      @books = Book.where(status: show_status).where(course_adoption: true).where("bindings LIKE ?", '%"format":"PB"%').order(:title)
       render template: "forms/create"
     else
       render "errors/not_found", status: :not_found
