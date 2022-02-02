@@ -22,7 +22,7 @@ class BookDashboard < Administrate::BaseDashboard
     excerpt_text: Field::String,
     excerpt_file: FileField,
     toc_file: FileField,
-    toc_label: Field::String,
+    qa_label: Field::String,
     binding: Field::Text,
     description: Field::Text,
     contents: Field::Text,
@@ -98,6 +98,7 @@ class BookDashboard < Administrate::BaseDashboard
     award_year3: Field::String,
     featured_award_winner: Field::Boolean,
     price: Field::String.with_options(searchable: false),
+    qa: FileField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -137,7 +138,8 @@ class BookDashboard < Administrate::BaseDashboard
     excerpt_file
     excerpt_text
     toc_file
-    toc_label
+    qa_label
+    qa
     supplement
     desk_copy
     subject1

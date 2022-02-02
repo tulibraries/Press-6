@@ -5,6 +5,8 @@ en:
         hot: New and Noteworthy
         xml_id: PW ID
         XML_ID: PW ID
+        qa: Q&A's
+        qa_label: Q&A label
       phone: Phone
       fax: Fax
   tupress:
@@ -112,6 +114,12 @@ en:
         tabs:
           staff_info: staff_info
           sales_rep: sales_rep
+        departments:
+          Administration: Administration
+          Editorial Department: Editorial Department
+          Marketing Department: Marketing Department
+          Production Departmen: Production Department
+          Sales Representatives: Sales Representatives
         regions:
           Midwest: Midwest
           West: West
@@ -143,6 +151,7 @@ en:
       of_interest: Also of Interest
       course_adoptions: 
         title: Books for Course Adoption
+      toc: Table of Contents
     catalogs:
       index_title: Catalog Index
     conferences:

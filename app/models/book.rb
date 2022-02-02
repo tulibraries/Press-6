@@ -4,7 +4,8 @@ class Book < ApplicationRecord
   include Imageable
   include Friendable
 
-  before_save :sort_titles, :get_excerpt, :catalog_code
+  before_validation :sort_titles
+  before_save :get_excerpt, :catalog_code
 
   validates :title, :xml_id, :author_byline, :author_ids, :status, presence: true
   validates :cover_image, presence: false, blob: { content_type: ["image/png", "image/jpg", "image/jpeg", "image/gif"], size_range: 1..5.megabytes }
@@ -12,12 +13,14 @@ class Book < ApplicationRecord
   validates :toc_file, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
   validates :guide_file, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
   validates :excerpt_file, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
+  validates :qa, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
 
   has_one_attached :cover_image, dependent: :destroy
   has_one_attached :excerpt_file, dependent: :destroy
   has_one_attached :suggested_reading_image, dependent: :destroy
   has_one_attached :guide_file, dependent: :destroy
   has_one_attached :toc_file, dependent: :destroy
+  has_one_attached :qa, dependent: :destroy
 
   has_rich_text :news_text
   has_rich_text :guide_text
@@ -33,14 +36,17 @@ class Book < ApplicationRecord
   belongs_to :series, optional: true
 
   def sort_titles
-    excludes = ["A", "An", "The"]
-    sort_title = self.title
-    first = sort_title.split.first
-    if !first.nil? && excludes.include?(first.titlecase)
-      sort_title = sort_title.sub(/^(the|a|an)\s+/i, "")
-      self.sort_title = sort_title + ", " + first
-    else
-      self.sort_title = self.title
+    if self.title.present?
+      excludes = ["A", "An", "The"]
+      sort_title = self.title
+      first = sort_title.split.first
+      if !first.nil? && excludes.include?(first.titlecase)
+        sort_title = sort_title.sub(/^(the|a|an)\s+/i, "")
+        sort_title = cleanup(sort_title)
+        self.sort_title = sort_title + ", " + first
+      else
+        self.sort_title = cleanup(sort_title)
+      end
     end
   end
 
@@ -75,6 +81,7 @@ class Book < ApplicationRecord
       q = q.last.present? ? q : q[0...-1]
       Book.where({ status: ["NP", "IP", "OP"] })
       .where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
+      .or(Book.where("sort_title REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
       .or(Book.where("subtitle REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
       .or(Book.where("author_byline REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
       .order(:sort_title)

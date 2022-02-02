@@ -1,7 +1,7 @@
 <div class="container special-offers index">
 
   <div class="row">
-    <div class="col-12 mt-3 px-0">
+    <div class="col-12 mt-3">
       <h1 class="mt-3">
         <%= title_link(t("tupress.special_offers.index_title")) %>
       </h1>
@@ -10,7 +10,7 @@
 
   <div class="row special-offers mt-2 g-3">
     <% @special_offers.each do |so| %>
-      <div class="col-12 col-md-6 px-0">
+      <div class="col-12 col-md-6">
         <div class="so p-3 mr-4 mb-3" style="min-height:140px;">
           <p style="font-size: 120%;">
             <strong><%= link_to so.title, special_offer_path(so) %></strong>

@@ -44,6 +44,20 @@ strong {
 .gold {
   background-color: $gold!important;
   padding: 7px!important;
+  border-radius: 0!important;
+}
+
+button.gold, nav.gold, .so, .author {
+  border-bottom: solid $dark-gold 1px!important;
+}
+
+#left-home-menu li {
+  border-bottom: solid $dark-gold 1px!important;
+  @media (max-width: 999px) {
+    border-bottom: 0!important;
+    padding-left: 14px!important;
+    border-left: solid $dark-gold 2px!important;
+  }
 }
 
 .flash {

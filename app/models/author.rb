@@ -7,6 +7,9 @@ class Author < ApplicationRecord
 
   validates :author_id, :last_name, presence: true
 
+  has_one_attached :qa, dependent: :destroy
+  validates :qa, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
+
   paginates_per 45
 
   def set_title

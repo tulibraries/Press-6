@@ -67,7 +67,7 @@ scan:
 		fi
 	@if [ $(CI) == false ]; \
 		then \
-			trivy $(HARBOR)/$(IMAGE):$(VERSION); \
+			trivy image $(HARBOR)/$(IMAGE):$(VERSION); \
 		fi
 
 deploy: scan lint

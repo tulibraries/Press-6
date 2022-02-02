@@ -12,6 +12,7 @@ class AuthorDashboard < Administrate::BaseDashboard
     last_name: Field::String,
     prefix: Field::String,
     suffix: Field::String,
+    qa: FileField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     suppress: Field::Boolean,
@@ -24,12 +25,14 @@ class AuthorDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     title
     suppress
+    qa
   ].freeze
 
   FORM_ATTRIBUTES = %i[
     title
     slug
     suppress
+    qa
   ].freeze
 
   COLLECTION_FILTERS = {}.freeze

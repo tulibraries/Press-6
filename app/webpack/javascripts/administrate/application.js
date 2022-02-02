@@ -117,6 +117,13 @@ addEventListener("trix-action-invoke", function (event) {
   }
 })
 
+addEventListener("trix-initialize", event => {
+  const { toolbarElement } = event.target
+  const inputElement = toolbarElement.querySelector("input[name=href]")
+  inputElement.type = "text"
+  inputElement.pattern = "(https?://|/).+"
+})
+
 class RichText {
   constructor(element) {
     this.element = element
