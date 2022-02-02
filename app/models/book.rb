@@ -36,15 +36,17 @@ class Book < ApplicationRecord
   belongs_to :series, optional: true
 
   def sort_titles
-    excludes = ["A", "An", "The"]
-    sort_title = self.title
-    first = sort_title.split.first
-    if !first.nil? && excludes.include?(first.titlecase)
-      sort_title = sort_title.sub(/^(the|a|an)\s+/i, "")
-      sort_title = cleanup(sort_title)
-      self.sort_title = sort_title + ", " + first
-    else
-      self.sort_title = cleanup(sort_title)
+    if self.title.present?
+      excludes = ["A", "An", "The"]
+      sort_title = self.title
+      first = sort_title.split.first
+      if !first.nil? && excludes.include?(first.titlecase)
+        sort_title = sort_title.sub(/^(the|a|an)\s+/i, "")
+        sort_title = cleanup(sort_title)
+        self.sort_title = sort_title + ", " + first
+      else
+        self.sort_title = cleanup(sort_title)
+      end
     end
   end
 
