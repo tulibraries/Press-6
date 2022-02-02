@@ -1,21 +1,21 @@
 $(document).ready(function() {  
-  $(window).width() < 768 ? mobile() : desktop()
-  $('#form_requested_books').change(function(event) {;
-    var last_valid_selection = null;
-    if ($(this).val().length > 3) {
-      console.log(last_valid_selection);
-      last_valid_selection = $(this).val();
-      // $('#form_requested_books').val(last_valid_selection);
-    } else {
-      last_valid_selection = $(this).val();
-      console.log(last_valid_selection);
+  $(window).width() < 768 ? mobile() : desktop();
+
+  $('input[type=radio]').click(function(){
+    if (this.value == "Exam Copy") {
+      document.getElementById("examcopy").style.display = "block";
+      document.getElementById("deskcopy").style.display = "none";
+    }
+    if (this.value == "Desk Copy") {
+      document.getElementById("examcopy").style.display = "none";
+      document.getElementById("deskcopy").style.display = "block";
     }
   });
-});
-$(window).resize(function() {  
-  $(window).width() < 768 ? mobile() : desktop();
-});
 
+  $(window).resize(function() {  
+    $(window).width() < 768 ? mobile() : desktop();
+  });
+});
 function desktop () {
   $('#book-details').appendTo('#book-cover');
   $('#social-share').insertBefore('#book-details');

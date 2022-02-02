@@ -1,22 +1,51 @@
+<div id="copy-request-type">
+  <%= f.input :request_type, as: :radio_buttons,
+                collection: t("tupress.forms.copy-request.request_type"),
+                item_wrapper_class: "form-check inline",
+                required: true %>
+</div>
+        
+<div class="my-4"></div>
+
 <label class="string pr-0" for="form_books">
   <%= t("tupress.forms.copy-request.books") %>
 </label>
 
-<abbr title="required">*</abbr>
+<abbr title="required">*</abbr> 
+<p>You may select up to 3 books</p>
 
-<%= f.collection_select :requested_books, @books, 
+<%= f.collection_select :requested_book1, @books, 
                       :select_value, 
                       :select_value,
                       {prompt: t("tupress.forms.copy-request.prompt")},
-                      {multiple: true, required: true}
+                      {multiple: false, required: true}
+                        %>
+
+<%= f.collection_select :requested_book2, @books, 
+                      :select_value, 
+                      :select_value,
+                      {prompt: t("tupress.forms.copy-request.prompt")},
+                      {multiple: false, required: true}
+                        %>
+
+<%= f.collection_select :requested_book3, @books, 
+                      :select_value, 
+                      :select_value,
+                      {prompt: t("tupress.forms.copy-request.prompt")},
+                      {multiple: false, required: true}
                         %>
 <div class="my-2"></div>
 
+<div id="deskcopy" style="display:none;">
 <%= f.input :format, as: :radio_buttons, 
-                collection: ["eBook", "Print"],
+                collection: t("tupress.forms.copy-request.request_format"),
                 item_wrapper_class: "form-check inline",
                 legend_html: { class: "pl-0" },
                 required: true %>
+</div>
+<div id="examcopy" style="display:none;" class="mt-1 mb-3">
+  <em><%= t("tupress.forms.copy-request.exam-format") %></em>
+</div>
 
 <%= f.input :authorized_bookstore, hint: t("tupress.forms.copy-request.hint"), required: false,
                       item_wrapper_class: "mt-3" %>
