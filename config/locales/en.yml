@@ -323,7 +323,8 @@ en:
         prompt: "Click then begin typing to select a book               "
         hint: (required for Desk Copy requests)
         books: Requested Books
-        exam-format: "Exam copies will be delivered as an eBook"
+        exam-format: Exam copies will be delivered as an eBook
+        preselect-text: is preselected below. Please fill out the following required fields.
         request_format:
           eBook: eBook
           Print: Print

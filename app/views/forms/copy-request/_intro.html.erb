@@ -1,5 +1,8 @@
 <% if @book.present? %>
-  <div class="flash alert notice"><strong><%= @book.title.html_safe %></strong> is preselected below. Please fill out the following required fields.</div>
+  <div class="flash alert notice">
+    <strong><%= @book.title.html_safe %></strong> 
+    <%= t("tupress.forms.copy-request.preselect-text") %>
+  </div>
 <% end %>
 
 <%= @intro %>
