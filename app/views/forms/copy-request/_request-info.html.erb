@@ -7,6 +7,19 @@
         
 <div class="my-4"></div>
 
+<div id="deskcopy" style="display:none;">
+<%= f.input :format, as: :radio_buttons, 
+                collection: t("tupress.forms.copy-request.request_format"),
+                item_wrapper_class: "form-check inline",
+                legend_html: { class: "pl-0" },
+                required: true %>
+</div>
+<div id="examcopy" style="display:none;" class="mt-1 mb-3">
+  <em><%= t("tupress.forms.copy-request.exam-format") %></em>
+</div>
+
+<div class="my-4"></div>
+
 <label class="string pr-0" for="form_books">
   <%= t("tupress.forms.copy-request.books") %>
 </label>
@@ -25,32 +38,22 @@
                       :select_value, 
                       :select_value,
                       {prompt: t("tupress.forms.copy-request.prompt")},
-                      {multiple: false, required: true}
+                      {multiple: false, required: false}
                         %>
 
 <%= f.collection_select :requested_book3, @books, 
                       :select_value, 
                       :select_value,
                       {prompt: t("tupress.forms.copy-request.prompt")},
-                      {multiple: false, required: true}
+                      {multiple: false, required: false}
                         %>
 <div class="my-2"></div>
-
-<div id="deskcopy" style="display:none;">
-<%= f.input :format, as: :radio_buttons, 
-                collection: t("tupress.forms.copy-request.request_format"),
-                item_wrapper_class: "form-check inline",
-                legend_html: { class: "pl-0" },
-                required: true %>
-</div>
-<div id="examcopy" style="display:none;" class="mt-1 mb-3">
-  <em><%= t("tupress.forms.copy-request.exam-format") %></em>
-</div>
 
 <div id="bookstore" style="display:none;">
   <%= f.input :authorized_bookstore, hint: t("tupress.forms.copy-request.hint"), 
                       required: true,
-                      item_wrapper_class: "mt-3" %>
+                      item_wrapper_class: "mt-3"
+                       %>
 </div>
 
 <%= f.input :comments, as: :text, required: false %>

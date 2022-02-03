@@ -17,7 +17,7 @@
         collection: t("tupress.forms.copy-request.address_type"),
         item_wrapper_class: "form-check inline",
         required: true %>
-<%= f.input :instructor, required: false %>
-<%= f.input :course_title, required: false %>
-<%= f.input :projected_enrollment, required: false %>
-<%= f.input :semester_taught, required: false %>
+<%= f.input :instructor, required: true %>
+<%= f.input :course_title, required: true %>
+<%= f.input :projected_enrollment, required: true %>
+<%= f.input :semester_taught, required: true %>
