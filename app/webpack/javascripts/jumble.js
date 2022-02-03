@@ -5,10 +5,12 @@ $(document).ready(function() {
     if (this.value == "Exam Copy") {
       document.getElementById("examcopy").style.display = "block";
       document.getElementById("deskcopy").style.display = "none";
+      document.getElementById("bookstore").style.display = "none";
     }
     if (this.value == "Desk Copy") {
       document.getElementById("examcopy").style.display = "none";
       document.getElementById("deskcopy").style.display = "block";
+      document.getElementById("bookstore").style.display = "block";
     }
   });
 

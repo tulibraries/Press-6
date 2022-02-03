@@ -47,7 +47,10 @@
   <em><%= t("tupress.forms.copy-request.exam-format") %></em>
 </div>
 
-<%= f.input :authorized_bookstore, hint: t("tupress.forms.copy-request.hint"), required: false,
+<div id="bookstore" style="display:none;">
+  <%= f.input :authorized_bookstore, hint: t("tupress.forms.copy-request.hint"), 
+                      required: true,
                       item_wrapper_class: "mt-3" %>
+</div>
 
 <%= f.input :comments, as: :text, required: false %>
