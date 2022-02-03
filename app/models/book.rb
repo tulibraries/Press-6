@@ -89,6 +89,6 @@ class Book < ApplicationRecord
   end
 
   def select_value
-    "#{self.title.to_s} -- #{self.author_byline}"
+    "#{self.sort_title.to_s} -- #{self.author_byline}"
   end
 end
