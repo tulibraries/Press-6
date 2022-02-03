@@ -84,7 +84,7 @@ module ApplicationHelper
         link_to linkable.title.html_safe, edit_url(linkable.slug)
       end
     else
-      linkable.is_a?(String) ? linkable.presence : linkable.title
+      linkable.is_a?(String) ? linkable.presence : linkable.title.html_safe
     end
   end
 
