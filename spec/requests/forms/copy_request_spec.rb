@@ -8,7 +8,7 @@ RSpec.describe "Request a Desk or Exam Copy", type: :request do
   let(:hc_adoption) { FactoryBot.create(:book, title: "hard cover", sort_title: "hard cover", course_adoption: true, bindings: "")  }
 
   describe "request formats" do
-    it "only has paperback course adoption books" do 
+    it "only has paperback course adoption books" do
       @books = [pb_adoption, hc_adoption]
       get "/forms/copy-request"
       expect(response.body).to include(pb_adoption.sort_title)
