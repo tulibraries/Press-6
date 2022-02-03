@@ -1,1 +1,5 @@
+<% if @book.present? %>
+  <div class="flash alert notice"><strong><%= @book.title.html_safe %></strong> is preselected below. Please fill out the following required fields.</div>
+<% end %>
+
 <%= @intro %>

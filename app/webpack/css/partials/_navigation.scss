@@ -40,7 +40,7 @@ nav.pagination {
     }
   }
   .navbar {
-    background-color: #22223b;
+    background-color: $dark-blue;
     justify-content: flex-start;
     padding: .25rem 0;
     .navbar-toggler {
@@ -52,10 +52,10 @@ nav.pagination {
     }
     .show .padding {
       height: 10px;
-      background-color: #22223b;
+      background-color: $dark-blue;
     }
     .navbar-toggler:hover {
-      background-color: #22223b;
+      background-color: $dark-blue;
     }
     .navbar-toggler:focus {
       outline: none;
@@ -71,7 +71,7 @@ nav.pagination {
     }
     .row {
       margin-top: 2px;
-      background-color: #22223b;
+      background-color: $dark-blue;
       height: 45px !important;
       max-height: 45px !important;
       max-width: 100%;
@@ -94,7 +94,7 @@ nav.pagination {
 }
 
 #mobile-menu {
-  background-color: #22223b;
+  background-color: $dark-blue;
   .col {
     display: table;
     a {
@@ -118,7 +118,7 @@ nav.pagination {
     font-size: 1.5rem;
     padding-bottom: 7px;
     a {
-      color: white;
+      color: $white;
     }
     @media screen and (max-width: 999px) {
       width: 100%;
@@ -126,16 +126,16 @@ nav.pagination {
     }
   }
   .navbar-collapse {
-    background-color: #c4cede;
+    background-color: $light-blue;
     padding-top: 10px;
   }
   .navbar-toggler {
-    color: white;
+    color: $white;
     width: 100%;
   }
   .navbar-toggler[aria-expanded="true"] {
-    background-color: #9dadc9!important;
-    color: #000;
+    background-color: $med-blue!important;
+    color: $black;
     padding: 10px 0;
     font-size: 1.5rem;
     font-weight: 900;
@@ -149,7 +149,7 @@ nav.pagination {
   margin-right: 10px!important;
   margin-top: 1px!important;
   background-image: none;
-  color: white;
+  color: $white;
   height: auto;
   @media screen and (min-width: 0) and (max-width: 999px) {
     float: left;    
@@ -159,7 +159,7 @@ nav.pagination {
   div {
     width: 25px;
     height: 2px;
-    background-color: #fff;
+    background-color: $white;
     margin: 6px 0;
     transition: 0.4s;
   }
