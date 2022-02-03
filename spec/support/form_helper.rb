@@ -28,7 +28,7 @@ RSpec.shared_examples "email form" do
     it "accepts information" do
       post "/forms", params
       expect(the_email.subject).to eq(title)
-      expect(the_email.body.raw_source).to include(*form_params.values.flatten)
+      expect(the_email.body.raw_source).to include(*form_params.values.flatten.reject { |val| val.blank? })
     end
   end
 end

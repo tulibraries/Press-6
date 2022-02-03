@@ -28,7 +28,9 @@ class Form < MailForm::Base
   attribute :course_title
   attribute :projected_enrollment
   attribute :semester_taught
-  attribute :requested_books
+  attribute :requested_book1
+  attribute :requested_book2
+  attribute :requested_book3
   attribute :format
   attribute :authorized_bookstore
 
