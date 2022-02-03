@@ -192,7 +192,9 @@ en:
         course_title: Course Title
         projected_enrollment: Projected Enrollment
         semester_taught: Semester Taught
-        requested_books: Requested Books
+        requested_book1: Requested Book 1
+        requested_book2: Requested Book 2
+        requested_book3: Requested Book 3
         format: Format
         authorized_bookstore: Authorized Bookstore
         book_title: Book Title
