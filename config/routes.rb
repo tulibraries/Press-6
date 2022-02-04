@@ -82,5 +82,5 @@ Rails.application.routes.draw do
   get "/open-access/north-broad-press/:id"  => "oabooks#show", as: :north_broad_book
 
   get "forms", to: "forms#index", as: "forms_index"
-  get "forms/*type", to: "forms#new"
+  get "forms/*type", to: "forms#new", as: "form"
 end

@@ -320,10 +320,11 @@ en:
           <a href="mailto:examcopy@temple.edu">examcopy@temple.edu,</a> fax your request on 
           letterhead to 215-204-2142, or use our <a href="/forms/copy-request">online form</a>. 
           Thanks.</p>
-        prompt: "Click then begin typing to select a book"
+        prompt: "Click then begin typing to select a book               "
         hint: (required for Desk Copy requests)
         books: Requested Books
-        exam-format: "Exam copies will be delivered as an eBook"
+        exam-format: Exam copies will be delivered as an eBook
+        preselect-text: is preselected below. Please fill out the following required fields.
         request_format:
           eBook: eBook
           Print: Print

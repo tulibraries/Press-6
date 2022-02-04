@@ -73,6 +73,11 @@ button.gold, nav.gold, .so, .author {
   }
 }
 
+.flash.notice {
+  background-color: $light-blue;
+  font-size: 1.25rem;
+}
+
 .flash.timedout {
   display: none;
 }

@@ -99,7 +99,8 @@ class BooksController < ApplicationController
   def course_adoptions
     @books = Book.where(status: show_status)
                  .where(course_adoption: true)
-                 .sort_by { |b| b.sort_title }
+                 .where("bindings LIKE ?", '%"format":"PB"%')
+                 .order(:title)
   end
 
   def study_guides
