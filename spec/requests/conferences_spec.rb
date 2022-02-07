@@ -6,7 +6,7 @@
    let(:future_conference) { FactoryBot.create(:conference, title: "future-conference") }
    let(:old_conference) { FactoryBot.create(:conference, title: "old-conference",
                                              start_date: DateTime.now.months_ago(3),
-                                             end_date: DateTime.now.months_ago(1)) }
+                                             end_date: DateTime.now.months_ago(2)) }
    let(:recent_conference) { FactoryBot.create(:conference, title: "recent-conference",
                                                  start_date: DateTime.now.months_ago(1),
                                                  end_date: DateTime.now) }
