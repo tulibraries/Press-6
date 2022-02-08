@@ -66,7 +66,7 @@ class BooksController < ApplicationController
       subjects << s
     end
 
-    @awards_by_subject = subjects
+    @awards_by_subject = subjects.compact!
 
     @recent_winners = books_with_awards
                         .select { |b| show_status.include?(b.status) }
