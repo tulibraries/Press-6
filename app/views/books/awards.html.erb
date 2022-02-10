@@ -10,7 +10,7 @@
 
   <div class="row featured_awards">
     <div class="col-12 mb-2 mb-lg-0 text-center">
-      <h2 class="d-none d-lg-block pl-3 gold" style="border-bottom: solid #f3f3f3 7px">Recent Award Winners</h2>
+      <h2 class="d-none d-lg-block pl-3 gold">Recent Award Winners</h2>
       <%= button_tag("", 
                 :class=>"btn btn-lg btn-secondary dropdown-toggle pl-0 text-center gold w-100 d-lg-none", 
                 :type=>"button",
@@ -20,13 +20,13 @@
                 :'aria-expanded'=>"false",
                 :'aria-label'=>"Toggle Recent Award Winners") do
                 %>
-        <span class="navbar-toggler-icon pt-0 text-center w-auto gold">Recent Award Winners</span>
+        <span class="navbar-toggler-icon pt-0 text-center w-auto">Recent Award Winners</span>
       <% end %>
 
-      <div class="d-none d-lg-flex mx-0 row mb-0 featured_awards">
+      <div class="d-none d-lg-flex mx-0 row mb-0 featured_awards f-awards">
         <%= render "featured_awards" %>
       </div>
-      <div class="d-lg-none row collapse navbar-collapse featured_awards" id="featured_awards">
+      <div class="d-lg-none row collapse navbar-collapse featured_awards f-awards mx-0" id="featured_awards">
         <%= render "featured_awards" %>
       </div>
     </div>
