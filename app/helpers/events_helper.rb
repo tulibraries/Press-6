@@ -49,11 +49,11 @@ module EventsHelper
     :  # display times
 
     # single day event, no end time
-    if (starting.strftime("%h") == ending.strftime("%h")) && (starting.strftime("%d") == ending.strftime("%d"))
+    if (starting.strftime("%h:%M") == ending.strftime("%h:%M")) && (starting.strftime("%d") == ending.strftime("%d"))
       [
         starting.strftime("%a, %h"),
         "#{starting.strftime("%d").to_i.ordinalize},",
-        starting.strftime("%l %P")
+        starting.strftime("%l:%M %P")
       ].join(" ")
     # single day event, start and end time
     elsif
@@ -62,22 +62,19 @@ module EventsHelper
         [
           starting.strftime("%a, %h"),
           "#{starting.strftime("%d").to_i.ordinalize},",
-          starting.strftime("%l %P")
+          starting.strftime("%l:%M %P")
         ].join(" ")
         }
       -
-        #{
-        [
-          ending.strftime("%a %h"),
-          "#{ending.strftime("%d").to_i.ordinalize},"
-        ].join(" ")}"
+        #{ ending.strftime("%l:%M %P")}
+        "
     elsif # multi day event, start but no end time
       ending.strftime("%H") == "00" && (starting.strftime("%d") == ending.strftime("%d"))
       "#{
         [
           starting.strftime("%a, %b"),
           "#{starting.strftime("%d").to_i.ordinalize},",
-          starting.strftime("%l %P")
+          starting.strftime("%l:%M %P")
           ].join(" ")}
         -
         #{
@@ -91,14 +88,14 @@ module EventsHelper
             [
               starting.strftime("%a, %b"),
               "#{starting.strftime("%d").to_i.ordinalize},",
-              starting.strftime("%l %P")
+              starting.strftime("%l:%M %P")
               ].join(" ")}
             -
             #{
               [
                 ending.strftime("%a, %h"),
                 "#{ending.strftime("%d").to_i.ordinalize},",
-                ending.strftime("%l %P")
+                ending.strftime("%l:%M %P")
               ].join(" ")}"
         elsif # multi day event, differing start and end time
           (starting.strftime("%h") != ending.strftime("%h")) && (starting.strftime("%d") != ending.strftime("%d"))
@@ -106,14 +103,14 @@ module EventsHelper
             [
               starting.strftime("%a, %b"),
               "#{starting.strftime("%d").to_i.ordinalize},",
-              starting.strftime("%l %P")
+              starting.strftime("%l:%M %P")
               ].join(" ")}
             -
             #{
               [
                 ending.strftime("%a, %h"),
                 "#{ending.strftime("%d").to_i.ordinalize},",
-                ending.strftime("%l %P")
+                ending.strftime("%l:%M %P")
               ].join(" ")}"
     end
   end
