@@ -12,6 +12,25 @@ COPY . .
 
 USER root
 
+# Security fixes.
+# This can be removed in the next ruby upgrade.
+RUN cd `ruby -e 'puts Gem.default_specifications_dir'`; \
+      GEM_DEFAULT_DIR=`ruby -e 'puts Gem.default_dir'`; \
+      mv -t ../ bundler*.gemspec \
+      cgi*.gemspec \
+      rdoc*.gemspec \
+      rexml*.gemspec; \
+      \
+      gem uninstall -aIx -i $GEM_DEFAULT_DIR bundler; \
+      gem uninstall -aIx -i $GEM_DEFAULT_DIR cgi; \
+      gem uninstall -aIx -i $GEM_DEFAULT_DIR rdoc; \
+      gem uninstall -aIx -i $GEM_DEFAULT_DIR rexml; \
+      \
+      gem install bundler -i $GEM_DEFAULT_DIR -v 2.3.7 --default; \
+      gem install cgi -i $GEM_DEFAULT_DIR -v 0.3.1 --default; \
+      gem install rexml -i $GEM_DEFAULT_DIR -v 3.2.5 --default; \
+      cd -
+
 RUN apk add -U --no-cache \
       bash=5.1.16-r0 \
       libxslt=1.1.34-r1 \
@@ -26,8 +45,6 @@ RUN apk add -U --no-cache \
       mariadb-dev=10.6.4-r2 \
       nodejs=16.14.0-r0 \
       yarn=1.22.17-r0 && \
-    rm -rf /usr/local/lib/ruby/gems/2.7.0/specifications/default && \
-    gem install bundler:2.2.27  && \
     bundle config build.nokogiri --use-system-libraries && \
     if [ "${RAILS_ENV}" = "production" ]; then bundle config set --local without "development test"; fi && \
     bundle install --jobs=8 && \
