@@ -29,6 +29,7 @@ build:
 		--tag $(HARBOR)/$(IMAGE):$(VERSION) \
 		--tag $(HARBOR)/$(IMAGE):latest \
 		--file .docker/app/Dockerfile \
+		--progress plain \
 		--no-cache .
 
 run:

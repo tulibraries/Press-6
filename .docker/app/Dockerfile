@@ -12,14 +12,16 @@ COPY . .
 
 USER root
 
-# Security fixes.
+# L7-L31 Security fixes.
 # This can be removed in the next ruby upgrade.
-RUN cd `ruby -e 'puts Gem.default_specifications_dir'`; \
+# hadolint ignore=SC2086
+RUN GEM_DEFAULT_SPEC_DIR=`ruby -e 'puts Gem.default_specifications_dir'`; \
       GEM_DEFAULT_DIR=`ruby -e 'puts Gem.default_dir'`; \
-      mv -t ../ bundler*.gemspec \
-      cgi*.gemspec \
-      rdoc*.gemspec \
-      rexml*.gemspec; \
+      mv -t $GEM_DEFAULT_SPEC_DIR/../ \
+        $GEM_DEFAULT_SPEC_DIR/bundler*.gemspec \
+        $GEM_DEFAULT_SPEC_DIR/cgi*.gemspec \
+        $GEM_DEFAULT_SPEC_DIR/rdoc*.gemspec \
+        $GEM_DEFAULT_SPEC_DIR/rexml*.gemspec; \
       \
       gem uninstall -aIx -i $GEM_DEFAULT_DIR bundler; \
       gem uninstall -aIx -i $GEM_DEFAULT_DIR cgi; \
@@ -29,9 +31,9 @@ RUN cd `ruby -e 'puts Gem.default_specifications_dir'`; \
       gem install bundler -i $GEM_DEFAULT_DIR -v 2.3.7 --default; \
       gem install cgi -i $GEM_DEFAULT_DIR -v 0.3.1 --default; \
       gem install rexml -i $GEM_DEFAULT_DIR -v 3.2.5 --default; \
-      cd -
-
-RUN apk add -U --no-cache \
+      \
+      \
+      apk add -U --no-cache \
       bash=5.1.16-r0 \
       libxslt=1.1.34-r1 \
       tzdata=2021e-r0 \
