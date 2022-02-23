@@ -9,14 +9,14 @@ RSpec.shared_examples "email form" do
 
   let(:the_email) { ActionMailer::Base.deliveries.first }
   let(:title) { I18n.t("tupress.forms.#{form_type}.title") }
-  let(:params) {  { params:
-      { form: {
-        form_type: form_type,
-        name: "test",
-        email: "test@example.com"
-      }.merge(form_params || {}) }
-      }
-    }
+  let(:params) {  {
+                    form: {
+                      form_type: form_type,
+                      name: "test",
+                      email: "test@example.com"
+                    }.merge(form_params || {})
+                  }
+                }
 
   describe "" do
     it "renders the form" do
@@ -26,7 +26,7 @@ RSpec.shared_examples "email form" do
     end
 
     it "accepts information" do
-      post "/forms", params
+      post "/forms", params: params
       expect(the_email.subject).to eq(title)
       expect(the_email.body.raw_source).to include(*form_params.values.flatten.reject { |val| val.blank? })
     end
