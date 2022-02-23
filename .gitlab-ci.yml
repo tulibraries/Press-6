@@ -41,7 +41,7 @@ build:
 scan:
   stage: scan
   extends: .scanimage_high
-  allow_failure: true
+  allow_failure: false
   variables:
     THRESHOLD: 10
 
