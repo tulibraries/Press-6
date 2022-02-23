@@ -9,12 +9,12 @@ RSpec.shared_examples "email form" do
 
   let(:the_email) { ActionMailer::Base.deliveries.first }
   let(:title) { I18n.t("tupress.forms.#{form_type}.title") }
-  let(:params) {  { 
+  let(:params) {  {
                     form: {
                       form_type: form_type,
                       name: "test",
                       email: "test@example.com"
-                    }.merge(form_params || {}) 
+                    }.merge(form_params || {})
                   }
                 }
 
