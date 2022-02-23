@@ -1,5 +1,5 @@
 # For circleci this arg gets overridden by value in the .env file.
-ARG BASE_IMAGE_NAME="harbor.k8s.temple.edu/library/ruby:2.7-alpine" \
+ARG BASE_IMAGE_NAME="harbor.k8s.temple.edu/library/ruby:3.1.0-alpine" \
   RAILS_MASTER_KEY=foobar \
   RAILS_ENV=production
 
@@ -13,7 +13,7 @@ COPY . .
 USER root
 
 RUN apk add -U --no-cache \
-      bash=5.1.8-r0 \
+      bash=5.1.16-r0 \
       libxslt=1.1.34-r1 \
       tzdata=2021e-r0 \
       mariadb-connector-c=3.1.13-r2 \
@@ -26,7 +26,7 @@ RUN apk add -U --no-cache \
       mariadb-dev=10.6.4-r2 \
       nodejs=16.14.0-r0 \
       yarn=1.22.17-r0 && \
-    gem install bundler:2.2.27  && \
+    gem install bundler:2.2.33  && \
     bundle config build.nokogiri --use-system-libraries && \
     if [ "${RAILS_ENV}" = "production" ]; then bundle config set --local without "development test"; fi && \
     bundle install --jobs=8 && \
