@@ -36,7 +36,9 @@ gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
 gem "httparty"
 gem "font-awesome-rails"
-gem "net-smtp"
+gem "net-smtp", require: false
+gem "net-pop", require: false
+gem "net-imap", require: false
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
