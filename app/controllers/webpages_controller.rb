@@ -12,7 +12,7 @@ class WebpagesController < ApplicationController
     @highlights = Highlight.where(promote_to_homepage: true).order(:created_at).reverse
     @featured_catalog = Catalog.where.not(suppress: 1).order([year: :desc, season: :asc]).first
     @brochure = Brochure.where(promoted_to_homepage: 1).order(updated_at: :desc).first
-    @philly = Subject.find_by(title: "Philadelphia Region")
+    @philly = Subject.find_by(title: "Philadelphia")
     @hot = Book.where(hot: true).order(updated_at: :desc).take(3).sort
   end
 
