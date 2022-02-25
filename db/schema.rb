@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_01_192914) do
+ActiveRecord::Schema.define(version: 2022_02_25_151250) do
 
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -183,8 +183,8 @@ ActiveRecord::Schema.define(version: 2022_02_01_192914) do
     t.integer "catalog_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["brochure_id"], name: "index_catalog_brochures_on_brochure_id", unique: true
-    t.index ["catalog_id"], name: "index_catalog_brochures_on_catalog_id", unique: true
+    t.index ["brochure_id"], name: "index_catalog_brochures_on_brochure_id"
+    t.index ["catalog_id"], name: "index_catalog_brochures_on_catalog_id"
   end
 
   create_table "catalogs", charset: "utf8mb3", force: :cascade do |t|
