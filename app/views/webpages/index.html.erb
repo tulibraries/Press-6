@@ -63,7 +63,7 @@
     <% if @featured_catalog.present? %>
     <div class="mb-4 p-3 white" id="feature-catalog">
       <h2><%= @featured_catalog.title %> Catalog</h2>
-      <%= link_to display_image(@featured_catalog), catalog_path(@featured_catalog) %>
+      <%= link_to display_image(@featured_catalog, true), catalog_path(@featured_catalog) %>
       <p class="mt-2">
         <%= link_to "[PDF Version]", @featured_catalog.pdf.attachment if @featured_catalog.pdf.attached? %>
       </p>
@@ -74,7 +74,7 @@
     <div class="mb-4 p-3 white" id="feature-other">
       <h2><%= @brochure.title %></h2>
       <%= link_to @brochure.pdf.attachment do %>
-        <%= display_image(@brochure) %>
+        <%= display_image(@brochure, true) %>
         <p class="mt-2">[PDF]</p>
       <% end %>
     </div>
