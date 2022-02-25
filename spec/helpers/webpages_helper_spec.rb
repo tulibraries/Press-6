@@ -15,8 +15,11 @@ RSpec.describe WebpagesHelper, type: :helper do
     it "returns image from model" do
       expect(helper.display_image(brochure)).to eq(image_tag brochure.image)
     end
-    it "returns default image when model image nil" do
-      expect(helper.display_image(no_image)).to include("default-book-cover-index")
+    it "returns default image when model image nil - homepage" do
+      expect(helper.display_image(no_image, true)).to include("default-book-cover-index")
+    end
+    it "does not returns default image when model image nil - non-homepage" do
+      expect(helper.display_image(no_image)).not_to have_text "default-book-cover-index"
     end
   end
 

@@ -1,31 +1,34 @@
 <div class="container catalog show">
 
-<div class="row">
-  <div class="col-12 mt-3">
-    <h1 class="mt-4">
-      <%= title_link(@catalog) %>
-    </h1>
-      <% if @catalog.pdf.attached? %>
-        <div class="text-right">
-        <%= link_to @catalog.pdf.attachment do%>
-          <%= image_tag(@catalog.custom_image("image", 100, 200)) if @catalog.image.attached? %>
-          <%= link_to "<br />Download PDF version".html_safe, @catalog.pdf.attachment, class: "text-right text-lg-left mt-2" %><br />
-        <% end %>
-        </div>
-      <% end %>
+  <div class="row">
+    <div class="col-12 mt-3">
+      <h1 class="mt-4">
+        <%= title_link(@catalog) %>
+      </h1>
     </div>
-  <div class="col-12 social-sharing text-md-right">
-			<% if @catalog.pdf.attached? %>
-				<%= link_to "Download PDF version", @catalog.pdf.attachment, class: "text-right text-lg-left" %><br />
-			<% end %>
+  </div>
 
-      <% @catalog.brochures.each do |brochure| %>
-        <%= link_to brochure.title, brochure.pdf.attachment, class: "text-right text-lg-left" %>
-        <%= display_image(brochure) %>
-      <% end %>
-	</div>
-</div>
+  <% if @catalog.pdf.attached? || @catalog.brochures.present? %>
+  <div class="row">
+    <div class="col-2 mt-5">
+        <% if @catalog.pdf.attached? %>
+          <%= link_to "#{@catalog.title} [PDF]", @catalog.pdf.attachment, 
+                          class: "text-right text-lg-left mb-4 d-block",
+                          style: "text-decoration: underline;font-size: 1.25rem" %>
+        <% end %>
 
-    <%= render "/books/books" %>
+        <% @catalog.brochures.each do |brochure| %>
+          <%= link_to brochure.title, brochure.pdf.attachment, style: "text-decoration: underline;", class: "d-block mb-4 text-right text-lg-left" %>
+          <%= display_image(brochure) %>
+        <% end %>
+    </div>
+    <div class="col-10">
+    <% end %>
 
+      <%= render "books" %>
+
+    <% if @catalog.pdf.attached? || @catalog.brochures.present? %>
+    </div>
+  </div>
+  <% end %>
 </div>

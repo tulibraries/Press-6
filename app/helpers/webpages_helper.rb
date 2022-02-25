@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module WebpagesHelper
-  def display_image(model)
+  def display_image(model, homepage = false)
     model.image.attached? ?
       (image_tag model.image)
       :
-      (image_pack_tag "default-book-cover-index.png")
+      ((image_pack_tag "default-book-cover-index.png") if homepage.present?)
   end
 
   def news_image(model)
