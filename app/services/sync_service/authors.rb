@@ -19,7 +19,7 @@ class SyncService::Authors
     @updated = @created = @errored = 0
 
     get_books.each do |book|
-      if ["NP", "IP", "OP"].include? book["record"]["status"]
+      if ["NP", "IP"].include? book["record"]["status"]
         authors = book["record"]["authors"]["author"]
         if authors.kind_of?(Hash)
           begin

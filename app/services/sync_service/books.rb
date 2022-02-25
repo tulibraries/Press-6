@@ -79,7 +79,7 @@ class SyncService::Books
 
     if record_hash["title"].present? && record_hash["status"].present? && record_hash["author_byline"].present? && record_hash["isbn"].present?
 
-      book.assign_attributes(record_hash) if ["NP", "IP", "OP"].include? record_hash["status"]
+      book.assign_attributes(record_hash) if ["NP", "IP"].include? record_hash["status"]
 
       if book.save!
         @updated += 1
