@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveUniqueCatslogBrochuresIndices < ActiveRecord::Migration[6.1]
   def change
     reversible do |dir|
@@ -7,7 +9,7 @@ class RemoveUniqueCatslogBrochuresIndices < ActiveRecord::Migration[6.1]
         remove_index :catalog_brochures, :brochure_id
         add_index :catalog_brochures, :brochure_id
       end
-    
+
       dir.down do
         remove_index :catalog_brochures, :catalog_id
         add_index :catalog_brochures, :catalog_id, unique: true

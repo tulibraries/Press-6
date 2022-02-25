@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module WebpagesHelper
-  def display_image(model, homepage=false)
+  def display_image(model, homepage = false)
     model.image.attached? ?
       (image_tag model.image)
       :
