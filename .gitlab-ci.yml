@@ -49,16 +49,7 @@ tag:
   stage: tag
   extends: .tag_image
 
-qa_1_deploy:
-  variables:
-    IMAGE: harbor.k8s.temple.edu/tulibraries/tupress
-  stage: deploy
-  extends: .kubectl_setup
-  script:
-    - *export_variables
-    - kubectl --namespace=tupress set image deployment/tupress-app tupress-app=$IMAGE:$VERSION --record
-
-qa_2_deploy:
+qa_deploy:
   variables:
     IMAGE: harbor.k8s.temple.edu/tulibraries/tupress
   stage: deploy
