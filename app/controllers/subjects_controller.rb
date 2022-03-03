@@ -9,10 +9,12 @@ class SubjectsController < ApplicationController
   end
 
   def show
+    sort = params[:sort]
     @books = Book.where("subjects LIKE ?", "%#{@subject.code}%")
-                  .where(status: show_status)
-                  .order(:sort_title)
-                  .page params[:page]
+                .where(status: show_status)
+                .order(:sort_title)
+                .page params[:page]
+    # @books.sort_by(bindings_as_tuples.first[:pub_date])
     @brochures = @subject.brochures
   end
 
@@ -20,4 +22,5 @@ class SubjectsController < ApplicationController
     def set_subject
       @subject = find_instance
     end
+
 end

@@ -5,7 +5,7 @@ class Book < ApplicationRecord
   include Friendable
 
   before_validation :sort_titles
-  before_save :get_excerpt, :catalog_code
+  before_save :get_excerpt, :catalog_code, :sort_date
 
   validates :title, :xml_id, :author_byline, :author_ids, :status, presence: true
   validates :cover_image, presence: false, blob: { content_type: ["image/png", "image/jpg", "image/jpeg", "image/gif"], size_range: 1..5.megabytes }
@@ -74,6 +74,14 @@ class Book < ApplicationRecord
           status: b["binding_status"],
           pub_date: b["pub_date_for_format"]
         }}
+  end
+
+  def sort_date
+    bindings_as_tuples.each do |tuple|
+      date = tuple[:pub_date].split(" ")
+      self.sort_year = date[0]
+      self.sort_month = date[1]
+    end if self.bindings.present?
   end
 
   def self.search(q)
