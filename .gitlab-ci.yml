@@ -61,3 +61,16 @@ qa_deploy:
     - helm repo add tulibraries https://$HARBOR/chartrepo/tulibraries
     - helm pull tulibraries/tupress --untar
     - helm upgrade tupress ./tupress --history-max=5 --namespace=tupress-qa --set image.repository=$IMAGE:$VERSION
+
+  prod_deploy:
+    variables:
+      IMAGE: harbor.k8s.temple.edu/tulibraries/tupress
+    stage: deploy
+    extends: .helm_setup
+    only:
+      - tags
+    script:
+      - *export_variables
+      - helm repo add tulibraries https://$HARBOR/chartrepo/tulibraries
+      - helm pull tulibraries/tupress --untar
+      - helm upgrade tupress ./tupress --values ./tupress/values-prod.yaml --history-max 5 --namespace tupress-qa --set image.repository=$IMAGE:$VERSION
