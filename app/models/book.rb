@@ -78,9 +78,15 @@ class Book < ApplicationRecord
 
   def sort_date
     bindings_as_tuples.each do |tuple|
-      date = tuple[:pub_date].split(" ")
-      self.sort_year = date[0]
-      self.sort_month = date[1]
+      if tuple[:pub_date].present?
+        date = tuple[:pub_date].split(" ")
+
+        (date[1].to_i < 99 && date[1].to_i > 22) ?  # remove after initial run and replace with "unless self.sort_year.present?"
+          self.sort_year = "19#{date[1]}" : # remove after initial run
+          self.sort_year = "20#{date[1]}"
+
+        self.sort_month = date[0]
+      end
     end if self.bindings.present?
   end
 
