@@ -65,14 +65,14 @@ qa_deploy:
 prod_deploy:
   variables:
     IMAGE: harbor.k8s.temple.edu/tulibraries/tupress
-    CLUSTER: prod-library
-    RANCHER: rancher
   stage: deploy
   extends: .helm_setup
   only:
     - tags
   script:
     - *export_variables
+    - export CLUSTER=prod-library
+    - export RANCHER=rancher
     - echo "Cluster is $CLUSTER"
     - echo "Rancher is $RANCHER"
     - kubectl cluster-info
