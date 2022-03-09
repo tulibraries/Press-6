@@ -75,4 +75,4 @@ prod_deploy:
     - *export_variables
     - helm repo add tulibraries https://$HARBOR/chartrepo/tulibraries
     - helm pull tulibraries/tupress --version 0.2.0 --untar
-    - helm upgrade tupress ./tupress --values ./tupress/values-prod.yaml --history-max 5 --namespace tupress-prod --set image.repository=$IMAGE:$VERSION
+    - helm upgrade tupress ./tupress --values ./tupress/values-prod.yaml --history-max 5 --namespace tupress-prod --set image.repository=$IMAGE:$CI_COMMIT_TAG
