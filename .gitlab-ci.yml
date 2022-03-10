@@ -27,6 +27,8 @@ lint:
   extends: .lint_docker
   variables:
     DF: ".docker/app/Dockerfile"
+  except:
+    - tags
 
 build:
   stage: build
@@ -37,6 +39,8 @@ build:
   services:
     - name: harbor.k8s.temple.edu/gitlab-ci/docker:20-dind
       command: ["--tls=false"]
+  except:
+    - tags
 
 scan:
   stage: scan
@@ -44,10 +48,14 @@ scan:
   allow_failure: false
   variables:
     THRESHOLD: 10
+  except:
+    - tags
 
 tag:
   stage: tag
   extends: .tag_image
+  except:
+    - tags
 
 qa_deploy:
   variables:
@@ -56,6 +64,8 @@ qa_deploy:
   extends: .helm_setup
   only:
     - main
+  except:
+    - tags
   script:
     - *export_variables
     - helm repo add tulibraries https://$HARBOR/chartrepo/tulibraries
