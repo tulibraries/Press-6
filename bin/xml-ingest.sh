@@ -1,6 +1,11 @@
 #! /usr/bin/env sh
 set -e
 
+# Switches Kubernetes context to production
+# Assumes production Kube Config file is "$HOME/.kube/prod-library.yaml"
+# Iterates over xml files found in given path
+# Copies files to Kubernetes tupress-app pod
+# Runs the rails sync:pressworks task
 
 export KUBECONFIG="$HOME/.kube/prod-library.yaml"
 
@@ -12,14 +17,14 @@ ingest() {
   # Copy local xml to tupress app
   echo path $1
 
-  kubectl cp $1 $PODID:tmp/books.xml
+  kubectl cp -c tupress-app $1 $PODID:tmp/books.xml
 
   # Ingest
-  kubectl exec $PODID rails sync:pressworks:all[/app/tmp/books.xml]
+  kubectl exec -c tupress-app $PODID rails sync:pressworks:all[/app/tmp/books.xml]
 }
 
 if [ -d $1 ]; then
-  for file in $(find $1 -name "*.xml")
+  for file in $(find $1 -name "*.xml" | sort)
   do
     ingest $file
   done
