@@ -10,62 +10,63 @@ variables:
   IMAGE: "tulibraries/tupress"
 
 stages:
-  #- lint
-  #- build
-  #- scan
-  #- tag
+  - lint
+  - build
+  - scan
+  - tag
   - deploy
 
-#lint:
-  #extends: .lint_docker
-  #variables:
-    #DF: ".docker/app/Dockerfile"
-  #except:
-    #- tags
+lint:
+  extends: .lint_docker
+  variables:
+    DF: ".docker/app/Dockerfile"
+  except:
+    - tags
 
-#build:
-  #stage: build
-  #extends: .build_image
-  #image: harbor.k8s.temple.edu/gitlab-ci/docker:20
-  #variables:
-    #DF: ".docker/app/Dockerfile --build-arg RAILS_MASTER_KEY=$MASTER_KEY --no-cache"
-  #services:
-    #- name: harbor.k8s.temple.edu/gitlab-ci/docker:20-dind
-      #command: ["--tls=false"]
-  #except:
-    #- tags
+build:
+  stage: build
+  extends: .build_image
+  image: harbor.k8s.temple.edu/gitlab-ci/docker:20
+  variables:
+    DF: ".docker/app/Dockerfile --build-arg RAILS_MASTER_KEY=$MASTER_KEY --no-cache"
+  services:
+    - name: harbor.k8s.temple.edu/gitlab-ci/docker:20-dind
+      command: ["--tls=false"]
+  except:
+    - tags
 
-#scan:
-  #stage: scan
-  #extends: .scanimage_high
-  #allow_failure: false
-  #variables:
-    #THRESHOLD: 10
-  #except:
-    #- tags
+scan:
+  stage: scan
+  extends: .scanimage_high
+  allow_failure: false
+  variables:
+    THRESHOLD: 10
+  except:
+    - tags
 
-#tag:
-  #stage: tag
-  #extends: .tag_image
-  #except:
-    #- tags
+tag:
+  stage: tag
+  extends: .tag_image
+  except:
+    - tags
 
-#qa_deploy:
-  #variables:
-    #IMAGE: harbor.k8s.temple.edu/tulibraries/tupress
-  #stage: deploy
-  #extends: .helm_setup
-  #only:
-    #- main
-  #except:
-    #- tags
-  #script:
-    # - source .env
-    # - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
-    #- export RANCHER=rancher-np
-    #- helm repo add tulibraries https://$HARBOR/chartrepo/tulibraries
-    #- helm pull tulibraries/tupress --untar
-    #- helm upgrade tupress ./tupress --history-max=5 --namespace=tupress-qa --set image.repository=$IMAGE:$VERSION
+qa_deploy:
+  variables:
+    IMAGE: harbor.k8s.temple.edu/tulibraries/tupress
+    RANCHER: rancher-np
+    CLUSTER: dev-library
+  stage: deploy
+  extends: .helm_setup
+  only:
+    - main
+  except:
+    - tags
+  script:
+    - source .env
+    - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
+    - helm repo add tulibraries https://$HARBOR/chartrepo/tulibraries
+    - helm pull tulibraries/tupress --untar
+    - helm upgrade tupress ./tupress --history-max=5 --namespace=tupress-qa --set image.repository=$IMAGE:$VERSION
 
 prod_deploy:
   variables:
@@ -79,9 +80,6 @@ prod_deploy:
   script:
     - source .env
     - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
-    - echo "Cluster is $CLUSTER"
-    - echo "Rancher is $RANCHER"
-    - cat $KUBECONFIG
     - helm repo add tulibraries https://$HARBOR/chartrepo/tulibraries
     - helm pull tulibraries/tupress --version 0.2.0 --untar
-    - helm upgrade tupress ./tupress --values ./tupress/values-prod.yaml --history-max 5 --namespace tupress-prod --set image.repository=$IMAGE:latest
+    - helm upgrade tupress ./tupress --values ./tupress/values-prod.yaml --history-max 5 --namespace tupress-prod --set image.repository=$IMAGE:$CI_COMMIT_TAG
