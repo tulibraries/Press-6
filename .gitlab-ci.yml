@@ -9,6 +9,13 @@ include:
 variables:
   IMAGE: "tulibraries/tupress"
 
+.export_variables: &export_variables
+  - source .env
+  - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
+
+before_script:
+  - *export_variables
+
 stages:
   - lint
   - build
@@ -59,11 +66,7 @@ qa_deploy:
   extends: .helm_setup
   only:
     - main
-  except:
-    - tags
   script:
-    - source .env
-    - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
     - helm repo add tulibraries https://$HARBOR/chartrepo/tulibraries
     - helm pull tulibraries/tupress --untar
     - helm upgrade tupress ./tupress --history-max=5 --namespace=tupress-qa --set image.repository=$IMAGE:$VERSION
