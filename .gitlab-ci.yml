@@ -81,9 +81,9 @@ prod_deploy:
   #only:
     #- tags
   script:
+    - export RANCHER=rancher
     - *export_variables
     - export CLUSTER=prod-library
-    - export RANCHER=rancher
     - echo "Cluster is $CLUSTER"
     - echo "Rancher is $RANCHER"
     - cat $KUBECONFIG
