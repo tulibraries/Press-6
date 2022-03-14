@@ -9,13 +9,6 @@ include:
 variables:
   IMAGE: "tulibraries/tupress"
 
-.export_variables: &export_variables
-  - source .env
-  - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
-
-before_script:
-  - *export_variables
-
 stages:
   #- lint
   #- build
@@ -67,7 +60,8 @@ stages:
   #except:
     #- tags
   #script:
-    #- *export_variables
+    # - source .env
+    # - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
     #- export RANCHER=rancher-np
     #- helm repo add tulibraries https://$HARBOR/chartrepo/tulibraries
     #- helm pull tulibraries/tupress --untar
@@ -81,9 +75,10 @@ prod_deploy:
   #only:
     #- tags
   script:
-    - export RANCHER=rancher
-    - *export_variables
+    - source .env
+    - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
     - export CLUSTER=prod-library
+    - export RANCHER=rancher
     - echo "Cluster is $CLUSTER"
     - echo "Rancher is $RANCHER"
     - cat $KUBECONFIG
