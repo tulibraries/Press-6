@@ -13,6 +13,7 @@ variables:
   - source .env
   - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
 
+# Gets used in build and tag staged but overridden by deploy stage.
 before_script:
   - *export_variables
 
@@ -67,6 +68,7 @@ qa_deploy:
   only:
     - main
   script:
+    - *export_variables
     - helm repo add tulibraries https://$HARBOR/chartrepo/tulibraries
     - helm pull tulibraries/tupress --untar
     - helm upgrade tupress ./tupress --history-max=5 --namespace=tupress-qa --set image.repository=$IMAGE:$VERSION
