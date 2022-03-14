@@ -13,6 +13,7 @@ variables:
   - source .env
   - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
 
+# Gets used in build and tag staged but overridden by deploy stage.
 before_script:
   - *export_variables
 
@@ -27,6 +28,8 @@ lint:
   extends: .lint_docker
   variables:
     DF: ".docker/app/Dockerfile"
+  except:
+    - tags
 
 build:
   stage: build
@@ -37,6 +40,8 @@ build:
   services:
     - name: harbor.k8s.temple.edu/gitlab-ci/docker:20-dind
       command: ["--tls=false"]
+  except:
+    - tags
 
 scan:
   stage: scan
@@ -44,14 +49,20 @@ scan:
   allow_failure: false
   variables:
     THRESHOLD: 10
+  except:
+    - tags
 
 tag:
   stage: tag
   extends: .tag_image
+  except:
+    - tags
 
 qa_deploy:
   variables:
     IMAGE: harbor.k8s.temple.edu/tulibraries/tupress
+    RANCHER: rancher-np
+    CLUSTER: dev-library
   stage: deploy
   extends: .helm_setup
   only:
@@ -65,14 +76,13 @@ qa_deploy:
 prod_deploy:
   variables:
     IMAGE: harbor.k8s.temple.edu/tulibraries/tupress
-    CLUSTER: prod-library
     RANCHER: rancher
+    CLUSTER: prod-library
   stage: deploy
   extends: .helm_setup
   only:
     - tags
   script:
-    - *export_variables
     - helm repo add tulibraries https://$HARBOR/chartrepo/tulibraries
     - helm pull tulibraries/tupress --version 0.2.0 --untar
     - helm upgrade tupress ./tupress --values ./tupress/values-prod.yaml --history-max 5 --namespace tupress-prod --set image.repository=$IMAGE:$CI_COMMIT_TAG
