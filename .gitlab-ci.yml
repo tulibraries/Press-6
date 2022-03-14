@@ -85,6 +85,7 @@ prod_deploy:
     - export RANCHER=rancher
     - echo "Cluster is $CLUSTER"
     - echo "Rancher is $RANCHER"
+    - cat $KUBECONFIG
     - helm repo add tulibraries https://$HARBOR/chartrepo/tulibraries
     - helm pull tulibraries/tupress --version 0.2.0 --untar
     - helm upgrade tupress ./tupress --values ./tupress/values-prod.yaml --history-max 5 --namespace tupress-prod --set image.repository=$IMAGE:latest
