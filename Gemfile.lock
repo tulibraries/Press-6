@@ -491,7 +491,7 @@ DEPENDENCIES
   rails (~> 6.1.4.7)
   rails-controller-testing
   rspec-activemodel-mocks
-  rspec-rails (~> 4.0.1)
+  rspec-rails
   rubocop
   rubocop-rails
   selenium-webdriver

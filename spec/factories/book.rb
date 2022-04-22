@@ -11,7 +11,7 @@ FactoryBot.define do
     news_text { "This is news text." }
     hot { false }
     course_adoption { false }
-    subjects { '[{ "subject_id":1032, "subject_title":"The Subject of John" }]' }
+    subjects { '[{ "subject_id":1032, "subject_title":"American Studies" }]' }
     subject1 { FactoryBot.create(:subject) }
     label_1 { "Google"  }
     link_1 { "http://google.com"  }
@@ -30,6 +30,8 @@ FactoryBot.define do
     edition { "2nd Edition" }
     add_to_news { false }
     isbn { "123456789" }
+    sort_year { "2022"}
+    sort_title { "John" }
 
     trait :with_cover_image do
       after :create do |book|
