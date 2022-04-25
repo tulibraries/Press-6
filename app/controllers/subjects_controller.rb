@@ -25,7 +25,7 @@ class SubjectsController < ApplicationController
   end
 
  private
-    def set_subject
-      @subject = find_instance
-    end
+   def set_subject
+     @subject = find_instance
+   end
 end

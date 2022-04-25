@@ -30,7 +30,7 @@ FactoryBot.define do
     edition { "2nd Edition" }
     add_to_news { false }
     isbn { "123456789" }
-    sort_year { "2022"}
+    sort_year { "2022" }
     sort_title { "John" }
 
     trait :with_cover_image do
