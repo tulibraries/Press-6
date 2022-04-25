@@ -1,3 +1,5 @@
+# busybox and ssl_client can be removed once alpine image update resolves them
+
 # For circleci this arg gets overridden by value in the .env file.
 ARG BASE_IMAGE_NAME="harbor.k8s.temple.edu/library/ruby:3.1.0-alpine" \
   RAILS_MASTER_KEY=foobar \
@@ -16,6 +18,8 @@ RUN apk add -U --no-cache \
       bash=5.1.16-r0 \
       libxslt=1.1.35-r0 \
       tzdata=2022a-r0 \
+      busybox=1.34.1-r5 \      
+      ssl_client=1.34.1-r5 \
       mariadb-connector-c=3.1.13-r2 \
       imagemagick=7.1.0.16-r0 \
       shared-mime-info=2.1-r0 && \
