@@ -81,8 +81,8 @@ class Book < ApplicationRecord
       if tuple[:pub_date].present?
         date = tuple[:pub_date].split(" ")
 
-        (date[1].to_i < 99 && date[1].to_i > 22) ?  # remove after initial run and replace with "unless self.sort_year.present?"
-          self.sort_year = "19#{date[1]}" : # remove after initial run
+        (date[1].to_i < 99 && date[1].to_i > 22) ?  # [TODO] remove after initial run and replace with "unless self.sort_year.present?"
+          self.sort_year = "19#{date[1]}" : # [TODO] remove after initial run
           self.sort_year = "20#{date[1]}"
 
         self.sort_month = date[0]
