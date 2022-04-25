@@ -6,7 +6,7 @@ module BooksHelper
     when "PB"
       "Paperback"
     when "HC"
-      "Hard Cover"
+      "Hardcover"
     when "Ebook"
       "eBook"
     else
