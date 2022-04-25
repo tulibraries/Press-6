@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem "rails", "~> 6.1.4.7"
 
 gem "mysql2", "~> 0.5.3"
-gem "puma", "~> 4.3"
+gem "puma", "~> 4.3.12"
 gem "webpacker", "~> 5.0"
 gem "turbolinks", "~> 5"
 gem "jbuilder", "~> 2.7"
@@ -47,8 +47,6 @@ group :development, :test do
   gem "pry"
   gem "pry-rails"
   gem "pry-byebug"
-  gem "rspec-activemodel-mocks"
-  gem "rspec-rails", "~> 4.0.1"
 end
 
 group :development do
@@ -67,6 +65,8 @@ group :test do
   gem "simplecov"
   gem "simplecov-lcov"
   gem "shoulda-matchers", "~> 4.0"
+  gem "rspec-rails"
+  gem "rspec-activemodel-mocks"
   gem "orderly"
 end
 

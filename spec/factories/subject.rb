@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :subject do
-    title { "The Subject of John" }
+    title { "American Studies" }
     slug { "slug" }
     code  { "1032" }
 
