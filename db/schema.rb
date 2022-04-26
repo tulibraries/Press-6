@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2022_03_03_135111) do
 
   create_table "authors", charset: "utf8mb3", force: :cascade do |t|
     t.string "author_id"
-    t.text "title"
+    t.string "title"
     t.string "first_name"
     t.string "last_name"
     t.string "prefix"
@@ -250,12 +250,6 @@ ActiveRecord::Schema.define(version: 2022_03_03_135111) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "forms", charset: "utf8mb3", force: :cascade do |t|
-    t.string "title"
-    t.bigint "book_id_id", null: false
-    t.index ["book_id_id"], name: "index_forms_on_book_id_id"
-  end
-
   create_table "friendly_id_slugs", charset: "utf8mb3", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -333,8 +327,9 @@ ActiveRecord::Schema.define(version: 2022_03_03_135111) do
     t.string "region"
     t.string "website"
     t.boolean "is_rep", default: false
-    t.text "slug"
+    t.string "slug"
     t.index ["document_id"], name: "index_people_on_document_id"
+    t.index ["slug"], name: "index_people_on_slug", unique: true
   end
 
   create_table "promotions", charset: "utf8mb3", force: :cascade do |t|
@@ -359,14 +354,15 @@ ActiveRecord::Schema.define(version: 2022_03_03_135111) do
     t.string "code"
     t.string "title"
     t.string "editors"
+    t.text "description"
     t.string "founder"
     t.string "image_link"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "book_id"
-    t.text "slug"
-    t.text "description"
+    t.string "slug"
     t.index ["book_id"], name: "index_series_on_book_id"
+    t.index ["slug"], name: "index_series_on_slug", unique: true
   end
 
   create_table "special_offer_books", charset: "utf8mb3", force: :cascade do |t|
@@ -417,10 +413,8 @@ ActiveRecord::Schema.define(version: 2022_03_03_135111) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "slug"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
   create_table "webpages", charset: "utf8mb3", force: :cascade do |t|
@@ -432,7 +426,9 @@ ActiveRecord::Schema.define(version: 2022_03_03_135111) do
   end
 
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "books", "special_offers"
   add_foreign_key "brochures", "catalogs"
+  add_foreign_key "brochures", "subjects"
   add_foreign_key "documents", "people"
   add_foreign_key "people", "documents"
   add_foreign_key "series", "books"
