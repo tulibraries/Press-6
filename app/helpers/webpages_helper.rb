@@ -8,6 +8,13 @@ module WebpagesHelper
       ((image_pack_tag "default-book-cover-index.png") if homepage.present?)
   end
 
+  def hot_cover(book)
+    book.cover_image.attached? ?
+      (image_tag book.custom_image("cover_image", 180, 280), class: "news-image")
+      :
+      (image_pack_tag "default-book-cover-index.png", class: "news-image")
+  end
+
   def news_image(model)
     unless model.class.to_s == "Event"
       model.class.to_s == "Book" ? hot_cover(model) : (image_tag model.image, class: "news-image")
