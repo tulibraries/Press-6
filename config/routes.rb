@@ -83,4 +83,7 @@ Rails.application.routes.draw do
 
   get "forms", to: "forms#index", as: "forms_index"
   get "forms/*type", to: "forms#new", as: "form"
+
+  get "promotions", to: "special_offers#index"
+  get "promotions/:id", to: "special_offers#index"
 end
