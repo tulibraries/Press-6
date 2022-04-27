@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Media Inquiries", type: :request do
+RSpec.describe "Inquiries", type: :request do
 
   let(:form_type) { "inquiries" }
   let(:form_params) {

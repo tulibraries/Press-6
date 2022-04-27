@@ -49,7 +49,7 @@ class Form < MailForm::Base
   attribute :publication_date
   attribute :rights_requested
 
-  # media-inquiries
+  # inquiries
   attribute :e_catalog
   attribute :print_catalog
   attribute :add_to_mailing_list
@@ -63,7 +63,7 @@ class Form < MailForm::Base
       "review-copy" => ["Request a Review Copy", ["tempress@temple.edu"]],
       "copy-request" => ["Request a Desk or Exam Copy", ["tempress@temple.edu"]],
       "rights-permissions" => ["Rights &amp; Permissions", ["tempress@temple.edu"]],
-      "media-inquiries" => ["Media Inquiries", ["tempress@temple.edu"]]
+      "inquiries" => ["Inquiries", ["tempress@temple.edu"]]
     }
     @forms.fetch(form_type)
   end

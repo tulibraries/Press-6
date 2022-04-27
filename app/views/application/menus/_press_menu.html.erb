@@ -5,6 +5,7 @@
   <li><%= link_to t("tupress.default.menu.press_info.agents"), agencies_path, :class=>"dropdown-item" %></li>
   <%= %Q(<li>#{link_to t("tupress.default.menu.press_info.submissions"), webpage_path(@submissions), :class=>"dropdown-item"}</li>).html_safe if @submissions.present? %>
   <%= %Q(<li>#{link_to t("tupress.default.menu.press_info.presses"), webpage_path(@about_u_presses), :class=>"dropdown-item"}</li>).html_safe if @about_u_presses.present? %>
+  <li><%= link_to t("tupress.default.menu.press_info.inquiries"), root_path+["forms", "inquiries"].join("/"), :class=>"dropdown-item" %></li>
   <li><%= link_to t("tupress.default.menu.press_info.zane_miller"), "/webpages/zane-miller-award", :class=>"dropdown-item" %></li>
   <li><%= link_to t("tupress.default.menu.press_info.download"), documents_path, :class=>"dropdown-item" %></li>
   <li><%= link_to t("tupress.default.menu.press_info.faq"), faqs_path, :class=>"dropdown-item" %></li>

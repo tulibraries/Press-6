@@ -55,6 +55,7 @@ en:
           agents: Foreign Rights Agents
           submissions: Submissions
           presses: About University Presses
+          inquiries: Inquiries
           zane_miller: Zane Miller Award
           download: Download Documents
           faq: FAQs
@@ -67,7 +68,6 @@ en:
           reps: Sales Representatives
         events:
           title: News & Events
-          inquiries: Media Inquiries
           blog: North Philly Notes
           podcast: Podcast
           podcast_link: https://spoti.fi/3q4KzZd
@@ -219,8 +219,8 @@ en:
         new_and_special_news: Add to New & Special Events
         subjects: Subject Interested In
 
-      media-inquiries:
-        title: Media Inquiries
+      inquiries:
+        title: Inquiries
         prefix_html: >-
           <p>To order, please call 1-800-621-2736 or fax 1-800-621-8476.</p>
           <p>If you want to send us a message, fill out the following form. You can also call 215-204-8787 or write to:</p>
