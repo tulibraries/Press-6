@@ -64,7 +64,7 @@ group :test do
   gem "rails-controller-testing"
   gem "simplecov"
   gem "simplecov-lcov"
-  gem "shoulda-matchers", "~> 4.0"
+  gem "shoulda-matchers", "~> 5.1"
   gem "rspec-rails"
   gem "rspec-activemodel-mocks"
   gem "orderly"
