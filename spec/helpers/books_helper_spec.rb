@@ -20,15 +20,6 @@ RSpec.describe BooksHelper, type: :helper do
       end
     end
 
-    describe "homepage covers for forthcoming section" do
-      it "returns the cover when attached" do
-        expect(helper.hot_cover(book_with_cover)).to include("charles")
-      end
-      it "returns the default cover when no cover attached" do
-        expect(helper.hot_cover(book)).to include("default-book-cover-index")
-      end
-    end
-
     describe "view formatting" do
       it "handles both subtitle and editions" do
         expect(helper.sub_ed(book)).to eq("<p><em>#{book.subtitle}<br />#{book.edition}</em></p>")
