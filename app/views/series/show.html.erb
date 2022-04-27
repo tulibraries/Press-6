@@ -10,7 +10,7 @@
 
 <div class="row mb-5">
   <div class="col<%= "-9" if @series.image.attached? %>">
-    <%= @series.description.html_safe if @series.description.present? %>
+    <%= Nokogiri::HTML5.fragment(@series.description).html_safe if @series.description.present? %>
   </div>
   <% if @series.image.attached? %>
   <div class="col-3">

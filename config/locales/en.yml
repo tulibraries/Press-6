@@ -56,6 +56,7 @@ en:
           submissions: Submissions
           presses: About University Presses
           inquiries: Inquiries
+          zane_miller: Zane Miller Award
           download: Download Documents
           faq: FAQs
         orders:
@@ -384,6 +385,6 @@ en:
       index_title: Subjects
     webpages:
       index:
-        forthcoming: New & Forthcoming
+        forthcoming: Hot off the Press!
         news: In the News
-        philly: Books on the Philadelphia Region
+        philly: Books about Philadelphia

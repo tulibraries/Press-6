@@ -23,7 +23,7 @@ gem "bootsnap", ">= 1.4.2", require: false
 gem "aws-sdk-s3", require: false
 gem "active_storage_validations"
 gem "kaminari"
-gem "administrate-field-date_picker", "~> 0.2.0"
+gem "administrate-field-date_picker", "~> 0.3.0"
 gem "meta-tags"
 gem "activestorage-validator"
 gem "friendly_id"
@@ -64,7 +64,7 @@ group :test do
   gem "rails-controller-testing"
   gem "simplecov"
   gem "simplecov-lcov"
-  gem "shoulda-matchers", "~> 4.0"
+  gem "shoulda-matchers", "~> 5.1"
   gem "rspec-rails"
   gem "rspec-activemodel-mocks"
   gem "orderly"
