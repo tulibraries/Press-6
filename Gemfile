@@ -23,7 +23,7 @@ gem "bootsnap", ">= 1.4.2", require: false
 gem "aws-sdk-s3", require: false
 gem "active_storage_validations"
 gem "kaminari"
-gem "administrate-field-date_picker", "~> 0.2.0"
+gem "administrate-field-date_picker", "~> 0.3.0"
 gem "meta-tags"
 gem "activestorage-validator"
 gem "friendly_id"

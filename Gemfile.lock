@@ -79,10 +79,10 @@ GEM
       momentjs-rails (~> 2.8)
       sassc-rails (~> 2.1)
       selectize-rails (~> 0.6)
-    administrate-field-date_picker (0.2.0)
+    administrate-field-date_picker (0.3.0)
       administrate (< 1.0.0)
       flatpickr_rails (>= 0.0.2, < 1.2.0)
-      rails (>= 4.2, < 7)
+      rails (>= 4.2, < 8)
     administrate-field-ordered_has_many (0.1.0)
       administrate
       rails (>= 5.0)
@@ -452,7 +452,7 @@ DEPENDENCIES
   active_storage_validations
   activestorage-validator
   administrate (>= 0.16.0)
-  administrate-field-date_picker (~> 0.2.0)
+  administrate-field-date_picker (~> 0.3.0)
   administrate-field-ordered_has_many
   administrate-field-scoped_has_many
   aws-sdk-s3
