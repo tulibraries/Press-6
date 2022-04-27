@@ -23,6 +23,15 @@ RSpec.describe WebpagesHelper, type: :helper do
     end
   end
 
+  describe "homepage covers for forthcoming section" do
+    it "returns the cover when attached" do
+      expect(helper.hot_cover(book)).to include("charles")
+    end
+    it "returns the default cover when no cover attached" do
+      expect(helper.hot_cover(book_no_image)).to include("default-book-cover-index")
+    end
+  end
+
   describe "displays news images" do
     it "returns image from book model" do
       expect(helper.news_image(book)).to include("charles")
@@ -38,18 +47,6 @@ RSpec.describe WebpagesHelper, type: :helper do
     end
     it "returns default image when model image nil" do
       expect(helper.news_image(book_no_image)).to include("default-book-cover-index")
-    end
-  end
-
-  describe "displays news text" do
-    it "returns news text from book model" do
-      expect(helper.news_text(book)).to eq(book.news_text)
-    end
-    it "returns image from event model" do
-      expect(helper.news_text(event)).to eq(event.news_text)
-    end
-    it "returns image from news_item model" do
-      expect(helper.news_text(news_item)).to eq(news_item.description)
     end
   end
 

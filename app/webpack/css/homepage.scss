@@ -53,15 +53,23 @@
     margin-top: 7px;
     color: $red;
   }
-  img {
-    height: 300px;
-    max-width: 200px;
-  }
   a {
-    display: block;
     font-weight: 600;
     margin-top: 7px;
+    width: 100%;
   }
+  .new-image-holder {
+    width: 100%;
+    height: 360px;
+    display: table-cell;
+    vertical-align: middle;
+  }
+  .news-image {
+    width: 235px;
+    max-width: 235px;
+    display: block;
+    margin: auto;
+  } 
 }
 
 #news {
@@ -89,10 +97,10 @@
         width: 100%;
       }
       .news-image {
-        height: 200px;
-        max-width: 140px;
+        width: 180px;
+        max-width: 180px;
         margin: auto;
-      }
+      } 
     }
     .right {
       padding-left: 28px;
