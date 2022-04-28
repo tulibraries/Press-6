@@ -25,6 +25,7 @@ en:
           label: Conferences
         bookseller_info:
           label: Resources for Booksellers
+          slug: resources-for-booksellers
         author_info:
           label: Resources for Authors
           slug: resources-for-authors

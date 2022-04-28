@@ -97,6 +97,7 @@ class BookDashboard < Administrate::BaseDashboard
     award_year2: Field::String,
     award_year3: Field::String,
     featured_award_winner: Field::Boolean,
+    featured_award_weight: Field::Number,
     price: Field::String.with_options(searchable: false),
     qa: FileField,
     created_at: Field::DateTime,
@@ -146,6 +147,7 @@ class BookDashboard < Administrate::BaseDashboard
     subject2
     subject3
     featured_award_winner
+    featured_award_weight
     award_year
     award
     award_year2

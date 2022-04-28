@@ -10,7 +10,7 @@ module Admin
       @tab_content = {}
       @tab_content["book"] = ["xml_id", "slug", "sort_title", "author_byline", "edition", "status", "cover_image", "cover", "excerpt_file", "excerpt_text", "toc_file", "qa_label", "qa", "supplement", "suggested_reading_image", "suggested_reading_label", "desk_copy"]
       @tab_content["subjects"] = ["subject1", "subject2", "subject3"]
-      @tab_content["awards"] = ["featured_award_winner", "award_year", "award", "award_year2", "award2", "award_year3", "award3"]
+      @tab_content["awards"] = ["featured_award_winner", "featured_award_weight", "award_year", "award", "award_year2", "award2", "award_year3", "award3"]
       @tab_content["guide"] = ["active_guide", "guide_file", "guide_file_label", "guide_text"]
       @tab_content["homepage"] = ["hot", "hotweight", "add_to_news", "newsweight", "news_text", "course_adoption"]
       @tab_content["special_offers"] = ["special_offers"]
