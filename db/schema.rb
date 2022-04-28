@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_03_135111) do
+ActiveRecord::Schema.define(version: 2022_04_28_130938) do
 
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -160,6 +160,7 @@ ActiveRecord::Schema.define(version: 2022_03_03_135111) do
     t.string "slug"
     t.string "sort_year"
     t.string "sort_month"
+    t.integer "featured_award_weight"
     t.index ["catalog_id"], name: "index_books_on_catalog_id"
     t.index ["promotion_id"], name: "index_books_on_promotion_id"
     t.index ["series_id"], name: "index_books_on_series_id"

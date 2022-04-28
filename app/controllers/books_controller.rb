@@ -68,12 +68,19 @@ class BooksController < ApplicationController
 
     @awards_by_subject = subjects.compact!
 
-    @recent_winners = books_with_awards
-                        .select { |b| show_status.include?(b.status) }
-                        .select { |b| b.featured_award_winner == true }
-                        .sort_by { |b| b.award_year }
-                        .uniq
-                        .take(4)
+    recent_winners = books_with_awards
+                      .select { |b| show_status.include?(b.status) }
+                      .select { |b| b.featured_award_winner == true }
+                      .sort_by { |b| b.award_year }
+                      .uniq
+                      .take(4)
+
+    first_position = recent_winners.select { |b| b.featured_award_weight == 1 }.sort_by{ |b| b.updated_at }.take(1).first
+    second_position = recent_winners.select { |b| b.featured_award_weight == 2 }.sort_by{ |b| b.updated_at }.take(1).first
+    third_position = recent_winners.select { |b| b.featured_award_weight == 3 }.sort_by{ |b| b.updated_at }.take(1).first
+    fourth_position = recent_winners.select { |b| b.featured_award_weight == 4 }.sort_by{ |b| b.updated_at }.take(1).first
+
+    @recent_winners = [first_position, second_position, third_position, fourth_position].compact!
   end
 
   def awards_by_year
