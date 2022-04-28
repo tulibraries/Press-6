@@ -4,8 +4,6 @@ require "rails_helper"
 
 RSpec.describe BooksController, type: :controller do
   let(:book) { FactoryBot.create(:book, :with_cover_image, title: "A Formation") }
-  let(:book2) { FactoryBot.create(:book, :with_cover_image, title: "Z Formation", award_year: "2019") }
-  let(:book3) { FactoryBot.create(:book, :with_cover_image, title: "200 Years of Latino History in Philadelphia", award_year: "2018") }
 
   render_views
 
