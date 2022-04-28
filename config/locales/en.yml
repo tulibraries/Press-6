@@ -28,6 +28,7 @@ en:
           slug: resources-for-booksellers
         author_info:
           label: Resources for Authors
+          slug: resources-for-authors
         books: 
           title: Books
           awards: Award Winning titles

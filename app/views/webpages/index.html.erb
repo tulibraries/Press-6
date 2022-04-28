@@ -9,7 +9,7 @@
 <div class="row px-3">
   <div class="col-12 col-lg-3 mt-4" id="left-home-menu">
     <ul class="list-unstyled px-3 pr-lg-0">
-      <li><%= link_to t("tupress.default.menu.author_info.label"), "#" %></li>
+      <li><%= link_to t("tupress.default.menu.author_info.label"), webpage_path(t("tupress.default.menu.author_info.slug")) %></li>
       <li><%= link_to t("tupress.default.menu.bookseller_info.label"), webpage_path(t("tupress.default.menu.bookseller_info.slug")) %></li>
       <li><%= link_to t("tupress.default.menu.conferences.label"), conferences_path %></li>
       <li><%= link_to t("tupress.default.menu.special_offers.label"), special_offers_path %></li>
