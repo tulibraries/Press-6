@@ -4,7 +4,7 @@
 class CreateActiveStorageTables < ActiveRecord::Migration[5.2]
   def change
     create_table :active_storage_blobs do |t|
-      t.string   :key,        null: false
+      t.string   :key,        null: false, type: :bigint
       t.string   :filename,   null: false
       t.string   :content_type
       t.text     :metadata
@@ -17,7 +17,7 @@ class CreateActiveStorageTables < ActiveRecord::Migration[5.2]
 
     create_table :active_storage_attachments do |t|
       t.string     :name,     null: false
-      t.references :record,   null: false, polymorphic: true, index: false
+      t.references :record,   null: false, type: :bigint, polymorphic: true, index: false
       t.references :blob,     null: false, type: :bigint
 
       t.datetime :created_at, null: false
