@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem "rails", "~> 6.1.4.7"
+gem "rails", "~> 6.1.5.1"
 
 gem "mysql2", "~> 0.5.3"
 gem "puma", "~> 5.6.4"
