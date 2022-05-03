@@ -142,8 +142,16 @@ class RichText {
     this.buttonGroupBlockTools.removeChild(this.originalHeadingButton)
   }
 
+  removeOriginalCodeButton() {
+    this.buttonGroupBlockTools.removeChild(this.originalCodeButton)
+  }
+
   insertNewHeadingButton() {
     this.buttonGroupBlockTools.insertAdjacentHTML("afterbegin", this.headingButtonTemplate)
+  }
+
+  insertNewCodeButton() {
+    this.buttonGroupTextTools.insertAdjacentHTML("beforeend", this.codeButtonTemplate)
   }
 
   insertHeadingDialog() {
@@ -170,6 +178,10 @@ class RichText {
     return this.toolbarElement.querySelector("[data-trix-attribute=heading1]")
   }
 
+  get originalCodeButton() {
+    return this.toolbarElement.querySelector("[data-trix-attribute=code]")
+  }
+
   get quoteButton() {
     return this.toolbarElement.querySelector("[data-trix-attribute=quote]")
   }
@@ -184,6 +196,10 @@ class RichText {
 
   get headingButtonTemplate() {
     return '<button type="button" class="trix-button trix-button--icon trix-button--icon-heading-1" data-trix-action="x-heading" title="Heading" tabindex="-1">Heading</button>'
+  }
+
+  get codeButtonTemplate() {
+    return '<button type="button" class="trix-button" data-trix-action="code" title="code" tabindex="-1">Gold</button>'
   }
 
   get dialogHeadingTemplate() {
