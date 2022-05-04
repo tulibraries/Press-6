@@ -394,15 +394,22 @@ class CreateStructure < ActiveRecord::Migration[6.1]
     add_index :action_text_rich_texts, %i[record_type record_id name], name: "index_action_text_rich_texts_uniqueness", unique: true
     add_index :active_storage_attachments, %i[record_type record_id name blob_id], name: "index_active_storage_attachments_uniqueness", unique: true
     add_index :active_storage_blobs, [:key], unique: true
-    add_index :books, :series_id
-    add_index :books, :catalog_id
-    add_index :catalog_brochures, :brochure_id
-    add_index :catalog_brochures, :catalog_id
-    add_index :special_offer_books, :special_offer_id
-    add_index :special_offer_books, :book_id
-    add_index :subject_brochures, :brochure_id, unique: true
-    add_index :subject_brochures, :subject_id, unique: true
-
+    change_table :books, bulk: true do |t|
+      t.index :series_id
+      t.index :catalog_id
+    end
+    change_table :catalog_brochures, bulk: true do |t|
+      t.index :brochure_id
+      t.index :catalog_id
+    end
+    change_table :special_offer_books, bulk: true do |t|
+      t.index :special_offer_id
+      t.index :book_id
+    end
+    change_table :subject_brochures, bulk: true do |t|
+      t.index :brochure_id, unique: true
+      t.index :subject_id, unique: true
+    end
     add_index :friendly_id_slugs, [:sluggable_type, :sluggable_id]
     add_index :friendly_id_slugs, [:slug, :sluggable_type], length: { slug: 140, sluggable_type: 50 }
     add_index :friendly_id_slugs, [:slug, :sluggable_type, :scope], length: { slug: 70, sluggable_type: 50, scope: 70 }, unique: true
