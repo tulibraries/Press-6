@@ -127,15 +127,16 @@ addEventListener("trix-initialize", event => {
 class RichText {
   constructor(element) {
     this.element = element
-
-    this.insertHeadingElements()
+    this.insertNewElements()
     this.insertDividerElements()
   }
 
-  insertHeadingElements() {
+  insertNewElements() {
     this.removeOriginalHeadingButton()
     this.insertNewHeadingButton()
     this.insertHeadingDialog()
+    this.removeOriginalCodeButton()
+    this.insertNewCodeButton()
   }
 
   removeOriginalHeadingButton() {
@@ -199,7 +200,7 @@ class RichText {
   }
 
   get codeButtonTemplate() {
-    return '<button type="button" class="trix-button" data-trix-action="code" title="code" tabindex="-1">Gold</button>'
+    return '<button type="button" class="trix-button" data-trix-attribute="code" title="code" tabindex="-1">Gold</button>'
   }
 
   get dialogHeadingTemplate() {
