@@ -12,8 +12,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.bigint   :byte_size,    null: false
         t.string   :checksum,     null: false
         t.datetime :created_at,   null: false
-
-        t.index [:key], unique: true
       end
     end
 
@@ -22,8 +20,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.belongs_to :blob, null: false, index: false, type: :bigint
         t.string :variation_digest, null: false
 
-        t.foreign_key :active_storage_blobs, column: :blob_id
-        t.index %i[ blob_id variation_digest ], name: "index_active_storage_variant_records_uniqueness", unique: true
         t.timestamps
       end
     end
@@ -34,8 +30,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.references :record,   null: false, polymorphic: true, index: false
         t.references :blob,     null: false
 
-        t.foreign_key :active_storage_blobs, column: :blob_id
-        t.index %i[record_type record_id name blob_id], name: "index_active_storage_attachments_uniqueness", unique: true
         t.datetime :created_at, null: false
       end
     end
@@ -44,9 +38,8 @@ class CreateStructure < ActiveRecord::Migration[6.1]
       create_table :action_text_rich_texts do |t|
         t.string     :name, null: false
         t.text       :body, size: :long
-
         t.references :record, null: false, polymorphic: true, index: false
-        t.index %i[record_type record_id name], name: "index_action_text_rich_texts_uniqueness", unique: true
+
         t.timestamps
       end
     end
@@ -62,7 +55,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.string :email
         t.string :website
 
-        t.index :slug, unique: true
         t.timestamps
       end
     end
@@ -78,7 +70,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.string :suffix
         t.boolean :suppress, default: false
 
-        t.index :slug, unique: true
         t.timestamps
       end
     end
@@ -160,11 +151,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.string :label_9
         t.string :label_10
 
-        t.reference :special_offer, foreign_key: true
-        t.index :series_id
-        t.index :catalog_id
-
-        t.index :slug, unique: true
         t.timestamps
       end
     end
@@ -175,10 +161,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.string :title
         t.boolean :promoted_to_homepage
 
-        t.reference :catalog, foreign_key: true
-        t.reference :subject, foreign_key: true
-
-        t.index :slug, unique: true
         t.timestamps
       end
     end
@@ -192,7 +174,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.string :year
         t.boolean :suppress
 
-        t.index :slug, unique: true
         t.timestamps
       end
     end
@@ -202,8 +183,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.integer :brochure_id
         t.integer :catalog_id
 
-        t.index :brochure_id
-        t.index :catalog_id
         t.timestamps
       end
     end
@@ -220,7 +199,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.string :location
         t.string :booth
 
-        t.index :slug, unique: true
         t.timestamps
       end
     end
@@ -233,8 +211,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.string :contact_email
         t.string :document_type
 
-        t.reference :person, foreign_key: true
-        t.index :slug, unique: true
         t.timestamps
       end
     end
@@ -250,7 +226,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.string :location
         t.boolean :add_to_news
 
-        t.index :slug, unique: true
         t.timestamps
       end
     end
@@ -259,8 +234,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
       create_table :faqs do |t|
         t.string :title
         t.string :slug
-
-        t.index :slug, unique: true
         t.timestamps
       end
     end
@@ -273,7 +246,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.boolean :promote_to_homepage
         t.string :link
 
-        t.index :slug, unique: true
         t.timestamps
       end
     end
@@ -284,7 +256,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.string :title
         t.string :url
 
-        t.index :slug, unique: true
         t.timestamps
       end
     end
@@ -296,7 +267,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.string :link
         t.boolean :promote_to_homepage
 
-        t.index :slug, unique: true
         t.timestamps
       end
     end
@@ -316,7 +286,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.string :epub_link
         t.string :manifold
 
-        t.index :slug, unique: true
         t.timestamps
       end
     end
@@ -339,8 +308,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.string :website
         t.boolean :is_rep, default: false
 
-        t.reference :document, foreign_key: true
-        t.index :slug, unique: true
         t.timestamps
       end
     end
@@ -366,8 +333,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.string  :founder
         t.string  :image_link
 
-        t.reference :book, foreign_key: true
-        t.index :slug, unique: true
         t.timestamps
       end
     end
@@ -379,8 +344,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.string :pdf_display_name
         t.boolean :active
 
-        t.reference :book, foreign_key: true
-        t.index :slug, unique: true
         t.timestamps
       end
     end
@@ -390,8 +353,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.integer :special_offer_id
         t.integer :book_id
 
-        t.index :special_offer_id
-        t.index :book_id
         t.timestamps
       end
     end
@@ -403,7 +364,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.string :title
         t.string :file_label
 
-        t.index :slug, unique: true
         t.timestamps
       end
     end
@@ -413,8 +373,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.integer :brochure_id
         t.integer :subject_id
 
-        t.index :brochure_id, unique: true
-        t.index :subject_id, unique: true
         t.timestamps
       end
     end
@@ -423,8 +381,6 @@ class CreateStructure < ActiveRecord::Migration[6.1]
       create_table :webpages do |t|
         t.string :slug
         t.string :title
-
-        t.index :slug, unique: true
         t.timestamps
       end
     end
@@ -476,11 +432,64 @@ class CreateStructure < ActiveRecord::Migration[6.1]
         t.string   :sluggable_type, limit: 50
         t.string   :scope
         t.datetime :created_at
-
-        t.index [:sluggable_type, :sluggable_id]
-        t.index [:slug, :sluggable_type], length: { slug: 140, sluggable_type: 50 }
-        t.index [:slug, :sluggable_type, :scope], length: { slug: 70, sluggable_type: 50, scope: 70 }, unique: true
       end
     end
+
+    add_foreign_key :active_storage_attachments, :active_storage_blobs, column: :blob_id
+    add_foreign_key :active_storage_variant_records, :active_storage_blobs, column: :blob_id
+
+    add_reference :special_offers, :book, foreign_key: true
+    add_reference :books, :special_offer, foreign_key: true
+    add_reference :brochures, :catalog, foreign_key: true
+    add_reference :brochures, :subject, foreign_key: true
+    add_reference :documents, :person, foreign_key: true
+    add_reference :people, :document, foreign_key: true
+    add_reference :series, :book, foreign_key: true
+
+    add_index :active_storage_variant_records, %i[ blob_id variation_digest ], name: "index_active_storage_variant_records_uniqueness", unique: true
+    add_index :action_text_rich_texts, %i[record_type record_id name], name: "index_action_text_rich_texts_uniqueness", unique: true
+    add_index :active_storage_attachments, %i[record_type record_id name blob_id], name: "index_active_storage_attachments_uniqueness", unique: true
+    add_index :active_storage_blobs, [:key], unique: true
+
+    change_table :books, bulk: true do |t|
+      t.index :series_id
+      t.index :catalog_id
+    end
+    change_table :catalog_brochures, bulk: true do |t|
+      t.index :brochure_id
+      t.index :catalog_id
+    end
+    change_table :special_offer_books, bulk: true do |t|
+      t.index :special_offer_id
+      t.index :book_id
+    end
+    change_table :subject_brochures, bulk: true do |t|
+      t.index :brochure_id, unique: true
+      t.index :subject_id, unique: true
+    end
+    change_table :friendly_id_slugs, bulk: true do |t|
+      t.index [:sluggable_type, :sluggable_id]
+      t.index [:slug, :sluggable_type], length: { slug: 140, sluggable_type: 50 }
+      t.index [:slug, :sluggable_type, :scope], length: { slug: 70, sluggable_type: 50, scope: 70 }, unique: true
+    end
+
+    add_index :agencies, :slug, unique: true
+    add_index :authors, :slug, unique: true
+    add_index :books, :slug, unique: true
+    add_index :brochures, :slug, unique: true
+    add_index :catalogs, :slug, unique: true
+    add_index :conferences, :slug, unique: true
+    add_index :documents, :slug, unique: true
+    add_index :events, :slug, unique: true
+    add_index :faqs, :slug, unique: true
+    add_index :highlights, :slug, unique: true
+    add_index :journals, :slug, unique: true
+    add_index :news_items, :slug, unique: true
+    add_index :oabooks, :slug, unique: true
+    add_index :people, :slug, unique: true
+    add_index :series, :slug, unique: true
+    add_index :special_offers, :slug, unique: true
+    add_index :subjects, :slug, unique: true
+    add_index :webpages, :slug, unique: true
   end
 end
