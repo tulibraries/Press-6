@@ -221,8 +221,8 @@ ActiveRecord::Schema.define(version: 2022_05_04_135058) do
     t.string "document_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "person_id"
-    t.index ["person_id"], name: "index_documents_on_person_id"
+    t.bigint "documents_id"
+    t.index ["documents_id"], name: "index_documents_on_documents_id"
     t.index ["slug"], name: "index_documents_on_slug", unique: true
   end
 
@@ -423,7 +423,7 @@ ActiveRecord::Schema.define(version: 2022_05_04_135058) do
   add_foreign_key "books", "special_offers"
   add_foreign_key "brochures", "catalogs"
   add_foreign_key "brochures", "subjects"
-  add_foreign_key "documents", "people"
+  add_foreign_key "documents", "documents", column: "documents_id"
   add_foreign_key "people", "documents"
   add_foreign_key "series", "books"
   add_foreign_key "special_offers", "books"
