@@ -454,8 +454,8 @@ class CreateStructure < ActiveRecord::Migration[6.1]
     unless index_exists?(:brochures, :subject_id)
       add_reference :brochures, :subject, foreign_key: true
     end
-    unless index_exists?(:documents, :people_id)
-      add_reference :documents, :people, foreign_key: true
+    unless index_exists?(:documents, :person_id)
+      add_reference :documents, :person, foreign_key: true
     end
     unless index_exists?(:people, :document_id)
       add_reference :people, :document, foreign_key: true
