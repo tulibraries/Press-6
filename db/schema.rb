@@ -45,11 +45,11 @@ ActiveRecord::Schema.define(version: 2022_05_04_135058) do
   end
 
   create_table "active_storage_variant_records", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "blob_id", null: false
-    t.index ["variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "agencies", charset: "utf8mb3", force: :cascade do |t|
@@ -420,6 +420,7 @@ ActiveRecord::Schema.define(version: 2022_05_04_135058) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "books", "special_offers"
   add_foreign_key "brochures", "catalogs"
   add_foreign_key "brochures", "subjects"
