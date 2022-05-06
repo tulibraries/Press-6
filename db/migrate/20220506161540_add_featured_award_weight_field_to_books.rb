@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddFeaturedAwardWeightFieldToBooks < ActiveRecord::Migration[6.1]
   def change
     def change
