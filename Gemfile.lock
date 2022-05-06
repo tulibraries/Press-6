@@ -88,10 +88,10 @@ GEM
       rails (>= 5.0)
     administrate-field-scoped_has_many (0.2.0)
     ast (2.4.2)
-    autoprefixer-rails (10.4.2.0)
+    autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.583.0)
+    aws-partitions (1.584.0)
     aws-sdk-core (3.130.2)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
@@ -443,6 +443,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-darwin-20
 
 DEPENDENCIES
   active_storage_validations
@@ -504,4 +505,4 @@ DEPENDENCIES
   webpacker (~> 5.0)
 
 BUNDLED WITH
-   2.1.4
+   2.3.13
