@@ -8,26 +8,30 @@
     </div>
   </div>
 
-  <% if @catalog.pdf.attached? || @catalog.brochures.present? %>
   <div class="row">
-    <div class="col-2 mt-5">
-        <% if @catalog.pdf.attached? %>
-          <%= link_to "#{@catalog.title} [PDF]", @catalog.pdf.attachment, 
-                          class: "text-right text-lg-left mb-4 d-block",
-                          style: "text-decoration: underline;font-size: 1.25rem" %>
-        <% end %>
+  <% if @catalog.image.attached? || @catalog.pdf.attached? || @catalog.brochures.present? %>
+    <div class="col-2 mt-4">
+      <%= image_tag @catalog.thumb_image("image"), class: "mb-3" if @catalog.image.attached? %>
+      <% if @catalog.pdf.attached? %>
+        <%= link_to "#{@catalog.title} [PDF]", @catalog.pdf.attachment, 
+                        class: "text-right text-lg-left mb-4 d-block",
+                        style: "text-decoration: underline;font-size: 1.25rem" %>
+      <% end %>
 
-        <% @catalog.brochures.each do |brochure| %>
-          <%= link_to brochure.title, brochure.pdf.attachment, style: "text-decoration: underline;", class: "d-block mb-4 text-right text-lg-left" %>
-          <%= display_image(brochure) %>
-        <% end %>
+      <% @catalog.brochures.each do |brochure| %>
+        <%= link_to brochure.title, brochure.pdf.attachment, style: "text-decoration: underline;", class: "d-block mb-4 text-right text-lg-left" %>
+        <%= display_image(brochure) %>
+      <% end if @catalog.brochures.present? %>
+
     </div>
     <div class="col-10">
-    <% end %>
+  <% else %>
+    <div class="col-12">
+  <% end %>
 
       <%= render "books" %>
 
-    <% if @catalog.pdf.attached? || @catalog.brochures.present? %>
+    <% if @catalog.image.attached? || @catalog.pdf.attached? || @catalog.brochures.present? %>
     </div>
   </div>
   <% end %>
