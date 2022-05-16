@@ -10,6 +10,8 @@ class EventsController < ApplicationController
     @events = Event.where("end_date > ?", 1.month.ago)
                     .group_by { |event|
                       event.start_date.strftime("%Y%m")
-                    }.sort
+                    }.sort_by { |e|
+                      e.start_date.strftime("%d")
+                    }
   end
 end
