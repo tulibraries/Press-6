@@ -357,7 +357,6 @@ en:
           <p>If this request is for a reuse of material for which permission was previously granted, please 
           supply a copy of the previous permission agreement and any additional information regarding 
           the previous use.</p>
-
     oabooks:
       online_epub: Read it Online
       manifold_label: View Epub
@@ -385,6 +384,8 @@ en:
       title: "Study Guide for:"
     subjects:
       index_title: Subjects
+      sort_recent: "View most recent titles"
+      sort_alpha: "Sort Alphabetically"
     webpages:
       index:
         forthcoming: Hot off the Press!
