@@ -223,14 +223,6 @@ en:
 
       inquiries:
         title: Inquiries
-        prefix_html: >-
-          <p>To order, please call 1-800-621-2736 or fax 1-800-621-8476.</p>
-          <p>If you want to send us a message, fill out the following form. You can also call 215-204-8787 or write to:</p>
-          <p class="col col-md-12 offset-md-1" style="font-weight: 600;">Temple University Press<br>1900 N. 13th Street<br>
-          Philadelphia, PA 19122</p>
-        suffix_html: >-
-          <p class="mt-5"><strong>Privacy Policy</strong>: Temple University Press respects your privacy. We carefully control the distribution of our customer information, and although we occasionally buy, sell, and swap mailing lists, we do so only with like-minded organizations. If you wish to be removed from either the postal mailing list or the email distribution list, 
-          please <a class="inline" href="mailto:tempress@temple.edu">send a note to the webmaster</a>.</p>
         e_catalog: Send me an e-catalog
         print_catalog: Send me a printed catalog
         add_to_mailing_list: Add my name to the mailing list
@@ -290,12 +282,6 @@ en:
 
       review-copy: 
         title: Request a Review Copy
-        intro_html: >-
-          <p>
-          <strong>We are currently fulfilling all examination copies as an ebook (when available).&nbsp; If requesting a desk copy please select print or ebook below.</strong>
-          </p>
-          <hr />
-          <p>We invite you to fill out the form below or to write on departmental letterhead for an examination copy of any paperback title you wish to consider for course adoption or request for desk copies. <strong>For examination copies</strong>, please state course title, semester, and projected enrollment. <strong>For desk copies</strong>, please provide course ID, instructor's name, projected enrollment, semester class will be taught, and the name of the bookstore that will be placing the order. Please note: book(s) will not be sent until bookstore order is confirmed. All orders can be forwarded to: <a href="mailto:examcopy@temple.edu" target="_blank" rel="noopener">examcopy@temple.edu</a>&nbsp;</p>
         media_type_label: Media Type
         media_type:
           Radio_TV: Radio/TV
@@ -305,24 +291,9 @@ en:
           Exam_Desk_Copy: Exam/Desk Copy
           Other: Other
         request_statement: Request
-        suffix_html: >-
-          <p>
-            <strong>Please note</strong>: all requests are indeed that—requests. Unfortunately, we cannot always honor all of them. 
-            If you think we are unfamiliar with your publication, please send a sample/tearsheets with your request. 
-            Thank you.
-          </p>
 
       copy-request: 
         title: Request a Desk or Exam Copy
-        prefix_html: >-
-          <p class="mt-3">To request a copy of a Temple University Press book, please fax your request on 
-          company letterhead to: Gary Kramer at 215.204.2160. If you would like to email your 
-          request, please include your name and contact information.</p>
-          <p><strong>If you are a professor</strong> wishing to request an examination copy 
-          or a desk copy of a book that you've ordered for your class, you may email us at: 
-          <a href="mailto:examcopy@temple.edu">examcopy@temple.edu,</a> fax your request on 
-          letterhead to 215-204-2142, or use our <a href="/forms/copy-request">online form</a>. 
-          Thanks.</p>
         prompt: "Click then begin typing to select a book               "
         hint: (required for Desk Copy requests)
         books: Requested Books
@@ -338,25 +309,9 @@ en:
           Business:  Business
           Residential: Residential
 
-      rights-permissions: 
-        title: Rights &amp; Permissions
-        prefix_html: >-
-          <p>For permission to use material from one of our publications, please fill out the following form. 
-          The following information/material is required before requests for permission to use material from 
-          Temple University Press books will be considered.</p>
-          <p>This form should only be used for requests to reproduce material copyrighted by Temple University 
-          Press in forthcoming books for publication. <strong>Please submit all requests for photocopies for 
-          academic use and for electronic course reserve via Copyright Clearance Center</strong> at 
-          <a href="http://www.copyright.com">www.copyright.com</a>.</p>
-        suffix_html: >-
-          <p>If selection is an excerpt, adaptation, or is altered in any way from its copyrighted form, a 
-          photocopy of the pages of material to be reprinted, indicating any edits, should be sent to:</p>
-          <p class="address">Rights &amp; Permissions Manager<br>Temple University Press 
-          <br>1900 N. 13th Street<br>Philadelphia, PA 19122</p>
-          <p>Fax: 215.204.2142</p>
-          <p>If this request is for a reuse of material for which permission was previously granted, please 
-          supply a copy of the previous permission agreement and any additional information regarding 
-          the previous use.</p>
+      rights-and-permissions: 
+        title: Rights and Permissions
+
     oabooks:
       online_epub: Read it Online
       manifold_label: View Epub
