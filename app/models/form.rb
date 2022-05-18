@@ -34,7 +34,7 @@ class Form < MailForm::Base
   attribute :format
   attribute :authorized_bookstore
 
-  # rights-permissions
+  # rights-and-permissions
   attribute :book_title
   attribute :book_author_editor
   attribute :chapter_title
@@ -62,7 +62,7 @@ class Form < MailForm::Base
     @forms = {
       "review-copy" => ["Request a Review Copy", ["tempress@temple.edu"]],
       "copy-request" => ["Request a Desk or Exam Copy", ["tempress@temple.edu"]],
-      "rights-permissions" => ["Rights &amp; Permissions", ["tempress@temple.edu"]],
+      "rights-and-permissions" => ["Rights and Permissions", ["tempress@temple.edu"]],
       "inquiries" => ["Inquiries", ["tempress@temple.edu"]]
     }
     @forms.fetch(form_type)

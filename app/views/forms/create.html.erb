@@ -10,7 +10,15 @@
 
       <div class="row">
         <div class="col">
-          <%= render "forms/#{@type}/intro" %>
+        <% if @book.present? %>
+          <div class="flash alert notice">
+            <strong><%= @book.title.html_safe %></strong> 
+            <%= t("tupress.forms.copy-request.preselect-text") %>
+          </div>
+        <% end %>
+          <div class="form-intro">
+            <%= @intro.body if @intro.present? %>
+          </div>
         </div>
       </div>
 
@@ -41,6 +49,10 @@
           </div>
         </div>
       <% end %>
+
+      <div class="form-footer">
+        <%= @footer.body if @footer.present? %>
+      </div>
     </div>
   </div>
 </div>

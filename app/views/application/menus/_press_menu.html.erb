@@ -1,7 +1,7 @@
 <ul class="list-unstyled">
   <%= %Q(<li>#{link_to t("tupress.default.menu.press_info.about"), webpage_path(@about), :class=>"dropdown-item"}</li>).html_safe if @about.present? %>
   <li><%= link_to t("tupress.default.menu.press_info.people"), people_path, :class=>"dropdown-item" %></li>
-  <li><%= link_to t("tupress.default.menu.press_info.rights"), root_path+["forms", "rights-permissions"].join("/"), :class=>"dropdown-item" %></li>
+  <li><%= link_to t("tupress.default.menu.press_info.rights"), root_path+["forms", "rights-and-permissions"].join("/"), :class=>"dropdown-item" %></li>
   <li><%= link_to t("tupress.default.menu.press_info.agents"), agencies_path, :class=>"dropdown-item" %></li>
   <%= %Q(<li>#{link_to t("tupress.default.menu.press_info.submissions"), webpage_path(@submissions), :class=>"dropdown-item"}</li>).html_safe if @submissions.present? %>
   <%= %Q(<li>#{link_to t("tupress.default.menu.press_info.presses"), webpage_path(@about_u_presses), :class=>"dropdown-item"}</li>).html_safe if @about_u_presses.present? %>
