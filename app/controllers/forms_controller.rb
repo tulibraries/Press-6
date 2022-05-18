@@ -5,8 +5,10 @@ class FormsController < ApplicationController
     @form = Form.new
     if existing_forms.include? params[:type]
       @type = params[:type]
-      intro = Webpage.find_by(slug: "copy-request-intro")
-      @intro = intro.body if intro.present? && @type == "copy-request"
+      existing_forms.each do |form|
+        @intro = Webpage.find_by(slug: "#{form}-intro") if form == @type
+        @footer = Webpage.find_by(slug: "#{form}-footer") if form == @type
+      end
       @books = Book.where(status: show_status).where(course_adoption: true).where("bindings LIKE ?", '%"format":"PB"%').order(:title)
       @book = Book.find(params[:id]) if params[:id].present?
       render template: "forms/create"
