@@ -17,7 +17,7 @@ gem "administrate-field-scoped_has_many"
 gem "administrate-field-ordered_has_many"
 gem "nokogiri", ">=1.13.4"
 gem "listen", "~> 3.2"
-gem "jquery-rails"
+gem "jquery-rails", ">=4.5.0"
 gem "bootstrap"
 gem "bootsnap", ">= 1.4.2", require: false
 gem "aws-sdk-s3", require: false
