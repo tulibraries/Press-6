@@ -32,7 +32,7 @@ default: &default
 
 development:
   <<: *default
-  database: press6
+  database: tupress
 
 test:
   <<: *default
