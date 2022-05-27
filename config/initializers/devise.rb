@@ -126,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '8b979e00b423aacee09fef58051d7fd87eae3dca2cbe794b2d24d0b8da48c3905a9a1fbcab957ee47e51ec236814dc92ce4b4aab29e4efe14a5bdf2a32f99c1a'
+  # config.pepper = 'b654eb80f985c24a94c46990e39dc37e9fcce0d1f83f4126245f9e592ff0a533dc4ea0a70d65244f641aff9e12716e786e3a953b8b47f74787ee787f2af38781'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -295,6 +295,7 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+
   config.omniauth :google_oauth2, ENV["GOOGLE_OAUTH_CLIENT_ID"], ENV["GOOGLE_OAUTH_SECRET"],
     scope: "email"
 

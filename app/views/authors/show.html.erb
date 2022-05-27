@@ -15,7 +15,7 @@
       <% if book.cover_image.attached? %>
         <%= image_tag book.index_image("cover_image"), class: "cover-image" %>
       <% else %>
-        <%= image_pack_tag "default-book-cover-show.png", class: "default" %>
+        <%= image_tag "default-book-cover-show.png", class: "default" %>
       <% end %>
         <p class="pt-2 mb-0"><%= book.title.html_safe %></p>
       <% end %>

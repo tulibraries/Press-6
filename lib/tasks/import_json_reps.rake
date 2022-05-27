@@ -6,7 +6,6 @@ require "logger"
 
 namespace :import do
   task reps_json: [:environment] do
-
     response = HTTParty.get("http://tupress.temple.edu/reps.json")
     reps = JSON.parse(response.body)
 
@@ -18,31 +17,27 @@ namespace :import do
     @pdfs = 0
     @errored = 0
     @log = Logger.new("log/sync-reps.log")
-    @stdout = Logger.new(STDOUT)
+    @stdout = Logger.new($stdout)
 
     reps.each do |rep|
-
       rep_to_update = (
-                              Person.find_by(email: rep["email"]) ?
-                              Person.find_by(email: rep["email"])
-                              :
-                              Person.new
+                              Person.find_by(email: rep["email"]) || Person.new
                             )
 
       new_rep = true if rep_to_update.email.blank?
 
       record_hash =
-      {
-        "title"         => rep.dig("name"),
-        "department"    => "Sales Reps",
-        "email"         => rep.dig("email"),
-        "company"       => rep.dig("company"),
-        "address"       => rep.dig("address"),
-        "phone"         => rep.dig("phone"),
-        "fax"           => rep.dig("fax"),
-        "region"        => rep.dig("region"),
-        "coverage"      => rep.dig("coverage")
-      }
+        {
+          "title" => rep["name"],
+          "department" => "Sales Reps",
+          "email" => rep["email"],
+          "company" => rep["company"],
+          "address" => rep["address"],
+          "phone" => rep["phone"],
+          "fax" => rep["fax"],
+          "region" => rep["region"],
+          "coverage" => rep["coverage"]
+        }
 
       rep_to_update.update(record_hash)
 
@@ -51,11 +46,11 @@ namespace :import do
           @updated += 1 unless new_rep
           @created += 1 if new_rep
         else
-          stdout_and_log(%Q(Rep record unable to be saved for #{record_hash["title"]}))
+          stdout_and_log(%(Rep record unable to be saved for #{record_hash['title']}))
           @not_saved += 1
         end
-      rescue => err
-        stdout_and_log(%Q(Rep title: #{record_hash["title"]} -- #{err.message}))
+      rescue StandardError => e
+        stdout_and_log(%(Rep title: #{record_hash['title']} -- #{e.message}))
         @not_saved += 1
       end
 
@@ -66,6 +61,5 @@ namespace :import do
       @log.send(level, message)
       @stdout.send(level, message)
     end
-
   end
 end

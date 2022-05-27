@@ -17,7 +17,8 @@ class SubjectDashboard < Administrate::BaseDashboard
     file_label: Field::String,
     pdf: FileField,
     brochures: Field::HasMany.with_options(
-      order: "sort_title"),
+      order: "sort_title"
+    ),
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze

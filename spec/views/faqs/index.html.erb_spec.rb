@@ -8,9 +8,9 @@ RSpec.describe "faqs/index", type: :view do
 
   before(:each) do
     assign(:faqs, [
-      faq1,
-      faq2
-    ])
+             faq1,
+             faq2
+           ])
   end
 
   it "renders a list of faqs" do

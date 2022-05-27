@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "books/show.html.erb", type: :view do
+RSpec.describe "books/show", type: :view do
   let(:user) { FactoryBot.create(:user) }
 
   before(:each) do
@@ -13,13 +13,14 @@ RSpec.describe "books/show.html.erb", type: :view do
     @book = FactoryBot.create(:book)
     assign(:links, [[@book.label_1, @book.link_1]])
     render
-    expect(rendered).to match /#{@book.label_1}/
+    expect(rendered).to match(/#{@book.label_1}/)
   end
 
   it "uses helper to add century to pub_dates" do
-    @book = FactoryBot.create(:book, bindings: '{"binding":[{"format":"PB","price":"$31.95","ean":"978-1-59213-386-4","binding_status":"IP","pub_date_for_format":"Jun 85"}]}')
+    @book = FactoryBot.create(:book,
+                              bindings: '{"binding":[{"format":"PB","price":"$31.95","ean":"978-1-59213-386-4","binding_status":"IP","pub_date_for_format":"Jun 85"}]}')
     assign(:links, [[@book.label_1, @book.link_1]])
     render
-    expect(rendered).to match /1985/
+    expect(rendered).to match(/1985/)
   end
 end

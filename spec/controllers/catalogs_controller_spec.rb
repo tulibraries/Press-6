@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe CatalogsController, type: :controller do
-
   let(:catalog) { FactoryBot.create(:catalog) }
 
   describe "GET #index" do
@@ -26,5 +25,4 @@ RSpec.describe CatalogsController, type: :controller do
   end
 
   it_behaves_like "index_editable"
-
 end

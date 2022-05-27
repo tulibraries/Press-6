@@ -7,7 +7,7 @@ require File.expand_path("../config/environment", __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require "rspec/rails"
-require "support/factory_bot.rb"
+require "support/factory_bot"
 require "capybara/rails"
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
@@ -40,12 +40,10 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
-
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :helper
   config.include Devise::Test::ControllerHelpers, type: :view
-
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -88,5 +86,4 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
-
 end

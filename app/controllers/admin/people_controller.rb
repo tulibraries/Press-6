@@ -3,13 +3,14 @@
 module Admin
   class PeopleController < Admin::ApplicationController
     include Admin::Detachable
-    before_action :set_tabs, only: [:edit, :new]
+    before_action :set_tabs, only: %i[edit new]
 
     def set_tabs
       @tab_names = I18n.t("tupress.admin.people.tabs")
       @tab_content = {}
-      @tab_content["staff_info"] = ["image", "title", "slug", "email", "position", "position_description", "department", "head"]
-      @tab_content["sales_rep"] = ["company", "region", "address", "phone", "fax", "coverage", "website"]
+      @tab_content["staff_info"] =
+        %w[image title slug email position position_description department head]
+      @tab_content["sales_rep"] = %w[company region address phone fax coverage website]
     end
   end
 end

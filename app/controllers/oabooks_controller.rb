@@ -4,8 +4,7 @@ class OabooksController < ApplicationController
   before_action :set_oabook, only: [:show]
   include SetInstance
 
-  def show
-  end
+  def show; end
 
   def north_broad_press
     @oabooks = Oabook.where(collection: "North Broad Press").order(:title)
@@ -18,6 +17,7 @@ class OabooksController < ApplicationController
   end
 
   private
+
     def set_oabook
       @oabook = find_instance
     end

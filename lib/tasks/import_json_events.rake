@@ -6,7 +6,6 @@ require "logger"
 
 namespace :import do
   task events_json: [:environment] do
-
     response = HTTParty.get("http://tupress.temple.edu/events.json")
     events = JSON.parse(response.body)
 
@@ -18,7 +17,7 @@ namespace :import do
     @pdfs = 0
     @errored = 0
     @log = Logger.new("log/sync-events.log")
-    @stdout = Logger.new(STDOUT)
+    @stdout = Logger.new($stdout)
 
     def combine(d, t)
       d = Date.parse(d) if d.is_a? String
@@ -27,44 +26,40 @@ namespace :import do
     end
 
     def attach_image(event, path)
-      begin
+      unless event.image.attached?
         event.image.attach(
           io: URI.open("http://tupress.temple.edu#{path}"),
-          filename: path.sub("/uploads/event/", ""),
-        ) unless event.image.attached?
-        @images += 1
-      rescue => err
-        stdout_and_log("Syncing Event #{event.title}, -- errored --  #{err.message} ")
-        @errored += 1
+          filename: path.sub("/uploads/event/", "")
+        )
       end
+      @images += 1
+    rescue StandardError => e
+      stdout_and_log("Syncing Event #{event.title}, -- errored --  #{e.message} ")
+      @errored += 1
     end
 
     events.each do |event|
-
       event_to_update = (
-                              Event.find_by(id: event["id"]) ?
-                              Event.find_by(id: event["id"])
-                              :
-                              Event.new
+                              Event.find_by(id: event["id"]) || Event.new
                             )
 
       new_event = true if event_to_update.id.blank?
 
       record_hash =
-      {
-        "id"              => event.dig("id"),
-        "title"           => event.dig("title"),
-        "description"     => event.dig("dates"),
-        "start_date"      => event.dig("startdate"),
-        "end_date"        => event.dig("enddate"),
-        "start_time"      => event.dig("time"),
-        "end_time"        => event.dig("endtime"),
-        "time_zone"       => event.dig("timezone"),
-        "location"        => event.dig("location"),
-        "add_to_news"     => event.dig("news"),
-        "news_weight"     => event.dig("weight"),
-        "image"           => event.dig("image")["url"]
-      }
+        {
+          "id" => event["id"],
+          "title" => event["title"],
+          "description" => event["dates"],
+          "start_date" => event["startdate"],
+          "end_date" => event["enddate"],
+          "start_time" => event["time"],
+          "end_time" => event["endtime"],
+          "time_zone" => event["timezone"],
+          "location" => event["location"],
+          "add_to_news" => event["news"],
+          "news_weight" => event["weight"],
+          "image" => event["image"]["url"]
+        }
 
       if record_hash["start_date"].present? && record_hash["start_time"].present?
         record_hash["start_date"] = combine(record_hash["start_date"], record_hash["start_time"])
@@ -74,7 +69,10 @@ namespace :import do
       end
       if record_hash["start_date"].blank? && record_hash["start_time"].blank? && record_hash["end_date"].present?
         record_hash["start_date"] = record_hash["end_date"]
-        record_hash["start_date"] = combine(record_hash["start_date"], record_hash["end_time"]) if record_hash["end_time"].present?
+        if record_hash["end_time"].present?
+          record_hash["start_date"] =
+            combine(record_hash["start_date"], record_hash["end_time"])
+        end
       end
       if record_hash["start_date"].blank? && record_hash["start_time"].blank? && record_hash["end_date"].blank? && record_hash["end_time"].present?
         record_hash["start_date"] = record_hash["end_time"]
@@ -88,7 +86,10 @@ namespace :import do
       end
       if record_hash["end_date"].blank? && record_hash["end_time"].blank? && record_hash["start_date"].present?
         record_hash["end_date"] = record_hash["start_date"]
-        record_hash["end_date"] = combine(record_hash["start_date"], record_hash["start_time"]) if record_hash["start_time"].present?
+        if record_hash["start_time"].present?
+          record_hash["end_date"] =
+            combine(record_hash["start_date"], record_hash["start_time"])
+        end
       end
       if record_hash["end_date"].blank? && record_hash["end_time"].blank? && record_hash["start_date"].blank? && record_hash["start_time"].present?
         record_hash["end_date"] = record_hash["start_time"]
@@ -102,11 +103,11 @@ namespace :import do
           @updated += 1 unless new_event
           @created += 1 if new_event
         else
-          stdout_and_log(%Q(Event record unable to be saved for #{record_hash["title"]}))
+          stdout_and_log(%(Event record unable to be saved for #{record_hash['title']}))
           @not_saved += 1
         end
-      rescue => err
-        stdout_and_log(%Q(Event id: #{record_hash["id"]} -- #{err.message}))
+      rescue StandardError => e
+        stdout_and_log(%(Event id: #{record_hash['id']} -- #{e.message}))
         @not_saved += 1
       end
 
@@ -117,6 +118,5 @@ namespace :import do
       @log.send(level, message)
       @stdout.send(level, message)
     end
-
   end
 end

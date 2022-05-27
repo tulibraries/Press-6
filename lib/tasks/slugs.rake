@@ -4,12 +4,12 @@ require "logger"
 
 namespace :update do
   task slugs: [:environment] do
-
     @log = Logger.new("log/slug-fest.log")
-    @stdout = Logger.new(STDOUT)
+    @stdout = Logger.new($stdout)
     stdout_and_log("Updating model slugs.")
 
-    models = [Agency, Author, Book, Brochure, Catalog, Conference, Document, Event, Highlight, Journal, NewsItem, Oabook, Series, SpecialOffer, Subject, Webpage]
+    models = [Agency, Author, Book, Brochure, Catalog, Conference, Document, Event, Highlight, Journal, NewsItem,
+              Oabook, Series, SpecialOffer, Subject, Webpage]
 
     models.each do |model|
       model.all.each do |m|

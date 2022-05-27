@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe SyncService::Catalogs, type: :service do
-
   before(:all) do
     Catalog.delete_all
     @catalog_harvest = described_class.new(xml_path: file_fixture("delta.xml").to_path)
@@ -34,19 +33,17 @@ RSpec.describe SyncService::Catalogs, type: :service do
       sleep 2
     end
 
-    let (:catalog1) {
+    let(:catalog1) do
       Catalog.find_by(code: "FA21")
-    }
+    end
 
-    let (:catalog2) {
+    let(:catalog2) do
       Catalog.find_by(code: "SP21")
-    }
+    end
 
     it "syncs catalogs to the table" do
       expect(catalog1).to be
       expect(catalog2).to be
     end
-
   end
-
 end

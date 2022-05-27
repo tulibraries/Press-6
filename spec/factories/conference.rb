@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :conference do
     title { "Spring 2014" }
     slug { "slug" }
-    start_date  { DateTime.now }
+    start_date { DateTime.now }
     end_date { DateTime.now.next_month }
     location { "Narbeth" }
     venue { "The Plaza" }

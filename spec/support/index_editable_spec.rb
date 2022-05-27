@@ -3,7 +3,6 @@
 require "spec_helper"
 
 RSpec.shared_examples "index_editable" do
-
   def model_name
     controller.to_s.underscore.chomp("_controller").singularize
   end
@@ -24,13 +23,14 @@ RSpec.shared_examples "index_editable" do
     it "has an edit link" do
       if model_name == "oabook"
         get :north_broad_press
-        expect(response.body).to match /[EDIT]/
+        expect(response.body).to match(/[EDIT]/)
       else
         get :index
-        model_name == "conference" ?
-          (expect(response.body).to match /[EDIT]/)
-          :
-          (expect(response.body).to match /\/admin\/#{model_name.pluralize}\"/)
+        if model_name == "conference"
+          (expect(response.body).to match(/[EDIT]/))
+        else
+          (expect(response.body).to match(%r{/admin/#{model_name.pluralize}"}))
+        end
       end
     end
   end

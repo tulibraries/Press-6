@@ -13,5 +13,4 @@ RSpec.describe DocumentsController, type: :controller do
   end
 
   it_behaves_like "index_editable"
-
 end

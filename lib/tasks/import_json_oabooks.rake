@@ -6,7 +6,6 @@ require "logger"
 
 namespace :import do
   task oabooks_json: [:environment] do
-
     response = HTTParty.get("http://tupress.temple.edu/oabooks.json")
     oabooks = JSON.parse(response.body)
 
@@ -18,89 +17,77 @@ namespace :import do
     @pdfs = 0
     @errored = 0
     @log = Logger.new("log/sync-oabooks.log")
-    @stdout = Logger.new(STDOUT)
+    @stdout = Logger.new($stdout)
 
     def attach_image(oabook, path)
-      begin
-        oabook.image.attach(
-          io: URI.open("http://tupress.temple.edu#{path}"),
-          filename: path.sub("/uploads/oabook/cover_images/", ""),
-        )
-        @images += 1
-      rescue => err
-        stdout_and_log("Syncing Oabook #{oabook.title}, -- image errored --  #{err.message} ")
-        @errored += 1
-      end
+      oabook.image.attach(
+        io: URI.open("http://tupress.temple.edu#{path}"),
+        filename: path.sub("/uploads/oabook/cover_images/", "")
+      )
+      @images += 1
+    rescue StandardError => e
+      stdout_and_log("Syncing Oabook #{oabook.title}, -- image errored --  #{e.message} ")
+      @errored += 1
     end
 
     def attach_mobi(oabook, path)
-      begin
-        oabook.mobi.attach(
-          io: URI.open("http://tupress.temple.edu#{path}"),
-          filename: path.sub("/uploads/oabooks/", ""),
-        )
-        @images += 1
-      rescue => err
-        stdout_and_log("Syncing Oabook #{oabook.title}, -- mobi errored --  #{err.message} ")
-        @errored += 1
-      end
+      oabook.mobi.attach(
+        io: URI.open("http://tupress.temple.edu#{path}"),
+        filename: path.sub("/uploads/oabooks/", "")
+      )
+      @images += 1
+    rescue StandardError => e
+      stdout_and_log("Syncing Oabook #{oabook.title}, -- mobi errored --  #{e.message} ")
+      @errored += 1
     end
 
     def attach_pdf(oabook, path)
-      begin
-        oabook.pdf.attach(
-          io: URI.open("http://tupress.temple.edu#{path}"),
-          filename: path.sub("/uploads/oabooks/", ""),
-        )
-        @images += 1
-      rescue => err
-        stdout_and_log("Syncing Oabook #{oabook.title}, -- pdf errored --  #{err.message} ")
-        @errored += 1
-      end
+      oabook.pdf.attach(
+        io: URI.open("http://tupress.temple.edu#{path}"),
+        filename: path.sub("/uploads/oabooks/", "")
+      )
+      @images += 1
+    rescue StandardError => e
+      stdout_and_log("Syncing Oabook #{oabook.title}, -- pdf errored --  #{e.message} ")
+      @errored += 1
     end
 
     def attach_epub(oabook, path)
-      begin
-        oabook.epub.attach(
-          io: URI.open("http://tupress.temple.edu#{path}"),
-          filename: path.sub("/uploads/oabooks/", ""),
-        )
-        @images += 1
-      rescue => err
-        stdout_and_log("Syncing Oabook #{oabook.title}, -- epub errored --  #{err.message} ")
-        @errored += 1
-      end
+      oabook.epub.attach(
+        io: URI.open("http://tupress.temple.edu#{path}"),
+        filename: path.sub("/uploads/oabooks/", "")
+      )
+      @images += 1
+    rescue StandardError => e
+      stdout_and_log("Syncing Oabook #{oabook.title}, -- epub errored --  #{e.message} ")
+      @errored += 1
     end
 
     oabooks.each do |oabook|
-
       oabook_to_update = (
-                              Oabook.find_by(title: oabook["title"]) ?
-                              Oabook.find_by(title: oabook["title"])
-                              :
-                              Oabook.new
+                              Oabook.find_by(title: oabook["title"]) || Oabook.new
                             )
 
       new_oabook = true if oabook_to_update.title.blank?
 
       record_hash =
-      {
-        "title"                  => oabook.dig("title"),
-        "subtitle"               => oabook.dig("subtitle"),
-        "author"                 => oabook.dig("author"),
-        "edition"                => oabook.dig("edition"),
-        "isbn"                   => oabook.dig("isbn"),
-        "print_isbn"             => oabook.dig("print_isbn"),
-        "description"            => oabook.dig("description"),
-        "manifold"               => oabook.dig("manifold"),
-        "collection"             => oabook.dig("collection"),
-        "supplemental"           => oabook.dig("supplemental"),
-        "pod"                    => oabook.dig("pod"),
-        "image"                  => oabook.dig("cover_image")["url"],
-        "epub"                   => oabook.dig("epub")["url"],
-        "mobi"                   => oabook.dig("mobi")["url"],
-        "pdf"                    => oabook.dig("pdf")["url"]
-      }
+        {
+          "title" => oabook["title"],
+          "subtitle" => oabook["subtitle"],
+          "author" => oabook["author"],
+          "edition" => oabook["edition"],
+          "isbn" => oabook["isbn"],
+          "print_isbn" => oabook["print_isbn"],
+          "description" => oabook["description"],
+          "manifold" => oabook["manifold"],
+          "collection" => oabook["collection"],
+          "supplemental" => oabook["supplemental"],
+          "pod" => oabook["pod"],
+          "image" => oabook["cover_image"]["url"],
+          "epub" => oabook["epub"]["url"],
+          "mobi" => oabook["mobi"]["url"],
+          "pdf" => oabook["pdf"]["url"]
+        }
 
       record_hash["collection"] = "Labor Studies & Work" if record_hash["collection"] == "Labor Studies"
 
@@ -115,11 +102,11 @@ namespace :import do
           @updated += 1 unless new_oabook
           @created += 1 if new_oabook
         else
-          stdout_and_log(%Q(Oabook record unable to be saved for #{record_hash["title"]}))
+          stdout_and_log(%(Oabook record unable to be saved for #{record_hash['title']}))
           @not_saved += 1
         end
-      rescue => err
-        stdout_and_log(%Q(Oabook title: #{record_hash["title"]} -- #{err.message}))
+      rescue StandardError => e
+        stdout_and_log(%(Oabook title: #{record_hash['title']} -- #{e.message}))
         @not_saved += 1
       end
 
@@ -130,6 +117,5 @@ namespace :import do
       @log.send(level, message)
       @stdout.send(level, message)
     end
-
   end
 end

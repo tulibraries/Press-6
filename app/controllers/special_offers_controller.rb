@@ -16,6 +16,7 @@ class SpecialOffersController < ApplicationController
   end
 
   private
+
     def set_special_offer
       @special_offer = find_instance
     end

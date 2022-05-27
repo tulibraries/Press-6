@@ -2,6 +2,6 @@
 
 module CatalogsHelper
   def catalog_year(catalogs)
-    catalogs.sort_by { |c| c.season }.reverse
+    catalogs.sort_by(&:season).reverse
   end
 end

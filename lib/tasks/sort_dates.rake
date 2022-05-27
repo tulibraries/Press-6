@@ -4,9 +4,8 @@ require "logger"
 
 namespace :update do
   task sort_dates: [:environment] do
-
     @log = Logger.new("log/sort-dates.log")
-    @stdout = Logger.new(STDOUT)
+    @stdout = Logger.new($stdout)
     stdout_and_log("Adds sortable date fields to books.")
 
     Book.all.each do |m|
@@ -14,7 +13,6 @@ namespace :update do
       m.save!
       stdout_and_log("Saved: title: #{m.title}, sort_title: #{m.sort_title}, slug: #{m.slug}")
     end
-
   end
 end
 

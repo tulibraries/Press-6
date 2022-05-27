@@ -11,7 +11,7 @@ class NewsItemDashboard < Administrate::BaseDashboard
     link: Field::String,
     promote_to_homepage: Field::Boolean,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   COLLECTION_ATTRIBUTES = %i[

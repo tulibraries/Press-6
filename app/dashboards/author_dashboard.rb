@@ -15,7 +15,7 @@ class AuthorDashboard < Administrate::BaseDashboard
     qa: FileField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    suppress: Field::Boolean,
+    suppress: Field::Boolean
   }.freeze
 
   COLLECTION_ATTRIBUTES = %i[

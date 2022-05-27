@@ -9,7 +9,8 @@ class FormsController < ApplicationController
         @intro = Webpage.find_by(slug: "#{form}-intro") if form == @type
         @footer = Webpage.find_by(slug: "#{form}-footer") if form == @type
       end
-      @books = Book.where(status: show_status).where(course_adoption: true).where("bindings LIKE ?", '%"format":"PB"%').order(:title)
+      @books = Book.where(status: show_status).where(course_adoption: true).where("bindings LIKE ?",
+                                                                                  '%"format":"PB"%').order(:title)
       @book = Book.find(params[:id]) if params[:id].present?
       render template: "forms/create"
     else
@@ -31,6 +32,6 @@ class FormsController < ApplicationController
 
   def existing_forms
     Dir.glob(Rails.root.join("app/views/forms/*/"))
-      .map { |template_path| template_path.split("/").last }
+       .map { |template_path| template_path.split("/").last }
   end
 end

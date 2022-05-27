@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe SeriesController, type: :controller do
-
   let(:series) { FactoryBot.create(:series) }
 
   describe "GET #index" do
@@ -26,5 +25,4 @@ RSpec.describe SeriesController, type: :controller do
   end
 
   it_behaves_like "index_editable"
-
 end

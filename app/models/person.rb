@@ -5,7 +5,8 @@ class Person < ApplicationRecord
   include Imageable
   include Friendable
 
-  validates :image, presence: false, blob: { content_type: ["image/png", "image/jpg", "image/jpeg", "image/gif"], size_range: 1..5.megabytes }
+  validates :image, presence: false,
+                    blob: { content_type: ["image/png", "image/jpg", "image/jpeg", "image/gif"], size_range: 1..5.megabytes }
 
   has_rich_text :position_description
   has_rich_text :address

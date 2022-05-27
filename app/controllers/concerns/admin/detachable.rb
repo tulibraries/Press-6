@@ -8,11 +8,11 @@ module Admin
       klass = params[:controller].split("/").last.classify
       @entity = klass.constantize.friendly.find(params[:id])
 
-      types = ["cover_image", "excerpt_file", "guide_file", "toc_file", "suggested_reading_image"] if klass == "Book"
-      types = ["image"] if ["Event", "Series", "Person", "Highlight", "NewsItem"].include?(klass)
-      types = ["image", "pdf"] if ["Catalog", "Brochure"].include?(klass)
-      types = ["pdf"] if ["SpecialOffer", "Subject"].include?(klass)
-      types = ["image", "epub", "mobi", "pdf"] if ["Oabook"].include?(klass)
+      types = %w[cover_image excerpt_file guide_file toc_file suggested_reading_image] if klass == "Book"
+      types = ["image"] if %w[Event Series Person Highlight NewsItem].include?(klass)
+      types = %w[image pdf] if %w[Catalog Brochure].include?(klass)
+      types = ["pdf"] if %w[SpecialOffer Subject].include?(klass)
+      types = %w[image epub mobi pdf] if ["Oabook"].include?(klass)
 
       type = types.index(params[:field])
 

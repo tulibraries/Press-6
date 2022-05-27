@@ -33,7 +33,7 @@ RSpec.shared_examples "renderable_dashboard" do
     it "access #{model_name} adminstrate" do
       get index_path
       expect(response).to have_http_status(200)
-      #expect(response.body).to match(factory_model.label)
+      # expect(response.body).to match(factory_model.label)
     end
   end
 
@@ -52,7 +52,7 @@ RSpec.shared_examples "renderable_dashboard" do
   end
 
   describe "GET /admin/#{model_name}/new" do
-    it "renders #{model_name} new page"  do
+    it "renders #{model_name} new page" do
       get new_path
       expect(response).to have_http_status(200)
     end

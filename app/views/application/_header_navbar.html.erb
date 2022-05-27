@@ -1,9 +1,9 @@
 <div id="header-background">
   <div id="header-navbar" class="container navbar navbar-static-top d-print-block" role="navigation">
     <div class="col-8 col-sm-7 col-lg-4 logo-container text-left ">
-      <%= link_to image_pack_tag('TUPress_2C_Red_Black.png', alt: "Temple University Press"),
+      <%= link_to image_tag('TUPress_2C_Red_Black.png', alt: "Temple University Press"),
                     root_path, class: "header-name", id: "header-logo" unless current_user %>
-      <%= link_to (image_pack_tag 'TUPress_2C_Red_Black.png', alt: "Temple University Press"), admin_url if current_user %>
+      <%= link_to (image_tag 'TUPress_2C_Red_Black.png', alt: "Temple University Press"), admin_url if current_user %>
     </div>
 
       <%= render "header-search" %>

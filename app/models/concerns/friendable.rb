@@ -10,13 +10,11 @@ module Friendable
   def title_and_sequence
     case self.class
     when "Review"
-      slug = [cleanup(self.book.sort_title)]
+      slug = [cleanup(book.sort_title)]
     when "Book"
-      slug = [cleanup(self.sort_title)]
+      slug = [cleanup(sort_title)]
     else
-      if title.present?
-        slug = self.title.parameterize
-      end
+      slug = title.parameterize if title.present?
     end
     if self.class.count > 1
       sequence = self.class.where("slug like ?", "%#{slug}%").count
@@ -28,17 +26,17 @@ module Friendable
     case self.class
     when "Review"
       [
-        [cleanup(self.book.sort_title)],
+        [cleanup(book.sort_title)],
         [:title_and_sequence]
       ]
     when "Book"
       [
-        [cleanup(self.sort_title)],
+        [cleanup(sort_title)],
         [:title_and_sequence]
       ]
     else
       [
-        [cleanup(self.title)],
+        [cleanup(title)],
         [:title_and_sequence]
       ]
     end

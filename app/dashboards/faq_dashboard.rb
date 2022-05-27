@@ -15,7 +15,7 @@ class FaqDashboard < Administrate::BaseDashboard
     answer: TrixField,
     slug: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES

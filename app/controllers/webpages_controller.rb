@@ -16,11 +16,10 @@ class WebpagesController < ApplicationController
     @hot = Book.where(hot: true).order(updated_at: :desc).take(3).sort
   end
 
-  def show
-  end
+  def show; end
 
   def search
-    @books = Book.search(params[:q]).where({ status: ["NP", "IP"] }).order(:sort_title)
+    @books = Book.search(params[:q]).where({ status: %w[NP IP] }).order(:sort_title)
     @subjects = Subject.search(params[:q])
     @series = Series.search(params[:q])
     @people = Person.search(params[:q])
@@ -28,19 +27,17 @@ class WebpagesController < ApplicationController
     @authors = Author.search(params[:q])
     events = Event.search(params[:q])
     conferences = Conference.search(params[:q])
-    @confevents = (events + conferences).sort_by { |e| e.title }
+    @confevents = (events + conferences).sort_by(&:title)
     @faqs = Faq.search(params[:q])
     @journals = Journal.search(params[:q])
     @oabooks = Oabook.search(params[:q])
-    @results = [@books, @subjects, @series, @people, @site, @authors, @confevents, @faqs, @journals, @oabooks].any? {
-      |result| result.present?
-    }
-    if params[:q].blank?
-      redirect_to(root_path)
-    end
+    @results = [@books, @subjects, @series, @people, @site, @authors, @confevents, @faqs, @journals,
+                @oabooks].any?(&:present?)
+    redirect_to(root_path) if params[:q].blank?
   end
 
   private
+
     def set_webpage
       @page = find_instance
     end

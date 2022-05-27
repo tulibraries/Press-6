@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :set_menu
 
   def show_status
-    ["NP", "IP"]
+    %w[NP IP]
   end
 
   def set_menu

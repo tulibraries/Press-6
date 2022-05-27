@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "catalogs/show.html.erb", type: :view do
+RSpec.describe "catalogs/show", type: :view do
   let(:user) { FactoryBot.create(:user) }
   let(:catalog) { FactoryBot.create(:catalog) }
 

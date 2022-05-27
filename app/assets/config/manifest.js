@@ -1,4 +1,3 @@
-//= link_tree ../../webpack/images
-//= link_directory ../../webpack/javascripts .js
-//= link_directory ../../webpack/javascripts/administrate .js
-//= link_directory ../../webpack/css .scss
+//= link_tree ../images
+//= link_tree ../builds 
+//= link administrate-field-date_picker/application.css

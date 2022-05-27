@@ -3,31 +3,29 @@
 require "spec_helper"
 
 RSpec.shared_examples "imageable" do
-
   describe "GET /#{described_class.to_s.underscore} image variants" do
-
     let(:model) { described_class } # the class that includes the concern
     let(:factory_model) { FactoryBot.create(model.to_s.underscore.to_sym) }
-    let(:attachment) {
+    let(:attachment) do
       file_path = Rails.root.join("spec/fixtures/charles.jpg")
       file = Rack::Test::UploadedFile.new(file_path, "image/jpeg")
-      factory_model.image.attach(file) if ["Brochure", "Series"].include?(model.to_s)
+      factory_model.image.attach(file) if %w[Brochure Series].include?(model.to_s)
       factory_model.cover_image.attach(file) if ["Book"].include?(model.to_s)
-    }
-    let(:bigattachment) {
+    end
+    let(:bigattachment) do
       file_path = Rails.root.join("spec/fixtures/orecchiette.jpg")
       file = Rack::Test::UploadedFile.new(file_path, "image/jpeg")
-      factory_model.image.attach(file) if ["Brochure", "Series"].include?(model.to_s)
+      factory_model.image.attach(file) if %w[Brochure Series].include?(model.to_s)
       factory_model.cover_image.attach(file) if ["Book"].include?(model.to_s)
-    }
+    end
 
     def attachment_field(model)
-      factory_model.image.attachment if ["Brochure", "Series"].include?(model.to_s)
+      factory_model.image.attachment if %w[Brochure Series].include?(model.to_s)
       factory_model.cover_image.attachment if ["Book"].include?(model.to_s)
     end
 
     def large_attachment_field(model)
-      factory_model.image.bigattachment if ["Brochure", "Series"].include?(model.to_s)
+      factory_model.image.bigattachment if %w[Brochure Series].include?(model.to_s)
       factory_model.cover_image.bigattachment if ["Book"].include?(model.to_s)
     end
 
@@ -47,14 +45,14 @@ RSpec.shared_examples "imageable" do
 
     context "when index_image is called" do
       it "the index variant blob is returned" do
-        expect(factory_model.index_image("image")).not_to raise_error if ["Brochure", "Series"].include?(model.to_s)
+        expect(factory_model.index_image("image")).not_to raise_error if %w[Brochure Series].include?(model.to_s)
         expect(factory_model.index_image("cover_image")).not_to raise_error if ["Book"].include?(model.to_s)
       end
     end
 
     context "when show_image is called" do
       it "the show variant blob is returned" do
-        expect(factory_model.show_image("image")).not_to raise_error if ["Brochure", "Series"].include?(model.to_s)
+        expect(factory_model.show_image("image")).not_to raise_error if %w[Brochure Series].include?(model.to_s)
         expect(factory_model.show_image("cover_image")).not_to raise_error if ["Book"].include?(model.to_s)
       end
     end

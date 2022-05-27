@@ -2,8 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe SyncService::Series, type: :service do
-
+RSpec.describe SyncService::BookSeries, type: :service do
   before(:all) do
     @series_harvest = described_class.new(xml_path: file_fixture("delta.xml").to_path)
     @series = @series_harvest.read_series
@@ -37,19 +36,17 @@ RSpec.describe SyncService::Series, type: :service do
       sleep 2
     end
 
-    let (:series1) {
+    let(:series1) do
       Series.find_by(code: "S-195")
-    }
+    end
 
-    let (:series2) {
+    let(:series2) do
       Series.find_by(code: "S-911")
-    }
+    end
 
     it "syncs series to the table" do
       expect(series1).to be
       expect(series2).to be
     end
-
   end
-
 end

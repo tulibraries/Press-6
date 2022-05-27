@@ -25,14 +25,15 @@ RSpec.describe Book, type: :model do
 
   it "- can list subjects as tuples (arrays) of (title , id)" do
     book = described_class.new
-    book.assign_attributes("subjects" => JSON.dump([{ "subject_id" => 1, "subject_title" => "foo" } ]))
+    book.assign_attributes("subjects" => JSON.dump([{ "subject_id" => 1, "subject_title" => "foo" }]))
     expect(book.subjects_as_tuples).to eq [["foo", 1]]
   end
 
   it "- can list binding as tuples (hashes) of (:format,:price,:ean,:status,:pub_date)" do
     book = described_class.new
-    book.assign_attributes("bindings" => "{\"binding\":[{\"format\":\"PB\",\"price\":\"$31.95\",\"ean\":\"978-1-59213-386-4\",\"binding_status\":\"IP\",\"pub_date_for_format\":\"Jun 06\"}]}")
-    expect(book.bindings_as_tuples).to eq [{ format: "PB", price: "$31.95", ean: "978-1-59213-386-4", status: "IP", pub_date: "Jun 06" }]
+    book.assign_attributes("bindings" => '{"binding":[{"format":"PB","price":"$31.95","ean":"978-1-59213-386-4","binding_status":"IP","pub_date_for_format":"Jun 06"}]}')
+    expect(book.bindings_as_tuples).to eq [{ format: "PB", price: "$31.95", ean: "978-1-59213-386-4", status: "IP",
+                                             pub_date: "Jun 06" }]
   end
 
   it "- can add sort title to book before save" do
@@ -43,5 +44,4 @@ RSpec.describe Book, type: :model do
 
   it_behaves_like "detachable"
   it_behaves_like "attachable"
-
 end

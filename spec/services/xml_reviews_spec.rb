@@ -4,7 +4,6 @@ require "rails_helper"
 require "pry"
 
 RSpec.describe SyncService::Reviews, type: :service do
-
   before(:all) do
     @review_harvest = described_class.new(xml_path: file_fixture("delta.xml").to_path)
     @reviews = @review_harvest.read_reviews
@@ -28,7 +27,7 @@ RSpec.describe SyncService::Reviews, type: :service do
     end
 
     describe "maps review xml to db schema" do
-      if @reviews #tests where reviews exist, need another test when reviews empty (inconsistent xml)
+      if @reviews # tests where reviews exist, need another test when reviews empty (inconsistent xml)
         let subject { @review_harvest.record_hash(@reviews.first) }
 
         it "maps Code to code field" do
@@ -48,19 +47,17 @@ RSpec.describe SyncService::Reviews, type: :service do
       sleep 4
     end
 
-    let (:review1) {
+    let(:review1) do
       Review.find_by(review_id: "145014")
-    }
+    end
 
-    let (:review2) {
+    let(:review2) do
       Review.find_by(review_id: "145015")
-    }
+    end
 
     it "syncs reviews to the table" do
       expect(review1).to be
       expect(review2).to be
     end
-
   end
-
 end

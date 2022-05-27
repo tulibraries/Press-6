@@ -9,13 +9,13 @@ FactoryBot.define do
     before :create do |brochure|
       brochure.image.attach(io:
         File.open(Rails.root.join("spec/fixtures/charles.jpg")),
-        filename: "charles.jpg",
-        content_type: "image/jpeg")
+                            filename: "charles.jpg",
+                            content_type: "image/jpeg")
 
       brochure.pdf.attach(io:
         File.open(Rails.root.join("spec/fixtures/guidelines.pdf")),
-        filename: "guidelines.pdf",
-        content_type: "application/pdf")
+                          filename: "guidelines.pdf",
+                          content_type: "application/pdf")
     end
 
     trait :without_image do

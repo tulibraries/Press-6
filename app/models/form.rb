@@ -20,7 +20,7 @@ class Form < MailForm::Base
   attribute :website
   attribute :request_statement
 
-  #copy-request
+  # copy-request
   attribute :university
   attribute :department
   attribute :address_type
@@ -84,7 +84,7 @@ class Form < MailForm::Base
       subject: get_subject[0],
       to: get_subject[1],
       cc: email,
-      from: %("#{name || default_from_name }" <#{email || default_from_email }>)
+      from: %("#{name || default_from_name}" <#{email || default_from_email}>)
     }
   end
 end

@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe SyncService::Subjects, type: :service do
-
   before(:all) do
     @subject_harvest = described_class.new(xml_path: file_fixture("delta.xml").to_path)
     @subject = @subject_harvest.read_subjects
@@ -36,13 +35,13 @@ RSpec.describe SyncService::Subjects, type: :service do
         sleep 2
       end
 
-      let (:subject1) {
+      let(:subject1) do
         Subject.find_by(code: "1045")
-      }
+      end
 
-      let (:subject2) {
+      let(:subject2) do
         Subject.find_by(code: "1058")
-      }
+      end
 
       it "syncs subjects to the table" do
         expect(subject1).to be

@@ -21,7 +21,7 @@ class AgencyDashboard < Administrate::BaseDashboard
     website: Field::String,
     region: Field::Select.with_options(collection: I18n.t("tupress.admin.collections.agencies.regions")),
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -30,9 +30,9 @@ class AgencyDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-  title
-  region
-  contact
+    title
+    region
+    contact
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

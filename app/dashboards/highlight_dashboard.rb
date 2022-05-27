@@ -17,7 +17,7 @@ class HighlightDashboard < Administrate::BaseDashboard
     promote_to_homepage: Field::Boolean,
     link: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES

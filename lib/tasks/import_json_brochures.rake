@@ -6,7 +6,6 @@ require "logger"
 
 namespace :import do
   task brochures_json: [:environment] do
-
     response = HTTParty.get("http://tupress.temple.edu/brochures.json")
     brochures = JSON.parse(response.body)
 
@@ -18,67 +17,62 @@ namespace :import do
     @pdfs = 0
     @errored = 0
     @log = Logger.new("log/sync-brochures.log")
-    @stdout = Logger.new(STDOUT)
-
+    @stdout = Logger.new($stdout)
 
     def attach_image(brochure, image_path)
-      begin
+      unless brochure.image.attached?
         brochure.image.attach(
           io: URI.open("http://tupress.temple.edu#{image_path}"),
-          filename: image_path.sub("/uploads/brochure/images/", ""),
-        ) unless brochure.image.attached?
-        @images += 1
-      rescue OpenURI::HTTPError => err
-        stdout_and_log("Syncing Brochure #{brochure.id}, image -- errored --  #{err.message} ")
-        @errored += 1
+          filename: image_path.sub("/uploads/brochure/images/", "")
+        )
       end
+      @images += 1
+    rescue OpenURI::HTTPError => e
+      stdout_and_log("Syncing Brochure #{brochure.id}, image -- errored --  #{e.message} ")
+      @errored += 1
     end
 
     def attach_pdf(brochure, pdf_path)
-      begin
+      unless brochure.image.attached?
         brochure.pdf.attach(
           io: URI.open("http://tupress.temple.edu#{pdf_path}"),
-          filename: pdf_path.sub("/uploads/brochures/", ""),
-        ) unless brochure.image.attached?
-        @pdfs += 1
-      rescue OpenURI::HTTPError => err
-        stdout_and_log(%Q(Syncing Brochure \"#{brochure.title}\", PDF -- errored --  #{err.message} ))
-        @errored += 1
+          filename: pdf_path.sub("/uploads/brochures/", "")
+        )
       end
+      @pdfs += 1
+    rescue OpenURI::HTTPError => e
+      stdout_and_log(%(Syncing Brochure \"#{brochure.title}\", PDF -- errored --  #{e.message} ))
+      @errored += 1
     end
 
     def assign_brochure(model, id)
       model_class = model.class.to_s.downcase
-      join = "#{model.class.to_s}Brochure".constantize.new
+      join = "#{model.class}Brochure".constantize.new
       begin
         join.update(brochure_id: id, "#{model_class}_id".to_sym => model.id)
         stdout_and_log("Brochure (#{id}) associated with #{model_class}")
-      rescue => error
-        stdout_and_log("Brochure (#{id}) unable to be associated with #{model_class}: #{error}")
+      rescue StandardError => e
+        stdout_and_log("Brochure (#{id}) unable to be associated with #{model_class}: #{e}")
         @not_saved += 1
       end
     end
 
     brochures.each do |brochure|
-
       brochure_to_update = (
-                              Brochure.find_by(title: brochure["title"]) ?
-                              Brochure.find_by(title: brochure["title"])
-                              :
-                              Brochure.new
+                              Brochure.find_by(title: brochure["title"]) || Brochure.new
                             )
 
       new_brochure = true if brochure_to_update.title.blank?
 
       record_hash =
-      {
-        "title"                 => brochure.dig("title"),
-        "subject_code"          => brochure.dig("subject_id"),
-        "catalog_code"          => brochure.dig("catalog_code"),
-        "promoted_to_homepage"  => brochure.dig("promoted_to_homepage"),
-        "pdf"                   => brochure.dig("pdf")["url"],
-        "image"                 => brochure.dig("image")["url"]
-      }
+        {
+          "title" => brochure["title"],
+          "subject_code" => brochure["subject_id"],
+          "catalog_code" => brochure["catalog_code"],
+          "promoted_to_homepage" => brochure["promoted_to_homepage"],
+          "pdf" => brochure["pdf"]["url"],
+          "image" => brochure["image"]["url"]
+        }
 
       brochure_to_update.assign_attributes(record_hash.except("pdf", "image", "catalog_code", "subject_code"))
 
@@ -96,21 +90,19 @@ namespace :import do
           assign_brochure(subject, brochure_to_update.id) if subject.present?
 
         else
-          stdout_and_log(%Q(Brochure record unable to be saved for #{record_hash["title"]}))
+          stdout_and_log(%(Brochure record unable to be saved for #{record_hash['title']}))
           @not_saved += 1
         end
       else
-        stdout_and_log(%Q(Brochure record unable to be saved for #{record_hash["title"]} -- No PDF))
+        stdout_and_log(%(Brochure record unable to be saved for #{record_hash['title']} -- No PDF))
       end
 
       stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved. \n Covers: #{@images}, Excerpts: #{@pdfs}")
-
     end
 
     def stdout_and_log(message, level: :info)
       @log.send(level, message)
       @stdout.send(level, message)
     end
-
   end
 end
