@@ -3,24 +3,22 @@
 require "spec_helper"
 
 RSpec.shared_examples "attachable" do
-
   describe "GET /#{described_class.to_s.underscore.pluralize}/:id" do
-
     let(:model) { described_class } # the class that includes the concern
     let(:factory_model) { FactoryBot.create(model.to_s.underscore.to_sym) }
-    let(:attachment) {
+    let(:attachment) do
       file_path = Rails.root.join("spec/fixtures/charles.jpg")
       pdf_file_path = Rails.root.join("spec/fixtures/guidelines.pdf")
       file = Rack::Test::UploadedFile.new(file_path, "image/jpeg")
       pdf_file = Rack::Test::UploadedFile.new(file_path, "application/pdf")
-      factory_model.image.attach(file) if ["Brochure", "Event", "Series"].include?(model.to_s)
-      factory_model.pdf.attach(pdf_file) if ["Brochure", "SpecialOffer", "Subject"].include?(model.to_s)
+      factory_model.image.attach(file) if %w[Brochure Event Series].include?(model.to_s)
+      factory_model.pdf.attach(pdf_file) if %w[Brochure SpecialOffer Subject].include?(model.to_s)
       factory_model.cover_image.attach(file) if ["Book"].include?(model.to_s)
-    }
+    end
 
     def attachment_field(model)
-      factory_model.image.attachment if ["Brochure", "Event", "Series"].include?(model.to_s)
-      factory_model.pdf.attachment if ["Brochure", "SpecialOffer", "Subject"].include?(model.to_s)
+      factory_model.image.attachment if %w[Brochure Event Series].include?(model.to_s)
+      factory_model.pdf.attachment if %w[Brochure SpecialOffer Subject].include?(model.to_s)
       factory_model.cover_image.attachment if ["Book"].include?(model.to_s)
     end
 

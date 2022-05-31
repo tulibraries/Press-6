@@ -15,6 +15,6 @@ class PeopleController < ApplicationController
   end
 
   def sales_reps
-    @people = Person.where(department: "Sales Reps").group_by { |rep| rep.region }
+    @people = Person.where(department: "Sales Reps").group_by(&:region)
   end
 end

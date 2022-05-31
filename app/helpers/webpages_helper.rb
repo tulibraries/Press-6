@@ -2,37 +2,49 @@
 
 module WebpagesHelper
   def display_image(model, homepage = false)
-    model.image.attached? ?
+    if model.image.attached?
       (image_tag model.image)
-      :
-      ((image_pack_tag "default-book-cover-index.png") if homepage.present?)
+    else
+      ((image_tag "default-book-cover-index.png") if homepage.present?)
+    end
   end
 
   def hot_cover(book)
-    book.cover_image.attached? ?
+    if book.cover_image.attached?
       (image_tag book.custom_image("cover_image", 180, 280), class: "news-image")
-      :
-      (image_pack_tag "default-book-cover-index.png", class: "news-image")
+    else
+      (image_tag "default-book-cover-index.png", class: "news-image")
+    end
   end
 
   def news_image(model)
-    unless model.class.to_s == "Event"
-      model.class.to_s == "Book" ? hot_cover(model) : (image_tag model.image, class: "news-image")
+    if model.class.to_s == "Event"
+      if model.image.attached?
+        (image_tag model.image,
+                   class: "news-image")
+      else
+        (image_tag "default-book-cover-index.png",
+                   class: "news-image")
+      end
     else
-      model.image.attached? ? (image_tag model.image, class: "news-image") : (image_pack_tag "default-book-cover-index.png", class: "news-image")
+      model.class.to_s == "Book" ? hot_cover(model) : (image_tag model.image, class: "news-image")
     end
   end
 
   def news_link(model, type = nil)
     case model.class.to_s
     when "Book"
-      type == "image" ?
+      if type == "image"
         (link_to news_image(model), book_path(model))
-        :
+      else
         (link_to model.title, book_path(model))
+      end
     when "NewsItem"
-      type == "image" ? (model.link.present? ? (link_to news_image(model), model.link) : (news_image(model))) :
-                        (model.link.present? ? (link_to model.title, model.link) : (model.title))
+      if type == "image"
+        (model.link.present? ? (link_to news_image(model), model.link) : news_image(model))
+      else
+        (model.link.present? ? (link_to model.title, model.link) : model.title)
+      end
     when "Event"
       type == "image" ? (link_to news_image(model), events_path) : (link_to model.title, events_path)
     end

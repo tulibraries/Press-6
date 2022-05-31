@@ -8,8 +8,10 @@ class Book < ApplicationRecord
   before_save :get_excerpt, :catalog_code, :sort_date
 
   validates :title, :xml_id, :author_byline, :author_ids, :status, presence: true
-  validates :cover_image, presence: false, blob: { content_type: ["image/png", "image/jpg", "image/jpeg", "image/gif"], size_range: 1..5.megabytes }
-  validates :suggested_reading_image, presence: false, blob: { content_type: ["image/png", "image/jpg", "image/jpeg", "image/gif"], size_range: 1..5.megabytes }
+  validates :cover_image, presence: false,
+                          blob: { content_type: ["image/png", "image/jpg", "image/jpeg", "image/gif"], size_range: 1..5.megabytes }
+  validates :suggested_reading_image, presence: false,
+                                      blob: { content_type: ["image/png", "image/jpg", "image/jpeg", "image/gif"], size_range: 1..5.megabytes }
   validates :toc_file, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
   validates :guide_file, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
   validates :excerpt_file, presence: false, blob: { content_type: ["application/pdf"], size_range: 1..250.megabytes }
@@ -36,14 +38,14 @@ class Book < ApplicationRecord
   belongs_to :series, optional: true
 
   def sort_titles
-    if self.title.present?
-      excludes = ["A", "An", "The"]
-      sort_title = self.title
+    if title.present?
+      excludes = %w[A An The]
+      sort_title = title
       first = sort_title.split.first
       if !first.nil? && excludes.include?(first.titlecase)
         sort_title = sort_title.sub(/^(the|a|an)\s+/i, "")
         sort_title = cleanup(sort_title)
-        self.sort_title = I18n.transliterate(sort_title + ", " + first)
+        self.sort_title = I18n.transliterate("#{sort_title}, #{first}")
       else
         self.sort_title = I18n.transliterate(cleanup(sort_title))
       end
@@ -51,58 +53,63 @@ class Book < ApplicationRecord
   end
 
   def catalog_code
-    self.catalog_id.downcase if self.catalog_id.present?
+    catalog_id.downcase if catalog_id.present?
   end
 
   def get_excerpt
-    if self.excerpt.present? && self.excerpt.include?("tempress/") # only runs during harvest
-      self.excerpt_text = self.excerpt.split(/.pdf\"> */i)[1].present? ? self.excerpt.split(/.pdf\"> */i)[1].split(/<\/a> */i)[0] : "Read An Excerpt (pdf)."
-      self.excerpt_file_name = self.excerpt.split(/tempress\/ */)[1].split(/\"> */)[0]
+    if excerpt.present? && excerpt.include?("tempress/") # only runs during harvest
+      self.excerpt_text = excerpt.split(/.pdf"> */i)[1].present? ? excerpt.split(/.pdf"> */i)[1].split(%r{</a> *}i)[0] : "Read An Excerpt (pdf)."
+      self.excerpt_file_name = excerpt.split(%r{tempress/ *})[1].split(/"> */)[0]
     end
   end
 
   def subjects_as_tuples
-    [JSON.parse(self.subjects)].flatten.map { |h| [h["subject_title"], h["subject_id"]] } if self.subjects.present?
+    [JSON.parse(subjects)].flatten.map { |h| [h["subject_title"], h["subject_id"]] } if subjects.present?
   end
 
   def bindings_as_tuples
-    [JSON.parse(self.bindings)["binding"]].flatten.select { |b| ["NP", "IP"].include? b["binding_status"] }.map { |b|
-        {
-          format: b["format"],
-          price: b["price"],
-          ean: b["ean"],
-          status: b["binding_status"],
-          pub_date: b["pub_date_for_format"]
-        }}
+    [JSON.parse(bindings)["binding"]].flatten.select { |b| %w[NP IP].include? b["binding_status"] }.map do |b|
+      {
+        format: b["format"],
+        price: b["price"],
+        ean: b["ean"],
+        status: b["binding_status"],
+        pub_date: b["pub_date_for_format"]
+      }
+    end
   end
 
   def sort_date
-    bindings_as_tuples.each do |tuple|
-      if tuple[:pub_date].present?
+    if bindings.present?
+      bindings_as_tuples.each do |tuple|
+        next if tuple[:pub_date].blank?
+
         date = tuple[:pub_date].split(" ")
 
-        (date[1].to_i < 99 && date[1].to_i > 22) ?  # [TODO] remove after initial run and replace with "unless self.sort_year.present?"
-          self.sort_year = "19#{date[1]}" : # [TODO] remove after initial run
-          self.sort_year = "20#{date[1]}"
+        self.sort_year = if date[1].to_i < 99 && date[1].to_i > 22
+          "19#{date[1]}"
+                         else
+                           "20#{date[1]}"
+        end
 
         self.sort_month = date[0]
       end
-    end if self.bindings.present?
+    end
   end
 
   def self.search(q)
     if q
       q = q.last.present? ? q : q[0...-1]
-      Book.where({ status: ["NP", "IP"] })
-      .where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
-      .or(Book.where("sort_title REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
-      .or(Book.where("subtitle REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
-      .or(Book.where("author_byline REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
-      .order(:sort_title)
+      Book.where({ status: %w[NP IP] })
+          .where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
+          .or(Book.where("sort_title REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
+          .or(Book.where("subtitle REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
+          .or(Book.where("author_byline REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
+          .order(:sort_title)
     end
   end
 
   def select_value
-    "#{self.sort_title.to_s} -- #{self.author_byline}"
+    "#{sort_title} -- #{author_byline}"
   end
 end

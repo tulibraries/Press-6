@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe SyncService::Books, type: :service do
-
   before(:all) do
     @book_harvest = described_class.new(xml_path: file_fixture("delta.xml").to_path)
     @books = @book_harvest.read_books
@@ -126,7 +125,5 @@ RSpec.describe SyncService::Books, type: :service do
     it "does not sync missing AUTHOR_BYLINE book" do
       expect(noauthor).not_to be
     end
-
   end
-
 end

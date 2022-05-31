@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "conferences/index.html.erb", type: :view do
+RSpec.describe "conferences/index", type: :view do
   let(:conference1) { FactoryBot.create(:conference, start_date: DateTime.now) }
   let(:conference2) { FactoryBot.create(:conference, start_date: DateTime.now.next_month) }
   let(:intro) { FactoryBot.create(:webpage) }
@@ -21,13 +21,12 @@ RSpec.describe "conferences/index.html.erb", type: :view do
 
   it "groups conferences by month" do
     render
-    expect(rendered).to include "#{conference1.start_date.strftime("%B")}</h2>"
-    expect(rendered).to include "#{conference2.start_date.strftime("%B")}</h2>"
+    expect(rendered).to include "#{conference1.start_date.strftime('%B')}</h2>"
+    expect(rendered).to include "#{conference2.start_date.strftime('%B')}</h2>"
   end
 
   it "renders top of page intro" do
     render
     expect(rendered).to include "Hello World"
   end
-
 end

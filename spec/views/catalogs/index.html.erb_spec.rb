@@ -2,13 +2,15 @@
 
 require "rails_helper"
 
-RSpec.describe "catalogs/index.html.erb", type: :view do
+RSpec.describe "catalogs/index", type: :view do
   let(:user) { FactoryBot.create(:user) }
   let(:spring_catalog) { FactoryBot.create(:catalog) }
-  let(:fall_catalog) { FactoryBot.create(:catalog, title: "Fall 2014",
-                                                    year: "2014",
-                                                    code: "FA14",
-                                                    season: "Fall") }
+  let(:fall_catalog) do
+    FactoryBot.create(:catalog, title: "Fall 2014",
+                                year: "2014",
+                                code: "FA14",
+                                season: "Fall")
+  end
 
   before(:each) do
     allow(view).to receive(:current_user).and_return(user)

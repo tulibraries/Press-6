@@ -21,24 +21,26 @@
 # Ignore uploaded files in development.
 /storage/*
 !/storage/.keep
+/tmp/storage/*
+!/tmp/storage/
+!/tmp/storage/.keep
 
-/public/assets
+/public/asset
+/app/assets/builds/*
+!/app/assets/builds/.keep
+
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 config/secrets.yml
 
-/public/uploads
-/public/packs
-/public/packs-test
-/node_modules
-/yarn-error.log
-yarn-debug.log*
-.yarn-integrity
-*.sql
-.DS_Store
-/public/uploads
+coverage
 /coverage
-/sync-logs
+/coverage/*
+
+/node_modules
+*.sql
+*.xml
+.DS_Store
 .ruby-version

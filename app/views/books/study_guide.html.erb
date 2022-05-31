@@ -13,7 +13,7 @@
         <% if @book.cover_image.attached? %>
           <%= image_tag @book.index_image("cover_image"), class: "cover-image" %>
         <% else %>
-          <%= image_pack_tag "default-book-cover-index.png" %>
+          <%= image_tag "default-book-cover-index.png" %>
         <% end %>
       <% end %>
     </div>

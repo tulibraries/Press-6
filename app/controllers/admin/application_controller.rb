@@ -29,10 +29,10 @@ module Admin
     # end
 
     def find_resource(param)
-      unless ["ActiveStorage::Attachment::ActiveRecord_Relation", "Journal"].include? scoped_resource.class.to_s
-        scoped_resource.friendly.find(param)
-      else
+      if ["ActiveStorage::Attachment::ActiveRecord_Relation", "Journal"].include? scoped_resource.class.to_s
         scoped_resource.find(param)
+      else
+        scoped_resource.friendly.find(param)
       end
     end
   end

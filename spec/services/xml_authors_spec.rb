@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe SyncService::Authors, type: :service do
-
   before(:all) do
     Author.delete_all
     @author_harvest = described_class.new(xml_path: file_fixture("delta.xml").to_path)
@@ -22,10 +21,10 @@ RSpec.describe SyncService::Authors, type: :service do
 
     describe "checks book status" do
       it "allows authors from good status books" do
-        expect(["NP", "IP"].include?(@status)).to be_truthy
+        expect(%w[NP IP].include?(@status)).to be_truthy
       end
       it "disallows authors from bad status books" do
-        expect(["NP", "IP"].include?("X")).to be_falsey
+        expect(%w[NP IP].include?("X")).to be_falsey
       end
     end
 
@@ -48,7 +47,6 @@ RSpec.describe SyncService::Authors, type: :service do
         expect(author2).to be
         expect(author3).to be
       end
-
     end
   end
 end

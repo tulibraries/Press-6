@@ -15,5 +15,4 @@ RSpec.describe ConferencesController, type: :controller do
   it_behaves_like "index_editable"
 
   it_behaves_like "index_editable"
-
 end

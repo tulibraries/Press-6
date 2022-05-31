@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe SubjectsController, type: :controller do
-
   let(:brochure) { FactoryBot.create(:brochure) }
   let(:subject) { FactoryBot.create(:subject, brochures: [brochure]) }
 
@@ -27,5 +26,4 @@ RSpec.describe SubjectsController, type: :controller do
   end
 
   it_behaves_like "index_editable"
-
 end

@@ -442,41 +442,30 @@ class CreateStructure < ActiveRecord::Migration[6.1]
       add_foreign_key :active_storage_variant_records, :active_storage_blobs, column: :blob_id
     end
 
-    unless index_exists?(:special_offers, :book_id)
-      add_reference :special_offers, :book, foreign_key: true
-    end
-    unless index_exists?(:books, :special_offer_id)
-      add_reference :books, :special_offer, foreign_key: true
-    end
-    unless index_exists?(:brochures, :catalog_id)
-      add_reference :brochures, :catalog, foreign_key: true
-    end
-    unless index_exists?(:brochures, :subject_id)
-      add_reference :brochures, :subject, foreign_key: true
-    end
-    unless index_exists?(:documents, :person_id)
-      add_reference :documents, :person, foreign_key: true
-    end
-    unless index_exists?(:people, :document_id)
-      add_reference :people, :document, foreign_key: true
-    end
-    unless index_exists?(:series, :book_id)
-      add_reference :series, :book, foreign_key: true
-    end
+    add_reference :special_offers, :book, foreign_key: true unless index_exists?(:special_offers, :book_id)
+    add_reference :books, :special_offer, foreign_key: true unless index_exists?(:books, :special_offer_id)
+    add_reference :brochures, :catalog, foreign_key: true unless index_exists?(:brochures, :catalog_id)
+    add_reference :brochures, :subject, foreign_key: true unless index_exists?(:brochures, :subject_id)
+    add_reference :documents, :person, foreign_key: true unless index_exists?(:documents, :person_id)
+    add_reference :people, :document, foreign_key: true unless index_exists?(:people, :document_id)
+    add_reference :series, :book, foreign_key: true unless index_exists?(:series, :book_id)
 
-    unless index_exists?(:active_storage_variant_records, %i[ blob_id variation_digest ], name: "index_active_storage_variant_records_uniqueness")
-      add_index :active_storage_variant_records, %i[ blob_id variation_digest ], name: "index_active_storage_variant_records_uniqueness", unique: true
+    unless index_exists?(:active_storage_variant_records, %i[blob_id variation_digest],
+                         name: "index_active_storage_variant_records_uniqueness")
+      add_index :active_storage_variant_records, %i[blob_id variation_digest],
+                name: "index_active_storage_variant_records_uniqueness", unique: true
     end
-    unless index_exists?(:action_text_rich_texts, %i[record_type record_id name], name: "index_action_text_rich_texts_uniqueness")
-      add_index :action_text_rich_texts, %i[record_type record_id name], name: "index_action_text_rich_texts_uniqueness", unique: true
+    unless index_exists?(:action_text_rich_texts, %i[record_type record_id name],
+                         name: "index_action_text_rich_texts_uniqueness")
+      add_index :action_text_rich_texts, %i[record_type record_id name],
+                name: "index_action_text_rich_texts_uniqueness", unique: true
     end
-    unless index_exists?(:active_storage_attachments, %i[record_type record_id name blob_id], name: "index_active_storage_attachments_uniqueness")
-      add_index :active_storage_attachments, %i[record_type record_id name blob_id], name: "index_active_storage_attachments_uniqueness", unique: true
+    unless index_exists?(:active_storage_attachments, %i[record_type record_id name blob_id],
+                         name: "index_active_storage_attachments_uniqueness")
+      add_index :active_storage_attachments, %i[record_type record_id name blob_id],
+                name: "index_active_storage_attachments_uniqueness", unique: true
     end
-    unless index_exists?(:active_storage_blobs, :key)
-      add_index :active_storage_blobs, [:key], unique: true
-    end
-
+    add_index :active_storage_blobs, [:key], unique: true unless index_exists?(:active_storage_blobs, :key)
 
     unless index_exists?(:books, :series_id) && index_exists?(:books, :catalog_id)
       change_table :books, bulk: true do |t|
@@ -506,67 +495,37 @@ class CreateStructure < ActiveRecord::Migration[6.1]
       end
     end
 
-    unless index_exists?(:friendly_id_slugs, [:sluggable_type, :sluggable_id]) && index_exists?(:friendly_id_slugs, [:slug, :sluggable_type]) && index_exists?(:friendly_id_slugs, [:slug, :sluggable_type, :scope])
+    unless index_exists?(:friendly_id_slugs,
+                         %i[sluggable_type
+                            sluggable_id]) && index_exists?(:friendly_id_slugs,
+                                                            %i[slug
+                                                               sluggable_type]) && index_exists?(:friendly_id_slugs,
+                                                                                                 %i[slug sluggable_type
+                                                                                                    scope])
       change_table :friendly_id_slugs, bulk: true do |t|
-        t.index [:sluggable_type, :sluggable_id]
-        t.index [:slug, :sluggable_type], length: { slug: 140, sluggable_type: 50 }
-        t.index [:slug, :sluggable_type, :scope], length: { slug: 70, sluggable_type: 50, scope: 70 }, unique: true
+        t.index %i[sluggable_type sluggable_id]
+        t.index %i[slug sluggable_type], length: { slug: 140, sluggable_type: 50 }
+        t.index %i[slug sluggable_type scope], length: { slug: 70, sluggable_type: 50, scope: 70 }, unique: true
       end
     end
 
-    unless index_exists?(:agencies, :slug)
-      add_index :agencies, :slug, unique: true
-    end
-    unless index_exists?(:authors, :slug)
-      add_index :authors, :slug, unique: true
-    end
-    unless index_exists?(:books, :slug)
-      add_index :books, :slug, unique: true
-    end
-    unless index_exists?(:brochures, :slug)
-      add_index :brochures, :slug, unique: true
-    end
-    unless index_exists?(:catalogs, :slug)
-      add_index :catalogs, :slug, unique: true
-    end
-    unless index_exists?(:conferences, :slug)
-      add_index :conferences, :slug, unique: true
-    end
-    unless index_exists?(:documents, :slug)
-      add_index :documents, :slug, unique: true
-    end
-    unless index_exists?(:events, :slug)
-      add_index :events, :slug, unique: true
-    end
-    unless index_exists?(:faqs, :slug)
-      add_index :faqs, :slug, unique: true
-    end
-    unless index_exists?(:highlights, :slug)
-      add_index :highlights, :slug, unique: true
-    end
-    unless index_exists?(:journals, :slug)
-      add_index :journals, :slug, unique: true
-    end
-    unless index_exists?(:news_items, :slug)
-      add_index :news_items, :slug, unique: true
-    end
-    unless index_exists?(:oabooks, :slug)
-      add_index :oabooks, :slug, unique: true
-    end
-    unless index_exists?(:people, :slug)
-      add_index :people, :slug, unique: true
-    end
-    unless index_exists?(:series, :slug)
-      add_index :series, :slug, unique: true
-    end
-    unless index_exists?(:special_offers, :slug)
-      add_index :special_offers, :slug, unique: true
-    end
-    unless index_exists?(:subjects, :slug)
-      add_index :subjects, :slug, unique: true
-    end
-    unless index_exists?(:webpages, :slug)
-      add_index :webpages, :slug, unique: true
-    end
+    add_index :agencies, :slug, unique: true unless index_exists?(:agencies, :slug)
+    add_index :authors, :slug, unique: true unless index_exists?(:authors, :slug)
+    add_index :books, :slug, unique: true unless index_exists?(:books, :slug)
+    add_index :brochures, :slug, unique: true unless index_exists?(:brochures, :slug)
+    add_index :catalogs, :slug, unique: true unless index_exists?(:catalogs, :slug)
+    add_index :conferences, :slug, unique: true unless index_exists?(:conferences, :slug)
+    add_index :documents, :slug, unique: true unless index_exists?(:documents, :slug)
+    add_index :events, :slug, unique: true unless index_exists?(:events, :slug)
+    add_index :faqs, :slug, unique: true unless index_exists?(:faqs, :slug)
+    add_index :highlights, :slug, unique: true unless index_exists?(:highlights, :slug)
+    add_index :journals, :slug, unique: true unless index_exists?(:journals, :slug)
+    add_index :news_items, :slug, unique: true unless index_exists?(:news_items, :slug)
+    add_index :oabooks, :slug, unique: true unless index_exists?(:oabooks, :slug)
+    add_index :people, :slug, unique: true unless index_exists?(:people, :slug)
+    add_index :series, :slug, unique: true unless index_exists?(:series, :slug)
+    add_index :special_offers, :slug, unique: true unless index_exists?(:special_offers, :slug)
+    add_index :subjects, :slug, unique: true unless index_exists?(:subjects, :slug)
+    add_index :webpages, :slug, unique: true unless index_exists?(:webpages, :slug)
   end
 end

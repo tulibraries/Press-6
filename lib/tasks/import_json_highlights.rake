@@ -6,7 +6,6 @@ require "logger"
 
 namespace :import do
   task highlights_json: [:environment] do
-
     response = HTTParty.get("http://tupress.temple.edu/highlights.json")
     highlights = JSON.parse(response.body)
 
@@ -18,40 +17,36 @@ namespace :import do
     @pdfs = 0
     @errored = 0
     @log = Logger.new("log/sync-highlights.log")
-    @stdout = Logger.new(STDOUT)
+    @stdout = Logger.new($stdout)
 
     def attach_image(highlight, path)
-      begin
+      unless highlight.image.attached?
         highlight.image.attach(
           io: URI.open("http://tupress.temple.edu#{path}"),
-          filename: path.sub("/uploads/highlight/images/", ""),
-        ) unless highlight.image.attached?
-        @images += 1
-      rescue => err
-        stdout_and_log("Syncing Highlight #{highlight.title}, -- errored --  #{err.message} ")
-        @errored += 1
+          filename: path.sub("/uploads/highlight/images/", "")
+        )
       end
+      @images += 1
+    rescue StandardError => e
+      stdout_and_log("Syncing Highlight #{highlight.title}, -- errored --  #{e.message} ")
+      @errored += 1
     end
 
     highlights.each do |highlight|
-
       highlight_to_update = (
-                              Highlight.find_by(title: highlight["title"]) ?
-                              Highlight.find_by(title: highlight["title"])
-                              :
-                              Highlight.new
+                              Highlight.find_by(title: highlight["title"]) || Highlight.new
                             )
 
       new_highlight = true if highlight_to_update.title.blank?
 
       record_hash =
-      {
-        "title"                    => highlight.dig("title"),
-        "promote_to_homepage"      => highlight.dig("homepage"),
-        "link"                     => highlight.fetch("link") { "https://tupress.temple.edu" },
-        "image"                    => highlight.dig("image")["url"],
-        "alt_text"                 => "Alt text needed"
-      }
+        {
+          "title" => highlight["title"],
+          "promote_to_homepage" => highlight["homepage"],
+          "link" => highlight.fetch("link", "https://tupress.temple.edu"),
+          "image" => highlight["image"]["url"],
+          "alt_text" => "Alt text needed"
+        }
 
       highlight_to_update.update(record_hash.except("image"))
       attach_image(highlight_to_update, record_hash["image"]) if record_hash["image"].present?
@@ -61,11 +56,11 @@ namespace :import do
           @updated += 1 unless new_highlight
           @created += 1 if new_highlight
         else
-          stdout_and_log(%Q(Highlight record unable to be saved for #{record_hash["title"]}))
+          stdout_and_log(%(Highlight record unable to be saved for #{record_hash['title']}))
           @not_saved += 1
         end
-      rescue => err
-        stdout_and_log(%Q(Highlight title: #{record_hash["title"]} -- #{err.message}))
+      rescue StandardError => e
+        stdout_and_log(%(Highlight title: #{record_hash['title']} -- #{e.message}))
         @not_saved += 1
       end
 
@@ -76,6 +71,5 @@ namespace :import do
       @log.send(level, message)
       @stdout.send(level, message)
     end
-
   end
 end

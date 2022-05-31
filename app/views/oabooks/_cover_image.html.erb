@@ -1,11 +1,11 @@
 <% if oabook.image.attached? %>
   <%= link_to (image_tag oabook.show_image("image")), edit_admin_oabook_path(oabook), {class: "mb-4"} %>
 <% else %>
-  <%= link_to (image_pack_tag "default-book-cover-show.png"), edit_admin_oabook_path(oabook), {class: "mb-4"} %>
+  <%= link_to (image_tag "default-book-cover-show.png"), edit_admin_oabook_path(oabook), {class: "mb-4"} %>
 <% end if current_user %>
 
 <% if oabook.image.attached? %>
   <%= image_tag oabook.show_image("image"), class: "mb-4" %>
 <% else %>
-  <%= image_pack_tag "default-book-cover-show.png", class: "mb-4" %>
+  <%= image_tag "default-book-cover-show.png", class: "mb-4" %>
 <% end unless current_user %>

@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "oabooks/show.html.erb", type: :view do
+RSpec.describe "oabooks/show", type: :view do
   let(:user) { FactoryBot.create(:user) }
 
   before(:each) do
@@ -12,7 +12,6 @@ RSpec.describe "oabooks/show.html.erb", type: :view do
   it "uses helper to create manifold link" do
     @oabook = FactoryBot.create(:oabook)
     render
-    expect(rendered).to match /#{t("tupress.oabooks.manifold_link")}/
+    expect(rendered).to match(/#{t("tupress.oabooks.manifold_link")}/)
   end
-
 end

@@ -14,5 +14,4 @@ RSpec.describe Catalog, type: :model do
 
   it_behaves_like "detachable"
   it_behaves_like "attachable"
-
 end

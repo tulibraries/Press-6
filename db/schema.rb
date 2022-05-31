@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,16 +12,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_09_195511) do
-
+ActiveRecord::Schema[7.0].define(version: 20_220_509_195_511) do
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
     t.string "record_type", null: false
     t.bigint "record_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index %w[record_type record_id name], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
@@ -27,9 +28,10 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+    t.index %w[record_type record_id name blob_id], name: "index_active_storage_attachments_uniqueness",
+                                                    unique: true
   end
 
   create_table "active_storage_blobs", charset: "utf8mb3", force: :cascade do |t|
@@ -40,16 +42,16 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.text "metadata"
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
   create_table "active_storage_variant_records", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index %w[blob_id variation_digest], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "agencies", charset: "utf8mb3", force: :cascade do |t|
@@ -61,8 +63,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.string "fax"
     t.string "email"
     t.string "website"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_agencies_on_slug", unique: true
   end
 
@@ -75,8 +77,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.string "prefix"
     t.string "suffix"
     t.boolean "suppress", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_authors_on_slug", unique: true
   end
 
@@ -155,8 +157,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.string "label_8"
     t.string "label_9"
     t.string "label_10"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "special_offer_id"
     t.index ["catalog_id"], name: "index_books_on_catalog_id"
     t.index ["series_id"], name: "index_books_on_series_id"
@@ -168,8 +170,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.string "slug"
     t.string "title"
     t.boolean "promoted_to_homepage"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "catalog_id"
     t.bigint "subject_id"
     t.index ["catalog_id"], name: "index_brochures_on_catalog_id"
@@ -180,8 +182,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
   create_table "catalog_brochures", charset: "utf8mb3", force: :cascade do |t|
     t.integer "brochure_id"
     t.integer "catalog_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["brochure_id"], name: "index_catalog_brochures_on_brochure_id"
     t.index ["catalog_id"], name: "index_catalog_brochures_on_catalog_id"
   end
@@ -193,8 +195,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.string "season"
     t.string "year"
     t.boolean "suppress"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_catalogs_on_slug", unique: true
   end
 
@@ -202,14 +204,14 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.string "dates"
     t.string "slug"
     t.string "title"
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.datetime "start_date", precision: nil
+    t.datetime "end_date", precision: nil
     t.string "link"
     t.string "venue"
     t.string "location"
     t.string "booth"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_conferences_on_slug", unique: true
   end
 
@@ -219,8 +221,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.string "contact_name"
     t.string "contact_email"
     t.string "document_type"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "person_id"
     t.index ["person_id"], name: "index_documents_on_person_id"
     t.index ["slug"], name: "index_documents_on_slug", unique: true
@@ -230,21 +232,21 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.integer "news_weight"
     t.string "slug"
     t.string "title"
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.datetime "start_date", precision: nil
+    t.datetime "end_date", precision: nil
     t.string "time_zone"
     t.string "location"
     t.boolean "add_to_news"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_events_on_slug", unique: true
   end
 
   create_table "faqs", charset: "utf8mb3", force: :cascade do |t|
     t.string "title"
     t.string "slug"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_faqs_on_slug", unique: true
   end
 
@@ -253,10 +255,12 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.string "scope"
-    t.datetime "created_at"
-    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, length: { slug: 70, scope: 70 }
-    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", length: { slug: 140 }
-    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+    t.datetime "created_at", precision: nil
+    t.index %w[slug sluggable_type scope], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope",
+                                           unique: true, length: { slug: 70, scope: 70 }
+    t.index %w[slug sluggable_type], name: "index_friendly_id_slugs_on_slug_and_sluggable_type",
+                                     length: { slug: 140 }
+    t.index %w[sluggable_type sluggable_id], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
   create_table "highlights", charset: "utf8mb3", force: :cascade do |t|
@@ -265,8 +269,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.string "title"
     t.boolean "promote_to_homepage"
     t.string "link"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_highlights_on_slug", unique: true
   end
 
@@ -274,8 +278,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.string "slug"
     t.string "title"
     t.string "url"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_journals_on_slug", unique: true
   end
 
@@ -284,8 +288,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.string "title"
     t.string "link"
     t.boolean "promote_to_homepage"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_news_items_on_slug", unique: true
   end
 
@@ -302,8 +306,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.boolean "pod"
     t.string "epub_link"
     t.string "manifold"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_oabooks_on_slug", unique: true
   end
 
@@ -323,8 +327,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.string "region"
     t.string "website"
     t.boolean "is_rep", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "document_id"
     t.index ["document_id"], name: "index_people_on_document_id"
     t.index ["slug"], name: "index_people_on_slug", unique: true
@@ -335,8 +339,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.text "review"
     t.string "review_id"
     t.integer "weight"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "series", charset: "utf8mb3", force: :cascade do |t|
@@ -347,8 +351,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.text "description"
     t.string "founder"
     t.string "image_link"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "book_id"
     t.index ["book_id"], name: "index_series_on_book_id"
     t.index ["slug"], name: "index_series_on_slug", unique: true
@@ -357,8 +361,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
   create_table "special_offer_books", charset: "utf8mb3", force: :cascade do |t|
     t.integer "special_offer_id"
     t.integer "book_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_special_offer_books_on_book_id"
     t.index ["special_offer_id"], name: "index_special_offer_books_on_special_offer_id"
   end
@@ -368,8 +372,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.string "title"
     t.string "pdf_display_name"
     t.boolean "active"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "book_id"
     t.index ["book_id"], name: "index_special_offers_on_book_id"
     t.index ["slug"], name: "index_special_offers_on_slug", unique: true
@@ -378,8 +382,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
   create_table "subject_brochures", charset: "utf8mb3", force: :cascade do |t|
     t.integer "brochure_id"
     t.integer "subject_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["brochure_id"], name: "index_subject_brochures_on_brochure_id", unique: true
     t.index ["subject_id"], name: "index_subject_brochures_on_subject_id", unique: true
   end
@@ -389,8 +393,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.string "code"
     t.string "title"
     t.string "file_label"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_subjects_on_slug", unique: true
   end
 
@@ -398,15 +402,15 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -414,8 +418,8 @@ ActiveRecord::Schema.define(version: 2022_05_09_195511) do
   create_table "webpages", charset: "utf8mb3", force: :cascade do |t|
     t.string "slug"
     t.string "title"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_webpages_on_slug", unique: true
   end
 

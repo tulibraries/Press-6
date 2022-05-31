@@ -6,7 +6,6 @@ require "logger"
 
 namespace :import do
   task people_json: [:environment] do
-
     response = HTTParty.get("http://tupress.temple.edu/people/list.json")
     persons = JSON.parse(response.body)
 
@@ -18,28 +17,24 @@ namespace :import do
     @pdfs = 0
     @errored = 0
     @log = Logger.new("log/sync-people.log")
-    @stdout = Logger.new(STDOUT)
+    @stdout = Logger.new($stdout)
 
     persons.each do |person|
-
       person_to_update = (
-                              Person.find_by(email: person["email"]) ?
-                              Person.find_by(email: person["email"])
-                              :
-                              Person.new
+                              Person.find_by(email: person["email"]) || Person.new
                             )
 
       new_person = true if person_to_update.email.blank?
 
       record_hash =
-      {
-        "title"                   => person.dig("name"),
-        "email"                   => person.dig("email"),
-        "position"                => person.dig("position"),
-        "position_description"    => person.dig("position_description"),
-        "department"              => person.dig("department"),
-        "document_contact"        => person.dig("document_contact")
-      }
+        {
+          "title" => person["name"],
+          "email" => person["email"],
+          "position" => person["position"],
+          "position_description" => person["position_description"],
+          "department" => person["department"],
+          "document_contact" => person["document_contact"]
+        }
 
       person_to_update.update(record_hash)
 
@@ -48,11 +43,11 @@ namespace :import do
           @updated += 1 unless new_person
           @created += 1 if new_person
         else
-          stdout_and_log(%Q(Person record unable to be saved for #{record_hash["title"]}))
+          stdout_and_log(%(Person record unable to be saved for #{record_hash['title']}))
           @not_saved += 1
         end
-      rescue => err
-        stdout_and_log(%Q(Person title: #{record_hash["title"]} -- #{err.message}))
+      rescue StandardError => e
+        stdout_and_log(%(Person title: #{record_hash['title']} -- #{e.message}))
         @not_saved += 1
       end
 
@@ -63,6 +58,5 @@ namespace :import do
       @log.send(level, message)
       @stdout.send(level, message)
     end
-
   end
 end

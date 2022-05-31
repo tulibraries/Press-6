@@ -26,19 +26,19 @@ class PersonDashboard < Administrate::BaseDashboard
     ),
     website: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   COLLECTION_ATTRIBUTES = %i[
-  title
-  position
+    title
+    position
   ].freeze
 
   SHOW_PAGE_ATTRIBUTES = %i[
-  image
-  title
-  position
-  department
+    image
+    title
+    position
+    department
   ].freeze
 
   FORM_ATTRIBUTES = %i[

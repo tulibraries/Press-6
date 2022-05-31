@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe SpecialOffersController, type: :controller do
-
   let(:special_offer) { FactoryBot.create(:special_offer) }
 
   describe "GET #index" do
@@ -26,5 +25,4 @@ RSpec.describe SpecialOffersController, type: :controller do
   end
 
   it_behaves_like "index_editable"
-
 end

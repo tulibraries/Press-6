@@ -11,7 +11,7 @@ class Faq < ApplicationRecord
     if q
       q = q.last.present? ? q : q[0...-1]
       Faq.joins(:action_text_rich_text)
-          .where("action_text_rich_texts.body REGEXP ? OR title REGEXP ?", "(^|\\W)#{q}(\\W|$)", "(^|\\W)#{q}(\\W|$)")
+         .where("action_text_rich_texts.body REGEXP ? OR title REGEXP ?", "(^|\\W)#{q}(\\W|$)", "(^|\\W)#{q}(\\W|$)")
     end
   end
 end

@@ -13,7 +13,7 @@ RSpec.describe "Oabooks", type: :request do
 
     it "does not return ls&w books" do
       get "/open-access/north-broad-press/"
-      expect(response.body).not_to match /"#{oabook.title}"/
+      expect(response.body).not_to match(/"#{oabook.title}"/)
     end
   end
 
@@ -22,5 +22,4 @@ RSpec.describe "Oabooks", type: :request do
       expect { get collection_path(oabook.id).to have_text(t("tupress.oabooks.manifold_label")) }
     end
   end
-
 end

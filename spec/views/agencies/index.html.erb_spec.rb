@@ -9,7 +9,6 @@ RSpec.describe "agencies/index", type: :view do
   let(:agency4) { FactoryBot.create(:agency, contact: "Ringo", region: "All Other Territories") }
   let(:user) { FactoryBot.create(:user) }
 
-
   context "displays agency info" do
     before(:each) do
       assign(:default_agency, agency3)
@@ -19,9 +18,9 @@ RSpec.describe "agencies/index", type: :view do
     end
 
     it "renders a list of agencies by region" do
-      expect(rendered).to match /#{agency1.contact}/
-      expect(rendered).to match /#{agency2.contact}/
-      expect(rendered).not_to match /#{agency3.contact}/
+      expect(rendered).to match(/#{agency1.contact}/)
+      expect(rendered).to match(/#{agency2.contact}/)
+      expect(rendered).not_to match(/#{agency3.contact}/)
     end
   end
 
@@ -32,13 +31,13 @@ RSpec.describe "agencies/index", type: :view do
     end
 
     it "only displays assigned regions" do
-      expect(rendered).to match /#{agency1.region}/
-      expect(rendered).not_to match /#{agency3.region}/
+      expect(rendered).to match(/#{agency1.region}/)
+      expect(rendered).not_to match(/#{agency3.region}/)
     end
 
     it "gets rights info from helper method" do
-      expect(rendered).to match /Non-exclusive Rights/
-      expect(rendered).not_to match /Exclusive Rights/
+      expect(rendered).to match(/Non-exclusive Rights/)
+      expect(rendered).not_to match(/Exclusive Rights/)
     end
   end
 
@@ -50,11 +49,10 @@ RSpec.describe "agencies/index", type: :view do
     end
 
     it "renders only default agency" do
-      expect(rendered).not_to match /#{agency1.contact}/
-      expect(rendered).not_to match /#{agency2.contact}/
-      expect(rendered).not_to match /#{agency3.contact}/
-      expect(rendered).to match /#{agency4.contact}/
+      expect(rendered).not_to match(/#{agency1.contact}/)
+      expect(rendered).not_to match(/#{agency2.contact}/)
+      expect(rendered).not_to match(/#{agency3.contact}/)
+      expect(rendered).to match(/#{agency4.contact}/)
     end
   end
-
 end

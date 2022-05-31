@@ -6,7 +6,6 @@ require "logger"
 
 namespace :import do
   task books_json: [:environment] do
-
     response = HTTParty.get("http://tupress.temple.edu/books.json")
     books = JSON.parse(response.body)
 
@@ -18,77 +17,76 @@ namespace :import do
     @guides = 0
     @errored = 0
     @log = Logger.new("log/sync-books.log")
-    @stdout = Logger.new(STDOUT)
-
+    @stdout = Logger.new($stdout)
 
     def attach_cover_image(book, image_path)
-      begin
+      unless book.cover_image.attached?
         book.cover_image.attach(
           io: URI.open("http://tupress.temple.edu#{image_path}"),
-          filename: image_path.sub("/uploads/book/cover_images/", ""),
-        ) unless book.cover_image.attached?
-        @covers += 1
-      rescue OpenURI::HTTPError => err
-        stdout_and_log("Syncing Book #{book.xml_id}, cover_image -- errored --  #{err.message} ")
-        @errored += 1
+          filename: image_path.sub("/uploads/book/cover_images/", "")
+        )
       end
+      @covers += 1
+    rescue OpenURI::HTTPError => e
+      stdout_and_log("Syncing Book #{book.xml_id}, cover_image -- errored --  #{e.message} ")
+      @errored += 1
     end
 
     def attach_excerpt_file(book, excerpt_path)
-      begin
+      unless book.excerpt_file.attached?
         book.excerpt_file.attach(
           io: URI.open("http://tupress.temple.edu#{excerpt_path}"),
-          filename: excerpt_path.sub("/uploads/book/excerpt/", ""),
-        ) unless book.excerpt_file.attached?
-        @excerpts += 1
-      rescue OpenURI::HTTPError => err
-        stdout_and_log("Syncing Book #{book.xml_id}, excerpt_file -- errored --  #{err.message} ")
-        @errored += 1
+          filename: excerpt_path.sub("/uploads/book/excerpt/", "")
+        )
       end
+      @excerpts += 1
+    rescue OpenURI::HTTPError => e
+      stdout_and_log("Syncing Book #{book.xml_id}, excerpt_file -- errored --  #{e.message} ")
+      @errored += 1
     end
 
     def attach_guide_file(book, guide_path)
-      begin
+      unless book.guide_file.attached?
         book.guide_file.attach(
           io: URI.open("http://tupress.temple.edu#{guide_path}"),
-          filename: guide_path.sub("/uploads/books/", ""),
-        ) unless book.guide_file.attached?
-        @guides += 1
-      rescue OpenURI::HTTPError => err
-        stdout_and_log("Syncing Book #{book.xml_id}, guide_file  -- errored --  #{err.message} ")
-        @errored += 1
+          filename: guide_path.sub("/uploads/books/", "")
+        )
       end
+      @guides += 1
+    rescue OpenURI::HTTPError => e
+      stdout_and_log("Syncing Book #{book.xml_id}, guide_file  -- errored --  #{e.message} ")
+      @errored += 1
     end
 
     books.each do |book|
-      book_to_update = (Book.find_by(xml_id: book["book_id"]) ? Book.find_by(xml_id: book["book_id"]) : Book.new)
+      book_to_update = (Book.find_by(xml_id: book["book_id"]) || Book.new)
       new_book = true if book_to_update.xml_id.blank?
 
       record_hash =
-      {
-        "xml_id"              => book.dig("book_id"),
-        "title"               => book.dig("title"),
-        "author_ids"          => book.dig("author_id"),
-        "author_byline"       => book.dig("author_byline"),
-        "subjects"            => book.dig("subjects"),
-        "subject1"            => book.dig("subject1"),
-        "subject2"            => book.dig("subject2"),
-        "subject3"            => book.dig("subject3"),
-        "award"               => book.dig("award"),
-        "award_year"          => book.dig("award_year"),
-        "award2"              => book.dig("award2"),
-        "award_year2"         => book.dig("award_year2"),
-        "award3"              => book.dig("award3"),
-        "award_year3"         => book.dig("award_year3"),
-        "guide_file"          => book.dig("is_guide")["url"],
-        "guide_text"          => book.dig("is_guide_text"),
-        "supplement"          => book.dig("supplement"),
-        "status"              => book.dig("status"),
-        "cover_image"         => book.dig("cover_image")["url"],
-        "excerpt_text"        => book.dig("excerpt_text"),
-        "excerpt_file"        => book.dig("excerpt")["url"],
-        "news_text"           => book.dig("news_text")
-      }
+        {
+          "xml_id" => book["book_id"],
+          "title" => book["title"],
+          "author_ids" => book["author_id"],
+          "author_byline" => book["author_byline"],
+          "subjects" => book["subjects"],
+          "subject1" => book["subject1"],
+          "subject2" => book["subject2"],
+          "subject3" => book["subject3"],
+          "award" => book["award"],
+          "award_year" => book["award_year"],
+          "award2" => book["award2"],
+          "award_year2" => book["award_year2"],
+          "award3" => book["award3"],
+          "award_year3" => book["award_year3"],
+          "guide_file" => book["is_guide"]["url"],
+          "guide_text" => book["is_guide_text"],
+          "supplement" => book["supplement"],
+          "status" => book["status"],
+          "cover_image" => book["cover_image"]["url"],
+          "excerpt_text" => book["excerpt_text"],
+          "excerpt_file" => book["excerpt"]["url"],
+          "news_text" => book["news_text"]
+        }
 
       if record_hash["subjects"].present?
         record_hash["subjects"] = JSON.dump(record_hash["subjects"].map { |h| h["subject"] })
@@ -96,11 +94,10 @@ namespace :import do
         record_hash["subject"] = { "subject" => { "subject_id" => nil, "subject_title" => nil } }
       end
 
-      if record_hash["status"].blank?
-        record_hash["status"] = "X"
-      end
+      record_hash["status"] = "X" if record_hash["status"].blank?
 
-      if book_to_update.present? && record_hash["title"].present? && record_hash["author_byline"].present? && ["NP", "IP"].include?(record_hash["status"])
+      if book_to_update.present? && record_hash["title"].present? && record_hash["author_byline"].present? && %w[NP
+                                                                                                                 IP].include?(record_hash["status"])
         book_to_update.update(record_hash.except("guide_file", "cover_image", "excerpt_file"))
 
         attach_guide_file(book_to_update, record_hash["guide_file"]) if record_hash["guide_file"].present?
@@ -111,15 +108,14 @@ namespace :import do
           @updated += 1 unless new_book
           @created += 1 if new_book
         else
-          stdout_and_log(%Q(Record unable to be saved for #{record_hash["title"]}))
+          stdout_and_log(%(Record unable to be saved for #{record_hash['title']}))
           @not_saved += 1
         end
       else
-        stdout_and_log("#{record_hash["title"]}: missing required field values")
+        stdout_and_log("#{record_hash['title']}: missing required field values")
       end
 
       stdout_and_log("Syncing completed with #{@updated} updated, #{@created} created, #{@errored} errored, and #{@not_saved} not saved. \n Covers: #{@covers}, Excerpts: #{@excerpts}, Guides: #{@guides}")
-
     end
 
     def stdout_and_log(message, level: :info)

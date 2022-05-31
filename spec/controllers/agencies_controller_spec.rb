@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe AgenciesController, type: :controller do
-
   let(:agency) { FactoryBot.create(:agency) }
 
   describe "GET #index" do
@@ -14,5 +13,4 @@ RSpec.describe AgenciesController, type: :controller do
   end
 
   it_behaves_like "index_editable"
-
 end

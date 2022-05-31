@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe AuthorsController, type: :controller do
-
   let(:author) { FactoryBot.create(:author) }
 
   describe "GET #index" do
@@ -26,5 +25,4 @@ RSpec.describe AuthorsController, type: :controller do
   end
 
   it_behaves_like "index_editable"
-
 end

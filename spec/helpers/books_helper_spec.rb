@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe BooksHelper, type: :helper do
-
   let(:formats) { [{ "PB" => "Paperback" }, { "HC" => "Hardcover" }, { "Ebook" => "eBook" }] }
   let(:book) { FactoryBot.create(:book) }
   let(:book_with_cover) { FactoryBot.create(:book, :with_cover_image) }
@@ -41,5 +40,4 @@ RSpec.describe BooksHelper, type: :helper do
       end
     end
   end
-
 end

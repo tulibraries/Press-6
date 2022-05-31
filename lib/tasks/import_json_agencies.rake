@@ -6,7 +6,6 @@ require "logger"
 
 namespace :import do
   task agencies_json: [:environment] do
-
     response = HTTParty.get("http://tupress.temple.edu/agencies.json")
     agencies = JSON.parse(response.body)
 
@@ -18,30 +17,26 @@ namespace :import do
     @pdfs = 0
     @errored = 0
     @log = Logger.new("log/sync-agencies.log")
-    @stdout = Logger.new(STDOUT)
+    @stdout = Logger.new($stdout)
 
     agencies.each do |agency|
-
       agency_to_update = (
-                              Agency.find_by(email: agency["email"]) ?
-                              Agency.find_by(email: agency["email"])
-                              :
-                              Agency.new
+                              Agency.find_by(email: agency["email"]) || Agency.new
                             )
 
       new_agency = true if agency_to_update.email.blank?
 
       record_hash =
-      {
-        "title"         => agency.fetch("title") { "Temple" },
-        "email"         => agency.dig("email"),
-        "contact"       => agency.dig("contact"),
-        "address"       => agency.dig("address1") + "<br>" + agency.dig("address2") + "<br>" + agency.dig("address3") + "<br>" + agency.dig("city") + "<br>" + agency.dig("country"),
-        "phone"         => agency.dig("phone"),
-        "fax"           => agency.dig("fax"),
-        "region"        => agency.dig("region"),
-        "website"       => agency.dig("website")
-      }
+        {
+          "title" => agency.fetch("title", "Temple"),
+          "email" => agency["email"],
+          "contact" => agency["contact"],
+          "address" => "#{agency['address1']}<br>#{agency['address2']}<br>#{agency['address3']}<br>#{agency['city']}<br>#{agency['country']}",
+          "phone" => agency["phone"],
+          "fax" => agency["fax"],
+          "region" => agency["region"],
+          "website" => agency["website"]
+        }
 
       agency_to_update.update(record_hash)
 
@@ -50,11 +45,11 @@ namespace :import do
           @updated += 1 unless new_agency
           @created += 1 if new_agency
         else
-          stdout_and_log(%Q(Agency record unable to be saved for #{record_hash["title"]}))
+          stdout_and_log(%(Agency record unable to be saved for #{record_hash['title']}))
           @not_saved += 1
         end
-      rescue => err
-        stdout_and_log(%Q(Agency title: #{record_hash["title"]} -- #{err.message}))
+      rescue StandardError => e
+        stdout_and_log(%(Agency title: #{record_hash['title']} -- #{e.message}))
         @not_saved += 1
       end
 
@@ -65,6 +60,5 @@ namespace :import do
       @log.send(level, message)
       @stdout.send(level, message)
     end
-
   end
 end

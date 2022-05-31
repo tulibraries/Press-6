@@ -21,7 +21,7 @@ class EventDashboard < Administrate::BaseDashboard
     image: ImageField,
     news_text: TrixField,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES

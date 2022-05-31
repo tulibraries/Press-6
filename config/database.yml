@@ -32,11 +32,11 @@ default: &default
 
 development:
   <<: *default
-  database: press6
+  database: tupress
 
 test:
   <<: *default
-  database: <%= ENV["TUPRESS_DB_NAME"] || "press6-test" %>
+  database: <%= ENV["TUPRESS_DB_NAME"] || "tupress-test" %>
 
 production:
   <<: *default

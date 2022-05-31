@@ -3,11 +3,10 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-
   describe "field validators" do
-    let (:user) { FactoryBot.build(:user) }
-    let (:blank_error) { /Email can't be blank/ }
-    let (:invalid_error) { /Email is invalid/ }
+    let(:user) { FactoryBot.build(:user) }
+    let(:blank_error) { /Email can't be blank/ }
+    let(:invalid_error) { /Email is invalid/ }
     context "Email validation" do
       example "valid email" do
         expect { user.save! }.to_not raise_error
@@ -24,7 +23,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "title = email" do
-    let (:user) { FactoryBot.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
 
     it "assigns email as title" do
       expect(user.title).to match user.email

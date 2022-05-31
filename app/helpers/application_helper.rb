@@ -2,7 +2,7 @@
 
 module ApplicationHelper
   def search_glass
-    asset_pack_path("media/images/mag.png")
+    image_path("mag.png")
   end
 
   # Close unclosed tags
@@ -20,19 +20,20 @@ module ApplicationHelper
       when "webpages"
         "/admin/#{controller_name}/#{id}/edit" if action_name == "show"
       when "books"
-        if action_name == "show"
+        case action_name
+        when "show"
           "/admin/#{controller_name}/#{book_id}/edit"
-        elsif action_name == "index"
+        when "index"
           "/admin/#{controller_name}"
-        elsif action_name == "awards_by_subject"
+        when "awards_by_subject"
           "/admin/subjects/#{id_from_index}/edit"
-        elsif action_name == "awards_by_year"
+        when "awards_by_year"
           "/admin/#{controller_name}"
-        elsif action_name == "course_adoptions"
+        when "course_adoptions"
           "/admin/#{controller_name}"
-        elsif action_name == "study_guides"
+        when "study_guides"
           "/admin/#{controller_name}"
-        elsif action_name == "study_guide"
+        when "study_guide"
           "/admin/#{controller_name}"
         end
       when "agencies"
@@ -42,13 +43,14 @@ module ApplicationHelper
           "/admin/#{controller_name}/#{id_from_index}/edit"
         end
       when "people"
-        if action_name == "index"
+        case action_name
+        when "index"
           if book_id.nil? && id_from_index.nil?
             "/admin/#{controller_name}"
           else
             "/admin/#{controller_name}/#{id_from_index}/edit"
           end
-        elsif action_name == "sales_reps"
+        when "sales_reps"
           if book_id.nil? && id_from_index.nil?
             "/admin/#{controller_name}"
           else
@@ -62,12 +64,10 @@ module ApplicationHelper
           "/admin/#{controller_name}/#{id_from_index}/edit"
         end
       end
-    else
-      if ["index", "labor_studies", "north_broad_press"].include?(action_name)
-        (id_from_index.present?) ? ("/admin/#{controller_name}/#{id_from_index}/edit") : ("/admin/#{controller_name.pluralize}")
-      else
-        "/admin/#{controller_name}/#{id}/edit" if id.present?
-      end
+    elsif ["index", "labor_studies", "north_broad_press"].include?(action_name)
+      (id_from_index.present?) ? ("/admin/#{controller_name}/#{id_from_index}/edit") : ("/admin/#{controller_name.pluralize}")
+    elsif id.present?
+      "/admin/#{controller_name}/#{id}/edit"
     end
   end
 
@@ -104,9 +104,9 @@ module ApplicationHelper
 
   def menu_button(text)
     button_tag text,
-              { id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle",
-              style: "display:inline-block;border:0;",
-              "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false",
-              method: :get }
+               { id: "dropdownMenuButton", type: "button", class: "btn btn-lg btn-secondary dropdown-toggle",
+                 style: "display:inline-block;border:0;",
+                 "data-bs-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false",
+                 method: :get }
   end
 end

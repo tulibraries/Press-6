@@ -5,7 +5,10 @@ require "rails_helper"
 RSpec.describe Book, type: :request do
   let(:book) { FactoryBot.create(:book, :with_cover_image, title: "A Formation") }
   let(:book2) { FactoryBot.create(:book, :with_cover_image, title: "Z Formation", award_year: "2019") }
-  let(:book3) { FactoryBot.create(:book, :with_cover_image, title: "200 Years of Latino History in Philadelphia", award_year: "2018") }
+  let(:book3) do
+    FactoryBot.create(:book, :with_cover_image, title: "200 Years of Latino History in Philadelphia",
+                                                award_year: "2018")
+  end
   let(:book4) { FactoryBot.create(:book, :with_guide_file, active_guide: true) }
   let(:book5) { FactoryBot.create(:book, :with_guide_file, active_guide: true, guide_file_label: "no file") }
   let(:subject) { FactoryBot.create(:subject) }
@@ -43,6 +46,5 @@ RSpec.describe Book, type: :request do
     it "displays pdf link text in show view" do
       expect { get study_guide_path(book4.slug).to have_text("Curriculum/Study Guide [PDF]") }
     end
-
   end
 end

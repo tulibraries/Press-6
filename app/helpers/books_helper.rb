@@ -9,8 +9,6 @@ module BooksHelper
       "Hardcover"
     when "Ebook"
       "eBook"
-    else
-      nil
     end
   end
 
@@ -50,12 +48,12 @@ module BooksHelper
   end
 
   def order_button(book)
-    unless book.status == "OP"
-      link_to t("tupress.books.order_button"),
-                "#{t("tupress.books.purchase_link")}#{book.isbn}",
-                class: "order-button" if book.isbn.present?
-    else
+    if book.status == "OP"
       "[OUT OF PRINT]"
+    elsif book.isbn.present?
+      link_to t("tupress.books.order_button"),
+              "#{t('tupress.books.purchase_link')}#{book.isbn}",
+              class: "order-button"
     end
   end
 end

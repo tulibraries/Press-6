@@ -10,8 +10,8 @@ FactoryBot.define do
     after :build do |doc|
       doc.document.attach(io:
       File.open(Rails.root.join("spec/fixtures/guidelines.pdf")),
-      filename: "guidelines.pdf",
-      content_type: "application/pdf")
+                          filename: "guidelines.pdf",
+                          content_type: "application/pdf")
     end
   end
 end

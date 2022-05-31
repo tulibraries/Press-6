@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe PeopleController, type: :controller do
-
   let(:person) { FactoryBot.create(:person) }
 
   describe "GET #index" do
@@ -14,5 +13,4 @@ RSpec.describe PeopleController, type: :controller do
   end
 
   it_behaves_like "index_editable"
-
 end

@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe WebpagesController, type: :controller do
-
   let(:webpage) { FactoryBot.create(:webpage) }
 
   describe "GET #index" do
@@ -27,12 +26,12 @@ RSpec.describe WebpagesController, type: :controller do
 
   describe "GET #search" do
     it "- renders show template" do
-      get :search, params: { q: webpage.title  }
+      get :search, params: { q: webpage.title }
       expect(response).to render_template("search")
     end
 
     it "- redirects  if blank" do
-      get :search, params: { q: ""  }
+      get :search, params: { q: "" }
       expect(response).to redirect_to("/")
     end
   end

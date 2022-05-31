@@ -6,8 +6,8 @@
       
       <div class="social-share text-right p-4" id="social-share">
         <span class="share-label"><%= t("tupress.books.share_label") %></span>
-        <%= link_to image_pack_tag('twitter-icon.png', class: 'social-icon', alt: 'Twitter Icon'), 'http://twitter.com/TempleUnivPress' %>
-        <%= link_to image_pack_tag('fb-icon.png', class: 'social-icon', alt: 'Facebook Icon'), 'http://facebook.com/TempleUnivPress' %>
+        <%= link_to image_tag('twitter-icon.png', class: 'social-icon', alt: 'Twitter Icon'), 'http://twitter.com/TempleUnivPress' %>
+        <%= link_to image_tag('fb-icon.png', class: 'social-icon', alt: 'Facebook Icon'), 'http://facebook.com/TempleUnivPress' %>
       </div>
 
       <div class="book-details text-left p-3" id="book-details">
@@ -171,7 +171,7 @@
       <% if book.cover_image.attached? %>
         <%= image_tag book.index_image("cover_image") %>
       <% else %>
-        <%= image_pack_tag "see-also-default.gif", class: "default" %>
+        <%= image_tag "see-also-default.gif", class: "default" %>
       <% end %>
         
         <p class="pt-2 mb-0"><%= book.title.html_safe %></p>

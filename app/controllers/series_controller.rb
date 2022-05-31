@@ -16,6 +16,7 @@ class SeriesController < ApplicationController
   end
 
   private
+
     def set_series
       @series = find_instance
     end
