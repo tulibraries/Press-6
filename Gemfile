@@ -37,7 +37,6 @@ gem "puma", "~> 5.6.4"
 gem "simple_form"
 gem "sprockets-rails"
 gem "stimulus-rails"
-gem "trix"
 gem "turbo-rails"
 
 group :development, :test do
