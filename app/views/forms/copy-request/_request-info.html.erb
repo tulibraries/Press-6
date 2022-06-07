@@ -52,7 +52,7 @@
                         %>
 <div class="my-2"></div>
 
-<div id="bookstore" style="display:none;">
+<div id="bookstore" style="display:none;" data-controller="selectize">
   <%= f.input :authorized_bookstore, hint: t("tupress.forms.copy-request.hint"), 
                       required: true,
                       item_wrapper_class: "mt-3"
