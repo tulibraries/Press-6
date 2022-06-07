@@ -11,8 +11,14 @@
     "esbuild": "^0.14.39",
     "esbuild-rails": "^1.0.3",
     "jquery": "^3.6.0",
+    "microplugin": "^0.0.3",
     "sass": "^1.52.1",
+    "sifter": "^0.5.4",
     "trix": "^2.0.0-beta.0"
+  },
+  "version": "0.1.0",
+  "resolutions": {
+    "minimist": "1.2.6"
   },
   "scripts": {
     "build": "node esbuild.config.js",
