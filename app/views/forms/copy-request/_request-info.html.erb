@@ -33,26 +33,26 @@
   <%= f.collection_select :requested_book1, @books, 
                       :select_value, 
                       :select_value,
-                      {prompt: t("tupress.forms.copy-request.prompt")},
+                      {prompt: t("tupress.forms.copy-request.prompt"), class: "limited"},
                       {multiple: false, required: true}
                         %>
 <% end %>
 <%= f.collection_select :requested_book2, @books, 
                       :select_value, 
                       :select_value,
-                      {prompt: t("tupress.forms.copy-request.prompt")},
+                      {prompt: t("tupress.forms.copy-request.prompt"), class: "limited"},
                       {multiple: false, required: false}
                         %>
 
 <%= f.collection_select :requested_book3, @books, 
                       :select_value, 
                       :select_value,
-                      {prompt: t("tupress.forms.copy-request.prompt")},
+                      {prompt: t("tupress.forms.copy-request.prompt"), class: "limited"},
                       {multiple: false, required: false}
                         %>
 <div class="my-2"></div>
 
-<div id="bookstore" style="display:none;">
+<div id="bookstore" style="display:none;" data-controller="selectize">
   <%= f.input :authorized_bookstore, hint: t("tupress.forms.copy-request.hint"), 
                       required: true,
                       item_wrapper_class: "mt-3"
