@@ -294,7 +294,7 @@ en:
 
       copy-request: 
         title: Request a Desk or Exam Copy
-        prompt: "Click then begin typing to select a book               "
+        prompt: "Select a book"
         hint: (required for Desk Copy requests)
         books: Requested Books
         exam-format: Exam copies will be delivered as an eBook
