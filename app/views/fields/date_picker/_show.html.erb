@@ -12,4 +12,4 @@ with the :default format
 - `field`:
   An instance of DateTime.
 %>
-<%= field %>
+<%= field.data.to_date.strftime("%^b %d, %Y ") %>
