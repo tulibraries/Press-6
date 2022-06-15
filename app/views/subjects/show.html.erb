@@ -7,7 +7,7 @@
       </h1>
     </div>
 
-    <div class="col-12 social-sharing text-md-right">
+    <div class="col-12 social-sharing text-md-end">
       <%= sort_link(@subject, params[:sort]) %>
     </div>
   </div>
@@ -16,7 +16,7 @@
   <div class="row">
     <div class="col-2 mt-5">
         <% @subject.brochures.each do |brochure| %>
-          <%= link_to brochure.title, brochure.pdf.attachment, style: "text-decoration: underline;", class: "d-block mb-4 text-right text-lg-left" %>
+          <%= link_to brochure.title, brochure.pdf.attachment, style: "text-decoration: underline;", class: "d-block mb-4 text-right text-lg-start" %>
           <%= display_image(brochure) %>
         <% end %>
     </div>

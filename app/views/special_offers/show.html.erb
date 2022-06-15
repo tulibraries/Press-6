@@ -6,10 +6,10 @@
       <%= title_link(@special_offer) %>
     </h1>
   </div>
-  <div class="col-12 social-sharing text-md-right">
+  <div class="col-12 social-sharing text-md-end">
 			<% if @special_offer.pdf.attached? %>
 				<%= t("tupress.special_offers.download") %>: 
-        <%= link_to @special_offer.pdf_display_name, @special_offer.pdf.attachment, class: "text-right text-lg-left" %>
+        <%= link_to @special_offer.pdf_display_name, @special_offer.pdf.attachment, class: "text-right text-lg-start" %>
 			<% end %>
 	</div>
   <div class="col-12 mt-4">

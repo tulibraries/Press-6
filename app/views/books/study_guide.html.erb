@@ -17,14 +17,14 @@
         <% end %>
       <% end %>
     </div>
-    <div class="col-12 col-md-8 col-lg-9 px-4 pl-0 pb-4 text-center text-md-left">
+    <div class="col-12 col-md-8 col-lg-9 px-4 pl-0 pb-4 text-center text-md-start">
       <h2><%= link_to @book.title.html_safe, book_path(@book) %></h2>
       <%= ("<p><em>#{@book.subtitle}</em></p>").html_safe if @book.subtitle.present? %>
       <%= ("<p>#{@book.author_byline}</p>").html_safe if @book.author_byline.present? %>
       <p class="pdf-link"><%= link_to guide_label(@book), @book.guide_file.attachment if @book.guide_file.attached? %></p>
 
       <div class="guide-wrapper mt-4 pt-1 pl-4 pr-2 pb-3">
-        <div class="guide-text text-left">
+        <div class="guide-text text-start">
           <%= @book.guide_text if @book.guide_text %>
         </div>
       </div>
