@@ -80,7 +80,7 @@ jobs:
       - run:
           name: Build docker container
           command: "source .env && docker build \
-                    --build-arg BASE_IMAGE_NAME=${BASE_IMAGE_NAME} \
+                    --build-arg BASE_IMAGE=${BASE_IMAGE} \
                     --build-arg RAILS_ENV=test \
                     -t trivy-ci-test:${CIRCLE_SHA1} -f .docker/app/Dockerfile ."
 
