@@ -19,6 +19,7 @@ RUN apk add -U --no-cache \
       bash=5.1.16-r0 \
       busybox=1.34.1-r5 \      
       imagemagick=7.1.0.16-r0 \
+      libc6-compat=1.2.2-r7 \
       libxslt=1.1.35-r0 \
       mariadb-connector-c=3.1.13-r2 \
       shared-mime-info=2.1-r0 \
@@ -27,7 +28,6 @@ RUN apk add -U --no-cache \
     apk add -U --no-cache --virtual build-dependencies \
       build-base=0.5-r2 \
       git=2.34.2-r0 \
-      libc6-compat \
       libxslt-dev=1.1.35-r0 \
       mariadb-dev=10.6.8-r0 \
       nodejs=16.14.2-r0 \
