@@ -31,7 +31,7 @@ module EventsHelper
         starting.strftime('%a, %b'),
         starting.strftime('%d').to_i.ordinalize.to_s
       ].join(' ')}
-      -
+      --
       #{
         [
           ending.strftime('%a, %h'),
@@ -58,7 +58,7 @@ module EventsHelper
           starting.strftime('%l:%M %P')
         ].join(' ')
       }
-      -
+      --
         #{ending.strftime('%l:%M %P')}
         "
     elsif ending.strftime("%H") == "00" && (starting.strftime("%d") == ending.strftime("%d")) # multi day event, start but no end time
@@ -68,7 +68,7 @@ module EventsHelper
           "#{starting.strftime('%d').to_i.ordinalize},",
           starting.strftime('%l:%M %P')
         ].join(' ')}
-        -
+        --
         #{
           [
             ending.strftime('%a, %h'),
@@ -81,7 +81,7 @@ module EventsHelper
               "#{starting.strftime('%d').to_i.ordinalize},",
               starting.strftime('%l:%M %P')
             ].join(' ')}
-            -
+            --
             #{
               [
                 ending.strftime('%a, %h'),
@@ -95,7 +95,7 @@ module EventsHelper
               "#{starting.strftime('%d').to_i.ordinalize},",
               starting.strftime('%l:%M %P')
             ].join(' ')}
-            -
+            --
             #{
               [
                 ending.strftime('%a, %h'),
