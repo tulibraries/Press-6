@@ -27,6 +27,8 @@ The app database needs to be initialized in oder for `make load-data` to work.  
 We defined a Makefile with many useful commands for local development. These commands replicate the process used to deploy in the Gitlab pipeline.
 
 * To build an image: ```make build ```
+  * `BASE_IMAGE` can be set to override the default base_image: ```make build BASE_NAME=ruby:3.1.0-alpine```
+  * `PLATFORM` can be set to override default platform used: ```make build PLATFORM=arm64```
 * To start the dockerized app, run ```make run```
 * To deploy prod image: ```make deploy VERSION=x```  
     * VERSION=latest by default
@@ -35,6 +37,7 @@ We defined a Makefile with many useful commands for local development. These com
 * To run a shell with image: ```make shell```
 * To run docker lint: ```make lint```
     * This depends on hadolint. Run `brew install hadolint` to make this available locally.
+
 
 ## Deployment
 ### QA
