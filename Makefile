@@ -4,13 +4,16 @@ export #exports the .env variables
 
 #Set DOCKER_IMAGE_VERSION in the .env file OR by passing in
 VERSION ?= $(DOCKER_IMAGE_VERSION)
+BASE_IMAGE ?= harbor.k8s.temple.edu/library/ruby:3.1.0-alpine
 IMAGE ?= tulibraries/tupress
 HARBOR ?= harbor.k8s.temple.edu
+PLATFORM ?= linux/aarch64
 CLEAR_CACHES ?= no
 RAILS_MASTER_KEY ?= $(TUPRESS_MASTER_KEY)
 TUPRESS_DB_HOST ?= host.docker.internal
 TUPRESS_DB_NAME ?= tupress
 TUPRESS_DB_USER ?= root
+
 CI ?= false
 
 DEFAULT_RUN_ARGS ?= -e "EXECJS_RUNTIME=Disabled" \
@@ -22,10 +25,14 @@ DEFAULT_RUN_ARGS ?= -e "EXECJS_RUNTIME=Disabled" \
 		-e "TUPRESS_DB_NAME=$(TUPRESS_DB_NAME)" \
 		-e "TUPRESS_DB_PASSWORD=$(TUPRESS_DB_PASSWORD)" \
 		-e "TUPRESS_DB_USER=$(TUPRESS_DB_USER)" \
+		-e "RAILS_LOG_TO_STDOUT=yes" \
 		--rm -it
 
 build:
 	@docker build --build-arg RAILS_MASTER_KEY=$(RAILS_MASTER_KEY) \
+		--build-arg BASE_IMAGE=$(BASE_IMAGE) \
+		--platform $(PLATFORM) \
+		--progress plain \
 		--tag $(HARBOR)/$(IMAGE):$(VERSION) \
 		--tag $(HARBOR)/$(IMAGE):latest \
 		--file .docker/app/Dockerfile \
@@ -33,6 +40,7 @@ build:
 
 run:
 	@docker run --name=tupress -p 127.0.0.1:3000:3000/tcp \
+		--platform $(PLATFORM) \
 		$(DEFAULT_RUN_ARGS) \
 		$(HARBOR)/$(IMAGE):$(VERSION)
 

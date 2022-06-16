@@ -14,12 +14,12 @@
       <%= image_tag @catalog.thumb_image("image"), class: "mb-3" if @catalog.image.attached? %>
       <% if @catalog.pdf.attached? %>
         <%= link_to "#{@catalog.title} [PDF]", @catalog.pdf.attachment, 
-                        class: "text-right text-lg-left mb-4 d-block",
+                        class: "text-right text-lg-start mb-4 d-block",
                         style: "text-decoration: underline;font-size: 1.25rem" %>
       <% end %>
 
       <% @catalog.brochures.each do |brochure| %>
-        <%= link_to brochure.title, brochure.pdf.attachment, style: "text-decoration: underline;", class: "d-block mb-4 text-right text-lg-left" %>
+        <%= link_to brochure.title, brochure.pdf.attachment, style: "text-decoration: underline;", class: "d-block mb-4 text-right text-lg-start" %>
         <%= display_image(brochure) %>
       <% end if @catalog.brochures.present? %>
 

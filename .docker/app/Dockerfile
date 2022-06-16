@@ -1,12 +1,12 @@
 # busybox and ssl_client can be removed once alpine image update resolves them
 
 # For circleci this arg gets overridden by value in the .env file.
-ARG BASE_IMAGE_NAME="harbor.k8s.temple.edu/library/ruby:3.1.0-alpine" \
+ARG BASE_IMAGE="harbor.k8s.temple.edu/library/ruby:3.1.0-alpine" \
   RAILS_MASTER_KEY=foobar \
   RAILS_ENV=production
 
 # hadolint ignore=DL3006,DL3026
-FROM "${BASE_IMAGE_NAME}"
+FROM "${BASE_IMAGE}"
 
 WORKDIR /app
 
@@ -14,15 +14,17 @@ COPY . .
 
 USER root
 
+# libc6-compat is added to allow m1 build of nokogiri
 RUN apk add -U --no-cache \
       bash=5.1.16-r0 \
-      libxslt=1.1.35-r0 \
-      tzdata=2022a-r0 \
       busybox=1.34.1-r5 \      
-      ssl_client=1.34.1-r5 \
-      mariadb-connector-c=3.1.13-r2 \
       imagemagick=7.1.0.16-r0 \
-      shared-mime-info=2.1-r0 && \
+      libc6-compat=1.2.2-r7 \
+      libxslt=1.1.35-r0 \
+      mariadb-connector-c=3.1.13-r2 \
+      shared-mime-info=2.1-r0 \
+      ssl_client=1.34.1-r5 \
+      tzdata=2022a-r0 && \
     apk add -U --no-cache --virtual build-dependencies \
       git=2.34.2-r0 \
       build-base=0.5-r3 \
@@ -30,8 +32,6 @@ RUN apk add -U --no-cache \
       mariadb-dev=10.6.8-r0 \
       nodejs=16.14.2-r0 \
       yarn=1.22.17-r0 && \
-    gem install bundler:2.3.7  && \
-    bundle config build.nokogiri --use-system-libraries && \
     if [ "${RAILS_ENV}" = "production" ]; then bundle config set --local without "development test"; fi && \
     bundle install --jobs=8 && \
     find "$GEM_HOME" -name Gemfile.lock -exec rm "{}" \; && \

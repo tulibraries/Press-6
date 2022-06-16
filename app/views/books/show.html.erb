@@ -10,7 +10,7 @@
         <%= link_to image_tag('fb-icon.png', class: 'social-icon', alt: 'Facebook Icon'), 'http://facebook.com/TempleUnivPress' %>
       </div>
 
-      <div class="book-details text-left p-3" id="book-details">
+      <div class="book-details text-start p-3" id="book-details">
         <ul class="list-unstyled">
           <li><%= "#{@book.pages_total} #{t("tupress.books.pages")}" %></li>
           <li><%= @book.trim %></li>

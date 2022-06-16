@@ -1,10 +1,10 @@
-<div id="search-bar" class="col-12 col-sm-5 col-lg-4 px-md-0 text-lg-right d-lg-block d-print-none">
-	<div class="text-md-right">
+<div id="search-bar" class="col-12 col-sm-5 col-lg-4 px-md-0 text-lg-end d-lg-block d-print-none">
+	<div class="text-md-end">
 		<%= link_to image_tag("cart.png", :alt=>"shopping cart"), 
 		"https://cdcshoppingcart.uchicago.edu/Cart2/Cart.aspx?PRESS=temple", :class=>"nav-link" %>
 	</div>
 
-	<div class="text-md-right">
+	<div class="text-md-end">
 		<%= form_tag(root_path+"search", method: "get", :class=>"", :id=>"search-block") do %>
 			<%= label_tag(:q, "Search by title, author, ISBN...", :class=>"element-invisible") %>
 
