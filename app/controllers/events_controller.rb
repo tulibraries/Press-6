@@ -11,6 +11,6 @@ class EventsController < ApplicationController
                       event.start_date.strftime("%Y%m")
                     end.sort_by do |e|
                       e[1][0].start_date.strftime("%d")
-                    end
+                    end.reverse
   end
 end
