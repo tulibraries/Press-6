@@ -2,6 +2,7 @@
   <%= f.input :request_type, as: :radio_buttons,
                 collection: t("tupress.forms.copy-request.request_type"),
                 item_wrapper_class: "form-check inline",
+                input_html: {"data-action": "click->desk-exam#formtype"},
                 required: true %>
 </div>
         
@@ -12,7 +13,6 @@
                 collection: t("tupress.forms.copy-request.request_format"),
                 item_wrapper_class: "form-check inline",
                 legend_html: { class: "pl-0" },
-                data-action: "click->desk-exam#select"
                 required: true %>
 </div>
 <div id="examcopy" style="display:none;" class="mt-1 mb-3">

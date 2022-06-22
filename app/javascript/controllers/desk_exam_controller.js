@@ -1,8 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  select(event) {
-    console.log(event)
+  formtype(event) {
+    let type = event["target"]["value"]
+    type == "Desk Copy" ? this.desk() : this.exam()
   }
   exam() {
     document.getElementById("examcopy").style.display = "block";
