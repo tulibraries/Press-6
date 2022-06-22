@@ -1,7 +1,8 @@
-<div id="copy-request-type">
+<div id="copy-request-type" data-controller="desk-exam">
   <%= f.input :request_type, as: :radio_buttons,
                 collection: t("tupress.forms.copy-request.request_type"),
                 item_wrapper_class: "form-check inline",
+                input_html: {"data-action": "click->desk-exam#formtype"},
                 required: true %>
 </div>
         
