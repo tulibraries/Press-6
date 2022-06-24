@@ -144,6 +144,7 @@ class BookDashboard < Administrate::BaseDashboard
     qa_label
     qa
     supplement
+    course_adoption
     desk_copy
     subject1
     subject2
@@ -166,7 +167,6 @@ class BookDashboard < Administrate::BaseDashboard
     news_text
     suggested_reading_image
     suggested_reading_label
-    course_adoption
     special_offers
     books
     label_1

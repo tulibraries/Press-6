@@ -3,17 +3,19 @@
 require "rails_helper"
 
 RSpec.describe "Request a Desk or Exam Copy", type: :request do
-  let(:pb_adoption) { FactoryBot.create(:book, title: "paper back", sort_title: "paper back", course_adoption: true) }
+  let(:pb_adoption) { FactoryBot.create(:book, title: "paper back", sort_title: "paper back", course_adoption: true, desk_copy: false) }
+  let(:no_adoption) { FactoryBot.create(:book, title: "not requestable", sort_title: "not requestable", course_adoption: true, desk_copy: true) }
   let(:hc_adoption) do
-    FactoryBot.create(:book, title: "hard cover", sort_title: "hard cover", course_adoption: true, bindings: "")
+    FactoryBot.create(:book, title: "hard cover", sort_title: "hard cover", course_adoption: true, bindings: "", desk_copy: false)
   end
 
   describe "request formats" do
     it "only has paperback course adoption books" do
-      @books = [pb_adoption, hc_adoption]
+      @books = [pb_adoption, hc_adoption, no_adoption]
       get form_path(type: "copy-request")
       expect(response.body).to include(pb_adoption.sort_title)
       expect(response.body).not_to include(hc_adoption.sort_title)
+      expect(response.body).not_to include(no_adoption.sort_title)
     end
   end
 
