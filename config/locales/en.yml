@@ -7,6 +7,7 @@ en:
         XML_ID: PW ID
         qa: Q&A's
         qa_label: Q&A label
+        desk_copy: Not Requestable
       phone: Phone
       fax: Fax
   tupress:
