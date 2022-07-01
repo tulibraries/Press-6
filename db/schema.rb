@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_220_509_195_511) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_01_132136) do
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -20,7 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 20_220_509_195_511) do
     t.bigint "record_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[record_type record_id name], name: "index_action_text_rich_texts_uniqueness", unique: true
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
@@ -30,8 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 20_220_509_195_511) do
     t.bigint "blob_id", null: false
     t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index %w[record_type record_id name blob_id], name: "index_active_storage_attachments_uniqueness",
-                                                    unique: true
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
   create_table "active_storage_blobs", charset: "utf8mb3", force: :cascade do |t|
@@ -51,7 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 20_220_509_195_511) do
     t.string "variation_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[blob_id variation_digest], name: "index_active_storage_variant_records_uniqueness", unique: true
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "agencies", charset: "utf8mb3", force: :cascade do |t|
@@ -160,6 +157,7 @@ ActiveRecord::Schema[7.0].define(version: 20_220_509_195_511) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "special_offer_id"
+    t.string "cover_alt_text"
     t.index ["catalog_id"], name: "index_books_on_catalog_id"
     t.index ["series_id"], name: "index_books_on_series_id"
     t.index ["slug"], name: "index_books_on_slug", unique: true
@@ -256,11 +254,9 @@ ActiveRecord::Schema[7.0].define(version: 20_220_509_195_511) do
     t.string "sluggable_type", limit: 50
     t.string "scope"
     t.datetime "created_at", precision: nil
-    t.index %w[slug sluggable_type scope], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope",
-                                           unique: true, length: { slug: 70, scope: 70 }
-    t.index %w[slug sluggable_type], name: "index_friendly_id_slugs_on_slug_and_sluggable_type",
-                                     length: { slug: 140 }
-    t.index %w[sluggable_type sluggable_id], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, length: { slug: 70, scope: 70 }
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", length: { slug: 140 }
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
   create_table "highlights", charset: "utf8mb3", force: :cascade do |t|
@@ -423,7 +419,6 @@ ActiveRecord::Schema[7.0].define(version: 20_220_509_195_511) do
     t.index ["slug"], name: "index_webpages_on_slug", unique: true
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "books", "special_offers"
   add_foreign_key "brochures", "catalogs"
