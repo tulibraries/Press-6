@@ -5,8 +5,11 @@
 <% end if current_user %>
 
 <% if book.cover_image.attached? %>
-  <%= image_tag book.show_image("cover_image"), class: "cover-image", {alt: @book.cover_alt_text} %> if @book.cover_alt_text.present?
-  <%= image_tag book.show_image("cover_image"), class: "cover-image" %> unless @book.cover_alt_text.present?
+  <% if @book.cover_alt_text.present? %>
+    image_tag book.show_image("cover_image"), class: "cover-image", {alt: @book.cover_alt_text}
+  <% else %>
+    image_tag book.show_image("cover_image"), class: "cover-image"
+  <% end %>
 <% else %>
   <%= image_tag "default-book-cover-show.png", class: "default-show-cover cover-image" %>
 <% end unless current_user %>
