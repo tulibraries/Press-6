@@ -65,9 +65,9 @@ class BooksController < ApplicationController
       subjects << s if s.present?
     end
 
-    if subjects.any? nil 
-      @awards_by_subject = subjects.compact! 
-    else 
+    if subjects.any? nil
+      @awards_by_subject = subjects.compact!
+    else
       @awards_by_subject = subjects
     end
 
