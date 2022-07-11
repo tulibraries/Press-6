@@ -19,7 +19,7 @@
       text-align: center;
     }
   }
-  .header-logo {
+  #header-logo {
     max-width: 90px;
     max-height: 77px;
     min-width: 90px;
@@ -31,6 +31,9 @@
     }
     @media screen and (max-width: 449px) {
       vertical-align: top;
+    }
+    img {
+      height: 100px;
     }
   }	
 }
