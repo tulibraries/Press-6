@@ -6,7 +6,7 @@
 
 <% if book.cover_image.attached? %>
   <% if @book.cover_alt_text.present? %>
-    <%= image_tag book.show_image("cover_image"), class: "cover-image", {alt: @book.cover_alt_text} %>
+    <%= image_tag book.show_image("cover_image"), class: "cover-image", alt: @book.cover_alt_text %>
   <% else %>
     <%= image_tag book.show_image("cover_image"), class: "cover-image" %>
   <% end %>
