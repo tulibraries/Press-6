@@ -19,11 +19,15 @@ By default, the input is a text field.
   <%= f.label field.attribute.upcase %>
 </div>
 <div class="field-unit__field">
-<%= field.attribute == :xml_id ?
-                              (f.text_field field.attribute, disabled: true)
-                              :
-                              (f.text_field field.attribute)
-%>
+  <%= case field.attribute
+      when :xml_id
+        f.text_field field.attribute, disabled: true
+      when :cover_alt_text
+        f.text_field field.attribute, placeholder: "<optional>"
+      else
+        f.text_field field.attribute
+      end
+  %>
   <% if field.attribute == :image_link %>
     <span class="dim">Please include  http:// or https://</span>
   <% end %>

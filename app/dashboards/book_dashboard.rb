@@ -34,6 +34,7 @@ class BookDashboard < Administrate::BaseDashboard
     guide_text: TrixField,
     cover_image: ImageField,
     cover: Field::String,
+    cover_alt_text: Field::String,
     format: Field::String,
     ean: Field::String,
     pub_date: Field::String,
@@ -133,6 +134,7 @@ class BookDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     cover_image
+    cover_alt_text
     xml_id
     sort_title
     slug
