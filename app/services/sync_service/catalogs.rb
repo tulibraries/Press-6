@@ -39,8 +39,7 @@ module SyncService
     def record_hash(record)
       catalog_code = record['catalog']
       {
-        'code' => catalog_code.downcase,
-        'suppress' => false
+        'code' => catalog_code.downcase
       }
     end
 
