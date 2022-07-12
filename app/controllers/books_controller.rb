@@ -58,15 +58,18 @@ class BooksController < ApplicationController
                                       .select { |b| show_status.include?(b.status) }
                                       .map(&:subjects_as_tuples)
                                       .reject(&:blank?))
-
     subjects = []
 
     awards_by_subject.each do |subject|
       s = Subject.find_by(code: subject[1])
-      subjects << s
+      subjects << s if s.present?
     end
 
-    @awards_by_subject = subjects.compact!
+    if subjects.any? nil
+      @awards_by_subject = subjects.compact!
+    else
+      @awards_by_subject = subjects
+    end
 
     recent_winners = books_with_awards
                      .select { |b| b.featured_award_winner == true }
