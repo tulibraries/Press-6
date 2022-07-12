@@ -42,6 +42,7 @@ class BooksController < ApplicationController
       [@book.label_10, @book.link_10]
     ].compact
     @see_alsos = @book.books.sort_by(&:sort_title).take(4)
+    @requestable = Book.requestable.include? @book
   end
 
   def awards
@@ -112,7 +113,6 @@ class BooksController < ApplicationController
   def course_adoptions
     @books = Book.where(status: show_status)
                  .where(course_adoption: true)
-                 .where("bindings LIKE ?", '%"format":"PB"%')
                  .order(:title)
   end
 

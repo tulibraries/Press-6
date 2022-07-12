@@ -80,7 +80,7 @@
         </div>
         <% end %>
 
-        <% if @book.course_adoption %>
+        <% if @requestable %>
         <div class="book-desk-copy mt-5">
           <ul class="list-unstyled mt-5">
             <li><%= link_to t("tupress.books.desk_request"), form_path(type: "copy-request", id: @book.id) %></li> 

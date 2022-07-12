@@ -9,11 +9,7 @@ class FormsController < ApplicationController
         @intro = Webpage.find_by(slug: "#{form}-intro") if form == @type
         @footer = Webpage.find_by(slug: "#{form}-footer") if form == @type
       end
-      @books = Book.where(status: show_status)
-                    .where("bindings LIKE ?", '%"format":"PB"%')
-                    .where(course_adoption: true)
-                    .where(desk_copy: false)
-                    .order(:sort_title)
+      @books = Book.requestable.order(:sort_title)
       @book = Book.find(params[:id]) if params[:id].present?
       render template: "forms/create"
     else
