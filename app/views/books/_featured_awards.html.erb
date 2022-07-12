@@ -9,4 +9,4 @@
       <p class="pt-2"><%= book.title.html_safe %></p>
     <% end %>
   </div>
-  <% end unless @recent_winners.all? { |value| value.nil? } %>
+  <% end if @recent_winners.present? && @recent_winners.all? { |value| value.present? } %>
