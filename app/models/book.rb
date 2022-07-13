@@ -37,7 +37,7 @@ class Book < ApplicationRecord
 
   belongs_to :series, optional: true
 
-  scope :displayable, -> { where(status: %w[NP IP]) }
+  scope :displayable, -> { where(suppress_from_view: false).where(status: %w[NP IP]) }
 
   def sort_titles
     if title.present?
