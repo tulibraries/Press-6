@@ -103,6 +103,7 @@ class BookDashboard < Administrate::BaseDashboard
     featured_award_weight: Field::Number,
     price: Field::String.with_options(searchable: false),
     qa: FileField,
+    suppress_from_view: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -140,6 +141,7 @@ class BookDashboard < Administrate::BaseDashboard
     slug
     edition
     status
+    suppress_from_view
     excerpt_file
     excerpt_text
     toc_file

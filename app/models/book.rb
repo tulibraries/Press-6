@@ -37,6 +37,8 @@ class Book < ApplicationRecord
 
   belongs_to :series, optional: true
 
+  scope :displayable, -> { where(status: %w[NP IP]) }
+
   def sort_titles
     if title.present?
       excludes = %w[A An The]

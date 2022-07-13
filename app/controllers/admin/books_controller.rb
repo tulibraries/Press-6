@@ -9,7 +9,7 @@ module Admin
       @tab_names = I18n.t("tupress.admin.books.tabs")
       @tab_content = {}
       @tab_content["book"] =
-        %w[xml_id slug sort_title author_byline edition status cover_image cover cover_alt_text excerpt_file
+        %w[xml_id slug sort_title author_byline edition status suppress_from_view cover_image cover cover_alt_text excerpt_file
            excerpt_text toc_file qa_label qa supplement suggested_reading_image suggested_reading_label course_adoption desk_copy]
       @tab_content["subjects"] = %w[subject1 subject2 subject3]
       @tab_content["awards"] =

@@ -13,7 +13,7 @@ class AuthorsController < ApplicationController
   end
 
   def show
-    @books = Book.where(status: show_status)
+    @books = Book.displayable
                  .order(:sort_title)
                  .select { |b| b.author_ids.include?("\"#{@author.author_id}\"") }
   end

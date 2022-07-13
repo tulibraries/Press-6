@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_01_132136) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_12_140701) do
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -158,6 +158,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_01_132136) do
     t.datetime "updated_at", null: false
     t.bigint "special_offer_id"
     t.string "cover_alt_text"
+    t.boolean "suppress_from_view", default: false
     t.index ["catalog_id"], name: "index_books_on_catalog_id"
     t.index ["series_id"], name: "index_books_on_series_id"
     t.index ["slug"], name: "index_books_on_slug", unique: true
@@ -192,7 +193,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_01_132136) do
     t.string "code"
     t.string "season"
     t.string "year"
-    t.boolean "suppress"
+    t.boolean "suppress", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_catalogs_on_slug", unique: true
