@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.2"
 
-gem "rails", "~> 7.0.3"
+gem "rails", "~> 7.0.3.1"
 gem "active_storage_validations"
 gem "activestorage-validator"
 gem "administrate", ">= 0.16.0"
@@ -28,7 +28,7 @@ gem "mail_form"
 gem "meta-tags"
 gem "mini_magick"
 gem "mysql2", "~> 0.5.4"
-gem "nokogiri", "1.13.6"
+gem "nokogiri", "1.13.7"
 gem "okcomputer"
 gem "omniauth"
 gem "omniauth-google-oauth2"

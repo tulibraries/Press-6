@@ -64,6 +64,7 @@ module SyncService
         'description' => record.dig('record', 'description'),
         'subjects' => JSON.dump(record.dig('record', 'subjects', 'subject')),
         'contents' => record.dig('record', 'contents'),
+        'desk_copy' => false,
         'catalog_id' => if record.dig('record',
                                       'catalog').present?
                           record.dig('record',

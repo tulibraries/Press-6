@@ -11,7 +11,6 @@ class FormsController < ApplicationController
       end
       @books = Book.displayable
                     .where("bindings LIKE ?", '%"format":"PB"%')
-                    .where(course_adoption: true)
                     .where(desk_copy: false)
                     .order(:sort_title)
       @book = Book.find(params[:id]) if params[:id].present?

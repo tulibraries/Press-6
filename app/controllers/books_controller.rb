@@ -42,6 +42,7 @@ class BooksController < ApplicationController
       [@book.label_10, @book.link_10]
     ].compact
     @see_alsos = @book.books.sort_by(&:sort_title).take(4)
+    @requestable = Book.requestable.include? @book
   end
 
   def awards
@@ -56,15 +57,18 @@ class BooksController < ApplicationController
     awards_by_subject = get_subjects(books_with_awards
                                       .map(&:subjects_as_tuples)
                                       .reject(&:blank?))
-
     subjects = []
 
     awards_by_subject.each do |subject|
       s = Subject.find_by(code: subject[1])
-      subjects << s
+      subjects << s if s.present?
     end
 
-    @awards_by_subject = subjects.compact!
+    if subjects.any? nil
+      @awards_by_subject = subjects.compact!
+    else
+      @awards_by_subject = subjects
+    end
 
     recent_winners = books_with_awards
                      .select { |b| b.featured_award_winner == true }
@@ -106,7 +110,6 @@ class BooksController < ApplicationController
   def course_adoptions
     @books = Book.displayable
                  .where(course_adoption: true)
-                 .where("bindings LIKE ?", '%"format":"PB"%')
                  .order(:title)
   end
 

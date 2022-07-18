@@ -25,6 +25,25 @@
       <%= simple_form_for @form, html: {class: "form-horizontal", enctype: "multipart" } do |f| %>
       <%= f.input :form_type, as: :hidden, input_html: { value: "#{@type}" } %>
 
+      <% if @type == "copy-request" %>
+        <div class="row">
+          <div class="col">
+            <fieldset class="bordered">
+              <legend><%= t("manifold.forms.shared.request_info") %></legend>
+              <%= render "forms/#{@type}/request-info", f: f %>
+            </fieldset>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col">
+            <fieldset class="bordered">
+              <legend><%= t("manifold.forms.shared.your_info") %></legend>
+              <%= render "forms/#{@type}/personal_info", f: f %>
+            </fieldset>
+          </div>
+        </div>
+      <% else %>
         <div class="row">
           <div class="col">
             <fieldset class="bordered">
@@ -42,6 +61,7 @@
             </fieldset>
           </div>
         </div>
+      <% end %>
 
         <div class="row" style="margin-top: 28px;">
           <div class="col">
