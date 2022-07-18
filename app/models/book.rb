@@ -37,11 +37,10 @@ class Book < ApplicationRecord
 
   belongs_to :series, optional: true
 
-  scope :displayable, -> { where(suppress_from_view: false).where(status: %w[NP IP]) }
+  scope :displayable, -> { where(suppress_from_view: [nil, false]).where(status: %w[NP IP]) }
 
   scope :requestable, -> {
-    where(status: %w[NP IP])
-    .where("bindings LIKE ?", '%"format":"PB"%')
+    where("bindings LIKE ?", '%"format":"PB"%')
     .where(desk_copy: [nil, false])
   }
 
@@ -108,11 +107,12 @@ class Book < ApplicationRecord
   def self.search(q)
     if q
       q = q.last.present? ? q : q[0...-1]
-      Book.where({ status: %w[NP IP] })
+      Book.displayable
           .where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
           .or(Book.where("sort_title REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
           .or(Book.where("subtitle REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
           .or(Book.where("author_byline REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
+          .or(Book.where(isbn: q))
           .order(:sort_title)
     end
   end

@@ -19,7 +19,7 @@ class WebpagesController < ApplicationController
   def show; end
 
   def search
-    @books = Book.search(params[:q]).where({ status: %w[NP IP] }).order(:sort_title)
+    @books = Book.displayable.search(params[:q]).order(:sort_title)
     @subjects = Subject.search(params[:q])
     @series = Series.search(params[:q])
     @people = Person.search(params[:q])

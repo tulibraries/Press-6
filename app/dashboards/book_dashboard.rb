@@ -12,6 +12,7 @@ class BookDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     xml_id: Field::String,
+    isbn: Field::String,
     slug: Field::String,
     title: Field::String,
     subtitle: Field::String,
@@ -124,6 +125,7 @@ class BookDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     cover_image
     xml_id
+    isbn
     sort_title
     author_byline
     isbn

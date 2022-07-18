@@ -42,7 +42,7 @@ class BooksController < ApplicationController
       [@book.label_10, @book.link_10]
     ].compact
     @see_alsos = @book.books.sort_by(&:sort_title).take(4)
-    @requestable = Book.requestable.include? @book
+    @requestable = Book.displayable.requestable.include? @book
   end
 
   def awards

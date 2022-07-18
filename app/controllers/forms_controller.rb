@@ -9,7 +9,7 @@ class FormsController < ApplicationController
         @intro = Webpage.find_by(slug: "#{form}-intro") if form == @type
         @footer = Webpage.find_by(slug: "#{form}-footer") if form == @type
       end
-      @books = Book.requestable.order(:sort_title)
+      @books = Book.displayable.requestable.order(:sort_title)
       @book = Book.find(params[:id]) if params[:id].present?
       render template: "forms/create"
     else
