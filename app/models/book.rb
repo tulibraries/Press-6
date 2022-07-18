@@ -112,6 +112,7 @@ class Book < ApplicationRecord
           .or(Book.where("sort_title REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
           .or(Book.where("subtitle REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
           .or(Book.where("author_byline REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
+          .or(Book.where(isbn: q))
           .order(:sort_title)
     end
   end
