@@ -39,6 +39,12 @@ class Book < ApplicationRecord
 
   scope :displayable, -> { where(suppress_from_view: false).where(status: %w[NP IP]) }
 
+  scope :requestable, -> {
+    where(status: %w[NP IP])
+    .where("bindings LIKE ?", '%"format":"PB"%')
+    .where(desk_copy: [nil, false])
+  }
+
   def sort_titles
     if title.present?
       excludes = %w[A An The]
