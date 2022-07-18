@@ -128,12 +128,12 @@ class BooksController < ApplicationController
     end
 
     def books_with_awards
-      Book.displayable.select { 
-        |b| b.award_year.present? 
-        } + 
-        Book.select { 
-          |b| b.award_year2.present? 
-          } + 
+      Book.displayable.select {
+        |b| b.award_year.present?
+        } +
+        Book.select {
+          |b| b.award_year2.present?
+          } +
           Book.select do |b|
             b.award_year3.present?
           end.uniq
