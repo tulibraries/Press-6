@@ -10,7 +10,7 @@ class SpecialOffersController < ApplicationController
 
   def show
     @books = @special_offer.books
-                           .where(status: show_status)
+                           .displayable
                            .order(:sort_title)
                            .page params[:page]
   end

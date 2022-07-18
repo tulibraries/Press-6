@@ -37,6 +37,8 @@ class Book < ApplicationRecord
 
   belongs_to :series, optional: true
 
+  scope :displayable, -> { where(suppress_from_view: false).where(status: %w[NP IP]) }
+
   scope :requestable, -> {
     where(status: %w[NP IP])
     .where("bindings LIKE ?", '%"format":"PB"%')

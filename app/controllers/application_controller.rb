@@ -3,10 +3,6 @@
 class ApplicationController < ActionController::Base
   before_action :set_menu
 
-  def show_status
-    %w[NP IP]
-  end
-
   def set_menu
     @journals = Journal.all
     @ordering_information = Webpage.find_by(slug: "ordering-information")

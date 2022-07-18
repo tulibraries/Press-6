@@ -10,7 +10,7 @@ class SeriesController < ApplicationController
 
   def show
     @books = @series.books
-                    .where(status: show_status)
+                    .displayable
                     .order(:sort_title)
                     .page params[:page]
   end

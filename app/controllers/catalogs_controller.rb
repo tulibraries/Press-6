@@ -11,7 +11,7 @@ class CatalogsController < ApplicationController
   end
 
   def show
-    @books = @catalog.books.where(status: show_status)
+    @books = @catalog.books.displayable
                      .order(:sort_title)
                      .page params[:page]
     @brochures = @catalog.brochures

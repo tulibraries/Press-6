@@ -7,12 +7,12 @@ class BooksController < ApplicationController
   def index
     letter = params[:id] || "a"
     @books = if letter == "numeric"
-      Book.where(status: show_status)
+      Book.displayable
           .where("sort_title regexp ?", "^[0-9]+")
           .order(:sort_title)
           .page params[:page]
              else
-               Book.where(status: show_status)
+               Book.displayable
                    .where("sort_title LIKE ?", "#{letter}%")
                    .order(:sort_title)
                    .page params[:page]
@@ -47,7 +47,6 @@ class BooksController < ApplicationController
 
   def awards
     @awards_by_year = books_with_awards
-                      .select { |b| show_status.include?(b.status) }
                       .pluck(:award_year, :award_year2, :award_year3)
                       .flatten
                       .reject(&:blank?)
@@ -56,7 +55,6 @@ class BooksController < ApplicationController
                       .uniq
 
     awards_by_subject = get_subjects(books_with_awards
-                                      .select { |b| show_status.include?(b.status) }
                                       .map(&:subjects_as_tuples)
                                       .reject(&:blank?))
     subjects = []
@@ -74,7 +72,6 @@ class BooksController < ApplicationController
 
     recent_winners = books_with_awards
                      .select { |b| b.featured_award_winner == true }
-                     .select { |b| show_status.include?(b.status) }
                      .uniq
 
     first_position = recent_winners.select do |b|
@@ -94,10 +91,10 @@ class BooksController < ApplicationController
   end
 
   def awards_by_year
-    @books = Book.where("award_year LIKE ?", "%#{params[:id]}%")
+    @books = Book.displayable
+                 .where("award_year LIKE ?", "%#{params[:id]}%")
                  .or(Book.where("award_year2 LIKE ?", "%#{params[:id]}%"))
                  .or(Book.where("award_year3 LIKE ?", "%#{params[:id]}%"))
-                 .where(status: show_status)
                  .order(:sort_title)
   end
 
@@ -111,15 +108,14 @@ class BooksController < ApplicationController
   end
 
   def course_adoptions
-    @books = Book.where(status: show_status)
+    @books = Book.displayable
                  .where(course_adoption: true)
                  .order(:title)
   end
 
   def study_guides
     if params[:id].blank?
-      @books = Book.where(status: show_status)
-                   .where(active_guide: true)
+      @books = Book.displayable.where(active_guide: true)
     end
   end
 
@@ -132,9 +128,15 @@ class BooksController < ApplicationController
     end
 
     def books_with_awards
-      Book.select { |b| b.award_year.present? } + Book.select { |b| b.award_year2.present? } + Book.select do |b|
-                                                                                                 b.award_year3.present?
-                                                                                               end.uniq
+      Book.displayable.select {
+        |b| b.award_year.present?
+        } +
+        Book.select {
+          |b| b.award_year2.present?
+          } +
+          Book.select do |b|
+            b.award_year3.present?
+          end.uniq
     end
 
     def get_subjects(tuples)
