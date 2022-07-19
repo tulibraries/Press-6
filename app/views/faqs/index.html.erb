@@ -20,12 +20,12 @@
         <div class="panel panel-default list-group-item py-3">
             <div class="panel-heading">
               <h2 class="panel-title mb-0">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= index %>">
+                <a class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#collapse<%= index %>" href="#collapse<%= index %>">
                   <%= faq.title %>
                 </a>
               </h2>
             </div>
-            <div id="collapse<%= index %>" class="panel-collapse collapse in">
+            <div id="collapse<%= index %>" class="panel-collapse collapse in" data-bs-parent="#accordion" >
               <div class="panel-body mt-3">
                 <%= faq.answer %>
               </div>
