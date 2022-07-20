@@ -71,6 +71,7 @@ qa_deploy:
     - main
   script:
     - *export_variables
+    - helm pull oci://harbor.k8s.temple.edu/tulibraries/tupress --version "0.3.*"
     - helm upgrade tupress oci://$HARBOR/tulibraries/tupress --version "0.3.*" --history-max=5 --namespace=tupress-qa 
 
 prod_deploy:
@@ -83,4 +84,5 @@ prod_deploy:
   only:
     - tags
   script:
+    - helm pull oci://harbor.k8s.temple.edu/tulibraries/tupress --version "0.3.0"
     - helm upgrade tupress oci://$HARBOR/tulibraries/tupress --version "0.3.0" --history-max=5 --namespace=tupress-prod 
