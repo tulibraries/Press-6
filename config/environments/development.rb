@@ -71,4 +71,13 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   Rails.application.config.active_storage.variant_processor = :mini_magick
+
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    user_name: "templelibraries@gmail.com",
+    password: ENV["FORMS_EMAIL_PASSWORD"],
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
 end
