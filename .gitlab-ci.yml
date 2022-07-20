@@ -71,6 +71,7 @@ qa_deploy:
     - main
   script:
     - *export_variables
+    -  helm pull oci://$HARBOR/tulibraries/tupress-charts/tupress --version "0.3.*" --untar
     - helm upgrade tupress oci://$HARBOR/tulibraries/tupress-charts/tupress --version "0.3.*" --history-max=5 --namespace=tupress-qa --values values.yaml
 
 prod_deploy:
@@ -83,4 +84,5 @@ prod_deploy:
   only:
     - tags
   script:
+    -  helm pull oci://$HARBOR/tulibraries/tupress-charts/tupress --version "0.3.1" --untar
     - helm upgrade tupress oci://$HARBOR/tulibraries/tupress-charts/tupress --version "0.3.1" --history-max=5 --namespace=tupress-prod --values values-prod.yaml
