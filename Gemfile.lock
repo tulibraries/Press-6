@@ -246,9 +246,9 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.13.7-x86_64-darwin)
+    nokogiri (1.13.8-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.13.7-x86_64-linux)
+    nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.10)
       faraday (>= 0.17.3, < 3.0)
@@ -485,7 +485,7 @@ DEPENDENCIES
   meta-tags
   mini_magick
   mysql2 (~> 0.5.4)
-  nokogiri (= 1.13.7)
+  nokogiri (= 1.13.8)
   okcomputer
   omniauth
   omniauth-google-oauth2
