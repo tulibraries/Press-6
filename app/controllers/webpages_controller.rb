@@ -2,6 +2,7 @@
 
 class WebpagesController < ApplicationController
   before_action :set_webpage, only: :show
+  before_action :enable_maximum_privacy_headers, only: :search
   include SetInstance
 
   def index
@@ -19,6 +20,7 @@ class WebpagesController < ApplicationController
   def show; end
 
   def search
+    response.set_header('Cache-Control', 'private, no-store, must-revalidate')
     @books = Book.displayable.search(params[:q]).order(:sort_title)
     @subjects = Subject.search(params[:q])
     @series = Series.search(params[:q])
@@ -40,5 +42,25 @@ class WebpagesController < ApplicationController
 
     def set_webpage
       @page = find_instance
+    end
+
+    def enable_maximum_privacy_headers
+      # Harden the response by maximizing HTTP headers of user data
+      # for privacy. We do this by inhibiting indexing and caching.
+      # Our primary goal is to ensure that we maintain the privacy of
+      # private data.  However, we also want to be prepared so that
+      # if there *is* a breach, we reduce its impact.
+      # These lines instruct others to disable indexing and caching of
+      # user data, so that if private data is inadvertantly released,
+      # it is much less likely to be easily available to others via
+      # web-crawled data (such as from search engines) or via caches.
+      # The goal is to make it harder for adversaries to get leaked data.
+      # We do this as HTTP headers, so it applies to anything (HTML, JSON, etc.)
+      # Note that we need "private" along with "no-store"; the spec suggests
+      # "no-store" is enough, but "no-store" is ignored by some systems
+      # such as Fastly. See:
+      # https://github.com/rails/rails/issues/40798
+      response.set_header('X-Robots-Tag', 'noindex')
+      response.set_header('Cache-Control', 'private, no-store, must-revalidate')
     end
 end
