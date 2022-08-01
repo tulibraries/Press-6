@@ -8,15 +8,12 @@
         
 <div class="my-4"></div>
 
-<div id="deskcopy" style="display:none;">
+<div id="deskcopy">
 <%= f.input :format, as: :radio_buttons, 
                 collection: t("tupress.forms.copy-request.request_format"),
                 item_wrapper_class: "form-check inline",
                 legend_html: { class: "pl-0" },
                 required: true %>
-</div>
-<div id="examcopy" style="display:none;" class="mt-1 mb-3">
-  <em><%= t("tupress.forms.copy-request.exam-format") %></em>
 </div>
 
 <div class="my-4"></div>

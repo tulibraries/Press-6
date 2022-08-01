@@ -302,7 +302,7 @@ en:
         preselect-text: is preselected below. Please fill out the following required fields.
         request_format:
           eBook: eBook
-          Print: Print
+          Print ($10.00 fee required before book will be shipped): Print
         request_type:
           Exam Copy: Exam Copy
           Desk Copy: Desk Copy
