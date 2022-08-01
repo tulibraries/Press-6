@@ -91,11 +91,15 @@ class BooksController < ApplicationController
   end
 
   def awards_by_year
-    @books = Book.displayable
-                 .where("award_year LIKE ?", "%#{params[:id]}%")
-                 .or(Book.where("award_year2 LIKE ?", "%#{params[:id]}%"))
-                 .or(Book.where("award_year3 LIKE ?", "%#{params[:id]}%"))
+    if params[:id].present? && params[:id].to_i > 0
+      @books = Book.displayable
+                 .where("award_year LIKE ?", params[:id])
+                 .or(Book.where("award_year2 LIKE ?", params[:id]))
+                 .or(Book.where("award_year3 LIKE ?", params[:id]))
                  .order(:sort_title)
+    else
+      redirect_to :awards
+    end
   end
 
   def awards_by_subject
