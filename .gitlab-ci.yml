@@ -78,7 +78,7 @@ prod_deploy:
   variables:
     IMAGE: harbor.k8s.temple.edu/tulibraries/tupress
     RANCHER: rancher
-    CLUSTER: prod-library
+    CLUSTER: prod-library0
   stage: deploy
   extends: .helm_setup
   only:
