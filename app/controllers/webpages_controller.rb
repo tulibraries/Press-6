@@ -20,7 +20,7 @@ class WebpagesController < ApplicationController
   def show; end
 
   def search
-    response.set_header('Cache-Control', 'private, no-store, must-revalidate')
+    response.set_header("Cache-Control", "private, no-store, must-revalidate")
     @books = Book.displayable.search(params[:q]).order(:sort_title)
     @subjects = Subject.search(params[:q])
     @series = Series.search(params[:q])
@@ -60,7 +60,7 @@ class WebpagesController < ApplicationController
       # "no-store" is enough, but "no-store" is ignored by some systems
       # such as Fastly. See:
       # https://github.com/rails/rails/issues/40798
-      response.set_header('X-Robots-Tag', 'noindex')
-      response.set_header('Cache-Control', 'private, no-store, must-revalidate')
+      response.set_header("X-Robots-Tag", "noindex")
+      response.set_header("Cache-Control", "private, no-store, must-revalidate")
     end
 end
