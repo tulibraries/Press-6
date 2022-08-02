@@ -14,7 +14,7 @@
       <%= image_tag @catalog.thumb_image("image"), class: "mb-3" if @catalog.image.attached? %>
       <% if @catalog.pdf.attached? %>
         <%= link_to "#{@catalog.title} [PDF]", @catalog.pdf.attachment, 
-                        class: "text-right text-lg-start mb-4 d-block",
+                        class: "text-end text-lg-start mb-4 d-block",
                         style: "text-decoration: underline;font-size: 1.25rem" %>
       <% end %>
 
