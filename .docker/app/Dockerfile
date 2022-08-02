@@ -18,11 +18,13 @@ USER root
 RUN apk add -U --no-cache \
       bash=5.1.16-r2 \
       imagemagick=7.1.0.35-r0 \
+      busybox=1.35.0-r15 \ 
       libc6-compat=1.2.3-r0 \
       libxslt=1.1.35-r0 \
       mariadb-connector-c=3.1.13-r4 \
       shared-mime-info=2.2-r0 \
       tzdata=2022a-r0 && \
+      ssl_client=1.35.0-r15 \
     apk add -U --no-cache --virtual build-dependencies \
       git=2.36.2-r0 \
       build-base=0.5-r3 \
