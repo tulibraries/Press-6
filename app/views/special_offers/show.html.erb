@@ -9,7 +9,7 @@
   <div class="col-12 social-sharing text-md-end">
 			<% if @special_offer.pdf.attached? %>
 				<%= t("tupress.special_offers.download") %>: 
-        <%= link_to @special_offer.pdf_display_name, @special_offer.pdf.attachment, class: "text-right text-lg-start" %>
+        <%= link_to @special_offer.pdf_display_name, @special_offer.pdf.attachment, class: "text-end text-lg-start" %>
 			<% end %>
 	</div>
   <div class="col-12 mt-4">
