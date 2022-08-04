@@ -28,7 +28,7 @@
         <p class="name"><%= person.title %></p>
         <p><em><%= person.position %></em></p>
         <p><%= person.position_description %></p>
-        <p><%= mail_to person.email, person.email %></p>
+        <p><%= mail_to "Email", person.email, encode: "hex" %></p>
       </article>
       </div>
     </div>

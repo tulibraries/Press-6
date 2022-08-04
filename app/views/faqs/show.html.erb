@@ -16,7 +16,7 @@
             If you have a question not answered here, check 
             <%= link_to "all our FAQs", faqs_path %>, 
             or feel free to email the 
-            <%= mail_to 'tempress@temple.edu', 'webmaster', :class=>'alert-link' %> with your query.
+            <%= mail_to 'tempress@temple.edu', 'webmaster', encode: "hex", :class=>'alert-link' %> with your query.
         </div>
 
       <div class="panel-group" id="accordion">
