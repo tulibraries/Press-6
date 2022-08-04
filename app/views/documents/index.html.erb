@@ -15,7 +15,7 @@
     <h2 class="pl-3 mb-0">
       <%= type %>
       <span class="d-inline-block float-end pr-3 pt-2" style="font-size: 1.2rem;">
-        Contact: <%= mail_to documents.first.person.email, documents.first.person.title %>
+        Contact: <%= mail_to documents.first.person.email, documents.first.person.title, encode: "hex" %>
       </span>
     </h2>
   </div>
