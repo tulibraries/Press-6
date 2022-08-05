@@ -73,11 +73,8 @@ module SyncService
     end
 
     def create_or_update_if_needed!(record_hash)
-
-      if record_hash['title'].present? && record_hash['status'].present? && record_hash['author_byline'].present? && record_hash['isbn'].present? && %w[NP IP].include?(record_hash['status'])
-        
+      if valid_record(record_hash)
         book = Book.find_by(xml_id: record_hash['xml_id'])
-
         if book.present?
           write_to_db(book, record_hash, false)
           @updated += 1
@@ -100,6 +97,12 @@ module SyncService
       else
         stdout_and_log(%(Book not saved: #{record_hash['xml_id']} -- #{record_hash['title']})) 
         @errored += 1
+      end
+    end
+
+    def valid_record(record_hash)
+      if %w[NP IP].include?(record_hash['status'])
+        record_hash['title'].present? && record_hash['status'].present? && record_hash['author_byline'].present? && record_hash['isbn'].present?
       end
     end
 
