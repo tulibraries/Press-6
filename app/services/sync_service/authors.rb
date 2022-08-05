@@ -85,7 +85,7 @@ module SyncService
         stdout_and_log(%(Existing author update: '( #{record_hash['author_id']} )')) unless is_new
         stdout_and_log(%(Creating new author: '( #{record_hash['author_id']} )')) if is_new
       else
-        stdout_and_log(%(Author not saved: #{record_hash['author_id']})) 
+        stdout_and_log(%(Author not saved: #{record_hash['author_id']}), :error) 
         @errored += 1
       end
     end
