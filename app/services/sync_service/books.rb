@@ -73,9 +73,11 @@ module SyncService
     end
 
     def create_or_update_if_needed!(record_hash)
-      book = Book.find_by(xml_id: record_hash['xml_id'])
 
       if record_hash['title'].present? && record_hash['status'].present? && record_hash['author_byline'].present? && record_hash['isbn'].present? && %w[NP IP].include?(record_hash['status'])
+        
+        book = Book.find_by(xml_id: record_hash['xml_id'])
+
         if book.present?
           write_to_db(book, record_hash, false)
           @updated += 1
