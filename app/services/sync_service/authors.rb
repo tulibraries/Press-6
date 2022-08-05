@@ -13,7 +13,7 @@ module SyncService
       @stdout = Logger.new($stdout)
       @xmlPath = params.fetch(:xml_path)
       @booksDoc = Nokogiri::XML(File.open(@xmlPath), &:noblanks)
-      stdout_and_log("Syncing authors from #{@xmlPath}")
+      stdout_and_log(%(Syncing authors from #{@xmlPath}))
     end
 
     def sync
@@ -25,23 +25,25 @@ module SyncService
         authors = book['record']['authors']['author']
         if authors.is_a?(Hash)
           begin
-            create_or_update!(authors)
+            record = record_hash(authors)
+            create_or_update!(record)
           rescue Exception => e
-            stdout_and_log("sync error:  #{e.message} \n #{e.backtrace}")
+            stdout_and_log(%(Author sync error:  #{e.message} \n #{e.backtrace}"), :error)
             @errored += 1
           end
         else
           begin
             authors.each do |author|
-              create_or_update!(author)
+              record = record_hash(author)
+              create_or_update!(record)
             end
           rescue Exception => e
-            stdout_and_log("sync error:  #{e.message} \n #{e.backtrace}")
+            stdout_and_log(%(uthor sync error:  #{e.message} \n #{e.backtrace}"), :error)
             @errored += 1
           end
         end
       end
-      stdout_and_log("Syncing completed with #{@created} created, #{@updated} updated, and #{@errored} errored records.")
+      stdout_and_log("Author sync completed with #{@created} created, #{@updated} updated, and #{@errored} errored records.")
     end
 
     def get_books
@@ -50,46 +52,46 @@ module SyncService
       end
     end
 
-    def create_or_update!(record)
-      if record.present?
-        begin
-          a = Author.find_by(author_id: record['author_id'])
-          if a.present?
-            stdout_and_log(
-              'Existing author update:, level: :info'
-            )
-            a['prefix'] = record['author_prefix']
-            a['first_name'] = record['author_first']
-            a['last_name'] = record['author_last']
-            a['suffix'] = record['author_suffix']
-            updated = true
-          else
-            a = Author.new
-            stdout_and_log(
-              %(Creating new author: '(author_id = #{record['author_id']} )', level: :info)
-            )
-            a['author_id'] = record['author_id']
-            a['prefix'] = record['author_prefix']
-            a['first_name'] = record['author_first']
-            a['last_name'] = record['author_last']
-            a['suffix'] = record['author_suffix']
-            created = true
-          end
+    def record_hash(record)
+      {
+        'author_id' => record.dig('author_id'),
+        'prefix' => record.dig('author_prefix'),
+        'first_name' => record.dig('author_first'),
+        'last_name' => record.dig('author_last'),
+        'suffix' => record.dig('author_suffix')
+      }
+    end
 
-          if a.save!
-            stdout_and_log(%(Successfully saved record for: #{a['author_id']}))
-            @updated += 1 if updated
-            @created += 1 if created
-          end
-        rescue Exception => e
-          @errored += 1
-          if e.message == 'no implicit conversion of String into Integer' # empty tags
-            stdout_and_log("Empty review tags for:  #{record}")
-          else
-            stdout_and_log(" #{e.message} ")
-          end
+
+    def create_or_update!(record_hash)
+      if valid_record(record_hash)
+        author = Author.find_by(author_id: record_hash['author_id'])
+        if author.present?
+          write_to_db(author, record_hash, false)
+          @updated += 1
+        else
+          write_to_db(author, record_hash, true)
+          @created += 1
         end
+      else
+        stdout_and_log(%(Skipped won't validate: '( #{record_hash} )'))
       end
+    end
+
+    def write_to_db(author, record_hash, is_new)
+      author = Author.new if is_new
+      author.assign_attributes(record_hash) 
+      if author.save!
+        stdout_and_log(%(Existing author update: '( #{record_hash['author_id']} )')) unless is_new
+        stdout_and_log(%(Creating new author: '( #{record_hash['author_id']} )')) if is_new
+      else
+        stdout_and_log(%(Author not saved: #{record_hash['author_id']})) 
+        @errored += 1
+      end
+    end
+
+    def valid_record(record_hash)
+      record_hash.present? && record_hash['author_id'].present? && record_hash['first_name'].present? && record_hash['last_name'].present?
     end
 
     def stdout_and_log(message, level: :info)
