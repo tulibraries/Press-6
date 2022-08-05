@@ -80,7 +80,6 @@ module SyncService
           write_to_db(book, record_hash, false)
           @updated += 1
         else
-          binding.pry
           write_to_db(book, record_hash, true)
           @created += 1
         end
