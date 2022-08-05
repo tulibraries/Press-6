@@ -26,7 +26,7 @@ module SyncService
         stdout_and_log(%(Syncing catalog: #{catalog['title']} errored -  #{e.message} \n #{e.backtrace}))
         @errored += 1
       end
-      stdout_and_log("Syncing completed with #{@created} created, #{@skipped} skipped, #{@baddata} with bad data in catalog field, and #{@errored} errored records.")
+      stdout_and_log("Catalog syncing completed with #{@created} created, #{@skipped} skipped, #{@baddata} with bad data in catalog field, and #{@errored} errored records.")
     end
 
     def read_catalogs
