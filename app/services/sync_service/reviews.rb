@@ -22,82 +22,76 @@ module SyncService
 
     def sync
       @updated = @created = @errored = 0
-      read_reviews.each do |book|
-        if book.is_a?(Hash)
-          @log.info(%(Syncing reviews for: #{book['record']['title']}))
-          record = record_hash(book)
+      read_books.each do |book|
+        next unless %w[NP IP].include? book['record']['status']
+        next if book['record']['reviews']['review'].first.any?(nil)
+        reviews = book['record']['reviews']['review']
+        if reviews.is_a?(Hash)
+          record = record_hash(reviews, book)
           create_or_update!(record)
-        else # when node is returned from read_reviews
-          reviews = book.at('reviews').children.map(&:to_xml)
-          if reviews.present?
-            book = { 'reviews' => reviews }
-            create_or_update!(book)
-          else
-            @log.info(%(Syncing review for book: #{book.at('book_id').text}))
+        else
+          begin
+            reviews.each do |review|
+              record = record_hash(review, book)
+              create_or_update!(record)
+            end
+          rescue Exception => e
+            stdout_and_log(%(Review sync error:  #{e.message} \n #{e.backtrace}"), :error)
+            @errored += 1
           end
         end
-      rescue Exception => e
-        stdout_and_log("sync error:  #{e.message} \n #{e.backtrace}")
-        @errored += 1
       end
 
       prune_reviews
 
-      stdout_and_log("Syncing completed with #{@created} created, #{@updated} updated, #{@deleted_ids.length} deleted, and #{@errored} errored records.")
+      stdout_and_log("Review syncing completed with #{@created} created, #{@updated} updated, #{@deleted_ids.length} deleted, and #{@errored} errored records.")
     end
 
-    def read_reviews
+    def read_books
       @booksDoc.xpath('//record').map do |node|
-        node_xml = node.to_xml
-        begin
-          Hash.from_xml(node_xml)
-        rescue REXML::ParseException => e
-          node
-        end
+        Hash.from_xml(node.serialize(encoding: 'UTF-8'))
       end
     end
 
-    def record_hash(record)
-      unless record == true
-        {
-          'reviews' => record.fetch('record', nil)['reviews']['review'],
-          'book_id' => record.fetch('record', nil)['book_id']
-        }
-      end
+    def record_hash(record, book)
+      {
+        'book_id' => book.dig('record').dig('book_id'),
+        'review_id' => record.dig('review_id'),
+        'review' => record.dig('review_text'),
+        'weight' => 0
+      }
     end
 
-    def create_or_update!(record_hash)
-      reviews = record_hash['reviews']
-      book = record_hash['book_id']
-
-      unless record_hash.nil?
+    def create_or_update!(record)
+      if valid_record(record)
         begin
-          reviews.each do |review|
-            r = Review.find_by(review_id: review['review_id'])
-            if r
-              stdout_and_log(
-                %(Incoming book with review '#{r['review_id']}' matched to existing review '(code = #{r.review_id} )', level: :debug)
-              )
-              @updated += 1
-            else
-              r = Review.new
-              @created += 1
-            end
-
-            r['review_id'] = review['review_id']
-            r['review'] = review['review_text']
-            r['book_id'] = record_hash['book_id']
-            r['weight'] = 0
-
-            stdout_and_log(%(Successfully saved record for: #{r['review_id']})) if r['review'].present? && r.save!
+          review = Review.find_by(review_id: record['review_id'])
+          if review.present?
+            write_to_db(review, record, false)
+            @updated += 1
+          else
+            write_to_db(review, record, true)
+            @created += 1
           end
         rescue Exception => e
           if e.message == 'no implicit conversion of String into Integer' # empty tags
-            stdout_and_log(%(Empty review tags for:  #{book['record']['title']}))
+            stdout_and_log("Empty review tags for:  #{record['book_id']}", :info)
           else
-            stdout_and_log("Syncing Review: #{book['record']['title']} - #{e.message} \n #{e.backtrace}")
+            stdout_and_log("Error Syncing Review for book: #{record['book_id']} - #{e.message} \n #{e.backtrace}", :error)
           end
         end
+      end
+    end
+
+    def write_to_db(review, record_hash, is_new)
+      review = Review.new if is_new
+      review.assign_attributes(record_hash) 
+      if review.save!
+        stdout_and_log(%(Existing review update: '( #{record_hash['review_id']} )')) unless is_new
+        stdout_and_log(%(Creating new review: '( #{record_hash['review_id']} )')) if is_new
+      else
+        stdout_and_log(%(Review not saved: #{record_hash['review_id']})) 
+        @errored += 1
       end
     end
 
@@ -124,6 +118,10 @@ module SyncService
           toDelete.destroy
         end
       end
+    end
+
+    def valid_record(record)
+      record.present? && record['review_id'].present? && record['review'].present? && record['book_id'].present?
     end
 
     def stdout_and_log(message, level: :info)

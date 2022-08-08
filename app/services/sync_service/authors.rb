@@ -38,7 +38,7 @@ module SyncService
               create_or_update!(record)
             end
           rescue Exception => e
-            stdout_and_log(%(uthor sync error:  #{e.message} \n #{e.backtrace}"), :error)
+            stdout_and_log(%(Author sync error:  #{e.message} \n #{e.backtrace}"), :error)
             @errored += 1
           end
         end
@@ -48,7 +48,7 @@ module SyncService
 
     def get_books
       @booksDoc.xpath('//record').map do |node|
-        @status = Hash.from_xml(node.serialize(encoding: 'UTF-8'))
+        Hash.from_xml(node.serialize(encoding: 'UTF-8'))
       end
     end
 
