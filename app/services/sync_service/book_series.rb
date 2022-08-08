@@ -63,16 +63,10 @@ module SyncService
 
         if series && series.code.present?
           unless series.title === record_hash["title"]
-            stdout_and_log(
-              %(Updating '#{series.title}' to '#{record_hash['title']}')
-            )
             write_to_db(series, record_hash, false)
             @updated += 1
           end
         else
-          stdout_and_log(
-            %(Creating '#{series.title}' -- '#{series.code}')
-          )
           write_to_db(series, record_hash, true)
           @created += 1
         end

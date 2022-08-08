@@ -58,10 +58,9 @@ module SyncService
       catalog = Catalog.new
       catalog.assign_attributes(record_hash) 
       if catalog.save!
-        stdout_and_log(%(Existing catalog update: '( #{record_hash['catalog_id']} )')) unless is_new
-        stdout_and_log(%(Creating new catalog: '( #{record_hash['catalog_id']} )')) if is_new
+        stdout_and_log(%(Created new catalog: '( #{catalog['code']} )'))
       else
-        stdout_and_log(%(Catalog not saved: #{record_hash['catalog_id']}), :error) 
+        stdout_and_log(%(Catalog not saved: #{catalog['code']}), :error) 
         @errored += 1
       end
     end
