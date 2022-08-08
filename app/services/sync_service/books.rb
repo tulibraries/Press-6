@@ -14,20 +14,19 @@ module SyncService
       @xmlPath = params.fetch(:xml_path)
       xml = File.open(@xmlPath, 'rb:utf-8', &:read)
       @booksDoc = Nokogiri.XML(xml)
-      stdout_and_log("Syncing books from #{@xmlPath}")
+      stdout_and_log(%(Syncing Books from #{@xmlPath}))
     end
 
     def sync
-      @updated = @not_saved = @skipped = @errored = 0
+      @updated = @created = @skipped = @errored = 0
       read_books.each do |book|
-        @log.info(%(Syncing Book: #{book['title']}))
         record = record_hash(book)
         create_or_update_if_needed!(record)
       rescue Exception => e
-        stdout_and_log(%(Syncing Book: #{book['title']} errored -  #{e.message} \n #{e.backtrace}))
+        stdout_and_log(%(Book error: #{book['record']['xml_id']}/#{book['record']['title']} -  #{e.message}))
         @errored += 1
       end
-      stdout_and_log("Syncing completed with #{@updated} updated, #{@not_saved} not saved, #{@skipped} bad data, and #{@errored} errored records.")
+      stdout_and_log(%(Book sync completed with #{@created} created, #{@updated} updated, #{@skipped} (malformed or missing xml data, bad status), and #{@errored} errored records.))
     end
 
     def read_books
@@ -65,34 +64,45 @@ module SyncService
         'subjects' => JSON.dump(record.dig('record', 'subjects', 'subject')),
         'contents' => record.dig('record', 'contents'),
         'desk_copy' => false,
-        'catalog_id' => if record.dig('record',
-                                      'catalog').present?
-                          record.dig('record',
-                                     'catalog').downcase
+        'catalog_id' => if record.dig('record', 'catalog').present?
+                          record.dig('record', 'catalog').downcase
                         else
-                          record.dig('record',
-                                     'catalog')
+                          record.dig('record', 'catalog')
                         end
       }
     end
 
     def create_or_update_if_needed!(record_hash)
-      book = Book.find_by(xml_id: record_hash['xml_id'])
-      book ||= Book.new
-
-      if record_hash['title'].present? && record_hash['status'].present? && record_hash['author_byline'].present? && record_hash['isbn'].present?
-
-        book.assign_attributes(record_hash) if %w[NP IP].include? record_hash['status']
-
-        if book.save!
+      if valid_record(record_hash)
+        book = Book.find_by(xml_id: record_hash['xml_id'])
+        if book.present?
+          write_to_db(book, record_hash, false)
           @updated += 1
         else
-          stdout_and_log(%(Record unable to be saved for #{record_hash['title']}))
-          @not_saved += 1
+          write_to_db(book, record_hash, true)
+          @created += 1
         end
       else
-        stdout_and_log(%(Record with blank title, status, isbn, or author_byline not saved for #{record_hash['xml_id']}))
+        stdout_and_log(%(Book's xml record has blank title, blank or rejected status, no isbn, or no author_byline. Not saved: #{record_hash['xml_id']}))
         @skipped += 1
+      end
+    end
+
+    def write_to_db(book, record_hash, is_new)
+      book = Book.new if is_new
+      book.assign_attributes(record_hash) 
+      if book.save!
+        stdout_and_log(%(Updated existing book: #{book.id}: #{book.title})) unless is_new
+        stdout_and_log(%(Created new book: #{book.id}: #{book.title})) if is_new
+      else
+        stdout_and_log(%(Book not saved: #{record_hash['xml_id']} -- #{record_hash['title']})) 
+        @errored += 1
+      end
+    end
+
+    def valid_record(record_hash)
+      if %w[NP IP].include?(record_hash['status'])
+        record_hash['title'].present? && record_hash['status'].present? && record_hash['author_byline'].present? && record_hash['isbn'].present?
       end
     end
 

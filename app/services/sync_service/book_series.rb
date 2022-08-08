@@ -13,25 +13,25 @@ module SyncService
       @stdout = Logger.new($stdout)
       @xmlPath = params.fetch(:xml_path)
       @booksDoc = Nokogiri::XML(File.open(@xmlPath), &:noblanks)
-      stdout_and_log("Syncing series from #{@xmlPath}")
+      stdout_and_log(%(Syncing series from #{@xmlPath}))
     end
 
     def sync
       @created = @updated = @errored = 0
       read_series.each do |series|
         if series.is_a?(Hash)
-          @log.info(%(Syncing Series: #{series['series_title']}))
-          record = record_hash(series)
-          create_if_needed!(record)
+          if series['series']['series_title'].present?
+            record = record_hash(series)
+            create_if_needed!(record)
+          end
         else
-          @log.info("Syncing Series: #{series.children.first.text}")
           @errored += 1
         end
       rescue Exception => e
-        stdout_and_log("#{e.message} \n #{e.backtrace}")
+        stdout_and_log(%(Cannot read file: #{e.message} \n #{e.backtrace}))
         @errored += 1
       end
-      stdout_and_log("Syncing completed with #{@created} created, #{@updated} updated, and #{@errored} errored records.")
+      stdout_and_log(%(Series syncing completed with #{@created} created, #{@updated} updated, and #{@errored} errored records.))
     end
 
     def read_series
@@ -40,7 +40,7 @@ module SyncService
         begin
           Hash.from_xml(node_xml)
         rescue REXML::ParseException
-          stdout_and_log("Parse exception: #{node.children.first.text}")
+          stdout_and_log(%(Parse exception: #{node.children.first.text}))
           node
         end
       end
@@ -62,18 +62,26 @@ module SyncService
         series = Series.where(code: record_hash['code']).first
 
         if series && series.code.present?
-          stdout_and_log(
-            %(Incoming book with series '#{record_hash['code']}' matched to existing series '(code = #{series.code})', level: :debug)
-          )
-          @updated += 1
+          unless series.title === record_hash["title"]
+            write_to_db(series, record_hash, false)
+            @updated += 1
+          end
         else
-          series = Series.new
+          write_to_db(series, record_hash, true)
           @created += 1
         end
+      end
+    end
 
-        series.assign_attributes(record_hash) unless record_hash.nil?
-
-        stdout_and_log(%(Successfully saved record for: #{record_hash['code']})) if series.save!
+    def write_to_db(series, record_hash, is_new)
+      series = Series.new if is_new
+      series.assign_attributes(record_hash) unless record_hash.nil?
+      if series.save!
+        stdout_and_log(%(Updated record: #{series.code}: #{series.title})) unless is_new
+        stdout_and_log(%(Created record: #{series.code}: #{series.title})) if is_new
+      else
+        stdout_and_log(%(Series not saved: #{record_hash['code']})) 
+        @errored += 1
       end
     end
 
