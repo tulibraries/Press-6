@@ -300,7 +300,10 @@ en:
         books: Requested Books
         exam-format: Exam copies will be delivered as an eBook
         preselect-text: is preselected below. Please fill out the following required fields.
-        request_format:
+        deskcopy:
+          eBook: eBook
+          Print: Print
+        examcopy:
           eBook: eBook
           Print ($10.00 fee required before book will be shipped): Print
         request_type:

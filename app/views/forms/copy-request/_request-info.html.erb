@@ -10,7 +10,14 @@
 
 <div id="deskcopy">
 <%= f.input :format, as: :radio_buttons, 
-                collection: t("tupress.forms.copy-request.request_format"),
+                collection: t("tupress.forms.copy-request.deskcopy"),
+                item_wrapper_class: "form-check inline",
+                legend_html: { class: "pl-0" },
+                required: true %>
+</div>
+<div id="examcopy">
+<%= f.input :format, as: :radio_buttons, 
+                collection: t("tupress.forms.copy-request.examcopy"),
                 item_wrapper_class: "form-check inline",
                 legend_html: { class: "pl-0" },
                 required: true %>
