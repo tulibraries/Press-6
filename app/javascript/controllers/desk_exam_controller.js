@@ -6,6 +6,8 @@ export default class extends Controller {
     type == "Desk Copy" ? this.desk() : this.exam()
   }
   exam() {
+    document.getElementById("examcopy").style.display = "block";
+    document.getElementById("deskcopy").style.display = "none";
     document.getElementById("bookstore").style.display = "none";
     document.getElementById("form_authorized_bookstore").classList.remove("required");
     document.getElementById("form_authorized_bookstore").removeAttribute("required", "required");
@@ -17,6 +19,8 @@ export default class extends Controller {
     document.getElementById("form_format_print").setAttribute("aria-required", "false");
   }
   desk() {
+    document.getElementById("examcopy").style.display = "none";
+    document.getElementById("deskcopy").style.display = "block";
     document.getElementById("bookstore").style.display = "block";
     document.getElementById("form_authorized_bookstore").classList.add("required");
     document.getElementById("form_authorized_bookstore").setAttribute("required", "required");
