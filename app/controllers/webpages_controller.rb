@@ -62,5 +62,7 @@ class WebpagesController < ApplicationController
       # https://github.com/rails/rails/issues/40798
       response.set_header("X-Robots-Tag", "noindex")
       response.set_header("Cache-Control", "private, no-store, must-revalidate")
+      response.set_header("Pragma", "no-cache")
+      response.set_header("Expires", "Fri, 01 Jan 1990 00:00:00 GMT")
     end
 end
