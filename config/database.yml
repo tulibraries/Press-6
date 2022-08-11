@@ -36,7 +36,7 @@ development:
 
 test:
   <<: *default
-  database: <%= ENV["TUPRESS_DB_NAME"] || "tupress-test" %>
+  database: tupresstest
 
 production:
   <<: *default
