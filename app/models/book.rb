@@ -90,15 +90,8 @@ class Book < ApplicationRecord
     if bindings.present?
       bindings_as_tuples.each do |tuple|
         next if tuple[:pub_date].blank?
-
         date = tuple[:pub_date].split(" ")
-
-        self.sort_year = if date[1].to_i < 99 && date[1].to_i > 22
-          "19#{date[1]}"
-                         else
-                           "20#{date[1]}"
-        end
-
+        self.sort_year = (date[1].to_i <= 99 && date[1].to_i > 70) ? "19#{date[1]}" : "20#{date[1]}"
         self.sort_month = date[0]
       end
     end
