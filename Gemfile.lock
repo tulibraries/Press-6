@@ -46,8 +46,6 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    actionview-encoded_mail_to (1.0.9)
-      rails
     active_storage_validations (0.9.8)
       activejob (>= 5.2.0)
       activemodel (>= 5.2.0)
@@ -460,7 +458,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  actionview-encoded_mail_to
   active_storage_validations
   activestorage-validator
   administrate (>= 0.16.0)

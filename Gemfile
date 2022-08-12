@@ -38,7 +38,6 @@ gem "simple_form"
 gem "sprockets-rails"
 gem "stimulus-rails"
 gem "turbo-rails"
-gem "actionview-encoded_mail_to"
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
