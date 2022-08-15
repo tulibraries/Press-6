@@ -9,7 +9,7 @@
     <% end %>
     <%= sanitize("<li><strong>Phone</strong>: #{@default_agency.phone} (phone)</li>").html_safe if @default_agency.phone.present? %>
     <%= sanitize("<li><strong>Fax</strong>: #{@default_agency.fax} (fax)</li>").html_safe if @default_agency.fax.present? %>
-    <%= sanitize("<li>#{mail_to @default_agency.email, @default_agency.email, encode: "hex"}</li>").html_safe if @default_agency.email.present? %>
+    <%= sanitize("<li>#{mail_to @default_agency.email, @default_agency.email}</li>").html_safe if @default_agency.email.present? %>
     <%= sanitize("<li>#{link_to @default_agency.website, @default_agency.website}</li>").html_safe if @default_agency.website.present? %>
   </ul>
 </div>
