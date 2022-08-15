@@ -28,7 +28,7 @@ to be displayed on a resource's edit form page.
         :first,
         selected: field.data.presence,
       ),
-      { include_blank: true, include_hidden: false }
+      { include_blank: field.include_blank_option, include_hidden: false }
     ) %>
   <% else %>
     <%= f.select(
@@ -39,7 +39,7 @@ to be displayed on a resource's edit form page.
         :to_s,
         selected: field.data.presence,
       ),
-      { include_blank: true, include_hidden: false }
+      { include_blank: field.include_blank_option, include_hidden: false }
     ) %>
   <% end %>
 </div>
