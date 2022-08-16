@@ -6,9 +6,6 @@ By default, it includes the application JS,
 but each page can define additional JS sources
 by providing a `content_for(:javascript)` block.
 
-Administrate::Engine.javascripts.each do |js_path|
- <= echo javascript_include_tag js_path
-<% end
 %>
 
 <%= yield :javascript %>

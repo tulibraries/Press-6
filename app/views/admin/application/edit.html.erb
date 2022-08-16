@@ -19,7 +19,6 @@ It displays a header, and renders the `_form` partial to do the heavy lifting.
 
 <header class="main-content__header" role="banner">
   <h1 class="main-content__page-title">
-
     <%= content_for(:title) %>
   </h1>
 
@@ -28,7 +27,7 @@ It displays a header, and renders the `_form` partial to do the heavy lifting.
       t("administrate.actions.show_resource", name: page.resource.class),
       [namespace, page.resource],
       class: "button",
-    ) if valid_action?(:show) && show_action?(:show, page.resource) %>
+    ) if accessible_action?(page.resource, :show) %>
   </div>
 </header>
 
