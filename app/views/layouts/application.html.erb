@@ -15,7 +15,7 @@
     <%= yield :head %>
   </head>
 
-  <body>
+  <body data-controller="external-links">
 
   <div id="skip-link">
     <%= link_to t("tupress.default.fields.content_skip"), "#skiplink_ada", :class => "element-invisible", :tabindex => "1" %>
