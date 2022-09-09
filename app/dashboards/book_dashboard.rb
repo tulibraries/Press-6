@@ -51,7 +51,7 @@ class BookDashboard < Administrate::BaseDashboard
     add_to_news: Field::Boolean,
     news_text: TrixField,
     newsweight: Field::Select.with_options(
-      collection: [1, 2, 3, 4]
+      collection: ["None", 1, 2, 3, 4]
     ),
     hot: Field::Boolean,
     supplement: Field::String,
