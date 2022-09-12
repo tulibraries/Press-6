@@ -103,5 +103,7 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
+  # GA.tracker = "UA-2152985-17"
+
   # Rails.application.routes.default_url_options[:protocol] = "https"
 end
