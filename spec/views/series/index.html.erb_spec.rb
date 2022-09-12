@@ -7,10 +7,11 @@ RSpec.describe "series/index", type: :view do
   let(:webpage_with_text) { FactoryBot.create(:webpage, :with_text) }
   let(:webpage_no_text) { FactoryBot.create(:agency) }
 
-  context "displays agency info" do
+  context "displays intro" do
     before(:each) do
       assign(:intro, webpage_with_text)
-      render "series"
+      assign(:series, [series])
+      render
     end
 
     it "renders page with intro" do
@@ -18,21 +19,16 @@ RSpec.describe "series/index", type: :view do
     end
   end
 
-  # context "displays region info" do
-  #   before(:each) do
-  #     allow(view).to receive(:current_user).and_return(user)
-  #     render "region", region: agency1.region
-  #   end
+  context "displays intro" do
+    before(:each) do
+      assign(:intro, webpage_no_text)
+      assign(:series, [series])
+      render
 
-  #   it "only displays assigned regions" do
-  #     expect(rendered).to match(/#{agency1.region}/)
-  #     expect(rendered).not_to match(/#{agency3.region}/)
-  #   end
-
-  #   it "gets rights info from helper method" do
-  #     expect(rendered).to match(/Non-exclusive Rights/)
-  #     expect(rendered).not_to match(/Exclusive Rights/)
-  #   end
-  # end
+      it "renders page with intro" do
+        expect(rendered).not_to match(/Hello World/)
+      end
+    end
+  end
 
 end

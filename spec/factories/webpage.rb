@@ -4,10 +4,9 @@ FactoryBot.define do
   factory :webpage do
     title { "John" }
     slug { "slug" }
+    body { ActionText::Content.new("") }
     trait :with_text do
-      after :create do |webpage|
-        body { ActionText::Content.new("Hello World") }
-      end
+      body { ActionText::Content.new("Hello World") }
     end
   end
 end

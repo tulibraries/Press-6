@@ -8,10 +8,10 @@
     </div>
   </div>
 
-  <% if @intro.body.present? %>
+  <% if @intro.present? %>
   <div class="row">
     <div class="col-12 mt-2">
-      <%= @intro.body %>
+      <%= @intro.body if @intro.body.present? %>
     </div>
   </div>
   <% end %>
