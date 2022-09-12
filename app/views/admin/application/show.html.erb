@@ -28,7 +28,7 @@ as well as a link to its edit page.
       t("administrate.actions.edit_resource", name: page.resource.class),
       [:edit, namespace, page.resource],
       class: "button",
-    ) if valid_action?(:edit) && show_action?(:edit, page.resource) %>
+    ) if accessible_action?(page.resource, :edit) %>
 
     <%= link_to(
       t("Show in Site"),

@@ -20,10 +20,12 @@
     }
   }
   #header-logo {
-    max-width: 90px;
-    max-height: 77px;
-    min-width: 90px;
-    min-height: 77px;
+    max-width: 290px;
+    max-height: 120px;
+    min-width: 290px;
+    min-height: 120px;
+    width: 290px;
+    height: 120px;
     vertical-align: bottom;
     @media screen and (min-width: 450) and (max-width: 1039px) {
       margin-top: 10px;

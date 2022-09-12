@@ -29,7 +29,7 @@ namespace :import do
       record_hash =
         {
           "title" => rep["name"],
-          "department" => "Sales Reps",
+          "department" => "Sales Representatives",
           "email" => rep["email"],
           "company" => rep["company"],
           "address" => rep["address"],

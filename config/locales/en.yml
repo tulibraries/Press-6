@@ -73,6 +73,7 @@ en:
           title: News & Events
           blog: North Philly Notes
           podcast: Podcast
+          blog_link: https://templepress.wordpress.com
           podcast_link: https://spoti.fi/3q4KzZd
           conferences: Conferences
           events: Event Calendar
@@ -289,7 +290,6 @@ en:
           Magazine: Magazine
           Journal: Journal
           Newspaper: Newspaper
-          Exam_Desk_Copy: Exam/Desk Copy
           Other: Other
         request_statement: Request
 
@@ -300,9 +300,12 @@ en:
         books: Requested Books
         exam-format: Exam copies will be delivered as an eBook
         preselect-text: is preselected below. Please fill out the following required fields.
-        request_format:
+        deskcopy:
           eBook: eBook
           Print: Print
+        examcopy:
+          eBook: eBook
+          Print ($10.00 fee required before book will be shipped): Print
         request_type:
           Exam Copy: Exam Copy
           Desk Copy: Desk Copy

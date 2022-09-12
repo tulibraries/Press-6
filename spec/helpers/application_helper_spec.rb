@@ -103,7 +103,7 @@ RSpec.describe ApplicationHelper, type: :helper do
           expect(helper.title_link("People at the Press")).to eq(link_to("People at the Press", admin_people_path))
           expect(helper.title_link(person)).to eq(link_to(person.title, edit_admin_person_path(person)))
           allow(controller).to receive(:action_name).and_return "sales_reps"
-          expect(helper.title_link("Sales Reps")).to eq(link_to("Sales Reps", admin_people_path))
+          expect(helper.title_link("Sales Representatives")).to eq(link_to("Sales Representatives", admin_people_path))
           expect(helper.title_link(person)).to eq(link_to(person.title, edit_admin_person_path(person)))
         end
       end

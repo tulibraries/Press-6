@@ -5,6 +5,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' www.google-analytics.com;img-src 'self' www.google-analytics.com tulib-press-prod.s3.amazonaws.com;">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= analytics_init if GoogleAnalytics.valid_tracker? %>
 
@@ -14,7 +16,7 @@
     <%= yield :head %>
   </head>
 
-  <body>
+  <body data-controller="external-links">
 
   <div id="skip-link">
     <%= link_to t("tupress.default.fields.content_skip"), "#skiplink_ada", :class => "element-invisible", :tabindex => "1" %>
@@ -29,8 +31,7 @@
 
     <a href="#" name="skiplink_ada" id="skiplink_ada" aria-label="skip link"></a>
 
-      <%= yield %>
- 
+      <%= yield %> 
 
     <%= render "footer" %>
 

@@ -17,19 +17,19 @@ USER root
 # libc6-compat is added to allow m1 build of nokogiri
 RUN apk add -U --no-cache \
       bash=5.1.16-r2 \
-      busybox=1.35.0-r15 \      
       imagemagick=7.1.0.35-r0 \
+      busybox=1.35.0-r17 \ 
       libc6-compat=1.2.3-r0 \
       libxslt=1.1.35-r0 \
       mariadb-connector-c=3.1.13-r4 \
       shared-mime-info=2.2-r0 \
+      tzdata=2022c-r0 && \
       ssl_client=1.35.0-r15 \
-      tzdata=2022a-r0 && \
     apk add -U --no-cache --virtual build-dependencies \
       git=2.36.2-r0 \
       build-base=0.5-r3 \
       libxslt-dev=1.1.35-r0 \
-      mariadb-dev=10.6.8-r0 \
+      mariadb-dev=10.6.9-r0 \
       nodejs=16.16.0-r0 \
       yarn=1.22.19-r0 && \
     if [ "${RAILS_ENV}" = "production" ]; then bundle config set --local without "development test"; fi && \
