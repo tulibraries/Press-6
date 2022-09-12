@@ -18,6 +18,7 @@ class SeriesDashboard < Administrate::BaseDashboard
     description: TrixField,
     founder: Field::String,
     image: FileField,
+    unpublish: Field::Boolean,
     image_link: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
@@ -57,6 +58,7 @@ class SeriesDashboard < Administrate::BaseDashboard
     editors
     founder
     description
+    unpublish
   ].freeze
 
   # COLLECTION_FILTERS
