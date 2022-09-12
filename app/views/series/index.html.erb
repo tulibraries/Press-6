@@ -8,6 +8,14 @@
     </div>
   </div>
 
+  <% if @intro.present? %>
+  <div class="row">
+    <div class="col-12 mt-2">
+      <%= @intro.body %>
+    </div>
+  </div>
+  <% end %>
+
   <div class="row pr-4 pt-4">
     <% @series.each do |s| %>
     <div class="col-12 col-md-6 col-lg-4 series">

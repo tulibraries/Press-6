@@ -15,7 +15,7 @@ class SeriesDashboard < Administrate::BaseDashboard
     slug: Field::String,
     title: Field::String,
     editors: Field::String,
-    description: Field::Text,
+    description: TrixField,
     founder: Field::String,
     image: FileField,
     image_link: Field::String,
@@ -49,10 +49,14 @@ class SeriesDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
+    title
+    code
+    slug
     image
     image_link
-    slug
+    editors
     founder
+    description
   ].freeze
 
   # COLLECTION_FILTERS

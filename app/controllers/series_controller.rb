@@ -6,6 +6,7 @@ class SeriesController < ApplicationController
 
   def index
     @series = Series.all.order(:title)
+    @intro = Webpage.find_by(slug: "series-index-intro")
   end
 
   def show
