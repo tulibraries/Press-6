@@ -42,3 +42,6 @@ We defined a Makefile with many useful commands for local development. These com
 ## Deployment
 ### QA
 * Deploys to https://tupress-qa.k8s.temple.edu
+
+### Production
+* To deploy the app to the prod cluster, add a new release via gitlab. The release image will be tagged with "prod" and with the release tag you use in the release.
