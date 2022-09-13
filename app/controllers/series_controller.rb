@@ -5,7 +5,8 @@ class SeriesController < ApplicationController
   include SetInstance
 
   def index
-    @series = Series.all.order(:title)
+    @series = Series.where(unpublish: false).order(:title)
+    @intro = Webpage.find_by(slug: "series-index-intro")
   end
 
   def show

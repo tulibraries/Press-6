@@ -7,7 +7,8 @@ FactoryBot.define do
     code { "BL-123" }
     image_link { "" }
     editors { "NBC" }
-    description { "World" }
+    description { ActionText::Content.new("World") }
     founder { "Washington" }
+    unpublish { false }
   end
 end

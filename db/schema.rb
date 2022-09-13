@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_12_140701) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_12_200332) do
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -351,6 +351,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_12_140701) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "book_id"
+    t.boolean "unpublish", default: false
     t.index ["book_id"], name: "index_series_on_book_id"
     t.index ["slug"], name: "index_series_on_slug", unique: true
   end

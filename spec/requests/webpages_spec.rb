@@ -3,17 +3,13 @@
 require "rails_helper"
 
 RSpec.describe "/faqs", type: :request do
-  let(:faq) { FactoryBot.create(:faq) }
+  let(:webpage) { FactoryBot.create(:webpage, :with_text) }
 
-  describe "GET /index" do
+  describe "GET /webpage" do
     it "renders a successful response" do
-      expect { get faqs_path.to have_text(faq.title) }
+      expect { get webpage_path(webpage).to have_text(webpage.title) }
+      expect { get webpage_path(webpage).to have_text(webpage.description) }
     end
   end
 
-  describe "GET /show" do
-    it "renders a successful response" do
-      expect { get faq_path(faq).to have_text(faq.answer) }
-    end
-  end
 end

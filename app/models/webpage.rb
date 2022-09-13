@@ -4,7 +4,7 @@ class Webpage < ApplicationRecord
   include Imageable
   include Friendable
 
-  validates :title, :body, presence: true
+  validates :title, presence: true
   has_rich_text :body
 
   has_one :action_text_rich_text, class_name: "ActionText::RichText", as: :record, dependent: :nullify
