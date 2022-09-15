@@ -92,5 +92,5 @@ Rails.application.routes.draw do
   get "promotions", to: "special_offers#index"
   get "promotions/:id", to: "special_offers#index"
 
-  get "book/20000000010571"=> redirect("books/blue-state-republican") 
+  get "book/20000000010571" => redirect("books/blue-state-republican")
 end
