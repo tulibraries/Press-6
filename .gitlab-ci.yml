@@ -74,6 +74,22 @@ qa_deploy:
     -  helm pull oci://$HARBOR/tulibraries/tupress-charts/tupress --version "0.3.*" --untar
     - helm upgrade tupress oci://$HARBOR/tulibraries/tupress-charts/tupress --version "0.3.*" --history-max=5 --namespace=tupress-qa --values tupress/values.yaml --set image.repository=$IMAGE:$VERSION
 
+tag_prod:
+  stage: tag
+  extends: .tag_image
+  variables:
+    TAG: prod
+  only:
+    - tags
+
+tag_release:
+  stage: tag
+  extends: .tag_image
+  variables:
+    TAG: $CI_COMMIT_TAG
+  only:
+    - tags
+
 prod_deploy:
   variables:
     IMAGE: harbor.k8s.temple.edu/tulibraries/tupress

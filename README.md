@@ -42,3 +42,6 @@ We defined a Makefile with many useful commands for local development. These com
 ## Deployment
 ### QA
 * Deploys to https://tupress-qa.k8s.temple.edu
+
+### Production
+* In order to deploy to production, create a release in GitLab. The release tag normally used for releases should continue to be added manually during the release process, e.g. “1.3.3”. Gitlab will then automatically tag the release image with both a “prod” tag and a release tag that references the git tag (e.g. 1.3.3). The newly tagged image will then be deployed to the production environment.
