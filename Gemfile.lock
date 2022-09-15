@@ -163,7 +163,6 @@ GEM
       activerecord (>= 4.0.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    google-analytics-rails (1.1.1)
     hashie (5.0.0)
     httparty (0.20.0)
       mime-types (~> 3.0)
@@ -470,7 +469,6 @@ DEPENDENCIES
   font-awesome-rails
   font-awesome-sass
   friendly_id
-  google-analytics-rails (= 1.1.1)
   httparty
   image_processing (>= 1.2)
   jbuilder
