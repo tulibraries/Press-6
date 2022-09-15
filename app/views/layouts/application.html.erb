@@ -8,7 +8,6 @@
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' www.google-analytics.com ssl.google-analytics.com;img-src 'self' www.google-analytics.com ssl.google-analytics.com tulib-press-prod.s3.amazonaws.com;">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%= analytics_init if GoogleAnalytics.valid_tracker? %>
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
