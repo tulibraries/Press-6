@@ -16,8 +16,8 @@ import "./src/administrate-trix"
 var _gaq = _gaq || [];
 
 function loadtracking() {
-  window._gaq.push(['_setAccount', 'UA-2152985-17']);
-  window._gaq.push(['_trackPageview']);
+  _gaq.push(['_setAccount', 'UA-2152985-17']);
+  _gaq.push(['_trackPageview']);
 
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
