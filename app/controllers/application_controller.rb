@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     @payment_terms = Webpage.find_by(slug: "payment-terms")
   end
 
-  def script_nonce 
+  def script_nonce
     if Rails.env.production?
       @nonce = SecureRandom.base64(12)
     end
