@@ -62,7 +62,7 @@
             <%= t("tupress.books.preview") %>
           </span>
           <ul class="list-unstyled">
-            <li><%= link_to @book.excerpt_text, url_for(@book.excerpt_file.attachment), disposition: "attachment" if @book.excerpt_file.attached? %></li>
+            <li><%= link_to (@book.excerpt_text).html_safe, url_for(@book.excerpt_file.attachment), disposition: "attachment" if @book.excerpt_file.attached? %></li>
             <li><%= link_to t("tupress.books.toc"), url_for(@book.toc_file.attachment), disposition: "attachment" if @book.toc_file.attached? %></li>
           </ul>
         </div>
