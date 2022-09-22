@@ -22,6 +22,8 @@ By default, the input is a text field.
   <%= case field.attribute
       when :xml_id
         f.text_field field.attribute, disabled: true
+      when :excerpt_text
+        f.text_field field.attribute, disabled: true
       when :cover_alt_text
         f.text_field field.attribute, placeholder: "<optional>"
       else
