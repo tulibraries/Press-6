@@ -33,7 +33,7 @@
 <p>You may select up to 3 books</p>
 
 <% if @book.present? %>
-  <%= f.input :requested_book1, label: false, disabled: true, required: true, input_html: { value: "#{@book.sort_title.to_s} -- #{@book.author_byline}" } %>
+  <%= f.input :requested_book1, label: false, disabled: false, required: true, input_html: { value: "#{@book.sort_title.to_s} -- #{@book.author_byline}" } %>
 <% else %>
   <%= f.collection_select :requested_book1, @books, 
                       :select_value, 
