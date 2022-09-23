@@ -18,11 +18,6 @@ RSpec.describe Book, type: :model do
 
   let(:book) { FactoryBot.create(:book) }
 
-  it "- formats excerpt info from xml" do
-    expect(book.excerpt_text).to eq "Read Chapter 1 (pdf)."
-    expect(book.excerpt_file_name).to eq "chapters_1400/1799_ch1.pdf"
-  end
-
   it "- can list subjects as tuples (arrays) of (title , id)" do
     book = described_class.new
     book.assign_attributes("subjects" => JSON.dump([{ "subject_id" => 1, "subject_title" => "foo" }]))

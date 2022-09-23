@@ -5,7 +5,7 @@ class Book < ApplicationRecord
   include Friendable
 
   before_validation :sort_titles
-  before_save :get_excerpt, :catalog_code, :sort_date
+  before_save :catalog_code, :sort_date
 
   validates :title, :xml_id, :author_byline, :author_ids, :status, presence: true
   validates :cover_image, presence: false,
@@ -61,13 +61,6 @@ class Book < ApplicationRecord
 
   def catalog_code
     catalog_id.downcase if catalog_id.present?
-  end
-
-  def get_excerpt
-    if excerpt.present? && excerpt.include?("tempress/") # only runs during harvest
-      self.excerpt_text = excerpt.split(/.pdf"> */i)[1].present? ? excerpt.split(/.pdf"> */i)[1].split(%r{</a> *}i)[0] : "Read An Excerpt (pdf)."
-      self.excerpt_file_name = excerpt.split(%r{tempress/ *})[1].split(/"> */)[0]
-    end
   end
 
   def subjects_as_tuples

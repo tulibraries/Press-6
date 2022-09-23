@@ -51,7 +51,6 @@ module SyncService
         'about_author' => record.dig('record', 'author_bios'),
         'intro' => record.dig('record', 'intro'),
         'blurb' => record.dig('record', 'blurb'),
-        'excerpt' => record.dig('record', 'excerpt'),
         'status' => record.dig('record', 'status'),
         'pages_total' => record.dig('record', 'format', 'pages_total'),
         'trim' => record.dig('record', 'format', 'trim'),
