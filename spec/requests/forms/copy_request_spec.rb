@@ -29,7 +29,7 @@ RSpec.describe "Request a Desk or Exam Copy", type: :request do
   let(:form_type) { "copy-request" }
   let(:form_params) do
     {
-      name: "Joe", email: "test@temple.edu", address_line_1: "123 Hammock Sway", state: "FL", zip: "345321", address_type: "Residential",
+      name: "Joe", email: "test@temple.edu", address_line_1: "123 Hammock Sway", city: "Panama City", state: "FL", zip: "345321", address_type: "Residential",
       requested_book1: "Appollonian Way -- Lorenzo Garcia", format: "eBook"
     }
   end
