@@ -20,7 +20,7 @@ FactoryBot.define do
     status { "IP" }
     catalog_id { "SP18" }
     bindings do
-      '{"binding":[{"format":"PB","price":"$31.95","ean":"978-1-59213-386-4","binding_status":"IP","pub_date_for_format":"Jun 06"}]}'
+      '{"binding":[{"format":"HC","price":"$31.95","ean":"123-4-5678-9","binding_status":"IP","pub_date_for_format":"Jun 06"}]}'
     end
     excerpt { '<p><a href="http://www.temple.edu/tempress/chapters_1400/1799_ch1.pdf">Read Chapter 1 (pdf).</a></p>' }
     excerpt_text { "" }

@@ -4,7 +4,9 @@ require "rails_helper"
 
 RSpec.describe BooksHelper, type: :helper do
   let(:formats) { [{ "PB" => "Paperback" }, { "HC" => "Hardcover" }, { "Ebook" => "eBook" }] }
-  let(:book) { FactoryBot.create(:book) }
+  let(:book) { FactoryBot.create(:book, bindings: %({"binding":[{"format":"HC","price":"$31.95","ean":"123-4-5678-9","binding_status":"IP","pub_date_for_format":"Jun 06"}, {"format":"PB","price":"$31.95","ean":"987-6-5432-1","binding_status":"IP","pub_date_for_format":"Jun 06"}]})) }
+  let(:pb_book) { FactoryBot.create(:book, bindings: %({"binding":[{"format":"HC","price":"$31.95","ean":"","binding_status":"IP","pub_date_for_format":"Jun 06"}, {"format":"PB","price":"$31.95","ean":"987-6-5432-1","binding_status":"IP","pub_date_for_format":"Jun 06"}]})) }
+  let(:e_book) { FactoryBot.create(:book, bindings: %({"binding":[{"format":"Ebook","price":"$31.95","ean":"","binding_status":"IP","pub_date_for_format":"Jun 06"}, {"format":"PB","price":"$31.95","ean":"","binding_status":"IP","pub_date_for_format":"Jun 06"}]})) }
   let(:book_with_cover) { FactoryBot.create(:book, :with_cover_image) }
   let(:no_subtitle) { FactoryBot.create(:book, edition: "") }
   let(:no_edition) { FactoryBot.create(:book, subtitle: "") }
@@ -37,6 +39,18 @@ RSpec.describe BooksHelper, type: :helper do
       end
       it "displays 'out of print' for OP status" do
         expect(helper.order_button(no_nothing)).to eq("[OUT OF PRINT]")
+      end
+    end
+
+    describe "parses the correct isbn" do
+      it "uses hc for isbn if present" do
+        expect(helper.order_button(book)).to eq(%(<a class="order-button" href="https://cdcshoppingcart.uchicago.edu/Cart2/Chicagobook.aspx?PRESS=temple&amp;ISBN=123456789">ORDER</a>))
+      end
+      it "uses pb for isbn if hc isbn not present" do
+        expect(helper.order_button(pb_book)).to eq(%(<a class="order-button" href="https://cdcshoppingcart.uchicago.edu/Cart2/Chicagobook.aspx?PRESS=temple&amp;ISBN=987654321">ORDER</a>))
+      end
+      it "does not error when neither are present" do
+        expect(helper.order_button(e_book)).to eq(%())
       end
     end
   end
