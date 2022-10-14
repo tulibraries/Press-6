@@ -42,7 +42,7 @@ RSpec.describe BooksHelper, type: :helper do
       end
     end
 
-    describe "parses the correct isbn" do 
+    describe "parses the correct isbn" do
       it "uses hc for isbn if present" do
         expect(helper.order_button(book)).to eq(%(<a class="order-button" href="https://cdcshoppingcart.uchicago.edu/Cart2/Chicagobook.aspx?PRESS=temple&amp;ISBN=123456789">ORDER</a>))
       end

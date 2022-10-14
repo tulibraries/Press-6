@@ -52,8 +52,8 @@ module BooksHelper
       "[OUT OF PRINT]"
     elsif book.isbn.present?
       bindings = JSON.parse(book.bindings)["binding"]
-      hc = bindings.map{|format| format["ean"] if format["format"] == "HC" && format["ean"].present?}.join("")
-      pb = bindings.map{|format| format["ean"] if format["format"] == "PB" && format["ean"].present?}.join("")
+      hc = bindings.map { |format| format["ean"] if format["format"] == "HC" && format["ean"].present? }.join("")
+      pb = bindings.map { |format| format["ean"] if format["format"] == "PB" && format["ean"].present? }.join("")
       if hc.present?
         link_to t("tupress.books.order_button"),
                 "#{t('tupress.books.purchase_link')}#{hyphen_strip(hc)}",
@@ -62,7 +62,7 @@ module BooksHelper
         link_to t("tupress.books.order_button"),
                 "#{t('tupress.books.purchase_link')}#{hyphen_strip(pb)}",
                 class: "order-button"
-      else 
+      else
         ""
       end
     end
