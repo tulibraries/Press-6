@@ -5,8 +5,8 @@ require "rails_helper"
 RSpec.describe BooksHelper, type: :helper do
   let(:formats) { [{ "PB" => "Paperback" }, { "HC" => "Hardcover" }, { "Ebook" => "eBook" }] }
   let(:book) { FactoryBot.create(:book, bindings: %({"binding":[{"format":"HC","price":"$31.95","ean":"123-4-5678-9","binding_status":"IP","pub_date_for_format":"Jun 06"}, {"format":"PB","price":"$31.95","ean":"987-6-5432-1","binding_status":"IP","pub_date_for_format":"Jun 06"}]})) }
-  let(:pb_book) { FactoryBot.create(:book, bindings: %({"binding":[{"format":"HC","price":"$31.95","ean":"","binding_status":"IP","pub_date_for_format":"Jun 06"}, {"format":"PB","price":"$31.95","ean":"987-6-5432-1","binding_status":"IP","pub_date_for_format":"Jun 06"}]})) }
-  let(:e_book) { FactoryBot.create(:book, bindings: %({"binding":[{"format":"Ebook","price":"$31.95","ean":"","binding_status":"IP","pub_date_for_format":"Jun 06"}, {"format":"PB","price":"$31.95","ean":"","binding_status":"IP","pub_date_for_format":"Jun 06"}]})) }
+  let(:pb_book) { FactoryBot.create(:book, bindings: %({"binding":{"format":"PB","price":"$31.95","ean":"987-6-5432-1","binding_status":"IP","pub_date_for_format":"Jun 06"}})) }
+  let(:e_book) { FactoryBot.create(:book, bindings: %({"binding":[{"format":"Ebook","price":"$31.95","ean":"123456789","binding_status":"IP","pub_date_for_format":"Jun 06"}, {"format":"PB","price":"$31.95","ean":"","binding_status":"IP","pub_date_for_format":"Jun 06"}]})) }
   let(:book_with_cover) { FactoryBot.create(:book, :with_cover_image) }
   let(:no_subtitle) { FactoryBot.create(:book, edition: "") }
   let(:no_edition) { FactoryBot.create(:book, subtitle: "") }
