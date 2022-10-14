@@ -48,23 +48,30 @@ module BooksHelper
   end
 
   def order_button(book)
+    hc, pb = nil
     if book.status == "OP"
       "[OUT OF PRINT]"
     elsif book.isbn.present?
       bindings = JSON.parse(book.bindings)["binding"]
-      hc = bindings.map { |format| format["ean"] if format["format"] == "HC" && format["ean"].present? }.join("")
-      pb = bindings.map { |format| format["ean"] if format["format"] == "PB" && format["ean"].present? }.join("")
-      if hc.present?
-        link_to t("tupress.books.order_button"),
-                "#{t('tupress.books.purchase_link')}#{hyphen_strip(hc)}",
-                class: "order-button"
-      elsif pb.present?
-        link_to t("tupress.books.order_button"),
-                "#{t('tupress.books.purchase_link')}#{hyphen_strip(pb)}",
-                class: "order-button"
+      if bindings.is_a? Array
+        hc = bindings.map { |format| format["ean"] if format["format"] == "HC" && format["ean"].present? }
+        pb = bindings.map { |format| format["ean"] if format["format"] == "PB" && format["ean"].present? }
+        hc.present? ? order_link(hc.join) : order_link(pb.join)
       else
-        ""
+        hc = bindings["ean"] if bindings["format"] == "HC"
+        pb = bindings["ean"] if bindings["format"] == "PB"
+        hc.present? ? order_link(hc) : order_link(pb)
       end
+    end
+  end
+
+  def order_link(isbn)
+    if isbn.present?
+      link_to t("tupress.books.order_button"),
+              "#{t('tupress.books.purchase_link')}#{hyphen_strip(isbn)}",
+              class: "order-button"
+    else
+      ""
     end
   end
 end
