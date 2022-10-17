@@ -54,8 +54,8 @@ module BooksHelper
     elsif book.isbn.present?
       bindings = JSON.parse(book.bindings)["binding"]
       if bindings.is_a? Array
-        hc = bindings.map { |format| format["ean"] if format["format"] == "HC" && format["ean"].present? && (%w[NP IP].include? format["binding_status"])}
-        pb = bindings.map { |format| format["ean"] if format["format"] == "PB" && format["ean"].present? && (%w[NP IP].include? format["binding_status"])}
+        hc = bindings.map { |format| format["ean"] if format["format"] == "HC" && format["ean"].present? && (%w[NP IP].include? format["binding_status"]) }
+        pb = bindings.map { |format| format["ean"] if format["format"] == "PB" && format["ean"].present? && (%w[NP IP].include? format["binding_status"]) }
         hc.compact! if hc.present?
         pb.compact! if pb.present?
         hc.present? ? order_link(hc.compact.join) : order_link(pb.join)
