@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Request a Desk or Exam Copy", type: :request do
-  let(:pb_adoption) { FactoryBot.create(:book, title: "paper back", bindings: %({"binding":[{"format":"PB","price":"$31.95","ean":"978-1-59213-386-4","binding_status":"IP","pub_date_for_format":"Jun 06"}]}), sort_title: "paper back", course_adoption: true, desk_copy: false) }
+  let(:pb_adoption) { FactoryBot.create(:book, title: "paper back", bindings: %({"binding":{"format":"PB","price":"$31.95","ean":"978-1-59213-386-4","binding_status":"IP","pub_date_for_format":"Jun 06"}}), sort_title: "paper back", course_adoption: true, desk_copy: false) }
   let(:no_adoption) { FactoryBot.create(:book, title: "not requestable", sort_title: "not requestable", course_adoption: true, desk_copy: true) }
   let(:hc_adoption) do
     FactoryBot.create(:book, title: "hard cover", sort_title: "hard cover", course_adoption: true, bindings: "", desk_copy: false)

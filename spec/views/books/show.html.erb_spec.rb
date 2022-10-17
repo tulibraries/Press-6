@@ -18,7 +18,7 @@ RSpec.describe "books/show", type: :view do
 
   it "uses helper to add century to pub_dates" do
     @book = FactoryBot.create(:book,
-                              bindings: '{"binding":[{"format":"HC","price":"$31.95","ean":"978-1-59213-386-4","binding_status":"IP","pub_date_for_format":"Jun 85"}]}')
+                              bindings: '{"binding":{"format":"HC","price":"$31.95","ean":"978-1-59213-386-4","binding_status":"IP","pub_date_for_format":"Jun 85"}}')
     assign(:links, [[@book.label_1, @book.link_1]])
     render
     expect(rendered).to match(/1985/)

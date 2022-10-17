@@ -6,10 +6,10 @@ RSpec.describe "/subjects/:id", type: :feature do
   subject = FactoryBot.create(:subject, code: 123456789, title: "Test Subject")
   old_book = FactoryBot.create(:book, title: "A Test Book",
                                       subjects: "[{ \"subject_id\":#{subject.code}, \"subject_title\":\"#{subject.title}\" }]",
-                                      bindings: '{"binding":[{"format":"PB","price":"$31.95","ean":"978-1-59213-386-4","binding_status":"IP","pub_date_for_format":"Jun 99"}]}')
+                                      bindings: '{"binding":{"format":"PB","price":"$31.95","ean":"978-1-59213-386-4","binding_status":"IP","pub_date_for_format":"Jun 99"}}')
   new_book = FactoryBot.create(:book, title: "Zebra Crossing",
                                       subjects: "[{ \"subject_id\":#{subject.code}, \"subject_title\":\"#{subject.title}\" }]",
-                                      bindings: '{"binding":[{"format":"PB","price":"$31.95","ean":"978-1-59213-386-4","binding_status":"IP","pub_date_for_format":"Jun 05"}]}')
+                                      bindings: '{"binding":{"format":"PB","price":"$31.95","ean":"978-1-59213-386-4","binding_status":"IP","pub_date_for_format":"Jun 05"}}')
 
   it "sorts by alphabetically" do
     visit(subject_path(subject))

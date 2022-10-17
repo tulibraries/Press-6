@@ -58,11 +58,11 @@ module BooksHelper
         pb = bindings.map { |format| format["ean"] if format["format"] == "PB" && format["ean"].present? && (%w[NP IP].include? format["binding_status"]) }
         hc.compact! if hc.present?
         pb.compact! if pb.present?
-        hc.present? ? order_link(hc.compact.join) : order_link(pb.join)
+        hc.present? ? order_link(hc.join) : order_link(pb.join)
       else
         hc = bindings["ean"] if bindings["format"] == "HC" && (%w[NP IP].include? bindings["binding_status"])
         pb = bindings["ean"] if bindings["format"] == "PB" && (%w[NP IP].include? bindings["binding_status"])
-        hc.present? ? order_link(hc.compact) : order_link(pb)
+        hc.present? ? order_link(hc) : order_link(pb)
       end
     end
   end
