@@ -56,11 +56,11 @@ module BooksHelper
       if bindings.is_a? Array
         hc = bindings.map { |format| format["ean"] if format["format"] == "HC" && format["ean"].present? }
         pb = bindings.map { |format| format["ean"] if format["format"] == "PB" && format["ean"].present? }
-        hc.present? ? order_link(hc.join) : order_link(pb.join)
+        hc.present? ? order_link(hc.compact.join) : order_link(pb.join)
       else
         hc = bindings["ean"] if bindings["format"] == "HC"
         pb = bindings["ean"] if bindings["format"] == "PB"
-        hc.present? ? order_link(hc) : order_link(pb)
+        hc.present? ? order_link(hc.compact) : order_link(pb)
       end
     end
   end
