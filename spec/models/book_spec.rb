@@ -26,7 +26,7 @@ RSpec.describe Book, type: :model do
 
   it "- can list binding as tuples (hashes) of (:format,:price,:ean,:status,:pub_date)" do
     book = described_class.new
-    book.assign_attributes("bindings" => '{"binding":[{"format":"PB","price":"$31.95","ean":"978-1-59213-386-4","binding_status":"IP","pub_date_for_format":"Jun 06"}]}')
+    book.assign_attributes("bindings" => '{"binding":{"format":"PB","price":"$31.95","ean":"978-1-59213-386-4","binding_status":"IP","pub_date_for_format":"Jun 06"}}')
     expect(book.bindings_as_tuples).to eq [{ format: "PB", price: "$31.95", ean: "978-1-59213-386-4", status: "IP",
                                              pub_date: "Jun 06" }]
   end
