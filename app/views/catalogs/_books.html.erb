@@ -33,8 +33,7 @@
         </p>
 
         <p class="order-button">
-        <%= link_to "ORDER", "https://cdcshoppingcart.uchicago.edu/Cart2/ChicagoBook.aspx?ISBN=#{book.isbn}&&PRESS=temple", 
-                              class: "order-button" if book.isbn.present? %>
+         <%= order_button(book) %>
         </p>
       </div>
     </div>
