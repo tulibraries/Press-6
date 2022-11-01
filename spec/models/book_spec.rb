@@ -37,6 +37,18 @@ RSpec.describe Book, type: :model do
     expect(book.sort_titles).to eq "Way to Nirvana, The"
   end
 
+  it "- can remove quotes within quotes for sort title" do
+    book = described_class.new
+    book.assign_attributes(title: 'The Way "to" Nirvana')
+    expect(book.sort_titles).to eq "Way to Nirvana, The"
+  end
+
+  it "- can remove quotes for sort title" do
+    book = described_class.new
+    book.assign_attributes(title: 'Way "to" Nirvana')
+    expect(book.sort_titles).to eq "Way to Nirvana"
+  end
+
   it_behaves_like "detachable"
   it_behaves_like "attachable"
 end
