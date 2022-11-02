@@ -52,10 +52,10 @@ class Book < ApplicationRecord
       if first.present? && excludes.include?(first.titlecase)
         sort_title = sort_title.sub(/^(the|a|an)\s+/i, "")
         sort_title = cleanup(sort_title)
-        sort_title = sort_title.gsub('"', '')
+        sort_title = sort_title.gsub('"', "")
         self.sort_title = I18n.transliterate("#{sort_title}, #{first}")
       else
-        sort_title = sort_title.gsub('"', '')
+        sort_title = sort_title.gsub('"', "")
         self.sort_title = I18n.transliterate(cleanup(sort_title))
       end
     end
