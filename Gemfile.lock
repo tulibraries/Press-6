@@ -158,7 +158,7 @@ GEM
       railties (>= 3.2, < 8.0)
     font-awesome-sass (6.2.1)
       sassc (~> 2.0)
-    friendly_id (5.4.2)
+    friendly_id (5.5.0)
       activerecord (>= 4.0.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
