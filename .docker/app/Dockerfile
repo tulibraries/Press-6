@@ -19,7 +19,7 @@ RUN apk add -U --no-cache \
       bash=5.1.16-r2 \
       imagemagick=7.1.0.50-r0 \
       busybox=1.35.0-r17 \ 
-      libc6-compat=1.2.3-r1 \
+      libc6-compat=1.2.3-r2 \
       libxslt=1.1.35-r0 \
       mariadb-connector-c=3.1.13-r4 \
       shared-mime-info=2.2-r1 \
