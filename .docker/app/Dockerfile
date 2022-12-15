@@ -26,11 +26,11 @@ RUN apk add -U --no-cache \
       tzdata=2022f-r1 && \
       ssl_client=1.35.0-r15 \
     apk add -U --no-cache --virtual build-dependencies \
-      git=2.36.3-r0 \
+      git=2.38.2-r0 \
       build-base=0.5-r3 \
-      libxslt-dev=1.1.35-r0 \
-      mariadb-dev=10.6.10-r0 \
-      nodejs=16.17.1-r0 \
+      libxslt-dev=1.1.37-r0 \
+      mariadb-dev=10.6.11-r0 \
+      nodejs=18.12.1-r0 \
       yarn=1.22.19-r0 && \
     if [ "${RAILS_ENV}" = "production" ]; then bundle config set --local without "development test"; fi && \
     bundle install --jobs=8 && \
