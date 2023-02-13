@@ -4,16 +4,18 @@ class Form < MailForm::Base
   attribute :form_type
 
   # common fields
-  attribute :name
-  attribute :email
+  attribute :add_to_mailing_list
   attribute :address_line_1
   attribute :address_line_2
+  attribute :book_title
   attribute :city
+  attribute :comments
+  attribute :country
+  attribute :email
+  attribute :name
+  attribute :request_type
   attribute :state
   attribute :zip
-  attribute :country
-  attribute :comments
-  attribute :request_type
 
   # review-copy
   attribute :media_type
@@ -35,7 +37,6 @@ class Form < MailForm::Base
   attribute :authorized_bookstore
 
   # rights-and-permissions
-  attribute :book_title
   attribute :book_author_editor
   attribute :chapter_title
   attribute :chapter_author_editor
@@ -52,7 +53,6 @@ class Form < MailForm::Base
   # inquiries
   attribute :e_catalog
   attribute :print_catalog
-  attribute :add_to_mailing_list
   attribute :remove_from_mailing_list
   attribute :removal_description
   attribute :new_and_special_news
