@@ -4,7 +4,12 @@
         item_wrapper_class: "form-check inline mt-2 mb-3",
         required: true %>
         
-<%= f.input :request_statement, as: :text, 
-        label: t("tupress.forms.review-copy.request_statement"),
+<%= f.input :book_title, required: true %>
+
+<%= f.input :comments, as: :text, 
         input_html: { cols: 60, rows: 5 },
-        required: true %>
+        required: false %>
+
+<%= f.input :add_to_mailing_list, as: :boolean, 
+        label: t("tupress.forms.attributes.add_to_mailing_list"),
+        required: false %>
