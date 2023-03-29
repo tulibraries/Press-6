@@ -32,7 +32,9 @@ jobs:
 
       - run:
           name: Build docker containers
-          command: docker-compose -p press_6 -f docker-compose.yaml up -d
+          command: |
+            docker-compose -p press_6 -f docker-compose.yaml up -d
+            sleep 30
 
       - run:
           name: Run linter
