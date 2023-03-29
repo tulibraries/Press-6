@@ -219,7 +219,7 @@ GEM
     minitest (5.17.0)
     msgpack (1.6.0)
     multi_xml (0.6.0)
-    mysql2 (0.5.4)
+    mysql2 (0.5.5)
     net-imap (0.3.2)
       date
       net-protocol
@@ -472,7 +472,7 @@ DEPENDENCIES
   mail_form
   meta-tags
   mini_magick
-  mysql2 (~> 0.5.4)
+  mysql2 (~> 0.5.5)
   nokogiri (= 1.14.2)
   okcomputer
   omniauth
