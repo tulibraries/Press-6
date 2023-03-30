@@ -222,12 +222,12 @@ en:
         removal_description: Removal Description
         new_and_special_news: Add to New & Special Events
         subjects: Subject Interested In
+        add_to_mailing_list: Add my name to the mailing list
 
       inquiries:
         title: Inquiries
         e_catalog: Send me an e-catalog
         print_catalog: Send me a printed catalog
-        add_to_mailing_list: Add my name to the mailing list
         remove_from_mailing_list: Remove my name from the mailing list
         removal_description_placeholder: Please describe the mailing piece you received 
         new_and_special: Send me e-newsletters about new books and special offers

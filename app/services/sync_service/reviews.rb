@@ -5,7 +5,7 @@ require 'logger'
 module SyncService
   class Reviews
     def self.call(xml_path: nil)
-      new(xml_path:).sync
+      new(xml_path).sync
     end
 
     def initialize(params = {})
