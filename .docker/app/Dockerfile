@@ -17,7 +17,7 @@ USER root
 # libc6-compat is added to allow m1 build of nokogiri
 RUN apk add -U --no-cache \
       bash=5.2.15-r0 \
-      imagemagick=7.1.0.52-r0 \
+      imagemagick=7.1.0.62-r0 \
       busybox=1.35.0-r29 \ 
       libc6-compat=1.2.3-r4 \
       libxslt=1.1.37-r1 \
