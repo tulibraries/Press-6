@@ -64,7 +64,7 @@ qa_deploy:
   variables:
     IMAGE: $HARBOR/tulibraries/tupress
     RANCHER: rancher-np
-    CLUSTER: dev-library0
+    CLUSTER: dev-library1
   stage: deploy
   extends: .helm_setup
   only:
@@ -94,7 +94,7 @@ prod_deploy:
   variables:
     IMAGE: harbor.k8s.temple.edu/tulibraries/tupress
     RANCHER: rancher
-    CLUSTER: prod-library0
+    CLUSTER: prod-library1
   stage: deploy
   extends: .helm_setup
   only:
