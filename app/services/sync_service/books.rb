@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'logger'
+require "logger"
 
 module SyncService
   class Books
@@ -9,10 +9,10 @@ module SyncService
     end
 
     def initialize(params = {})
-      @log = Logger.new('log/sync-books.log')
+      @log = Logger.new("log/sync-books.log")
       @stdout = Logger.new($stdout)
       @xmlPath = params.fetch(:xml_path)
-      xml = File.open(@xmlPath, 'rb:utf-8', &:read)
+      xml = File.open(@xmlPath, "rb:utf-8", &:read)
       @booksDoc = Nokogiri.XML(xml)
       stdout_and_log(%(Syncing Books from #{@xmlPath}))
     end
@@ -30,49 +30,49 @@ module SyncService
     end
 
     def read_books
-      @booksDoc.xpath('//record').map do |node|
-        Hash.from_xml(node.serialize(encoding: 'UTF-8'))
+      @booksDoc.xpath("//record").map do |node|
+        Hash.from_xml(node.serialize(encoding: "UTF-8"))
       end
     end
 
     def record_hash(record)
       {
-        'xml_id' => record.dig('record', 'book_id'),
-        'title' => record.dig('record', 'title'),
-        'subtitle' => record.dig('record', 'subtitle'),
-        'author_ids' => record['record'].fetch('authors')['author'].map do |author|
+        "xml_id" => record.dig("record", "book_id"),
+        "title" => record.dig("record", "title"),
+        "subtitle" => record.dig("record", "subtitle"),
+        "author_ids" => record["record"].fetch("authors")["author"].map do |author|
                           if author.size == 2
-                            author[1] if author[0] == 'author_id'
+                            author[1] if author[0] == "author_id"
                           else
-                            author['author_id']
+                            author["author_id"]
                           end
                         end.compact,
-        'author_byline' => record.dig('record', 'author_byline'),
-        'about_author' => record.dig('record', 'author_bios'),
-        'intro' => record.dig('record', 'intro'),
-        'blurb' => record.dig('record', 'blurb'),
-        'status' => record.dig('record', 'status'),
-        'pages_total' => record.dig('record', 'format', 'pages_total'),
-        'trim' => record.dig('record', 'format', 'trim'),
-        'illustrations' => record.dig('record', 'format', 'illustrations_copy'),
-        'isbn' => record.dig('record', 'isbn'),
-        'pub_date' => record.dig('record', 'pub_date'),
-        'series_id' => record.dig('record', 'series', 'series_id'),
-        'bindings' => JSON.dump(record.dig('record', 'bindings')),
-        'description' => record.dig('record', 'description'),
-        'subjects' => JSON.dump(record.dig('record', 'subjects', 'subject')),
-        'contents' => record.dig('record', 'contents'),
-        'catalog_id' => if record.dig('record', 'catalog').present?
-                          record.dig('record', 'catalog').downcase
+        "author_byline" => record.dig("record", "author_byline"),
+        "about_author" => record.dig("record", "author_bios"),
+        "intro" => record.dig("record", "intro"),
+        "blurb" => record.dig("record", "blurb"),
+        "status" => record.dig("record", "status"),
+        "pages_total" => record.dig("record", "format", "pages_total"),
+        "trim" => record.dig("record", "format", "trim"),
+        "illustrations" => record.dig("record", "format", "illustrations_copy"),
+        "isbn" => record.dig("record", "isbn"),
+        "pub_date" => record.dig("record", "pub_date"),
+        "series_id" => record.dig("record", "series", "series_id"),
+        "bindings" => JSON.dump(record.dig("record", "bindings")),
+        "description" => record.dig("record", "description"),
+        "subjects" => JSON.dump(record.dig("record", "subjects", "subject")),
+        "contents" => record.dig("record", "contents"),
+        "catalog_id" => if record.dig("record", "catalog").present?
+                          record.dig("record", "catalog").downcase
                         else
-                          record.dig('record', 'catalog')
+                          record.dig("record", "catalog")
                         end
       }
     end
 
     def create_or_update_if_needed!(record_hash)
       if valid_record(record_hash)
-        book = Book.find_by(xml_id: record_hash['xml_id'])
+        book = Book.find_by(xml_id: record_hash["xml_id"])
         if book.present?
           write_to_db(book, record_hash, false)
           @updated += 1
@@ -88,19 +88,19 @@ module SyncService
 
     def write_to_db(book, record_hash, is_new)
       book = Book.new if is_new
-      book.assign_attributes(record_hash) 
+      book.assign_attributes(record_hash)
       if book.save!
         stdout_and_log(%(Updated existing book: #{book.id}: #{book.title})) unless is_new
         stdout_and_log(%(Created new book: #{book.id}: #{book.title})) if is_new
       else
-        stdout_and_log(%(Book not saved: #{record_hash['xml_id']} -- #{record_hash['title']})) 
+        stdout_and_log(%(Book not saved: #{record_hash['xml_id']} -- #{record_hash['title']}))
         @errored += 1
       end
     end
 
     def valid_record(record_hash)
-      if %w[NP IP].include?(record_hash['status'])
-        record_hash['title'].present? && record_hash['status'].present? && record_hash['author_byline'].present? && record_hash['isbn'].present?
+      if %w[NP IP].include?(record_hash["status"])
+        record_hash["title"].present? && record_hash["status"].present? && record_hash["author_byline"].present? && record_hash["isbn"].present?
       end
     end
 
