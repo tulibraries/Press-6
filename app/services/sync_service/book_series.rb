@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require 'logger'
+require "logger"
 
 module SyncService
   class BookSeries
     def self.call(xml_path: nil)
-      new(xml_path:).sync
+      new(xml_path).sync
     end
 
     def initialize(params = {})
-      @log = Logger.new('log/sync-series.log')
+      @log = Logger.new("log/sync-series.log")
       @stdout = Logger.new($stdout)
       @xmlPath = params.fetch(:xml_path)
       @booksDoc = Nokogiri::XML(File.open(@xmlPath), &:noblanks)
@@ -20,7 +20,7 @@ module SyncService
       @created = @updated = @errored = 0
       read_series.each do |series|
         if series.is_a?(Hash)
-          if series['series']['series_title'].present?
+          if series["series"]["series_title"].present?
             record = record_hash(series)
             create_if_needed!(record)
           end
@@ -35,7 +35,7 @@ module SyncService
     end
 
     def read_series
-      @booksDoc.xpath('//record/series').map do |node|
+      @booksDoc.xpath("//record/series").map do |node|
         node_xml = node.to_xml
         begin
           Hash.from_xml(node_xml)
@@ -49,17 +49,17 @@ module SyncService
     def record_hash(record)
       unless record == true
         {
-          'code' => record['series'].fetch('series_id', nil),
-          'title' => record['series'].fetch('series_title', nil),
-          'description' => record['series'].fetch('series_description', nil),
-          'editors' => record['series'].fetch('series_editors', nil)
+          "code" => record["series"].fetch("series_id", nil),
+          "title" => record["series"].fetch("series_title", nil),
+          "description" => record["series"].fetch("series_description", nil),
+          "editors" => record["series"].fetch("series_editors", nil)
         }
       end
     end
 
     def create_if_needed!(record_hash)
       if !record_hash.nil? && !record_hash.values.first.nil?
-        series = Series.where(code: record_hash['code']).first
+        series = Series.where(code: record_hash["code"]).first
 
         if series && series.code.present?
           unless series.title === record_hash["title"]
@@ -80,7 +80,7 @@ module SyncService
         stdout_and_log(%(Updated record: #{series.code}: #{series.title})) unless is_new
         stdout_and_log(%(Created record: #{series.code}: #{series.title})) if is_new
       else
-        stdout_and_log(%(Series not saved: #{record_hash['code']})) 
+        stdout_and_log(%(Series not saved: #{record_hash['code']}))
         @errored += 1
       end
     end

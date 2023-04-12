@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require 'logger'
+require "logger"
 
 module SyncService
   class Subjects
     def self.call(xml_path: nil)
-      new(xml_path:).sync
+      new(xml_path).sync
     end
 
     def initialize(params = {})
-      @log = Logger.new('log/sync-subjects.log')
+      @log = Logger.new("log/sync-subjects.log")
       @stdout = Logger.new($stdout)
       @xmlPath = params.fetch(:xml_path)
       @booksDoc = File.open(@xmlPath) { |f| Nokogiri::XML(f) }
@@ -20,8 +20,8 @@ module SyncService
       @updated = @created = @errored = @skipped = 0
 
       get_books.each do |book|
-        next if book['record']['subjects']['subject'].first.any?(nil)
-        subjects = book['record']['subjects']['subject']
+        next if book["record"]["subjects"]["subject"].first.any?(nil)
+        subjects = book["record"]["subjects"]["subject"]
         if subjects.is_a?(Hash)
           begin
             record = record_hash(subjects)
@@ -46,25 +46,25 @@ module SyncService
     end
 
     def get_books
-      @booksDoc.xpath('//record').map do |node|
+      @booksDoc.xpath("//record").map do |node|
         node_xml = node.to_xml
-        Hash.from_xml(node.serialize(encoding: 'UTF-8'))
+        Hash.from_xml(node.serialize(encoding: "UTF-8"))
       end
     end
 
     def record_hash(record)
       {
-        'code' => record.dig('subject_id'),
-        'title' => record.dig('subject_title')
+        "code" => record.dig("subject_id"),
+        "title" => record.dig("subject_title")
       }
     end
 
     def create_or_update!(record)
-      subject = Subject.find_by(code: record['code'])
+      subject = Subject.find_by(code: record["code"])
       if subject.present?
         write_to_db(subject, record, false)
         @updated += 1
-      else 
+      else
         write_to_db(subject, record, true)
         @created += 1
       end
@@ -72,12 +72,12 @@ module SyncService
 
     def write_to_db(subject, record, is_new)
       subject = Subject.new if is_new
-      subject.assign_attributes(record) 
+      subject.assign_attributes(record)
       if subject.save!
         stdout_and_log(%(Existing subject update: '( #{record['code']} )')) unless is_new
         stdout_and_log(%(Creating new subject: '( #{record['code']} )')) if is_new
       else
-        stdout_and_log(%(Subject not saved: #{record['code']}), :error) 
+        stdout_and_log(%(Subject not saved: #{record['code']}), :error)
         @errored += 1
       end
     end

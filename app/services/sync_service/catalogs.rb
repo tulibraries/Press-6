@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require 'logger'
+require "logger"
 
 module SyncService
   class Catalogs
     def self.call(xml_path: nil)
-      new(xml_path:).sync
+      new(xml_path).sync
     end
 
     def initialize(params = {})
-      @log = Logger.new('log/sync-catalogs.log')
+      @log = Logger.new("log/sync-catalogs.log")
       @stdout = Logger.new($stdout)
       @xmlPath = params.fetch(:xml_path)
       @booksDoc = Nokogiri::XML(File.open(@xmlPath), &:noblanks)
@@ -28,23 +28,23 @@ module SyncService
     end
 
     def read_catalogs
-      @booksDoc.xpath('//record/catalog').map do |node|
+      @booksDoc.xpath("//record/catalog").map do |node|
         node_xml = node.to_xml
         Hash.from_xml(node_xml)
       end
     end
 
     def record_hash(record)
-      catalog_code = record['catalog']
+      catalog_code = record["catalog"]
       {
-        'code' => catalog_code.downcase
+        "code" => catalog_code.downcase
       }
     end
 
     def create_if_needed!(record_hash)
       if valid_record(record_hash)
-        catalog = Catalog.find_by(code: record_hash['code'])
-        unless catalog.present?
+        catalog = Catalog.find_by(code: record_hash["code"])
+        if catalog.blank?
           write_to_db(record_hash)
           @created += 1
         end
@@ -56,17 +56,17 @@ module SyncService
 
     def write_to_db(record_hash)
       catalog = Catalog.new
-      catalog.assign_attributes(record_hash) 
+      catalog.assign_attributes(record_hash)
       if catalog.save!
         stdout_and_log(%(Created new catalog: '( #{catalog['code']} )'))
       else
-        stdout_and_log(%(Catalog not saved: #{catalog['code']}), :error) 
+        stdout_and_log(%(Catalog not saved: #{catalog['code']}), :error)
         @errored += 1
       end
     end
 
     def valid_record(record_hash)
-      %w[sp fa].include?(record_hash['code'][0, 2].downcase) && Float(record_hash['code'][2, 4], exception: false)
+      %w[sp fa].include?(record_hash["code"][0, 2].downcase) && Float(record_hash["code"][2, 4], exception: false)
     end
 
     def stdout_and_log(message, level: :info)
