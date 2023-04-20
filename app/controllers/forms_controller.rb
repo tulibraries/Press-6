@@ -21,11 +21,14 @@ class FormsController < ApplicationController
     @form = Form.new(params[:form])
     @form.request = request
     @type = params[:form][:form_type]
-    if @form.deliver
-      redirect_to root_path(@form), notice: "Thank you for your message. We will contact you soon!"
-    else
-      flash.now[:error] = "Cannot send message."
-      render :new
+    if verify_recaptcha(model: @form)
+      if @form.deliver
+        redirect_to root_path(@form), notice: "Thank you for your message. We will contact you soon!"
+      else
+        redirect_to new_form_path(type: @type), notice: "Cannot send message."
+      end
+      # else
+
     end
   end
 

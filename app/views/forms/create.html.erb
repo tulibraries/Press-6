@@ -63,7 +63,12 @@
         </div>
       <% end %>
 
-        <div class="row" style="margin-top: 28px;">
+        <div class="row">
+          <div class="col">
+            <%= recaptcha_tags %>
+          </div>
+        </div>
+        <div class="row mt-4">
           <div class="col">
             <%= f.button :submit, "Submit", class: "btn btn-primary" %>
           </div>
