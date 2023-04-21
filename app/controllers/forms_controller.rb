@@ -18,17 +18,29 @@ class FormsController < ApplicationController
   end
 
   def create
+    # binding.pry
+    # params = params[:form]
     @form = Form.new(params[:form])
     @form.request = request
     @type = params[:form][:form_type]
+
+    if params[:form][:comments].present? 
+      comments = params[:form][:comments].to_plain_text
+      new_comments = strip_tags(comments)
+      params[:form] = params[:form].except(:comments).merge(comments: comments)
+    end
+
+
+
     if verify_recaptcha(model: @form)
       if @form.deliver
         redirect_to root_path(@form), notice: "Thank you for your message. We will contact you soon!"
       else
         redirect_to new_form_path(type: @type), notice: "Cannot send message."
       end
-      # else
-
+    else
+      render :create, form: params[:form]
+      flash[:alert] = "Please prove you are human."
     end
   end
 
