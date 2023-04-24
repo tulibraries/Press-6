@@ -1,6 +1,18 @@
 # frozen_string_literal: true
 
 class FormsController < ApplicationController
+  before_action :html_check, only: :create
+
+  def html_check
+    binding.pry
+    if params[:form][:comments].present?
+      if params[:form][:comments].include? "<"
+        flash[:alert] = "HTML markup is not allowed in comments."
+        render :create, denied: true
+      end
+    end
+  end
+
   def new
     @form = Form.new
     if existing_forms.include? params[:type]
@@ -18,19 +30,9 @@ class FormsController < ApplicationController
   end
 
   def create
-    # binding.pry
-    # params = params[:form]
     @form = Form.new(params[:form])
     @form.request = request
     @type = params[:form][:form_type]
-
-    if params[:form][:comments].present? 
-      comments = params[:form][:comments].to_plain_text
-      new_comments = strip_tags(comments)
-      params[:form] = params[:form].except(:comments).merge(comments: comments)
-    end
-
-
 
     if verify_recaptcha(model: @form)
       if @form.deliver
