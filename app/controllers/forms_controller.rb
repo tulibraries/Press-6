@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class FormsController < ApplicationController
-
   def new
     @form = (params[:form].present? ? Form.new(params[:form]) : Form.new)
     @notice = flash.now[:notice] if :notice.present?
@@ -51,7 +50,7 @@ class FormsController < ApplicationController
       notice = "Unable to send form."
       flash.now[:notice] = notice
     end
-    render :new, notice: notice
+    render :new, notice:
   end
 
   def existing_forms
