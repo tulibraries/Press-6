@@ -26,7 +26,7 @@ RUN apk add -U --no-cache \
       tzdata=2023c-r0 && \
       ssl_client=1.35.0-r15 \
     apk add -U --no-cache --virtual build-dependencies \
-      git=2.38.4-r1 \
+      git=2.38.5-r0 \
       build-base=0.5-r3 \
       libxslt-dev=1.1.37-r1 \
       mariadb-dev=10.6.12-r0 \
