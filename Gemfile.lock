@@ -109,6 +109,10 @@ GEM
     aws-sigv4 (1.5.2)
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.18)
+    better_errors (2.9.1)
+      coderay (>= 1.0.0)
+      erubi (>= 1.0.0)
+      rack (>= 0.9.0)
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
@@ -457,6 +461,7 @@ DEPENDENCIES
   administrate-field-ordered_has_many
   administrate-field-scoped_has_many
   aws-sdk-s3
+  better_errors
   bootsnap
   brakeman
   capybara (>= 2.15)
