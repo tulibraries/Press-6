@@ -1,5 +1,4 @@
 <ul class="list-unstyled p-3 mb-0">
-<%# binding.pry %>
 <% @awards_by_subject.each do |subject| %>
   <li><%= link_to subject.title, awards_by_subject_path(subject) %></li>
 <% end if @awards_by_subject.present? %>
