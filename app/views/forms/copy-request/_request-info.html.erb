@@ -64,4 +64,6 @@
                        %>
 </div>
 
-<%= f.input :comments, as: :text, required: false %>
+<%= f.input :comments, as: :text,
+        placeholder: "HTML markup is not allowed in comments.",
+        required: false %>
