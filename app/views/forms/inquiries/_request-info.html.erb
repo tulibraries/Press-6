@@ -24,11 +24,12 @@
                         required: false %>
 <%= f.input :subjects, as: :select, 
                         include_blank: true, 
-                        input_html: { multiple: true, size: 10 }, 
+                        input_html: { class: "multi", multiple: true }, 
                         label: t("tupress.forms.inquiries.preferred_subjects"),
                         collection:  t("tupress.forms.inquiries.subjects"), 
                         hint: t("tupress.forms.inquiries.preferred_subjects_hint"), 
                         required: false %>
 </fieldset>
 
-<%= f.input :comments, as: :text, input_html: { cols: 60, rows: 5 }, required: false %>
+<%= f.input :comments, as: :text, input_html: { cols: 60, rows: 5 }, required: false,
+        placeholder: "HTML markup is not allowed in comments." %>

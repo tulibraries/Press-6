@@ -14,7 +14,6 @@ RSpec.describe "books/awards", type: :view do
     subject = FactoryBot.create(:subject)
     assign(:awards_by_subject, [subject])
     render
-    # binding.pry
     expect(rendered).to have_text(/#{subject.title}/)
   end
 end

@@ -1,7 +1,7 @@
 <div class="container form">
   <div class="row">
     <div class="col-12 col-lg-9">
-
+    
       <div class="row">
         <div class="col">
           <h1 class="mt-3"><%= title t("tupress.forms.#{@type}.title").html_safe %></h1>
@@ -67,7 +67,9 @@
           <div class="col">
             <%= recaptcha_tags %>
             <% flash.each do |key, value| %>
-              <div class="flash <%= key %> mt-3"><%= value %></div>
+            <div class="flash <%= key %> mt-3">
+              <%= value %>
+            </div>
             <% end %>
           </div>
         </div>
