@@ -24,7 +24,7 @@ class FormsController < ApplicationController
     @type = params[:form][:form_type]
 
     if verify_recaptcha(model: @form)
-      if params[:form][:comments].include? "<"
+      if params[:form][:comments].present? && (params[:form][:comments].include? "<")
         failure("html")
       else
         @form.deliver ? success : failure("mail")
