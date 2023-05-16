@@ -72,6 +72,9 @@ Rails.application.configure do
 
   Rails.application.config.active_storage.variant_processor = :mini_magick
 
+  config.log_path = "/Users/cdoyle/test/log/development.log"
+  config.logger = ActiveSupport::Logger.new(config.log_path)
+
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
     port: 587,
