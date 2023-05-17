@@ -22,6 +22,7 @@ class FormsController < ApplicationController
     @form = Form.new(params[:form])
     @form.request = request
     @type = params[:form][:form_type]
+    @books = Book.displayable.requestable.order(:sort_title)
 
     if verify_recaptcha(model: @form)
       if params[:form][:comments].present? && (params[:form][:comments].include? "<")
