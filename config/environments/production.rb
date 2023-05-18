@@ -85,7 +85,7 @@ Rails.application.configure do
   # require "syslog/logger"
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")
 
-  config.log_path = "/tmp/app/production.log"
+  config.log_path = "/tmp/log/production.log"
   logger = ActiveSupport::Logger.new(config.log_path)
   logger.formatter = config.log_formatter
   config.logger = ActiveSupport::TaggedLogging.new(logger)
