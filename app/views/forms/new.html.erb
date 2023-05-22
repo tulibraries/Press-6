@@ -65,7 +65,7 @@
 
         <div class="row">
           <div class="col">
-            <%= recaptcha_tags %>
+            <%= recaptcha_tags nonce: @nonce %>
             <% flash.each do |key, value| %>
             <div class="flash <%= key %> mt-3">
               <%= value %>
