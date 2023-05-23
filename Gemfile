@@ -43,6 +43,7 @@ gem "turbo-rails"
 
 group :production do
   gem "dalli"
+  gem "connection_pool"
 end
 
 group :development, :test do
