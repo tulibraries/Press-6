@@ -133,6 +133,7 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.1.2)
       railties (>= 6.0.0)
+    dalli (3.2.4)
     date (3.3.3)
     debug (1.8.0)
       irb (>= 1.5.0)
@@ -467,6 +468,7 @@ DEPENDENCIES
   brakeman
   capybara (>= 2.15)
   cssbundling-rails
+  dalli
   debug
   devise
   factory_bot_rails
