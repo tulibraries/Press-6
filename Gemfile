@@ -42,7 +42,7 @@ gem "stimulus-rails"
 gem "turbo-rails"
 
 group :production do
-  gem 'memcached', "~> 1.8"
+  gem "dalli"
 end
 
 group :development, :test do
