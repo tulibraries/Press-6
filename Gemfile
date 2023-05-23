@@ -41,6 +41,10 @@ gem "sprockets-rails"
 gem "stimulus-rails"
 gem "turbo-rails"
 
+group :production do
+  gem 'memcached', "~> 1.8"
+end
+
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "pry"

@@ -218,6 +218,7 @@ GEM
       activemodel (>= 5.2)
     marcel (1.0.2)
     matrix (0.4.2)
+    memcached (1.8.0)
     meta-tags (2.18.0)
       actionpack (>= 3.2.0, < 7.1)
     method_source (1.0.0)
@@ -481,6 +482,7 @@ DEPENDENCIES
   kaminari
   mail (~> 2.8.1)
   mail_form
+  memcached (~> 1.8)
   meta-tags
   mini_magick
   mysql2 (~> 0.5.5)
