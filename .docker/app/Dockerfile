@@ -21,7 +21,7 @@ RUN apk add -U --no-cache \
       busybox=1.36.0-r09 \ 
       libc6-compat=1.2.4-r0 \
       libxslt=1.1.38-r0 \
-      mariadb-connector-c=3.3.4-r1 \
+      mariadb-connector-c=3.3.5-r0 \
       shared-mime-info=2.2-r5 \
       tzdata=2023c-r1 && \
       ssl_client=1.35.0-r15 \
