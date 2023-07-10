@@ -30,7 +30,7 @@ RUN apk add -U --no-cache \
       build-base=0.5-r3 \
       libxslt-dev=1.1.38-r0 \
       mariadb-dev=10.11.4-r0 \
-      nodejs=18.16.0-r1 \
+      nodejs=18.16.1-r0 \
       yarn=1.22.19-r0 && \
     if [ "${RAILS_ENV}" = "production" ]; then bundle config set --local without "development test"; fi && \
     bundle install --jobs=8 && \
