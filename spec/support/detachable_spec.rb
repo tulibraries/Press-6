@@ -20,7 +20,6 @@ RSpec.shared_examples "detachable", type: :request do
 
     it "detaches file from #{described_class.to_s.underscore.pluralize}" do
       login_as(FactoryBot.create(:user))
-      # binding.pry
       admin_show_page = ["/admin", described_class.to_s.pluralize.underscore, factory_model.id].join("/")
       get admin_show_page
       expect(response).to render_template(:show)

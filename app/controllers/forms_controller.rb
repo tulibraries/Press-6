@@ -24,15 +24,11 @@ class FormsController < ApplicationController
     @type = params[:form][:form_type]
     @books = Book.displayable.requestable.order(:sort_title)
 
-    # if verify_recaptcha(model: @form)
     if params[:form][:comments].present? && (params[:form][:comments].include? "<")
       failure("html")
     else
       @form.deliver ? success : failure("mail")
     end
-    # else
-    #   failure("recaptcha")
-    # end
   end
 
   def success
@@ -43,9 +39,6 @@ class FormsController < ApplicationController
     case mode
     when "html"
       notice = "HTML markup is not allowed in comments."
-      flash.now[:notice] = notice
-    when "recaptcha"
-      notice = "Please prove you are human."
       flash.now[:notice] = notice
     when "mail"
       notice = "Unable to send form."

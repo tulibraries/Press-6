@@ -36,10 +36,16 @@ gem "omniauth"
 gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
 gem "puma", "~> 6.2.2"
+gem "recaptcha", require: "recaptcha/rails"
 gem "simple_form"
 gem "sprockets-rails"
 gem "stimulus-rails"
 gem "turbo-rails"
+
+group :production do
+  gem "dalli"
+  gem "connection_pool"
+end
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]

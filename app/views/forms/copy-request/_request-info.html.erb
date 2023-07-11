@@ -50,9 +50,10 @@
 
 <div id="bookstore" data-controller="selectize">
   <%= f.input :authorized_bookstore,
-                      required: true,
                       item_wrapper_class: "mt-3"
                        %>
 </div>
 
-<%= f.input :comments, as: :text, required: false %>
+<%= f.input :comments, as: :text,
+        placeholder: "HTML markup is not allowed in comments.",
+        required: false %>

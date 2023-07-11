@@ -11,4 +11,6 @@
 <%= f.input :number_of_copies, required: false %>
 <%= f.input :publication_date, required: true %>
 <%= f.input :rights_requested, required: true %>
-<%= f.input :comments, as: :text, input_html: { cols: 60, rows: 5 }, required: false %>
+<%= f.input :comments, as: :text, input_html: { cols: 60, rows: 5 },
+        placeholder: "HTML markup is not allowed in comments.",
+        required: false %>
