@@ -232,7 +232,7 @@ en:
         removal_description_placeholder: Please describe the mailing piece you received 
         new_and_special: Send me e-newsletters about new books and special offers
         preferred_subjects: "My preferred subjects of interest are:"
-        preferred_subjects_hint: (hold the CTRL/CMD key to select multiple subjects)
+        preferred_subjects_hint: (Keep clicking to select multiple subjects)
         subjects:
           African American Studies: African American Studies
           Aging: Aging
@@ -303,9 +303,9 @@ en:
         deskcopy:
           eBook: eBook
           Print: Print
-        examcopy:
+        formats:
           eBook: eBook
-          Print ($10.00 fee required before book will be shipped): Print
+          "Print (Exam copies: $10.00 fee required before book will be shipped)": Print
         request_type:
           Exam Copy: Exam Copy
           Desk Copy: Desk Copy

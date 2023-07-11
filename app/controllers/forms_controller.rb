@@ -2,7 +2,8 @@
 
 class FormsController < ApplicationController
   def new
-    @form = Form.new
+    @form = (params[:form].present? ? Form.new(params[:form]) : Form.new)
+    @notice = flash.now[:notice] if :notice.present?
     if existing_forms.include? params[:type]
       @type = params[:type]
       existing_forms.each do |form|
@@ -11,7 +12,7 @@ class FormsController < ApplicationController
       end
       @books = Book.displayable.requestable.order(:sort_title)
       @book = Book.find(params[:id]) if params[:id].present?
-      render template: "forms/create"
+      create if params[:form].present?
     else
       render "errors/not_found", status: :not_found
     end
@@ -21,11 +22,17 @@ class FormsController < ApplicationController
     @form = Form.new(params[:form])
     @form.request = request
     @type = params[:form][:form_type]
+    @books = Book.displayable.requestable.order(:sort_title)
+
+    # if verify_recaptcha(model: @form)
     if params[:form][:comments].present? && (params[:form][:comments].include? "<")
       failure("html")
     else
       @form.deliver ? success : failure("mail")
     end
+    # else
+    #   failure("recaptcha")
+    # end
   end
 
   def success
@@ -36,6 +43,9 @@ class FormsController < ApplicationController
     case mode
     when "html"
       notice = "HTML markup is not allowed in comments."
+      flash.now[:notice] = notice
+    when "recaptcha"
+      notice = "Please prove you are human."
       flash.now[:notice] = notice
     when "mail"
       notice = "Unable to send form."
