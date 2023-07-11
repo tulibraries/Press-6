@@ -243,7 +243,9 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.15.1-x86_64-darwin)
+    nokogiri (1.15.3-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.15.3-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -459,6 +461,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   active_storage_validations
@@ -493,7 +496,7 @@ DEPENDENCIES
   meta-tags
   mini_magick
   mysql2 (~> 0.5.5)
-  nokogiri (= 1.15.1)
+  nokogiri (= 1.15.3)
   okcomputer
   omniauth
   omniauth-google-oauth2
