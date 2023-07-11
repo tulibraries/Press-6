@@ -8,6 +8,7 @@
 
 <%= f.input :comments, as: :text, 
         input_html: { cols: 60, rows: 5 },
+        placeholder: "HTML markup is not allowed in comments.",
         required: false %>
 
 <%= f.input :add_to_mailing_list, as: :boolean, 
