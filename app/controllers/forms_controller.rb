@@ -21,12 +21,27 @@ class FormsController < ApplicationController
     @form = Form.new(params[:form])
     @form.request = request
     @type = params[:form][:form_type]
-    if @form.deliver
-      redirect_to root_path(@form), notice: "Thank you for your message. We will contact you soon!"
+    if params[:form][:comments].present? && (params[:form][:comments].include? "<")
+      failure("html")
     else
-      flash.now[:error] = "Cannot send message."
-      render :new
+      @form.deliver ? success : failure("mail")
     end
+  end
+
+  def success
+    redirect_to root_path, notice: "Thank you for your message. We will contact you soon!"
+  end
+
+  def failure(mode)
+    case mode
+    when "html"
+      notice = "HTML markup is not allowed in comments."
+      flash.now[:notice] = notice
+    when "mail"
+      notice = "Unable to send form."
+      flash.now[:notice] = notice
+    end
+    render :new, notice:
   end
 
   def existing_forms
