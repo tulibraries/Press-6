@@ -22,7 +22,7 @@ RSpec.shared_examples "email form" do
   describe "" do
     it "renders the form" do
       get "/forms/#{form_type}"
-      expect(response).to render_template(:create)
+      expect(response).to render_template(:new)
       expect(response.body).to include(title)
     end
 
