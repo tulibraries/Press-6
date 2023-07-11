@@ -8,6 +8,17 @@
         </div>
       </div>
 
+
+        <div class="row">
+          <div class="col">
+            <% flash.each do |key, value| %>
+            <div class="flash <%= key %> mt-3">
+              <%= value %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+
       <div class="row">
         <div class="col">
         <% if @book.present? %>
@@ -63,16 +74,6 @@
         </div>
       <% end %>
 
-        <div class="row">
-          <div class="col">
-            <%= recaptcha_tags nonce: @nonce %>
-            <% flash.each do |key, value| %>
-            <div class="flash <%= key %> mt-3">
-              <%= value %>
-            </div>
-            <% end %>
-          </div>
-        </div>
         <div class="row mt-4">
           <div class="col">
             <%= f.button :submit, "Submit", class: "btn btn-primary" %>

@@ -1,4 +1,4 @@
-<div id="copy-request-type" data-controller="desk-exam">
+<div id="copy-request-type">
   <%= f.input :request_type, as: :radio_buttons,
                 collection: t("tupress.forms.copy-request.request_type"),
                 item_wrapper_class: "form-check inline",
@@ -8,20 +8,11 @@
         
 <div class="my-4"></div>
 
-<div id="deskcopy">
 <%= f.input :format, as: :radio_buttons, 
-                collection: t("tupress.forms.copy-request.deskcopy"),
+                collection: t("tupress.forms.copy-request.formats"),
                 item_wrapper_class: "form-check inline",
                 legend_html: { class: "pl-0" },
                 required: true %>
-</div>
-<div id="examcopy">
-<%= f.input :format, as: :radio_buttons, 
-                collection: t("tupress.forms.copy-request.examcopy"),
-                item_wrapper_class: "form-check inline",
-                legend_html: { class: "pl-0" },
-                required: true %>
-</div>
 
 <div class="my-4"></div>
 
@@ -57,7 +48,7 @@
                         %>
 <div class="my-2"></div>
 
-<div id="bookstore" style="display:none;" data-controller="selectize">
+<div id="bookstore" data-controller="selectize">
   <%= f.input :authorized_bookstore,
                       item_wrapper_class: "mt-3"
                        %>
