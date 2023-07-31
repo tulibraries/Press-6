@@ -82,14 +82,15 @@ class Book < ApplicationRecord
   end
 
   def sort_date
+    years = []
     if bindings.present?
       bindings_as_tuples.each do |tuple|
         next if tuple[:pub_date].blank?
         date = tuple[:pub_date].split(" ")
         temp_year = (date[1].to_i <= 99 && date[1].to_i > 70) ? "19#{date[1]}" : "20#{date[1]}"
-        self.sort_year = Date.parse("#{date[0]} #{temp_year}")
-        self.sort_month = date[0]
+        years << Date.parse("#{date[0]} #{temp_year}")
       end
+      self.sort_year = years.compact.sort.last
     end
   end
 
