@@ -5,7 +5,7 @@ module WebpagesHelper
     if model.image.attached?
       (image_tag model.image)
     else
-      ((image_tag "default-book-cover-index.png") if homepage.present?)
+      (image_tag "default-book-cover-index.png")
     end
   end
 

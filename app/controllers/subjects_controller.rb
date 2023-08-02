@@ -22,6 +22,7 @@ class SubjectsController < ApplicationController
                     .page params[:page]
     end
     @brochures = @subject.brochures
+    @page = params[:page] ? false : true
   end
 
   private
