@@ -7,25 +7,33 @@
       </h1>
     </div>
 
-    <div class="col-12 social-sharing text-md-end">
-      <%= sort_link(@subject, params[:sort]) %>
-    </div>
   </div>
-
-  <% if @subject.brochures.present? %>
+  <% if @brochures && @page %>
   <div class="row">
-    <div class="col-2 mt-5">
-        <% @subject.brochures.each do |brochure| %>
-          <%= link_to brochure.title, brochure.pdf.attachment, style: "text-decoration: underline;", class: "d-block mb-4 text-end text-lg-start" %>
-          <%= display_image(brochure) %>
-        <% end %>
-    </div>
-    <div class="col-10">
-    <% end %>
-
-      <%= render "books/books" %>
-
-    <% if @subject.brochures.present? %>
-    </div>
+    <h2 class="gold mt-4 px-0 mx-0">Brochures</h2>
   </div>
+
+  <div class="row bg-white mt-3 px-5 py-3">
+    <% @subject.brochures.each do |brochure| %>
+    <div class="col px-3 text-center brochure">
+    <%= link_to brochure.pdf.attachment, class: "d-block" do %>
+          <%= display_image(brochure) %>
+          <p class="mb-0"><%= brochure.title %></p>
+    <% end %>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <h2 class="gold mt-4 px-0 mx-0">Titles</h2>
+  </div>
+
   <% end %>
+
+  <div class="col-12 social-sharing text-md-end">
+    <%= sort_link(@subject, params[:sort]) %>
+  </div>
+
+  <%= render "books/books" %>
+
+</div>

@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_12_200332) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_01_175038) do
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
-    t.text "body", size: :long
+    t.text "body"
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.datetime "created_at", null: false
@@ -34,12 +34,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_200332) do
   create_table "active_storage_blobs", charset: "utf8mb3", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
-    t.string "service_name", null: false
     t.string "content_type"
     t.text "metadata"
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
     t.datetime "created_at", precision: nil, null: false
+    t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -52,7 +52,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_200332) do
   end
 
   create_table "agencies", charset: "utf8mb3", force: :cascade do |t|
-    t.string "slug"
     t.string "title"
     t.string "region"
     t.string "contact"
@@ -62,44 +61,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_200332) do
     t.string "website"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["slug"], name: "index_agencies_on_slug", unique: true
   end
 
   create_table "authors", charset: "utf8mb3", force: :cascade do |t|
-    t.string "slug"
     t.string "author_id"
     t.string "title"
     t.string "first_name"
     t.string "last_name"
     t.string "prefix"
     t.string "suffix"
-    t.boolean "suppress", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "suppress", default: false
+    t.string "slug"
     t.index ["slug"], name: "index_authors_on_slug", unique: true
   end
 
   create_table "books", charset: "utf8mb3", force: :cascade do |t|
-    t.string "sort_year"
-    t.string "sort_month"
-    t.string "slug"
-    t.boolean "add_to_news"
-    t.boolean "active_guide"
-    t.string "link_1"
-    t.string "label_1"
-    t.string "link_2"
-    t.string "label_2"
-    t.string "link_3"
-    t.string "label_3"
-    t.string "award_year"
-    t.string "award_year2"
-    t.string "award_year3"
-    t.boolean "featured_award_winner"
-    t.integer "featured_award_weight"
-    t.string "excerpt"
-    t.string "excerpt_file_name"
     t.string "xml_id"
-    t.text "book_id"
     t.string "title"
     t.string "sort_title"
     t.string "subtitle"
@@ -112,7 +93,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_200332) do
     t.text "contents"
     t.text "author_byline"
     t.text "author_bios"
-    t.string "cover"
     t.string "format"
     t.string "isbn"
     t.string "ean"
@@ -127,19 +107,39 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_200332) do
     t.integer "hotweight"
     t.string "supplement"
     t.string "edition"
-    t.string "suggested_reading_label"
+    t.string "suggested_reading"
     t.boolean "course_adoption"
-    t.text "subjects"
+    t.text "subjects", size: :long
     t.string "subject1"
     t.string "subject2"
     t.string "subject3"
-    t.string "guide_file_label"
-    t.string "qa_label"
-    t.boolean "desk_copy"
     t.decimal "price", precision: 5, scale: 2
+    t.string "promotion_id"
     t.string "series_id"
     t.string "catalog_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "promotion_ids"
     t.text "author_ids"
+    t.string "suggested_reading_label"
+    t.bigint "special_offer_id"
+    t.string "guide_file_label"
+    t.string "cover"
+    t.text "book_id"
+    t.string "qa_label"
+    t.boolean "desk_copy"
+    t.boolean "featured_award_winner"
+    t.string "excerpt"
+    t.string "excerpt_file_name"
+    t.string "link_1"
+    t.string "label_1"
+    t.string "link_2"
+    t.string "label_2"
+    t.string "link_3"
+    t.string "label_3"
+    t.string "award_year"
+    t.string "award_year2"
+    t.string "award_year3"
     t.string "link_4"
     t.string "link_5"
     t.string "link_6"
@@ -154,25 +154,29 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_200332) do
     t.string "label_8"
     t.string "label_9"
     t.string "label_10"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "special_offer_id"
+    t.boolean "active_guide"
+    t.boolean "add_to_news"
+    t.string "slug"
+    t.string "sort_year"
+    t.string "sort_month"
+    t.integer "featured_award_weight"
     t.string "cover_alt_text"
     t.boolean "suppress_from_view", default: false
     t.index ["catalog_id"], name: "index_books_on_catalog_id"
+    t.index ["promotion_id"], name: "index_books_on_promotion_id"
     t.index ["series_id"], name: "index_books_on_series_id"
     t.index ["slug"], name: "index_books_on_slug", unique: true
     t.index ["special_offer_id"], name: "index_books_on_special_offer_id"
   end
 
   create_table "brochures", charset: "utf8mb3", force: :cascade do |t|
-    t.string "slug"
     t.string "title"
     t.boolean "promoted_to_homepage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "catalog_id"
     t.bigint "subject_id"
+    t.string "slug"
     t.index ["catalog_id"], name: "index_brochures_on_catalog_id"
     t.index ["slug"], name: "index_brochures_on_slug", unique: true
     t.index ["subject_id"], name: "index_brochures_on_subject_id"
@@ -188,20 +192,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_200332) do
   end
 
   create_table "catalogs", charset: "utf8mb3", force: :cascade do |t|
-    t.string "slug"
     t.string "title"
     t.string "code"
     t.string "season"
     t.string "year"
-    t.boolean "suppress", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "suppress", default: true
+    t.string "slug"
     t.index ["slug"], name: "index_catalogs_on_slug", unique: true
   end
 
   create_table "conferences", charset: "utf8mb3", force: :cascade do |t|
-    t.string "dates"
-    t.string "slug"
     t.string "title"
     t.datetime "start_date", precision: nil
     t.datetime "end_date", precision: nil
@@ -211,11 +213,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_200332) do
     t.string "booth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.string "dates"
     t.index ["slug"], name: "index_conferences_on_slug", unique: true
   end
 
   create_table "documents", charset: "utf8mb3", force: :cascade do |t|
-    t.string "slug"
     t.string "title"
     t.string "contact_name"
     t.string "contact_email"
@@ -223,21 +226,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_200332) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "person_id"
+    t.string "slug"
     t.index ["person_id"], name: "index_documents_on_person_id"
     t.index ["slug"], name: "index_documents_on_slug", unique: true
   end
 
   create_table "events", charset: "utf8mb3", force: :cascade do |t|
-    t.integer "news_weight"
-    t.string "slug"
     t.string "title"
     t.datetime "start_date", precision: nil
     t.datetime "end_date", precision: nil
     t.string "time_zone"
     t.string "location"
-    t.boolean "add_to_news"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "add_to_news"
+    t.string "slug"
+    t.integer "news_weight"
     t.index ["slug"], name: "index_events_on_slug", unique: true
   end
 
@@ -261,37 +265,36 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_200332) do
   end
 
   create_table "highlights", charset: "utf8mb3", force: :cascade do |t|
-    t.string "alt_text"
-    t.string "slug"
     t.string "title"
     t.boolean "promote_to_homepage"
     t.string "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.string "alt_text"
     t.index ["slug"], name: "index_highlights_on_slug", unique: true
   end
 
   create_table "journals", charset: "utf8mb3", force: :cascade do |t|
-    t.string "slug"
     t.string "title"
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["slug"], name: "index_journals_on_slug", unique: true
   end
 
   create_table "news_items", charset: "utf8mb3", force: :cascade do |t|
-    t.string "slug"
     t.string "title"
     t.string "link"
     t.boolean "promote_to_homepage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["slug"], name: "index_news_items_on_slug", unique: true
   end
 
   create_table "oabooks", charset: "utf8mb3", force: :cascade do |t|
-    t.string "slug"
     t.string "title"
     t.string "subtitle"
     t.string "author"
@@ -301,22 +304,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_200332) do
     t.string "collection"
     t.string "supplemental"
     t.boolean "pod"
-    t.string "epub_link"
-    t.string "manifold"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "epub_link"
+    t.string "manifold"
+    t.string "slug"
     t.index ["slug"], name: "index_oabooks_on_slug", unique: true
   end
 
   create_table "people", charset: "utf8mb3", force: :cascade do |t|
-    t.string "slug"
     t.string "title"
     t.string "email"
     t.string "position"
     t.text "position_description"
     t.string "department"
     t.string "document_contact"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "head"
+    t.bigint "document_id"
     t.string "phone"
     t.string "fax"
     t.string "coverage"
@@ -324,11 +330,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_200332) do
     t.string "region"
     t.string "website"
     t.boolean "is_rep", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "document_id"
+    t.string "slug"
     t.index ["document_id"], name: "index_people_on_document_id"
     t.index ["slug"], name: "index_people_on_slug", unique: true
+  end
+
+  create_table "promotions", charset: "utf8mb3", force: :cascade do |t|
+    t.string "title"
+    t.string "pdf_display_name"
+    t.boolean "active"
+    t.text "book_ids"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reviews", charset: "utf8mb3", force: :cascade do |t|
@@ -341,7 +354,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_200332) do
   end
 
   create_table "series", charset: "utf8mb3", force: :cascade do |t|
-    t.string "slug"
     t.string "code"
     t.string "title"
     t.string "editors"
@@ -351,6 +363,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_200332) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "book_id"
+    t.string "slug"
     t.boolean "unpublish", default: false
     t.index ["book_id"], name: "index_series_on_book_id"
     t.index ["slug"], name: "index_series_on_slug", unique: true
@@ -366,33 +379,33 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_200332) do
   end
 
   create_table "special_offers", charset: "utf8mb3", force: :cascade do |t|
-    t.string "slug"
     t.string "title"
     t.string "pdf_display_name"
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "book_id"
+    t.string "slug"
     t.index ["book_id"], name: "index_special_offers_on_book_id"
     t.index ["slug"], name: "index_special_offers_on_slug", unique: true
   end
 
   create_table "subject_brochures", charset: "utf8mb3", force: :cascade do |t|
-    t.integer "brochure_id"
-    t.integer "subject_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["brochure_id"], name: "index_subject_brochures_on_brochure_id", unique: true
-    t.index ["subject_id"], name: "index_subject_brochures_on_subject_id", unique: true
+    t.bigint "brochure_id"
+    t.bigint "subject_id"
+    t.index ["brochure_id"], name: "index_subject_brochures_on_brochure_id"
+    t.index ["subject_id"], name: "index_subject_brochures_on_subject_id"
   end
 
   create_table "subjects", charset: "utf8mb3", force: :cascade do |t|
-    t.string "slug"
     t.string "code"
     t.string "title"
-    t.string "file_label"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "file_label"
+    t.string "slug"
     t.index ["slug"], name: "index_subjects_on_slug", unique: true
   end
 
@@ -414,13 +427,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_200332) do
   end
 
   create_table "webpages", charset: "utf8mb3", force: :cascade do |t|
-    t.string "slug"
-    t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title"
+    t.string "slug"
     t.index ["slug"], name: "index_webpages_on_slug", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "books", "special_offers"
   add_foreign_key "brochures", "catalogs"
