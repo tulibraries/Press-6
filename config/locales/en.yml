@@ -12,6 +12,7 @@ en:
       fax: Fax
   tupress:
     default:
+      brochures_title: Promotions
       donate_label: Donate to the Press
       donate_link: https://giving.temple.edu/givetotupress
       menu:
