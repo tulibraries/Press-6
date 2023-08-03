@@ -21,7 +21,7 @@ class SubjectsController < ApplicationController
                     .order(:sort_title)
                     .page params[:page]
     end
-    @brochures = @subject.brochures
+    @brochures = @subject.brochures if @subject.brochures.any?
     @page = params[:page] ? false : true
   end
 
