@@ -14,7 +14,8 @@ class CatalogsController < ApplicationController
     @books = @catalog.books.displayable
                      .order(:sort_title)
                      .page params[:page]
-    @brochures = @catalog.brochures
+    @brochures = @catalog.brochures if @catalog.brochures.any?
+    @page = params[:page] ? false : true
   end
 
   private
