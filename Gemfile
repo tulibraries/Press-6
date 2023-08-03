@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.4"
 
-gem "rails", "~> 7.0.4.1"
+gem "rails", "~> 7.0.6"
 gem "active_storage_validations"
 gem "activestorage-validator"
 gem "administrate", ">= 0.18.0"
