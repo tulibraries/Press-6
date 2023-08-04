@@ -16,7 +16,7 @@ module BooksHelper
     dates = pub_date.split
     month = dates[0]
     year = dates[1]
-    if year >= "78" && year <= "99"
+    if year >= "69" && year <= "99"
       "#{month} 19#{year}"
     else
       "#{month} 20#{year}"
