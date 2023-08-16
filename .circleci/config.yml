@@ -33,7 +33,7 @@ jobs:
       - run:
           name: Build docker containers
           command: |
-            docker-compose -p press_6 -f docker-compose.yaml up -d
+            source .env && docker-compose -p press_6 -f docker-compose.yaml up -d
             sleep 30
 
       - run:
@@ -60,6 +60,7 @@ jobs:
   trivy_scan:
     docker:
       - image: cimg/base:2020.01
+
         auth:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
@@ -82,8 +83,9 @@ jobs:
 
       - run:
           name: Build docker container
-          command: "source .env && docker build \
-                    --build-arg BASE_IMAGE=${BASE_IMAGE} \
+          command: "source .env && \
+                    docker build \
+                    --build-arg BASE_IMAGE=${LOCAL_BASE_IMAGE} \
                     --build-arg RAILS_ENV=test \
                     -t trivy-ci-test:${CIRCLE_SHA1} -f .docker/app/Dockerfile ."
 

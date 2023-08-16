@@ -3,7 +3,7 @@ include:
     file:
       - "lint_docker.yaml"
       - "build_docker.yaml"
-      # - "security_scan.yaml"
+      - "security_scan.yaml"
       - "kubectl_commands.yaml"
 
 variables:
@@ -22,7 +22,7 @@ before_script:
 stages:
   - lint
   - build
-  # - scan
+  - scan
   - tag
   - deploy
 
@@ -45,14 +45,11 @@ build:
   except:
     - tags
 
-# scan:
-#   stage: scan
-#   extends: .scanimage_high
-#   allow_failure: false
-#   variables:
-#     THRESHOLD: 10
-#   except:
-#     - tags
+scan:
+  stage: scan
+  extends: .scanimage_extended
+  except:
+    - tags
 
 tag:
   stage: tag
@@ -102,4 +99,3 @@ prod_deploy:
   script:
     - helm pull oci://$HARBOR/tulibraries/tupress-charts/tupress --version "0.3.15" --untar
     - helm upgrade tupress oci://$HARBOR/tulibraries/tupress-charts/tupress --version "0.3.15" --history-max=5 --namespace=tupress-prod --values tupress/values-prod.yaml --set image.repository=$IMAGE:$CI_COMMIT_TAG
-    

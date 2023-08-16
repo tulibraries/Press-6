@@ -14,7 +14,7 @@ services:
       context: .
       dockerfile: .docker/app/Dockerfile
       args:
-        BASE_IMAGE: $BASE_IMAGE
+        BASE_IMAGE: $LOCAL_BASE_IMAGE
         RAILS_ENV: "test"
 
     ports:
