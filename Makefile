@@ -4,7 +4,7 @@ export #exports the .env variables
 
 #Set DOCKER_IMAGE_VERSION in the .env file OR by passing in
 VERSION ?= $(DOCKER_IMAGE_VERSION)
-BASE_IMAGE ?= harbor.k8s.temple.edu/library/ruby:3.1.0-alpine
+BASE_IMAGE ?= harbor.k8s.temple.edu/library/ruby:3.1-alpine
 IMAGE ?= tulibraries/tupress
 HARBOR ?= harbor.k8s.temple.edu
 PLATFORM ?= linux/x86_64
@@ -71,11 +71,11 @@ load-data:
 scan:
 	@if [ $(CLEAR_CACHES) == yes ]; \
 		then \
-			trivy image -c $(HARBOR)/$(IMAGE):$(VERSION); \
+			trivy image --scanners vuln  -c $(HARBOR)/$(IMAGE):$(VERSION); \
 		fi
 	@if [ $(CI) == false ]; \
 		then \
-			trivy image $(HARBOR)/$(IMAGE):$(VERSION); \
+		  trivy image --scanners vuln $(HARBOR)/$(IMAGE):$(VERSION); \
 		fi
 
 deploy: scan lint

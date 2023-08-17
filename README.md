@@ -22,6 +22,10 @@
 
 The app database needs to be initialized in oder for `make load-data` to work.  If that has not happened, then run `make db-init` (this only needs to run once).
 
+### If using docker-compose:
+* source .env or set LOCAL_BASE_IMAGE manually.
+* run docker-compose up
+
 ### Start the Application using Docker as an alternative
 
 We defined a Makefile with many useful commands for local development. These commands replicate the process used to deploy in the Gitlab pipeline.

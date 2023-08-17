@@ -1,6 +1,4 @@
-# busybox and ssl_client can be removed once alpine image update resolves them
-
-# For circleci this arg gets overridden by value in the .env file.
+# For circleci this arg gets overridden via configuration.
 ARG BASE_IMAGE="harbor.k8s.temple.edu/library/ruby:3.1-alpine" \
   RAILS_MASTER_KEY=foobar \
   RAILS_ENV=production
