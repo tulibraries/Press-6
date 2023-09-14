@@ -139,5 +139,8 @@ Rails/OutputSafety:
 Rails/HttpPositionalArguments:
   Enabled: false
 
+Rails/FindEach:
+  Enabled: false
+
 Rails/LexicallyScopedActionFilter:
   Enabled: false
