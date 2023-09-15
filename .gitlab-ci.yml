@@ -11,6 +11,10 @@ variables:
   IMAGE: "tulibraries/tupress"
   HARBOR: "harbor.k8s.temple.edu"
   HELM_EXPERIMENTAL_OCI: "1"
+  SAST_DEFAULT_EXCLUDED_PATHS: "spec, test, tests, tmp, "
+  SAST_EXCLUDE_1: "app/controllers/concerns/admin/detachable.rb" # TODO: Remove after TWM-487 is fixed.
+  SAST_EXCLUDE_2: "app/javascript/src/selectize.js" # TODO: Remove after TWM-489 is fixed.
+  SAST_EXCLUDED_PATHS: "$SAST_DEFAULT_EXCLUDED_PATHS, $SAST_EXCLUDE_1, $SAST_EXCLUDE_2" # TODO: Remove atfter TWM-487, TWM-489 resolved.
 
 .export_variables: &export_variables
   - source .env
