@@ -6,7 +6,7 @@ module Admin
 
     def detach
       klass = params[:controller].split("/").last.classify
-      @entity = get_model(klass).find(params[:id])
+      @entity = get_model(klass).find_by(slug: params[:id])
 
       types = %w[cover_image excerpt_file guide_file toc_file suggested_reading_image] if klass == "Book"
       types = ["image"] if %w[Event Series Person Highlight NewsItem].include?(klass)
