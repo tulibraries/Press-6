@@ -6,7 +6,7 @@ module Admin
 
     def detach
       klass = params[:controller].split("/").last.classify
-      @entity = klass.constantize.friendly.find(params[:id])
+      @entity = get_model(klass).find_by(slug: params[:id])
 
       types = %w[cover_image excerpt_file guide_file toc_file suggested_reading_image] if klass == "Book"
       types = ["image"] if %w[Event Series Person Highlight NewsItem].include?(klass)
@@ -22,5 +22,15 @@ module Admin
       flash[:notice] = "Uploaded file detached"
       redirect_to url_for(controller: params[:controller], action: :show, id: params[:id], only_path: true)
     end
+
+    private
+
+      def get_model(name)
+        @models ||= ActiveRecord::Base.descendants.reduce({}) { |acc, model|
+          acc.merge({ model.name => model })
+        }
+
+        @models[name]
+      end
   end
 end
