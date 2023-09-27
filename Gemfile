@@ -38,14 +38,10 @@ gem "omniauth-rails_csrf_protection"
 gem "puma", "~> 6.4.0"
 gem "recaptcha", require: "recaptcha/rails"
 gem "simple_form"
+gem "skylight"
 gem "sprockets-rails"
 gem "stimulus-rails"
 gem "turbo-rails"
-
-group :production do
-  gem "dalli"
-  gem "connection_pool"
-end
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
