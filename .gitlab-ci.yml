@@ -41,12 +41,8 @@ lint:
 build:
   stage: build
   extends: .build_image
-  image: $HARBOR/gitlab-ci/docker:20
   variables:
     DF: ".docker/app/Dockerfile --build-arg RAILS_MASTER_KEY=$MASTER_KEY --no-cache"
-  services:
-    - name: $HARBOR/gitlab-ci/docker:20-dind
-      command: ["--tls=false"]
   except:
     - tags
 
