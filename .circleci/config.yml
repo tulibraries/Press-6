@@ -8,7 +8,7 @@ workflows:
       - trivy_scan
 
 orbs:
-  coveralls: coveralls/coveralls@2.2.1
+  coveralls: coveralls/coveralls@2.2.0
 
 jobs:
   run_tests:
