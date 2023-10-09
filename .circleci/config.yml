@@ -8,7 +8,7 @@ workflows:
       - trivy_scan
 
 orbs:
-  coveralls: coveralls/coveralls@2.2.1
+  coveralls: coveralls/coveralls@1.0.6
 
 jobs:
   run_tests:
@@ -54,7 +54,7 @@ jobs:
               docker cp press_6-test_app-1:/app/coverage/lcov/app.lcov ./app.lcov
 
       - coveralls/upload:
-          path_to_lcov: ./app.lcov
+          coverage_file: ./app.lcov
 
 
   trivy_scan:
