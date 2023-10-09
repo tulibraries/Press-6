@@ -54,7 +54,7 @@ jobs:
               docker cp press_6-test_app-1:/app/coverage/lcov/app.lcov ./app.lcov
 
       - coveralls/upload:
-          coverage_file: /app/coverage/lcov/app.lcov
+          path_to_lcov: /app/coverage/lcov/app.lcov
 
 
   trivy_scan:
