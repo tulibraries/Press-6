@@ -54,7 +54,6 @@ jobs:
               docker cp press_6-test_app-1:/app/coverage/lcov/app.lcov ./app.lcov
 
       - coveralls/upload:
-          COVERALLS_VERBOSE: 1
           coverage_file: ./app.lcov
 
 
