@@ -51,9 +51,11 @@ jobs:
           name: Run ruby tests
           command: |
               docker-compose -p press_6 -f docker-compose.yaml exec --user root test_app bundle exec  rake spec
-              docker cp press_6-test_app-1:/app/coverage/lcov/app.lcov ./coverage
+              docker cp press_6-test_app-1:/app/coverage/lcov/app.lcov ./app.lcov
 
-      - coveralls/upload
+      - coveralls/upload:
+          COVERALLS_VERBOSE: 1
+          coverage_file: ./app.lcov
 
 
   trivy_scan:
