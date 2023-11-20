@@ -5,7 +5,8 @@ require "rails_helper"
 RSpec.describe "conferences/index", type: :view do
   let(:conference1) { FactoryBot.create(:conference, start_date: DateTime.now) }
   let(:conference2) { FactoryBot.create(:conference, start_date: DateTime.now.next_month) }
-  let(:intro) { FactoryBot.create(:webpage, :with_text) }
+  # binding.pry
+  let(:intro) { FactoryBot.create(:webpage, body: ActionText::Content.new("Hello World")) }
   let(:user) { FactoryBot.create(:user) }
 
   before(:each) do
