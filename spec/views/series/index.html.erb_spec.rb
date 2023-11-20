@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe "series/index", type: :view do
   let(:published_series) { FactoryBot.create(:series) }
-  let(:webpage_with_text) { FactoryBot.create(:webpage, :with_text) }
+  let(:webpage_with_text) { FactoryBot.create(:webpage, body: ActionText::Content.new("Hello World")) }
   let(:webpage_no_text) { FactoryBot.create(:agency) }
 
   context "displays intro" do
