@@ -8,6 +8,6 @@ import * as bootstrap from "bootstrap"
 import "trix"
 import Trix from "trix";
 import "@rails/actiontext"
-import "./src/selectize"
+import "selectize"
 import "./src/jumble"
 import "./src/administrate-trix"
