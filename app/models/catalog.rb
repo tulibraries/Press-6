@@ -3,6 +3,7 @@
 class Catalog < ApplicationRecord
   include Imageable
   include Friendable
+  after_commit :save_dimensions_now
 
   before_validation :set_title
 
@@ -23,4 +24,9 @@ class Catalog < ApplicationRecord
       self.title = "#{season} #{year}"
     end
   end
+
+  private
+    def save_dimensions_now
+      image.analyze if image.attached?
+    end
 end

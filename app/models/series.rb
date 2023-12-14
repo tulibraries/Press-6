@@ -3,6 +3,7 @@
 class Series < ApplicationRecord
   include Imageable
   include Friendable
+  after_commit :save_dimensions_now
 
   validates :code, :title, presence: true
   validates :image, presence: false,
@@ -21,4 +22,9 @@ class Series < ApplicationRecord
       Series.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)").sort
     end
   end
+
+  private
+    def save_dimensions_now
+      image.analyze if image.attached?
+    end
 end

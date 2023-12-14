@@ -2,6 +2,7 @@
 
 class Brochure < ApplicationRecord
   include Friendable
+  after_commit :save_dimensions_now
 
   validates :title, :pdf, presence: true
 
@@ -12,4 +13,9 @@ class Brochure < ApplicationRecord
 
   has_one_attached :image, dependent: :destroy
   has_one_attached :pdf, dependent: :destroy
+
+  private
+    def save_dimensions_now
+      image.analyze if image.attached?
+    end
 end

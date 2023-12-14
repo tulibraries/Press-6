@@ -3,6 +3,7 @@
 class Oabook < ApplicationRecord
   include Imageable
   include Friendable
+  after_commit :save_dimensions_now
 
   validates :title, :isbn, :author, :collection, presence: true
   validates :image, presence: false,
@@ -34,4 +35,9 @@ class Oabook < ApplicationRecord
             .order(:title)
     end
   end
+
+  private
+    def save_dimensions_now
+      image.analyze if image.attached?
+    end
 end

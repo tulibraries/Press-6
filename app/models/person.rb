@@ -4,6 +4,7 @@ class Person < ApplicationRecord
   validates :title, :email, :department, presence: true
   include Imageable
   include Friendable
+  after_commit :save_dimensions_now
 
   validates :image, presence: false,
                     blob: { content_type: ["image/png", "image/jpg", "image/jpeg", "image/gif"], size_range: 1..5.megabytes }
@@ -25,4 +26,9 @@ class Person < ApplicationRecord
             .sort
     end
   end
+
+  private
+    def save_dimensions_now
+      image.analyze if image.attached?
+    end
 end
