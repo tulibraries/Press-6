@@ -26,8 +26,8 @@ module Imageable
 
     if (image_width != width) || (image_height != height)
       if image_width.nil?
-        @log.send("image: #{image}, meta: #{image_width} / #{image_height}")
-        @stdout.send("image: #{image}, meta: #{image_width} / #{image_height}")
+        @log.send("meta: #{image_width} / #{image_height}")
+        @stdout.send("meta: #{image_width} / #{image_height}")
         binding.pry
       end
 
