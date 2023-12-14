@@ -16,10 +16,8 @@ module Imageable
   end
 
   def custom_image(image_field, width, height)
-    @log = Logger.new("log/debug.log")
-    @stdout = Logger.new($stdout)
     image = send(image_field.to_sym)
-    image.analyze unless image.analyzed?
+    image.analyze #unless image.analyzed?
 
     image_width = image.metadata[:width]
     image_height = image.metadata[:width]
