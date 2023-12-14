@@ -24,27 +24,23 @@ module Imageable
     image_width = image.metadata[:width]
     image_height = image.metadata[:width]
 
-    if (image_width != width) || (image_height != height)
-      if image_width.nil?
-        @log.send("meta: #{image_width} / #{image_height}")
-        @stdout.send("meta: #{image_width} / #{image_height}")
-        binding.pry
-      end
-
-      if image_width > image_height
-        image.variant(format: :png,
-                      background: :transparent,
-                      gravity: "North",
-                      resize_to_fit: [width, height]).processed
+    if image_width.present? && image_height.present?
+      if (image_width != width) || (image_height != height)
+        if image_width > image_height
+          image.variant(format: :png,
+                        background: :transparent,
+                        gravity: "North",
+                        resize_to_fit: [width, height]).processed
+        else
+          image.variant(format: :png,
+                        background: :transparent,
+                        gravity: :center,
+                        resize_and_pad: [width,
+                                        height]).processed
+        end
       else
-        image.variant(format: :png,
-                      background: :transparent,
-                      gravity: :center,
-                      resize_and_pad: [width,
-                                      height]).processed
+        image
       end
-    else
-      image
     end
   end
 end
