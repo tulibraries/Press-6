@@ -17,11 +17,10 @@ module Imageable
 
   def custom_image(image_field, width, height)
     image = send(image_field.to_sym)
-    if image.present?
-      image.analyze unless image.analyzed
+    image.analyze unless image.analyzed?
 
-      image_width = image.metadata[:width]
-      image_height = image.metadata[:height]
+    image_width = image.metadata[:width]
+    image_height = image.metadata[:height]
 
       if (image_width != width) || (image_height != height)
         if image_width > image_height
@@ -39,6 +38,5 @@ module Imageable
       else
         image
       end
-    end
   end
 end
