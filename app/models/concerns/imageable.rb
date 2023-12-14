@@ -35,7 +35,7 @@ module Imageable
     #                   resize_and_pad: [width, height]).processed
     #   end
     # else
-      image
+    image
     # end
   end
 end
