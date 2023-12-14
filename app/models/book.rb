@@ -4,7 +4,7 @@ class Book < ApplicationRecord
   include Imageable
   include Friendable
   after_commit :save_dimensions_now
- 
+
   before_validation :sort_titles
   before_save :catalog_code, :sort_date
 
@@ -116,5 +116,4 @@ class Book < ApplicationRecord
     def save_dimensions_now
       cover_image.analyze if cover_image.attached?
     end
-
 end
