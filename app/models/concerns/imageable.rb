@@ -23,6 +23,7 @@ module Imageable
     image_height = image.metadata[:height]
 
     if (image_width != width) || (image_height != height)
+      binding.pry if image.nil?
       if image_width > image_height
         image.variant(format: :png,
                       background: :transparent,
@@ -37,6 +38,6 @@ module Imageable
       end
     else
       image
-    end
+    end if image.present?
   end
 end
