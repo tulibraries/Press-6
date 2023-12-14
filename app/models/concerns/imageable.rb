@@ -30,7 +30,7 @@ module Imageable
         @stdout.send(level, message)
         binding.pry
       end
-  
+
       if image_width > image_height
         image.variant(format: :png,
                       background: :transparent,
