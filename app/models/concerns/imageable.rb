@@ -16,6 +16,8 @@ module Imageable
   end
 
   def custom_image(image_field, width, height)
+    @log = Logger.new("log/debug.log")
+    @stdout = Logger.new($stdout)
     image = send(image_field.to_sym)
     image.analyze unless image.analyzed?
 
@@ -23,7 +25,12 @@ module Imageable
     image_height = image.metadata[:width]
 
     if (image_width != width) || (image_height != height)
-      binding.pry if image_width.nil?
+      if image_width.nil?
+        @log.send(level, "image: #{image}, meta: #{image_width} / #{image_height}")
+        @stdout.send(level, message)
+        binding.pry
+      end
+  
       if image_width > image_height
         image.variant(format: :png,
                       background: :transparent,
