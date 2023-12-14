@@ -38,7 +38,7 @@ module Imageable
         end
       else
         image
-      end 
+      end
     end
   end
 end
