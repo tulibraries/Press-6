@@ -20,9 +20,10 @@ module Imageable
     image.analyze unless image.analyzed?
 
     image_width = image.metadata[:width]
-    image_height = image.metadata[:height]
+    image_height = image.metadata[:width]
 
     if (image_width != width) || (image_height != height)
+      binding.pry if image_width.nil?
       if image_width > image_height
         image.variant(format: :png,
                       background: :transparent,
