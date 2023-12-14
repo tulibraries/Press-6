@@ -37,6 +37,6 @@ module Imageable
       end
     else
       image
-    end
+    end if image.present?
   end
 end
