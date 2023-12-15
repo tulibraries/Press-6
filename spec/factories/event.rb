@@ -18,6 +18,7 @@ FactoryBot.define do
           File.open(Rails.root.join("spec/fixtures/charles.jpg")),
                            filename: "charles.jpg",
                            content_type: "image/jpeg")
+
         event.image.analyze
       end
     end

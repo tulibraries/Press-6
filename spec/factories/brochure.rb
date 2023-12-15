@@ -12,12 +12,14 @@ FactoryBot.define do
                             filename: "charles.jpg",
                             content_type: "image/jpeg")
 
-      brochure.image.analyze
-
       brochure.pdf.attach(io:
         File.open(Rails.root.join("spec/fixtures/guidelines.pdf")),
                           filename: "guidelines.pdf",
                           content_type: "application/pdf")
+    end
+
+    after :create do |brochure|
+      brochure.image.analyze
     end
 
     trait :without_image do

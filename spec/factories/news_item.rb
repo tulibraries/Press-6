@@ -13,6 +13,9 @@ FactoryBot.define do
       File.open(Rails.root.join("spec/fixtures/charles.jpg")),
                              filename: "charles.jpg",
                              content_type: "image/jpeg")
+    end
+
+    after :create do |news_item|
       news_item.image.analyze
     end
   end
