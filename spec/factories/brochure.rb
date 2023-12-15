@@ -11,6 +11,8 @@ FactoryBot.define do
         File.open(Rails.root.join("spec/fixtures/charles.jpg")),
                             filename: "charles.jpg",
                             content_type: "image/jpeg")
+        
+      brochure.image.analyze
 
       brochure.pdf.attach(io:
         File.open(Rails.root.join("spec/fixtures/guidelines.pdf")),
