@@ -17,25 +17,26 @@ module Imageable
 
   def custom_image(image_field, width, height)
     image = send(image_field.to_sym)
-    image.analyze unless image.analyzed?
-    image_width = image.metadata[:width]
-    image_height = image.metadata[:height]
-
-
-    if (image_width != width) || (image_height != height) # does it need to be processed
-      if image_width > image_height # which processing does it need
-        image.variant(format: :png,
-                      background: :transparent,
-                      gravity: "North",
-                      resize_to_fit: [width, height]).processed
-      else
-        image.variant(format: :png,
-                      background: :transparent,
-                      gravity: :center,
-                      resize_and_pad: [width, height]).processed
+    if image.blob.present?
+      if image.blob.metadata[:width] == nil
+        image.blob.analyze
       end
-    else
-      image
+      if (image.blob.metadata[:width] != width) || (image.blob.metadata[:height] != height)
+        if image.blob.metadata[:width] > image.blob.metadata[:height]
+          image.variant(format: :png,
+                        background: :transparent,
+                        gravity: "North",
+                        resize_to_fit: [width, height])
+        else
+          image.variant(format: :png,
+                        background: :transparent,
+                        gravity: :center,
+                        resize_and_pad: [width,
+                                        height])
+        end
+      else
+        image
+      end
     end
   end
 end

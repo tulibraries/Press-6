@@ -12,11 +12,12 @@ COPY . .
 
 USER root
 
-# libc6-compat is added to allow m1 build of nokogiri
+# gcompat is added to allow m1 build of nokogiri
 RUN apk add -U --no-cache \
       bash=5.2.21-r0 \
       imagemagick=7.1.1.22-r0 \
       busybox=1.36.1-r15 \ 
+      gcompat=1.1.0-r4 \
       libxslt=1.1.39-r0 \
       mariadb-connector-c=3.3.8-r0 \
       shared-mime-info=2.4-r0 \
