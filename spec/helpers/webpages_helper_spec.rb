@@ -34,7 +34,6 @@ RSpec.describe WebpagesHelper, type: :helper do
 
   describe "displays news images" do
     it "returns image from book model" do
-      binding.pry
       expect(helper.news_image(book)).to include("charles")
     end
     it "returns image from event model" do
