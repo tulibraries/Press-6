@@ -36,11 +36,13 @@ FactoryBot.define do
     sort_title { "John" }
 
     trait :with_cover_image do
-      after :create do |book|
+      before :create do |book|
         book.cover_image.attach(io:
           File.open(Rails.root.join("spec/fixtures/charles.jpg")),
                                 filename: "charles.jpg",
                                 content_type: "image/jpeg")
+      end
+      after :create do |book|
         book.cover_image.analyze
       end
     end
