@@ -5,8 +5,6 @@ require "rails_helper"
 RSpec.describe BooksController, type: :controller do
   let!(:book) { FactoryBot.create(:book, :with_cover_image, title: "A Formation") }
 
-  render_views
-
   context "Get Views" do
     describe "GET #index" do
       it "returns html when requested" do
