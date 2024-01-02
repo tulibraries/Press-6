@@ -31,7 +31,6 @@ class Book < ApplicationRecord
   has_rich_text :award3
 
   has_many :books, class_name: "Book", dependent: :nullify
-
   has_many :special_offer_book, dependent: :nullify
   has_many :special_offers, through: :special_offer_book, source: :special_offer
 
@@ -43,6 +42,10 @@ class Book < ApplicationRecord
     where("bindings LIKE ?", '%"format":"PB"%')
     .where(desk_copy: [nil, false])
   }
+
+  def requestable?
+    Book.displayable.requestable.include? self
+  end
 
   def sort_titles
     if title.present?
@@ -63,6 +66,45 @@ class Book < ApplicationRecord
 
   def catalog_code
     catalog_id.downcase if catalog_id.present?
+  end
+
+  def reviews 
+    Review.where(book_id: xml_id)
+  end
+
+  def series 
+    Series.find_by(code: series_id)
+  end
+
+  def awards 
+    [award, award2, award3]
+  end
+
+  def assigned_subjects 
+    [
+      Subject.find_by(code: subject1),
+      Subject.find_by(code: subject2),
+      Subject.find_by(code: subject3)
+    ].compact
+  end
+
+  def links 
+    [
+      [label_1, link_1],
+      [label_2, link_2],
+      [label_3, link_3],
+      [label_4, link_4],
+      [label_5, link_5],
+      [label_6, link_6],
+      [label_7, link_7],
+      [label_8, link_8],
+      [label_9, link_9],
+      [label_10, link_10]
+    ].compact
+  end
+
+  def see_alsos 
+    books.sort_by(&:sort_title).take(4)
   end
 
   def subjects_as_tuples

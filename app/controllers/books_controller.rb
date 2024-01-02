@@ -21,28 +21,6 @@ class BooksController < ApplicationController
   end
 
   def show
-    @reviews = Review.where(book_id: @book.xml_id)
-    @series = Series.find_by(code: @book.series_id)
-    @awards = [@book.award, @book.award2, @book.award3]
-    @subjects = [
-      Subject.find_by(code: @book.subject1),
-      Subject.find_by(code: @book.subject2),
-      Subject.find_by(code: @book.subject3)
-    ].compact
-    @links = [
-      [@book.label_1, @book.link_1],
-      [@book.label_2, @book.link_2],
-      [@book.label_3, @book.link_3],
-      [@book.label_4, @book.link_4],
-      [@book.label_5, @book.link_5],
-      [@book.label_6, @book.link_6],
-      [@book.label_7, @book.link_7],
-      [@book.label_8, @book.link_8],
-      [@book.label_9, @book.link_9],
-      [@book.label_10, @book.link_10]
-    ].compact
-    @see_alsos = @book.books.sort_by(&:sort_title).take(4)
-    @requestable = Book.displayable.requestable.include? @book
   end
 
   def awards

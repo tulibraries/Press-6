@@ -43,13 +43,13 @@
 
         <hr />
 
-        <% if @subjects.present? %>
+        <% if @book.assigned_subjects.present? %>
         <div class="book-subjects mt-4">
           <span class="section-label">
             <%= t("tupress.books.subjects") %>
           </span>
           <ul class="list-unstyled">
-          <% @subjects.each do |subject| %>
+          <% @book.assigned_subjects.each do |subject| %>
             <li><%= link_to subject.title, subject_path(subject) %></li>
           <% end %>
           </ul>
@@ -68,20 +68,20 @@
         </div>
         <% end %>
         
-        <% unless @links.flatten.compact.all?(&:blank?) %>
+        <% unless @book.links.flatten.compact.all?(&:blank?) %>
         <div class="book-related-links mt-4">
           <span class="section-label">
             <%= t("tupress.books.related_links") %>
           </span>
           <ul class="list-unstyled">
-            <% @links.each do |link| %>
+            <% @book.links.each do |link| %>
               <li><%= link_to link[0], link[1] unless link.any?(nil) %></li> 
             <% end %>
           </ul>
         </div>
         <% end %>
 
-        <% if @requestable %>
+        <% if @book.requestable? %>
         <div class="book-desk-copy mt-5">
           <ul class="list-unstyled mt-5">
             <li><%= link_to t("tupress.books.desk_request"), form_path(type: "copy-request", id: @book.id) %></li> 
@@ -104,9 +104,9 @@
 
           <%= "<p>#{@book.supplement}</p>".html_safe if @book.supplement.present? %>
           
-          <% if @awards.present? %>
+          <% if @book.awards.present? %>
           <div class="awards mt-4">
-          <% @awards.each do |award| %>
+          <% @book.awards.each do |award| %>
             <ul class="list-unstyled">
               <li><%= award if award.present? %></li>
             </ul>
@@ -122,10 +122,10 @@
         <% end %>
       </div>
       
-      <% if @reviews.present? %>
+      <% if @book.reviews.present? %>
       <div class="reviews mt-3 p-3">
         <h2><%= t("tupress.books.reviews") %></h2>
-        <% @reviews.each do |review| %>
+        <% @book.reviews.each do |review| %>
           <div class="review mb-3">
             <%= fix_invalid_html(review.review).html_safe %>
           </div>
@@ -147,7 +147,7 @@
       </div>
       <% end %>
 
-      <% if @series.present? %>
+      <% if @book.series.present? %>
       <div class="series mt-3 p-3">
         <h2 class="mb-3"><%= t("tupress.books.series") %></h2>
           <p><%= link_to @series.title, series_path(@series), style: "font-size:larger;" %></p>
@@ -165,7 +165,7 @@
         </div>
     </div>
     <div class="row">
-    <% @see_alsos.each do |book| %>
+    <% @book.see_alsos.each do |book| %>
     
       <div class="col col-3 text-center">
       <%= link_to book_path(book.xml_id) do %>

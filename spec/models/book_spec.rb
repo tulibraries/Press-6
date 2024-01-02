@@ -16,12 +16,10 @@ RSpec.describe Book, type: :model do
     it { should have_many(:special_offers) }
   end
 
-  let(:book) { FactoryBot.create(:book) }
-
   it "- can list subjects as tuples (arrays) of (title , id)" do
     book = described_class.new
-    book.assign_attributes("subjects" => JSON.dump([{ "subject_id" => 1, "subject_title" => "foo" }]))
-    expect(book.subjects_as_tuples).to eq [["foo", 1]]
+    book.assign_attributes("subjects" => JSON.dump([{ "subject_id" => 1032, "subject_title" => "American Studies" }]))
+    expect(book.subjects_as_tuples).to eq [["American Studies", 1032]]
   end
 
   it "- can list binding as tuples (hashes) of (:format,:price,:ean,:status,:pub_date)" do

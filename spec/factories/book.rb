@@ -12,7 +12,6 @@ FactoryBot.define do
     hot { false }
     course_adoption { false }
     subjects { '[{ "subject_id":1032, "subject_title":"American Studies" }]' }
-    subject1 { FactoryBot.create(:subject) }
     label_1 { "Google" }
     link_1 { "http://google.com"  }
     award { "Double digits award" }
