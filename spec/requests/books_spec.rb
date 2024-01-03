@@ -3,15 +3,15 @@
 require "rails_helper"
 
 RSpec.describe Book, type: :request do
+  let(:subject) { FactoryBot.create(:subject) }
   let(:book) { FactoryBot.create(:book, :with_cover_image, title: "A Formation") }
-  let(:book2) { FactoryBot.create(:book, :with_cover_image, title: "Z Formation", award_year: "2019") }
+  let(:book2) { FactoryBot.create(:book, :with_cover_image, title: "Z Formation", award_year: "2019", subject1: subject.code) }
   let(:book3) do
     FactoryBot.create(:book, :with_cover_image, title: "200 Years of Latino History in Philadelphia",
                                                 award_year: "2018")
   end
   let(:book4) { FactoryBot.create(:book, :with_guide_file, active_guide: true) }
   let(:book5) { FactoryBot.create(:book, :with_guide_file, active_guide: true, guide_file_label: "no file") }
-  let(:subject) { FactoryBot.create(:subject) }
 
   describe "awards pages" do
     it "returns awards main page" do
