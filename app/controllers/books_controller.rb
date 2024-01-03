@@ -83,10 +83,12 @@ class BooksController < ApplicationController
   def awards_by_subject
     @subject = is_number?(params[:id]) ? Subject.find_by(code: params[:id]) : Subject.friendly.find(params[:id])
 
-    @books = books_with_awards
-             .select { |b| b.subjects.include?(@subject.code) }
-             .sort_by(&:sort_title)
-             .uniq
+    if @subject.present?
+      @books = books_with_awards
+              .select { |b| b.subjects.include?(@subject.code) }
+              .sort_by(&:sort_title)
+              .uniq
+    end
   end
 
   def course_adoptions
