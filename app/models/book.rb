@@ -68,19 +68,19 @@ class Book < ApplicationRecord
     catalog_id.downcase if catalog_id.present?
   end
 
-  def reviews 
+  def reviews
     Review.where(book_id: xml_id)
   end
 
-  def series 
+  def series
     Series.find_by(code: series_id)
   end
 
-  def awards 
+  def awards
     [award, award2, award3]
   end
 
-  def assigned_subjects 
+  def assigned_subjects
     [
       Subject.find_by(code: subject1),
       Subject.find_by(code: subject2),
@@ -88,7 +88,7 @@ class Book < ApplicationRecord
     ].compact
   end
 
-  def links 
+  def links
     [
       [label_1, link_1],
       [label_2, link_2],
@@ -103,7 +103,7 @@ class Book < ApplicationRecord
     ].compact
   end
 
-  def see_alsos 
+  def see_alsos
     books.sort_by(&:sort_title).take(4)
   end
 
