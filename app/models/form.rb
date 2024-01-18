@@ -58,6 +58,8 @@ class Form < MailForm::Base
   attribute :new_and_special_news
   attribute :subjects
 
+  attribute :survey
+
   def get_subject
     @forms = {
       "review-copy" => ["Request a Review Copy", ["tempress@temple.edu"]],

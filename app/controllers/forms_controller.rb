@@ -26,6 +26,8 @@ class FormsController < ApplicationController
 
     if params[:form][:comments].present? && (params[:form][:comments].include? "<")
       failure("html")
+    elsif params[:form][:survey].present?
+      failure("survey")
     else
       @form.deliver ? success : failure("mail")
     end
@@ -39,6 +41,9 @@ class FormsController < ApplicationController
     case mode
     when "html"
       notice = "HTML markup is not allowed in comments."
+      flash.now[:notice] = notice
+    when "survey"
+      notice = "Please check indicated fields for errors."
       flash.now[:notice] = notice
     when "mail"
       notice = "Unable to send form."
