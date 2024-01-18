@@ -63,6 +63,15 @@
             </fieldset>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col">
+            <fieldset class="bordered">
+              <legend><%= t("manifold.forms.shared.request_info") %></legend>
+              <%= render "forms/#{@type}/request-info", f: f %>
+            </fieldset>
+          </div>
+        </div>
       <% end %>
 
         <div class="row mt-4">
