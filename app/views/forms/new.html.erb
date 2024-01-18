@@ -71,10 +71,19 @@
             </fieldset>
           </div>
         </div>
+
+        <div class="row d-none">
+          <div class="col">
+            <fieldset class="bordered">
+              <%= render "forms/#{@type}/request-info", f: f %>
+            </fieldset>
+          </div>
+        </div>
       <% end %>
 
         <div class="row mt-4">
           <div class="col">
+            <span class="d-none"><%= f.input :survey %></span>
             <%= f.button :submit, "Submit", class: "btn btn-primary" %>
           </div>
         </div>
