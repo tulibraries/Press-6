@@ -22,6 +22,9 @@ module Imageable
     image_width = image.metadata[:width]
     image_height = image.metadata[:height]
 
+    image_width = 0 unless image_width.present?
+    image_height = 0 unless image_height.present?
+
     if (image_width != width) || (image_height != height)
       if image_width > image_height
         image.variant(format: :png,
