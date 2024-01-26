@@ -22,8 +22,8 @@ module Imageable
     image_width = image.metadata[:width]
     image_height = image.metadata[:height]
 
-    image_width = 0 unless image_width.present?
-    image_height = 0 unless image_height.present?
+    image_width = 0 if image_width.blank?
+    image_height = 0 if image_height.blank?
 
     if (image_width != width) || (image_height != height)
       if image_width > image_height
