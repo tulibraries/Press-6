@@ -6,6 +6,8 @@ ARG BASE_IMAGE="harbor.k8s.temple.edu/library/ruby:3.1" \
 # hadolint ignore=DL3006,DL3026
 FROM "${BASE_IMAGE}"
 
+RUN apk update && apk upgrade && apk add --no-cache apk-tools     # Install apk package manager
+
 WORKDIR /app
 
 COPY . .
