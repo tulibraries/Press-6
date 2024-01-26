@@ -22,24 +22,26 @@ module Imageable
     image_width = image.metadata[:width]
     image_height = image.metadata[:height]
 
-    image_width = 0 if image_width.blank?
-    image_height = 0 if image_height.blank?
+    # image_width = 0 if image_width.blank?
+    # image_height = 0 if image_height.blank?
 
-    if (image_width != width) || (image_height != height)
-      if image_width > image_height
-        image.variant(format: :png,
-                      background: :transparent,
-                      gravity: "North",
-                      resize_to_fit: [width, height]).processed
+    # unless image_width == 0 || image_height == 0
+      if (image_width != width) || (image_height != height)
+          if image_width > image_height
+            image.variant(format: :png,
+                          background: :transparent,
+                          gravity: "North",
+                          resize_to_fit: [width, height]).processed
+          else
+            image.variant(format: :png,
+                          background: :transparent,
+                          gravity: :center,
+                          resize_and_pad: [width,
+                                          height]).processed
+          end
       else
-        image.variant(format: :png,
-                      background: :transparent,
-                      gravity: :center,
-                      resize_and_pad: [width,
-                                       height]).processed
+        image
       end
-    else
-      image
-    end
+    # end
   end
 end
