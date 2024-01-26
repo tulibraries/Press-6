@@ -28,12 +28,12 @@ module Imageable
                       background: :transparent,
                       gravity: "North",
                       resize_to_fit: [width, height]).processed
-      else
-        image.variant(format: :png,
-                      background: :transparent,
-                      gravity: :center,
-                      resize_and_pad: [width,
-                                       height]).processed
+        else
+          image.variant(format: :png,
+                        background: :transparent,
+                        gravity: :center,
+                        resize_and_pad: [width,
+                                        height]).processed
       end
     else
       image
