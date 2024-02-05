@@ -28,6 +28,8 @@ class FormsController < ApplicationController
       failure("html")
     elsif params[:form][:survey].present?
       failure("survey")
+    elsif params[:form][:add_to_mailing_list].present? && params[:form][:remove_from_mailing_list].present?
+      failure("mailers")
     else
       @form.deliver ? success : failure("mail")
     end
@@ -40,13 +42,16 @@ class FormsController < ApplicationController
   def failure(mode)
     case mode
     when "html"
-      notice = "HTML markup is not allowed in comments."
+      notice = t("tupress.forms.errors.html")
       flash.now[:notice] = notice
     when "survey"
-      notice = "Please check indicated fields for errors."
+      notice = t("tupress.forms.errors.survey")
+      flash.now[:notice] = notice
+    when "mailers"
+      notice = t("tupress.forms.errors.mailers")
       flash.now[:notice] = notice
     when "mail"
-      notice = "Unable to send form."
+      notice = t("tupress.forms.errors.smtp")
       flash.now[:notice] = notice
     end
     render :new, notice:
