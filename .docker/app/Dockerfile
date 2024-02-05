@@ -22,7 +22,7 @@ RUN apk add -U --no-cache \
       mariadb-connector-c=3.3.8-r0 \
       shared-mime-info=2.4-r0 \
       ssl_client=1.36.1-r15 \
-      tzdata=2023d-r0 && \
+      tzdata=2024a-r0 && \
     apk add -U --no-cache --virtual build-dependencies \
       build-base=0.5-r3 \
       git=2.43.0-r0 \
