@@ -41,23 +41,10 @@ class PersonDashboard < Administrate::BaseDashboard
     department
   ].freeze
 
-  FORM_ATTRIBUTES = %i[
-    image
-    title
-    slug
-    email
-    position
-    position_description
-    department
-    head
-    company
-    region
-    address
-    phone
-    fax
-    coverage
-    website
-  ].freeze
+  FORM_ATTRIBUTES = {
+    "staff_info" => [:image, :title, :slug, :email, :position, :position_description, :department, :head],
+    "sales_rep" => [:company, :region, :address, :phone, :fax, :coverage, :website]
+  }
 
   # COLLECTION_FILTERS
   # a hash that defines filters that can be used while searching via the search
