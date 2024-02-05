@@ -19,45 +19,34 @@
 
 <nav>
   <div class="nav nav-tabs mb-4" id="nav-tab" role="tablist">
-  <% @tab_names.each do |tabname| %>
-    <%= link_to "#{tabname[1].humanize}", "#", 
-                  { :'class' => "nav-item nav-link", 
-                    :'id' => "nav-#{tabname[1]}-tab",
-                    :'data-bs-toggle' => "tab",
-                    :'data-bs-target' => "##{tabname[1]}-tab",
-                    :'role' => "tab",
-                    :'aria-controls' => "nav-#{tabname[1]}",
-                    :'aria-selected' => "true" }
-                  %>
-  <% end if @tab_names.present? %>
+  <% page.attributes(controller.action_name).each do |title, attributes| -%>
+    <%= link_to "#{title.humanize}", "#", 
+                      { :'class' => "nav-item nav-link", 
+                        :'id' => "nav-#{title}-tab",
+                        :'data-bs-toggle' => "tab",
+                        :'data-bs-target' => "##{title}-tab",
+                        :'role' => "tab",
+                        :'aria-controls' => "nav-#{title}",
+                        :'aria-selected' => "true" }
+                      %>
+  <% end -%>
   </div>
 </nav>
 
 <div class="tab-content" id="nav-tabContent">
-  <% @tab_content.each do |tab, fields| %>
-    <div class="tab-pane fade show <%= "active" if tab == "book" %>" id=<%= "#{tab}-tab" %> role="tabpanel" aria-labelledby=<%= "nav-#{tab}-tab" %>>
-
-      <% page.attributes.each do |title, attributes| %>
-        <% attributes.each do |attribute| %>
-          <% fields.each do |field| %>
-            <% if attribute.name == field %>
-              <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-                <%= render_field attribute, f: f %>
-              </div>
-            <% end %>
-          <% end %>
-        <% end %>
+  <% page.attributes(controller.action_name).each do |title, attributes| -%>
+    <div class="tab-pane fade show <%= "active" if title == "book" %>" id=<%= "#{title}-tab" %> role="tabpanel" aria-labelledby=<%= "nav-#{title}-tab" %>>
+      <% attributes.each do |attribute| %>
+        <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
+          <%= render_field attribute, f: f %>
+        </div>
       <% end %>
-      
     </div>
-  <% end if @tab_content.present? %>
-
-  <%= link_to "Return to edit screen", edit_admin_book_path(params[:id]) unless @tab_content.present? %>
-
+  <% end -%>
 </div>
 
 <div class="form-actions">
-  <%= f.submit if @tab_names.present? %>
+  <%= f.submit %>
 </div>
 
 <% end %>

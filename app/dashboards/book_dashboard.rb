@@ -129,67 +129,18 @@ class BookDashboard < Administrate::BaseDashboard
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = %i[
-    cover_image
-    cover_alt_text
-    xml_id
-    sort_title
-    slug
-    edition
-    status
-    suppress_from_view
-    excerpt_file
-    excerpt_text
-    toc_file
-    qa_label
-    qa
-    supplement
-    course_adoption
-    desk_copy
-    subject1
-    subject2
-    subject3
-    featured_award_winner
-    featured_award_weight
-    award_year
-    award
-    award_year2
-    award2
-    award_year3
-    award3
-    active_guide
-    guide_file
-    guide_file_label
-    guide_text
-    hot
-    add_to_news
-    newsweight
-    news_text
-    suggested_reading_image
-    suggested_reading_label
-    special_offers
-    books
-    label_1
-    link_1
-    label_2
-    link_2
-    label_3
-    link_3
-    label_4
-    link_4
-    label_5
-    link_5
-    label_6
-    link_6
-    label_7
-    link_7
-    label_8
-    link_8
-    label_9
-    link_9
-    label_10
-    link_10
-  ].freeze
+  FORM_ATTRIBUTES = {
+    "book" => [:xml_id, :slug, :sort_title, :author_byline, :edition, :status, :suppress_from_view, :cover_image, :cover, :cover_alt_text, :excerpt_file,
+               :excerpt_text, :toc_file, :qa_label, :qa, :supplement, :suggested_reading_image, :suggested_reading_label, :course_adoption, :desk_copy],
+    "subjects" => [:subject1, :subject2, :subject3],
+    "awards" => [:featured_award_winner, :featured_award_weight, :award_year, :award, :award_year2, :award2, :award_year3, :award3],
+    "guide" => [:active_guide, :guide_file, :guide_file_label, :guide_text],
+    "homepage" => [:hot, :add_to_news, :newsweight, :news_text],
+    "special_offers" => [:special_offers],
+    "see_also" => [:books],
+    "links" => [:label_1, :link_1, :label_2, :link_2, :label_3, :link_3, :label_4, :link_4, :label_5, :link_5, :label_6, :link_6, :label_7, :link_7, :label_8, 
+                :link_8, :label_9, :link_9, :label_10, :link_10]
+  }
 
   # COLLECTION_FILTERS
   # a hash that defines filters that can be used while searching via the search
