@@ -138,7 +138,7 @@ class BookDashboard < Administrate::BaseDashboard
     "homepage" => [:hot, :add_to_news, :newsweight, :news_text],
     "special_offers" => [:special_offers],
     "see_also" => [:books],
-    "links" => [:label_1, :link_1, :label_2, :link_2, :label_3, :link_3, :label_4, :link_4, :label_5, :link_5, :label_6, :link_6, :label_7, :link_7, :label_8, 
+    "links" => [:label_1, :link_1, :label_2, :link_2, :label_3, :link_3, :label_4, :link_4, :label_5, :link_5, :label_6, :link_6, :label_7, :link_7, :label_8,
                 :link_8, :label_9, :link_9, :label_10, :link_10]
   }
 
