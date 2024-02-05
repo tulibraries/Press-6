@@ -177,6 +177,11 @@ en:
         state: State/Province/Region
         country: Country (if not US)
         zip: Zip/Postal Code
+      errors:
+        html: "HTML markup is not allowed in comments."
+        survey: "Please check indicated fields for errors."
+        mailers: "Please check mailing options for errors."
+        smtp: "Unable to send form."
       attributes:
         name: Name
         email: Email
