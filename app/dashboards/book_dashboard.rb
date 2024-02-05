@@ -45,7 +45,6 @@ class BookDashboard < Administrate::BaseDashboard
       collection: %w[IP NP OP X]
     ),
     books: Field::HasMany.with_options(
-      class_name: "Book",
       order: "sort_title"
     ),
     add_to_news: Field::Boolean,
@@ -62,7 +61,6 @@ class BookDashboard < Administrate::BaseDashboard
     desk_copy: Field::Boolean,
 
     special_offers: Field::HasMany.with_options(
-      class_name: "SpecialOffer",
       order: "title"
     ),
 
