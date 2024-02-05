@@ -40,16 +40,18 @@ as well as a link to its edit page.
 
 <section class="main-content__body">
   <dl>
-    <% page.attributes.each do |attribute| %>
-      <dt class="attribute-label" id="<%= attribute.name %>">
-      <%= t(
-        "helpers.label.#{resource_name}.#{attribute.name}",
-        default: attribute.name
-      ).humanize.upcase %>
-      </dt>
-
-      <dd class="attribute-data attribute-data--<%=attribute.html_class%>"
-          ><%= render_field attribute, page: page %></dd>
+    <% page.attributes.each do |title, attributes| %>
+      <% attributes.each do |attribute| %>
+        <dt class="attribute-label" id="<%= attribute.name %>">
+        <%= t(
+          "helpers.label.#{resource_name}.#{attribute.name}",
+          default: attribute.name
+        ).humanize.upcase %>
+        </dt>
+        <dd class="attribute-data attribute-data--<%=attribute.html_class%>">
+          <%= render_field attribute, page: page %>
+        </dd>
+      <% end %>
     <% end %>
   </dl>
 </section>
