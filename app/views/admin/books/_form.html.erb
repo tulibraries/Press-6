@@ -37,7 +37,8 @@
   <% @tab_content.each do |tab, fields| %>
     <div class="tab-pane fade show <%= "active" if tab == "book" %>" id=<%= "#{tab}-tab" %> role="tabpanel" aria-labelledby=<%= "nav-#{tab}-tab" %>>
 
-      <% page.attributes.each do |attribute| %>
+      <% page.attributes.each do |title, attributes| %>
+        <% attributes.each do |attribute| %>
           <% fields.each do |field| %>
             <% if attribute.name == field %>
               <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
@@ -45,6 +46,7 @@
               </div>
             <% end %>
           <% end %>
+        <% end %>
       <% end %>
       
     </div>

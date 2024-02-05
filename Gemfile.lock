@@ -75,12 +75,12 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
-    administrate (0.19.0)
-      actionpack (>= 5.0)
-      actionview (>= 5.0)
-      activerecord (>= 5.0)
-      jquery-rails (>= 4.0)
-      kaminari (>= 1.0)
+    administrate (0.20.1)
+      actionpack (>= 6.0, < 8.0)
+      actionview (>= 6.0, < 8.0)
+      activerecord (>= 6.0, < 8.0)
+      jquery-rails (~> 4.6.0)
+      kaminari (~> 1.2.2)
       sassc-rails (~> 2.1)
       selectize-rails (~> 0.6)
     administrate-field-date_picker (0.3.0)
@@ -481,7 +481,7 @@ PLATFORMS
 DEPENDENCIES
   active_storage_validations
   activestorage-validator
-  administrate (>= 0.18.0)
+  administrate
   administrate-field-date_picker (~> 0.3.0)
   administrate-field-ordered_has_many
   administrate-field-scoped_has_many
