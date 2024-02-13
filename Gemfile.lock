@@ -176,7 +176,7 @@ GEM
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (5.0.0)
-    honeybadger (5.4.1)
+    honeybadger (5.5.0)
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
@@ -500,7 +500,7 @@ DEPENDENCIES
   font-awesome-rails
   font-awesome-sass
   friendly_id
-  honeybadger (~> 5.4)
+  honeybadger (~> 5.5)
   httparty (>= 0.21.0)
   image_processing (>= 1.2)
   jbuilder
