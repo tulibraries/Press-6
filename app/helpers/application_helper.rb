@@ -109,4 +109,8 @@ module ApplicationHelper
                  "data-bs-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false",
                  method: :get }
   end
+
+  def current_year
+    Time.zone.now.year
+  end
 end

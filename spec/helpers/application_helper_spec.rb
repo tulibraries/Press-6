@@ -22,6 +22,12 @@ RSpec.describe ApplicationHelper, type: :helper do
   end
 
   context ApplicationHelper do
+    describe "def current_year" do
+      it "returns current year" do
+        expect(helper.current_year).to eq(Time.zone.now.year)
+      end
+    end
+
     describe "-search-glass image lookup" do
       it "- returns the path to the file" do
         expect(helper.search_glass).to include("mag-")
