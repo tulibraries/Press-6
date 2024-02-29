@@ -13,6 +13,7 @@ class Form < MailForm::Base
   attribute :country
   attribute :email
   attribute :name
+  attribute :phone
   attribute :request_type
   attribute :state
   attribute :zip
