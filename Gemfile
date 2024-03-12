@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.4"
+ruby "3.3.0"
 
 gem "rails", "~> 7.0.8"
 gem "active_storage_validations"
@@ -76,7 +76,7 @@ group :test do
   gem "shoulda-matchers", "~> 6.1"
   gem "simplecov"
   gem "simplecov-lcov"
-  gem "webdrivers"
+  gem "webdrivers", "= 5.3.0"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
