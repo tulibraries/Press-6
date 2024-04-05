@@ -20,6 +20,7 @@ RUN apk add -U --no-cache \
       imagemagick=7.1.1.26-r0 \
       libxslt=1.1.39-r0 \
       mariadb-connector-c=3.3.8-r0 \
+      postgresql16-client=16.2-r0 \
       shared-mime-info=2.4-r0 \
       ssl_client=1.36.1-r15 \
       tzdata=2024a-r0 && \
@@ -29,6 +30,7 @@ RUN apk add -U --no-cache \
       libjpeg-turbo-dev=3.0.1-r0 \
       libxslt-dev=1.1.39-r0 \
       mariadb-dev=10.11.6-r0 \
+      postgresql16-dev=16.2-r0 \
       nodejs=20.12.1-r0 \
       yarn=1.22.19-r0 && \
     if [ "${RAILS_ENV}" = "production" ]; then bundle config set --local without "development test"; fi && \

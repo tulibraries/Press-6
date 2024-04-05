@@ -40,6 +40,7 @@ test:
 
 production:
   <<: *default
+  adapter: <%= ENV["TUPRESS_DB_ADAPTOR"] || "postgresql" %>
   host: <%= ENV["TUPRESS_DB_HOST"] || "localhost" %>
   database: <%= ENV["TUPRESS_DB_NAME"] %>
   username: <%= ENV["TUPRESS_DB_USER"] %>
