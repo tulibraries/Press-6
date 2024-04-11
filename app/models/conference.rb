@@ -8,7 +8,7 @@ class Conference < ApplicationRecord
   def self.search(q)
     if q
       q = q.last.present? ? q : q[0...-1]
-      Conference.where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
+      Conference.where("title ~ ?", "(^|\\W)#{q}(\\W|$)")
     end
   end
 end

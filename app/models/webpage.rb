@@ -13,7 +13,7 @@ class Webpage < ApplicationRecord
     if q
       q = q.last.present? ? q : q[0...-1]
       Webpage.joins(:action_text_rich_text)
-             .where("action_text_rich_texts.body REGEXP ? OR title REGEXP ?", "(^|\\W)#{q}(\\W|$)", "(^|\\W)#{q}(\\W|$)")
+             .where("action_text_rich_texts.body ~ ? OR title ~ ?", "(^|\\W)#{q}(\\W|$)", "(^|\\W)#{q}(\\W|$)")
     end
   end
 end

@@ -2,12 +2,11 @@ version: "3.4"
 
 services:
   db:
-    image: mysql:5.7
-    command: --default-authentication-plugin=mysql_native_password
+    image: postgres:16
     restart: always
     environment:
-      MYSQL_DATABASE: press_6_db
-      MYSQL_ROOT_PASSWORD: press_6_ci
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
 
   test_app:
     build:
@@ -22,8 +21,13 @@ services:
     environment:
       RAILS_ENV: "test"
       TUPRESS_DB_HOST: db
-      TUPRESS_DB_NAME: press_6_db
-      TUPRESS_DB_PASSWORD: press_6_ci
+      TUPRESS_DB_NAME: tupress-test
+      TUPRESS_DB_PASSWORD: postgres
+      TUPRESS_DB_USER: postgres
+    
+    depends_on:
+      db:
+        condition: service_started
 
     entrypoint:
       - "tail"

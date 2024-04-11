@@ -140,10 +140,10 @@ class Book < ApplicationRecord
     if q
       q = q.last.present? ? q : q[0...-1]
       Book.displayable
-          .where("title REGEXP ?", "(^|\\W)#{q}(\\W|$)")
-          .or(Book.where("sort_title REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
-          .or(Book.where("subtitle REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
-          .or(Book.where("author_byline REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
+          .where("title ~ ?", "(^|\\W)#{q}(\\W|$)")
+          .or(Book.where("sort_title ~ ?", "(^|\\W)#{q}(\\W|$)"))
+          .or(Book.where("subtitle ~ ?", "(^|\\W)#{q}(\\W|$)"))
+          .or(Book.where("author_byline ~ ?", "(^|\\W)#{q}(\\W|$)"))
           .or(Book.where(isbn: q))
           .order(:sort_title)
     end
