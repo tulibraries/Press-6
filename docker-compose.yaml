@@ -2,12 +2,12 @@ version: "3.4"
 
 services:
   db:
-    image: mysql:5.7
-    command: --default-authentication-plugin=mysql_native_password
+    image: postgres:16
     restart: always
     environment:
-      MYSQL_DATABASE: press_6_db
-      MYSQL_ROOT_PASSWORD: press_6_ci
+      POSTGRES_DATABASE: press_6_db
+      POSTGRES_PASSWORD: press_6_ci
+      POSTGRES_USER: press_6_user
 
   test_app:
     build:
