@@ -24,6 +24,10 @@ services:
       TUPRESS_DB_HOST: db
       TUPRESS_DB_NAME: press_6_db
       TUPRESS_DB_PASSWORD: press_6_ci
+    
+    depends_on:
+      db:
+        condition: service_started
 
     entrypoint:
       - "tail"
