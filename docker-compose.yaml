@@ -5,7 +5,6 @@ services:
     image: postgres:16
     restart: always
     environment:
-      POSTGRES_DATABASE: press_6_db
       POSTGRES_PASSWORD: press_6_ci
       POSTGRES_USER: press_6_user
 
