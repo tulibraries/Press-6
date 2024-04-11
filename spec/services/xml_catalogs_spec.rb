@@ -34,11 +34,11 @@ RSpec.describe SyncService::Catalogs, type: :service do
     end
 
     let(:catalog1) do
-      Catalog.find_by(code: "FA21")
+      Catalog.find_by(code: "fa21")
     end
 
     let(:catalog2) do
-      Catalog.find_by(code: "SP21")
+      Catalog.find_by(code: "sp21")
     end
 
     it "syncs catalogs to the table" do
