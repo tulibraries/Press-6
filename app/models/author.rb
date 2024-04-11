@@ -24,8 +24,8 @@ class Author < ApplicationRecord
     if q
       q = q.last.present? ? q : q[0...-1]
       Author.where(suppress: [nil, false])
-            .where("first_name REGEXP ?", "(^|\\W)#{q}(\\W|$)")
-            .or(Author.where(suppress: [nil, false]).where("last_name REGEXP ?", "(^|\\W)#{q}(\\W|$)"))
+            .where("first_name ~ ?", "(^|\\W)#{q}(\\W|$)")
+            .or(Author.where(suppress: [nil, false]).where("last_name ~ ?", "(^|\\W)#{q}(\\W|$)"))
             .sort_by { |a| [a.last_name, a.first_name] }
     end
   end
