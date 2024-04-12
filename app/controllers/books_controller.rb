@@ -8,12 +8,12 @@ class BooksController < ApplicationController
     letter = params[:id] || "a"
     @books = if letter == "numeric"
       Book.displayable
-          .where("sort_title regexp ?", "^[0-9]+")
+          .where("sort_title ~* ?", "^[0-9]+")
           .order(:sort_title)
           .page params[:page]
              else
                Book.displayable
-                   .where("sort_title LIKE ?", "#{letter}%")
+                   .where("sort_title ILIKE ?", "#{letter}%")
                    .order(:sort_title)
                    .page params[:page]
     end
@@ -71,9 +71,9 @@ class BooksController < ApplicationController
   def awards_by_year
     if params[:id].present? && params[:id].to_i > 0
       @books = Book.displayable
-                 .where("award_year LIKE ?", params[:id])
-                 .or(Book.where("award_year2 LIKE ?", params[:id]))
-                 .or(Book.where("award_year3 LIKE ?", params[:id]))
+                 .where("award_year ILIKE ?", params[:id])
+                 .or(Book.where("award_year2 ILIKE ?", params[:id]))
+                 .or(Book.where("award_year3 ILIKE ?", params[:id]))
                  .order(:sort_title)
     else
       redirect_to :awards

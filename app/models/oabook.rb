@@ -28,9 +28,9 @@ class Oabook < ApplicationRecord
   def self.search(q)
     if q
       q = q.last.present? ? q : q[0...-1]
-      Oabook.where("title ~ ?", "(^|\\W)#{q}(\\W|$)")
-            .or(Oabook.where("subtitle ~ ?", "(^|\\W)#{q}(\\W|$)"))
-            .or(Oabook.where("author ~ ?", "(^|\\W)#{q}(\\W|$)"))
+      Oabook.where("title ~* ?", "(^|\\W)#{q}(\\W|$)")
+            .or(Oabook.where("subtitle ~* ?", "(^|\\W)#{q}(\\W|$)"))
+            .or(Oabook.where("author ~* ?", "(^|\\W)#{q}(\\W|$)"))
             .order(:title)
     end
   end
