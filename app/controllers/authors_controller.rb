@@ -7,7 +7,7 @@ class AuthorsController < ApplicationController
   def index
     @selected = params[:id] || "a"
     @authors = Author.where(suppress: false)
-                     .where("last_name LIKE ?", "#{@selected}%")
+                     .where("last_name ILIKE ?", "#{@selected}%")
                      .order(%i[last_name first_name])
                      .page params[:page]
   end

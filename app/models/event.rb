@@ -13,7 +13,7 @@ class Event < ApplicationRecord
   def self.search(q)
     if q
       q = q.last.present? ? q : q[0...-1]
-      Event.where("title ~ ?", "(^|\\W)#{q}(\\W|$)")
+      Event.where("title ~* ?", "(^|\\W)#{q}(\\W|$)")
     end
   end
 end
