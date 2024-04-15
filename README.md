@@ -1,13 +1,11 @@
 # TUPRESS
 
 - This site is primarily based on the Book model.
-- We populate this daily with metadata from the PressWorks third party application (a Filemaker Pro instance administered by another company).
-- An xml file is generated on their server (which is in the Temple umbrella) and we then FTP that file to the production server.
+- We update books daily with metadata from the PressWorks third party application (a Filemaker Pro instance administered by another company).
+- An xml file is generated on their server (which is in the Temple umbrella) and then FTP'd to the production server via a cron job on the server.
 - The rails app then ingests that xml file, creating, books, catalogs, series, subjects, etc...
-
-- The backend is being ported from Trestle to Administrate.
-- It will (might still) use a combination of local storage and AWS.
-- There is currently no authentication.
+- The backend is Administrate by Thoughtbot.
+- It uses AWS for image storage.
 
 ## Getting started
 
@@ -15,7 +13,7 @@
 
 #### For the local instance:
 
-`bundle exec rails sync:pressworks:all[<utf-8 xml file from pressworks>]`
+`bundle exec rails sync:pressworks:all[<utf-16 xml file from pressworks>]`
 
 #### For the docker instance:
 * By default the database sync is not run locally. Use `make load-data` to run it.
