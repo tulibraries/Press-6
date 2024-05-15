@@ -71,11 +71,11 @@ load-data:
 scan:
 	@if [ $(CLEAR_CACHES) == yes ]; \
 		then \
-			trivy image --security-checks vuln  -c $(HARBOR)/$(IMAGE):$(VERSION); \
+			trivy image --scanners vuln  -c $(HARBOR)/$(IMAGE):$(VERSION); \
 		fi
 	@if [ $(CI) == false ]; \
 		then \
-		  trivy image --security-checks vuln $(HARBOR)/$(IMAGE):$(VERSION); \
+		  trivy image --scanners vuln $(HARBOR)/$(IMAGE):$(VERSION); \
 		fi
 
 deploy: scan lint
