@@ -241,7 +241,6 @@ GEM
     msgpack (1.7.2)
     multi_xml (0.7.0)
       bigdecimal (~> 3.1)
-    mysql2 (0.5.6)
     net-http (0.4.1)
       uri
     net-imap (0.4.10)
@@ -529,7 +528,6 @@ DEPENDENCIES
   mail_form
   meta-tags
   mini_magick
-  mysql2 (~> 0.5.6)
   nokogiri (= 1.16.5)
   okcomputer
   omniauth
@@ -564,4 +562,4 @@ DEPENDENCIES
   webdrivers (= 5.3.1)
 
 BUNDLED WITH
-   2.5.5
+   2.5.9
