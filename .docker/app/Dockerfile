@@ -14,23 +14,23 @@ USER root
 
 # gcompat is added to allow m1 build of nokogiri
 RUN apk add -U --no-cache \
-      bash=5.2.21-r0 \
-      busybox=1.36.1-r15 \ 
+      bash=5.2.26-r0 \
+      busybox=1.36.1-r28 \ 
       gcompat=1.1.0-r4 \
-      imagemagick=7.1.1.32-r0 \
-      libxslt=1.1.39-r0 \
+      imagemagick=7.1.1.32-r1 \
+      libxslt=1.1.39-r1 \
       postgresql16-client=16.3-r0 \
       shared-mime-info=2.4-r0 \
-      ssl_client=1.36.1-r15 \
-      tzdata=2024a-r0 && \
+      ssl_client=1.36.1-r28 \
+      tzdata=2024a-r1 && \
     apk add -U --no-cache --virtual build-dependencies \
       build-base=0.5-r3 \
-      git=2.43.4-r0 \
-      libjpeg-turbo-dev=3.0.1-r0 \
-      libxslt-dev=1.1.39-r0 \
+      git=2.45.1-r0 \
+      libjpeg-turbo-dev=3.0.3-r0 \
+      libxslt-dev=1.1.39-r1 \
       postgresql16-dev=16.3-r0 \
-      nodejs=20.12.1-r0 \
-      yarn=1.22.19-r0 && \
+      nodejs=20.13.1-r0 \
+      yarn=1.22.22-r0 && \
     if [ "${RAILS_ENV}" = "production" ]; then bundle config set --local without "development test"; fi && \
     bundle install --jobs=8 && \
     find "$GEM_HOME" -name Gemfile.lock -exec rm "{}" \; && \
