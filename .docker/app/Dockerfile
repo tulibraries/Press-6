@@ -25,7 +25,7 @@ RUN apk add -U --no-cache \
       tzdata=2024a-r1 && \
     apk add -U --no-cache --virtual build-dependencies \
       build-base=0.5-r3 \
-      git=2.45.1-r0 \
+      git=2.45.2-r0 \
       libjpeg-turbo-dev=3.0.3-r0 \
       libxslt-dev=1.1.39-r1 \
       postgresql16-dev=16.3-r0 \
