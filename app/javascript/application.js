@@ -1,6 +1,7 @@
 // Entry point for the build script in your package.json
 import "@hotwired/turbo-rails"
-import "./src/jquery"
+import { DirectUpload } from "@rails/activestorage"
+import "jquery"
 import "sifter"
 import "microplugin"
 import "./controllers"
