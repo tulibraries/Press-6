@@ -144,3 +144,6 @@ Rails/FindEach:
 
 Rails/LexicallyScopedActionFilter:
   Enabled: false
+
+Rails/CreateTableWithTimestamps:
+  Enabled: false
