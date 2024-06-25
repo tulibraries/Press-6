@@ -27,7 +27,7 @@ gem "mail", "~> 2.8.1"
 gem "mail_form"
 gem "meta-tags"
 gem "mini_magick"
-gem "nokogiri", "1.16.5"
+gem "nokogiri", "1.16.6"
 gem "okcomputer"
 gem "omniauth"
 gem "omniauth-google-oauth2"
@@ -81,4 +81,4 @@ end
 gem "bootsnap", require: false
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
-gem "honeybadger", "~> 5.10"
+gem "honeybadger", "~> 5.12"
