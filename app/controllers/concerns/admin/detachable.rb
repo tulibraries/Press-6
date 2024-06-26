@@ -5,17 +5,17 @@ module Admin
     extend ActiveSupport::Concern
 
     def detach
+      get_models
       klass = params[:controller].split("/").last.classify
-      @entity = get_model(klass).find_by(slug: params[:id])
+      @entity = get_model(klass).friendly.find(params[:id])
 
-      types = %w[cover_image excerpt_file guide_file toc_file suggested_reading_image] if klass == "Book"
+      types = %w[cover_image excerpt_file guide_file toc_file suggested_reading_image qa] if klass == "Book"
       types = ["image"] if %w[Event Series Person Highlight NewsItem].include?(klass)
       types = %w[image pdf] if %w[Catalog Brochure].include?(klass)
       types = ["pdf"] if %w[SpecialOffer Subject].include?(klass)
       types = %w[image epub mobi pdf] if ["Oabook"].include?(klass)
 
       type = types.index(params[:field])
-
       field = types.at(type) if types.include? params[:field]
       @entity.public_send(field).purge
 
@@ -25,12 +25,18 @@ module Admin
 
     private
 
+      def get_models
+        Dir[Rails.root + "app/models/**/*.rb"].each do |path|
+          require path
+        end
+      end
+
       def get_model(name)
-        @models ||= ActiveRecord::Base.descendants.reduce({}) { |acc, model|
+        models ||= ActiveRecord::Base.descendants.reduce({}) { |acc, model|
           acc.merge({ model.name => model })
         }
 
-        @models[name]
+        models[name]
       end
   end
 end
