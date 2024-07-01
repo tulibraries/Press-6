@@ -110,9 +110,7 @@ en:
             Thailand & Vietnam / Indonesia: Thailand & Vietnam / Indonesia
             Turkey: Turkey
             All Other Territories: All Other Territories
-            East Coast: East Coast
-            Northeast: Northeast
-            Mid-Atlantic: Mid-Atlantic
+            Northeast and Mid-Atlantic: Northeast and Mid-Atlantic
             Midwest: Midwest
             Southeast: Southeast
             West: West
@@ -129,7 +127,11 @@ en:
           Production Departmen: Production Department
           Sales Representatives: Sales Representatives
         regions:
+          East Coast: East Coast
+          Northeast: Northeast
+          Mid-Atlantic: Mid-Atlantic
           Midwest: Midwest
+          Southeast: Southeast
           West: West
           Hawaii, Asia and the Pacific, including Australia and New Zealand: Hawaii, Asia and the Pacific, including Australia and New Zealand
           Europe, the Middle East, and Africa: Europe, the Middle East, and Africa
