@@ -185,7 +185,7 @@ GEM
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (5.0.0)
-    honeybadger (5.13.1)
+    honeybadger (5.13.2)
     httparty (0.22.0)
       csv
       mini_mime (>= 1.0.0)
