@@ -4,6 +4,9 @@
 <%= f.input :website, required: false %>
 <%= f.input :address_line_1, required: true %>
 <%= f.input :address_line_2, required: false %>
+<%= f.input :city,
+        label: t("tupress.forms.attributes.city"), 
+        required: true %>
 <%= f.input :state, 
         label: t("tupress.forms.shared_fields.state"), 
         required: true %>
