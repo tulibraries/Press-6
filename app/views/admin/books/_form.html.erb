@@ -20,15 +20,16 @@
 <nav>
   <div class="nav nav-tabs mb-4" id="nav-tab" role="tablist">
   <% page.attributes(controller.action_name).each do |title, attributes| -%>
-    <%= link_to "#{title.humanize}", "#", 
-                      { :'class' => "nav-item nav-link", 
+   <% link_attributes = { :'class' => "nav-item nav-link", 
                         :'id' => "nav-#{title}-tab",
                         :'data-bs-toggle' => "tab",
                         :'data-bs-target' => "##{title}-tab",
                         :'role' => "tab",
                         :'aria-controls' => "nav-#{title}",
-                        :'aria-selected' => "true" }
-                      %>
+                        :'aria-selected' => "true" } 
+      link_attributes[:class] += " active" if title == "book" 
+    %>
+    <%= link_to "#{title.humanize}", "#", link_attributes %>
   <% end -%>
   </div>
 </nav>
