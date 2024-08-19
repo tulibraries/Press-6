@@ -4,28 +4,27 @@ class Form < MailForm::Base
   attribute :form_type
 
   # common fields
-  attribute :add_to_mailing_list
+  attribute :request_type
+  attribute :name
+  attribute :email
+  attribute :phone
+  attribute :university
+  attribute :department
   attribute :address_line_1
   attribute :address_line_2
-  attribute :book_title
   attribute :city
-  attribute :comments
-  attribute :country
-  attribute :email
-  attribute :name
-  attribute :phone
-  attribute :request_type
   attribute :state
   attribute :zip
+  attribute :country
+  attribute :website
+  attribute :add_to_mailing_list
 
   # review-copy
+  attribute :book_title
   attribute :media_type
-  attribute :website
   attribute :request_statement
 
   # copy-request
-  attribute :university
-  attribute :department
   attribute :address_type
   attribute :instructor
   attribute :course_title
@@ -59,6 +58,7 @@ class Form < MailForm::Base
   attribute :new_and_special_news
   attribute :subjects
 
+  attribute :comments
   attribute :survey
 
   def get_subject
