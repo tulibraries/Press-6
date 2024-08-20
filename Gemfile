@@ -71,7 +71,7 @@ group :test do
   gem "rspec-activemodel-mocks"
   gem "rspec-rails"
   gem "selenium-webdriver"
-  gem "shoulda-matchers", "~> 6.3"
+  gem "shoulda-matchers", "~> 6.4"
   gem "simplecov"
   gem "simplecov-lcov"
   gem "webdrivers", "5.3.1"
