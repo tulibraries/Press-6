@@ -14,7 +14,8 @@ class Subject < ApplicationRecord
   def self.search(q)
     if q
       q = q.last.present? ? q : q[0...-1]
-      Subject.where("title ~* ?", "(^|\\W)#{q}(\\W|$)").sort
+      escaped_q = Regexp.escape(q)
+      Subject.where("title ~* ?", "(^|\\W)#{escaped_q}(\\W|$)").sort
     end
   end
 end
