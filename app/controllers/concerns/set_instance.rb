@@ -6,15 +6,24 @@ module SetInstance
     model = controller_name.classify.constantize
     model_name = model.to_s
     if params[:id].nil?
-      raise ActionController::RoutingError, "Not Found"
+      raise(ActionController::RoutingError.new("Not Found"))
     else
-      instance = case model_name
-                 when "Book"
-                   is_number?(params[:id]) ? redirect_to(Book.find_by(xml_id: params[:id])) : model.friendly.find(params[:id])
-                 when "Series"
-                   params[:id][0, 2] == "S-" ? model.find_by(code: params[:id]) : model.friendly.find(params[:id])
-                 else
-                   model.friendly.find(params[:id])
+      case model_name
+      when "Book"
+        if is_number?(params[:id])
+          book = Book.find_by(xml_id: params[:id])
+          if book.present?
+            return redirect_to(book)
+          else
+            raise(ActionController::RoutingError.new("Not Found"))
+          end
+        else
+          model.friendly.find(params[:id])
+        end
+      when "Series"
+        params[:id][0, 2] == "S-" ? model.find_by(code: params[:id]) : model.friendly.find(params[:id])
+      else
+        model.friendly.find(params[:id])
       end
     end
   end
