@@ -1,4 +1,4 @@
-<div class="container px-0 px-lg-3 index" id="search-results">
+<div class="container px-0 px-lg-3 index">
 	<div class="row">
 		<div class="col">
 			<h1 class="my-4">You searched for: <small><%= params[:q] %></small></h1>
@@ -7,7 +7,7 @@
 	<% if @results.present? %>
 	<div class="row">
 		<% if @books.present? %>
-		<div class="col-12 col-lg-7">
+		<div class="col-12 col-lg-7" id="search-results">
 
 			<h2 class="gold mt-3 mx-1 d-none d-lg-block">Book Results</h2>
       <%= button_tag("", 

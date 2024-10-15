@@ -18,7 +18,9 @@ class Series < ApplicationRecord
   def self.search(q)
     if q
       q = q.last.present? ? q : q[0...-1]
-      Series.where("title ~* ?", "(^|\\W)#{q}(\\W|$)").sort
+      Series.where("title ~* ?", "(^|\\W)#{q}(\\W|$)")
+      .and(Series.where(unpublish: false))
+      .sort
     end
   end
 end
