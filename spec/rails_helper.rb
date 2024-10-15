@@ -10,19 +10,7 @@ require "rspec/rails"
 require "support/factory_bot"
 require "capybara/rails"
 
-Capybara.register_driver :selenium do |app|
-  options = ::Selenium::WebDriver::Chrome::Options.new
 
-  options.add_argument("--headless")
-  options.add_argument("--no-sandbox")
-  options.add_argument("--disable-gpu")
-  options.add_argument("--disable-dev-shm-usage")
-  options.add_argument("--window-size=1366,720")
-
-  Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
-end
-
-Capybara.javascript_driver = :selenium
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
@@ -93,6 +81,15 @@ RSpec.configure do |config|
   # Allow log in in request specs
   # config.include Devise::Test::IntegrationHelpers, type: :request
   # config.include Devise::Test::ControllerHelpers, type: :controller
+
+  config.before(:each, type: :system) do
+    driven_by :rack_test
+  end
+
+  config.before(:each, type: :system, js: true) do
+    driven_by :selenium_chrome_headless
+  end
+
 
   Shoulda::Matchers.configure do |config|
     config.integrate do |with|
