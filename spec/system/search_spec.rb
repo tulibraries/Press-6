@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require "selenium-webdriver"
+require "webdrivers/chromedriver"
 
 RSpec.describe "Webpage", type: :system do
 
