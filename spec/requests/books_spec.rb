@@ -47,4 +47,10 @@ RSpec.describe Book, type: :request do
       expect { get study_guide_path(book4.slug).to have_text("Curriculum/Study Guide [PDF]") }
     end
   end
+
+  describe "books redirect" do
+    it "raises page not found instead of 500 error" do
+      expect { get book_redirect_path("999999") }.to raise_error(ActionController::RoutingError)
+    end
+  end
 end
