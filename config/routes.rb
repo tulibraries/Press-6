@@ -92,5 +92,4 @@ Rails.application.routes.draw do
   get "promotions", to: "special_offers#index"
   get "promotions/:id", to: "special_offers#index"
 
-  get "book/:id", to: "books#show", as: "book_redirect"
 end
