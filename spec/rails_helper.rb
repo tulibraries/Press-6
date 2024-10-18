@@ -10,6 +10,8 @@ require "rspec/rails"
 require "support/factory_bot"
 require "capybara/rails"
 
+
+
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 include Warden::Test::Helpers
@@ -79,6 +81,15 @@ RSpec.configure do |config|
   # Allow log in in request specs
   # config.include Devise::Test::IntegrationHelpers, type: :request
   # config.include Devise::Test::ControllerHelpers, type: :controller
+
+  config.before(:each, type: :system) do
+    driven_by :rack_test
+  end
+
+  config.before(:each, type: :system, js: true) do
+    driven_by :selenium_chrome_headless
+  end
+
 
   Shoulda::Matchers.configure do |config|
     config.integrate do |with|
