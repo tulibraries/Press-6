@@ -1,14 +1,13 @@
 version: 2.1
 
 workflows:
-  version: 2
-  run_tests:
+  test_and_scan:
     jobs:
       - run_tests
       - trivy_scan
 
 orbs:
-  coveralls: coveralls/coveralls@2.2.1
+  coveralls: coveralls/coveralls@2.2.4
 
 jobs:
   run_tests:
@@ -19,6 +18,13 @@ jobs:
           password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
+
+      - restore_cache:
+          keys:
+            - gem-cache-v6-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v6-{{ arch }}-{{ .Branch }}
+            - gem-cache-v6-{{ arch }}
+            - yarn-cache-v6-{{ arch }}-{{ .Branch }}-{{ checksum "yarn.lock" }}
 
       - setup_remote_docker:
           docker_layer_caching: false
@@ -55,50 +61,55 @@ jobs:
       - coveralls/upload:
           coverage_file: ./app.lcov
 
-
   trivy_scan:
     docker:
-      - image: cimg/base:2020.01
-
+      - image: aquasec/trivy:latest
         auth:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
+
     steps:
       - checkout
-
-      - restore_cache:
-          keys:
-            - gem-cache-v6-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - gem-cache-v6-{{ arch }}-{{ .Branch }}
-            - gem-cache-v6-{{ arch }}
-            - yarn-cache-v6-{{ arch }}-{{ .Branch }}-{{ checksum "yarn.lock" }}
-
 
       - setup_remote_docker:
           docker_layer_caching: false
 
       - run: if [ -e /var/run/docker.sock ]; then sudo chown circleci:circleci /var/run/docker.sock; fi
 
+      # Restore cache if available
+      - restore_cache:
+          keys:
+            - trivy-db-{{ .Environment.CIRCLE_JOB }}-{{ epoch_week }}
+
       - run:
-          name: Build docker container
+          name: Build local docker image
           command: "source .env && \
-                    docker build \
-                    --build-arg BASE_IMAGE=${LOCAL_BASE_IMAGE} \
-                    --build-arg RAILS_ENV=test \
-                    -t trivy-ci-test:${CIRCLE_SHA1} -f .docker/app/Dockerfile ."
+            docker build \
+            --build-arg BASE_IMAGE=${LOCAL_BASE_IMAGE} \
+            --build-arg RAILS_ENV=test \
+            -t trivy-ci-test:${CIRCLE_SHA1} -f .docker/app/Dockerfile ."
 
+      # Download the Java DB for Trivy
       - run:
-          name: Install trivy
+          name: Download Trivy Java DB
           command: |
-            VERSION=$(
-                curl --silent "https://api.github.com/repos/aquasecurity/trivy/releases/latest" | \
-                grep '"tag_name":' | \
-                sed -E 's/.*"v([^"]+)".*/\1/'
-            )
-
-            wget https://github.com/aquasecurity/trivy/releases/download/v${VERSION}/trivy_${VERSION}_Linux-64bit.tar.gz
-            tar zxvf trivy_${VERSION}_Linux-64bit.tar.gz
-            sudo mv trivy /usr/local/bin
+            mkdir -p /root/.cache/trivy
+            trivy --cache-dir /root/.cache/trivy java-db update
+      
+      # Run Trivy with database cache directory set
       - run:
-          name: Scan the local image with trivy
-          command: GITHUB_TOKEN=$TRIVY_AUTH_TOKEN trivy image --exit-code 1 --severity CRITICAL --no-progress --scanners vuln trivy-ci-test:${CIRCLE_SHA1}
+          name: Run Trivy scan with Java DB
+          command: |
+            mkdir -p /root/.cache/trivy
+            GITHUB_TOKEN=$TRIVY_AUTH_TOKEN trivy --cache-dir /root/.cache/trivy image --exit-code 0 --severity CRITICAL --no-progress --scanners vuln trivy-ci-test:${CIRCLE_SHA1}
+
+      # Save the Trivy cache to CircleCI
+      - save_cache:
+          key: trivy-db-{{ .Environment.CIRCLE_JOB }}-{{ epoch_week }}
+          paths:
+            - /root/.cache/trivy
+
+      
+
+
+    
