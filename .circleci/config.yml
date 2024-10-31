@@ -74,7 +74,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: false
 
-      - run: if [ -e /var/run/docker.sock ]; then sudo chown circleci:circleci /var/run/docker.sock; fi
+      - run: if [ -e /var/run/docker.sock ]; then chown circleci:circleci /var/run/docker.sock; fi
 
       # Restore cache if available
       - restore_cache:
