@@ -187,7 +187,7 @@ GEM
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (5.0.0)
-    honeybadger (5.23.0)
+    honeybadger (5.26.0)
       logger
     httparty (0.22.0)
       csv
@@ -231,7 +231,7 @@ GEM
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    logger (1.6.1)
+    logger (1.6.2)
     loofah (2.23.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -537,7 +537,7 @@ DEPENDENCIES
   font-awesome-rails
   font-awesome-sass
   friendly_id
-  honeybadger (~> 5.23)
+  honeybadger (~> 5.26)
   httparty (>= 0.21.0)
   image_processing (>= 1.2)
   jbuilder
