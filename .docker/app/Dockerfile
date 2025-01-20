@@ -15,19 +15,22 @@ USER root
 # gcompat is added to allow m1 build of nokogiri
 RUN apk add -U --no-cache \
       bash=5.2.37-r0 \
-      busybox=1.37.0-r9 \
+      busybox=1.37.0-r12 \
       gcompat=1.1.0-r4 \
       imagemagick=7.1.1.41-r0 \
       libxslt=1.1.42-r1 \
       postgresql16-client=16.6-r0 \
       shared-mime-info=2.4-r2 \
-      ssl_client=1.37.0-r9 \
+      ssl_client=1.37.0-r12 \
       tzdata=2024b-r1 && \
     apk add -U --no-cache --virtual build-dependencies \
       build-base=0.5-r3 \
+      yaml=0.2.5-r2 \
+      yaml-dev=0.2.5-r2 \
       git=2.47.2-r0 \
       libjpeg-turbo-dev=3.0.4-r0 \
       libxslt-dev=1.1.42-r1 \
+      libxml2-dev=2.13.4-r3 \
       postgresql16-dev=16.6-r0 \
       nodejs=22.11.0-r1 \
       yarn=1.22.22-r1 && \

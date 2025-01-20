@@ -11,7 +11,7 @@ orbs:
 jobs:
   lint_and_test:
     docker:
-      - image: cimg/ruby:3.3.5-node
+      - image: cimg/ruby:3.3.6-node
         auth:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
