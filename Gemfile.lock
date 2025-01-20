@@ -558,6 +558,7 @@ DEPENDENCIES
   jsbundling-rails
   json (>= 2.3.0)
   kaminari
+  logger
   mail (~> 2.8.1)
   mail_form
   meta-tags
