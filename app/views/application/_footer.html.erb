@@ -26,16 +26,16 @@
 		<div class="col-5 col-lg-2 offset-lg-3">
 			<ul class="list-unstyled">
 				<li class="list-inline-item">
-					<%= link_to image_tag('wp.png', class: 'social-icon', alt: 'Wordpress Icon'), 'https://templepress.wordpress.com' %>
+					<%= link_to image_tag('wp.png', class: 'social-icon', alt: 'Wordpress Icon', loading: "lazy"), 'https://templepress.wordpress.com' %>
 				</li>
 				<li class="list-inline-item">
-					<%= link_to image_tag('twitter-icon.png', class: 'social-icon', alt: 'Twitter Icon', style: 'width:29px'), 'https://twitter.com/TempleUnivPress' %>
+					<%= link_to image_tag('twitter-icon.png', class: 'social-icon', alt: 'Twitter Icon', style: 'width:29px', loading: "lazy"), 'https://twitter.com/TempleUnivPress' %>
 				</li>
 				<li class="list-inline-item">
-					<%= link_to image_tag('fb-icon.png', class: 'social-icon', alt: 'Facebook Icon'), 'https://facebook.com/TempleUnivPress' %>
+					<%= link_to image_tag('fb-icon.png', class: 'social-icon', alt: 'Facebook Icon', loading: "lazy"), 'https://facebook.com/TempleUnivPress' %>
 				</li>
 				<li class="list-inline-item">
-					<%= link_to image_tag('insta-icon.png', class: 'social-icon', alt: 'Instagram Icon'), 'https://instagram.com/templeuniversitypress' %>
+					<%= link_to image_tag('insta-icon.png', class: 'social-icon', alt: 'Instagram Icon', loading: "lazy"), 'https://instagram.com/templeuniversitypress' %>
 				</li>
 			</ul>
 			<nav role="navigation">
@@ -47,12 +47,14 @@
 						<%= link_to (image_tag "gear.png",
 													class: "decorative", 
 													id: "login-link",
-													alt: "login link"), admin_root_path unless current_user %>
+													alt: "login link",
+													loading: "lazy"), admin_root_path unless current_user %>
 
 						<%= link_to (image_tag "gear.png",
 													class: "decorative", 
 													id: "login-link",
-													alt: "login link"), destroy_user_session_path, method: :delete if current_user %>
+													alt: "login link",
+													loading: "lazy"), destroy_user_session_path, method: :delete if current_user %>
 					</li>
 				</ul>
 			</nav>

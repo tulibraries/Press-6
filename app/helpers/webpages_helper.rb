@@ -3,17 +3,17 @@
 module WebpagesHelper
   def display_image(model, homepage = false)
     if model.image.attached?
-      (image_tag model.image)
+      (image_tag model.image, loading: "lazy")
     else
-      (image_tag "default-book-cover-index.png")
+      (image_tag "default-book-cover-index.png", loading: "lazy")
     end
   end
 
   def hot_cover(book)
     if book.cover_image.attached?
-      (image_tag book.custom_image("cover_image", 180, 280), class: "news-image")
+      (image_tag book.custom_image("cover_image", 180, 280), class: "news-image", loading: "lazy")
     else
-      (image_tag "default-book-cover-index.png", class: "news-image")
+      (image_tag "default-book-cover-index.png", class: "news-image", loading: "lazy")
     end
   end
 
@@ -21,13 +21,15 @@ module WebpagesHelper
     if model.class.to_s == "Event"
       if model.image.attached?
         (image_tag model.image,
-                   class: "news-image")
+                  class: "news-image",
+                  loading: "lazy")
       else
         (image_tag "default-book-cover-index.png",
-                   class: "news-image")
+                  class: "news-image",
+                  loading: "lazy")
       end
     else
-      model.class.to_s == "Book" ? hot_cover(model) : (image_tag model.image, class: "news-image")
+      model.class.to_s == "Book" ? hot_cover(model) : (image_tag model.image, class: "news-image", loading: "lazy")
     end
   end
 

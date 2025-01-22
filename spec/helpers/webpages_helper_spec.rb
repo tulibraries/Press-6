@@ -13,7 +13,7 @@ RSpec.describe WebpagesHelper, type: :helper do
 
   describe "display images" do
     it "returns image from model" do
-      expect(helper.display_image(brochure)).to eq(image_tag(brochure.image))
+      expect(helper.display_image(brochure)).to eq(image_tag(brochure.image, loading: "lazy"))
     end
     it "returns default image when model image nil - homepage" do
       expect(helper.display_image(no_image, true)).to include("default-book-cover-index")
@@ -37,13 +37,13 @@ RSpec.describe WebpagesHelper, type: :helper do
       expect(helper.news_image(book)).to include("charles")
     end
     it "returns image from event model" do
-      expect(helper.news_image(event_with_image)).to eq(image_tag(event_with_image.image, class: "news-image"))
+      expect(helper.news_image(event_with_image)).to eq(image_tag(event_with_image.image, class: "news-image", loading: "lazy"))
     end
     it "returns default image if event model has no image" do
       expect(helper.news_image(event)).to include("default-book-cover-index")
     end
     it "returns image from news_item model" do
-      expect(helper.news_image(news_item)).to eq(image_tag(news_item.image, class: "news-image"))
+      expect(helper.news_image(news_item)).to eq(image_tag(news_item.image, class: "news-image", loading: "lazy"))
     end
     it "returns default image when model image nil" do
       expect(helper.news_image(book_no_image)).to include("default-book-cover-index")
