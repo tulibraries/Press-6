@@ -11,3 +11,6 @@ amazon:
   service: S3
   bucket: tulib-press-prod
   region: us-east-1
+  upload:
+    cache_control: 'private, max-age=31536000'
+  
