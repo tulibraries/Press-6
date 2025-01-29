@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_01_175038) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_27_194949) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_175038) do
     t.string "content_type", limit: 255
     t.text "metadata"
     t.bigint "byte_size", null: false
-    t.string "checksum", limit: 255, null: false
+    t.string "checksum", limit: 255
     t.timestamptz "created_at", null: false
     t.string "service_name", limit: 255, null: false
     t.index ["key"], name: "idx_19032_index_active_storage_blobs_on_key", unique: true
@@ -52,6 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_175038) do
     t.timestamptz "created_at", null: false
     t.timestamptz "updated_at", null: false
     t.index ["blob_id", "variation_digest"], name: "idx_19040_index_active_storage_variant_records_uniqueness", unique: true
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "agencies", force: :cascade do |t|
@@ -398,7 +399,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_175038) do
     t.timestamptz "updated_at", null: false
     t.bigint "brochure_id"
     t.bigint "subject_id"
+    t.index ["brochure_id"], name: "idx_19356_index_subject_brochures_on_brochure_id", unique: true
     t.index ["brochure_id"], name: "index_subject_brochures_on_brochure_id"
+    t.index ["subject_id"], name: "idx_19356_index_subject_brochures_on_subject_id", unique: true
     t.index ["subject_id"], name: "index_subject_brochures_on_subject_id"
   end
 
