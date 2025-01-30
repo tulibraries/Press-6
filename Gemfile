@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem "rails", "~> 7.0.8"
+gem "rails"
 gem "active_storage_validations"
 gem "activestorage-validator"
 gem "administrate"
@@ -13,7 +13,7 @@ gem "administrate-field-scoped_has_many"
 gem "aws-sdk-s3"
 gem "binding_of_caller"
 gem "cssbundling-rails"
-gem "concurrent-ruby", "1.3.4"
+gem "concurrent-ruby"
 gem "devise"
 gem "font-awesome-rails"
 gem "font-awesome-sass"

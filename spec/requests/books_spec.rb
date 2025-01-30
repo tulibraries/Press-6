@@ -50,7 +50,8 @@ RSpec.describe Book, type: :request do
 
   describe "books redirect" do
     it "raises page not found instead of 500 error" do
-      expect { get book_redirect_path("999999") }.to raise_error(ActionController::RoutingError)
+      get book_redirect_path("999999")
+      expect(response.status).to eq(404)
     end
   end
 end
