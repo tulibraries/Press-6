@@ -51,13 +51,6 @@ Rails.application.configure do
   config.force_ssl = true
   config.ssl_options = { redirect: false }
 
-  # Include generic and useful information about system operation, but avoid logging too much
-  # information to avoid inadvertent exposure of personally identifiable information (PII).
-  config.log_level = :info
-
-  # Prepend all log lines with the following tags.
-  config.log_tags = [:request_id]
-
   # Use a different cache store in production.
   config.cache_store = :mem_cache_store, nil, { pool_size: 10, pool_timeout: 5 }
 
@@ -78,21 +71,26 @@ Rails.application.configure do
   # Don't log any deprecations.
   config.active_support.report_deprecations = false
 
+  # Include generic and useful information about system operation, but avoid logging too much
+  # information to avoid inadvertent exposure of personally identifiable information (PII).
+  config.log_level = :info
+
+  # Prepend all log lines with the following tags.
+  config.log_tags = [:request_id, ->(request) { request.remote_ip }]
+
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  # Use a different logger for distributed setups.
-  # require "syslog/logger"
-  # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")
+  stdout_logger = Logger.new(STDOUT)
+  stdout_logger.formatter = config.log_formatter
+  stdout_logger = ActiveSupport::TaggedLogging.new(stdout_logger)
 
-  config.log_path = "/tmp/log/production.log"
-  logger = ActiveSupport::Logger.new(config.log_path)
-  logger.formatter = config.log_formatter
-  config.logger = ActiveSupport::TaggedLogging.new(logger)
+  log_path = "/tmp/log/production.log"
+  file_logger = Logger.new(log_path)
+  file_logger.formatter = config.log_formatter
+  file_logger = ActiveSupport::TaggedLogging.new(file_logger)
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
-    config.logger.extend(ActiveSupport::Logger.broadcast(Logger.new($stdout)))
-  end
+  config.logger = ActiveSupport::BroadcastLogger.new(stdout_logger, file_logger)
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
@@ -106,5 +104,4 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
-  # Rails.application.routes.default_url_options[:protocol] = "https"
 end
