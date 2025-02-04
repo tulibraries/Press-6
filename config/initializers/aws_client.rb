@@ -2,7 +2,11 @@
 
 require "aws-sdk-s3"
 
-key = Rails.application.credentials.dig(:aws, :access_key_id)
+key = (ENV["AWS_ENV"] == "prod") ?
+  Rails.application.credentials.dig(:aws, :prod_access_key_id)
+  :
+  Rails.application.credentials.dig(:aws, :dev_access_key_id)
+
 secret = Rails.application.credentials.dig(:aws, :secret_access_key)
 
 Aws.config.update(
