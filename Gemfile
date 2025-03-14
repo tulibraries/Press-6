@@ -82,4 +82,4 @@ end
 gem "bootsnap", require: false
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
-gem "honeybadger", "~> 5.26"
+gem "honeybadger", "~> 5.27"
