@@ -23,19 +23,19 @@ RUN apk add -U --no-cache \
       busybox=1.37.0-r12 \
       gcompat=1.1.0-r4 \
       imagemagick=7.1.1.41-r0 \
-      libxslt=1.1.42-r1 \
+      libxslt=1.1.42-r2 \
       postgresql16-client=16.8-r0 \
       shared-mime-info=2.4-r2 \
       ssl_client=1.37.0-r12 \
-      tzdata=2025a-r0 && \
+      tzdata=2025b-r0 && \
     apk add -U --no-cache --virtual build-dependencies \
       build-base=0.5-r3 \
       yaml=0.2.5-r2 \
       yaml-dev=0.2.5-r2 \
       git=2.47.2-r0 \
       libjpeg-turbo-dev=3.0.4-r0 \
-      libxslt-dev=1.1.42-r1 \
-      libxml2-dev=2.13.4-r4 \
+      libxslt-dev=1.1.42-r2 \
+      libxml2-dev=2.13.4-r5 \
       postgresql16-dev=16.8-r0 \
       nodejs=22.13.1-r0 \
       yarn=1.22.22-r1 && \
