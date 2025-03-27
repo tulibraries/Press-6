@@ -1,4 +1,5 @@
 ---
 exceptions:
   ignore:
-    - "undefined method `order' for nil"
+    - "Dalli::RingError"
+    - "ActiveRecord::ConnectionNotEstablished"
