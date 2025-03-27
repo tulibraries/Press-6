@@ -3,8 +3,7 @@
 # Errors for honeybadger to ignore.
 Honeybadger.configure do |config|
   config.before_notify do |notice|
-    notice.halt! if notice.error_message =~ /undefined method `order' for nil/
-    
+    notice.halt! if notice.error_message =~ /undefined method `order' for nil/    
     # Ignore errors that occur during overnight maintenance
     start_time = Time.now.utc.change(hour: 5, min: 0, sec: 0)
     end_time = Time.now.utc.change(hour: 8, min: 30, sec: 0)
