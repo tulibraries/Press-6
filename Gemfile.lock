@@ -148,7 +148,7 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.4.3)
       railties (>= 6.0.0)
-    csv (3.3.2)
+    csv (3.3.3)
     dalli (3.2.8)
     date (3.4.1)
     debug (1.10.0)
@@ -200,7 +200,7 @@ GEM
     honeybadger (5.27.1)
       logger
       ostruct
-    httparty (0.22.0)
+    httparty (0.23.0)
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
