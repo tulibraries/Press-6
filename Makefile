@@ -4,7 +4,7 @@ export #exports the .env variables
 
 #Set DOCKER_IMAGE_VERSION in the .env file OR by passing in
 VERSION ?= $(DOCKER_IMAGE_VERSION)
-BASE_IMAGE ?= harbor.k8s.temple.edu/library/ruby:3.3-alpine
+BASE_IMAGE ?= harbor.k8s.temple.edu/library/ruby:3.4-alpine
 IMAGE ?= tulibraries/tupress
 HARBOR ?= harbor.k8s.temple.edu
 PLATFORM ?= linux/x86_64
