@@ -198,7 +198,7 @@ GEM
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (5.0.0)
-    honeybadger (5.27.2)
+    honeybadger (5.28.0)
       logger
       ostruct
     httparty (0.23.1)
@@ -583,7 +583,7 @@ DEPENDENCIES
   font-awesome-rails
   font-awesome-sass
   friendly_id
-  honeybadger (~> 5.27)
+  honeybadger (~> 5.28)
   httparty (>= 0.21.0)
   image_processing (>= 1.2)
   jbuilder
