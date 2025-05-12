@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  def aria_hidden(model)
+    if model.class.to_s == "Book"
+      alt_text = model.cover_alt_text
+    else
+      alt_text = model.image_alt_text
+    end
+    alt_text.present? ? false : true
+  end
+
   def search_glass
     image_path("mag.png")
   end
