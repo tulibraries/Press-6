@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 module BooksHelper
+  def aria_hidden(book)
+    book.cover_alt_text.present? ? false : true
+  end
+
   def book_format(format)
     case format
     when "PB"
