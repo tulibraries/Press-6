@@ -18,6 +18,7 @@ class SeriesDashboard < Administrate::BaseDashboard
     description: TrixField,
     founder: Field::String,
     image: FileField,
+    image_alt_text: Field::String,
     unpublish: Field::Boolean,
     image_link: Field::String,
     created_at: Field::DateTime,
@@ -54,6 +55,7 @@ class SeriesDashboard < Administrate::BaseDashboard
     code
     slug
     image
+    image_alt_text
     image_link
     editors
     founder

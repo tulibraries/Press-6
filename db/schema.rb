@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_27_194949) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_12_191355) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -369,6 +369,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_27_194949) do
     t.bigint "book_id"
     t.string "slug", limit: 255
     t.boolean "unpublish", default: false
+    t.string "image_alt_text"
     t.index ["book_id"], name: "idx_19316_index_series_on_book_id"
     t.index ["slug"], name: "idx_19316_index_series_on_slug", unique: true
   end
