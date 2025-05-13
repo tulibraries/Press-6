@@ -24,7 +24,7 @@ RUN apk add -U --no-cache \
       gcompat=1.1.0-r4 \
       imagemagick=7.1.1.41-r0 \
       libxslt=1.1.42-r2 \
-      postgresql16-client=16.8-r0 \
+      postgresql16-client=16.9-r0 \
       shared-mime-info=2.4-r2 \
       ssl_client=1.37.0-r12 \
       tzdata=2025b-r0 && \
