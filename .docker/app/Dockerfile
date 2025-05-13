@@ -35,7 +35,7 @@ RUN apk add -U --no-cache \
       git=2.47.2-r0 \
       libjpeg-turbo-dev=3.0.4-r0 \
       libxslt-dev=1.1.42-r2 \
-      libxml2-dev=2.13.4-r5 \
+      libxml2-dev=2.13.4-r6 \
       postgresql16-dev=16.9-r0 \
       nodejs=22.13.1-r0 \
       yarn=1.22.22-r1 && \
