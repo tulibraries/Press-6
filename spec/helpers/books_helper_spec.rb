@@ -57,5 +57,17 @@ RSpec.describe BooksHelper, type: :helper do
         expect(helper.order_button(bad_status)).to eq(%())
       end
     end
+
+    describe "aria_hidden" do
+      it "returns false if cover_alt_text is present" do
+        book_with_cover.cover_alt_text = "This is an alt text"
+        expect(helper.aria_hidden(book_with_cover)).to be false
+      end
+
+      it "returns true if cover_alt_text is not present" do
+        book_with_cover.cover_alt_text = nil
+        expect(helper.aria_hidden(book_with_cover)).to be true
+      end
+    end
   end
 end

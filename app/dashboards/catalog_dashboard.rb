@@ -19,6 +19,7 @@ class CatalogDashboard < Administrate::BaseDashboard
     suppress: Field::Boolean,
     pdf: FileField,
     image: ImageField,
+    image_alt_text: Field::String,
     brochures: Field::HasMany.with_options(
       order: "sort_title"
     ),
@@ -54,6 +55,7 @@ class CatalogDashboard < Administrate::BaseDashboard
     year
     pdf
     image
+    image_alt_text
     brochures
     suppress
   ].freeze

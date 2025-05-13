@@ -13,6 +13,7 @@ class BrochureDashboard < Administrate::BaseDashboard
     id: Field::Number,
     title: Field::String,
     image: ImageField,
+    image_alt_text: Field::String,
     pdf: FileField,
     promoted_to_homepage: Field::Boolean,
     created_at: Field::DateTime,
@@ -44,6 +45,7 @@ class BrochureDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     title
     image
+    image_alt_text
     pdf
     promoted_to_homepage
   ].freeze
