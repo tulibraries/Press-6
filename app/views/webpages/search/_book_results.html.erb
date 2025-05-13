@@ -1,7 +1,7 @@
 <% @books.each do |book| %>
 <div class="row book-row mx-1 bg-white p-4 w-100" style="border-bottom: solid #ccc 1px">
   <div class="media">
-    <%= link_to image_tag(book.thumb_image("cover_image"), class: 'd-flex mr-3'), book_path(book) if book.cover_image.attached? %>
+    <%= link_to image_tag(book.thumb_image("cover_image"), class: 'd-flex mr-3'), book_path(book), "aria-hidden": aria_hidden(book) if book.cover_image.attached? %>
   </div>
   <div class="media-body">
     <%= link_to book.title.html_safe, book_path(book), class: "book" %>
