@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_12_191355) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_13_124017) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -181,6 +181,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_12_191355) do
     t.bigint "catalog_id"
     t.bigint "subject_id"
     t.string "slug", limit: 255
+    t.string "image_alt_text"
     t.index ["catalog_id"], name: "idx_19144_index_brochures_on_catalog_id"
     t.index ["slug"], name: "idx_19144_index_brochures_on_slug", unique: true
     t.index ["subject_id"], name: "idx_19144_index_brochures_on_subject_id"
@@ -204,6 +205,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_12_191355) do
     t.timestamptz "updated_at", null: false
     t.boolean "suppress", default: true
     t.string "slug", limit: 255
+    t.string "image_alt_text"
     t.index ["slug"], name: "idx_19153_index_catalogs_on_slug", unique: true
   end
 

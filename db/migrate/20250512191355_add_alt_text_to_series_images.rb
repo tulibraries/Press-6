@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddAltTextToSeriesImages < ActiveRecord::Migration[7.2]
   def up
     add_column :series, :image_alt_text, :string

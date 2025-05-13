@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddAltTextToBrochureImages < ActiveRecord::Migration[7.2]
   def up
     add_column :brochures, :image_alt_text, :string
