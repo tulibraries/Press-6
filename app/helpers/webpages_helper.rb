@@ -3,9 +3,9 @@
 module WebpagesHelper
   def display_image(model, homepage = false)
     if model.image.attached?
-      (image_tag model.image, loading: "lazy")
+      (image_tag model.image, loading: "lazy", "aria-hidden": aria_hidden(model))
     else
-      (image_tag "default-book-cover-index.png", loading: "lazy")
+      (image_tag "default-book-cover-index.png", loading: "lazy", "aria-hidden": true)
     end
   end
 
