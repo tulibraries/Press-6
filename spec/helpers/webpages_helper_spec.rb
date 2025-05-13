@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe WebpagesHelper, type: :helper do
   let(:brochure) { FactoryBot.create(:brochure) }
+  let(:brochure_with_alt_text) { FactoryBot.create(:brochure, image_alt_text: "this is alt text") }
   let(:no_image) { FactoryBot.create(:brochure, :without_image) }
   let(:book_no_image) { FactoryBot.create(:book) }
   let(:book) { FactoryBot.create(:book, :with_cover_image) }
@@ -13,7 +14,8 @@ RSpec.describe WebpagesHelper, type: :helper do
 
   describe "display images" do
     it "returns image from model" do
-      expect(helper.display_image(brochure)).to eq(image_tag(brochure.image, loading: "lazy"))
+      expect(helper.display_image(brochure)).to eq(image_tag(brochure.image, loading: "lazy", "aria-hidden": "true"))
+      expect(helper.display_image(brochure_with_alt_text)).to eq(image_tag(brochure_with_alt_text.image, loading: "lazy", "aria-hidden": "false"))
     end
     it "returns default image when model image nil - homepage" do
       expect(helper.display_image(no_image, true)).to include("default-book-cover-index")
