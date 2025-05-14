@@ -90,7 +90,9 @@ Rails.application.configure do
   file_logger.formatter = config.log_formatter
   file_logger = ActiveSupport::TaggedLogging.new(file_logger)
 
-  config.logger = ActiveSupport::BroadcastLogger.new(stdout_logger, file_logger)
+  config.logger = Logger.new("/dev/null")
+  # config.logger = ActiveSupport::BroadcastLogger.new(stdout_logger, file_logger)
+
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
