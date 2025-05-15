@@ -16,7 +16,7 @@ RSpec.describe SyncService::Authors, type: :service do
 
   context "valid authors" do
     it "runs the sync" do
-      expect(@sync).to_not be
+      expect(@sync).to be
     end
 
     describe "checks book status" do

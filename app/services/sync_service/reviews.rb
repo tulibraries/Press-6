@@ -125,7 +125,7 @@ module SyncService
     end
 
     def stdout_and_log(message, level: :info)
-      # @log.send(level, message)
+      @log.send(level, message)
       # @stdout.send(level, message)
     end
   end
