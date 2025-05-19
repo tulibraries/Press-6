@@ -18,7 +18,7 @@ module ApplicationHelper
     when "Highlight"
       model.alt_text.presence || model.title
     else
-      model.image_alt_text.presence
+      model.image_alt_text.presence || model.title
     end
   end
 
