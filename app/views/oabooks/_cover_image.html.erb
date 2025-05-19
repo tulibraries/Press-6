@@ -5,7 +5,7 @@
 <% end if current_user %>
 
 <% if oabook.image.attached? %>
-  <%= image_tag oabook.show_image("image"), class: "mb-4" %>
+  <%= image_tag oabook.show_image("image"), class: "mb-4", alt: cover_alt_text(oabook) %>
 <% else %>
-  <%= image_tag "default-book-cover-show.png", class: "mb-4" %>
+  <%= image_tag "default-book-cover-show.png", class: "mb-4", alt: cover_alt_text(oabook) %>
 <% end unless current_user %>

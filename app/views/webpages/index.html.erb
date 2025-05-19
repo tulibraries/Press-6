@@ -86,7 +86,7 @@
     <div class="p-3 pb-5 white" id="feature-philly">
       <h2><%= t("tupress.webpages.index.philly") %></h2>
       <%= link_to subject_path(@philly) do %>
-        <%= image_tag "phila.jpg",  loading: "lazy" %>
+        <%= image_tag "phila.jpg",  loading: "lazy", alt: @philly.title  %>
       <% end if @philly.present? %>
     </div>
     <% end %>

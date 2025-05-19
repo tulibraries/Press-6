@@ -5,7 +5,7 @@
 <% end if current_user %>
 
 <% if book.cover_image.attached? %>
-  <%= image_tag book.show_image("cover_image"), class: "cover-image", "aria-hidden": aria_hidden(book), alt: @book.cover_alt_text %>
+  <%= image_tag book.show_image("cover_image"), class: "cover-image", alt: cover_alt_text(@book) %>
 <% else %>
-  <%= image_tag "default-book-cover-show.png", class: "default-show-cover cover-image", "aria-hidden": true %>
+  <%= image_tag "default-book-cover-show.png", class: "default-show-cover cover-image", alt: cover_alt_text(@book) %>
 <% end unless current_user %>

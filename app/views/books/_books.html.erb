@@ -1,11 +1,11 @@
   <% @books.each do |book| %>  
     <div class="row pb-lg-4 mt-lg-4 mb-lg-4 px-3 book-listing">
       <div class="col-12 col-md-4 col-lg-3 py-3 text-center">
-        <%= link_to book_path(book), "aria-hidden": aria_hidden(book) do %>
+        <%= link_to book_path(book) do %>
           <% if book.cover_image.attached? %>
-            <%= image_tag book.index_image("cover_image"), class: "cover-image", "aria-hidden": aria_hidden(book), alt: book.cover_alt_text %>
+            <%= image_tag book.index_image("cover_image"), class: "cover-image", alt: cover_alt_text(book) %>
           <% else %>
-            <%= image_tag "default-book-cover-index.png", alt: nil, "aria-hidden": true  %>
+            <%= image_tag "default-book-cover-index.png", alt: cover_alt_text(book)  %>
           <% end %>
         <% end %>
       </div>
