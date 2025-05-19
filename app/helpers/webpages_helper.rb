@@ -28,6 +28,7 @@ module WebpagesHelper
       else
         (image_tag "default-book-cover-index.png",
                   class: "news-image",
+                  alt: model.title,
                   loading: "lazy")
       end
     else

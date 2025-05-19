@@ -10,7 +10,9 @@ RSpec.describe WebpagesHelper, type: :helper do
   let(:book) { FactoryBot.create(:book, :with_cover_image) }
   let(:event) { FactoryBot.create(:event) }
   let(:event_with_image) { FactoryBot.create(:event, :with_image) }
+  let(:event_with_image_alt_text) { FactoryBot.create(:event, :with_image, image_alt_text: "this is alt text") }
   let(:news_item) { FactoryBot.create(:news_item) }
+  let(:news_item_with_alt_text) { FactoryBot.create(:news_item, image_alt_text: "this is alt text") }
 
   describe "display images" do
     it "returns image from model" do
@@ -38,14 +40,20 @@ RSpec.describe WebpagesHelper, type: :helper do
     it "returns image from book model" do
       expect(helper.news_image(book)).to include("charles")
     end
-    it "returns image from event model" do
-      expect(helper.news_image(event_with_image)).to eq(image_tag(event_with_image.image, class: "news-image", loading: "lazy"))
+    it "returns image from event model, no alt specified" do
+      expect(helper.news_image(event_with_image)).to eq(image_tag(event_with_image.image, class: "news-image", alt: event_with_image.title, loading: "lazy"))
+    end
+    it "returns image from event model, alt specified" do
+      expect(helper.news_image(event_with_image_alt_text)).to eq(image_tag(event_with_image_alt_text.image, class: "news-image", alt: event_with_image_alt_text.image_alt_text, loading: "lazy"))
     end
     it "returns default image if event model has no image" do
       expect(helper.news_image(event)).to include("default-book-cover-index")
     end
-    it "returns image from news_item model" do
-      expect(helper.news_image(news_item)).to eq(image_tag(news_item.image, class: "news-image", loading: "lazy"))
+    it "returns image from news_item model, alt not specified" do
+      expect(helper.news_image(news_item)).to eq(image_tag(news_item.image, class: "news-image", alt: news_item.title, loading: "lazy"))
+    end
+    it "returns image from news_item model, alt specified" do
+      expect(helper.news_image(news_item_with_alt_text)).to eq(image_tag(news_item_with_alt_text.image, class: "news-image", alt: news_item_with_alt_text.image_alt_text, loading: "lazy"))
     end
     it "returns default image when model image nil" do
       expect(helper.news_image(book_no_image)).to include("default-book-cover-index")
