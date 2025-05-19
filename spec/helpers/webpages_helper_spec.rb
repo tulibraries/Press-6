@@ -14,8 +14,8 @@ RSpec.describe WebpagesHelper, type: :helper do
 
   describe "display images" do
     it "returns image from model" do
-      expect(helper.display_image(brochure)).to eq(image_tag(brochure.image, loading: "lazy", "aria-hidden": "true"))
-      expect(helper.display_image(brochure_with_alt_text)).to eq(image_tag(brochure_with_alt_text.image, loading: "lazy", "aria-hidden": "false"))
+      expect(helper.display_image(brochure)).to eq(image_tag(brochure.image, loading: "lazy"))
+      expect(helper.display_image(brochure_with_alt_text)).to eq(image_tag(brochure_with_alt_text.image, loading: "lazy", alt: brochure_with_alt_text.image_alt_text))
     end
     it "returns default image when model image nil - homepage" do
       expect(helper.display_image(no_image, true)).to include("default-book-cover-index")

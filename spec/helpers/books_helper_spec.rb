@@ -61,12 +61,12 @@ RSpec.describe BooksHelper, type: :helper do
     describe "aria_hidden" do
       it "returns false if cover_alt_text is present" do
         book_with_cover.cover_alt_text = "This is an alt text"
-        expect(helper.aria_hidden(book_with_cover)).to be false
+        expect(helper.cover_alt_text(book_with_cover)).to match book_with_cover.cover_alt_text
       end
 
       it "returns true if cover_alt_text is not present" do
         book_with_cover.cover_alt_text = nil
-        expect(helper.aria_hidden(book_with_cover)).to be true
+        expect(helper.cover_alt_text(book_with_cover)).to match "#{I18n.t("tupress.default.cover_alt_text")} #{book_with_cover.title}"
       end
     end
   end
