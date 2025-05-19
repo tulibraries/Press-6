@@ -10,6 +10,18 @@ module ApplicationHelper
     alt_text.present? ? false : true
   end
 
+  def cover_alt_text(model)
+    prefix = t("tupress.default.cover_alt_text")
+    case model.class.to_s
+    when "Book"
+      model.cover_alt_text.presence || "#{prefix} #{model.title}"
+    when "Highlight"
+      model.alt_text.presence || model.title
+    else
+      model.image_alt_text.presence
+    end
+  end
+
   def search_glass
     image_path("mag.png")
   end
