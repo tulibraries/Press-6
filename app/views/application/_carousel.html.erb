@@ -9,9 +9,9 @@
     <% @highlights.each_with_index do |highlight, index| %>
       <div class="text-center carousel-item <%= "active" if index == 0 %>">
         <%= link_to image_tag(highlight.image, {class: "highlight", 
-                                                alt: highlight.alt_text}), highlight.link %>
+                                                alt: cover_alt_text(highlight)}), highlight.link %>
       </div>
-    <% end %>highlight.image.find_signed
+    <% end %>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

@@ -14,8 +14,14 @@
   </div>
   <% if @series.image.attached? %>
   <div class="col-3">
-    <%= link_to (image_tag @series.custom_image("image", 270, 220)), @series.image_link, {"aria-hidden": aria_hidden(@series), alt: @series.image_alt_text} if @series.image.attached? %>
-    <%= image_tag @series.custom_image("image", 270, 220) unless @series.image.attached? %>
+    <%= link_to (
+          image_tag @series.custom_image("image", 270, 220)), @series.image_link, 
+          {"aria-hidden": aria_hidden(@series), alt: @series.image_alt_text} 
+          if @series.image_link.present? %>
+          
+    <%= image_tag @series.custom_image("image", 270, 220), 
+          {"aria-hidden": aria_hidden(@series), alt: @series.image_alt_text} 
+          unless @series.image_link.present? %>
   </div>
   <% end %>
 </div>

@@ -19,6 +19,7 @@ class EventDashboard < Administrate::BaseDashboard
     description: TrixField,
     add_to_news: Field::Boolean,
     image: ImageField,
+    image_alt_text: Field::String,
     news_text: TrixField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
@@ -58,6 +59,7 @@ class EventDashboard < Administrate::BaseDashboard
     add_to_news
     news_text
     image
+    image_alt_text
   ].freeze
 
   # COLLECTION_FILTERS

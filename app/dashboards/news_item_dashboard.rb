@@ -5,6 +5,7 @@ require "administrate/base_dashboard"
 class NewsItemDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     image: ImageField,
+    image_alt_text: Field::String,
     description: TrixField,
     id: Field::Number,
     title: Field::String,
@@ -31,6 +32,7 @@ class NewsItemDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     title
     image
+    image_alt_text
     description
     link
     promote_to_homepage
