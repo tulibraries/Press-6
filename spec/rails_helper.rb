@@ -38,8 +38,8 @@ include Warden::Test::Helpers
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
-  puts e.to_s.strip
-  exit 1
+  Rails.logger.debug e.to_s.strip
+  raise ActiveRecord::PendingMigrationError
 end
 RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
