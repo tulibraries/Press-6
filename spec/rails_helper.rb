@@ -38,9 +38,9 @@ include Warden::Test::Helpers
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
-  Rails.logger.debug e.to_s.strip
-  raise ActiveRecord::PendingMigrationError
+  abort e.to_s.strip
 end
+
 RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::ControllerHelpers, type: :controller
@@ -48,7 +48,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :view
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = Rails.root.join("spec/fixtures")
+  config.fixture_paths = [Rails.root.join("spec/fixtures")]
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
