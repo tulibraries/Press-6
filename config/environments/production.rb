@@ -104,4 +104,8 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
+  MiniMagick.configure do |config|
+    config.tmpdir = File.join(Dir.tmpdir, "/app/tmp")
+  end
+
 end
