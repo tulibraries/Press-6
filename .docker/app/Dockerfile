@@ -51,7 +51,7 @@ RUN apk add -U --no-cache \
     if [ "${RAILS_ENV}" = "production" ]; then apk del build-dependencies; fi && \
     rm -rf /var/cache/apk/
 
-    RUN mkdir -p /app/tmp \
+    RUN mkdir -p /app/tmp && \
     chown nobody -R /app/tmp
 
 USER nobody
