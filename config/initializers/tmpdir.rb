@@ -17,5 +17,3 @@ module Dir
     end
   end
 end
-
-
