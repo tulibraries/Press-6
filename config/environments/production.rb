@@ -85,7 +85,7 @@ Rails.application.configure do
   stdout_logger.formatter = config.log_formatter
   stdout_logger = ActiveSupport::TaggedLogging.new(stdout_logger)
 
-  log_path = "/app/tmp/production.log"
+  log_path = "/mnt/tmp/production.log"
   file_logger = Logger.new(log_path)
   file_logger.formatter = config.log_formatter
   file_logger = ActiveSupport::TaggedLogging.new(file_logger)
@@ -105,7 +105,7 @@ Rails.application.configure do
   }
 
   MiniMagick.configure do |config|
-    config.tmpdir = "/app/tmp"
+    config.tmpdir = "/mnt/tmp"
   end
 
 end
