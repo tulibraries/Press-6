@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Only run this initializer in runtime contexts
 
 unless ENV["SKIP_TMPDIR_INIT"]
@@ -8,5 +9,5 @@ unless ENV["SKIP_TMPDIR_INIT"]
     raise "TMPDIR is not set or is not writable: #{ENV['TMPDIR'].inspect}"
   end
 
- Rails.logger.info "Using TMPDIR: #{ENV['TMPDIR']}" if defined?(Rails)
+  Rails.logger.info "Using TMPDIR: #{ENV['TMPDIR']}" if defined?(Rails)
 end
