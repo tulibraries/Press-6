@@ -1,15 +1,11 @@
-# config/initializers/tmpdir.rb
-ENV['TMPDIR'] = '/app/tmp'
+# Only run this initializer in runtime contexts
+unless ENV['SKIP_TMPDIR_INIT']
+  require 'tmpdir'
 
-require 'tmpdir'
-
-# Monkey-patch Dir.tmpdir only if needed
-if Dir.respond_to?(:tmpdir)
-  module Dir
-    class << self
-      def tmpdir
-        ENV['TMPDIR'] || '/app/tmp'
-      end
-    end
+  if ENV['TMPDIR'].nil? || !File.writable?(ENV['TMPDIR'])
+    raise "TMPDIR is not set or is not writable: #{ENV['TMPDIR'].inspect}"
   end
+
+  puts "Using TMPDIR: #{ENV['TMPDIR']}"
 end
+
