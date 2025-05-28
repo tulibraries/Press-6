@@ -105,7 +105,7 @@ Rails.application.configure do
   }
 
   MiniMagick.configure do |config|
-    config.tmpdir = File.join(Dir.tmpdir, "/app/tmp")
+    config.tmpdir = "/app/tmp"
   end
 
 end
