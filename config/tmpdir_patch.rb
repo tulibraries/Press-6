@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
-require "tmpdir"
+# config/tmpdir_patch.rb
 
-# config/initializers/tmpdir.rb
-
-require "tmpdir"
-
+# Patch Dir.tmpdir before any gems load
 class << Dir
   def tmpdir
     env_tmp = ENV["TMPDIR"]
@@ -13,9 +10,7 @@ class << Dir
       return env_tmp
     end
 
-    # Intentionally skip checking `.` (Dir.pwd) because in containerized environments,
-    # the working directory (e.g., /app) may be read-only, which will cause Ruby to raise
-    # an ArgumentError during temp file creation even if TMPDIR is correctly set.
+    # Intentionally skip checking '.' (Dir.pwd) to avoid errors in read-only workdir environments
     ["/app/tmp", "/tmp", "/var/tmp"].each do |path|
       return path if File.directory?(path) && File.writable?(path)
     end
