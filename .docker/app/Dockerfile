@@ -13,9 +13,8 @@ COPY . .
 ENV LD_PRELOAD="libjemalloc.so.2" \
       MALLOC_CONF="dirty_decay_ms:1000,narenas:2,background_thread:true" \
       RUBY_YJIT_ENABLE="1" \
-      TMPDIR=/app/tmp \
-      MAGICK_TMPDIR=/app/tmp \
-      SKIP_TMPDIR_INIT=1
+      TMPDIR=/mnt/tmp \
+      MAGICK_TMPDIR=/mnt/tmp 
 
 USER root
 
@@ -52,8 +51,9 @@ RUN apk add -U --no-cache \
     if [ "${RAILS_ENV}" = "production" ]; then apk del build-dependencies; fi && \
     rm -rf /var/cache/apk/
 
-    RUN mkdir -p /app/tmp && \
-    chown nobody -R /app/tmp
+    RUN mkdir -p /mnt/tmp && \
+    chmod 755 /mnt/tmp && \
+    chown nobody -R /mnt/tmp
 
 USER nobody
 
