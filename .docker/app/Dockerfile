@@ -14,6 +14,7 @@ ENV LD_PRELOAD="libjemalloc.so.2" \
       MALLOC_CONF="dirty_decay_ms:1000,narenas:2,background_thread:true" \
       RUBY_YJIT_ENABLE="1" \
       TMPDIR=/app/tmp \
+      MAGICK_TMPDIR=/app/tmp \
       SKIP_TMPDIR_INIT=1
 
 USER root
