@@ -107,5 +107,5 @@ Rails.application.configure do
   MiniMagick.configure do |config|
     config.tmpdir = "/app/tmp"
   end
-  
+
 end
