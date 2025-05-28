@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # config/tmpdir_patch.rb
 
 # Patch Dir.tmpdir before any gems load
