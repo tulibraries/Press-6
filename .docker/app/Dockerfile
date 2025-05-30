@@ -12,9 +12,7 @@ COPY . .
 
 ENV LD_PRELOAD="libjemalloc.so.2" \
       MALLOC_CONF="dirty_decay_ms:1000,narenas:2,background_thread:true" \
-      RUBY_YJIT_ENABLE="1" \
-      TMPDIR=/mnt/tmp \
-      MAGICK_TMPDIR=/mnt/tmp 
+      RUBY_YJIT_ENABLE="1"
 
 USER root
 
@@ -39,7 +37,7 @@ RUN apk add -U --no-cache \
       libxslt-dev=1.1.42-r2 \
       libxml2-dev=2.13.4-r6 \
       postgresql16-dev=16.9-r0 \
-      nodejs=22.13.1-r0 \
+      nodejs=22.15.1-r0 \
       yarn=1.22.22-r1 && \
     if [ "${RAILS_ENV}" = "production" ]; then bundle config set --local without "development test"; fi && \
     bundle install --jobs=8 && \
@@ -49,11 +47,9 @@ RUN apk add -U --no-cache \
     if [ "${RAILS_ENV}" = "production" ]; then rm -rf node_modules; fi && \
     if [ "${RAILS_ENV}" = "production" ]; then rm -rf tmp/*; fi && \
     if [ "${RAILS_ENV}" = "production" ]; then apk del build-dependencies; fi && \
-    rm -rf /var/cache/apk/
-
-    RUN mkdir -p /mnt/tmp && \
-    chmod 755 /mnt/tmp && \
-    chown nobody -R /mnt/tmp
+    rm -rf /var/cache/apk/ && \
+    chown nobody -R /app/tmp && \
+    chown nobody -R /app/log
 
 USER nobody
 
