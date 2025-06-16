@@ -48,8 +48,8 @@ RUN apk add -U --no-cache \
     if [ "${RAILS_ENV}" = "production" ]; then rm -rf tmp/*; fi && \
     if [ "${RAILS_ENV}" = "production" ]; then apk del build-dependencies; fi && \
     rm -rf /var/cache/apk/ && \
-    mkdir -p /app/tmp && chmod 700 /app/tmp && \
-    mkdir -p /app/log && chmod 700 /app/log
+    mkdir -p /secure-tmp && chmod 700 /secure-tmp && \
+    mkdir -p /secure-tmp/log && chmod 700 /secure-tmp/log
 
 USER 65534:65534
  
