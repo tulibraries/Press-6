@@ -85,7 +85,7 @@ Rails.application.configure do
   stdout_logger.formatter = config.log_formatter
   stdout_logger = ActiveSupport::TaggedLogging.new(stdout_logger)
 
-  log_path = "/tmp/log/production.log"
+  log_path = "/secure-tmp/production.log"
   file_logger = Logger.new(log_path)
   file_logger.formatter = config.log_formatter
   file_logger = ActiveSupport::TaggedLogging.new(file_logger)
