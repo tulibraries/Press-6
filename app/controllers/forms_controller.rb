@@ -14,7 +14,7 @@ class FormsController < ApplicationController
       @book = Book.find(params[:id]) if params[:id].present?
       create if params[:form].present?
     else
-      render "errors/not_found", status: :not_found
+      render template: "errors/not_found", status: :not_found
     end
   end
 
