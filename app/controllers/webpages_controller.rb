@@ -20,6 +20,7 @@ class WebpagesController < ApplicationController
   def show; end
 
   def search
+    return redirect_to(root_path) if params[:q].blank?
     response.set_header("Cache-Control", "private, no-store, must-revalidate")
     @books = Book.displayable.search(params[:q]).order(:sort_title)
     @subjects = Subject.search(params[:q])
@@ -35,7 +36,6 @@ class WebpagesController < ApplicationController
     @oabooks = Oabook.search(params[:q])
     @results = [@books, @subjects, @series, @people, @site, @authors, @confevents, @faqs, @journals,
                 @oabooks].any?(&:present?)
-    redirect_to(root_path) if params[:q].blank?
   end
 
   private
