@@ -31,7 +31,7 @@ DEFAULT_RUN_ARGS ?= -e "EXECJS_RUNTIME=Disabled" \
 		--rm -it
 
 build:
-	@docker build --build-arg RAILS_MASTER_KEY=$(RAILS_MASTER_KEY) \
+	@docker build --pull --build-arg RAILS_MASTER_KEY=$(RAILS_MASTER_KEY) \
 		--build-arg BASE_IMAGE=$(BASE_IMAGE) \
 		--platform $(PLATFORM) \
 		--progress plain \
