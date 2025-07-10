@@ -32,7 +32,7 @@ RUN apk add -U --no-cache \
       build-base=0.5-r3 \
       yaml=0.2.5-r2 \
       yaml-dev=0.2.5-r2 \
-      git=2.49.0-r0 \
+      git=2.49.1-r0 \
       libjpeg-turbo-dev=3.1.0-r0 \
       libxslt-dev=1.1.43-r3 \
       libxml2-dev=2.13.8-r0 \
