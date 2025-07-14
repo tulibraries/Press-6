@@ -15,6 +15,8 @@ module ApplicationHelper
     case model.class.to_s
     when "Book"
       model.cover_alt_text.presence || "#{prefix} #{model.title}"
+    when "Oabook"
+      model.cover_alt_text.presence || "#{prefix} #{model.title}"
     when "Highlight"
       model.alt_text.presence || model.title
     else

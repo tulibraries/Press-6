@@ -14,6 +14,7 @@ class OabookDashboard < Administrate::BaseDashboard
     print_isbn: Field::String,
     description: TrixField,
     image: ImageField,
+    cover_alt_text: Field::String,
     collection: Field::Select.with_options(
       collection: ["North Broad Press", "Labor Studies & Work"]
     ),
@@ -51,6 +52,7 @@ class OabookDashboard < Administrate::BaseDashboard
 
   FORM_ATTRIBUTES = %i[
     image
+    cover_alt_text
     title
     slug
     subtitle
