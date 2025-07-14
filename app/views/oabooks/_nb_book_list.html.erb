@@ -1,8 +1,8 @@
 <div class="col-12 col-lg-6">
   <div class="row py-3 border-bottom">
     <div class="col-12 col-md-3 col-lg-4 py-3 text-center text-md-start">
-      <%= link_to image_tag(oabook.thumb_image("image")), north_broad_book_path(oabook), alt: cover_alt_text(book) if oabook.image.attached? %>
-      <%= link_to image_tag("default-book-cover-show.png"), north_broad_book_path(oabook), alt: cover_alt_text(book) unless oabook.image.attached?  %>
+      <%= link_to image_tag(oabook.thumb_image("image"), alt: cover_alt_text(oabook)), north_broad_book_path(oabook) if oabook.image.attached? %>
+      <%= link_to image_tag("default-book-cover-show.png", alt: cover_alt_text(oabook)), north_broad_book_path(oabook) unless oabook.image.attached?  %>
     </div>
 
     <div class="col-12 col-md-9 col-lg-8 pt-3">
