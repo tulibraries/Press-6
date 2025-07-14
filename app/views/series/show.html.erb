@@ -19,10 +19,12 @@
         <%= image_tag @series.custom_image("image", 270, 220), alt: @series.image_alt_text %>
       <% end %>
     <% end %>
-          
-    <%= image_tag @series.custom_image("image", 270, 220), 
-          {"aria-hidden": aria_hidden(@series), alt: @series.image_alt_text} 
-          unless @series.image_link.present? %>
+    
+    <%= image_tag(
+        @series.custom_image("image", 270, 220),
+        "aria-hidden": aria_hidden(@series),
+        alt:           @series.image_alt_text
+      ) unless @series.image_link.present? %>
   </div>
   <% end %>
 </div>
