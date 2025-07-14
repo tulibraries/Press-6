@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_19_152202) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_14_150233) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -317,6 +317,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_19_152202) do
     t.string "epub_link", limit: 255
     t.string "manifold", limit: 255
     t.string "slug", limit: 255
+    t.string "cover_alt_text"
     t.index ["slug"], name: "idx_19257_index_oabooks_on_slug", unique: true
   end
 
