@@ -9,7 +9,7 @@
 </div>
 
 <div class="row mb-5">
-  <div class="col<%= "-9" if @series.image.attached? %>">
+  <div class="col<%= '-9' if @series.image.attached? %>">
     <%= Nokogiri::HTML5.fragment(@series.description).to_s.html_safe if @series.description.present? %>
   </div>
   <% if @series.image.attached? %>
@@ -19,10 +19,12 @@
         <%= image_tag @series.custom_image("image", 270, 220), alt: @series.image_alt_text %>
       <% end %>
     <% end %>
-          
-    <%= image_tag @series.custom_image("image", 270, 220), 
-          {"aria-hidden": aria_hidden(@series), alt: @series.image_alt_text} 
-          unless @series.image_link.present? %>
+    
+    <%= image_tag(
+        @series.custom_image("image", 270, 220),
+        "aria-hidden": aria_hidden(@series),
+        alt:           @series.image_alt_text
+      ) unless @series.image_link.present? %>
   </div>
   <% end %>
 </div>
