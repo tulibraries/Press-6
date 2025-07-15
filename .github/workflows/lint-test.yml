@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+    branches: [ main ]
+  workflow_dispatch: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx (for docker-compose)
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Remove .dockerignore
+        run: rm .dockerignore
+
+      - name: Bring up services with docker-compose
+        run: |
+          docker-compose -p press_6 -f docker-compose.yaml up -d
+          sleep 30
+
+      - name: Run RuboCop linter
+        run: |
+          docker-compose -p press_6 -f docker-compose.yaml \
+            exec --user root test_app \
+            bundle exec rubocop -c .rubocop.yml
+
+      - name: Run DB setup + migrations
+        run: |
+          docker-compose -p press_6 -f docker-compose.yaml \
+            exec --user root test_app bundle exec rails db:setup
+          docker-compose -p press_6 -f docker-compose.yaml \
+            exec --user root test_app bundle exec rails db:migrate
+
+      - name: Run RSpec suite
+        run: |
+          docker-compose -p press_6 -f docker-compose.yaml \
+            exec --user root test_app bundle exec rake spec
+          docker cp press_6-test_app-1:/app/coverage/lcov/app.lcov ./app.lcov
+
+      - name: Upload coverage to Coveralls
+        uses: coverallsapp/github-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./app.lcov
