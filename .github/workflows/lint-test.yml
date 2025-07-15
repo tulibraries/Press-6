@@ -19,30 +19,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx (for docker-compose)
-        uses: docker/setup-buildx-action@v2
-
-      - name: Install Docker Compose plugin
-        run: |
-          mkdir -p ~/.docker/cli-plugins
-          curl -SL https://github.com/docker/compose/releases/download/v2.23.1/docker-compose-linux-x86_64 \
-            -o ~/.docker/cli-plugins/docker-compose
-          chmod +x ~/.docker/cli-plugins/docker-compose
-
-      - name: Remove .dockerignore
-        run: rm .dockerignore
-
-      - name: Extract BASE_IMAGE
-        run: |
-          BASE=$(grep '^ARG BASE_IMAGE' .docker/app/Dockerfile \
-            | sed -E 's/.*="([^"]+)".*/\1/' \
-            | sed 's#harbor\.k8s\.temple\.edu/library/##' \
-            | tr '[:upper:]' '[:lower:]')
-          echo "LOCAL_BASE_IMAGE=$BASE" >> $GITHUB_ENV
-
-      - name: Build images with LOCAL_BASE_IMAGE
-        run: |
-          docker compose -p press_6 -f docker-compose.yaml build --build-arg LOCAL_BASE_IMAGE=${{ env.LOCAL_BASE_IMAGE }} test_app
+      - name: Run docker compose
+        uses: hoverkraft-tech/compose-action@v2.0.1
+        with:
+          compose-file: "../../docker/docker-compose.yml"
 
       - name: Bring up services with docker-compose
         run: |
