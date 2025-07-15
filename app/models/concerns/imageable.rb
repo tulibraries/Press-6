@@ -19,8 +19,8 @@ module Imageable
     image = send(image_field.to_sym)
     image.analyze unless image.analyzed
 
-    image_width = image.metadata[:width]
-    image_height = image.metadata[:height]
+    image_width = image.metadata[:width].to_i
+    image_height = image.metadata[:height].to_i
 
     if (image_width != width) || (image_height != height)
       if image_width > image_height
