@@ -32,9 +32,23 @@ jobs:
       - name: Remove .dockerignore
         run: rm .dockerignore
 
-      - name: Bring up services with docker-compose
+      - name: Build & start containers
         run: |
-          docker compose -p press_6 -f docker-compose.yaml up -d
+          source .env
+          # extract, lowercase & sanitize the base image string:
+          TAG=$(grep 'ARG BASE_IMAGE' .docker/app/Dockerfile \
+            | sed 's/.*="\(.*\)".*/\1/' \
+            | sed 's#harbor\.k8s\.temple\.edu/library/##' \
+            | tr '[:upper:]' '[:lower:]' \
+            | tr ':' '-')
+          echo "Using tag → $TAG"
+          # use docker compose here if you prefer, but make sure to use the sanitized $TAG
+          docker build \
+            --build-arg BASE_IMAGE="$BASE_IMAGE" \
+            -t yourapp:"$TAG" \
+            -f .docker/app/Dockerfile \
+            .
+          docker run -d --name test_app yourapp:"$TAG"
           sleep 30
 
       - name: Run RuboCop linter
