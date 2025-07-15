@@ -14,7 +14,7 @@ services:
       dockerfile: .docker/app/Dockerfile
       target: builder
       args:
-        BASE_IMAGE: $LOCAL_BASE_IMAGE
+        BASE_IMAGE: $local_base_image
         RAILS_ENV: "test"
     image: press_6-test_app:builder
 
