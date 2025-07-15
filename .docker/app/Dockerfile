@@ -4,7 +4,7 @@ ARG BASE_IMAGE="harbor.k8s.temple.edu/library/ruby:3.4-alpine" \
   RAILS_ENV=production
 
 # hadolint ignore=DL3006,DL3026
-FROM "${BASE_IMAGE}"
+FROM "${BASE_IMAGE}" AS builder
 
 WORKDIR /app
 
