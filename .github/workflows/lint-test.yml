@@ -34,25 +34,25 @@ jobs:
 
       - name: Bring up services with docker-compose
         run: |
-          docker-compose -p press_6 -f docker-compose.yaml up -d
+          docker compose -p press_6 -f docker-compose.yaml up -d
           sleep 30
 
       - name: Run RuboCop linter
         run: |
-          docker-compose -p press_6 -f docker-compose.yaml \
+          docker compose -p press_6 -f docker-compose.yaml \
             exec --user root test_app \
             bundle exec rubocop -c .rubocop.yml
 
       - name: Run DB setup + migrations
         run: |
-          docker-compose -p press_6 -f docker-compose.yaml \
+          docker compose -p press_6 -f docker-compose.yaml \
             exec --user root test_app bundle exec rails db:setup
-          docker-compose -p press_6 -f docker-compose.yaml \
+          docker compose -p press_6 -f docker-compose.yaml \
             exec --user root test_app bundle exec rails db:migrate
 
       - name: Run RSpec suite
         run: |
-          docker-compose -p press_6 -f docker-compose.yaml \
+          docker compose -p press_6 -f docker-compose.yaml \
             exec --user root test_app bundle exec rake spec
           docker cp press_6-test_app-1:/app/coverage/lcov/app.lcov ./app.lcov
 
