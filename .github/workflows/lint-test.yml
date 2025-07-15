@@ -45,6 +45,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: tupress-test 
         ports:
           - 5432:5432
         options: >-
@@ -54,7 +55,7 @@ jobs:
           --health-retries 5
     env:
       RAILS_ENV: test
-      DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/tupress-test
 
     steps:
       - name: Checkout code
@@ -72,7 +73,7 @@ jobs:
           bundle install --jobs 4 --retry 3
           
       - name: Prepare test database
-        run: bundle exec rails db:schema:load
+        run: bundle exec rails db:migrate
 
       - name: Run rspec tests
         run: bundle exec rspec spec
