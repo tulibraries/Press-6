@@ -38,11 +38,11 @@ jobs:
             | sed -E 's/.*="([^"]+)".*/\1/' \
             | sed 's#harbor\.k8s\.temple\.edu/library/##' \
             | tr '[:upper:]' '[:lower:]')
-          echo "BASE_IMAGE=$BASE" >> $GITHUB_ENV
+          echo "LOCAL_BASE_IMAGE=$BASE" >> $GITHUB_ENV
 
-      - name: Build images with BASE_IMAGE
+      - name: Build images with LOCAL_BASE_IMAGE
         run: docker compose -p press_6 -f docker-compose.yaml build \
-              --build-arg BASE_IMAGE=${{ env.BASE_IMAGE }}
+              --build-arg LOCAL_BASE_IMAGE=${{ env.LOCAL_BASE_IMAGE }}
 
       - name: Bring up services with docker-compose
         run: |
