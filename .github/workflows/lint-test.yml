@@ -32,6 +32,18 @@ jobs:
       - name: Remove .dockerignore
         run: rm .dockerignore
 
+      - name: Extract BASE_IMAGE
+        run: |
+          BASE=$(grep '^ARG BASE_IMAGE' .docker/app/Dockerfile \
+            | sed -E 's/.*="([^"]+)".*/\1/' \
+            | sed 's#harbor\.k8s\.temple\.edu/library/##' \
+            | tr '[:upper:]' '[:lower:]')
+          echo "BASE_IMAGE=$BASE" >> $GITHUB_ENV
+
+      - name: Build images with BASE_IMAGE
+        run: docker compose -p press_6 -f docker-compose.yaml build \
+              --build-arg BASE_IMAGE=${{ env.BASE_IMAGE }}
+
       - name: Bring up services with docker-compose
         run: |
           docker compose -p press_6 -f docker-compose.yaml up -d

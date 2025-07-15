@@ -12,11 +12,9 @@ services:
     build:
       context: .
       dockerfile: .docker/app/Dockerfile
-      target: builder
       args:
-        BASE_IMAGE: $local_base_image
+        BASE_IMAGE: $LOCAL_BASE_IMAGE
         RAILS_ENV: "test"
-    image: press_6-test_app:builder
 
     ports:
       - "3000"
