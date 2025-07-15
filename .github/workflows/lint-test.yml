@@ -42,7 +42,8 @@ jobs:
 
       - name: Build images with LOCAL_BASE_IMAGE
         run: docker compose -p press_6 -f docker-compose.yaml build \
-              --build-arg LOCAL_BASE_IMAGE=${{ env.LOCAL_BASE_IMAGE }}
+              --build-arg LOCAL_BASE_IMAGE=${{ env.LOCAL_BASE_IMAGE }} \
+              test_app
 
       - name: Bring up services with docker-compose
         run: |
