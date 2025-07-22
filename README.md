@@ -22,7 +22,7 @@ The app database needs to be initialized in oder for `make load-data` to work.  
 
 ### If using docker-compose:
 * source .env or set LOCAL_BASE_IMAGE manually.
-* run docker-compose up
+* run `docker-compose up`
 
 ### Start the Application using Docker as an alternative
 
