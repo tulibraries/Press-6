@@ -58,8 +58,8 @@ jobs:
           bundler-cache: true
 
       - name: Precompile Rails assets
-        run: |
-          bundle exec rails assets:precompile
+        run: bundle exec rails assets:precompile
+          
 
       - name: Setup Postgres
         uses: ikalnytskyi/action-setup-postgres@v7
