@@ -20,13 +20,13 @@ USER root
 RUN apk add -U --no-cache \
       jemalloc=5.3.0-r6 \
       bash=5.2.37-r0 \
-      busybox=1.37.0-r18 \
+      busybox=1.37.0-r19 \
       gcompat=1.1.0-r4 \
       imagemagick=7.1.2.0-r0 \
       libxslt=1.1.43-r3 \
       postgresql16-client=16.9-r0 \
       shared-mime-info=2.4-r6 \
-      ssl_client=1.37.0-r18 \
+      ssl_client=1.37.0-r19 \
       tzdata=2025b-r0 && \
     apk add -U --no-cache --virtual build-dependencies \
       build-base=0.5-r3 \
