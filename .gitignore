@@ -13,6 +13,9 @@
 !/log/.keep
 !/tmp/.keep
 
+# Vim files
+*.sw[p-o]
+
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
 !/tmp/pids/
