@@ -18,6 +18,7 @@ gem "devise"
 gem "font-awesome-rails"
 gem "font-awesome-sass"
 gem "friendly_id"
+gem "honeybadger"
 gem "httparty", ">= 0.21.0"
 gem "image_processing", ">= 1.2"
 gem "jbuilder"
@@ -82,5 +83,3 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "bootsnap", require: false
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
-
-gem "honeybadger", "~> 5.29"
