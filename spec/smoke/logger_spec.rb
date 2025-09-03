@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # spec/smoke/logger_spec.rb
 require "rails_helper"
 
@@ -7,4 +9,3 @@ RSpec.describe "Logger configuration" do
     expect(Rails.logger.formatter.current_tags).to eq([])
   end
 end
-
