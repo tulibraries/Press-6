@@ -81,16 +81,19 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  stdout_logger = Logger.new(STDOUT)
-  stdout_logger.formatter = config.log_formatter
-  stdout_logger = ActiveSupport::TaggedLogging.new(stdout_logger)
+  stdout = ActiveSupport::Logger.new($stdout)
+  file   = ActiveSupport::Logger.new("/secure-tmp/production.log")
 
-  log_path = "/secure-tmp/production.log"
-  file_logger = Logger.new(log_path)
-  file_logger.formatter = config.log_formatter
-  file_logger = ActiveSupport::TaggedLogging.new(file_logger)
+  stdout.formatter = config.log_formatter
+  file.formatter   = config.log_formatter
 
-  config.logger = ActiveSupport::BroadcastLogger.new(stdout_logger, file_logger)
+  combined = ActiveSupport::BroadcastLogger.new(stdout, file)
+
+  # Wrap the broadcaster with TaggedLogging (wrap once, at the top)
+  tagged = ActiveSupport::TaggedLogging.new(combined)
+
+  config.logger = tagged
+  config.action_cable.logger = tagged
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false

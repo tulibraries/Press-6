@@ -72,6 +72,29 @@ Rails.application.configure do
 
   Rails.application.config.active_storage.variant_processor = :mini_magick
 
+  # Prepend all log lines with the following tags.
+  config.log_tags = [:request_id, ->(request) { request.remote_ip }]
+
+  # Use default logging formatter so that PID and timestamp are not suppressed.
+  config.log_formatter = ::Logger::Formatter.new
+
+  stdout = ActiveSupport::Logger.new($stdout)
+  file   = ActiveSupport::Logger.new("log/development.log")
+
+  stdout.formatter = config.log_formatter
+  file.formatter   = config.log_formatter
+
+  combined = ActiveSupport::BroadcastLogger.new(stdout, file)
+
+  # Wrap the broadcaster with TaggedLogging (wrap once, at the top)
+  tagged = ActiveSupport::TaggedLogging.new(combined)
+
+  config.logger = tagged
+  config.action_cable.logger = tagged
+
+  # Do not dump schema after migrations.
+  config.active_record.dump_schema_after_migration = false
+
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
     port: 587,
