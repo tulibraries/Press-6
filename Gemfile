@@ -43,6 +43,7 @@ gem "skylight"
 gem "sprockets-rails"
 gem "stimulus-rails"
 gem "turbo-rails"
+gem "rexml"
 
 group :production do
   gem "dalli"
