@@ -618,6 +618,7 @@ DEPENDENCIES
   rails-controller-testing
   recaptcha
   resolv (>= 0.6.2)
+  rexml
   rspec-activemodel-mocks
   rspec-rails
   rubocop
