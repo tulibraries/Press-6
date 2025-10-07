@@ -1,4 +1,3 @@
-# For circleci this arg gets overridden via configuration.
 ARG BASE_IMAGE="harbor.k8s.temple.edu/library/ruby:3.4-alpine" \
   RAILS_MASTER_KEY=foobar \
   RAILS_ENV=production
