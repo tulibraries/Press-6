@@ -200,7 +200,7 @@ GEM
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (5.0.0)
-    honeybadger (6.1.0)
+    honeybadger (6.1.2)
       logger
       ostruct
     httparty (0.23.2)
