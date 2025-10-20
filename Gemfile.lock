@@ -359,7 +359,7 @@ GEM
       date
       stringio
     public_suffix (6.0.1)
-    puma (7.0.4)
+    puma (7.1.0)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.1.18)
@@ -616,7 +616,7 @@ DEPENDENCIES
   pry
   pry-byebug
   pry-rails
-  puma (~> 7.0.4)
+  puma (~> 7.1.0)
   rails
   rails-controller-testing
   recaptcha
