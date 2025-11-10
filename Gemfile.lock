@@ -272,7 +272,7 @@ GEM
       logger
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
-    minitest (5.26.0)
+    minitest (5.26.1)
     msgpack (1.8.0)
     multi_xml (0.7.2)
       bigdecimal (~> 3.1)
@@ -496,8 +496,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    shoulda-matchers (6.5.0)
-      activesupport (>= 5.2.0)
+    shoulda-matchers (7.0.1)
+      activesupport (>= 7.1)
     simple_form (5.4.0)
       actionpack (>= 7.0)
       activemodel (>= 7.0)
@@ -633,7 +633,7 @@ DEPENDENCIES
   rubocop
   rubocop-rails
   selenium-webdriver
-  shoulda-matchers (~> 6.5)
+  shoulda-matchers (~> 7.0)
   simple_form
   simplecov
   simplecov-lcov
