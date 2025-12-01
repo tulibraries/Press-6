@@ -19,13 +19,13 @@ USER root
 RUN apk add -U --no-cache \
       jemalloc=5.3.0-r6 \
       bash=5.2.37-r0 \
-      busybox=1.37.0-r19 \
+      busybox=1.37.0-r20 \
       gcompat=1.1.0-r4 \
-      imagemagick=7.1.2.3-r0 \
+      imagemagick=7.1.2.8-r0 \
       libxslt=1.1.43-r3 \
-      postgresql16-client=16.10-r0 \
+      postgresql16-client=16.11-r0 \
       shared-mime-info=2.4-r6 \
-      ssl_client=1.37.0-r19 \
+      ssl_client=1.37.0-r20 \
       tzdata=2025b-r0 && \
     apk add -U --no-cache --virtual build-dependencies \
       build-base=0.5-r3 \
@@ -35,7 +35,7 @@ RUN apk add -U --no-cache \
       libjpeg-turbo-dev=3.1.0-r0 \
       libxslt-dev=1.1.43-r3 \
       libxml2-dev=2.13.9-r0 \
-      postgresql16-dev=16.10-r0 \
+      postgresql16-dev=16.11-r0 \
       nodejs=22.16.0-r2 \
       yarn=1.22.22-r1 && \
     if [ "${RAILS_ENV}" = "production" ]; then bundle config set --local without "development test"; fi && \
