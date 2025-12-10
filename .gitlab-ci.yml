@@ -50,7 +50,6 @@ tag:
 qa_deploy:
   variables:
     IMAGE: $HARBOR/tulibraries/tupress
-    RANCHER: rancher-np
     CLUSTER: $DEV_CLUSTER
   stage: deploy
   extends: .helm_setup
