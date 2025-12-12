@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     resources :news_items
     resources :oabooks
     resources :people
+    resources :regions
     resources :series
     resources :special_offers
     resources :subjects

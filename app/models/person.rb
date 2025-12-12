@@ -17,6 +17,24 @@ class Person < ApplicationRecord
     title
   end
 
+  def region_record
+    return nil if region.blank?
+
+    @region_record ||= begin
+      normalized = region.to_s.sub(/\s*\(.*\)\s*\z/, "").strip
+      scope = Region.where(name: normalized)
+
+      designation = parsed_rights_designation
+      scoped_scope = designation ? scope.where(rights_designation: Region.rights_designations[designation]) : scope
+
+      scoped_scope.first || scope.first
+    end
+  end
+
+  def rights_type
+    region_record&.rights_type
+  end
+
   def self.search(q)
     if q
       q = q.last.present? ? q : q[0...-1]
@@ -24,5 +42,15 @@ class Person < ApplicationRecord
             .or(Person.where("position ~* ?", "(^|\\W)#{q}(\\W|$)"))
             .sort
     end
+  end
+
+  private
+
+  def parsed_rights_designation
+    label = region.to_s.downcase
+    return :exclusive if label.include?("exclusive")
+    return :non_exclusive if label.include?("non-exclusive") || label.include?("non exclusive")
+    return :unspecified if label.include?("unspecified")
+    nil
   end
 end

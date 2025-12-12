@@ -22,7 +22,10 @@ class PersonDashboard < Administrate::BaseDashboard
     coverage: Field::String,
     company: Field::String,
     region: Field::Select.with_options(
-      collection: I18n.t("tupress.admin.people.regions")
+      collection: -> {
+        Region.ordered.map { |r| [r.display_name, r.name] }.sort_by(&:first)
+      },
+      include_blank: true
     ),
     website: Field::String,
     created_at: Field::DateTime,

@@ -1,6 +1,6 @@
+  <% region_record = agencies.first&.region_record %>
+  <% region_name = region_record&.name.presence || region %>
   <h2 class="pl-3 my-2 region-title">
-    <%= region %> 
-    <span style="font-size:65%;">
-      <em><%= rights_coverage(region) %></em>
-    </span>
+    <%= region_name %>
+    <%= rights_coverage(agencies.first) %>
   </h2> 

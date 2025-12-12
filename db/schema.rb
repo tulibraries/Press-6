@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_14_150233) do
+ActiveRecord::Schema[7.2].define(version: 2025_12_11_210231) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -351,6 +351,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_14_150233) do
     t.text "book_ids"
     t.timestamptz "created_at", null: false
     t.timestamptz "updated_at", null: false
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.string "slug", null: false
+    t.integer "rights_designation", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "rights_designation"], name: "index_regions_on_name_and_rights_designation", unique: true
+    t.index ["slug"], name: "index_regions_on_slug", unique: true
   end
 
   create_table "reviews", force: :cascade do |t|
