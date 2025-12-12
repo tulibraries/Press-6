@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_14_150233) do
+ActiveRecord::Schema[7.2].define(version: 2025_12_16_121000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,6 +66,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_14_150233) do
     t.timestamptz "created_at", null: false
     t.timestamptz "updated_at", null: false
     t.string "slug", limit: 255
+    t.bigint "region_id"
+    t.index ["region_id"], name: "index_agencies_on_region_id"
     t.index ["slug"], name: "idx_19045_index_agencies_on_slug", unique: true
   end
 
@@ -353,6 +355,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_14_150233) do
     t.timestamptz "updated_at", null: false
   end
 
+  create_table "regions", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.string "slug", null: false
+    t.integer "rights_designation", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "rights_designation"], name: "index_regions_on_name_and_rights_designation", unique: true
+    t.index ["slug"], name: "index_regions_on_slug", unique: true
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.string "book_id", limit: 255
     t.text "review"
@@ -448,6 +461,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_14_150233) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id", on_update: :restrict, on_delete: :restrict
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id", on_update: :restrict, on_delete: :restrict
+  add_foreign_key "agencies", "regions"
   add_foreign_key "books", "special_offers", on_update: :restrict, on_delete: :restrict
   add_foreign_key "brochures", "catalogs", on_update: :restrict, on_delete: :restrict
   add_foreign_key "brochures", "subjects", on_update: :restrict, on_delete: :restrict

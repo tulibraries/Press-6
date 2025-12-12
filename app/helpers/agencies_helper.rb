@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 module AgenciesHelper
-  def rights_coverage(region)
-    case region
-    when "Turkey", "Spanish & Portuguese languages, World"
-      "Exclusive Rights"
-    else
-      "Non-exclusive Rights"
-    end
+  def rights_coverage(agency)
+    return if agency.blank?
+
+    text = agency.rights_type.to_s
+    return if text.blank?
+
+    clean_text = text.gsub(/\A\((.*)\)\z/, '\1').strip
+    content_tag(:span, content_tag(:em, clean_text), style: "font-size:65%;")
   end
 end

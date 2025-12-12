@@ -10,7 +10,7 @@
   <% @agencies.each do |region, agencies| %>
     <div class="row" id="regions">
       <div class="col-12">
-        <%= render "region", region: region %>
+        <%= render "region", region: region, agencies: agencies %>
         <%= render "agencies", agencies: agencies %>
       </div>
     </div>
