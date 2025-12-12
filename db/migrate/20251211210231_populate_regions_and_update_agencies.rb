@@ -44,8 +44,21 @@ class PopulateRegionsAndUpdateAgencies < ActiveRecord::Migration[7.2]
     normalized = raw_name.to_s.strip
     clean_name = normalized
 
+    # Special cases to preserve legacy strings while normalizing names and rights
+    if normalized == "Arabic World Exclusive Rights"
+      clean_name = "Arabic"
+      return [clean_name, 3, normalized]
+    end
+
+    if normalized.include?("Spanish & Portuguese languages, World")
+      clean_name = "Spanish & Portuguese languages"
+      return [clean_name, 3, normalized]
+    end
+
     rights_designation =
-      if normalized.match?(/non[-\s]?exclusive/i)
+      if normalized.match?(/world\s+exclusive/i)
+        3
+      elsif normalized.match?(/non[-\s]?exclusive/i)
         1
       elsif normalized.match?(/exclusive/i)
         2

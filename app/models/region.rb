@@ -3,7 +3,7 @@
 class Region < ApplicationRecord
   include Friendable
 
-  enum rights_designation: {
+  enum :rights_designation, {
     unspecified: 0,
     non_exclusive: 1,
     exclusive: 2,
