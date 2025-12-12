@@ -13,6 +13,9 @@ class PopulateRegionsAndUpdateAgencies < ActiveRecord::Migration[7.2]
       clean_name, rights_designation, normalized = parsed_region(region_name, exclusive_regions, default_rights: 1)
 
       upsert_region(clean_name, rights_designation, raw_name: normalized)
+      if normalized.include?("Spanish & Portuguese languages, World") && clean_name != normalized
+        Agency.where(region: normalized).update_all(region: clean_name)
+      end
       # Note: We do NOT update the agency.region field - it stays as the clean name
     end
 
