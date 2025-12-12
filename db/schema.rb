@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_12_11_210231) do
+ActiveRecord::Schema[7.2].define(version: 2025_12_16_121000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,6 +66,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_11_210231) do
     t.timestamptz "created_at", null: false
     t.timestamptz "updated_at", null: false
     t.string "slug", limit: 255
+    t.bigint "region_id"
+    t.index ["region_id"], name: "index_agencies_on_region_id"
     t.index ["slug"], name: "idx_19045_index_agencies_on_slug", unique: true
   end
 
@@ -459,6 +461,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_11_210231) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id", on_update: :restrict, on_delete: :restrict
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id", on_update: :restrict, on_delete: :restrict
+  add_foreign_key "agencies", "regions"
   add_foreign_key "books", "special_offers", on_update: :restrict, on_delete: :restrict
   add_foreign_key "brochures", "catalogs", on_update: :restrict, on_delete: :restrict
   add_foreign_key "brochures", "subjects", on_update: :restrict, on_delete: :restrict

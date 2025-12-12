@@ -14,7 +14,7 @@ class Region < ApplicationRecord
   validates :slug, presence: true, uniqueness: true
   validate :unique_name_and_rights_designation
 
-  has_many :agencies, foreign_key: :region, primary_key: :name
+  has_many :agencies, foreign_key: :region_id, inverse_of: :region_ref
   has_many :people, foreign_key: :region, primary_key: :name
 
   scope :ordered, -> { order(:name) }

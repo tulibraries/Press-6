@@ -23,7 +23,7 @@ class PersonDashboard < Administrate::BaseDashboard
     company: Field::String,
     region: Field::Select.with_options(
       collection: -> {
-        Region.ordered.map { |r| [r.display_name, r.name] }.sort_by(&:first)
+        Region.order(:name, :rights_designation).map { |r| [r.display_name, r.name] }
       },
       include_blank: true
     ),

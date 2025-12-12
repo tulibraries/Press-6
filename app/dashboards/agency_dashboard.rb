@@ -19,13 +19,9 @@ class AgencyDashboard < Administrate::BaseDashboard
     fax: Field::String,
     email: Field::String,
     website: Field::String,
-    region: Field::Select.with_options(
-      collection: -> {
-        region_options = Region.ordered.map { |r| [r.display_name, r.display_name] }
-        legacy_regions = Agency.distinct.order(:region).pluck(:region).compact
-        missing = legacy_regions - region_options.map(&:last)
-        (region_options + missing.map { |reg| [reg, reg] }).sort_by(&:first)
-      }
+    region_ref: Field::BelongsTo.with_options(
+      class_name: "Region",
+      order: "name ASC"
     ),
     created_at: Field::DateTime,
     updated_at: Field::DateTime
@@ -38,7 +34,7 @@ class AgencyDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     title
-    region
+    region_ref
     contact
   ].freeze
 
@@ -52,7 +48,7 @@ class AgencyDashboard < Administrate::BaseDashboard
     fax
     email
     website
-    region
+    region_ref
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -61,7 +57,7 @@ class AgencyDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     title
     slug
-    region
+    region_ref
     contact
     address
     phone

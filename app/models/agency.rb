@@ -3,13 +3,18 @@
 class Agency < ApplicationRecord
   include Friendable
 
+  belongs_to :region_ref, class_name: "Region", foreign_key: :region_id, optional: true, inverse_of: :agencies
+
   validates :title, :region, presence: true
 
   has_rich_text :address
 
+  before_validation :sync_region_from_ref
+
   scope :by_region, ->(region) { where(region: region) }
 
   def region_record
+    return region_ref if region_ref.present?
     return nil if region.blank?
 
     @region_record ||= begin
@@ -29,6 +34,10 @@ class Agency < ApplicationRecord
   end
 
   private
+
+  def sync_region_from_ref
+    self.region = region_ref.name if region_ref.present?
+  end
 
   def parsed_rights_designation
     label = region.to_s.downcase
