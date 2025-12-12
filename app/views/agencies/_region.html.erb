@@ -1,6 +1,7 @@
-  <% region_record = agencies.first&.region_record %>
-  <% region_name = region_record&.name.presence || region %>
+  <% first_agency = Array(local_assigns[:agencies]).first %>
+  <% region_record = first_agency&.region_record %>
+  <% region_name = region_record&.name.presence || local_assigns[:region] %>
   <h2 class="pl-3 my-2 region-title">
     <%= region_name %>
-    <%= rights_coverage(agencies.first) %>
+    <%= rights_coverage(first_agency) %>
   </h2> 

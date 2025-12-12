@@ -8,6 +8,7 @@ RSpec.describe "agencies/index", type: :view do
   let(:agency3) { FactoryBot.create(:agency, contact: "Luke", region: "Midwest") }
   let(:agency4) { FactoryBot.create(:agency, contact: "Ringo", region: "All Other Territories") }
   let(:user) { FactoryBot.create(:user) }
+  let!(:japan_region) { FactoryBot.create(:region, name: "Japan", rights_designation: :non_exclusive) }
 
   context "displays agency info" do
     before(:each) do
@@ -27,7 +28,7 @@ RSpec.describe "agencies/index", type: :view do
   context "displays region info" do
     before(:each) do
       allow(view).to receive(:current_user).and_return(user)
-      render "region", region: agency1.region
+      render "region", region: agency1.region, agencies: [agency1]
     end
 
     it "only displays assigned regions" do
