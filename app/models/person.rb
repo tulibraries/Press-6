@@ -22,7 +22,8 @@ class Person < ApplicationRecord
 
     @region_record ||= begin
       normalized = region.to_s.sub(/\s*\(.*\)\s*\z/, "").strip
-      scope = Region.where(name: normalized)
+      base_name = normalized.gsub(/\b(world\s+exclusive|non[-\s]?exclusive|exclusive)\b(\s+rights?)?/i, "").strip
+      scope = Region.where(name: [normalized, base_name].uniq)
 
       designation = parsed_rights_designation
       scoped_scope = designation ? scope.where(rights_designation: Region.rights_designations[designation]) : scope
@@ -48,8 +49,9 @@ class Person < ApplicationRecord
 
   def parsed_rights_designation
     label = region.to_s.downcase
-    return :exclusive if label.include?("exclusive")
+    return :world_exclusive if label.include?("world exclusive")
     return :non_exclusive if label.include?("non-exclusive") || label.include?("non exclusive")
+    return :exclusive if label.include?("exclusive")
     return :unspecified if label.include?("unspecified")
     nil
   end

@@ -21,4 +21,12 @@ RSpec.describe Region, type: :model do
       expect(duplicate.errors[:name]).to include("has already been taken for this rights designation")
     end
   end
+
+  describe "#rights_type" do
+    it "returns the correct label for world exclusive" do
+      region = build(:region, rights_designation: :world_exclusive)
+
+      expect(region.rights_type).to eq("World Exclusive Rights")
+    end
+  end
 end

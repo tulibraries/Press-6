@@ -61,6 +61,8 @@ module Friendable
       "exclusive-rights"
     when "non_exclusive", 1
       "non-exclusive-rights"
+    when "world_exclusive", 3
+      "world-exclusive-rights"
     else
       ""
     end

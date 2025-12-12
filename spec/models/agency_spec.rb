@@ -17,5 +17,13 @@ RSpec.describe Agency, type: :model do
 
       expect(agency.rights_type).to eq("Exclusive Rights")
     end
+
+    it "returns world exclusive when the label includes world exclusive" do
+      create(:region, name: "Global", rights_designation: :world_exclusive)
+
+      agency = build(:agency, region: "Global World Exclusive Rights")
+
+      expect(agency.rights_type).to eq("World Exclusive Rights")
+    end
   end
 end

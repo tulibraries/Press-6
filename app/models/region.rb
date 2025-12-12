@@ -6,7 +6,8 @@ class Region < ApplicationRecord
   enum rights_designation: {
     unspecified: 0,
     non_exclusive: 1,
-    exclusive: 2
+    exclusive: 2,
+    world_exclusive: 3
   }
 
   validates :name, presence: true
@@ -26,6 +27,8 @@ class Region < ApplicationRecord
                " (Exclusive Rights)"
              when "non_exclusive"
                " (Non-exclusive Rights)"
+             when "world_exclusive"
+               " (World Exclusive Rights)"
              else
                ""
              end
@@ -38,6 +41,8 @@ class Region < ApplicationRecord
       "Exclusive Rights"
     when "non_exclusive"
       "Non-exclusive Rights"
+    when "world_exclusive"
+      "World Exclusive Rights"
     when "unspecified"
       ""
     else
