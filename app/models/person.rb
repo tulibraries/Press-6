@@ -47,12 +47,12 @@ class Person < ApplicationRecord
 
   private
 
-  def parsed_rights_designation
-    label = region.to_s.downcase
-    return :world_exclusive if label.include?("world exclusive")
-    return :non_exclusive if label.include?("non-exclusive") || label.include?("non exclusive")
-    return :exclusive if label.include?("exclusive")
-    return :unspecified if label.include?("unspecified")
-    nil
-  end
+    def parsed_rights_designation
+      label = region.to_s.downcase
+      return :world_exclusive if label.include?("world exclusive")
+      return :non_exclusive if label.include?("non-exclusive") || label.include?("non exclusive")
+      return :exclusive if label.include?("exclusive")
+      return :unspecified if label.include?("unspecified")
+      nil
+    end
 end

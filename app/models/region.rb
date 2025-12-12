@@ -14,8 +14,8 @@ class Region < ApplicationRecord
   validates :slug, presence: true, uniqueness: true
   validate :unique_name_and_rights_designation
 
-  has_many :agencies, foreign_key: :region_id, inverse_of: :region_ref
-  has_many :people, foreign_key: :region, primary_key: :name
+  has_many :agencies, dependent: :nullify, inverse_of: :region_ref
+  has_many :people, foreign_key: :region, primary_key: :name, dependent: :nullify # rubocop:disable Rails/InverseOf
 
   scope :ordered, -> { order(:name) }
 
@@ -31,7 +31,7 @@ class Region < ApplicationRecord
                " (World Exclusive Rights)"
              else
                ""
-             end
+    end
     "#{name}#{suffix}"
   end
 
@@ -52,19 +52,19 @@ class Region < ApplicationRecord
 
   private
 
-  # Enforce uniqueness on the combination of name and rights_designation
-  # while tolerating string or integer enum inputs.
-  def unique_name_and_rights_designation
-    return if name.blank?
+    # Enforce uniqueness on the combination of name and rights_designation
+    # while tolerating string or integer enum inputs.
+    def unique_name_and_rights_designation
+      return if name.blank?
 
-    rights_value = self.class.rights_designations[rights_designation] || rights_designation_before_type_cast
-    return if rights_value.nil?
+      rights_value = self.class.rights_designations[rights_designation] || rights_designation_before_type_cast
+      return if rights_value.nil?
 
-    scope = Region.where(name: name, rights_designation: rights_value)
-    scope = scope.where.not(id: id) if persisted?
+      scope = Region.where(name: name, rights_designation: rights_value)
+      scope = scope.where.not(id: id) if persisted?
 
-    if scope.exists?
-      errors.add(:name, "has already been taken for this rights designation")
+      if scope.exists?
+        errors.add(:name, "has already been taken for this rights designation")
+      end
     end
-  end
 end

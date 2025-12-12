@@ -15,7 +15,7 @@ class AddRegionReferenceToAgencies < ActiveRecord::Migration[7.2]
       region_scope = region_scope.where(rights_designation: parsed[:designation]) if parsed[:designation]
       region = region_scope.first || Region.find_by(name: parsed[:name])
 
-      agency.update_columns(region_id: region.id) if region
+      agency.update_columns(region_id: region.id) if region # rubocop:disable Rails/SkipsModelValidations
     end
   end
 
@@ -25,20 +25,20 @@ class AddRegionReferenceToAgencies < ActiveRecord::Migration[7.2]
 
   private
 
-  def parse_region_label(label)
-    normalized = label.to_s.sub(/\s*\(.*\)\s*\z/, "").strip
-    base_name = normalized.gsub(/\b(world\s+exclusive|non[-\s]?exclusive|exclusive)\b(\s+rights?)?/i, "").strip
-    name = base_name.presence || normalized
+    def parse_region_label(label)
+      normalized = label.to_s.sub(/\s*\(.*\)\s*\z/, "").strip
+      base_name = normalized.gsub(/\b(world\s+exclusive|non[-\s]?exclusive|exclusive)\b(\s+rights?)?/i, "").strip
+      name = base_name.presence || normalized
 
-    designation =
-      if normalized.match?(/world\s+exclusive/i)
-        Region.rights_designations[:world_exclusive]
-      elsif normalized.match?(/non[-\s]?exclusive/i)
-        Region.rights_designations[:non_exclusive]
-      elsif normalized.match?(/exclusive/i)
-        Region.rights_designations[:exclusive]
-      end
+      designation =
+        if normalized.match?(/world\s+exclusive/i)
+          Region.rights_designations[:world_exclusive]
+        elsif normalized.match?(/non[-\s]?exclusive/i)
+          Region.rights_designations[:non_exclusive]
+        elsif normalized.match?(/exclusive/i)
+          Region.rights_designations[:exclusive]
+        end
 
-    { name: name, designation: designation }
-  end
+      { name: name, designation: designation }
+    end
 end

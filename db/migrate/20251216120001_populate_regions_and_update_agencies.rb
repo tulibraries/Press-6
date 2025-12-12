@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class PopulateRegionsAndUpdateAgencies < ActiveRecord::Migration[7.2]
   def up
@@ -15,7 +16,7 @@ class PopulateRegionsAndUpdateAgencies < ActiveRecord::Migration[7.2]
 
       upsert_region(clean_name, rights_designation, raw_name: normalized)
       if normalized.include?("Spanish & Portuguese languages, World") && clean_name != normalized
-        Agency.where(region: normalized).update_all(region: clean_name)
+        Agency.where(region: normalized).update_all(region: clean_name) # rubocop:disable Rails/SkipsModelValidations
       end
       # Note: We do NOT update the agency.region field - it stays as the clean name
     end
