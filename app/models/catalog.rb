@@ -14,6 +14,8 @@ class Catalog < ApplicationRecord
   has_many :books, primary_key: :code, class_name: "Book", dependent: :nullify
   has_one_attached :pdf, dependent: :destroy
   has_one_attached :image, dependent: :destroy
+  validates :image, presence: false,
+                    blob: { content_type: Imageable::ALLOWED_IMAGE_TYPES, size_range: Imageable::IMAGE_SIZE_RANGE }
 
   def set_title
     if code.present?

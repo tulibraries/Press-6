@@ -3,6 +3,9 @@
 module Imageable
   extend ActiveSupport::Concern
 
+  ALLOWED_IMAGE_TYPES = %w[image/png image/jpg image/jpeg image/gif].freeze
+  IMAGE_SIZE_RANGE = 1..5.megabytes
+
   def thumb_image(image_field)
     custom_image(image_field, 160, 220)
   end

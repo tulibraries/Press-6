@@ -5,6 +5,8 @@ class Event < ApplicationRecord
   include Imageable
 
   validates :title, :start_date, :end_date, presence: true
+  validates :image, presence: false,
+                    blob: { content_type: Imageable::ALLOWED_IMAGE_TYPES, size_range: Imageable::IMAGE_SIZE_RANGE }
 
   has_rich_text :description
   has_rich_text :news_text
