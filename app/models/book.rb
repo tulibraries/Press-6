@@ -65,7 +65,7 @@ class Book < ApplicationRecord
   end
 
   def catalog_code
-    catalog_id.downcase if catalog_id.present?
+    (catalog_id.presence&.downcase)
   end
 
   def reviews
