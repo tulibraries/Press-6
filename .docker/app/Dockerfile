@@ -21,7 +21,7 @@ RUN apk add -U --no-cache \
       bash=5.3.3-r1 \
       busybox=1.37.0-r30 \
       gcompat=1.1.0-r4 \
-      imagemagick=7.1.2.8-r0 \
+      imagemagick=7.1.2.12-r0 \
       libxslt=1.1.43-r3 \
       postgresql16-client=16.11-r0 \
       shared-mime-info=2.4-r6 \
