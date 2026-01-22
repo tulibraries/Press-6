@@ -1,2 +1,3 @@
 cgi
 resolv
+@hotwired/turbo
