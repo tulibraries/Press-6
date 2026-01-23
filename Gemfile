@@ -47,7 +47,7 @@ gem "rexml"
 
 group :production do
   gem "dalli"
-  gem "connection_pool"
+  gem "connection_pool", "~> 2.5.5"
 end
 
 group :development, :test do
