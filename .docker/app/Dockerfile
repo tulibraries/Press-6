@@ -21,12 +21,12 @@ RUN apk add -U --no-cache \
       bash=5.3.3-r1 \
       busybox=1.37.0-r30 \
       gcompat=1.1.0-r4 \
-      imagemagick=7.1.2.13-r0 \
+      imagemagick=7.1.2.15-r0 \
       libxslt=1.1.43-r3 \
       postgresql17-client=17.8-r0 \
       shared-mime-info=2.4-r6 \
       ssl_client=1.37.0-r30 \
-      tzdata=2025c-r0 && \
+      tzdata=2026a-r0 && \
     apk add -U --no-cache --virtual build-dependencies \
       build-base=0.5-r3 \
       yaml=0.2.5-r2 \
