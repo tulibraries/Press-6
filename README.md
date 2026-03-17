@@ -40,10 +40,55 @@ We defined a Makefile with many useful commands for local development. These com
 * To run docker lint: ```make lint```
     * This depends on hadolint. Run `brew install hadolint` to make this available locally.
 
-
 ## Deployment
 ### QA
 * Deploys to https://tupress-qa.k8s.temple.edu
 
 ### Production
 * In order to deploy to production, create a release in GitLab. The release tag normally used for releases should continue to be added manually during the release process, e.g. “1.3.3”. Gitlab will then automatically tag the release image with both a “prod” tag and a release tag that references the git tag (e.g. 1.3.3). The newly tagged image will then be deployed to the production environment.
+
+## Profiling
+
+Three helper scripts are available for local profiling runs:
+
+* `bin/profile-stackprof`
+* `bin/profile-ruby-prof`
+* `bin/profile-flamegraph`
+
+Each script supports two modes:
+
+* `runner` evaluates a Ruby expression in the Rails app context.
+* `request` profiles one or more application paths with `Rack::MockRequest`.
+
+### StackProf
+
+Write a stack sample dump to `tmp/stackprof` and print a text summary:
+
+```sh
+bin/profile-stackprof runner 'Book.displayable.limit(10).load'
+STACKPROF_MODE=cpu bin/profile-stackprof runner 'Webpage.limit(10).load'
+bin/profile-stackprof request /
+bin/profile-stackprof request /books /subjects
+```
+
+### ruby-prof
+
+Write profiler reports to `tmp/ruby-prof`:
+
+```sh
+bin/profile-ruby-prof runner 'Book.displayable.limit(10).load'
+RUBY_PROF_PRELUDE='scope = Book.displayable.limit(50)' bin/profile-ruby-prof runner 'scope.load'
+RUBY_PROF_PRINTER=graph_html bin/profile-ruby-prof runner 'Webpage.limit(10).load'
+bin/profile-ruby-prof request /
+RUBY_PROF_PRINTER=multi bin/profile-ruby-prof request /books /subjects
+```
+
+### flamegraph
+
+Write an HTML flamegraph to `tmp/flamegraph`:
+
+```sh
+bin/profile-flamegraph runner 'Book.displayable.limit(10).load'
+FLAMEGRAPH_PRELUDE='scope = Webpage.limit(25)' bin/profile-flamegraph runner 'scope.load'
+bin/profile-flamegraph request /
+```
