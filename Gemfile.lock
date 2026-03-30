@@ -642,7 +642,7 @@ DEPENDENCIES
   pry-rails
   puma (~> 7.2.0)
   rack-mini-profiler
-  rails
+  rails (= 7.2.3)
   rails-controller-testing
   recaptcha
   resolv (>= 0.6.2)
