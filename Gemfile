@@ -53,11 +53,15 @@ end
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
+  gem "flamegraph"
   gem "pry"
   gem "pry-byebug"
   gem "pry-rails"
+  gem "rack-mini-profiler"
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
+  gem "ruby-prof"
+  gem "stackprof"
 end
 
 group :development do
