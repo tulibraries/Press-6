@@ -19,10 +19,7 @@
     "trix": "2.1.18"
   },
   "version": "0.1.0",
-  "resolutions": {
-    "minimist": "1.2.6",
-    "glob-parent": "6.0.1"
-  },
+  "resolutions": {},
   "scripts": {
     "build": "rollup -c --bundleConfigAsCjs rollup.config.js",
     "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules"
