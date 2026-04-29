@@ -3,11 +3,10 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem "rails", "7.2.3.1"
+gem "rails", "~> 8.0.4"
 gem "active_storage_validations"
 gem "activestorage-validator"
-gem "administrate"
-gem "administrate-field-date_picker", "~> 0.3.0"
+gem "administrate", "~> 1.0"
 gem "administrate-field-ordered_has_many"
 gem "administrate-field-scoped_has_many"
 gem "aws-sdk-s3"
