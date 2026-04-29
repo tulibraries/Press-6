@@ -11,8 +11,10 @@ gem "administrate-field-ordered_has_many"
 gem "administrate-field-scoped_has_many"
 gem "aws-sdk-s3"
 gem "binding_of_caller"
-gem "cssbundling-rails"
+gem "bootsnap", require: false
+gem "bootstrap"
 gem "concurrent-ruby"
+gem "dartsass-rails"
 gem "devise"
 gem "font-awesome-rails"
 gem "font-awesome-sass"
@@ -35,12 +37,12 @@ gem "omniauth"
 gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
 gem "pg"
+gem "propshaft"
 gem "puma", "~> 8.0.0"
 gem "recaptcha", require: "recaptcha/rails"
 gem "resolv", ">= 0.6.2"
 gem "simple_form"
 gem "skylight"
-gem "sprockets-rails"
 gem "stimulus-rails"
 gem "turbo-rails"
 gem "rexml"
@@ -86,5 +88,3 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "bootsnap", require: false
-gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
