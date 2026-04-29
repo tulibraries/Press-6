@@ -119,7 +119,7 @@ prod_deploy:
     - helm pull oci://$HARBOR/tulibraries/charts/tupress --version $HELM_VERSION_PROD --untar
     - |
       helm upgrade tupress oci://$HARBOR/tulibraries/charts/tupress \
-        --version $HELM_VERSION_PROD \
+        --version $CI_COMMIT_TAG \
         --history-max=5 --namespace=tupress-prod \
         --values tupress/values-prod.yaml \
         --set image.repository=$IMAGE:$VERSION \
