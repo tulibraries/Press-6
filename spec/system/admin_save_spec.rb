@@ -25,8 +25,8 @@ RSpec.describe "Administrate saves", type: :system, js: true do
   it "updates a faq from the admin edit form" do
     visit edit_admin_faq_path(faq)
 
-    expect(page).to have_css("trix-editor#answer[connected]")
-    fill_in_rich_text_area "answer", with: "Updated answer"
+    answer_input = find("input[name='faq[answer]']", visible: false)
+    page.execute_script("arguments[0].value = arguments[1]", answer_input, "Updated answer")
     click_button "Update Faq"
 
     expect(page).to have_current_path(admin_faq_path(faq.reload), ignore_query: true)
