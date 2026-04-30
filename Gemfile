@@ -23,8 +23,8 @@ gem "friendly_id"
 gem "honeybadger"
 gem "httparty", ">= 0.21.0"
 gem "image_processing", ">= 1.2"
+gem "importmap-rails", "~> 2.2"
 gem "jbuilder"
-gem "jsbundling-rails"
 gem "json", ">= 2.3.0"
 gem "kaminari"
 gem "mail", "~> 2.9.0"
@@ -86,5 +86,3 @@ group :test do
   gem "simplecov-lcov"
   gem "webdrivers", "5.3.1"
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
