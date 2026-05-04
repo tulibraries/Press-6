@@ -63,7 +63,11 @@ Rails.application.routes.draw do
   resources :news_items, only: [:show], concerns: [:imageable]
   resources :highlights, only: [:show], concerns: [:imageable]
   resources :oabooks, only: [:show], concerns: [:imageable]
-  resources :people, only: %i[index sales_reps], concerns: [:imageable]
+  resources :people, only: %i[index], concerns: [:imageable] do
+    collection do
+      get :sales_reps, path: "sales-reps"
+    end
+  end
   resources :series, only: %i[index show], concerns: [:imageable]
   resources :special_offers, concerns: [:imageable]
   resources :subjects, only: %i[index show]
