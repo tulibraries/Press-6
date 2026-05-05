@@ -20,20 +20,8 @@ Rails.application.configure do
   # Cache assets for far-future expiry since they are all digest stamped.
   config.public_file_server.headers = { "cache-control" => "public, max-age=#{1.year.to_i}" }
 
-  # Disable serving static files from the `/public` folder by default since
-  # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
-
-  # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
-  # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
-  # config.require_master_key = true
-
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
-
-  # Specifies the header that your server uses for sending files.
-  # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for Apache
-  # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :amazon
@@ -56,10 +44,6 @@ Rails.application.configure do
 
   # Change to "debug" to log everything (including potentially personally-identifiable information!)
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
-
-  # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
-  # the I18n.default_locale when a translation cannot be found).
-  config.i18n.fallbacks = true
 
   # Prevent health checks from clogging up the logs.
   config.silence_healthcheck_path = "/up"
@@ -101,6 +85,10 @@ Rails.application.configure do
     authentication: :plain,
     enable_starttls_auto: true
   }
+
+  # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
+  # the I18n.default_locale when a translation cannot be found).
+  config.i18n.fallbacks = true
 
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [
