@@ -1,5 +1,4 @@
-@import 'bootstrap/scss/bootstrap';
-@import 'bootstrap-icons/font/bootstrap-icons';
+@import "bootstrap";
 @import "partials/_vars.scss";
 @import "partials/_typography.scss";
 @import "partials/_header.scss";
@@ -23,8 +22,6 @@
 @import "faq.scss";
 @import "webpages.scss";
 @import "forms.scss";
-
-@import "selectize.bootstrap5.scss";
 
 
 .selectize-control {

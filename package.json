@@ -2,28 +2,10 @@
   "name": "app",
   "private": "true",
   "dependencies": {
-    "@hotwired/stimulus": "^3.2.2",
-    "@hotwired/turbo-rails": "8.0.23",
-    "@popperjs/core": "^2.11.8",
-    "@rails/actiontext": "^8.1.300",
-    "@rollup/plugin-commonjs": "^29.0.2",
-    "@rollup/plugin-node-resolve": "^16.0.2",
     "bootstrap": "^5.3.8",
-    "bootstrap-icons": "^1.13.1",
     "jquery": "^3.7.1",
-    "microplugin": "^0.0.3",
-    "rollup": "^4.60.1",
-    "sass": "^1.97.3",
     "selectize": "^0.12.6",
-    "sifter": "^0.5.4",
+    "stimulus-use": "^0.51.1",
     "trix": "2.1.18"
-  },
-  "version": "0.1.0",
-  "resolutions": {
-    "minimist": "1.2.6"
-  },
-  "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs rollup.config.js",
-    "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules"
   }
 }

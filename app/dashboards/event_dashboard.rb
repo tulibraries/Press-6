@@ -12,8 +12,8 @@ class EventDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     title: Field::String,
-    start_date: Field::DatePicker,
-    end_date: Field::DatePicker,
+    start_date: Field::Date,
+    end_date: Field::Date,
     time_zone: Field::String,
     location: Field::String,
     description: TrixField,
