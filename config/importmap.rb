@@ -3,6 +3,7 @@
 pin "application", preload: "application"
 pin "jquery" # @4.0.0
 pin "bootstrap" # @5.3.8
+
 pin "selectize", to: "selectize.js"
 
 pin "@hotwired/turbo-rails", to: "turbo.min.js"
@@ -20,4 +21,3 @@ pin "legacy-libs", to: "src/legacy-libs.js"
 pin "src/jquery", to: "src/jquery.js"
 pin "src/common-libs", to: "src/common-libs.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
-pin "@popperjs/core", to: "@popperjs--core.js" # @2.11.8
