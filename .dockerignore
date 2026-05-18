@@ -1,2 +1,8 @@
 tmp/db
 *.sw[p-z]
+public/assets
+app/assets/builds
+tmp
+log
+.git
+config/master.key
