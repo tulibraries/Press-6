@@ -27,12 +27,12 @@ module Imageable
 
     if (image_width != width) || (image_height != height)
       if image_width > image_height
-        image.variant(
+        image.variant(format: :png,
                       background: :transparent,
                       gravity: "North",
                       resize_to_fit: [width, height]).processed
       else
-        image.variant(
+        image.variant(format: :png,
                       background: :transparent,
                       gravity: :center,
                       resize_and_pad: [width,
