@@ -46,6 +46,7 @@ RUN apk add -U --no-cache \
     mkdir -p /secure-tmp/log && chmod 700 /secure-tmp/log && \
     export SECRET_KEY_BASE_DUMMY=1 && \
     bundle exec rails assets:clobber && \
+    bundle exec rails dartsass:build && \
     bundle exec rails assets:precompile && \
     if [ "${RAILS_ENV}" = "production" ]; then rm -rf tmp/*; fi && \
     if [ "${RAILS_ENV}" = "production" ]; then apk del build-dependencies; fi && \
