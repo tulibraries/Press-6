@@ -1,9 +1,10 @@
-ARG BASE_IMAGE="harbor.k8s.temple.edu/library/ruby:3.4-alpine" \
-  RAILS_MASTER_KEY=foobar \
-  RAILS_ENV=production
+ARG BASE_IMAGE="harbor.k8s.temple.edu/library/ruby:3.4-alpine" 
 
 # hadolint ignore=DL3006,DL3026
 FROM "${BASE_IMAGE}"
+
+ARG RAILS_MASTER_KEY=foobar \
+    RAILS_ENV=production
 
 WORKDIR /app
 
@@ -41,14 +42,14 @@ RUN apk add -U --no-cache \
     if [ "${RAILS_ENV}" = "production" ]; then bundle config set --local without "development test"; fi && \
     bundle install --jobs=8 && \
     find "$GEM_HOME" -name Gemfile.lock -exec rm "{}" \; && \
-    find "$GEM_HOME" -name yarn.lock -exec rm "{}" \; && \
+    mkdir -p /secure-tmp && chmod 700 /secure-tmp && \
+    mkdir -p /secure-tmp/log && chmod 700 /secure-tmp/log && \
+    export SECRET_KEY_BASE_DUMMY=1 && \
+    bundle exec rails assets:clobber && \
     bundle exec rails assets:precompile && \
-    if [ "${RAILS_ENV}" = "production" ]; then rm -rf node_modules; fi && \
     if [ "${RAILS_ENV}" = "production" ]; then rm -rf tmp/*; fi && \
     if [ "${RAILS_ENV}" = "production" ]; then apk del build-dependencies; fi && \
-    rm -rf /var/cache/apk/ && \
-    mkdir -p /secure-tmp && chmod 700 /secure-tmp && \
-    mkdir -p /secure-tmp/log && chmod 700 /secure-tmp/log
+    rm -rf /var/cache/apk/
 
 USER 65534:65534
  
