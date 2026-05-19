@@ -29,7 +29,7 @@ RSpec.shared_examples "email form" do
     it "accepts information" do
       post("/forms", params:)
       expect(the_email.subject).to eq(title)
-      expect(the_email.from).to eq(["librarymessages@temple.edu"])
+      expect(the_email.from).to eq([Mail::Address.new(ActionMailer::Base.default_params[:from]).address])
       expect(the_email.reply_to).to eq([params[:form][:email]])
       expect(the_email.cc).to eq([params[:form][:email]])
       expect(the_email.body.raw_source).to include(*form_params.values.flatten.reject(&:blank?))

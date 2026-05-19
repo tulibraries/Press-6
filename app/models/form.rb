@@ -71,13 +71,8 @@ class Form < MailForm::Base
     @forms.fetch(form_type)
   end
 
-  # Some forms don't supply an email and name, so they're failing
-  def default_from_name
-    "Temple University Press"
-  end
-
   def default_from_email
-    "librarymessages@temple.edu"
+    ActionMailer::Base.default_params[:from]
   end
 
   # Declare the e-mail headers. It accepts anything the mail method
@@ -88,7 +83,7 @@ class Form < MailForm::Base
       to: get_subject[1],
       cc: email,
       reply_to: email,
-      from: %("#{default_from_name}" <#{default_from_email}>)
+      from: default_from_email
     }
   end
 end
