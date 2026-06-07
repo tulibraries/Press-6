@@ -16,6 +16,10 @@ variables:
   - source .env
   - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
 
+.kubectl_version: &kubectl_version
+ - export KUBECTL_VERSION=$(curl -X 'GET'   "https://harbor.k8s.temple.edu/api/v2.0/projects/gitlab-ci/repositories/kubectl/artifacts?q=tag%3Dlatest&page=1&page_size=10&with_tag=true&with_label=false&with_scan_overview=false&with_signature=false&with_immutable_status=false&with_accessory=false"   -H 'accept: application/json'   -H 'X-Accept-Vulnerabilities: application/vnd.security.vulnerability.report; version=1.1, application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0' | jq .[0].tags | jq -r '[.[] | select(.name != "latest")][0].name')
+
+
 # Gets used in build and tag staged but overridden by deploy stage.
 before_script:
   - *export_variables
@@ -58,12 +62,14 @@ qa_deploy:
     - main
   script:
     - *export_variables
+    - *kubctl_version
     - helm pull oci://$HARBOR/tulibraries/charts/tupress  --untar
     - |
       helm upgrade tupress oci://$HARBOR/tulibraries/charts/tupress \
         --history-max=5 --namespace=tupress-qa \
         --values tupress/values.yaml \
         --set image.repository=$IMAGE:$VERSION \
+        --set kubectl_version=$KUBECTL_VERSION \
         --set skylight.deployId=$CI_COMMIT_SHA \
         --set skylight.gitSha=$CI_COMMIT_SHA \
         --set skylight.description="QA deploy $CI_COMMIT_SHORT_SHA"
@@ -117,6 +123,7 @@ prod_deploy:
     - tags
   script:
     - export VERSION=$CI_COMMIT_TAG
+    - *kubctl_version
     - helm pull oci://$HARBOR/tulibraries/charts/tupress --version $HELM_VERSION_PROD --untar
     - |
       helm upgrade tupress oci://$HARBOR/tulibraries/charts/tupress \
@@ -124,6 +131,7 @@ prod_deploy:
         --history-max=5 --namespace=tupress-prod \
         --values tupress/values-prod.yaml \
         --set image.repository=$IMAGE:$VERSION \
+        --set kubectl_version=$KUBECTL_VERSION  \
         --set skylight.deployId=$CI_COMMIT_SHA \
         --set skylight.gitSha=$CI_COMMIT_SHA \
         --set skylight.description="Release $CI_COMMIT_SHORT_SHA"
