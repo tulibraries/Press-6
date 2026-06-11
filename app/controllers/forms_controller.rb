@@ -19,8 +19,8 @@ class FormsController < ApplicationController
     @type = params[:form][:form_type]
     load_form_page_context
 
-    unless turnstile_valid?
-      failure("turnstile", status: :unprocessable_entity)
+    unless turnstile_verification_passed?
+      failure("turnstile")
       return
     end
 
@@ -72,9 +72,10 @@ class FormsController < ApplicationController
       @footer = Webpage.find_by(slug: "#{@type}-footer")
       @books = Book.displayable.requestable.order(:sort_title)
       @book = Book.find(params[:id]) if params[:id].present?
+      @turnstile_site_key = TurnstileService.site_key if TurnstileService.configured?
     end
 
-    def turnstile_valid?
+    def turnstile_verification_passed?
       return true unless TurnstileService.configured?
 
       TurnstileService.verify(

@@ -47,7 +47,7 @@ RSpec.describe "Request a Desk or Exam Copy", type: :request do
 
         post("/forms", params: { form: form_params.merge(form_type: form_type), "cf-turnstile-response" => "bad-token" })
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:ok)
         expect(response).to render_template(:new)
         expect(response.body).to include("Please complete the verification challenge and try again.")
         expect(ActionMailer::Base.deliveries).to be_empty
