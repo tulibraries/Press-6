@@ -161,6 +161,7 @@ en:
         survey: "Please check indicated fields for errors."
         mailers: "Please check mailing options for errors."
         smtp: "Unable to send form."
+        turnstile: "Please complete the verification challenge and try again."
       attributes:
         name: Name
         email: Email

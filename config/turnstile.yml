@@ -1,0 +1,12 @@
+default: &default
+  sitekey: <%= ENV.fetch("TURNSTILE_SITEKEY", nil) %>
+  secret_key: <%= ENV.fetch("TURNSTILE_SECRET_KEY", nil) %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

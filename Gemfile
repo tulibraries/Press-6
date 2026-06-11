@@ -13,6 +13,7 @@ gem "aws-sdk-s3"
 gem "binding_of_caller"
 gem "bootsnap", require: false
 gem "bootstrap"
+gem "flipflop"
 gem "concurrent-ruby"
 gem "dartsass-rails"
 gem "devise"

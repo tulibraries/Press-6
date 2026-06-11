@@ -5,6 +5,7 @@ require "spec_helper"
 RSpec.shared_examples "email form" do
   before(:each) do
     ActionMailer::Base.deliveries = []
+    allow(Flipflop).to receive(:cloudflare_turnstile?).and_return(false)
   end
 
   let(:the_email) { ActionMailer::Base.deliveries.first }
