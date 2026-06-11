@@ -19,8 +19,8 @@ class FormsController < ApplicationController
     @type = params[:form][:form_type]
     load_form_page_context
 
-    unless turnstile_verification_passed?
-      failure("turnstile")
+    unless turnstile_valid?
+      failure("turnstile", status: :unprocessable_entity)
       return
     end
 
@@ -39,7 +39,7 @@ class FormsController < ApplicationController
     redirect_to root_path, notice: "Thank you for your message. We will contact you soon!"
   end
 
-  def failure(mode)
+  def failure(mode, status: :ok)
     case mode
     when "html"
       notice = t("tupress.forms.errors.html")
@@ -57,7 +57,7 @@ class FormsController < ApplicationController
       notice = t("tupress.forms.errors.turnstile")
       flash.now[:notice] = notice
     end
-    render :new, notice:
+    render :new, notice:, status:
   end
 
   def existing_forms
@@ -72,10 +72,9 @@ class FormsController < ApplicationController
       @footer = Webpage.find_by(slug: "#{@type}-footer")
       @books = Book.displayable.requestable.order(:sort_title)
       @book = Book.find(params[:id]) if params[:id].present?
-      @turnstile_site_key = TurnstileService.site_key if TurnstileService.configured?
     end
 
-    def turnstile_verification_passed?
+    def turnstile_valid?
       return true unless TurnstileService.configured?
 
       TurnstileService.verify(

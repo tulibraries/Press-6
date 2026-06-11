@@ -76,10 +76,7 @@
         <div class="row mt-4">
           <div class="col">
             <span class="d-none"><%= f.input :survey %></span>
-            <% if @turnstile_site_key.present? %>
-              <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer<%= %Q( nonce="#{@nonce}").html_safe if @nonce.present? %>></script>
-              <div class="cf-turnstile mb-3" data-sitekey="<%= @turnstile_site_key %>"></div>
-            <% end %>
+            <%= render "forms/turnstile" %>
             <%= f.button :submit, "Submit", class: "btn btn-primary" %>
           </div>
         </div>

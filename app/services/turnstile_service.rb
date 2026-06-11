@@ -1,44 +1,48 @@
 # frozen_string_literal: true
 
-require "json"
 require "net/http"
 
 class TurnstileService
   VERIFY_URI = URI("https://challenges.cloudflare.com/turnstile/v0/siteverify")
 
   class << self
+    def config
+      Rails.configuration.turnstile.with_indifferent_access
+    end
+
+    def enabled?
+      Flipflop.cloudflare_turnstile?
+    end
+
     def configured?
-      Flipflop.cloudflare_turnstile? && site_key.present? && secret_key.present?
+      enabled? && site_key.present? && secret_key.present?
     end
 
     def site_key
       config[:sitekey]
     end
 
-    def verify(token:, remote_ip:)
-      return true unless configured?
-      return false if token.blank?
-
-      response = Net::HTTP.post_form(VERIFY_URI, {
-        "secret" => secret_key,
-        "response" => token,
-        "remoteip" => remote_ip
-      })
-
-      JSON.parse(response.body).fetch("success", false)
-    rescue StandardError => error
-      Rails.logger.warn("Turnstile verification failed: #{error.class}: #{error.message}")
-      false
+    def secret_key
+      config[:secret_key]
     end
 
-    private
+    def verify(token:, remote_ip:)
+      return false unless configured?
+      return false if token.blank?
 
-      def config
-        Rails.configuration.turnstile || {}
-      end
+      response = Net::HTTP.post_form(
+        VERIFY_URI,
+        {
+          "secret" => secret_key,
+          "response" => token,
+          "remoteip" => remote_ip
+        }
+      )
 
-      def secret_key
-        config[:secret_key]
-      end
+      JSON.parse(response.body).fetch("success", false)
+    rescue JSON::ParserError, StandardError => e
+      Rails.logger.warn("Cloudflare Turnstile verification failed: #{e.class} - #{e.message}")
+      false
+    end
   end
 end
