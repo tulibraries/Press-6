@@ -28,5 +28,6 @@ module Tupress
 
     config.active_storage.variant_processor = :mini_magick
     config.graph_mailer = config_for(:graph_mailer).with_indifferent_access
+    config.turnstile = config_for(:turnstile).with_indifferent_access
   end
 end
