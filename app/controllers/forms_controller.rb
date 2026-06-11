@@ -39,7 +39,7 @@ class FormsController < ApplicationController
     redirect_to root_path, notice: "Thank you for your message. We will contact you soon!"
   end
 
-  def failure(mode)
+  def failure(mode, status: :ok)
     case mode
     when "html"
       notice = t("tupress.forms.errors.html")
@@ -57,7 +57,7 @@ class FormsController < ApplicationController
       notice = t("tupress.forms.errors.turnstile")
       flash.now[:notice] = notice
     end
-    render :new, notice:
+    render :new, notice:, status:
   end
 
   def existing_forms
