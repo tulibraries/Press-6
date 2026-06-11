@@ -30,15 +30,15 @@ RUN apk add -U --no-cache \
       ssl_client=1.37.0-r31 \
       tzdata=2026b-r0 && \
     apk add -U --no-cache --virtual build-dependencies \
-      build-base=0.5-r3 \
+      build-base=0.5-r4 \
       yaml=0.2.5-r2 \
       yaml-dev=0.2.5-r2 \
-      git=2.52.0-r0 \
-      libjpeg-turbo-dev=3.1.2-r0 \
+      git=2.54.0-r0 \
+      libjpeg-turbo-dev=3.1.3-r0 \
       libxslt-dev=1.1.43-r3 \
-      libxml2-dev=2.13.9-r1 \
+      libxml2-dev=2.13.9-r2 \
       postgresql17-dev=17.10-r0 \
-      nodejs=24.14.1-r0 \
+      nodejs=24.16.0-r0 \
       yarn=1.22.22-r1 && \
     if [ "${RAILS_ENV}" = "production" ]; then bundle config set --local without "development test"; fi && \
     bundle install --jobs=8 && \
