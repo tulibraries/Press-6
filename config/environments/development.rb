@@ -101,7 +101,7 @@ Rails.application.configure do
   config.action_cable.logger = tagged
 
   # Do not dump schema after migrations.
-  config.active_record.dump_schema_after_migration = false
+  config.active_record.dump_schema_after_migration = true
 
   config.action_mailer.default_options = {
     from: '"Temple University Press" <librarymessages@temple.edu>'

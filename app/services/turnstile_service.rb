@@ -12,7 +12,7 @@ class TurnstileService
     end
 
     def site_key
-      config[:sitekey]
+      config[:site_key]
     end
 
     def verify(token:, remote_ip:)
