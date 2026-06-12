@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Flipflop.configure do
-  strategy :activerecord
+  strategy :active_record
   strategy :default
 
   feature :cloudflare_turnstile,
