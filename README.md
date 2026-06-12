@@ -28,7 +28,7 @@ The app database needs to be initialized in oder for `make load-data` to work.  
 
 Forms can be protected with Cloudflare Turnstile. Set both env vars and enable the feature flag at `/flipflop`:
 
-* `TURNSTILE_SITEKEY`
+* `TURNSTILE_SITE_KEY`
 * `TURNSTILE_SECRET_KEY`
 
 The app loads credentials through `config/turnstile.yml` into `Rails.configuration.turnstile`. The feature is toggled via the `cloudflare_turnstile` Flipflop flag (default: off). If disabled or credentials are absent, form pages and submissions continue with their existing behavior.
