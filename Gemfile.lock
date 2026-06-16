@@ -550,8 +550,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    shoulda-matchers (7.0.1)
-      activesupport (>= 7.1)
+    shoulda-matchers (8.0.1)
+      activesupport (>= 7.2)
     simple_form (5.4.1)
       actionpack (>= 7.0)
       activemodel (>= 7.0)
@@ -688,7 +688,7 @@ DEPENDENCIES
   rubocop-rails
   ruby-prof
   selenium-webdriver
-  shoulda-matchers (~> 7.0)
+  shoulda-matchers (~> 8.0)
   simple_form
   simplecov
   simplecov-lcov
