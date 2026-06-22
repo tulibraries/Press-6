@@ -6,3 +6,4 @@ tmp
 log
 .git
 config/master.key
+node_modules

@@ -10,7 +10,7 @@ pin "@hotwired/turbo-rails", to: "turbo.min.js"
 pin "@hotwired/stimulus", to: "@hotwired--stimulus.js" # @3.2.2
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 pin "@rails/actiontext", to: "actiontext.esm.js"
-pin "trix" # @2.1.18
+pin "trix" # @2.1.19
 pin "hotkeys-js" # @4.0.3
 pin "stimulus-use" # @0.52.3
 
@@ -21,3 +21,4 @@ pin "legacy-libs", to: "src/legacy-libs.js"
 pin "src/jquery", to: "src/jquery.js"
 pin "src/common-libs", to: "src/common-libs.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
+pin "@popperjs/core", to: "@popperjs--core.js" # @2.11.8
