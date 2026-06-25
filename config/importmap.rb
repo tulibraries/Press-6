@@ -2,7 +2,7 @@
 
 pin "application", preload: "application"
 pin "jquery" # @4.0.0
-pin "bootstrap", to: "bootstrap.bundle.min.js", preload: true
+pin "bootstrap" # @5.3.8
 
 pin "selectize", to: "selectize.js"
 
