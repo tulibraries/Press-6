@@ -45,10 +45,11 @@ RSpec.describe "Request a Desk or Exam Copy", type: :request do
       it "rejects submission when verification fails" do
         allow(TurnstileService).to receive(:verify).and_return(false)
 
-        post("/forms", params: { form: form_params.merge(form_type: form_type), "cf-turnstile-response" => "bad-token" })
+        post(form_path(type: form_type), params: { form: form_params.merge(form_type: form_type), "cf-turnstile-response" => "bad-token" })
 
         expect(response).to have_http_status(:ok)
         expect(response).to render_template(:new)
+        expect(request.path).to eq(form_path(type: form_type))
         expect(response.body).to include("Please complete the verification challenge and try again.")
         expect(ActionMailer::Base.deliveries).to be_empty
       end
@@ -56,7 +57,7 @@ RSpec.describe "Request a Desk or Exam Copy", type: :request do
       it "submits normally when verification passes" do
         allow(TurnstileService).to receive(:verify).with(token: "good-token", remote_ip: anything).and_return(true)
 
-        post("/forms", params: { form: form_params.merge(form_type: form_type), "cf-turnstile-response" => "good-token" })
+        post(form_path(type: form_type), params: { form: form_params.merge(form_type: form_type), "cf-turnstile-response" => "good-token" })
 
         expect(response).to redirect_to(root_path)
         expect(ActionMailer::Base.deliveries.count).to eq(1)
@@ -76,7 +77,7 @@ RSpec.describe "Request a Desk or Exam Copy", type: :request do
       end
 
       it "accepts submission without a turnstile token" do
-        post("/forms", params: { form: form_params.merge(form_type: form_type) })
+        post(form_path(type: form_type), params: { form: form_params.merge(form_type: form_type) })
 
         expect(response).to redirect_to(root_path)
         expect(ActionMailer::Base.deliveries.count).to eq(1)
