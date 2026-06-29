@@ -38,8 +38,8 @@ RSpec.shared_examples "email form" do
 
     it "fails on erroneous field options" do
       if form_type == "inquiries"
-        params[:form][:add_to_mailing_list] = true
-        params[:form][:remove_from_mailing_list] = true
+        params[:form][:add_to_mailing_list] = "1"
+        params[:form][:remove_from_mailing_list] = "1"
         post("/forms", params:)
         expect(response.body).to match /Please check mailing options for errors/
       end

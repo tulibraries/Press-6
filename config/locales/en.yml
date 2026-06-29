@@ -159,7 +159,7 @@ en:
       errors:
         html: "HTML markup is not allowed in comments."
         survey: "Please check indicated fields for errors."
-        mailers: "Please check mailing options for errors."
+        mailers: "Please check mailing options for errors. Both adding and removing from the mailing list are not allowed in the same submission."
         smtp: "Unable to send form."
         turnstile: "Please complete the verification challenge and try again."
       attributes:
