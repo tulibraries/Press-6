@@ -10,5 +10,22 @@ RSpec.describe "Inquiries", type: :request do
     }
   end
 
+  it "does not show the mailing options error when both checkboxes are unchecked" do
+    ActionMailer::Base.deliveries = []
+
+    post("/forms", params: {
+      form: form_params.merge(
+        form_type:,
+        add_to_mailing_list: "0",
+        remove_from_mailing_list: "0"
+      )
+    })
+
+    expect(response).to redirect_to(root_path)
+    expect(flash[:notice]).to eq("Thank you for your message. We will contact you soon!")
+    expect(flash[:notice]).not_to eq(I18n.t("tupress.forms.errors.mailers"))
+    expect(ActionMailer::Base.deliveries.count).to eq(1)
+  end
+
   it_behaves_like "email form"
 end

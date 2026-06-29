@@ -28,7 +28,7 @@ class FormsController < ApplicationController
       failure("html")
     elsif params[:form][:survey].present?
       failure("survey")
-    elsif params[:form][:add_to_mailing_list].present? && params[:form][:remove_from_mailing_list].present?
+    elsif params[:form][:add_to_mailing_list] == "1" && params[:form][:remove_from_mailing_list] == "1"
       failure("mailers")
     else
       @form.deliver ? success : failure("mail")
