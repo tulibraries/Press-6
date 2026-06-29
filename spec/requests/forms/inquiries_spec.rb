@@ -10,10 +10,25 @@ RSpec.describe "Inquiries", type: :request do
     }
   end
 
+  it "re-renders on the form-specific path when mailing options are invalid" do
+    post(form_path(type: form_type), params: {
+      form: form_params.merge(
+        form_type:,
+        add_to_mailing_list: "1",
+        remove_from_mailing_list: "1"
+      )
+    })
+
+    expect(response).to have_http_status(:ok)
+    expect(response).to render_template(:new)
+    expect(request.path).to eq(form_path(type: form_type))
+    expect(response.body).to include("Please check mailing options for errors.")
+  end
+
   it "does not show the mailing options error when both checkboxes are unchecked" do
     ActionMailer::Base.deliveries = []
 
-    post("/forms", params: {
+    post(form_path(type: form_type), params: {
       form: form_params.merge(
         form_type:,
         add_to_mailing_list: "0",

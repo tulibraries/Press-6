@@ -32,7 +32,11 @@
         </div>
       </div>
 
-      <%= simple_form_for @form, html: {class: "form-horizontal", enctype: "multipart" }, data: { turbo: "false"} do |f| %>
+      <%= simple_form_for @form,
+            url: form_path(type: @type, id: @book&.id || params[:id]),
+            method: :post,
+            html: {class: "form-horizontal", enctype: "multipart" },
+            data: { turbo: "false"} do |f| %>
       <%= f.input :form_type, as: :hidden, input_html: { value: "#{@type}" } %>
 
       <% if @type == "copy-request" %>
