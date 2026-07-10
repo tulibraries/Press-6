@@ -1,7 +1,7 @@
-require: rubocop-rails
+plugins: rubocop-rails
 
 AllCops:
-  TargetRubyVersion: 3.3
+  TargetRubyVersion: 4.0
   # RuboCop has a bunch of cops enabled by default. This setting tells RuboCop
   # to ignore them, so only the ones explicitly set in this file are enabled.
   DisabledByDefault: true
@@ -11,6 +11,8 @@ AllCops:
     - '**/templates/**/*'
     - '**/vendor/**/*'
     - 'bin/*'
+
+  NewCops: enable
 
 # Prefer &&/|| over and/or.
 Style/AndOr:
@@ -147,4 +149,10 @@ Rails/LexicallyScopedActionFilter:
   Enabled: false
 
 Rails/CreateTableWithTimestamps:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Rails/ThreeStateBooleanColumn:
   Enabled: false
