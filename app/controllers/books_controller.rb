@@ -27,14 +27,14 @@ class BooksController < ApplicationController
     @awards_by_year = books_with_awards
                       .pluck(:award_year, :award_year2, :award_year3)
                       .flatten
-                      .reject(&:blank?)
+                      .compact_blank
                       .sort
                       .reverse
                       .uniq
 
     awards_by_subject = get_subjects(books_with_awards
                                       .map(&:subjects_as_tuples)
-                                      .reject(&:blank?))
+                                      .compact_blank)
     subjects = []
 
     awards_by_subject.each do |subject|
@@ -81,7 +81,7 @@ class BooksController < ApplicationController
   end
 
   def awards_by_subject
-    @subject = is_number?(params[:id]) ? Subject.find_by(code: params[:id]) : Subject.friendly.find(params[:id])
+    @subject = is_number?(params[:id]) ? Subject.find_by(code: params[:id]) : Subject.friendly.find(params.expect(:id))
 
     if @subject.present?
       @books = books_with_awards
@@ -129,7 +129,7 @@ class BooksController < ApplicationController
         subject.each do |s|
           subjects << s unless s.any?(&:nil?)
         end
-        subjects.reject(&:blank?)
+        subjects.compact_blank
       end
       subjects.uniq.sort_by { |h| h[0] }
     end

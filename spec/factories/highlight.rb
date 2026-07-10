@@ -9,7 +9,7 @@ FactoryBot.define do
 
     before :create do |highlight|
       highlight.image.attach(io:
-      File.open(Rails.root.join("spec/fixtures/charles.jpg")),
+      Rails.root.join("spec/fixtures/charles.jpg").open,
                              filename: "charles.jpg",
                              content_type: "image/jpeg")
     end

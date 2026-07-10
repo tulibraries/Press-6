@@ -7,7 +7,7 @@ class EventsController < ApplicationController
 
   def group_events
     @events = Event.where("end_date > ?", 1.month.ago.beginning_of_month)
-                   .order("start_date ASC")
+                   .order(:start_date)
                    .group_by do |event|
                      event.start_date.strftime("%Y%m")
                    end

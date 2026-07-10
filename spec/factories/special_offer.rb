@@ -11,7 +11,7 @@ FactoryBot.define do
     trait :with_pdf do
       after :create do |promo|
         promo.pdf.attach(io:
-          File.open(Rails.root.join("spec/fixtures/guidelines.pdf")),
+          Rails.root.join("spec/fixtures/guidelines.pdf").open,
                          filename: "guidelines.pdf",
                          content_type: "application/pdf")
       end

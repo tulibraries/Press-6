@@ -61,8 +61,8 @@ class FormsController < ApplicationController
   end
 
   def existing_forms
-    Dir.glob(Rails.root.join("app/views/forms/*/"))
-       .map { |template_path| template_path.split("/").last }
+    Rails.root.glob("app/views/forms/*/")
+       .map { |template_path| template_path.basename.to_s }
   end
 
   private
@@ -71,7 +71,7 @@ class FormsController < ApplicationController
       @intro = Webpage.find_by(slug: "#{@type}-intro")
       @footer = Webpage.find_by(slug: "#{@type}-footer")
       @books = Book.displayable.requestable.order(:sort_title)
-      @book = Book.find(params[:id]) if params[:id].present?
+      @book = Book.find(params.expect(:id)) if params[:id].present?
       @turnstile_site_key = TurnstileService.site_key if TurnstileService.configured?
     end
 

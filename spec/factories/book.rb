@@ -37,7 +37,7 @@ FactoryBot.define do
     trait :with_cover_image do
       after :create do |book|
         book.cover_image.attach(io:
-          File.open(Rails.root.join("spec/fixtures/charles.jpg")),
+          Rails.root.join("spec/fixtures/charles.jpg").open,
                                 filename: "charles.jpg",
                                 content_type: "image/jpeg")
       end
@@ -46,7 +46,7 @@ FactoryBot.define do
     trait :with_guide_file do
       after :create do |book|
         book.guide_file.attach(io:
-          File.open(Rails.root.join("spec/fixtures/guidelines.pdf")),
+          Rails.root.join("spec/fixtures/guidelines.pdf").open,
                                filename: "guidelines.pdf",
                                content_type: "application/pdf")
       end

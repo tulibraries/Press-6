@@ -10,7 +10,7 @@ FactoryBot.define do
 
     before :create do |news_item|
       news_item.image.attach(io:
-      File.open(Rails.root.join("spec/fixtures/charles.jpg")),
+      Rails.root.join("spec/fixtures/charles.jpg").open,
                              filename: "charles.jpg",
                              content_type: "image/jpeg")
     end

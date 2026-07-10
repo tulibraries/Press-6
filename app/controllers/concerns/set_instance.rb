@@ -18,12 +18,12 @@ module SetInstance
             raise(ActionController::RoutingError.new("Not Found"))
           end
         else
-          model.friendly.find(params[:id])
+          model.friendly.find(params.expect(:id))
         end
       when "Series"
-        params[:id][0, 2] == "S-" ? model.find_by(code: params[:id]) : model.friendly.find(params[:id])
+        params[:id][0, 2] == "S-" ? model.find_by(code: params[:id]) : model.friendly.find(params.expect(:id))
       else
-        model.friendly.find(params[:id])
+        model.friendly.find(params.expect(:id))
       end
     end
   end
