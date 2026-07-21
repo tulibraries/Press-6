@@ -28,7 +28,7 @@ RUN apk add -U --no-cache \
       postgresql17-client=17.10-r0 \
       shared-mime-info=2.4-r7 \
       ssl_client=1.37.0-r31 \
-      tzdata=2026b-r0 && \
+      tzdata=2026c-r0 && \
     apk add -U --no-cache --virtual build-dependencies \
       build-base=0.5-r4 \
       yaml=0.2.5-r2 \
