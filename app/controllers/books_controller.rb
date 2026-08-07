@@ -83,7 +83,7 @@ class BooksController < ApplicationController
   def awards_by_subject
     @subject = is_number?(params[:id]) ? Subject.find_by(code: params[:id]) : Subject.friendly.find(params[:id])
 
-    unless @subject.present?
+    if @subject.blank?
       redirect_to :awards
       return
     end

@@ -23,11 +23,7 @@ module SetInstance
       when "Series"
         if params[:id][0, 2] == "S-"
           series = model.find_by(code: params[:id])
-          if series.present?
-            series
-          else
-            raise(ActionController::RoutingError.new("Not Found"))
-          end
+          series.presence || raise(ActionController::RoutingError.new("Not Found"))
         else
           model.friendly.find(params[:id])
         end
