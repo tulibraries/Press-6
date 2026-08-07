@@ -42,7 +42,7 @@ module WebpagesHelper
       if type == "image"
         (link_to news_image(model), book_path(model))
       else
-        (link_to model.title, book_path(model))
+        (link_to model.title.html_safe, book_path(model))
       end
     when "NewsItem"
       if type == "image"
