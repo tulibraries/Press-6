@@ -17,7 +17,6 @@ class NewsItemDashboard < Administrate::BaseDashboard
 
   COLLECTION_ATTRIBUTES = %i[
     title
-    promote_to_homepage
   ].freeze
 
   SHOW_PAGE_ATTRIBUTES = %i[
