@@ -39,8 +39,9 @@ class Person < ApplicationRecord
   def self.search(q)
     if q
       q = q.last.present? ? q : q[0...-1]
-      Person.where("title ~* ?", "(^|\\W)#{q}(\\W|$)")
-            .or(Person.where("position ~* ?", "(^|\\W)#{q}(\\W|$)"))
+      escaped_q = Regexp.escape(q)
+      Person.where("title ~* ?", "(^|\\W)#{escaped_q}(\\W|$)")
+            .or(Person.where("position ~* ?", "(^|\\W)#{escaped_q}(\\W|$)"))
             .sort
     end
   end

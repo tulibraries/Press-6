@@ -9,4 +9,9 @@ RSpec.describe Conference, type: :model do
     it { should validate_presence_of(:end_date) }
     it { should validate_presence_of(:location) }
   end
+
+  let(:search_query) { "Conference (" }
+  let(:search_attributes) { { title: "Conference (Test)" } }
+
+  it_behaves_like "regex-safe search"
 end

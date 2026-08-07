@@ -139,11 +139,12 @@ class Book < ApplicationRecord
   def self.search(q)
     if q
       q = q.last.present? ? q : q[0...-1]
+      escaped_q = Regexp.escape(q)
       Book.displayable
-          .where("title ~* ?", "(^|\\W)#{q}(\\W|$)")
-          .or(Book.where("sort_title ~* ?", "(^|\\W)#{q}(\\W|$)"))
-          .or(Book.where("subtitle ~* ?", "(^|\\W)#{q}(\\W|$)"))
-          .or(Book.where("author_byline ~* ?", "(^|\\W)#{q}(\\W|$)"))
+          .where("title ~* ?", "(^|\\W)#{escaped_q}(\\W|$)")
+          .or(Book.where("sort_title ~* ?", "(^|\\W)#{escaped_q}(\\W|$)"))
+          .or(Book.where("subtitle ~* ?", "(^|\\W)#{escaped_q}(\\W|$)"))
+          .or(Book.where("author_byline ~* ?", "(^|\\W)#{escaped_q}(\\W|$)"))
           .or(Book.where(isbn: q))
           .order(:sort_title)
     end
