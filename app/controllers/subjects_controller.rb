@@ -11,12 +11,12 @@ class SubjectsController < ApplicationController
   def show
     sort = params[:sort]
     if sort.present? && sort == "year"
-      @books =  Book.displayable
+      @books = Book.displayable
                     .where("subjects ILIKE ?", "%#{@subject.code}%")
                     .order("sort_year DESC")
                     .page params[:page]
     else
-      @books =  Book.displayable
+      @books = Book.displayable
                     .where("subjects ILIKE ?", "%#{@subject.code}%")
                     .order(:sort_title)
                     .page params[:page]
