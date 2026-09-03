@@ -14,7 +14,7 @@ ENV LD_PRELOAD="libjemalloc.so.2" \
       MALLOC_CONF="dirty_decay_ms:1000,narenas:2,background_thread:true" \
       RUBY_YJIT_ENABLE="1"
 
-USER root
+USER 0
 
 # gcompat is added to allow m1 build of nokogiri
 RUN apk add -U --no-cache \
