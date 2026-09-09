@@ -25,7 +25,7 @@ module SetInstance
           series = model.find_by(code: params[:id])
           series.presence || raise(ActionController::RoutingError.new("Not Found"))
         else
-          model.friendly.find(params[:id])
+          model.friendly.find(params.expect(:id))
         end
       else
         model.friendly.find(params.expect(:id))

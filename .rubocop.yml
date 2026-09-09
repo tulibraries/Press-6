@@ -7,10 +7,12 @@ AllCops:
   DisabledByDefault: true
   SuggestExtensions: false
   Exclude:
-    - 'node_modules/**/*'
-    - '**/templates/**/*'
-    - '**/vendor/**/*'
-    - 'bin/*'
+    - "node_modules/**/*"
+    - "**/templates/**/*"
+    - "**/vendor/**/*"
+    - "bin/*"
+    - "db/migrate/*"
+    - "tech-debt-audit-*/**/*"
 
   NewCops: enable
 
@@ -84,8 +86,8 @@ Style/FrozenStringLiteralComment:
   Enabled: true
   EnforcedStyle: always
   Exclude:
-    - 'app/models/traject_indexer.rb'
-    - 'db/schema.rb'
+    - "app/models/traject_indexer.rb"
+    - "db/schema.rb"
 
 # Use `foo {}` not `foo{}`.
 Layout/SpaceBeforeBlockBraces:
