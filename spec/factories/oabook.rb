@@ -17,22 +17,22 @@ FactoryBot.define do
 
     after :create do |oabook|
       oabook.image.attach(io:
-      File.open(Rails.root.join("spec/fixtures/charles.jpg")),
+      Rails.root.join("spec/fixtures/charles.jpg").open,
                           filename: "charles.jpg",
                           content_type: "image/jpeg")
 
       oabook.pdf.attach(io:
-      File.open(Rails.root.join("spec/fixtures/guidelines.pdf")),
+      Rails.root.join("spec/fixtures/guidelines.pdf").open,
                         filename: "guidelines.pdf",
                         content_type: "application/pdf")
 
       oabook.epub.attach(io:
-      File.open(Rails.root.join("spec/fixtures/alice.epub")),
+      Rails.root.join("spec/fixtures/alice.epub").open,
                          filename: "alice.epub",
                          content_type: "application/epub+zip")
 
       oabook.mobi.attach(io:
-      File.open(Rails.root.join("spec/fixtures/pg2000.mobi")),
+      Rails.root.join("spec/fixtures/pg2000.mobi").open,
                          filename: "pg2000.pdf",
                          content_type: "application/x-mobipocket-ebook")
     end

@@ -25,7 +25,7 @@ jobs:
       - name: Update pinned apk versions
         run: ruby .github/scripts/update_pinned_apk_versions.rb
         env:
-          APK_CHECK_BASE_IMAGE: ruby:3.4-alpine
+          APK_CHECK_BASE_IMAGE: ruby:4.0-alpine
           APK_UPDATE_SUMMARY_PATH: /tmp/apk-update-summary.md
 
       - name: Create pull request

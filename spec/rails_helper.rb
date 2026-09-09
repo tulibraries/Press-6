@@ -13,7 +13,7 @@ require "action_text/system_test_helper"
 
 
 
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+Rails.root.glob("spec/support/**/*.rb").each { |f| require f }
 
 include Warden::Test::Helpers
 

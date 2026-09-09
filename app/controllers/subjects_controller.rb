@@ -5,7 +5,7 @@ class SubjectsController < ApplicationController
   include SetInstance
 
   def index
-    @subjects = Subject.all.order(:title)
+    @subjects = Subject.order(:title)
   end
 
   def show
@@ -13,7 +13,7 @@ class SubjectsController < ApplicationController
     if sort.present? && sort == "year"
       @books = Book.displayable
                     .where("subjects ILIKE ?", "%#{@subject.code}%")
-                    .order("sort_year DESC")
+                    .order(sort_year: :desc)
                     .page params[:page]
     else
       @books = Book.displayable

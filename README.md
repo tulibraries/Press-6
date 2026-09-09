@@ -38,7 +38,7 @@ The app loads credentials through `config/turnstile.yml` into `Rails.configurati
 We defined a Makefile with many useful commands for local development. These commands replicate the process used to deploy in the Gitlab pipeline.
 
 * To build an image: ```make build ```
-  * `BASE_IMAGE` can be set to override the default base_image: ```make build BASE_NAME=ruby:3.1.0-alpine```
+  * `BASE_IMAGE` can be set to override the default base_image: ```make build BASE_NAME=ruby:4.0-alpine```
   * `PLATFORM` can be set to override default platform used: ```make build PLATFORM=arm64```
 * To start the dockerized app, run ```make run```
 * To deploy prod image: ```make deploy VERSION=x```  

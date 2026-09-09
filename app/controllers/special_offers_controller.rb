@@ -5,7 +5,7 @@ class SpecialOffersController < ApplicationController
   include SetInstance
 
   def index
-    @special_offers = SpecialOffer.all.where(active: true)
+    @special_offers = SpecialOffer.where(active: true)
   end
 
   def show

@@ -2,7 +2,7 @@
 
 class ConferencesController < ApplicationController
   def index
-    @conferences = Conference.where("end_date >= ?", Time.zone.now.last_month)
+    @conferences = Conference.where(end_date: Time.zone.now.last_month..)
                              .sort_by(&:start_date)
                              .group_by { |conference| conference.start_date.strftime("%B") }
 

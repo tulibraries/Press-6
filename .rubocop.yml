@@ -1,16 +1,20 @@
-require: rubocop-rails
+plugins: rubocop-rails
 
 AllCops:
-  TargetRubyVersion: 3.3
+  TargetRubyVersion: 4.0
   # RuboCop has a bunch of cops enabled by default. This setting tells RuboCop
   # to ignore them, so only the ones explicitly set in this file are enabled.
   DisabledByDefault: true
   SuggestExtensions: false
   Exclude:
-    - 'node_modules/**/*'
-    - '**/templates/**/*'
-    - '**/vendor/**/*'
-    - 'bin/*'
+    - "node_modules/**/*"
+    - "**/templates/**/*"
+    - "**/vendor/**/*"
+    - "bin/*"
+    - "db/migrate/*"
+    - "tech-debt-audit-*/**/*"
+
+  NewCops: enable
 
 # Prefer &&/|| over and/or.
 Style/AndOr:
@@ -82,8 +86,8 @@ Style/FrozenStringLiteralComment:
   Enabled: true
   EnforcedStyle: always
   Exclude:
-    - 'app/models/traject_indexer.rb'
-    - 'db/schema.rb'
+    - "app/models/traject_indexer.rb"
+    - "db/schema.rb"
 
 # Use `foo {}` not `foo{}`.
 Layout/SpaceBeforeBlockBraces:
@@ -147,4 +151,10 @@ Rails/LexicallyScopedActionFilter:
   Enabled: false
 
 Rails/CreateTableWithTimestamps:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Rails/ThreeStateBooleanColumn:
   Enabled: false
