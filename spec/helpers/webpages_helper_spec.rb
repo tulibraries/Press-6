@@ -76,6 +76,12 @@ RSpec.describe WebpagesHelper, type: :helper do
     it "returns link to book model" do
       expect(helper.news_link(book)).to include(book_path(book.slug))
     end
+    it "renders book title html without escaping it" do
+      book.update!(title: "<em>Marked Up Title</em>")
+
+      expect(helper.news_link(book)).to include("<em>Marked Up Title</em>")
+      expect(helper.news_link(book)).not_to include("&lt;em&gt;")
+    end
     it "returns link to event model" do
       expect(helper.news_link(event)).to include(events_path)
     end

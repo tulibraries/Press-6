@@ -23,9 +23,10 @@ class Author < ApplicationRecord
   def self.search(q)
     if q
       q = q.last.present? ? q : q[0...-1]
+      escaped_q = Regexp.escape(q)
       Author.where(suppress: [nil, false])
-            .where("first_name ~* ?", "(^|\\W)#{q}(\\W|$)")
-            .or(Author.where(suppress: [nil, false]).where("last_name ~* ?", "(^|\\W)#{q}(\\W|$)"))
+            .where("first_name ~* ?", "(^|\\W)#{escaped_q}(\\W|$)")
+            .or(Author.where(suppress: [nil, false]).where("last_name ~* ?", "(^|\\W)#{escaped_q}(\\W|$)"))
             .sort_by { |a| [a.last_name, a.first_name] }
     end
   end

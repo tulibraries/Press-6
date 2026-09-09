@@ -28,9 +28,10 @@ class Oabook < ApplicationRecord
   def self.search(q)
     if q
       q = q.last.present? ? q : q[0...-1]
-      Oabook.where("title ~* ?", "(^|\\W)#{q}(\\W|$)")
-            .or(Oabook.where("subtitle ~* ?", "(^|\\W)#{q}(\\W|$)"))
-            .or(Oabook.where("author ~* ?", "(^|\\W)#{q}(\\W|$)"))
+      escaped_q = Regexp.escape(q)
+      Oabook.where("title ~* ?", "(^|\\W)#{escaped_q}(\\W|$)")
+            .or(Oabook.where("subtitle ~* ?", "(^|\\W)#{escaped_q}(\\W|$)"))
+            .or(Oabook.where("author ~* ?", "(^|\\W)#{escaped_q}(\\W|$)"))
             .order(:title)
     end
   end

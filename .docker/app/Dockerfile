@@ -14,7 +14,7 @@ ENV LD_PRELOAD="libjemalloc.so.2" \
       MALLOC_CONF="dirty_decay_ms:1000,narenas:2,background_thread:true" \
       RUBY_YJIT_ENABLE="1"
 
-USER root
+USER 0
 
 # gcompat is added to allow m1 build of nokogiri
 RUN apk add -U --no-cache \
@@ -23,12 +23,12 @@ RUN apk add -U --no-cache \
       busybox=1.37.0-r31 \
       gcompat=1.1.0-r4 \
       libjpeg-turbo=3.1.3-r0 \
-      imagemagick=7.1.2.24-r0 \
+      imagemagick=7.1.2.30-r0 \
       libxslt=1.1.43-r3 \
-      postgresql17-client=17.10-r0 \
+      postgresql17-client=17.11-r0 \
       shared-mime-info=2.4-r7 \
       ssl_client=1.37.0-r31 \
-      tzdata=2026b-r0 && \
+      tzdata=2026c-r0 && \
     apk add -U --no-cache --virtual build-dependencies \
       build-base=0.5-r4 \
       yaml=0.2.5-r2 \
@@ -37,8 +37,8 @@ RUN apk add -U --no-cache \
       libjpeg-turbo-dev=3.1.3-r0 \
       libxslt-dev=1.1.43-r3 \
       libxml2-dev=2.13.9-r2 \
-      postgresql17-dev=17.10-r0 \
-      nodejs=24.17.0-r0 \
+      postgresql17-dev=17.11-r0 \
+      nodejs=24.18.1-r0 \
       yarn=1.22.22-r1 && \
     if [ "${RAILS_ENV}" = "production" ]; then bundle config set --local without "development test"; fi && \
     bundle install --jobs=8 && \
@@ -53,7 +53,7 @@ RUN apk add -U --no-cache \
     if [ "${RAILS_ENV}" = "production" ]; then apk del build-dependencies; fi && \
     rm -rf /var/cache/apk/
 
-USER 65534:65534
+USER 65534
  
 ENTRYPOINT [".docker/app/entrypoint.sh"]
 EXPOSE 3000

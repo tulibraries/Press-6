@@ -28,6 +28,11 @@ RSpec.describe Book, type: :request do
       get "/awards/subject/#{book2.subjects_as_tuples.first[1]}"
       expect(response).to render_template(:awards_by_subject)
     end
+
+    it "redirects invalid awards by subject requests instead of raising" do
+      get "/awards/subject/1.sql"
+      expect(response).to redirect_to(awards_path)
+    end
   end
 
   describe "study guide pages" do

@@ -23,5 +23,10 @@ RSpec.describe "/series", type: :request do
     it "returns books by series" do
       expect { get series_path.to have_text(book.title) }
     end
+
+    it "raises page not found for an unknown series code" do
+      get "/series/S-unknown"
+      expect(response.status).to eq(404)
+    end
   end
 end

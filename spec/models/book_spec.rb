@@ -47,6 +47,10 @@ RSpec.describe Book, type: :model do
     expect(book.sort_titles).to eq "Way to Nirvana"
   end
 
+  let(:search_query) { "Book (" }
+  let(:search_attributes) { { title: "Book (Test)" } }
+
+  it_behaves_like "regex-safe search"
   it_behaves_like "detachable"
   it_behaves_like "attachable"
 end

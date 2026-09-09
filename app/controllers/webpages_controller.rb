@@ -32,7 +32,7 @@ class WebpagesController < ApplicationController
     conferences = Conference.search(params[:q])
     @confevents = (events + conferences).sort_by(&:title)
     @faqs = Faq.search(params[:q])
-    @journals = Journal.search(params[:q])
+    @journal_results = Journal.search(params[:q])
     @oabooks = Oabook.search(params[:q])
     @results = [@books, @subjects, @series, @people, @site, @authors, @confevents, @faqs, @journals,
                 @oabooks].any?(&:present?)
