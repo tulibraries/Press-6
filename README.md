@@ -1,5 +1,7 @@
 # TUPRESS
 
+[![Coverage Status](https://coveralls.io/repos/github/tulibraries/Press-6/badge.svg?branch=main)](https://coveralls.io/github/tulibraries/Press-6?branch=main)
+
 - This site is primarily based on the Book model.
 - We update books daily with metadata from the PressWorks third party application (a Filemaker Pro instance administered by another company).
 - An xml file is generated on their server (which is in the Temple umbrella) and then FTP'd to the production server via a cron job on the server.
