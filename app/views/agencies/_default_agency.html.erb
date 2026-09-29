@@ -3,13 +3,28 @@
     <%= title_link(@default_agency.title) %>
   </h3>
   <ul class="list-unstyled">
-    <%= sanitize("<li>#{@default_agency.contact}</li>").html_safe if @default_agency.contact.present? %>
+    <% if @default_agency.contact.present? %>
+      <li><%= @default_agency.contact %></li>
+    <% end %>
+
     <% if @default_agency.address.present? %>
       <li><%= @default_agency.address %></li>
     <% end %>
-    <%= sanitize("<li><strong>Phone</strong>: #{@default_agency.phone} (phone)</li>").html_safe if @default_agency.phone.present? %>
-    <%= sanitize("<li><strong>Fax</strong>: #{@default_agency.fax} (fax)</li>").html_safe if @default_agency.fax.present? %>
-    <%= sanitize("<li>#{mail_to @default_agency.email, @default_agency.email}</li>").html_safe if @default_agency.email.present? %>
-    <%= sanitize("<li>#{link_to @default_agency.website, @default_agency.website}</li>").html_safe if @default_agency.website.present? %>
+
+    <% if @default_agency.phone.present? %>
+      <li><strong>Phone</strong>: <%= @default_agency.phone %> (phone)</li>
+    <% end %>
+
+    <% if @default_agency.fax.present? %>
+      <li><strong>Fax</strong>: <%= @default_agency.fax %> (fax)</li>
+    <% end %>
+
+    <% if @default_agency.email.present? %>
+      <li><strong>Email</strong>: <%= mail_to(@default_agency.email, @default_agency.email) %></li>
+    <% end %>
+
+    <% if @default_agency.website.present? %>
+      <li><strong>Website</strong>: <%= sanitize(link_to(@default_agency.website, @default_agency.website), tags: %w[a], attributes: %w[href title]) %></li>
+    <% end %>
   </ul>
 </div>

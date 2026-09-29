@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  RESTRICTED_HTML_TAGS = %w[
+    b strong i em u s del ins sub sup small br span cite abbr
+    p div blockquote ul ol li a
+  ].freeze
+  RESTRICTED_HTML_ATTRIBUTES = %w[href title].freeze
+
   def aria_hidden(model)
     if model.class.to_s == "Book"
       alt_text = model.cover_alt_text
@@ -101,13 +107,13 @@ module ApplicationHelper
         if linkable.is_a?(String)
           link_to linkable, edit_url
         else
-          link_to linkable.title, edit_url(nil, linkable.slug)
+          link_to sanitize(linkable.title, tags: RESTRICTED_HTML_TAGS, attributes: RESTRICTED_HTML_ATTRIBUTES), edit_url(nil, linkable.slug)
         end
       elsif action_name == "show"
-        link_to linkable.title.html_safe, edit_url(linkable.slug)
+        link_to sanitize(linkable.title, tags: RESTRICTED_HTML_TAGS, attributes: RESTRICTED_HTML_ATTRIBUTES), edit_url(linkable.slug)
       end
     else
-      linkable.is_a?(String) ? linkable.presence : linkable.title.html_safe
+      linkable.is_a?(String) ? linkable.presence : sanitize(linkable.title, tags: RESTRICTED_HTML_TAGS, attributes: RESTRICTED_HTML_ATTRIBUTES)
     end
   end
 
