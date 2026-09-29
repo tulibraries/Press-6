@@ -104,10 +104,10 @@ module ApplicationHelper
           link_to linkable.title, edit_url(nil, linkable.slug)
         end
       elsif action_name == "show"
-        link_to linkable.title.html_safe, edit_url(linkable.slug)
+        link_to sanitize(linkable.title), edit_url(linkable.slug)
       end
     else
-      linkable.is_a?(String) ? linkable.presence : linkable.title.html_safe
+      linkable.is_a?(String) ? linkable.presence : sanitize(linkable.title)
     end
   end
 

@@ -16,7 +16,7 @@
             <strong><%= link_to so.title, special_offer_path(so) %></strong>
           </p>
           <div class="pt-0">
-            <%= fix_invalid_html(so.intro_text.body.to_s.truncate(170)).html_safe %>
+            <%= sanitize(fix_invalid_html(so.intro_text.body.to_s.truncate(170))) %>
           </div>
           </div>
       </div>
