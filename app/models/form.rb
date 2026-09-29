@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
 class Form < MailForm::Base
+  # Allowlist of form types; each needs a matching app/views/forms/<type>/ directory.
+  # New forms must be added here manually.
+  TYPES = %w[
+    copy-request
+    inquiries
+    review-copy
+    rights-and-permissions
+  ].freeze
+
   attribute :form_type
 
   # common fields

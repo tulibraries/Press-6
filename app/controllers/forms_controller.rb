@@ -1,22 +1,17 @@
 # frozen_string_literal: true
 
 class FormsController < ApplicationController
+  before_action :set_form_type, only: [:new, :create]
+
   def new
     @form = (params[:form].present? ? Form.new(params[:form]) : Form.new)
     @notice = flash.now[:notice] if :notice.present?
-    if existing_forms.include? params[:type]
-      @type = params[:type]
-      load_form_page_context
-      create if params[:form].present?
-    else
-      render template: "errors/not_found", status: :not_found
-    end
+    load_form_page_context
   end
 
   def create
     @form = Form.new(params[:form])
     @form.request = request
-    @type = params[:form][:form_type]
     load_form_page_context
 
     unless turnstile_verification_passed?
@@ -60,12 +55,14 @@ class FormsController < ApplicationController
     render :new, notice:, status:
   end
 
-  def existing_forms
-    Rails.root.glob("app/views/forms/*/")
-       .map { |template_path| template_path.basename.to_s }
-  end
-
   private
+
+    def set_form_type
+      form_type = action_name == "create" ? params.dig(:form, :form_type) : params[:type]
+      @type = Form::TYPES.find { |type| type == form_type }
+
+      render template: "errors/not_found", status: :not_found if @type.nil?
+    end
 
     def load_form_page_context
       @intro = Webpage.find_by(slug: "#{@type}-intro")
