@@ -24,7 +24,7 @@
     <% end %>
 
     <% if @default_agency.website.present? %>
-      <li><strong>Website</strong>: <%= sanitize(link_to(@default_agency.website, @default_agency.website)) %></li>
+      <li><strong>Website</strong>: <%= sanitize(link_to(@default_agency.website, @default_agency.website), tags: %w[a], attributes: %w[href title]) %></li>
     <% end %>
   </ul>
 </div>

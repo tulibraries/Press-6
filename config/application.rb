@@ -13,12 +13,6 @@ module Tupress
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.1
 
-    config.action_view.sanitized_allowed_tags = %w[
-      b strong i em u s del ins sub sup small br span cite abbr
-      p div blockquote ul ol li a
-    ]
-    config.action_view.sanitized_allowed_attributes = %w[href title]
-
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
