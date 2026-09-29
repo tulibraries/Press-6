@@ -40,6 +40,17 @@ RSpec.describe "Invalid form types", type: :request do
     expect(ActionMailer::Base.deliveries).to be_empty
   end
 
+  it "returns 404 for POST with a scalar form parameter" do
+    expect(Form).not_to receive(:new)
+    expect(TurnstileService).not_to receive(:verify)
+
+    post form_path(type: "copy-request"), params: { form: "abc" }
+
+    expect(response).to have_http_status(:not_found)
+    expect(response).to render_template("errors/not_found")
+    expect(ActionMailer::Base.deliveries).to be_empty
+  end
+
   it "only displays the form when GET includes submission parameters" do
     get form_path(type: "copy-request"), params: {
       form: { form_type: "../forms/copy-request", name: "Test", email: "test@example.com" }

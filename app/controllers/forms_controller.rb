@@ -58,7 +58,11 @@ class FormsController < ApplicationController
   private
 
     def set_form_type
-      form_type = action_name == "create" ? params.dig(:form, :form_type) : params[:type]
+      form_type = if action_name == "create"
+        params[:form][:form_type] if params[:form].is_a?(ActionController::Parameters)
+                  else
+                    params[:type]
+      end
       @type = Form::TYPES.find { |type| type == form_type }
 
       render template: "errors/not_found", status: :not_found if @type.nil?
