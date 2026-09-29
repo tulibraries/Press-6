@@ -21,6 +21,19 @@ RSpec.describe ApplicationHelper, type: :helper do
     sign_out user
   end
 
+  describe "title HTML policy" do
+    it "preserves typography in show edit links without allowing attributes or scripts" do
+      allow(controller).to receive(:controller_name).and_return("books")
+      allow(controller).to receive(:action_name).and_return("show")
+      book.title = '<i style="color:red" onmouseover="x()">Title</i><sup>2</sup><script>x()</script>'
+
+      html = Nokogiri::HTML.fragment(helper.title_link(book))
+      expect(html.at_css("a i").text).to eq("Title")
+      expect(html.at_css("a sup").text).to eq("2")
+      expect(html.css("script, [style], [onmouseover]")).to be_empty
+    end
+  end
+
   context ApplicationHelper do
     describe "def current_year" do
       it "returns current year" do

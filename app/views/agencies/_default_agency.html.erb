@@ -12,19 +12,19 @@
     <% end %>
 
     <% if @default_agency.phone.present? %>
-      <li><strong>Phone</strong>: <%= sanitize(@default_agency.phone) %> (phone)</li>
+      <li><strong>Phone</strong>: <%= @default_agency.phone %> (phone)</li>
     <% end %>
 
     <% if @default_agency.fax.present? %>
-      <li><strong>Fax</strong>: <%= sanitize(@default_agency.fax) %> (fax)</li>
+      <li><strong>Fax</strong>: <%= @default_agency.fax %> (fax)</li>
     <% end %>
 
     <% if @default_agency.email.present? %>
-      <li><strong>Email</strong>: <%= sanitize(@default_agency.email) %></li>
+      <li><strong>Email</strong>: <%= mail_to(@default_agency.email, @default_agency.email) %></li>
     <% end %>
 
     <% if @default_agency.website.present? %>
-      <li><strong>Website</strong>: <%= sanitize(@default_agency.website) %></li>
+      <li><strong>Website</strong>: <%= sanitize(link_to(@default_agency.website, @default_agency.website)) %></li>
     <% end %>
   </ul>
 </div>
