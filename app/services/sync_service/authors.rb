@@ -22,7 +22,12 @@ module SyncService
       get_books.each do |book|
         next unless %w[NP IP].include? book["record"]["status"]
 
-        authors = book["record"]["authors"]["author"]
+        authors = book.dig("record", "authors", "author")
+        if authors.nil?
+          stdout_and_log(%(Skipped book with no authors: '( #{book["record"]["book_id"]} )'))
+          next
+        end
+
         if authors.is_a?(Hash)
           begin
             record = record_hash(authors)

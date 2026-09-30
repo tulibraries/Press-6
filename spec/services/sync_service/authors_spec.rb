@@ -277,16 +277,19 @@ RSpec.describe SyncService::Authors, type: :service do
       expect(Author.find_by(author_id: "518")).to have_attributes(first_name: "Dina", last_name: "Pinsky")
     end
 
-    it "raises NoMethodError when a book has an empty authors element" do
-      expect {
-        sync_edited { |xml| xml.sub(%r{<authors>.*?</authors>}m, "<authors></authors>") }
-      }.to raise_error(NoMethodError)
-    end
+    {
+      "an empty authors element" => "<authors></authors>",
+      "no authors element" => ""
+    }.each do |label, replacement|
+      it "skips a book with #{label}, logs it, and syncs later books" do
+        expect {
+          sync_edited { |xml| xml.sub(%r{<authors>.*?</authors>}m, replacement) }
+        }.to change(Author, :count).by(7)
 
-    it "raises NoMethodError when a book has no authors element" do
-      expect {
-        sync_edited { |xml| xml.sub(%r{<authors>.*?</authors>}m, "") }
-      }.to raise_error(NoMethodError)
+        expect(Author.find_by(author_id: "3000019856")).to be_nil
+        expect(log).to include("Skipped book with no authors: '( 20000000010395 )'")
+        expect(log).to include(summary(created: 7, updated: 1))
+      end
     end
 
     it "ignores books without authors when their status is filtered out" do
