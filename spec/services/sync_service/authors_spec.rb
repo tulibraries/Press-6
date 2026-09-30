@@ -3,8 +3,6 @@
 require "rails_helper"
 
 RSpec.describe SyncService::Authors, type: :service do
-  let(:wrong_arity) { "wrong number of arguments (given 2, expected 1)" }
-
   let(:fixture_path) { file_fixture("delta.xml").to_path }
   let(:fixture_xml) do
     File.read(fixture_path, mode: "rb:BOM|UTF-16BE:UTF-8").sub('encoding="UTF-16"', 'encoding="UTF-8"')
@@ -299,49 +297,64 @@ RSpec.describe SyncService::Authors, type: :service do
   end
 
   describe "synchronization failures" do
-    it "raises ArgumentError when saving a single author fails because the error logger rejects its level argument" do
+    def fail_on_save(call_number)
+      calls = 0
+      allow_any_instance_of(Author).to receive(:save!).and_wrap_original do |original, *args|
+        calls += 1
+        raise ActiveRecord::RecordInvalid if calls == call_number
+        original.call(*args)
+      end
+    end
+
+    it "logs a failure saving a single author at error level with the original message" do
+      fail_on_save(1)
+
+      expect { sync }.not_to raise_error
+      expect(log).to match(/ERROR -- : Author sync error:  Record invalid/)
+      expect(Author.find_by(author_id: "3000019856")).to be_nil
+    end
+
+    it "continues with the next book after a failure" do
+      fail_on_save(1)
+
+      sync
+
+      expect(Author.pluck(:author_id)).to match_array(synced_ids - %w[3000019856])
+      expect(log).to include(summary(created: 7, updated: 1, errored: 1))
+    end
+
+    it "skips the remaining authors in a book when one of them fails" do
+      fail_on_save(2)
+
+      sync
+
+      expect(Author.find_by(author_id: "519")).to be_nil
+      expect(Author.find_by(author_id: "518")).to be_present
+      expect(log).to include(summary(created: 7, updated: 0, errored: 1))
+    end
+
+    it "counts every failure and still logs the summary" do
       allow_any_instance_of(Author).to receive(:save!).and_raise(ActiveRecord::RecordInvalid)
 
-      expect { sync }.to raise_error(ArgumentError, wrong_arity)
-      expect(log).not_to include("Author sync completed")
+      expect { sync }.not_to change(Author, :count)
+      expect(log.scan("Author sync error").size).to eq(8)
+      expect(log).to include(summary(created: 0, updated: 0, errored: 8))
     end
 
-    it "raises ArgumentError when saving one of multiple authors fails" do
-      calls = 0
-      allow_any_instance_of(Author).to receive(:save!).and_wrap_original do |original, *args|
-        calls += 1
-        raise ActiveRecord::RecordInvalid if calls == 3
-        original.call(*args)
-      end
-
-      expect { sync }.to raise_error(ArgumentError, wrong_arity)
-      expect(Author.find_by(author_id: "518")).to be_present
-      expect(Author.find_by(author_id: "519")).to be_nil
-    end
-
-    it "raises ArgumentError when save! returns false" do
+    it "logs at error level when save! returns false" do
       allow_any_instance_of(Author).to receive(:save!).and_return(false)
 
-      expect { sync }.to raise_error(ArgumentError, wrong_arity)
+      expect { sync }.not_to raise_error
+      expect(log).to match(/ERROR -- : Author not saved: 3000019856/)
+      expect(log).to include("Author sync completed")
     end
 
-    it "keeps authors saved before the failure and stops processing later books" do
-      calls = 0
-      allow_any_instance_of(Author).to receive(:save!).and_wrap_original do |original, *args|
-        calls += 1
-        raise ActiveRecord::RecordInvalid if calls == 2
-        original.call(*args)
-      end
+    it "logs and counts database lookup failures" do
+      allow(Author).to receive(:find_by).and_raise(ActiveRecord::ConnectionNotEstablished, "no connection")
 
-      expect { sync }.to raise_error(ArgumentError, wrong_arity)
-
-      expect(Author.pluck(:author_id)).to eq(["3000019856"])
-    end
-
-    it "raises ArgumentError when the database lookup fails" do
-      allow(Author).to receive(:find_by).and_raise(ActiveRecord::ConnectionNotEstablished)
-
-      expect { sync }.to raise_error(ArgumentError, wrong_arity)
+      expect { sync }.not_to raise_error
+      expect(log).to match(/ERROR -- : Author sync error:  no connection/)
+      expect(log).to include(summary(created: 0, updated: 0, errored: 8))
     end
   end
 end
