@@ -28,7 +28,7 @@ module SyncService
             record = record_hash(authors)
             create_or_update!(record)
           rescue Exception => e
-            stdout_and_log(%(Author sync error:  #{e.message} \n #{e.backtrace}"), :error)
+            stdout_and_log(%(Author sync error:  #{e.message} \n #{e.backtrace}"), level: :error)
             @errored += 1
           end
         else
@@ -38,7 +38,7 @@ module SyncService
               create_or_update!(record)
             end
           rescue Exception => e
-            stdout_and_log(%(Author sync error:  #{e.message} \n #{e.backtrace}"), :error)
+            stdout_and_log(%(Author sync error:  #{e.message} \n #{e.backtrace}"), level: :error)
             @errored += 1
           end
         end
@@ -85,7 +85,7 @@ module SyncService
         stdout_and_log(%(Existing author update: '( #{record_hash['author_id']} )')) unless is_new
         stdout_and_log(%(Creating new author: '( #{record_hash['author_id']} )')) if is_new
       else
-        stdout_and_log(%(Author not saved: #{record_hash['author_id']}), :error)
+        stdout_and_log(%(Author not saved: #{record_hash['author_id']}), level: :error)
         @errored += 1
       end
     end
