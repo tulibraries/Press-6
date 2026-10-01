@@ -75,6 +75,15 @@ RSpec.describe SyncService::Authors, type: :service do
       expect { sync_edited { |xml| xml.gsub(%r{<record>.*?</record>}m, "") } }.not_to change(Author, :count)
       expect(log).to include(summary(created: 0, updated: 0))
     end
+
+    it "reports counts for each run when the same instance syncs twice" do
+      service = described_class.new(xml_path: fixture_path)
+      service.sync
+      service.sync
+
+      expect(log).to include(summary(created: 8, updated: 1))
+      expect(log).to include(summary(created: 0, updated: 9))
+    end
   end
 
   describe "book status filtering" do
@@ -326,22 +335,22 @@ RSpec.describe SyncService::Authors, type: :service do
       expect(log).to include(summary(created: 7, updated: 1, errored: 1))
     end
 
-    it "skips the remaining authors in a book when one of them fails" do
+    it "continues with the remaining authors in a book when one of them fails" do
       fail_on_save(2)
 
       sync
 
-      expect(Author.find_by(author_id: "519")).to be_nil
-      expect(Author.find_by(author_id: "518")).to be_present
-      expect(log).to include(summary(created: 7, updated: 0, errored: 1))
+      expect(log).to match(/Author sync error:  Record invalid \(ActiveRecord::RecordInvalid; book_id=\d+, author_id=518\)/)
+      expect(Author.find_by(author_id: "519")).to be_present
+      expect(log).to include(summary(created: 8, updated: 0, errored: 1))
     end
 
-    it "counts every failure and still logs the summary" do
+    it "counts every failed author and still logs the summary" do
       allow_any_instance_of(Author).to receive(:save!).and_raise(ActiveRecord::RecordInvalid)
 
       expect { sync }.not_to change(Author, :count)
-      expect(log.scan("Author sync error").size).to eq(8)
-      expect(log).to include(summary(created: 0, updated: 0, errored: 8))
+      expect(log.scan("Author sync error").size).to eq(9)
+      expect(log).to include(summary(created: 0, updated: 0, errored: 9))
     end
 
     it "logs at error level when save! returns false" do
@@ -357,7 +366,19 @@ RSpec.describe SyncService::Authors, type: :service do
 
       expect { sync }.not_to raise_error
       expect(log).to match(/ERROR -- : Author sync error:  no connection/)
-      expect(log).to include(summary(created: 0, updated: 0, errored: 8))
+      expect(log).to include(summary(created: 0, updated: 0, errored: 9))
+    end
+
+    it "logs and counts failures while reading an author's source data" do
+      allow(SyncService::Authors::AuthorRecord).to receive(:from_source).and_wrap_original do |original, entry|
+        raise ArgumentError, "bad entry" if entry["author_id"] == "519"
+        original.call(entry)
+      end
+
+      expect { sync }.not_to raise_error
+      expect(log).to match(/Author sync error:  bad entry \(ArgumentError; book_id=\d+, author_id=\)/)
+      expect(Author.find_by(author_id: "519")).to be_nil
+      expect(log).to include(summary(created: 7, updated: 1, errored: 1))
     end
   end
 end
