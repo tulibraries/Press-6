@@ -31,18 +31,17 @@ module SyncService
           next
         end
 
-        next if reviews.first.any?(nil)
         if reviews.is_a?(Hash)
           record = record_hash(reviews, book)
           create_or_update!(record)
         else
           begin
-            reviews.each do |review|
+            reviews.compact.each do |review|
               record = record_hash(review, book)
               create_or_update!(record)
             end
           rescue Exception => e
-            stdout_and_log(%(Review sync error:  #{e.message} \n #{e.backtrace}"), :error)
+            stdout_and_log(%(Review sync error:  #{e.message} \n #{e.backtrace}"), level: :error)
             @errored += 1
           end
         end
@@ -78,11 +77,8 @@ module SyncService
             @created += 1
           end
         rescue Exception => e
-          if e.message == "no implicit conversion of String into Integer" # empty tags
-            stdout_and_log("Empty review tags for:  #{record['book_id']}", :info)
-          else
-            stdout_and_log("Error Syncing Review for book: #{record['book_id']} - #{e.message} \n #{e.backtrace}", :error)
-          end
+          stdout_and_log("Error Syncing Review for book: #{record['book_id']} - #{e.message} \n #{e.backtrace}", level: :error)
+          @errored += 1
         end
       end
     end

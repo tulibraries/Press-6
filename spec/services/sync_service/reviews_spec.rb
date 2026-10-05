@@ -16,7 +16,6 @@ RSpec.describe SyncService::Reviews, type: :service do
 
   let(:log_output) { StringIO.new }
   let(:log) { log_output.string }
-  let(:logging_bug) { /wrong number of arguments \(given 2, expected 1\)/ }
 
   before do
     Review.delete_all
@@ -247,6 +246,16 @@ RSpec.describe SyncService::Reviews, type: :service do
       end
     end
 
+    { "first" => 0, "last" => 1 }.each do |position, index|
+      it "silently skips an empty review element that comes #{position} among several reviews" do
+        items = [review("901", "Valid")].insert(index, "<review/>")
+        sync_edited { |xml| set_reviews(xml, reviewed_book, reviews(*items)) }
+
+        expect(Review.pluck(:review_id)).to eq(["901"])
+        expect(log).to include(summary(created: 1, updated: 0))
+      end
+    end
+
     it "treats whitespace-only review text as blank" do
       sync_edited { |xml| set_reviews(xml, ip_book, reviews(review("900", "   "))) }
 
@@ -320,40 +329,50 @@ RSpec.describe SyncService::Reviews, type: :service do
   end
 
   describe "synchronization failures" do
-    it "raises ArgumentError from the error logging when a save raises among several reviews" do
-      allow_any_instance_of(Review).to receive(:save!).and_raise(ActiveRecord::RecordInvalid)
-
-      expect { sync }.to raise_error(ArgumentError, logging_bug)
-      expect(Review.count).to eq(0)
-      expect(log).not_to include("Review syncing completed")
+    def fail_on_save(call_number)
+      calls = 0
+      allow_any_instance_of(Review).to receive(:save!).and_wrap_original do |original, *args|
+        calls += 1
+        raise ActiveRecord::RecordInvalid if calls == call_number
+        original.call(*args)
+      end
     end
 
-    it "raises ArgumentError from the error logging when a single review fails to save" do
-      allow_any_instance_of(Review).to receive(:save!).and_raise(ActiveRecord::RecordInvalid)
+    it "logs a failed save at error level with the original message and continues with the next review" do
+      fail_on_save(1)
 
-      expect {
-        sync_edited { |xml| set_reviews(xml, ip_book, reviews(review("900", "Single review"))) }
-      }.to raise_error(ArgumentError, logging_bug)
+      expect { sync }.not_to raise_error
+      expect(log).to match(/ERROR -- : Error Syncing Review for book: #{reviewed_book} - Record invalid/)
+      expect(Review.pluck(:review_id)).to eq(["145015"])
+      expect(log).to include(summary(created: 1, updated: 0, errored: 1))
     end
 
-    it "raises ArgumentError for the empty review tags error message too" do
-      allow(Review).to receive(:find_by).and_raise(TypeError, "no implicit conversion of String into Integer")
+    it "continues with later books when a single review fails to save" do
+      fail_on_save(1)
 
-      expect { sync }.to raise_error(ArgumentError, logging_bug)
+      sync_edited { |xml| set_reviews(xml, ip_book, reviews(review("900", "Single review"))) }
+
+      expect(Review.find_by(review_id: "900")).to be_nil
+      expect(Review.where(book_id: reviewed_book).count).to eq(2)
+      expect(log).to include(summary(created: 2, updated: 0, errored: 1))
     end
 
-    it "raises ArgumentError when a database lookup fails" do
+    it "logs and counts database lookup failures" do
       allow(Review).to receive(:find_by).and_raise(ActiveRecord::ConnectionNotEstablished, "no connection")
 
-      expect { sync }.to raise_error(ArgumentError, logging_bug)
+      expect { sync }.not_to raise_error
+      expect(log).to match(/ERROR -- : Error Syncing Review for book: #{reviewed_book} - no connection/)
+      expect(log).to include(summary(created: 0, updated: 0, errored: 2))
     end
 
-    it "does not prune when the sync raises" do
+    it "still prunes stale reviews after save failures" do
       Review.create!(review_id: "999", book_id: reviewed_book, review: "Stale")
       allow_any_instance_of(Review).to receive(:save!).and_raise(ActiveRecord::RecordInvalid)
 
-      expect { sync }.to raise_error(ArgumentError, logging_bug)
-      expect(Review.find_by(review_id: "999")).to be_present
+      sync
+
+      expect(Review.find_by(review_id: "999")).to be_nil
+      expect(log).to include(summary(created: 0, updated: 0, deleted: 1, errored: 2))
     end
 
     it "logs at error level and counts a new review only as errored when save! returns false" do
