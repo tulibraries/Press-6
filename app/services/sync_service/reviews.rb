@@ -24,8 +24,14 @@ module SyncService
       @updated = @created = @errored = 0
       read_books.each do |book|
         next unless %w[NP IP].include? book["record"]["status"]
-        next if book["record"]["reviews"]["review"].first.any?(nil)
-        reviews = book["record"]["reviews"]["review"]
+
+        reviews = book.dig("record", "reviews", "review")
+        if reviews.nil?
+          stdout_and_log(%(Skipped book with no reviews: '( #{book['record']['book_id']} )'))
+          next
+        end
+
+        next if reviews.first.any?(nil)
         if reviews.is_a?(Hash)
           record = record_hash(reviews, book)
           create_or_update!(record)

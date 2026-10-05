@@ -257,9 +257,12 @@ RSpec.describe SyncService::Reviews, type: :service do
       "no reviews element" => "",
       "an empty reviews element" => "<reviews></reviews>"
     }.each do |label, replacement|
-      it "raises NoMethodError for an active book with #{label}" do
-        expect { sync_edited { |xml| set_reviews(xml, ip_book, replacement) } }.to raise_error(NoMethodError)
-        expect(Review.count).to eq(0)
+      it "skips an active book with #{label}, logs it, and syncs later books" do
+        expect { sync_edited { |xml| set_reviews(xml, ip_book, replacement) } }.to change(Review, :count).by(2)
+
+        expect(Review.where(book_id: ip_book)).to be_empty
+        expect(log).to include("Skipped book with no reviews: '( #{ip_book} )'")
+        expect(log).to include(summary(created: 2, updated: 0))
       end
     end
   end
