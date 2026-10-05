@@ -353,14 +353,26 @@ RSpec.describe SyncService::Reviews, type: :service do
       expect(Review.find_by(review_id: "999")).to be_present
     end
 
-    it "logs at info level and counts the review as both created and errored when save! returns false" do
+    it "logs at error level and counts a new review only as errored when save! returns false" do
       allow_any_instance_of(Review).to receive(:save!).and_return(false)
 
       sync
 
-      expect(log).to match(/INFO -- : Review not saved: 145014/)
-      expect(log).to include(summary(created: 2, updated: 0, errored: 2))
+      expect(log).to match(/ERROR -- : Review not saved: 145014/)
+      expect(log).not_to include("Creating new review")
+      expect(log).to include(summary(created: 0, updated: 0, errored: 2))
       expect(Review.count).to eq(0)
+    end
+
+    it "counts an existing review only as errored when save! returns false" do
+      Review.create!(review_id: "145014", book_id: reviewed_book, review: "Old text")
+      allow_any_instance_of(Review).to receive(:save!).and_return(false)
+
+      sync
+
+      expect(log).to match(/ERROR -- : Review not saved: 145014/)
+      expect(log).not_to include("Existing review update")
+      expect(log).to include(summary(created: 0, updated: 0, errored: 2))
     end
   end
 end

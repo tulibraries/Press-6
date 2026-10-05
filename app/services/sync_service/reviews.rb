@@ -67,10 +67,8 @@ module SyncService
         begin
           review = Review.find_by(review_id: record["review_id"])
           if review.present?
-            write_to_db(review, record, false)
-            @updated += 1
-          else
-            write_to_db(review, record, true)
+            @updated += 1 if write_to_db(review, record, false)
+          elsif write_to_db(review, record, true)
             @created += 1
           end
         rescue Exception => e
@@ -89,9 +87,11 @@ module SyncService
       if review.save!
         stdout_and_log(%(Existing review update: '( #{record_hash['review_id']} )')) unless is_new
         stdout_and_log(%(Creating new review: '( #{record_hash['review_id']} )')) if is_new
+        true
       else
-        stdout_and_log(%(Review not saved: #{record_hash['review_id']}))
+        stdout_and_log(%(Review not saved: #{record_hash['review_id']}), level: :error)
         @errored += 1
+        false
       end
     end
 
