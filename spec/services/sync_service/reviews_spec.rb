@@ -16,10 +16,12 @@ RSpec.describe SyncService::Reviews, type: :service do
 
   let(:log_output) { StringIO.new }
   let(:log) { log_output.string }
+  let(:sync_messages) { log.lines.grep_v(/Syncing reviews from/).join }
 
   before do
     Review.delete_all
     logger = Logger.new(log_output)
+    logger.formatter = proc { |severity, _time, _progname, message| "#{severity} -- : #{message}\n" }
     allow(Logger).to receive(:new).and_return(logger)
   end
 
@@ -223,7 +225,7 @@ RSpec.describe SyncService::Reviews, type: :service do
       sync
 
       expect(Review.where.not(book_id: reviewed_book)).to be_empty
-      expect(log).not_to include(ip_book)
+      expect(sync_messages).not_to include(ip_book)
     end
 
     {
@@ -234,7 +236,7 @@ RSpec.describe SyncService::Reviews, type: :service do
         sync_edited { |xml| set_reviews(xml, reviewed_book, reviews(review(id, text), review("901", "Valid"))) }
 
         expect(Review.pluck(:review_id)).to eq(["901"])
-        expect(log).not_to include("900")
+        expect(sync_messages).not_to include("900")
         expect(log).to include(summary(created: 1, updated: 0))
       end
 
@@ -294,6 +296,21 @@ RSpec.describe SyncService::Reviews, type: :service do
       expect(Review.find_by(review_id: "999")).to be_nil
     end
 
+    {
+      "no reviews element" => "",
+      "an empty reviews element" => "<reviews></reviews>"
+    }.each do |label, replacement|
+      it "deletes existing reviews for an active book with #{label}" do
+        Review.create!(review_id: "800", book_id: ip_book, review: "Existing")
+
+        sync_edited { |xml| set_reviews(xml, ip_book, replacement) }
+
+        expect(Review.find_by(review_id: "800")).to be_nil
+        expect(log).to include("Skipped book with no reviews: '( #{ip_book} )'")
+        expect(log).to include(summary(created: 2, updated: 0, deleted: 1))
+      end
+    end
+
     it "deletes stale reviews for books whose only feed review is empty" do
       Review.create!(review_id: "999", book_id: ip_book, review: "Stale")
 
@@ -324,7 +341,7 @@ RSpec.describe SyncService::Reviews, type: :service do
 
       sync
 
-      expect(log).not_to include("999")
+      expect(sync_messages).not_to include("999")
     end
   end
 
