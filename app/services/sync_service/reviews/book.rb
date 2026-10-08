@@ -16,7 +16,11 @@ module SyncService
       end
 
       def reviews
-        Array.wrap(fields["reviews"]).grep(Hash).flat_map { |container| Array.wrap(container["review"]) }.grep(Hash)
+        containers = Array.wrap(fields["reviews"]).select { |container| container.is_a?(Hash) }
+
+        containers.flat_map do |container|
+          Array.wrap(container["review"]).select { |review| review.is_a?(Hash) }
+        end
       end
     end
   end
