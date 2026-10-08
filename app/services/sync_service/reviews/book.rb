@@ -16,7 +16,7 @@ module SyncService
       end
 
       def reviews
-        fields.dig("reviews", "review")
+        Array.wrap(fields["reviews"]).grep(Hash).flat_map { |container| Array.wrap(container["review"]) }.grep(Hash)
       end
     end
   end

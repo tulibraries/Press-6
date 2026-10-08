@@ -31,30 +31,18 @@ module SyncService
 
       def sync_book(book)
         reviews = book.reviews
-        return @report.skipped_book(book) if reviews.nil?
+        return @report.skipped_book(book) if reviews.empty?
 
-        if reviews.is_a?(Hash)
-          sync_review(reviews, book)
-        else
-          sync_reviews(reviews, book)
-        end
-      end
-
-      def sync_reviews(reviews, book)
-        reviews.compact.each { |review| sync_review(review, book) }
-      rescue Exception => e
-        @report.book_failed(e)
+        reviews.each { |review| sync_review(review, book) }
       end
 
       def sync_review(review, book)
         record = ReviewRecord.from_source(review, book_id: book.book_id)
-        write(record) if record.valid?
-      end
+        return unless record.valid?
 
-      def write(record)
         @report.public_send(@writer.write(record), record)
-      rescue Exception => e
-        @report.failed(e, record)
+      rescue StandardError => e
+        @report.failed(e, book:, review_id: review["review_id"])
       end
   end
 end

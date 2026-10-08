@@ -93,6 +93,16 @@ RSpec.describe SyncService::Reviews, type: :service do
       expect { sync_edited { |xml| xml.gsub(%r{<record>.*?</record>}m, "") } }.not_to change(Review, :count)
       expect(log).to include(summary(created: 0, updated: 0))
     end
+
+    it "reports counts for each run when the same instance syncs twice" do
+      Review.create!(review_id: "999", book_id: reviewed_book, review: "Stale")
+      service = described_class.new(xml_path: fixture_path)
+      service.sync
+      service.sync
+
+      expect(log).to include(summary(created: 2, updated: 0, deleted: 1))
+      expect(log).to include(summary(created: 0, updated: 2, deleted: 0))
+    end
   end
 
   describe "book status filtering" do
@@ -258,6 +268,32 @@ RSpec.describe SyncService::Reviews, type: :service do
       end
     end
 
+    it "syncs the reviews from every reviews element when a book has more than one" do
+      sync_edited do |xml|
+        set_reviews(xml, ip_book, reviews(review("800", "First container")) + reviews(review("801", "Second container")))
+      end
+
+      expect(Review.where(book_id: ip_book).pluck(:review_id)).to contain_exactly("800", "801")
+      expect(log).to include(summary(created: 4, updated: 0))
+    end
+
+    it "silently skips a review element that has text instead of fields" do
+      sync_edited { |xml| set_reviews(xml, reviewed_book, reviews("<review>Not a review</review>", review("901", "Valid"))) }
+
+      expect(Review.pluck(:review_id)).to eq(["901"])
+      expect(log).to include(summary(created: 1, updated: 0))
+    end
+
+    it "logs a book as skipped when its only review element has text instead of fields" do
+      Review.create!(review_id: "800", book_id: ip_book, review: "Existing")
+
+      sync_edited { |xml| set_reviews(xml, ip_book, reviews("<review>Not a review</review>")) }
+
+      expect(Review.find_by(review_id: "800")).to be_nil
+      expect(log).to include("Skipped book with no reviews: '( #{ip_book} )'")
+      expect(log).to include(summary(created: 2, updated: 0, deleted: 1))
+    end
+
     it "treats whitespace-only review text as blank" do
       sync_edited { |xml| set_reviews(xml, ip_book, reviews(review("900", "   "))) }
 
@@ -298,7 +334,8 @@ RSpec.describe SyncService::Reviews, type: :service do
 
     {
       "no reviews element" => "",
-      "an empty reviews element" => "<reviews></reviews>"
+      "an empty reviews element" => "<reviews></reviews>",
+      "a reviews element with text instead of review elements" => "<reviews>Not a review</reviews>"
     }.each do |label, replacement|
       it "deletes existing reviews for an active book with #{label}" do
         Review.create!(review_id: "800", book_id: ip_book, review: "Existing")
@@ -359,7 +396,9 @@ RSpec.describe SyncService::Reviews, type: :service do
       fail_on_save(1)
 
       expect { sync }.not_to raise_error
-      expect(log).to match(/ERROR -- : Error Syncing Review for book: #{reviewed_book} - Record invalid/)
+      expect(log).to match(
+        /ERROR -- : Error Syncing Review for book: #{reviewed_book} - Record invalid \(ActiveRecord::RecordInvalid; review_id=145014\)/
+      )
       expect(Review.pluck(:review_id)).to eq(["145015"])
       expect(log).to include(summary(created: 1, updated: 0, errored: 1))
     end
@@ -380,6 +419,34 @@ RSpec.describe SyncService::Reviews, type: :service do
       expect { sync }.not_to raise_error
       expect(log).to match(/ERROR -- : Error Syncing Review for book: #{reviewed_book} - no connection/)
       expect(log).to include(summary(created: 0, updated: 0, errored: 2))
+    end
+
+    it "logs a cleaned backtrace of at most five lines" do
+      fail_on_save(1)
+
+      sync
+
+      backtrace = log[/Error Syncing Review.*?\n(.*?)(?=^[A-Z]+ -- :)/m, 1]
+      expect(backtrace.lines.size).to be_between(1, 5)
+      expect(backtrace).not_to include("/gems/")
+    end
+
+    it "logs and counts failures while reading a review's source data, and continues with the book" do
+      allow(SyncService::Reviews::ReviewRecord).to receive(:from_source).and_wrap_original do |original, review, **opts|
+        raise ArgumentError, "bad entry" if review["review_id"] == "145014"
+        original.call(review, **opts)
+      end
+
+      expect { sync }.not_to raise_error
+      expect(log).to match(/Error Syncing Review for book: #{reviewed_book} - bad entry \(ArgumentError; review_id=145014\)/)
+      expect(Review.pluck(:review_id)).to eq(["145015"])
+      expect(log).to include(summary(created: 1, updated: 0, errored: 1))
+    end
+
+    it "does not swallow an interrupt" do
+      allow_any_instance_of(Review).to receive(:save!).and_raise(Interrupt)
+
+      expect { sync }.to raise_error(Interrupt)
     end
 
     it "still prunes stale reviews after save failures" do
