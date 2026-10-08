@@ -4,7 +4,7 @@ module SyncService
   class Reviews
     ReviewRecord = Data.define(:review_id, :book_id, :review) do
       def self.from_source(fields, book_id:)
-        new(review_id: fields.dig("review_id"), book_id:, review: fields.dig("review_text"))
+        new(review_id: fields["review_id"], book_id:, review: fields["review_text"])
       end
 
       def valid?

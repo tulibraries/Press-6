@@ -3,9 +3,10 @@
 module SyncService
   class Reviews
     class Report
+      BACKTRACE_LINES = 5
+
       def initialize(logger)
         @logger = logger
-        @deleted = 0
         reset
       end
 
@@ -37,25 +38,30 @@ module SyncService
       end
 
       def pruned(review_ids)
-        @deleted += review_ids.size
+        @counts[:deleted] += review_ids.size
       end
 
-      def failed(error, record)
+      def failed(error, book:, review_id:)
         @counts[:errored] += 1
-        @logger.error("Error Syncing Review for book: #{record.book_id} - #{error.message} \n #{error.backtrace}")
-      end
-
-      def book_failed(error)
-        @counts[:errored] += 1
-        @logger.error(%(Review sync error:  #{error.message} \n #{error.backtrace}"))
+        @logger.error(
+          "Error Syncing Review for book: #{book.book_id} - #{error.message} " \
+          "(#{error.class}; review_id=#{review_id})\n" \
+          "#{backtrace(error)}"
+        )
       end
 
       def summary
         @logger.info(
           "Review syncing completed with #{@counts[:created]} created, #{@counts[:updated]} updated, " \
-          "#{@deleted} deleted, and #{@counts[:errored]} errored records."
+          "#{@counts[:deleted]} deleted, and #{@counts[:errored]} errored records."
         )
       end
+
+      private
+
+        def backtrace(error)
+          Rails.backtrace_cleaner.clean(Array(error.backtrace)).first(BACKTRACE_LINES).join("\n")
+        end
     end
   end
 end

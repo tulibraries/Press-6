@@ -16,7 +16,11 @@ module SyncService
       end
 
       def reviews
-        fields.dig("reviews", "review")
+        containers = Array.wrap(fields["reviews"]).select { |container| container.is_a?(Hash) }
+
+        containers.flat_map do |container|
+          Array.wrap(container["review"]).select { |review| review.is_a?(Hash) }
+        end
       end
     end
   end
