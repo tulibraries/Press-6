@@ -153,7 +153,7 @@ GEM
     connection_pool (2.5.5)
     crass (1.0.7)
     csv (3.3.6)
-    dalli (5.2.0)
+    dalli (5.2.2)
       logger
     dartsass-rails (0.5.1)
       railties (>= 6.0.0)
@@ -701,4 +701,4 @@ DEPENDENCIES
   webdrivers (= 5.3.1)
 
 BUNDLED WITH
-   2.5.9
+  4.0.18
