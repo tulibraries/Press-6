@@ -3,29 +3,47 @@
 require "rails_helper"
 
 RSpec.describe "/events", type: :request do
-  let(:date) { DateTime.new(1963, 11, 22, 12, 30, 0) }
-  let(:date_no_start_time) { DateTime.new(1963, 11, 22, 0, 0, 0) }
-  let(:event) { FactoryBot.create(:event) }
-  let(:event2) { FactoryBot.create(:event, start_date: date, end_date: date) }
+  let(:start_date) { 1.month.from_now.change(day: 2, hour: 14, min: 30) }
 
   describe "GET /index" do
     it "renders a successful response" do
-      expect { (get events_path).to be_successful }
+      get events_path
+
+      expect(response).to be_successful
     end
-    it "returns events" do
-      expect { get events_path.to have_text(event.title) }
+
+    it "groups events under their month heading" do
+      FactoryBot.create(:event, title: "Book Launch", start_date: start_date, end_date: start_date + 2.hours)
+      get events_path
+
+      expect(response.body).to include("Book Launch", start_date.strftime("%B %Y"))
     end
-    it "formats dates" do
-      expect { get events_path.to have_text(date.strftime("%B")) }
+
+    it "displays the formatted date range" do
+      FactoryBot.create(:event, start_date: start_date, end_date: start_date + 90.minutes)
+      get events_path
+
+      expect(response.body).to include(helper_date_range(start_date, start_date + 90.minutes))
     end
-    it "ordinalizes dates" do
-      expect { get events_path.to have_text(date.strftime("%d").to_i.ordinalize) }
+
+    it "omits times for events starting at midnight" do
+      midnight = start_date.beginning_of_day
+      FactoryBot.create(:event, start_date: midnight, end_date: midnight + 1.day)
+      get events_path
+
+      expect(response.body).to include(helper_date_range(midnight, midnight + 1.day))
+      expect(response.body).not_to include("12:00 am")
     end
-    it "displays formatted time" do
-      expect { get events_path.to have_text(date.strftime("%l:%M %P")) }
+
+    it "excludes events that ended before last month" do
+      FactoryBot.create(:event, title: "Long Gone", start_date: 1.year.ago, end_date: 1.year.ago + 1.hour)
+      get events_path
+
+      expect(response.body).not_to include("Long Gone")
     end
-    it "does not display times for events starting at midnight" do
-      expect { get events_path.not_to have_text(date_no_start_time.strftime("%l:%M %P")) }
-    end
+  end
+
+  def helper_date_range(starting, ending)
+    ApplicationController.helpers.date_range(starting, ending)
   end
 end
