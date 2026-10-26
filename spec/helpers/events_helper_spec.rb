@@ -66,22 +66,33 @@ RSpec.describe EventsHelper, type: :helper do
       end
     end
 
-    context "with legacy comparison behavior" do
-      it "drops the end time when a single-day event starts and ends on the same minute of the hour" do
-        expect(helper.date_range(at(3, 2, 14), at(3, 2, 16))).to eq("Mon, Mar 2nd, 2:00 pm")
+    context "when start and end share a day of the month or minute of the hour" do
+      it "shows the end time for a single-day event starting and ending on the hour" do
+        expect(helper.date_range(at(3, 2, 14), at(3, 2, 16))).to eq("Mon, Mar 2nd, 2:00 pm -- 4:00 pm")
       end
 
-      it "treats an all-day event ending on the same day of a later month as a single day" do
-        expect(helper.date_range(at(3, 2), at(4, 2))).to eq("Mon, Mar 2nd")
+      it "shows a date span for an all-day event ending on the same day of a later month" do
+        expect(helper.date_range(at(3, 2), at(4, 2))).to eq("Mon, Mar 2nd -- Thu, Apr 2nd")
       end
 
-      it "shows only the end date when a timed event ends at midnight on the same day of a later month" do
-        expect(helper.date_range(at(3, 2, 14), at(4, 2))).to eq("Mon, Mar 2nd, 2:00 pm -- Thu, Apr 2nd")
+      it "shows both dates and times for a timed event ending at midnight on the same day of a later month" do
+        expect(helper.date_range(at(3, 2, 14), at(4, 2)))
+          .to eq("Mon, Mar 2nd, 2:00 pm -- Thu, Apr 2nd, 12:00 am")
       end
 
-      it "returns nil when a timed event ends at a time on the same day of a later month" do
-        expect(helper.date_range(at(3, 2, 14), at(4, 2, 10))).to be_nil
+      it "shows both dates and times for a timed event ending on the same day of a later month" do
+        expect(helper.date_range(at(3, 2, 14), at(4, 2, 10)))
+          .to eq("Mon, Mar 2nd, 2:00 pm -- Thu, Apr 2nd, 10:00 am")
       end
+
+      it "shows both dates and times for an event ending on the same day of the following year" do
+        expect(helper.date_range(at(3, 2, 14), Time.zone.local(2027, 3, 2, 16)))
+          .to eq("Mon, Mar 2nd, 2:00 pm -- Tue, Mar 2nd, 4:00 pm")
+      end
+    end
+
+    it "keeps the end time for a multi-day timed event ending at midnight" do
+      expect(helper.date_range(at(3, 2, 14), at(3, 4))).to eq("Mon, Mar 2nd, 2:00 pm -- Wed, Mar 4th, 12:00 am")
     end
   end
 end

@@ -6,18 +6,15 @@ module EventsHelper
   end
 
   def date_range(starting, ending)
-    same_day = starting.day == ending.day
-    same_month = starting.month == ending.month
+    same_date = starting.to_date == ending.to_date
 
     if starting.hour.zero?
-      same_day ? event_date(starting) : event_span(event_date(starting), event_date(ending))
-    elsif same_month && same_day && starting.min == ending.min
+      same_date ? event_date(starting) : event_span(event_date(starting), event_date(ending))
+    elsif same_date && event_time(starting) == event_time(ending)
       event_datetime(starting)
-    elsif same_month && same_day
+    elsif same_date
       event_span(event_datetime(starting), event_time(ending))
-    elsif same_day && ending.hour.zero?
-      event_span(event_datetime(starting), event_date(ending))
-    elsif !same_day
+    else
       event_span(event_datetime(starting), event_datetime(ending))
     end
   end
