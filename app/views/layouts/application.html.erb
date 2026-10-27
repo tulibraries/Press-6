@@ -5,6 +5,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script src="https://cookiechimp.com/widget/a2ZtgNB.js"></script>
+
     <% @highlights.each do |highlight| %>
       <%= %[<link rel="preload" as="image" href="#{url_for(highlight.image)}">].html_safe %>
     <% end if @highlights.present? %>
