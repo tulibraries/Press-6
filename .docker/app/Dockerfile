@@ -74,7 +74,7 @@ RUN apk add -U --no-cache \
     bash=${BASH_VERSION} \
     busybox=1.37.0-r31 \
     gcompat=${GCOMPAT_VERSION} \
-    imagemagick=7.1.2.34-r0 \
+    imagemagick=7.1.2.35-r0 \
     jemalloc=5.3.0-r6 \
     libjpeg-turbo=${LIBJPEG_TURBO_VERSION} \
     libxslt=${LIBXSLT_VERSION} \
