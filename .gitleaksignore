@@ -1,0 +1,3 @@
+# False positive: Only used in development and test environments
+d8a4d4beffb49065863126383b340504d81dc7f2:config/initializers/devise.rb:generic-api-key:17
+83654da5db8fb524f9cb2d323770be105cee31cc:config/initializers/devise.rb:generic-api-key:17
