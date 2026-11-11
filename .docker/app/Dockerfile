@@ -28,7 +28,7 @@ RUN apk add -U --no-cache \
     bash=${BASH_VERSION} \
     build-base=0.5-r4 \
     gcompat=${GCOMPAT_VERSION} \
-    git=2.54.0-r0 \
+    git=2.54.1-r0 \
     yaml=0.2.5-r2 \
     yaml-dev=0.2.5-r2 \
     libjpeg-turbo-dev=${LIBJPEG_TURBO_VERSION} \
