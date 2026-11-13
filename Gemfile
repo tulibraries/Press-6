@@ -55,7 +55,7 @@ group :production do
 end
 
 group :development, :test do
-  gem "debug", platforms: %i[mri mingw x64_mingw]
+  gem "debug", platforms: %i[mri windows]
   gem "flamegraph"
   gem "pry"
   gem "pry-byebug"
