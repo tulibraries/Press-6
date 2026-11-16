@@ -50,7 +50,6 @@ gem "turbo-rails"
 gem "rexml"
 
 group :production do
-  gem "dalli"
   gem "connection_pool", "~> 2.5.5"
 end
 
