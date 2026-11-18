@@ -182,6 +182,7 @@ GEM
       logger
     faraday-net_http (3.5.0)
       net-http (~> 0.5)
+    ffi (1.17.4)
     ffi (1.17.4-aarch64-linux-gnu)
     ffi (1.17.4-aarch64-linux-musl)
     ffi (1.17.4-arm-linux-gnu)
@@ -403,7 +404,7 @@ GEM
     pry-rails (0.3.11)
       pry (>= 0.13.0)
     public_suffix (7.0.5)
-    puma (8.0.3)
+    puma (8.1.1)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.2.8)
@@ -672,7 +673,7 @@ DEPENDENCIES
   pry
   pry-byebug
   pry-rails
-  puma (~> 8.0.3)
+  puma (~> 8.1.1)
   rack-mini-profiler
   rails (~> 8.1.4)
   rails-controller-testing
