@@ -65,7 +65,7 @@ jobs:
           
 
       - name: Setup Postgres
-        uses: ikalnytskyi/action-setup-postgres@v8
+        uses: ikalnytskyi/action-setup-postgres@v9
         with:
           username: postgres
           password: postgres
