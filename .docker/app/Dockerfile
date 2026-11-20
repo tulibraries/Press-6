@@ -33,7 +33,7 @@ RUN apk add -U --no-cache \
     yaml-dev=0.2.5-r2 \
     libjpeg-turbo-dev=${LIBJPEG_TURBO_VERSION} \
     libxslt-dev=${LIBXSLT_VERSION} \
-    libxml2-dev=2.13.9-r2 \
+    libxml2-dev=2.13.9-r3 \
     postgresql17-dev=${POSTGRESQL_VERSION} \
     tzdata=${TZDATA_VERSION}
 
