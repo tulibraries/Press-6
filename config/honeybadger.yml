@@ -1,4 +1,5 @@
 ---
 exceptions:
   ignore:
+    - "Dalli::RingError"
     - "ActiveRecord::ConnectionNotEstablished"
