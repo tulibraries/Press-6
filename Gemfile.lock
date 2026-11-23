@@ -130,7 +130,7 @@ GEM
     bindex (0.8.1)
     binding_of_caller (2.0.0)
       debug_inspector (>= 1.2.0)
-    bootsnap (1.26.1)
+    bootsnap (1.26.2)
       msgpack (~> 1.5)
     bootstrap (5.3.8)
       popper_js (>= 2.11.8, < 3)
@@ -182,6 +182,7 @@ GEM
       logger
     faraday-net_http (3.5.0)
       net-http (~> 0.5)
+    ffi (1.17.4)
     ffi (1.17.4-aarch64-linux-gnu)
     ffi (1.17.4-aarch64-linux-musl)
     ffi (1.17.4-arm-linux-gnu)
